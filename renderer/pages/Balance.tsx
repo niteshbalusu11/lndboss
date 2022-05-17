@@ -8,6 +8,7 @@ import StandardButtonLink from "../standard_components/StandardButtonLink";
 import StandardSwitch from "../standard_components/StandardSwitch";
 import StartFlexBox from "../standard_components/StartFlexBox";
 import SubmitButton from "../standard_components/SubmitButton";
+import BalanceOutput from "../output/BalanceOutput";
 
 const BalanceCommand = commands.find((n) => n.value === "Balance");
 const stringify = (data: any) => JSON.stringify(data);
@@ -30,6 +31,7 @@ const Balance = () => {
   const [isEnabled2, setIsEnabled2] = useState(false);
   const [isEnabled3, setIsEnabled3] = useState(false);
   const [isEnabled4, setIsEnabled4] = useState(false);
+  const [data, setData] = useState({});
 
   const toggleSwitch1 = () => {
     setIsEnabled1((previousState: boolean) => !previousState);
@@ -65,19 +67,14 @@ const Balance = () => {
       flags
     );
 
+    console.log(result);
     if (!!error) {
       window.alert(stringify(error));
+      return;
     }
 
     if (!!result) {
-      const response = { flags, result };
-
-      router.push({
-        pathname: "/output/BalanceOutput",
-        query: {
-          data: stringify(response),
-        },
-      });
+      setData(result);
     }
   };
 
@@ -128,6 +125,7 @@ const Balance = () => {
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
+          {!!data && <BalanceOutput data={data} />}
         </Stack>
       </StartFlexBox>
     </CssBaseline>

@@ -7,6 +7,7 @@ import commands from "../commands";
 import StandardButtonLink from "../standard_components/StandardButtonLink";
 import StartFlexBox from "../standard_components/StartFlexBox";
 import SubmitButton from "../standard_components/SubmitButton";
+import ChainDepositOutput from "../output/ChainDepositOutput";
 
 const ChainDepositCommand = commands.find((n) => n.value === "ChainDeposit");
 const stringify = (data: any) => JSON.stringify(data);
@@ -22,6 +23,7 @@ const styles = createUseStyles({
 const ChainDeposit = () => {
   const classes = styles();
   const [amount, setAmount] = useState("");
+  const [data, setData] = useState({});
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(event.target.value);
@@ -36,20 +38,14 @@ const ChainDeposit = () => {
       flags
     );
 
+    console.log(result);
     if (!!error) {
       window.alert(stringify(error));
+      return;
     }
 
     if (!!result) {
-      const response = { flags, result };
-
-      // router.push({
-      //   pathname: "/output/BalanceOutput",
-      //   query: {
-      //     data: stringify(response),
-      //   },
-      // });
-      window.alert(stringify(response));
+      setData(result);
     }
   };
   return (
@@ -67,6 +63,7 @@ const ChainDeposit = () => {
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
+          {!!data && <ChainDepositOutput data={data} />}
         </Stack>
       </StartFlexBox>
     </CssBaseline>

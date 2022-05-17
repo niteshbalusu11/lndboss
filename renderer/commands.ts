@@ -31,10 +31,9 @@ const commands: Commands = [
     },
   },
   {
-    name: "Balance",
-    value: "Balance3",
-    description:
-      "Sums balances on-chain, in channels, and pending, plus commit fees",
+    name: "Chain Fees",
+    value: "ChainFees",
+    description: "Lookup chain fee estimates at various confirm targets",
     flags: {
       above: "Above",
       below: "Below",
@@ -45,10 +44,9 @@ const commands: Commands = [
     },
   },
   {
-    name: "Balance",
-    value: "Balanc4",
-    description:
-      "Sums balances on-chain, in channels, and pending, plus commit fees",
+    name: "Chart Chain Fees",
+    value: "ChartChainFees",
+    description: "Show the routing fees earned",
     flags: {
       above: "Above",
       below: "Below",
@@ -59,10 +57,9 @@ const commands: Commands = [
     },
   },
   {
-    name: "Balance",
-    value: "Balance5",
-    description:
-      "Sums balances on-chain, in channels, and pending, plus commit fees",
+    name: "Chart Fees Paid",
+    value: "ChartFeesPaid",
+    description: "Show the routing fees paid to forwarding nodes",
     flags: {
       above: "Above",
       below: "Below",
@@ -73,10 +70,10 @@ const commands: Commands = [
     },
   },
   {
-    name: "Balance",
-    value: "Balanc6",
+    name: "Closed",
+    value: "Closed",
     description:
-      "Sums balances on-chain, in channels, and pending, plus commit fees",
+      "Channel closes with chain-transaction derived resolution details.",
     flags: {
       above: "Above",
       below: "Below",

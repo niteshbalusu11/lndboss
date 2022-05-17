@@ -2,8 +2,8 @@ import { CssBaseline, Stack } from "@mui/material";
 import { createUseStyles } from "react-jss";
 import { useRouter } from "next/router";
 import React from "react";
-import StartFlexBox from "../../standard_components/StartFlexBox";
-import StandardButtonLink from "../../standard_components/StandardButtonLink";
+import StartFlexBox from "../standard_components/StartFlexBox";
+import StandardButtonLink from "../standard_components/StandardButtonLink";
 import {
   Table,
   TableBody,
@@ -30,17 +30,15 @@ const styles = createUseStyles({
   },
 });
 
-const BalanceOutput = () => {
+const BalanceOutput = ({ data }) => {
   const classes = styles();
   const router = useRouter();
-  console.log(router.query.data);
-  const data = JSON.parse(router.query.data.toString());
 
   const createData = (balance: number, channelBalance: number) => {
     return { balance, channelBalance };
   };
 
-  const rows = [createData(data.result.balance, data.result.channel_balance)];
+  const rows = [createData(data.balance, data.channel_balance)];
   return (
     <CssBaseline>
       <StartFlexBox>

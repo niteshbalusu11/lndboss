@@ -1,32 +1,39 @@
 import { auto } from "async";
-import { createChainAddress } from "lightning";
+import { AuthenticatedLnd, createChainAddress } from "lightning";
 import authenticatedLnd from "../../auth/authenticated_lnd";
 
 const bigTok = (tokens) => (!tokens ? "0" : (tokens / 1e8).toFixed(8));
 const format = "p2wpkh";
 
-/** Get deposit address
+type Tasks = {
+  lnd: AuthenticatedLnd;
+  getAddress: string;
+  url: {
+    address: string;
+    url: string;
+  };
+};
 
+/** Get deposit address
   {
     [tokens]: <Tokens to Receive Number>
   }
 
   @returns via cbk or Promise
   {
-    deposit_address: <Deposit Address URL string>
-    deposit_qr: <Deposit Address URL QR Code String>
+    url: <Deposit Address URL string>
   }
 */
 const chainDepositCommand = async (args) => {
-  console.log("Chain Deposit");
   try {
-    const result = await auto({
+    const result = await auto<Tasks>({
       // Authenticate LND
-      lnd: async () => {
-        const lnd = await authenticatedLnd();
-        return lnd;
-      },
-
+      lnd: [
+        async () => {
+          const lnd: AuthenticatedLnd = await authenticatedLnd();
+          return lnd;
+        },
+      ],
       // Get deposit address
       getAddress: [
         "lnd",
@@ -42,15 +49,16 @@ const chainDepositCommand = async (args) => {
 
       url: [
         "getAddress",
-        ({ getAddress }) => {
-          const address = `bitcoin:${getAddress}?amount=${bigTok(args.tokens)}`;
-          return address;
+        async ({ getAddress }) => {
+          const url = `bitcoin:${getAddress}?amount=${bigTok(args.amount)}`;
+          const address = `Deposit Address: ${getAddress}`;
+
+          return { address, url };
         },
       ],
     });
-    console.log(result);
+
     return { result: result.url };
-    return result;
   } catch (error) {
     return { error };
   }

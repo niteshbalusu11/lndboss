@@ -43,7 +43,6 @@ ipcMain.handle("command:balance", async (event, args) => {
 
 ipcMain.handle("command:chainDeposit", async (event, args) => {
   const { result, error } = await chainDepositCommand(args);
-  console.log(result, error);
   return { result, error };
 });
 
