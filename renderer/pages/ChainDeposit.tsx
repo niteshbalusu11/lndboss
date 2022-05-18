@@ -1,6 +1,4 @@
 import { CssBaseline, Stack, TextField } from "@mui/material";
-import { ipcRenderer } from "electron";
-import router from "next/router";
 import React, { useState } from "react";
 import { createUseStyles } from "react-jss";
 import commands from "../commands";

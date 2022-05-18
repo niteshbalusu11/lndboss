@@ -1,4 +1,3 @@
-import { ipcRenderer } from "electron";
 import { Alert, CssBaseline, Dialog, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { createUseStyles } from "react-jss";

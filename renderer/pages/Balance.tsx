@@ -1,4 +1,3 @@
-import { ipcRenderer } from "electron";
 import { CssBaseline, FormControlLabel, Stack, TextField } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
