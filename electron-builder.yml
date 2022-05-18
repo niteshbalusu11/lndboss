@@ -1,6 +1,5 @@
 appId: com.example.nextron
 productName: LND BOSS
-copyright: Copyright © 2018 Yoshihide Shiono
 directories:
   output: dist
   buildResources: resources

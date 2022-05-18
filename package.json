@@ -1,9 +1,9 @@
 {
   "private": true,
-  "name": "my-nextron-app",
-  "description": "My application description",
+  "name": "lndboss",
+  "description": "Desktop Application for BalanceOfSatoshis",
   "version": "1.0.0",
-  "author": "Yoshihide Shiono <shiono.yoshihide@gmail.com>",
+  "author": "Nitesh Balusu",
   "main": "app/background.js",
   "scripts": {
     "dev": "nextron",
