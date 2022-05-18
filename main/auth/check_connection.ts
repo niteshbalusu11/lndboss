@@ -1,17 +1,16 @@
-import { getWalletInfo } from "lightning";
-import authenticatedLnd from "./authenticated_lnd";
+import { getWalletInfo } from 'lightning';
+import authenticatedLnd from './authenticated_lnd';
+const stringify = (data: any) => JSON.stringify(data);
 
-const checkConnection = async (): Promise<string> => {
+const checkConnection = async (): Promise<{ [key: string]: string }> => {
   try {
     const lnd = await authenticatedLnd();
 
     const walletInfo = await getWalletInfo({ lnd });
 
-    const publicKey = walletInfo.public_key;
-
-    return publicKey;
+    return { publicKey: walletInfo.public_key };
   } catch (error) {
-    return error;
+    return { error: stringify(error) };
   }
 };
 

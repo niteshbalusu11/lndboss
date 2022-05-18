@@ -1,10 +1,10 @@
-import { auto, AsyncResultCallback } from "async";
-import fs from "fs";
-import { homedir } from "os";
-import path from "path";
+import { auto } from 'async';
+import fs from 'fs';
+import { homedir } from 'os';
+import path from 'path';
 
-const folderName = ".bosgui";
-const fileName = "credentials.json";
+const folderName = '.bosgui';
+const fileName = 'credentials.json';
 
 type Credentials = {
   cert: string;
@@ -21,7 +21,7 @@ const getCredentials = async (): Promise<Credentials> => {
         const exists = fs.existsSync(directory);
 
         if (!exists) {
-          throw new Error("ExpectedCredentialsDirectoryToGetCredentials");
+          throw new Error('ExpectedCredentialsDirectoryToGetCredentials');
         }
 
         return exists;
@@ -29,13 +29,13 @@ const getCredentials = async (): Promise<Credentials> => {
 
       // Check if file exists
       checkFile: [
-        "checkDirectory",
+        'checkDirectory',
         async ({}) => {
           const filePath = path.join(homedir(), folderName, fileName);
           const exists = fs.existsSync(filePath);
 
           if (!exists) {
-            throw new Error("ExpectedCredentialsFileToGetCredentials");
+            throw new Error('ExpectedCredentialsFileToGetCredentials');
           }
 
           return exists;
@@ -44,10 +44,10 @@ const getCredentials = async (): Promise<Credentials> => {
 
       // Read file
       readFile: [
-        "checkFile",
+        'checkFile',
         async ({ checkFile }) => {
           if (!checkFile) {
-            throw new Error("ExpectedCredentialsFileToGetCredentials");
+            throw new Error('ExpectedCredentialsFileToGetCredentials');
           }
 
           const filePath = path.join(homedir(), folderName, fileName);
@@ -56,12 +56,10 @@ const getCredentials = async (): Promise<Credentials> => {
           try {
             JSON.parse(file.toString());
           } catch (error) {
-            throw new Error("FailedToParseCredentialsFileToGetCredentials");
+            throw new Error('FailedToParseCredentialsFileToGetCredentials');
           }
 
-          const { cert, macaroon, socket }: Credentials = JSON.parse(
-            file.toString()
-          );
+          const { cert, macaroon, socket }: Credentials = JSON.parse(file.toString());
 
           return { cert, macaroon, socket };
         },

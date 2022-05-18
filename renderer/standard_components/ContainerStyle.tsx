@@ -1,26 +1,25 @@
-import React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import StandardButtonLink from "./StandardButtonLink";
-import { createUseStyles } from "react-jss";
-import CenterFlexBox from "./CenterFlexBox";
+import React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import StandardButtonLink from './StandardButtonLink';
+import { createUseStyles } from 'react-jss';
+import CenterFlexBox from './CenterFlexBox';
 
 type Props = {
-  children: React.PropsWithChildren<{}>["children"];
+  children: React.PropsWithChildren<{ unknown }>['children'];
 };
 
 const styles = createUseStyles({
   button: {
-    fontSize: "15px",
-    margin: "0px",
-    cursor: "pointer",
-    marginTop: "20px",
-    marginLeft: "20px",
-    height: "30px",
-    fontWeight: "bold",
-    position: "fixed",
-    top: "15px",
-    right: "20px",
+    fontSize: '15px',
+    margin: '0px',
+    cursor: 'pointer',
+    marginTop: '20px',
+    marginLeft: '20px',
+    height: '30px',
+    fontWeight: 'bold',
+    position: 'fixed',
+    top: '15px',
+    right: '20px',
   },
 });
 

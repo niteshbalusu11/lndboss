@@ -1,4 +1,4 @@
-import * as types from "./types";
+import * as types from './types';
 
 export interface IElectronAPI {
   commandBalance: (args: types.commandBalance) => Promise<any>;

@@ -1,14 +1,14 @@
-import { alpha, styled, Switch } from "@mui/material";
-import { blue, green } from "@mui/material/colors";
+import { alpha, styled, Switch } from '@mui/material';
+import { blue, green } from '@mui/material/colors';
 
 const StandardSwitch = styled(Switch)(({ theme }) => ({
-  "& .MuiSwitch-switchBase.Mui-checked": {
+  '& .MuiSwitch-switchBase.Mui-checked': {
     color: blue[600],
-    "&:hover": {
+    '&:hover': {
       backgroundColor: alpha(green[500], theme.palette.action.hoverOpacity),
     },
   },
-  "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
     backgroundColor: green[500],
   },
 }));

@@ -1,28 +1,27 @@
-import { CssBaseline, Stack, TextField } from "@mui/material";
-import React, { useState } from "react";
-import { createUseStyles } from "react-jss";
-import commands from "../commands";
-import StandardButtonLink from "../standard_components/StandardButtonLink";
-import StartFlexBox from "../standard_components/StartFlexBox";
-import SubmitButton from "../standard_components/SubmitButton";
-import ChainDepositOutput from "../output/ChainDepositOutput";
-import * as types from "../types";
+import { CssBaseline, Stack, TextField } from '@mui/material';
+import React, { useState } from 'react';
+import { createUseStyles } from 'react-jss';
+import commands from '../commands';
+import StandardButtonLink from '../standard_components/StandardButtonLink';
+import StartFlexBox from '../standard_components/StartFlexBox';
+import SubmitButton from '../standard_components/SubmitButton';
+import ChainDepositOutput from '../output/ChainDepositOutput';
+import * as types from '../types';
 
-const ChainDepositCommand = commands.find((n) => n.value === "ChainDeposit");
-const stringify = (data: any) => JSON.stringify(data);
+const ChainDepositCommand = commands.find((n) => n.value === 'ChainDeposit');
 
 const styles = createUseStyles({
   form: {
-    marginLeft: "50px",
-    marginTop: "100px",
-    width: "300px",
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '300px',
   },
 });
 
 const ChainDeposit = () => {
   const classes = styles();
-  const [amount, setAmount] = useState("");
-  const [data, setData] = useState({});
+  const [amount, setAmount] = useState('');
+  const [data, setData] = useState();
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(event.target.value);
@@ -37,9 +36,8 @@ const ChainDeposit = () => {
       flags
     );
 
-    console.log(result);
     if (!!error) {
-      window.alert(stringify(error));
+      window.alert(error);
       return;
     }
 
@@ -62,7 +60,7 @@ const ChainDeposit = () => {
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
-          {!!data && <ChainDepositOutput data={data} />}
+          {!!data ? <ChainDepositOutput data={data} /> : null}
         </Stack>
       </StartFlexBox>
     </CssBaseline>

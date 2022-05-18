@@ -1,6 +1,7 @@
-import { getBalance } from "balanceofsatoshis/balances";
-import authenticatedLnd from "../../auth/authenticated_lnd";
-import * as types from "../../../renderer/types";
+import { getBalance } from 'balanceofsatoshis/balances';
+import authenticatedLnd from '../../auth/authenticated_lnd';
+import * as types from '../../../renderer/types';
+const stringify = (data: any) => JSON.stringify(data);
 
 const balanceCommand = async (args: types.commandBalance) => {
   try {
@@ -14,10 +15,9 @@ const balanceCommand = async (args: types.commandBalance) => {
       is_offchain_only: args.is_offchain_only,
       is_onchain_only: args.is_onchain_only,
     });
-    console.log(result);
     return { result };
   } catch (error) {
-    return { error };
+    return { error: stringify(error) };
   }
 };
 

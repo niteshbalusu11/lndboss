@@ -1,9 +1,10 @@
-import { auto } from "async";
-import { AuthenticatedLnd, createChainAddress } from "lightning";
-import authenticatedLnd from "../../auth/authenticated_lnd";
+import { auto } from 'async';
+import { AuthenticatedLnd, createChainAddress } from 'lightning';
+import authenticatedLnd from '../../auth/authenticated_lnd';
 
-const bigTok = (tokens) => (!tokens ? "0" : (tokens / 1e8).toFixed(8));
-const format = "p2wpkh";
+const bigTok = tokens => (!tokens ? '0' : (tokens / 1e8).toFixed(8));
+const format = 'p2wpkh';
+const stringify = (data: any) => JSON.stringify(data);
 
 type Tasks = {
   lnd: AuthenticatedLnd;
@@ -24,7 +25,7 @@ type Tasks = {
     url: <Deposit Address URL string>
   }
 */
-const chainDepositCommand = async (args) => {
+const chainDepositCommand = async args => {
   try {
     const result = await auto<Tasks>({
       // Authenticate LND
@@ -36,7 +37,7 @@ const chainDepositCommand = async (args) => {
       ],
       // Get deposit address
       getAddress: [
-        "lnd",
+        'lnd',
         async ({ lnd }) => {
           const { address } = await createChainAddress({
             format,
@@ -48,7 +49,7 @@ const chainDepositCommand = async (args) => {
       ],
 
       url: [
-        "getAddress",
+        'getAddress',
         async ({ getAddress }) => {
           const url = `bitcoin:${getAddress}?amount=${bigTok(args.amount)}`;
           const address = `Deposit Address: ${getAddress}`;
@@ -60,7 +61,7 @@ const chainDepositCommand = async (args) => {
 
     return { result: result.url };
   } catch (error) {
-    return { error };
+    return { error: stringify(error) };
   }
 };
 

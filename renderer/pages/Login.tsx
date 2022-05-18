@@ -1,52 +1,52 @@
-import { Alert, CssBaseline, Dialog, TextField } from "@mui/material";
-import React, { useState } from "react";
-import { createUseStyles } from "react-jss";
-import SubmitButton from "../standard_components/SubmitButton";
-import StandardButtonLink from "../standard_components/StandardButtonLink";
-import StartFlexBox from "../standard_components/StartFlexBox";
+import { Alert, CssBaseline, Dialog, TextField } from '@mui/material';
+import React, { useState } from 'react';
+import { createUseStyles } from 'react-jss';
+import SubmitButton from '../standard_components/SubmitButton';
+import StandardButtonLink from '../standard_components/StandardButtonLink';
+import StartFlexBox from '../standard_components/StartFlexBox';
 
 const styles = createUseStyles({
   form: {
-    marginLeft: "50px",
-    marginTop: "50px",
+    marginLeft: '50px',
+    marginTop: '50px',
   },
   input: {
-    width: "700px",
-    height: "110px",
-    marginBottom: "10px",
-    marginTop: "10px",
+    width: '700px',
+    height: '110px',
+    marginBottom: '10px',
+    marginTop: '10px',
   },
   inputStyle: {
-    textOverflow: "ellipsis",
-    overflow: "hidden",
-    whiteSpace: "nowrap",
-    "&::placeholder": {
-      fontSize: "15px",
-      fontWeight: "bold",
-      color: "white",
-      opacity: "0.9",
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    '&::placeholder': {
+      fontSize: '15px',
+      fontWeight: 'bold',
+      color: 'white',
+      opacity: '0.9',
     },
   },
   h1: {
-    color: "black",
-    marginTop: "50px",
+    color: 'black',
+    marginTop: '50px',
   },
   sx: {
-    height: "100vh",
-    width: "100vw",
+    height: '100vh',
+    width: '100vw',
     background:
-      "linear-gradient(200.96deg, #fedc2a -29.09%, #dd5789 51.77%, #7a2c9e 129.35%)",
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "start",
+      'linear-gradient(200.96deg, #fedc2a -29.09%, #dd5789 51.77%, #7a2c9e 129.35%)',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'start',
     flexGrow: 1,
   },
 });
 
 const Login = () => {
-  const [macaroon, setMacaroon] = useState("");
-  const [cert, setCert] = useState("");
-  const [socket, setSocket] = useState("");
+  const [macaroon, setMacaroon] = useState('');
+  const [cert, setCert] = useState('');
+  const [socket, setSocket] = useState('');
   const [successDialog, setSuccessDialog] = useState(false);
   const [failureDialog, setFailureDialog] = useState(false);
 
@@ -71,17 +71,17 @@ const Login = () => {
 
     const { error, result } = await window.electronAPI.credentialsCreate(args);
 
-    const publicKey = await window.electronAPI.checkconnectionGet();
+    const checkConnection = await window.electronAPI.checkconnectionGet();
 
     if (!!error) {
       setFailureDialog(true);
     }
 
-    if (!result || !publicKey) {
+    if (!result || !!checkConnection.error) {
       setFailureDialog(true);
     }
 
-    if (!!result && !!publicKey) {
+    if (!!result && !!checkConnection.publicKey) {
       setSuccessDialog(true);
     }
   };

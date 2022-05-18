@@ -1,8 +1,8 @@
-import React from "react";
-import { experimentalStyled as styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import StandardRouterLink from "./StandardRouterLink";
+import React from 'react';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import StandardRouterLink from './StandardRouterLink';
 
 type Props = {
   gridArray: {
@@ -13,14 +13,14 @@ type Props = {
 };
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
   padding: theme.spacing(2),
-  textAlign: "center",
+  textAlign: 'center',
   color: theme.palette.text.secondary,
-  height: "130px",
-  borderRadius: "30px",
-  marginRight: "10px",
+  height: '130px',
+  borderRadius: '30px',
+  marginRight: '10px',
 }));
 
 const ResponsiveGrid = ({ gridArray }: Props) => {

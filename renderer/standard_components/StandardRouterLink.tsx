@@ -1,14 +1,14 @@
-import React from "react";
-import { createUseStyles } from "react-jss";
-import Link from "next/link";
-import { Link as MULink } from "@mui/material";
+import React from 'react';
+import { createUseStyles } from 'react-jss';
+import Link from 'next/link';
+import { Link as MULink } from '@mui/material';
 
 const styles = createUseStyles({
   link: {
-    fontSize: "20px",
-    margin: "0px",
-    cursor: "pointer",
-    color: "black",
+    fontSize: '20px',
+    margin: '0px',
+    cursor: 'pointer',
+    color: 'black',
   },
 });
 

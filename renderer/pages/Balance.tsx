@@ -1,37 +1,34 @@
-import { CssBaseline, FormControlLabel, Stack, TextField } from "@mui/material";
-import { useRouter } from "next/router";
-import React, { useState } from "react";
-import { createUseStyles } from "react-jss";
-import commands from "../commands";
-import StandardButtonLink from "../standard_components/StandardButtonLink";
-import StandardSwitch from "../standard_components/StandardSwitch";
-import StartFlexBox from "../standard_components/StartFlexBox";
-import SubmitButton from "../standard_components/SubmitButton";
-import BalanceOutput from "../output/BalanceOutput";
-import * as types from "../types";
+import { CssBaseline, FormControlLabel, Stack, TextField } from '@mui/material';
+import React, { useState } from 'react';
+import { createUseStyles } from 'react-jss';
+import commands from '../commands';
+import StandardButtonLink from '../standard_components/StandardButtonLink';
+import StandardSwitch from '../standard_components/StandardSwitch';
+import StartFlexBox from '../standard_components/StartFlexBox';
+import SubmitButton from '../standard_components/SubmitButton';
+import BalanceOutput from '../output/BalanceOutput';
+import * as types from '../types';
 
-const BalanceCommand = commands.find((n) => n.value === "Balance");
-const stringify = (data: any) => JSON.stringify(data);
+const BalanceCommand = commands.find((n) => n.value === 'Balance');
 
 const styles = createUseStyles({
   form: {
-    marginLeft: "50px",
-    marginTop: "100px",
-    width: "300px",
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '300px',
   },
 });
 
 const Balance = () => {
   const classes = styles();
-  const router = useRouter();
 
-  const [above, setAbove] = useState("");
-  const [below, setBelow] = useState("");
+  const [above, setAbove] = useState('');
+  const [below, setBelow] = useState('');
   const [isEnabled1, setIsEnabled1] = useState(false);
   const [isEnabled2, setIsEnabled2] = useState(false);
   const [isEnabled3, setIsEnabled3] = useState(false);
   const [isEnabled4, setIsEnabled4] = useState(false);
-  const [data, setData] = useState({});
+  const [data, setData] = useState();
 
   const toggleSwitch1 = () => {
     setIsEnabled1((previousState: boolean) => !previousState);
@@ -64,9 +61,8 @@ const Balance = () => {
     };
     const { error, result } = await window.electronAPI.commandBalance(flags);
 
-    console.log(result);
     if (!!error) {
-      window.alert(stringify(error));
+      window.alert(error);
       return;
     }
 
@@ -122,7 +118,7 @@ const Balance = () => {
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
-          {!!data && <BalanceOutput data={data} />}
+          {!!data ? <BalanceOutput data={data} /> : null}
         </Stack>
       </StartFlexBox>
     </CssBaseline>

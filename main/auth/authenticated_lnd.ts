@@ -1,5 +1,5 @@
-import { authenticatedLndGrpc } from "lightning";
-import getCredentials from "./get_credentials";
+import { authenticatedLndGrpc } from 'lightning';
+import getCredentials from './get_credentials';
 
 const authenticatedLnd = async () => {
   try {
@@ -13,7 +13,7 @@ const authenticatedLnd = async () => {
 
     return lnd;
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 export default authenticatedLnd;

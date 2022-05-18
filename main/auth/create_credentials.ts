@@ -1,11 +1,11 @@
-import { auto } from "async";
-import fs from "fs";
-import { homedir } from "os";
-import path from "path";
-import * as types from "../../renderer/types";
+import { auto } from 'async';
+import fs from 'fs';
+import { homedir } from 'os';
+import path from 'path';
+import * as types from '../../renderer/types';
 
-const folderName = ".bosgui";
-const fileName = "credentials.json";
+const folderName = '.bosgui';
+const fileName = 'credentials.json';
 
 /*
 {
@@ -20,11 +20,7 @@ const fileName = "credentials.json";
 }
 */
 
-const createCredentials = async ({
-  cert,
-  macaroon,
-  socket,
-}: types.credentialsCreate) => {
+const createCredentials = async ({ cert, macaroon, socket }: types.credentialsCreate) => {
   try {
     const result = await auto({
       // Check if folder exists
@@ -36,7 +32,7 @@ const createCredentials = async ({
 
       // Check if file exists
       checkFile: [
-        "checkDirectory",
+        'checkDirectory',
         async ({ checkDirectory }) => {
           if (!checkDirectory) {
             return false;
@@ -48,10 +44,10 @@ const createCredentials = async ({
 
       // Create folder
       createDirectory: [
-        "checkDirectory",
-        "checkFile",
+        'checkDirectory',
+        'checkFile',
         async ({ checkDirectory }) => {
-          if (!!checkDirectory) {
+          if (checkDirectory) {
             return false;
           }
           fs.mkdirSync(path.join(homedir(), folderName));
@@ -61,11 +57,11 @@ const createCredentials = async ({
 
       // Create file
       createFile: [
-        "checkDirectory",
-        "checkFile",
-        "createDirectory",
+        'checkDirectory',
+        'checkFile',
+        'createDirectory',
         async ({ checkFile }) => {
-          if (!!checkFile) {
+          if (checkFile) {
             return false;
           }
 
@@ -83,11 +79,11 @@ const createCredentials = async ({
 
       // Write to file and replace values
       writeFile: [
-        "checkFile",
-        "createDirectory",
-        "createFile",
+        'checkFile',
+        'createDirectory',
+        'createFile',
         async ({ createFile }) => {
-          if (!!createFile) {
+          if (createFile) {
             return true;
           }
 

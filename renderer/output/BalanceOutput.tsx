@@ -1,9 +1,5 @@
-import { CssBaseline, Stack } from "@mui/material";
-import { createUseStyles } from "react-jss";
-import { useRouter } from "next/router";
-import React from "react";
-import StartFlexBox from "../standard_components/StartFlexBox";
-import StandardButtonLink from "../standard_components/StandardButtonLink";
+import { createUseStyles } from 'react-jss';
+import React from 'react';
 import {
   Table,
   TableBody,
@@ -12,27 +8,33 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from "@mui/material";
+} from '@mui/material';
 
 const styles = createUseStyles({
   table: {
-    display: "flex",
-    marginTop: "200px",
-    height: "20vh",
-    marginRight: "80px",
-    width: "50vw",
-    backgroundColor: "black",
+    display: 'flex',
+    marginTop: '200px',
+    height: '20vh',
+    marginRight: '80px',
+    width: '50vw',
+    backgroundColor: 'black',
   },
   cell: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: "15px",
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: '15px',
   },
 });
 
-const BalanceOutput = ({ data }) => {
+type Data = {
+  data: {
+    balance: number;
+    channel_balance: number;
+  };
+};
+
+const BalanceOutput = ({ data }: Data) => {
   const classes = styles();
-  const router = useRouter();
 
   const createData = (balance: number, channelBalance: number) => {
     return { balance, channelBalance };
@@ -40,36 +42,30 @@ const BalanceOutput = ({ data }) => {
 
   const rows = [createData(data.balance, data.channel_balance)];
   return (
-    <CssBaseline>
-      <StartFlexBox>
-        <StandardButtonLink label="Balance" destination="/Balance" />
-        <StandardButtonLink label="Home" destination="/home" />
-        <TableContainer component={Paper} className={classes.table}>
-          <Table sx={{ minWidth: 100 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell className={classes.cell}>Balance</TableCell>
-                <TableCell className={classes.cell} align="right">
-                  Channel Balance
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell className={classes.cell}>{row.balance}</TableCell>
-                  <TableCell className={classes.cell} align="right">
-                    {row.channelBalance}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </StartFlexBox>
-    </CssBaseline>
+    <TableContainer component={Paper} className={classes.table}>
+      <Table sx={{ minWidth: 100 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell className={classes.cell}>Balance</TableCell>
+            <TableCell className={classes.cell} align="right">
+              Channel Balance
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map(row => (
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell className={classes.cell}>{row.balance}</TableCell>
+              <TableCell className={classes.cell} align="right">
+                {row.channelBalance}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 
