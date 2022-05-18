@@ -70,11 +70,9 @@ const Login = () => {
       socket,
     };
 
-    const { result, error } = await ipcRenderer.invoke(
-      "credentials:create",
-      args
-    );
-    const { publicKey } = await ipcRenderer.invoke("checkconnection:get");
+    const { error, result } = await window.electronAPI.credentialsCreate(args);
+
+    const publicKey = await window.electronAPI.checkconnectionGet();
 
     if (!!error) {
       setFailureDialog(true);

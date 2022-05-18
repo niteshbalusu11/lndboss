@@ -8,6 +8,7 @@ import StandardButtonLink from "../standard_components/StandardButtonLink";
 import StartFlexBox from "../standard_components/StartFlexBox";
 import SubmitButton from "../standard_components/SubmitButton";
 import ChainDepositOutput from "../output/ChainDepositOutput";
+import * as types from "../types";
 
 const ChainDepositCommand = commands.find((n) => n.value === "ChainDeposit");
 const stringify = (data: any) => JSON.stringify(data);
@@ -30,11 +31,11 @@ const ChainDeposit = () => {
   };
 
   const fetchData = async () => {
-    const flags = {
-      amount,
+    const flags: types.commandChainDeposit = {
+      amount: Number(amount),
     };
-    const { error, result } = await ipcRenderer.invoke(
-      "command:chainDeposit",
+
+    const { error, result } = await window.electronAPI.commandChainDeposit(
       flags
     );
 

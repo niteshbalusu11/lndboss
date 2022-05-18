@@ -9,6 +9,7 @@ import StandardSwitch from "../standard_components/StandardSwitch";
 import StartFlexBox from "../standard_components/StartFlexBox";
 import SubmitButton from "../standard_components/SubmitButton";
 import BalanceOutput from "../output/BalanceOutput";
+import * as types from "../types";
 
 const BalanceCommand = commands.find((n) => n.value === "Balance");
 const stringify = (data: any) => JSON.stringify(data);
@@ -55,17 +56,14 @@ const Balance = () => {
   };
 
   const fetchData = async () => {
-    const flags = {
-      above,
-      below,
+    const flags: types.commandBalance = {
+      above: Number(above),
+      below: Number(below),
       is_confirmed: isEnabled1,
       is_offchain_only: isEnabled2,
       is_onchain_only: isEnabled4,
     };
-    const { error, result } = await ipcRenderer.invoke(
-      "command:balance",
-      flags
-    );
+    const { error, result } = await window.electronAPI.commandBalance(flags);
 
     console.log(result);
     if (!!error) {

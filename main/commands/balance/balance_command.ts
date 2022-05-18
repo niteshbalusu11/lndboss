@@ -1,7 +1,8 @@
 import { getBalance } from "balanceofsatoshis/balances";
 import authenticatedLnd from "../../auth/authenticated_lnd";
+import * as types from "../../../renderer/types";
 
-const balanceCommand = async (args) => {
+const balanceCommand = async (args: types.commandBalance) => {
   try {
     const lnd = await authenticatedLnd();
 

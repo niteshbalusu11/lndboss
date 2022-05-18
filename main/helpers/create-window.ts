@@ -4,6 +4,7 @@ import {
   BrowserWindowConstructorOptions,
 } from "electron";
 import Store from "electron-store";
+import path from "path";
 
 export default (
   windowName: string,
@@ -70,12 +71,15 @@ export default (
 
   state = ensureVisibleOnSomeDisplay(restore());
 
+  // const __dirname = path.resolve();
+
   const browserOptions: BrowserWindowConstructorOptions = {
     ...options,
     ...state,
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
+      preload: path.join(__dirname, "../app/preload.js"),
+      nodeIntegration: false,
+      contextIsolation: true,
       ...options.webPreferences,
     },
   };

@@ -2,6 +2,7 @@ import { auto } from "async";
 import fs from "fs";
 import { homedir } from "os";
 import path from "path";
+import * as types from "../../renderer/types";
 
 const folderName = ".bosgui";
 const fileName = "credentials.json";
@@ -19,13 +20,11 @@ const fileName = "credentials.json";
 }
 */
 
-type Credentials = {
-  cert: string;
-  macaroon: string;
-  socket: string;
-};
-
-const createCredentials = async ({ cert, macaroon, socket }: Credentials) => {
+const createCredentials = async ({
+  cert,
+  macaroon,
+  socket,
+}: types.credentialsCreate) => {
   try {
     const result = await auto({
       // Check if folder exists

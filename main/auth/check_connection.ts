@@ -1,13 +1,15 @@
 import { getWalletInfo } from "lightning";
 import authenticatedLnd from "./authenticated_lnd";
 
-const checkConnection = async () => {
+const checkConnection = async (): Promise<string> => {
   try {
     const lnd = await authenticatedLnd();
 
     const walletInfo = await getWalletInfo({ lnd });
 
-    return { publicKey: walletInfo.public_key };
+    const publicKey = walletInfo.public_key;
+
+    return publicKey;
   } catch (error) {
     return error;
   }

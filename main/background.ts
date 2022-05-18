@@ -5,6 +5,7 @@ import balanceCommand from "./commands/balance/balance_command";
 import createCredentials from "./auth/create_credentials";
 import checkConnection from "./auth/check_connection";
 import chainDepositCommand from "./commands/chainDeposit/chain_deposit";
+import * as types from "../renderer/types";
 
 const isProd: boolean = process.env.NODE_ENV === "production";
 
@@ -35,29 +36,35 @@ app.on("window-all-closed", () => {
   app.quit();
 });
 
-ipcMain.handle("command:balance", async (event, args) => {
-  const { result, error } = await balanceCommand(args);
+ipcMain.handle(
+  "command:balance",
+  async (_event, args: types.commandBalance) => {
+    const { result, error } = await balanceCommand(args);
 
-  return { result, error };
-});
+    return { result, error };
+  }
+);
 
-ipcMain.handle("command:chainDeposit", async (event, args) => {
+ipcMain.handle("command:chainDeposit", async (_event, args) => {
   const { result, error } = await chainDepositCommand(args);
   return { result, error };
 });
 
-ipcMain.handle("credentials:create", async (event, args) => {
-  const { result, error } = await createCredentials({
-    cert: args.cert,
-    macaroon: args.macaroon,
-    socket: args.socket,
-  });
+ipcMain.handle(
+  "credentials:create",
+  async (_event, args: types.credentialsCreate) => {
+    const { result, error } = await createCredentials({
+      cert: args.cert,
+      macaroon: args.macaroon,
+      socket: args.socket,
+    });
 
-  return { result, error };
-});
+    return { result, error };
+  }
+);
 
-ipcMain.handle("checkconnection:get", async (event) => {
-  const publicKey = await checkConnection();
+ipcMain.handle("checkconnection:get", async (_event) => {
+  const publicKey: string = await checkConnection();
 
   return publicKey;
 });

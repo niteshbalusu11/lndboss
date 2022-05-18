@@ -69,7 +69,7 @@ const getCredentials = async (): Promise<Credentials> => {
     });
     return result.readFile;
   } catch (error) {
-    throw error;
+    return error;
   }
 };
 
