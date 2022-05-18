@@ -25,29 +25,26 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const ResponsiveGrid = ({ gridArray }: Props) => {
   return (
-    <>
-      <Grid
-        container
-        spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
-        height="600px"
-        alignItems="center"
-        justifyContent="center"
-        marginRight="50px"
-      >
-        {gridArray.map((grid) => (
-          <Grid item xs={2} sm={3} md={4} key={grid.value}>
-            <Item>
-              <StandardRouterLink
-                label={grid.name}
-                destination={`/${grid.value}`}
-              />
-              <p>{grid.description}</p>
-            </Item>
-          </Grid>
-        ))}
-      </Grid>
-    </>
+    <Grid
+      container
+      spacing={{ xs: 2, sm: 3 }}
+      columns={{ xs: 4, sm: 8, md: 12 }}
+      minHeight="100px"
+      alignItems="center"
+      justifyContent="center"
+      marginRight="50px"
+      paddingTop="70px"
+      paddingBottom="40px"
+    >
+      {gridArray.map(grid => (
+        <Grid item xs={2} sm={3} md={4} key={grid.value}>
+          <Item>
+            <StandardRouterLink label={grid.name} destination={`/${grid.value}`} />
+            <p>{grid.description}</p>
+          </Item>
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 

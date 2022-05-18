@@ -34,8 +34,7 @@ const styles = createUseStyles({
   sx: {
     height: '100vh',
     width: '100vw',
-    background:
-      'linear-gradient(200.96deg, #fedc2a -29.09%, #dd5789 51.77%, #7a2c9e 129.35%)',
+    background: 'linear-gradient(200.96deg, #fedc2a -29.09%, #dd5789 51.77%, #7a2c9e 129.35%)',
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'start',
@@ -138,18 +137,12 @@ const Login = () => {
               onChange={handleSocketChange}
             />
           </div>
-          <SubmitButton
-            variant="contained"
-            onClick={handleEvents}
-            disabled={!cert || !macaroon || !socket}
-          >
+          <SubmitButton variant="contained" onClick={handleEvents} disabled={!cert || !macaroon || !socket}>
             Authenticate
           </SubmitButton>
         </form>
         <Dialog open={successDialog} onClose={handleSuccessClick}>
-          <Alert severity="success">
-            Credentials saved and Authenticated to LND!
-          </Alert>
+          <Alert severity="success">Credentials saved and Authenticated to LND!</Alert>
         </Dialog>
         <Dialog open={failureDialog} onClose={handleFailureClick}>
           <Alert severity="error">Failed to connect to LND!</Alert>

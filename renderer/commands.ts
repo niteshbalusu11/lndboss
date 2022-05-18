@@ -81,6 +81,58 @@ const commands: Commands = [
       onchain: 'Onchain',
     },
   },
+  {
+    name: 'Closed',
+    value: 'Closed1',
+    description: 'Channel closes with chain-transaction derived resolution details.',
+    flags: {
+      above: 'Above',
+      below: 'Below',
+      confirmed: 'Confirmed',
+      detailed: 'Detailed',
+      offchain: 'Offchain',
+      onchain: 'Onchain',
+    },
+  },
+  {
+    name: 'Closed',
+    value: 'Closed2',
+    description: 'Channel closes with chain-transaction derived resolution details.',
+    flags: {
+      above: 'Above',
+      below: 'Below',
+      confirmed: 'Confirmed',
+      detailed: 'Detailed',
+      offchain: 'Offchain',
+      onchain: 'Onchain',
+    },
+  },
+  {
+    name: 'Closed',
+    value: 'Closed3',
+    description: 'Channel closes with chain-transaction derived resolution details.',
+    flags: {
+      above: 'Above',
+      below: 'Below',
+      confirmed: 'Confirmed',
+      detailed: 'Detailed',
+      offchain: 'Offchain',
+      onchain: 'Onchain',
+    },
+  },
+  {
+    name: 'Closed',
+    value: 'Closed4',
+    description: 'Channel closes with chain-transaction derived resolution details.',
+    flags: {
+      above: 'Above',
+      below: 'Below',
+      confirmed: 'Confirmed',
+      detailed: 'Detailed',
+      offchain: 'Offchain',
+      onchain: 'Onchain',
+    },
+  },
 ];
 
 export default commands;

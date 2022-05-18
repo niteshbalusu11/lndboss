@@ -57,7 +57,7 @@ ipcMain.handle('credentials:create', async (_event, args: types.credentialsCreat
   return { result, error };
 });
 
-ipcMain.handle('checkconnection:get', async _event => {
+ipcMain.handle('checkconnection:get', async () => {
   const connection = await checkConnection();
   return connection;
 });

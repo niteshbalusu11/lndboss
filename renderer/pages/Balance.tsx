@@ -9,7 +9,7 @@ import SubmitButton from '../standard_components/SubmitButton';
 import BalanceOutput from '../output/BalanceOutput';
 import * as types from '../types';
 
-const BalanceCommand = commands.find((n) => n.value === 'Balance');
+const BalanceCommand = commands.find(n => n.value === 'Balance');
 
 const styles = createUseStyles({
   form: {
@@ -92,27 +92,19 @@ const Balance = () => {
           />
 
           <FormControlLabel
-            control={
-              <StandardSwitch checked={isEnabled1} onChange={toggleSwitch1} />
-            }
+            control={<StandardSwitch checked={isEnabled1} onChange={toggleSwitch1} />}
             label={BalanceCommand.flags.confirmed}
           />
           <FormControlLabel
-            control={
-              <StandardSwitch checked={isEnabled2} onChange={toggleSwitch2} />
-            }
+            control={<StandardSwitch checked={isEnabled2} onChange={toggleSwitch2} />}
             label={BalanceCommand.flags.detailed}
           />
           <FormControlLabel
-            control={
-              <StandardSwitch checked={isEnabled3} onChange={toggleSwitch3} />
-            }
+            control={<StandardSwitch checked={isEnabled3} onChange={toggleSwitch3} />}
             label={BalanceCommand.flags.offchain}
           />
           <FormControlLabel
-            control={
-              <StandardSwitch checked={isEnabled4} onChange={toggleSwitch4} />
-            }
+            control={<StandardSwitch checked={isEnabled4} onChange={toggleSwitch4} />}
             label={BalanceCommand.flags.onchain}
           />
           <SubmitButton variant="contained" onClick={fetchData}>

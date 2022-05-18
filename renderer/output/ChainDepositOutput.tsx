@@ -30,13 +30,7 @@ const ChainDepositOutput = ({ data }: Data) => {
 
   return (
     <div className={classes.div}>
-      <QRCode
-        value={data.url}
-        size={250}
-        className={classes.qr}
-        bgColor="white"
-        fgColor="black"
-      />
+      <QRCode value={data.url} size={250} className={classes.qr} bgColor="white" fgColor="black" />
       <p className={classes.text}>{data.address}</p>
     </div>
   );

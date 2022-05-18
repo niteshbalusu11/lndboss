@@ -6,9 +6,11 @@
   "author": "Nitesh Balusu",
   "main": "app/background.js",
   "scripts": {
-    "dev": "nextron",
+    "dev": "eslint \"{main,renderer}/**/*.{ts,tsx}\" && nextron",
     "build": "nextron build",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "lint:check": "eslint \"{renderer,main}/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint \"{main,renderer}/**/*.{ts,tsx}\" --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -28,16 +30,12 @@
     "@types/node": "^16.11.7",
     "@types/react": "^18.0.8",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
-    "@typescript-eslint/parser": "^5.25.0",
     "electron": "^18.2.0",
     "electron-builder": "^23.0.3",
     "eslint": "^8.0.1",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-n": "^15.0.0",
+    "eslint-config-next": "^12.1.6",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-react": "^7.29.4",
     "next": "^12.1.6",
     "nextron": "^8.1.0",
     "prettier": "2.6.2",

@@ -1,14 +1,6 @@
 import { createUseStyles } from 'react-jss';
 import React from 'react';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 const styles = createUseStyles({
   table: {
@@ -18,6 +10,7 @@ const styles = createUseStyles({
     marginRight: '80px',
     width: '50vw',
     backgroundColor: 'black',
+    marginBottom: '20px',
   },
   cell: {
     color: 'white',
@@ -54,9 +47,7 @@ const BalanceOutput = ({ data }: Data) => {
         </TableHead>
         <TableBody>
           {rows.map(row => (
-            <TableRow
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
+            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell className={classes.cell}>{row.balance}</TableCell>
               <TableCell className={classes.cell} align="right">
                 {row.channelBalance}

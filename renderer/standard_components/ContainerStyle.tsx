@@ -3,10 +3,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import StandardButtonLink from './StandardButtonLink';
 import { createUseStyles } from 'react-jss';
 import CenterFlexBox from './CenterFlexBox';
-
-type Props = {
-  children: React.PropsWithChildren<{ unknown }>['children'];
-};
+import ResponsiveGrid from './ResponsiveGrid';
+import commands from '../commands';
 
 const styles = createUseStyles({
   button: {
@@ -23,17 +21,13 @@ const styles = createUseStyles({
   },
 });
 
-const ContainerStyle = ({ children }: Props) => {
+const ContainerStyle = () => {
   const classes = styles();
   return (
     <CssBaseline>
       <CenterFlexBox>
-        <StandardButtonLink
-          label="Login"
-          destination="/Login"
-          buttonStyle={classes.button}
-        />
-        {children}
+        <StandardButtonLink label="Login" destination="/Login" buttonStyle={classes.button} />
+        <ResponsiveGrid gridArray={commands} />
       </CenterFlexBox>
     </CssBaseline>
   );

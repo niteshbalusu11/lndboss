@@ -8,7 +8,7 @@ import SubmitButton from '../standard_components/SubmitButton';
 import ChainDepositOutput from '../output/ChainDepositOutput';
 import * as types from '../types';
 
-const ChainDepositCommand = commands.find((n) => n.value === 'ChainDeposit');
+const ChainDepositCommand = commands.find(n => n.value === 'ChainDeposit');
 
 const styles = createUseStyles({
   form: {
@@ -32,9 +32,7 @@ const ChainDeposit = () => {
       amount: Number(amount),
     };
 
-    const { error, result } = await window.electronAPI.commandChainDeposit(
-      flags
-    );
+    const { error, result } = await window.electronAPI.commandChainDeposit(flags);
 
     if (!!error) {
       window.alert(error);
