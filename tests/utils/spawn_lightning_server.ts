@@ -10,7 +10,9 @@ const spawnLightningServer = async (): Promise<SpawnLightningServerType> => {
   try {
     // Launch a lightning node
     const { nodes } = await spawnLightningCluster({});
-    const [{ lnd, kill }] = nodes;
+    const [{ lnd, generate, kill }] = nodes;
+
+    await generate({ count: 5 });
 
     const publicKey = (await getIdentity({ lnd })).public_key;
 

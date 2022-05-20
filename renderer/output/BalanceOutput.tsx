@@ -47,7 +47,7 @@ const BalanceOutput = ({ data }: Data) => {
         </TableHead>
         <TableBody>
           {rows.map(row => (
-            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+            <TableRow key="Balance" sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell className={classes.cell}>{row.balance}</TableCell>
               <TableCell className={classes.cell} align="right">
                 {row.channelBalance}
