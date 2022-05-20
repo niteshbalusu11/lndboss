@@ -10,16 +10,13 @@ const spawnLightningServer = async (): Promise<SpawnLightningServerType> => {
   try {
     // Launch a lightning node
     const { nodes } = await spawnLightningCluster({});
-    const [{ lnd, generate, kill }] = nodes;
+    const [{ lnd, kill }] = nodes;
 
     const publicKey = (await getIdentity({ lnd })).public_key;
 
     if (!!publicKey) {
       console.log('============================Lightning Server Spawned===============================');
     }
-
-    // Generate some coins for the wallet
-    await generate({ count: 500 });
 
     // Stop the image
     return { lnd, kill };
