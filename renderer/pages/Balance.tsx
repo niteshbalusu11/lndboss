@@ -20,6 +20,11 @@ const styles = createUseStyles({
   },
 });
 
+type BalanceData = {
+  balance: number | undefined;
+  channel_balance: number | undefined;
+};
+
 const Balance = () => {
   const classes = styles();
 
@@ -29,7 +34,7 @@ const Balance = () => {
   const [isEnabled2, setIsEnabled2] = useState(false);
   const [isEnabled3, setIsEnabled3] = useState(false);
   const [isEnabled4, setIsEnabled4] = useState(false);
-  const [data, setData] = useState();
+  const [data, setData] = useState<BalanceData>({ balance: undefined, channel_balance: undefined });
 
   const toggleSwitch1 = () => {
     setIsEnabled1((previousState: boolean) => !previousState);
@@ -121,7 +126,7 @@ const Balance = () => {
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
-          {!!data ? <BalanceOutput data={data} /> : null}
+          {data.balance !== undefined && data.channel_balance !== undefined ? <BalanceOutput data={data} /> : null}
         </Stack>
       </StartFlexBox>
     </CssBaseline>

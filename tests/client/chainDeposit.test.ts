@@ -19,7 +19,7 @@ try {
       page = await electronApp.firstWindow();
     });
 
-    test('render the login page and input values', async () => {
+    test('test the ChainDeposit command page and input values', async () => {
       await page.click('text=Chain Deposit');
       await expect(page).toHaveTitle('Chain Deposit');
       await page.type(`#${ChainDepositCommand.flags.amount}`, '1000');

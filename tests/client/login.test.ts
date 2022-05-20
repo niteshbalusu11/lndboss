@@ -16,7 +16,7 @@ try {
       page = await electronApp.firstWindow();
     });
 
-    test('render the login page and input values', async () => {
+    test('Test the login page and input values', async () => {
       await page.click('text=LOGIN');
       await expect(page).toHaveTitle('Authentication');
       await page.type('#cert', 'lightning.cert');

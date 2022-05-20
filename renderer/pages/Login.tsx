@@ -6,6 +6,12 @@ import SubmitButton from '../standard_components/SubmitButton';
 import StandardButtonLink from '../standard_components/StandardButtonLink';
 import StartFlexBox from '../standard_components/StartFlexBox';
 
+/*
+  Renders the login page that takes in the macaroon, cert, and socket.
+  Sends IPC to the main process to create the credentials.
+  Sends IPC to the main process to check the connection to LND.
+*/
+
 const styles = createUseStyles({
   form: {
     marginLeft: '50px',
@@ -81,7 +87,7 @@ const Login = () => {
       setFailureDialog(true);
     }
 
-    if (!!result && !!checkConnection.publicKey) {
+    if (!!result && !!checkConnection.hasAccess) {
       setSuccessDialog(true);
     }
   };

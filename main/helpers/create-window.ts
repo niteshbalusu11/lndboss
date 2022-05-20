@@ -64,8 +64,6 @@ export default (windowName: string, options: BrowserWindowConstructorOptions): B
 
   state = ensureVisibleOnSomeDisplay(restore());
 
-  // const __dirname = path.resolve();
-
   const browserOptions: BrowserWindowConstructorOptions = {
     ...options,
     ...state,

@@ -2,6 +2,10 @@ import { createUseStyles } from 'react-jss';
 import React from 'react';
 import QRCode from 'react-qr-code';
 
+/*
+  Renders the output of the ChainDeposit command.
+*/
+
 const styles = createUseStyles({
   div: {
     marginTop: '150px',

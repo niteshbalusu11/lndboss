@@ -4,7 +4,7 @@ import { SpawnLightningType } from '../utils/spawn_lightning.js';
 import createCredentials from '../../main/auth/create_credentials';
 
 try {
-  test.describe('Test authentication from server side', async () => {
+  test.describe('Test authentication from node.js side', async () => {
     let lightning: SpawnLightningType;
 
     test.beforeAll(async () => {
@@ -17,9 +17,9 @@ try {
         macaroon: lightning.macaroon,
         socket: lightning.socket,
       });
-      console.log(`credentials----${result}`);
       expect(error).toBe(undefined);
       expect(result).toBeTruthy();
+      console.log(`credentials----${result}`);
     });
 
     test.afterAll(async () => {

@@ -4,14 +4,14 @@ import { SpawnLightningServerType } from '../utils/spawn_lightning_server.js';
 import chainDepositCommand from '../../main/commands/chainDeposit/chain_deposit';
 
 try {
-  test.describe('Test authentication from server side', async () => {
+  test.describe('Test ChainDeposit command on the node.js side', async () => {
     let lightning: SpawnLightningServerType;
 
     test.beforeAll(async () => {
       lightning = await spawnLightningServer();
     });
 
-    test('run balance command', async () => {
+    test('run ChainDeposit command', async () => {
       const args = {
         amount: 1000,
       };

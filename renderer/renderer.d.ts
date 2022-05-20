@@ -1,10 +1,10 @@
 import * as types from './types';
 
 export interface IElectronAPI {
-  commandBalance: (args: types.commandBalance) => Promise<any>;
-  commandChainDeposit: (args: types.commandChainDeposit) => Promise<any>;
-  credentialsCreate: (args: types.credentialsCreate) => Promise<any>;
-  checkconnectionGet: () => Promise<any>;
+  commandBalance: (args: types.commandBalance) => Promise<types.commandBalanceReturn>;
+  commandChainDeposit: (args: types.commandChainDeposit) => Promise<types.commandChainDepositReturn>;
+  credentialsCreate: (args: types.credentialsCreate) => Promise<types.createCredentialsReturn>;
+  checkconnectionGet: () => Promise<types.checkConnectionReturn>;
 }
 
 declare global {

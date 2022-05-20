@@ -2,6 +2,10 @@ import React from 'react';
 import { Button, ButtonProps, styled } from '@mui/material';
 import { grey } from '@mui/material/colors';
 
+/*
+  Renders the standard submit button used in command forms.
+*/
+
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   color: theme.palette.getContrastText(grey[900]),
   backgroundColor: grey[900],

@@ -3,6 +3,22 @@ import * as types from '../../../renderer/types';
 import { AuthenticatedLnd } from 'lightning';
 const stringify = (data: any) => JSON.stringify(data);
 
+/** Get on-chain and off-chain balances
+  {
+    lnd: <AuthenticatedLnd>
+    [above]: <Number>
+    [below]: <Number>
+    [is_confirmed]: <Boolean>
+    [is_offchain_only]: <Boolean>
+    [is_onchain_only]: <Boolean>
+  }
+  @returns via cbk or Promise
+  {
+    result: <Balance Object>
+    error: <Error String>
+  }
+*/
+
 const balanceCommand = async (args: types.commandBalance, lnd: AuthenticatedLnd) => {
   try {
     const result = await getBalance({

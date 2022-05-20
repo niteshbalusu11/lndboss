@@ -1,6 +1,11 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
+/*
+  children: Renders the children passed into the start flex box.
+  This flexbox is used for command forms that align to the left.
+*/
+
 type Props = {
   children: React.PropsWithChildren<{ unknown }>['children'];
 };

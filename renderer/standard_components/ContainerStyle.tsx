@@ -6,6 +6,10 @@ import CenterFlexBox from './CenterFlexBox';
 import ResponsiveGrid from './ResponsiveGrid';
 import commands from '../commands';
 
+/*
+  Renders the login button and the commands grid on the home page.
+*/
+
 const styles = createUseStyles({
   button: {
     fontSize: '15px',

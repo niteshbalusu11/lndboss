@@ -1,6 +1,13 @@
 import { createUseStyles } from 'react-jss';
 import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import commands from '../commands';
+
+const BalanceCommand = commands.find(n => n.value === 'Balance');
+
+/*
+  Renders the output of the Balance command.
+*/
 
 const styles = createUseStyles({
   table: {
@@ -47,7 +54,7 @@ const BalanceOutput = ({ data }: Data) => {
         </TableHead>
         <TableBody>
           {rows.map(row => (
-            <TableRow key="Balance" sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+            <TableRow key={BalanceCommand.value} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell className={classes.cell}>{row.balance}</TableCell>
               <TableCell className={classes.cell} align="right">
                 {row.channelBalance}

@@ -6,6 +6,15 @@ import path from 'path';
 const folderName = '.bosgui';
 const fileName = 'credentials.json';
 
+/** Get credentials from credentials.json file
+  @returns via Promise
+  {
+    cert: <TLS Cert String>
+    macaroon: <Macaroon String>
+    socket: <Socket String>
+  }
+*/
+
 type Credentials = {
   cert: string;
   macaroon: string;

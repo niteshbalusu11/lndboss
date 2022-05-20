@@ -1,8 +1,12 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
+/*
+  children: Renders the children passed into the center flex box.
+*/
+
 type Props = {
-  children: React.PropsWithChildren<{ unknown }>['children'];
+  children: React.PropsWithChildren<{ unknown: any }>['children'];
 };
 
 const CenterFlexBox = ({ children }: Props) => {

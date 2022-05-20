@@ -22,7 +22,7 @@ const styles = createUseStyles({
 const ChainDeposit = () => {
   const classes = styles();
   const [amount, setAmount] = useState('');
-  const [data, setData] = useState();
+  const [data, setData] = useState({ address: '', url: '' });
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(event.target.value);
@@ -62,7 +62,7 @@ const ChainDeposit = () => {
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
-          {!!data ? <ChainDepositOutput data={data} /> : null}
+          {!!data.address && !!data.url ? <ChainDepositOutput data={data} /> : null}
         </Stack>
       </StartFlexBox>
     </CssBaseline>

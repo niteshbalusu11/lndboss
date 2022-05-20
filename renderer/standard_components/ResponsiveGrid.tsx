@@ -4,6 +4,10 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import StandardRouterLink from './StandardRouterLink';
 
+/*
+  Renders the grid of commands on the home page.
+*/
+
 type Props = {
   gridArray: {
     name: string;

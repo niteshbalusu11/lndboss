@@ -1,3 +1,8 @@
+/*
+  List of commands that will be used in the app, this list will be used
+  for command labels, descriptions, help text and flags.
+*/
+
 type Commands = {
   name: string;
   value: string;

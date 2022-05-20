@@ -4,6 +4,15 @@ import Link from 'next/link';
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 
+/* Renders the standard link button
+  {
+    [buttonStyle]: <Button Style>
+    destination: <Button Destination String>
+    label: <Button Label String>
+  }
+
+*/
+
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   color: theme.palette.getContrastText(purple[500]),
   backgroundColor: purple[500],
@@ -30,7 +39,7 @@ type Props = {
   buttonStyle?: any;
 };
 
-const StandardButtonLink = ({ label, destination, buttonStyle }: Props) => {
+const StandardButtonLink = ({ buttonStyle, destination, label }: Props) => {
   const classes = styles();
   return (
     <Link href={destination}>

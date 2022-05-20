@@ -4,7 +4,7 @@ import { SpawnLightningServerType } from '../utils/spawn_lightning_server.js';
 import balanceCommand from '../../main/commands/balance/balance_command';
 
 try {
-  test.describe('Test authentication from server side', async () => {
+  test.describe('Test Balance command on the node.js side', async () => {
     let lightning: SpawnLightningServerType;
 
     test.beforeAll(async () => {

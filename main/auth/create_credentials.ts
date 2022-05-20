@@ -7,17 +7,17 @@ import * as types from '../../renderer/types';
 const folderName = '.bosgui';
 const fileName = 'credentials.json';
 
-/*
-{
-  cert: <TLS Cert String>
-  macaroon: <Macaroon String>
-  socket: <Socket String>
-}
-@returns via Promise{
-  writeFile: <Boolean>
-  OR
-  error: <Error String>
-}
+/** Write to cert, macaroon and socket to credentials.json file
+  {
+    cert: <TLS Cert String>
+    macaroon: <Macaroon String>
+    socket: <Socket String>
+  }
+  @returns via Promise
+  {
+    writeFile: <Boolean>
+    error: <Error String>
+  }
 */
 
 const createCredentials = async ({ cert, macaroon, socket }: types.credentialsCreate) => {

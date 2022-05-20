@@ -1,6 +1,10 @@
 import { alpha, styled, Switch } from '@mui/material';
 import { blue, green } from '@mui/material/colors';
 
+/*
+  Renders the standard ios style switch used in command forms.
+*/
+
 const StandardSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked': {
     color: blue[600],

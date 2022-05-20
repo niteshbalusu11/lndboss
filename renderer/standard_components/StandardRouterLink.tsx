@@ -3,6 +3,14 @@ import { createUseStyles } from 'react-jss';
 import Link from 'next/link';
 import { Link as MULink } from '@mui/material';
 
+/*
+  {
+    label: <Link Label String>
+    destination: <Link Destination String>
+  }
+  Returns the standard link
+*/
+
 const styles = createUseStyles({
   link: {
     fontSize: '20px',
