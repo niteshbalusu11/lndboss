@@ -34,7 +34,7 @@ const StandardButtonLink = ({ label, destination, buttonStyle }: Props) => {
   const classes = styles();
   return (
     <Link href={destination}>
-      <ColorButton className={!!buttonStyle ? buttonStyle : classes.button} variant="contained">
+      <ColorButton className={!!buttonStyle ? buttonStyle : classes.button} variant="contained" id={label}>
         {label}
       </ColorButton>
     </Link>

@@ -1,4 +1,5 @@
 import { Alert, CssBaseline, Dialog, TextField } from '@mui/material';
+import Head from 'next/head';
 import React, { useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import SubmitButton from '../standard_components/SubmitButton';
@@ -95,6 +96,9 @@ const Login = () => {
 
   return (
     <CssBaseline>
+      <Head>
+        <title>Authentication</title>
+      </Head>
       <StartFlexBox>
         <StandardButtonLink label="Home" destination="/home" />
         <form className={classes.form}>
@@ -141,11 +145,15 @@ const Login = () => {
             Authenticate
           </SubmitButton>
         </form>
-        <Dialog open={successDialog} onClose={handleSuccessClick}>
-          <Alert severity="success">Credentials saved and Authenticated to LND!</Alert>
+        <Dialog open={successDialog} id="loginsuccess" onClose={handleSuccessClick}>
+          <Alert severity="success" id="loginsuccess">
+            Credentials saved and Authenticated to LND!
+          </Alert>
         </Dialog>
-        <Dialog open={failureDialog} onClose={handleFailureClick}>
-          <Alert severity="error">Failed to connect to LND!</Alert>
+        <Dialog open={failureDialog} id="loginerror" onClose={handleFailureClick}>
+          <Alert severity="error" id="loginerror">
+            Failed to connect to LND!
+          </Alert>
         </Dialog>
       </StartFlexBox>
     </CssBaseline>

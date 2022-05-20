@@ -3,3 +3,7 @@ node_modules
 .next
 app
 dist
+out
+/test-results/
+/playwright-report/
+/playwright/.cache/

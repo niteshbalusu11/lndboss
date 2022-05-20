@@ -7,6 +7,7 @@ import StartFlexBox from '../standard_components/StartFlexBox';
 import SubmitButton from '../standard_components/SubmitButton';
 import ChainDepositOutput from '../output/ChainDepositOutput';
 import * as types from '../types';
+import Head from 'next/head';
 
 const ChainDepositCommand = commands.find(n => n.value === 'ChainDeposit');
 
@@ -45,6 +46,9 @@ const ChainDeposit = () => {
   };
   return (
     <CssBaseline>
+      <Head>
+        <title>Chain Deposit</title>
+      </Head>
       <StartFlexBox>
         <StandardButtonLink label="Home" destination="/home" />
         <Stack spacing={3} className={classes.form}>

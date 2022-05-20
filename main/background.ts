@@ -5,6 +5,7 @@ import balanceCommand from './commands/balance/balance_command';
 import createCredentials from './auth/create_credentials';
 import checkConnection from './auth/check_connection';
 import chainDepositCommand from './commands/chainDeposit/chain_deposit';
+import authenticatedLnd from './auth/authenticated_lnd';
 import * as types from '../renderer/types';
 
 const isProd: boolean = process.env.NODE_ENV === 'production';
@@ -14,7 +15,6 @@ if (isProd) {
 } else {
   app.setPath('userData', `${app.getPath('userData')} (development)`);
 }
-
 (async () => {
   await app.whenReady();
 
@@ -37,13 +37,15 @@ app.on('window-all-closed', () => {
 });
 
 ipcMain.handle('command:balance', async (_event, args: types.commandBalance) => {
-  const { result, error } = await balanceCommand(args);
+  const lnd = await authenticatedLnd();
+  const { result, error } = await balanceCommand(args, lnd);
 
   return { result, error };
 });
 
 ipcMain.handle('command:chainDeposit', async (_event, args) => {
-  const { result, error } = await chainDepositCommand(args);
+  const lnd = await authenticatedLnd();
+  const { result, error } = await chainDepositCommand(args, lnd);
   return { result, error };
 });
 

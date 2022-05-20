@@ -1,13 +1,12 @@
 import { auto } from 'async';
 import { AuthenticatedLnd, createChainAddress } from 'lightning';
-import authenticatedLnd from '../../auth/authenticated_lnd';
+import * as types from '../../../renderer/types';
 
-const bigTok = tokens => (!tokens ? '0' : (tokens / 1e8).toFixed(8));
+const bigTok = (tokens: number) => (!tokens ? '0' : (tokens / 1e8).toFixed(8));
 const format = 'p2wpkh';
 const stringify = (data: any) => JSON.stringify(data);
 
 type Tasks = {
-  lnd: AuthenticatedLnd;
   getAddress: string;
   url: {
     address: string;
@@ -25,20 +24,12 @@ type Tasks = {
     url: <Deposit Address URL string>
   }
 */
-const chainDepositCommand = async args => {
+const chainDepositCommand = async (args: types.commandChainDeposit, lnd: AuthenticatedLnd) => {
   try {
     const result = await auto<Tasks>({
-      // Authenticate LND
-      lnd: [
-        async () => {
-          const lnd: AuthenticatedLnd = await authenticatedLnd();
-          return lnd;
-        },
-      ],
       // Get deposit address
       getAddress: [
-        'lnd',
-        async ({ lnd }) => {
+        async () => {
           const { address } = await createChainAddress({
             format,
             lnd,

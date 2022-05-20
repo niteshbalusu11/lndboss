@@ -8,6 +8,7 @@ import StartFlexBox from '../standard_components/StartFlexBox';
 import SubmitButton from '../standard_components/SubmitButton';
 import BalanceOutput from '../output/BalanceOutput';
 import * as types from '../types';
+import Head from 'next/head';
 
 const BalanceCommand = commands.find(n => n.value === 'Balance');
 
@@ -59,6 +60,7 @@ const Balance = () => {
       is_offchain_only: isEnabled2,
       is_onchain_only: isEnabled4,
     };
+
     const { error, result } = await window.electronAPI.commandBalance(flags);
 
     if (!!error) {
@@ -73,6 +75,9 @@ const Balance = () => {
 
   return (
     <CssBaseline>
+      <Head>
+        <title>Balance</title>
+      </Head>
       <StartFlexBox>
         <StandardButtonLink label="Home" destination="/home" />
         <Stack spacing={3} className={classes.form}>
@@ -92,19 +97,25 @@ const Balance = () => {
           />
 
           <FormControlLabel
-            control={<StandardSwitch checked={isEnabled1} onChange={toggleSwitch1} />}
+            control={
+              <StandardSwitch checked={isEnabled1} onChange={toggleSwitch1} id={BalanceCommand.flags.confirmed} />
+            }
             label={BalanceCommand.flags.confirmed}
           />
           <FormControlLabel
-            control={<StandardSwitch checked={isEnabled2} onChange={toggleSwitch2} />}
+            control={
+              <StandardSwitch checked={isEnabled2} onChange={toggleSwitch2} id={BalanceCommand.flags.detailed} />
+            }
             label={BalanceCommand.flags.detailed}
           />
           <FormControlLabel
-            control={<StandardSwitch checked={isEnabled3} onChange={toggleSwitch3} />}
+            control={
+              <StandardSwitch checked={isEnabled3} onChange={toggleSwitch3} id={BalanceCommand.flags.offchain} />
+            }
             label={BalanceCommand.flags.offchain}
           />
           <FormControlLabel
-            control={<StandardSwitch checked={isEnabled4} onChange={toggleSwitch4} />}
+            control={<StandardSwitch checked={isEnabled4} onChange={toggleSwitch4} id={BalanceCommand.flags.onchain} />}
             label={BalanceCommand.flags.onchain}
           />
           <SubmitButton variant="contained" onClick={fetchData}>

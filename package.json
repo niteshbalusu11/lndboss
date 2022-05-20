@@ -10,7 +10,8 @@
     "build": "nextron build",
     "postinstall": "electron-builder install-app-deps",
     "lint:check": "eslint \"{renderer,main}/**/*.{ts,tsx}\"",
-    "lint:fix": "eslint \"{main,renderer}/**/*.{ts,tsx}\" --fix"
+    "lint:fix": "eslint \"{main,renderer}/**/*.{ts,tsx}\" --fix",
+    "test": "playwright test --headed"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -26,18 +27,22 @@
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.22.1",
     "@types/async": "^3.2.13",
     "@types/node": "^16.11.7",
     "@types/react": "^18.0.8",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "electron": "^18.2.0",
     "electron-builder": "^23.0.3",
+    "electron-playwright-helpers": "^1.1.1",
     "eslint": "^8.0.1",
     "eslint-config-next": "^12.1.6",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "ln-docker-daemons": "^2.2.11",
     "next": "^12.1.6",
     "nextron": "^8.1.0",
+    "playwright": "^1.22.1",
     "prettier": "2.6.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

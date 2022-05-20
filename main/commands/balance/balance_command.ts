@@ -1,12 +1,10 @@
 import { getBalance } from 'balanceofsatoshis/balances';
-import authenticatedLnd from '../../auth/authenticated_lnd';
 import * as types from '../../../renderer/types';
+import { AuthenticatedLnd } from 'lightning';
 const stringify = (data: any) => JSON.stringify(data);
 
-const balanceCommand = async (args: types.commandBalance) => {
+const balanceCommand = async (args: types.commandBalance, lnd: AuthenticatedLnd) => {
   try {
-    const lnd = await authenticatedLnd();
-
     const result = await getBalance({
       lnd,
       above: args.above,
