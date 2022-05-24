@@ -1,4 +1,3 @@
-import { createUseStyles } from 'react-jss';
 import React from 'react';
 import QRCode from 'react-qr-code';
 
@@ -6,10 +5,10 @@ import QRCode from 'react-qr-code';
   Renders the output of the ChainDeposit command.
 */
 
-const styles = createUseStyles({
+const styles = {
   div: {
-    marginTop: '150px',
-    marginLeft: '20px',
+    marginTop: '100px',
+    marginLeft: '10px',
   },
   qr: {
     height: '250px',
@@ -20,7 +19,7 @@ const styles = createUseStyles({
     fontSize: '15px',
     fontWeight: 'bold',
   },
-});
+};
 
 type Data = {
   data: {
@@ -30,12 +29,10 @@ type Data = {
 };
 
 const ChainDepositOutput = ({ data }: Data) => {
-  const classes = styles();
-
   return (
-    <div className={classes.div}>
-      <QRCode value={data.url} size={250} className={classes.qr} bgColor="white" fgColor="black" />
-      <p className={classes.text}>{data.address}</p>
+    <div style={styles.div}>
+      <QRCode value={data.url} size={250} style={styles.qr} bgColor="white" fgColor="black" />
+      <p style={styles.text}>{data.address}</p>
     </div>
   );
 };

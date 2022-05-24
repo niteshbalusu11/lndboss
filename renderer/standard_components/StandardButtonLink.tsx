@@ -2,16 +2,24 @@ import { Button, ButtonProps, styled } from '@mui/material';
 import { purple } from '@mui/material/colors';
 import Link from 'next/link';
 import React from 'react';
-import { createUseStyles } from 'react-jss';
 
 /* Renders the standard link button
   {
-    [buttonStyle]: <Button Style>
     destination: <Button Destination String>
     label: <Button Label String>
   }
 
 */
+
+const styles = {
+  button: {
+    height: '30px',
+    marginLeft: '20px',
+    marginTop: '15px',
+    fontWeight: 'bold',
+    fontSize: '14px',
+  },
+};
 
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   color: theme.palette.getContrastText(purple[500]),
@@ -21,29 +29,15 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   },
 }));
 
-const styles = createUseStyles({
-  button: {
-    fontSize: '12px',
-    margin: '0px',
-    cursor: 'pointer',
-    marginTop: '20px',
-    marginLeft: '20px',
-    height: '30px',
-    fontWeight: 'bold',
-  },
-});
-
 type Props = {
   label: string;
   destination: string;
-  buttonStyle?: any;
 };
 
-const StandardButtonLink = ({ buttonStyle, destination, label }: Props) => {
-  const classes = styles();
+const StandardButtonLink = ({ destination, label }: Props) => {
   return (
     <Link href={destination}>
-      <ColorButton className={!!buttonStyle ? buttonStyle : classes.button} variant="contained" id={label}>
+      <ColorButton style={styles.button} variant="contained" id={label}>
         {label}
       </ColorButton>
     </Link>

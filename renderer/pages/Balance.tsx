@@ -1,6 +1,5 @@
 import { CssBaseline, FormControlLabel, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { createUseStyles } from 'react-jss';
 import commands from '../commands';
 import StandardButtonLink from '../standard_components/StandardButtonLink';
 import StandardSwitch from '../standard_components/StandardSwitch';
@@ -12,13 +11,13 @@ import Head from 'next/head';
 
 const BalanceCommand = commands.find(n => n.value === 'Balance');
 
-const styles = createUseStyles({
+const styles = {
   form: {
     marginLeft: '50px',
     marginTop: '100px',
     width: '300px',
   },
-});
+};
 
 type BalanceData = {
   balance: number | undefined;
@@ -26,8 +25,6 @@ type BalanceData = {
 };
 
 const Balance = () => {
-  const classes = styles();
-
   const [above, setAbove] = useState('');
   const [below, setBelow] = useState('');
   const [isEnabled1, setIsEnabled1] = useState(false);
@@ -84,8 +81,8 @@ const Balance = () => {
         <title>Balance</title>
       </Head>
       <StartFlexBox>
-        <StandardButtonLink label="Home" destination="/home" />
-        <Stack spacing={3} className={classes.form}>
+        <StandardButtonLink label="Home" destination="/Commands" />
+        <Stack spacing={3} style={styles.form}>
           <TextField
             type="text"
             placeholder="Above (Number)"

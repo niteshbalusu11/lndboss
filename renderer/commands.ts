@@ -3,7 +3,7 @@
   for command labels, descriptions, help text and flags.
 */
 
-type Commands = {
+export type Commands = {
   name: string;
   value: string;
   description: string;

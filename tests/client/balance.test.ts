@@ -20,6 +20,7 @@ try {
     });
 
     test('Test the Balance command page and input values', async () => {
+      await page.waitForTimeout(4000);
       await page.click('text=Balance');
       await expect(page).toHaveTitle('Balance');
       await page.type(`#${BalanceCommand.flags.above}`, '1000');

@@ -1,6 +1,5 @@
 import { CssBaseline, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { createUseStyles } from 'react-jss';
 import commands from '../commands';
 import StandardButtonLink from '../standard_components/StandardButtonLink';
 import StartFlexBox from '../standard_components/StartFlexBox';
@@ -11,16 +10,15 @@ import Head from 'next/head';
 
 const ChainDepositCommand = commands.find(n => n.value === 'ChainDeposit');
 
-const styles = createUseStyles({
+const styles = {
   form: {
     marginLeft: '50px',
     marginTop: '100px',
     width: '300px',
   },
-});
+};
 
 const ChainDeposit = () => {
-  const classes = styles();
   const [amount, setAmount] = useState('');
   const [data, setData] = useState({ address: '', url: '' });
 
@@ -50,8 +48,8 @@ const ChainDeposit = () => {
         <title>Chain Deposit</title>
       </Head>
       <StartFlexBox>
-        <StandardButtonLink label="Home" destination="/home" />
-        <Stack spacing={3} className={classes.form}>
+        <StandardButtonLink label="Home" destination="/Commands" />
+        <Stack spacing={3} style={styles.form}>
           <TextField
             type="text"
             placeholder="Above (Number)"

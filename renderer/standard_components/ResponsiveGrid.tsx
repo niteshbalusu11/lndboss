@@ -35,7 +35,6 @@ const ResponsiveGrid = ({ gridArray }: Props) => {
       columns={{ xs: 4, sm: 8, md: 12 }}
       minHeight="100px"
       alignItems="center"
-      justifyContent="center"
       marginRight="50px"
       paddingTop="70px"
       paddingBottom="40px"

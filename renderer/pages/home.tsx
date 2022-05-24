@@ -1,12 +1,12 @@
 import React from 'react';
-import ContainerStyle from '../standard_components/ContainerStyle';
+import Startup from '../standard_components/Startup';
 
 /*
   App starts here
 */
 
 const App = () => {
-  return <ContainerStyle />;
+  return <Startup />;
 };
 
 export default App;

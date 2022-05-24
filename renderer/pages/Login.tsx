@@ -106,7 +106,7 @@ const Login = () => {
         <title>Authentication</title>
       </Head>
       <StartFlexBox>
-        <StandardButtonLink label="Home" destination="/home" />
+        <StandardButtonLink label="Home" destination="/Commands" />
         <form className={classes.form}>
           <h1 className={classes.h1}>Authenticate</h1>
           <div>

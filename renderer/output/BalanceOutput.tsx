@@ -1,4 +1,3 @@
-import { createUseStyles } from 'react-jss';
 import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import commands from '../commands';
@@ -9,10 +8,10 @@ const BalanceCommand = commands.find(n => n.value === 'Balance');
   Renders the output of the Balance command.
 */
 
-const styles = createUseStyles({
+const styles = {
   table: {
     display: 'flex',
-    marginTop: '200px',
+    marginTop: '100px',
     height: '20vh',
     marginRight: '80px',
     width: '50vw',
@@ -24,7 +23,7 @@ const styles = createUseStyles({
     fontWeight: 'bold',
     fontSize: '15px',
   },
-});
+};
 
 type Data = {
   data: {
@@ -34,7 +33,7 @@ type Data = {
 };
 
 const BalanceOutput = ({ data }: Data) => {
-  const classes = styles();
+  // const classes = styles();
 
   const createData = (balance: number, channelBalance: number) => {
     return { balance, channelBalance };
@@ -42,12 +41,12 @@ const BalanceOutput = ({ data }: Data) => {
 
   const rows = [createData(data.balance, data.channel_balance)];
   return (
-    <TableContainer component={Paper} className={classes.table}>
+    <TableContainer component={Paper} style={styles.table}>
       <Table sx={{ minWidth: 100 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell className={classes.cell}>Balance</TableCell>
-            <TableCell className={classes.cell} align="right">
+            <TableCell style={styles.cell}>Balance</TableCell>
+            <TableCell style={styles.cell} align="right">
               Channel Balance
             </TableCell>
           </TableRow>
@@ -55,8 +54,8 @@ const BalanceOutput = ({ data }: Data) => {
         <TableBody>
           {rows.map(row => (
             <TableRow key={BalanceCommand.value} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell className={classes.cell}>{row.balance}</TableCell>
-              <TableCell className={classes.cell} align="right">
+              <TableCell style={styles.cell}>{row.balance}</TableCell>
+              <TableCell style={styles.cell} align="right">
                 {row.channelBalance}
               </TableCell>
             </TableRow>

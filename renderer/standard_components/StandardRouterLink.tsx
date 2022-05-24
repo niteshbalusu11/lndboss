@@ -1,5 +1,4 @@
 import React from 'react';
-import { createUseStyles } from 'react-jss';
 import Link from 'next/link';
 import { Link as MULink } from '@mui/material';
 
@@ -11,14 +10,14 @@ import { Link as MULink } from '@mui/material';
   Returns the standard link
 */
 
-const styles = createUseStyles({
+const styles = {
   link: {
     fontSize: '20px',
     margin: '0px',
     cursor: 'pointer',
     color: 'black',
   },
-});
+};
 
 type Props = {
   label: string;
@@ -26,10 +25,9 @@ type Props = {
 };
 
 const StandardRouterLink = ({ label, destination }: Props) => {
-  const classes = styles();
   return (
     <Link href={destination}>
-      <MULink className={classes.link} underline="hover">
+      <MULink style={styles.link} underline="hover">
         {label}
       </MULink>
     </Link>
