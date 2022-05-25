@@ -45,3 +45,12 @@ export type commandChainDepositReturn = {
   };
   error?: string;
 };
+
+export type commandTags = {
+  add: string[];
+  icon?: string;
+  id?: string;
+  is_avoided?: boolean;
+  remove: string[];
+  tag?: string;
+};

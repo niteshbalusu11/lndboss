@@ -7,6 +7,7 @@ import checkConnection from './auth/check_connection';
 import chainDepositCommand from './commands/chainDeposit/chain_deposit';
 import authenticatedLnd from './auth/authenticated_lnd';
 import * as types from '../renderer/types';
+import tagsCommand from './commands/tags/tags_command';
 
 const isProd: boolean = process.env.NODE_ENV === 'production';
 
@@ -62,4 +63,9 @@ ipcMain.handle('credentials:create', async (_event, args: types.credentialsCreat
 ipcMain.handle('checkconnection:get', async () => {
   const connection = await checkConnection();
   return connection;
+});
+
+ipcMain.handle('command:tags', async (_event, args: types.commandTags) => {
+  const { result, error } = await tagsCommand(args);
+  return { result, error };
 });

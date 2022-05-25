@@ -6,4 +6,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
   commandChainDeposit: (args: types.commandChainDeposit) => ipcRenderer.invoke('command:chainDeposit', args),
   credentialsCreate: (args: types.credentialsCreate) => ipcRenderer.invoke('credentials:create', args),
   checkconnectionGet: () => ipcRenderer.invoke('checkconnection:get'),
+  commandTags: (args: types.commandTags) => ipcRenderer.invoke('command:tags', args),
 });
