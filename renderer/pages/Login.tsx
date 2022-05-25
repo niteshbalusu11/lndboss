@@ -50,19 +50,23 @@ const styles = createUseStyles({
 });
 
 const Login = () => {
-  const [macaroon, setMacaroon] = useState('');
   const [cert, setCert] = useState('');
+  const [macaroon, setMacaroon] = useState('');
+  const [nodeName, setNodeName] = useState('');
   const [socket, setSocket] = useState('');
   const [successDialog, setSuccessDialog] = useState(false);
   const [failureDialog, setFailureDialog] = useState(false);
 
   const classes = styles();
 
+  const handleCertChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCert(event.target.value);
+  };
   const handleMacaroonChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMacaroon(event.target.value);
   };
-  const handleCertChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCert(event.target.value);
+  const handleNodeNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNodeName(event.target.value);
   };
   const handleSocketChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSocket(event.target.value);
@@ -73,21 +77,21 @@ const Login = () => {
       macaroon,
       cert,
       socket,
+      node: nodeName,
     };
 
-    const { error, result } = await window.electronAPI.credentialsCreate(args);
+    const { connection, error, result } = await window.electronAPI.credentialsCreate(args);
 
-    const checkConnection = await window.electronAPI.checkconnectionGet();
-
+    // const checkConnection = await window.electronAPI.checkconnectionGet();
     if (!!error) {
       setFailureDialog(true);
     }
 
-    if (!result || !!checkConnection.error) {
+    if (!result || !!connection.error) {
       setFailureDialog(true);
     }
 
-    if (!!result && !!checkConnection.hasAccess) {
+    if (!!result && !!connection.hasAccess) {
       setSuccessDialog(true);
     }
   };
@@ -111,10 +115,21 @@ const Login = () => {
           <h1 className={classes.h1}>Authenticate</h1>
           <div>
             <TextField
-              type="password"
+              type="text"
+              placeholder="Saved Node Name"
+              className={classes.input}
+              id="node"
+              inputProps={{
+                className: classes.inputStyle,
+              }}
+              onChange={handleNodeNameChange}
+            />
+          </div>
+          <div>
+            <TextField
+              type="text"
               placeholder="TLS Cert"
               className={classes.input}
-              multiline
               id="cert"
               inputProps={{
                 className: classes.inputStyle,
@@ -147,7 +162,11 @@ const Login = () => {
               onChange={handleSocketChange}
             />
           </div>
-          <SubmitButton variant="contained" onClick={handleEvents} disabled={!cert || !macaroon || !socket}>
+          <SubmitButton
+            variant="contained"
+            onClick={handleEvents}
+            disabled={!cert || !macaroon || !nodeName || !socket}
+          >
             Authenticate
           </SubmitButton>
         </form>

@@ -2,12 +2,11 @@ import { app, ipcMain } from 'electron';
 import serve from 'electron-serve';
 import { createWindow } from './helpers';
 import balanceCommand from './commands/balance/balance_command';
-import createCredentials from './auth/create_credentials';
-import checkConnection from './auth/check_connection';
 import chainDepositCommand from './commands/chainDeposit/chain_deposit';
-import authenticatedLnd from './auth/authenticated_lnd';
+import authenticatedLnd from './lnd/authenticated_lnd';
 import * as types from '../renderer/types';
 import tagsCommand from './commands/tags/tags_command';
+import * as lnd from './lnd';
 
 const isProd: boolean = process.env.NODE_ENV === 'production';
 
@@ -38,31 +37,27 @@ app.on('window-all-closed', () => {
 });
 
 ipcMain.handle('command:balance', async (_event, args: types.commandBalance) => {
-  const lnd = await authenticatedLnd();
+  const { lnd } = await authenticatedLnd({ node: args.node });
   const { result, error } = await balanceCommand(args, lnd);
 
   return { result, error };
 });
 
-ipcMain.handle('command:chainDeposit', async (_event, args) => {
-  const lnd = await authenticatedLnd();
+ipcMain.handle('command:chainDeposit', async (_event, args: types.commandChainDeposit) => {
+  const { lnd } = await authenticatedLnd({ node: args.node });
   const { result, error } = await chainDepositCommand(args, lnd);
   return { result, error };
 });
 
 ipcMain.handle('credentials:create', async (_event, args: types.credentialsCreate) => {
-  const { result, error } = await createCredentials({
-    cert: args.cert,
-    macaroon: args.macaroon,
-    socket: args.socket,
-  });
-
-  return { result, error };
+  const { result, error } = await lnd.putSavedCredentials(args);
+  const connection = await lnd.checkConnection({ node: args.node });
+  return { connection, result, error };
 });
 
-ipcMain.handle('checkconnection:get', async () => {
-  const connection = await checkConnection();
-  return connection;
+ipcMain.handle('credentials:getSavedNodes', async () => {
+  const { savedNodes, error } = await lnd.getSavedNodes();
+  return { savedNodes, error };
 });
 
 ipcMain.handle('command:tags', async (_event, args: types.commandTags) => {

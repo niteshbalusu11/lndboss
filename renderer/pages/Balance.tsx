@@ -6,8 +6,13 @@ import StandardSwitch from '../standard_components/StandardSwitch';
 import StartFlexBox from '../standard_components/StartFlexBox';
 import SubmitButton from '../standard_components/SubmitButton';
 import BalanceOutput from '../output/BalanceOutput';
+import SavedNodes from '../standard_components/SavedNodes';
 import * as types from '../types';
 import Head from 'next/head';
+
+/*
+  Renders the bos balance command
+*/
 
 const BalanceCommand = commands.find(n => n.value === 'Balance');
 
@@ -32,16 +37,24 @@ const Balance = () => {
   const [isEnabled3, setIsEnabled3] = useState(false);
   const [isEnabled4, setIsEnabled4] = useState(false);
   const [data, setData] = useState<BalanceData>({ balance: undefined, channel_balance: undefined });
+  const [node, setNode] = useState('');
+
+  const getSavedNode = (data: string) => {
+    setNode(data);
+  };
 
   const toggleSwitch1 = () => {
     setIsEnabled1((previousState: boolean) => !previousState);
   };
+
   const toggleSwitch2 = () => {
     setIsEnabled2((previousState: boolean) => !previousState);
   };
+
   const toggleSwitch3 = () => {
     setIsEnabled3((previousState: boolean) => !previousState);
   };
+
   const toggleSwitch4 = () => {
     setIsEnabled4((previousState: boolean) => !previousState);
   };
@@ -58,6 +71,7 @@ const Balance = () => {
     const flags: types.commandBalance = {
       above: Number(above),
       below: Number(below),
+      node,
       is_confirmed: isEnabled1,
       is_offchain_only: isEnabled2,
       is_onchain_only: isEnabled4,
@@ -120,6 +134,7 @@ const Balance = () => {
             control={<StandardSwitch checked={isEnabled4} onChange={toggleSwitch4} id={BalanceCommand.flags.onchain} />}
             label={BalanceCommand.flags.onchain}
           />
+          <SavedNodes getSavedNode={getSavedNode} />
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
