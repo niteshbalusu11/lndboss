@@ -5,6 +5,7 @@ export interface IElectronAPI {
   commandChainDeposit: (args: types.commandChainDeposit) => Promise<types.commandChainDepositReturn>;
   credentialsCreate: (args: types.credentialsCreate) => Promise<types.createCredentialsReturn>;
   checkconnectionGet: () => Promise<types.checkConnectionReturn>;
+  commandTags: (args: types.commandTags) => Promise<any>;
 }
 
 declare global {

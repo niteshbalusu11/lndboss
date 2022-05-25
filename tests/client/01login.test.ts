@@ -1,19 +1,13 @@
-import { ElectronApplication, expect, Page, test } from '@playwright/test';
-import { _electron as electron } from 'playwright';
+import { expect, test } from '@playwright/test';
+import { electronApp, page } from './_startupElectron.test';
 
 try {
   test.describe('Test the login page and check authentication', async () => {
-    let electronApp: ElectronApplication;
-    let page: Page;
-
     test.beforeAll(async () => {
-      electronApp = await electron.launch({ args: ['http://localhost:8888/home'] });
-
       const appPath = await electronApp.evaluate(async ({ app }) => {
         return app.getAppPath();
       });
       console.log(`appPath----${appPath}`);
-      page = await electronApp.firstWindow();
     });
 
     test('Test the login page and input values', async () => {
@@ -22,11 +16,7 @@ try {
       await page.type('#cert', 'lightning.cert');
       await page.type('#macaroon', 'lightning.macaroon');
       await page.type('#socket', 'lightning.socket');
-      await page.click('text=authenticate');
-    });
-
-    test.afterAll(async () => {
-      await electronApp.close();
+      await page.click('text=home');
     });
   });
 } catch (error) {

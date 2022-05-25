@@ -6,7 +6,7 @@
   "author": "Nitesh Balusu",
   "main": "app/background.js",
   "scripts": {
-    "dev": "eslint \"{main,renderer}/**/*.{ts,tsx}\" && nextron",
+    "dev": "nextron",
     "build": "nextron build",
     "postinstall": "electron-builder install-app-deps",
     "lint:check": "eslint \"{renderer,main}/**/*.{ts,tsx}\"",
@@ -16,12 +16,14 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.8.0",
     "@mui/material": "^5.7.0",
     "async": "^3.2.3",
     "balanceofsatoshis": "^12.8.2",
     "electron-serve": "^1.1.0",
     "electron-store": "^8.0.1",
     "lightning": "^5.15.1",
+    "pretty-error": "^4.0.0",
     "react-jss": "^10.9.0",
     "react-qr-code": "^2.0.7",
     "react-router-dom": "^6.3.0"

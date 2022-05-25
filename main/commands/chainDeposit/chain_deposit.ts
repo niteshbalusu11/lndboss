@@ -7,6 +7,7 @@ const format = 'p2wpkh';
 const stringify = (data: any) => JSON.stringify(data);
 
 type Tasks = {
+  validate: undefined;
   getAddress: string;
   url: {
     address: string;
@@ -27,8 +28,17 @@ type Tasks = {
 const chainDepositCommand = async (args: types.commandChainDeposit, lnd: AuthenticatedLnd) => {
   try {
     const result = await auto<Tasks>({
+      // Validate
+      validate: async () => {
+        if (!lnd) {
+          throw new Error('ExpectedAuthenticatedLndToCreateChainDepositAddress');
+        }
+
+        return;
+      },
       // Get deposit address
       getAddress: [
+        'validate',
         async () => {
           const { address } = await createChainAddress({
             format,
