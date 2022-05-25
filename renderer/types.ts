@@ -1,19 +1,24 @@
-//=========================Credential Check Types=====================================
-
-export type checkConnectionReturn = {
-  hasAccess?: boolean;
-  error?: string;
-};
+//=========================Credential Create Types=====================================
 
 export type credentialsCreate = {
   cert: string;
   macaroon: string;
+  node: string;
   socket: string;
 };
 
 export type createCredentialsReturn = {
-  result?: boolean;
-  error?: string;
+  connection: {
+    hasAccess: boolean;
+    error: string;
+  };
+  error: string;
+  result: boolean;
+};
+
+export type getSavedNodesReturn = {
+  error: string;
+  savedNodes: string[];
 };
 
 //=========================Command Types=====================================
@@ -21,6 +26,7 @@ export type createCredentialsReturn = {
 export type commandBalance = {
   above?: number;
   below?: number;
+  node: string;
   is_confirmed?: boolean;
   is_offchain_only?: boolean;
   is_onchain_only?: boolean;
@@ -35,6 +41,7 @@ export type commandBalanceReturn = {
 };
 
 export type commandChainDeposit = {
+  node: string;
   amount: number;
 };
 

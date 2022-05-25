@@ -6,6 +6,7 @@ export interface IElectronAPI {
   credentialsCreate: (args: types.credentialsCreate) => Promise<types.createCredentialsReturn>;
   checkconnectionGet: () => Promise<types.checkConnectionReturn>;
   commandTags: (args: types.commandTags) => Promise<any>;
+  getSavedNodes: () => Promise<types.getSavedNodesReturn>;
 }
 
 declare global {

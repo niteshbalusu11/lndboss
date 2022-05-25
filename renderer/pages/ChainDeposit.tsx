@@ -7,6 +7,11 @@ import SubmitButton from '../standard_components/SubmitButton';
 import ChainDepositOutput from '../output/ChainDepositOutput';
 import * as types from '../types';
 import Head from 'next/head';
+import SavedNodes from '../standard_components/SavedNodes';
+
+/*
+  Renders the bos chain-deposit command
+*/
 
 const ChainDepositCommand = commands.find(n => n.value === 'ChainDeposit');
 
@@ -21,6 +26,11 @@ const styles = {
 const ChainDeposit = () => {
   const [amount, setAmount] = useState('');
   const [data, setData] = useState({ address: '', url: '' });
+  const [node, setNode] = useState('');
+
+  const getSavedNode = (data: string) => {
+    setNode(data);
+  };
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(event.target.value);
@@ -28,6 +38,7 @@ const ChainDeposit = () => {
 
   const fetchData = async () => {
     const flags: types.commandChainDeposit = {
+      node,
       amount: Number(amount),
     };
 
@@ -57,6 +68,7 @@ const ChainDeposit = () => {
             id={ChainDepositCommand.flags.amount}
             onChange={handleAmountChange}
           />
+          <SavedNodes getSavedNode={getSavedNode} />
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>

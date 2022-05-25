@@ -1,7 +1,7 @@
 import { verifyAccess } from 'lightning';
-import authenticatedLnd from './authenticated_lnd';
-import getCredentials from './get_credentials';
 const stringify = (data: any) => JSON.stringify(data);
+import authenticatedLnd from './authenticated_lnd';
+import getSavedCredentials from './get_saved_credentials';
 
 /** Check if lnd is connected
 
@@ -12,12 +12,15 @@ const stringify = (data: any) => JSON.stringify(data);
   }
 */
 
-const checkConnection = async (): Promise<{ [key: string]: string | boolean }> => {
-  try {
-    const lnd = await authenticatedLnd();
-    const permissions = ['info:read'];
-    const { macaroon } = await getCredentials();
+type Args = {
+  node: string;
+};
 
+const checkConnection = async ({ node }: Args): Promise<{ [key: string]: string | boolean }> => {
+  try {
+    const permissions = ['info:read'];
+    const { lnd } = await authenticatedLnd({ node });
+    const { macaroon } = await getSavedCredentials({ node });
     const hasAccess = (await verifyAccess({ lnd, macaroon, permissions })).is_valid;
 
     return { hasAccess };
