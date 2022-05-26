@@ -5,6 +5,7 @@ export type credentialsCreate = {
   macaroon: string;
   node: string;
   socket: string;
+  is_default: boolean;
 };
 
 export type createCredentialsReturn = {
@@ -17,6 +18,7 @@ export type createCredentialsReturn = {
 };
 
 export type getSavedNodesReturn = {
+  defaultSavedNode: string | null;
   error: string;
   savedNodes: string[];
 };
@@ -28,14 +30,21 @@ export type commandBalance = {
   below?: number;
   node: string;
   is_confirmed?: boolean;
+  is_detailed: boolean;
   is_offchain_only?: boolean;
   is_onchain_only?: boolean;
 };
 
 export type commandBalanceReturn = {
   result?: {
-    balance: number;
-    channel_balance: number;
+    Balance?: number;
+    ChannelBalance?: number;
+    ClosingBalance: string;
+    ConflictedPending: string;
+    InvalidPending: string;
+    OffchainBalance: string;
+    OffchainPending: string;
+    OnchainBalance: string;
   };
   error?: string;
 };

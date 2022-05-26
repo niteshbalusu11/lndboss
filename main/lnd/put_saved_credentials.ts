@@ -3,9 +3,9 @@ import { join } from 'path';
 import { homedir } from 'os';
 import fs from 'fs';
 
-const home = '.bosgui';
-
 const credentials = 'credentials.json';
+const home = '.bosgui';
+const config = 'config.json';
 const stringify = (obj: any) => JSON.stringify(obj, null, 2);
 
 /** Write saved credentials for node
@@ -28,6 +28,7 @@ type Tasks = {
   validate: null;
   registerDirectory: null;
   writeCredentials: boolean;
+  writeConfig: null;
 };
 
 type Args = {
@@ -35,6 +36,7 @@ type Args = {
   macaroon: string;
   node: string;
   socket: string;
+  is_default: boolean;
 };
 
 const putSavedCredentials = async (args: Args) => {
@@ -65,6 +67,31 @@ const putSavedCredentials = async (args: Args) => {
 
           return fs.mkdir(nodeDirectory, () => {
             // Ignore errors, the directory may already be there
+            return cbk();
+          });
+        },
+      ],
+
+      // Write config file
+      writeConfig: [
+        'registerDirectory',
+        ({}, cbk: any) => {
+          // Exit early if not default saved node
+          if (!args.is_default) {
+            return cbk();
+          }
+
+          const path = join(...[homedir(), home, config]);
+
+          const file = stringify({
+            default_saved_node: args.node,
+          });
+
+          return fs.writeFile(path, file, (err: any) => {
+            if (!!err) {
+              return cbk([503, 'UnexpectedErrorWritingConfigFile', { err }]);
+            }
+
             return cbk();
           });
         },

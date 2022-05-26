@@ -56,8 +56,8 @@ ipcMain.handle('credentials:create', async (_event, args: types.credentialsCreat
 });
 
 ipcMain.handle('credentials:getSavedNodes', async () => {
-  const { savedNodes, error } = await lnd.getSavedNodes();
-  return { savedNodes, error };
+  const { defaultSavedNode, savedNodes, error } = await lnd.getSavedNodes();
+  return { defaultSavedNode, savedNodes, error };
 });
 
 ipcMain.handle('command:tags', async (_event, args: types.commandTags) => {

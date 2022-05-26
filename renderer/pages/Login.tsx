@@ -1,10 +1,11 @@
-import { Alert, CssBaseline, Dialog, TextField } from '@mui/material';
+import { Alert, CssBaseline, Dialog, FormControlLabel, Stack, TextField } from '@mui/material';
 import Head from 'next/head';
 import React, { useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import SubmitButton from '../standard_components/SubmitButton';
 import StandardButtonLink from '../standard_components/StandardButtonLink';
 import StartFlexBox from '../standard_components/StartFlexBox';
+import StandardSwitch from '../standard_components/StandardSwitch';
 
 /*
   Renders the login page that takes in the macaroon, cert, and socket.
@@ -14,14 +15,15 @@ import StartFlexBox from '../standard_components/StartFlexBox';
 
 const styles = createUseStyles({
   form: {
-    marginLeft: '50px',
+    marginLeft: '20px',
     marginTop: '50px',
+    width: '300px',
   },
   input: {
     width: '700px',
     height: '110px',
-    marginBottom: '10px',
-    marginTop: '10px',
+    marginBottom: '0px',
+    marginTop: '0px',
   },
   inputStyle: {
     textOverflow: 'ellipsis',
@@ -30,7 +32,7 @@ const styles = createUseStyles({
     '&::placeholder': {
       fontSize: '15px',
       fontWeight: 'bold',
-      color: 'white',
+      color: 'black',
       opacity: '0.9',
     },
   },
@@ -56,6 +58,7 @@ const Login = () => {
   const [socket, setSocket] = useState('');
   const [successDialog, setSuccessDialog] = useState(false);
   const [failureDialog, setFailureDialog] = useState(false);
+  const [defaultNode, setDefaultNode] = useState(true);
 
   const classes = styles();
 
@@ -72,17 +75,21 @@ const Login = () => {
     setSocket(event.target.value);
   };
 
+  const toggleSwitch = () => {
+    setDefaultNode((previousState: boolean) => !previousState);
+  };
+
   const handleEvents = async () => {
     const args = {
       macaroon,
       cert,
       socket,
       node: nodeName,
+      is_default: defaultNode,
     };
 
     const { connection, error, result } = await window.electronAPI.credentialsCreate(args);
 
-    // const checkConnection = await window.electronAPI.checkconnectionGet();
     if (!!error) {
       setFailureDialog(true);
     }
@@ -111,57 +118,52 @@ const Login = () => {
       </Head>
       <StartFlexBox>
         <StandardButtonLink label="Home" destination="/Commands" />
-        <form className={classes.form}>
-          <h1 className={classes.h1}>Authenticate</h1>
-          <div>
-            <TextField
-              type="text"
-              placeholder="Saved Node Name"
-              className={classes.input}
-              id="node"
-              inputProps={{
-                className: classes.inputStyle,
-              }}
-              onChange={handleNodeNameChange}
-            />
-          </div>
-          <div>
-            <TextField
-              type="text"
-              placeholder="TLS Cert"
-              className={classes.input}
-              id="cert"
-              inputProps={{
-                className: classes.inputStyle,
-              }}
-              onChange={handleCertChange}
-            />
-          </div>
-          <div>
-            <TextField
-              type="password"
-              placeholder="Admin/Read-Only Macaroon"
-              className={classes.input}
-              id="macaroon"
-              inputProps={{
-                className: classes.inputStyle,
-              }}
-              onChange={handleMacaroonChange}
-            />
-          </div>
-
-          <div>
-            <TextField
-              type="text"
-              placeholder="Socket (host:port)"
-              className={classes.inputStyle}
-              id="socket"
-              inputProps={{
-                className: classes.inputStyle,
-              }}
-              onChange={handleSocketChange}
-            />
-          </div>
+        <Stack spacing={1} className={classes.form}>
+          <h2 className={classes.h1}>Authenticate</h2>
+          <TextField
+            type="text"
+            placeholder="Saved Node Name"
+            className={classes.input}
+            id="node"
+            inputProps={{
+              className: classes.inputStyle,
+            }}
+            onChange={handleNodeNameChange}
+          />
+          <FormControlLabel
+            control={<StandardSwitch checked={defaultNode} onChange={toggleSwitch} id="default-node" />}
+            label="Is Default Node?"
+          />
+          <TextField
+            type="text"
+            placeholder="TLS Cert"
+            className={classes.input}
+            id="cert"
+            inputProps={{
+              className: classes.inputStyle,
+            }}
+            onChange={handleCertChange}
+          />
+          <TextField
+            type="password"
+            placeholder="Admin/Read-Only Macaroon"
+            className={classes.input}
+            id="macaroon"
+            inputProps={{
+              className: classes.inputStyle,
+            }}
+            onChange={handleMacaroonChange}
+          />
+          <TextField
+            type="text"
+            placeholder="Socket (host:port)"
+            className={classes.inputStyle}
+            id="socket"
+            inputProps={{
+              className: classes.inputStyle,
+            }}
+            onChange={handleSocketChange}
+          />
           <SubmitButton
             variant="contained"
             onClick={handleEvents}
@@ -169,7 +171,7 @@ const Login = () => {
           >
             Authenticate
           </SubmitButton>
-        </form>
+        </Stack>
         <Dialog open={successDialog} id="loginsuccess" onClose={handleSuccessClick}>
           <Alert severity="success" id="loginsuccess">
             Credentials saved and Authenticated to LND!

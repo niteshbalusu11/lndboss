@@ -1,8 +1,5 @@
 import React from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import commands from '../commands';
-
-const BalanceCommand = commands.find(n => n.value === 'Balance');
+import { Table, TableBody, TableCell, TableContainer, TableRow, Paper } from '@mui/material';
 
 /*
   Renders the output of the Balance command.
@@ -12,7 +9,7 @@ const styles = {
   table: {
     display: 'flex',
     marginTop: '100px',
-    height: '20vh',
+    minHeight: '20vh',
     marginRight: '80px',
     width: '50vw',
     backgroundColor: 'black',
@@ -27,36 +24,45 @@ const styles = {
 
 type Data = {
   data: {
-    balance: number;
-    channel_balance: number;
+    Balance?: number;
+    ChannelBalance?: number;
+    ClosingBalance: string;
+    ConflictedPending: string;
+    InvalidPending: string;
+    OffchainBalance: string;
+    OffchainPending: string;
+    OnchainBalance: string;
   };
 };
 
-const BalanceOutput = ({ data }: Data) => {
-  // const classes = styles();
+type CreateData = {
+  [key: string]: string;
+};
 
-  const createData = (balance: number, channelBalance: number) => {
-    return { balance, channelBalance };
+const BalanceOutput = ({ data }: Data) => {
+  const rows = [];
+  const keys = [];
+
+  const createData = (key: CreateData, value: CreateData) => {
+    return { key: key.key, value: value.value };
   };
 
-  const rows = [createData(data.balance, data.channel_balance)];
+  for (const [key, value] of Object.entries(data)) {
+    rows.push(createData({ key: String(key) }, { value: String(value) }));
+    keys.push(key);
+  }
+
   return (
     <TableContainer component={Paper} style={styles.table}>
-      <Table sx={{ minWidth: 100 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell style={styles.cell}>Balance</TableCell>
-            <TableCell style={styles.cell} align="right">
-              Channel Balance
-            </TableCell>
-          </TableRow>
-        </TableHead>
+      <Table aria-label="simple table">
         <TableBody>
           {rows.map(row => (
-            <TableRow key={BalanceCommand.value} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell style={styles.cell}>{row.balance}</TableCell>
-              <TableCell style={styles.cell} align="right">
-                {row.channelBalance}
+            <TableRow key={row.key} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell style={styles.cell} align="center">
+                {row.key}
+              </TableCell>
+              <TableCell style={styles.cell} align="center">
+                {row.value}
               </TableCell>
             </TableRow>
           ))}

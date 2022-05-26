@@ -9,19 +9,19 @@ import React from 'react';
 const SavedNode = ({ getSavedNode }) => {
   const [defaultNode, setDefaultNode] = React.useState('');
   const [savedNode, setSavedNode] = React.useState('');
-  const [nodeList, setNodeList] = React.useState([]);
+  const [nodeList, setNodeList] = React.useState(['']);
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const { savedNodes, error } = await window.electronAPI.getSavedNodes();
+      const { defaultSavedNode, savedNodes, error } = await window.electronAPI.getSavedNodes();
 
       if (!!error) {
         window.alert(error);
       }
       if (!!savedNodes) {
-        setDefaultNode(savedNodes[0]);
-        setNodeList(savedNodes);
-        getSavedNode(savedNodes[0]);
+        setDefaultNode(defaultSavedNode);
+        setNodeList(savedNodes.filter(node => node !== defaultSavedNode));
+        getSavedNode(defaultSavedNode);
       }
     };
     fetchData();
@@ -40,13 +40,13 @@ const SavedNode = ({ getSavedNode }) => {
       <Select
         labelId="saved-nodes"
         id="saved-nodes"
-        value={savedNode || defaultNode}
+        value={savedNode || defaultNode || ''}
         onChange={handleChoiceChange}
         label="Saved Nodes"
         style={{ marginTop: '0px' }}
       >
         <MenuItem value={defaultNode}>{defaultNode}</MenuItem>
-        {nodeList.slice(1).map((node: string) => {
+        {nodeList.map((node: string) => {
           return (
             <MenuItem value={node} key={node}>
               {node}
