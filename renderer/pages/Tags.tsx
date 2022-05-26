@@ -19,6 +19,7 @@ import StartFlexBox from '../standard_components/StartFlexBox';
 import SubmitButton from '../standard_components/SubmitButton';
 import TagsOutput from '../output/TagsOutput';
 import * as types from '../types';
+
 const stringify = (obj: any) => JSON.stringify(obj, null, 2);
 const tagsCommand = commands.find(n => n.value === 'Tags');
 
@@ -108,9 +109,15 @@ const Tags = () => {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value="display">Display Tags</MenuItem>
-              <MenuItem value="add">Add Tag</MenuItem>
-              <MenuItem value="remove">Remove Tag</MenuItem>
+              <MenuItem value="display" id="display">
+                Display Tags
+              </MenuItem>
+              <MenuItem value="add" id="add">
+                Add Tag
+              </MenuItem>
+              <MenuItem value="remove" id="remove">
+                Remove Tag
+              </MenuItem>
             </Select>
           </div>
           {tagType === 'add' || tagType === 'remove' ? (
@@ -119,6 +126,7 @@ const Tags = () => {
                 <TextField
                   type="text"
                   name={tagsCommand.flags.tag}
+                  id={tagsCommand.flags.tag}
                   placeholder={tagsCommand.flags.tag}
                   label={tagsCommand.flags.tag}
                   onChange={handleTagNameChange}
@@ -141,6 +149,7 @@ const Tags = () => {
                       onChange={e => handleChange(index, e)}
                       style={{ width: '500px', marginTop: '12px' }}
                       key={index}
+                      id={`pubkey-${index}`}
                     />
                     {!!index ? (
                       <IconButton aria-label="delete" onClick={() => removeFormFields(index)}>

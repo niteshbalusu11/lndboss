@@ -18,6 +18,25 @@ try {
         is_confirmed: true,
         is_offchain_only: false,
         is_onchain_only: false,
+        is_detailed: false,
+        node: '',
+      };
+      const { result, error } = await balanceCommand(args, lightning.lnd);
+
+      console.log('balance----', result);
+      expect(error).toBe(undefined);
+      expect(result).toBeTruthy();
+    });
+
+    test('run balance command detailed', async () => {
+      const args = {
+        above: 0,
+        below: 0,
+        is_confirmed: true,
+        is_offchain_only: false,
+        is_onchain_only: false,
+        is_detailed: true,
+        node: '',
       };
       const { result, error } = await balanceCommand(args, lightning.lnd);
 

@@ -1,16 +1,22 @@
-import { expect, test } from '@playwright/test';
+import { ElectronApplication, expect, Page, test } from '@playwright/test';
+import { _electron as electron } from 'playwright';
 import commands from '../../renderer/commands';
-import { electronApp, page } from './_startupElectron.test';
 
 const BalanceCommand = commands.find(n => n.value === 'Balance');
 
 try {
   test.describe('Test the Balance command client page', async () => {
+    let electronApp: ElectronApplication;
+    let page: Page;
+
     test.beforeAll(async () => {
+      electronApp = await electron.launch({ args: ['http://localhost:8888/Commands'] });
+
       const appPath = await electronApp.evaluate(async ({ app }) => {
         return app.getAppPath();
       });
       console.log(`appPath----${appPath}`);
+      page = await electronApp.firstWindow();
     });
 
     test('Test the Balance command page and input values', async () => {
@@ -23,6 +29,10 @@ try {
       await page.check(`#${BalanceCommand.flags.offchain}`);
       await page.check(`#${BalanceCommand.flags.onchain}`);
       await page.click('text=home');
+    });
+
+    test.afterAll(async () => {
+      await electronApp.close();
     });
   });
 } catch (error) {

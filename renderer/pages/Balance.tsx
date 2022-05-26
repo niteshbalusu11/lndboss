@@ -24,11 +24,6 @@ const styles = {
   },
 };
 
-type BalanceData = {
-  balance: number | undefined;
-  channel_balance: number | undefined;
-};
-
 const Balance = () => {
   const [above, setAbove] = useState('');
   const [below, setBelow] = useState('');
@@ -36,7 +31,8 @@ const Balance = () => {
   const [isEnabled2, setIsEnabled2] = useState(false);
   const [isEnabled3, setIsEnabled3] = useState(false);
   const [isEnabled4, setIsEnabled4] = useState(false);
-  const [data, setData] = useState<BalanceData>({ balance: undefined, channel_balance: undefined });
+  const [data, setData] = useState(undefined);
+
   const [node, setNode] = useState('');
 
   const getSavedNode = (data: string) => {
@@ -73,12 +69,13 @@ const Balance = () => {
       below: Number(below),
       node,
       is_confirmed: isEnabled1,
-      is_offchain_only: isEnabled2,
+      is_detailed: isEnabled2,
+      is_offchain_only: isEnabled3,
       is_onchain_only: isEnabled4,
     };
 
     const { error, result } = await window.electronAPI.commandBalance(flags);
-
+    console.log(result);
     if (!!error) {
       window.alert(error);
       return;
@@ -138,7 +135,7 @@ const Balance = () => {
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
-          {data.balance !== undefined && data.channel_balance !== undefined ? <BalanceOutput data={data} /> : null}
+          {!!data ? <BalanceOutput data={data} /> : null}
         </Stack>
       </StartFlexBox>
     </CssBaseline>

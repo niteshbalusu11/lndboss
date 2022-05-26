@@ -11,7 +11,7 @@
     "postinstall": "electron-builder install-app-deps",
     "lint:check": "eslint \"{renderer,main}/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"{main,renderer}/**/*.{ts,tsx}\" --fix",
-    "test": "playwright test --headed"
+    "test": "playwright test"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",

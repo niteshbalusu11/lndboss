@@ -6,7 +6,7 @@ let page: Page;
 try {
   test.beforeAll(async () => {
     console.log('beforeAll');
-    electronApp = await electron.launch({ args: ['http://localhost:8888/home'] });
+    electronApp = await electron.launch({ args: ['http://localhost:8888/Commands'] });
 
     const appPath = await electronApp.evaluate(async ({ app }) => {
       return app.getAppPath();

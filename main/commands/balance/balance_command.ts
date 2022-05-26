@@ -1,6 +1,10 @@
 import { getBalance } from 'balanceofsatoshis/balances';
-import * as types from '../../../renderer/types';
+import { getDetailedBalance } from 'balanceofsatoshis/balances';
 import { AuthenticatedLnd } from 'lightning';
+import * as types from '../../../renderer/types';
+
+const parseAnsi = (n: string) =>
+  n.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
 const stringify = (data: any) => JSON.stringify(data);
 
 /** Get on-chain and off-chain balances
@@ -18,10 +22,27 @@ const stringify = (data: any) => JSON.stringify(data);
     error: <Error String>
   }
 */
-
 const balanceCommand = async (args: types.commandBalance, lnd: AuthenticatedLnd) => {
   try {
-    const result = await getBalance({
+    if (!!args.is_detailed) {
+      const detailed = await getDetailedBalance({
+        lnd,
+        is_confirmed: args.is_confirmed,
+      });
+
+      const result = {
+        OnchainBalance: !!detailed.onchain_balance ? parseAnsi(detailed.onchain_balance) : '0',
+        OffchainBalance: !!detailed.offchain_balance ? parseAnsi(detailed.offchain_balance) : '0',
+        OffchainPending: !!detailed.offchain_pending ? parseAnsi(detailed.offchain_pending) : '0',
+        ClosingBalance: !!detailed.closing_balance ? parseAnsi(detailed.closing_balance) : '0',
+        ConflictedPending: !!detailed.conflicted_pending ? parseAnsi(detailed.conflicted_pending) : '0',
+        InvalidPending: !!detailed.invalid_pending ? parseAnsi(detailed.invalid_pending) : '0',
+      };
+
+      return { result };
+    }
+
+    const balance = await getBalance({
       lnd,
       above: args.above,
       below: args.below,
@@ -29,6 +50,12 @@ const balanceCommand = async (args: types.commandBalance, lnd: AuthenticatedLnd)
       is_offchain_only: args.is_offchain_only,
       is_onchain_only: args.is_onchain_only,
     });
+
+    const result = {
+      Balance: balance.balance,
+      ChannelBalance: balance.channel_balance,
+    };
+
     return { result };
   } catch (error) {
     return { error: stringify(error) };
