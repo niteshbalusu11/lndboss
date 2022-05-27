@@ -18,6 +18,9 @@ const styles = {
   form: {
     marginLeft: '50px',
     marginTop: '100px',
+    width: '700px',
+  },
+  textField: {
     width: '300px',
   },
 };
@@ -97,6 +100,7 @@ const Balance = () => {
             label={BalanceCommand.flags.above}
             id={BalanceCommand.flags.above}
             onChange={handleAboveChange}
+            style={styles.textField}
           />
           <TextField
             type="text"
@@ -104,6 +108,7 @@ const Balance = () => {
             label={BalanceCommand.flags.below}
             id={BalanceCommand.flags.below}
             onChange={handleBelowChange}
+            style={styles.textField}
           />
 
           <FormControlLabel
@@ -134,6 +139,7 @@ const Balance = () => {
             label={globalCommands.node.name}
             id={globalCommands.node.value}
             onChange={handeNodeChange}
+            style={styles.textField}
           />
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command

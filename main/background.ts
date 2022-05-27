@@ -1,7 +1,7 @@
 import { app, ipcMain } from 'electron';
 import serve from 'electron-serve';
 import { createWindow } from './helpers';
-import { balanceCommand, chainDepositCommand, tagsCommand } from './commands';
+import { balanceCommand, chainDepositCommand, chartChainFeesCommand, tagsCommand } from './commands';
 import authenticatedLnd from './lnd/authenticated_lnd';
 import * as types from '../renderer/types';
 import * as lnd from './lnd';
@@ -44,21 +44,32 @@ ipcMain.handle('command:balance', async (_event, args: types.commandBalance) => 
 ipcMain.handle('command:chainDeposit', async (_event, args: types.commandChainDeposit) => {
   const { lnd } = await authenticatedLnd({ node: args.node });
   const { result, error } = await chainDepositCommand(args, lnd);
+
+  return { result, error };
+});
+
+ipcMain.handle('command:chartChainFees', async (_event, args: types.commandChartChainFees) => {
+  const { lnd } = await authenticatedLnd({ node: args.node });
+  const { result, error } = await chartChainFeesCommand(args, [lnd]);
+
+  return { result, error };
+});
+
+ipcMain.handle('command:tags', async (_event, args: types.commandTags) => {
+  const { result, error } = await tagsCommand(args);
+
   return { result, error };
 });
 
 ipcMain.handle('credentials:create', async (_event, args: types.credentialsCreate) => {
   const { result, error } = await lnd.putSavedCredentials(args);
   const connection = await lnd.checkConnection({ node: args.node });
+
   return { connection, result, error };
 });
 
 ipcMain.handle('credentials:getSavedNodes', async () => {
   const { defaultSavedNode, savedNodes, error } = await lnd.getSavedNodes();
-  return { defaultSavedNode, savedNodes, error };
-});
 
-ipcMain.handle('command:tags', async (_event, args: types.commandTags) => {
-  const { result, error } = await tagsCommand(args);
-  return { result, error };
+  return { defaultSavedNode, savedNodes, error };
 });
