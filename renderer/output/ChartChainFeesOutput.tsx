@@ -89,7 +89,7 @@ const renderChart = ({ data }: Props): any => {
           font: {
             size: 14, // 'size' now within object 'font {}'
           },
-          stepSize: 1,
+          stepSize: 5,
           beginAtZero: true,
         },
       },

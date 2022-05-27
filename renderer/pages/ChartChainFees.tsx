@@ -40,7 +40,7 @@ const ChartChainFees = () => {
   const fetchData = async () => {
     const flags: types.commandChartChainFees = {
       node,
-      days: Number(days),
+      days: !!days ? Number(days) : 60,
     };
 
     const { error, result } = await window.electronAPI.commandChartChainFees(flags);
