@@ -28,17 +28,17 @@ export type getSavedNodesReturn = {
 export type commandBalance = {
   above?: number;
   below?: number;
-  node: string;
+  node?: string;
   is_confirmed?: boolean;
-  is_detailed: boolean;
+  is_detailed?: boolean;
   is_offchain_only?: boolean;
   is_onchain_only?: boolean;
 };
 
 export type commandBalanceReturn = {
   result?: {
-    Balance?: number;
-    ChannelBalance?: number;
+    Balance: number;
+    ChannelBalance: number;
     ClosingBalance: string;
     ConflictedPending: string;
     InvalidPending: string;
@@ -50,8 +50,8 @@ export type commandBalanceReturn = {
 };
 
 export type commandChainDeposit = {
-  node: string;
-  amount: number;
+  node?: string;
+  amount?: number;
 };
 
 export type commandChainDepositReturn = {

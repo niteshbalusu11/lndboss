@@ -1,13 +1,12 @@
 import { CssBaseline, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import commands from '../commands';
+import commands, { globalCommands } from '../commands';
 import StandardButtonLink from '../standard_components/StandardButtonLink';
 import StartFlexBox from '../standard_components/StartFlexBox';
 import SubmitButton from '../standard_components/SubmitButton';
 import ChainDepositOutput from '../output/ChainDepositOutput';
 import * as types from '../types';
 import Head from 'next/head';
-import SavedNodes from '../standard_components/SavedNodes';
 
 /*
   Renders the bos chain-deposit command
@@ -28,8 +27,8 @@ const ChainDeposit = () => {
   const [data, setData] = useState({ address: '', url: '' });
   const [node, setNode] = useState('');
 
-  const getSavedNode = (data: string) => {
-    setNode(data);
+  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNode(event.target.value);
   };
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,7 +67,13 @@ const ChainDeposit = () => {
             id={ChainDepositCommand.flags.amount}
             onChange={handleAmountChange}
           />
-          <SavedNodes getSavedNode={getSavedNode} />
+          <TextField
+            type="text"
+            placeholder={globalCommands.node.name}
+            label={globalCommands.node.name}
+            id={globalCommands.node.value}
+            onChange={handeNodeChange}
+          />
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>

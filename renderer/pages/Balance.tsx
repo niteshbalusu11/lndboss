@@ -6,7 +6,7 @@ import StandardSwitch from '../standard_components/StandardSwitch';
 import StartFlexBox from '../standard_components/StartFlexBox';
 import SubmitButton from '../standard_components/SubmitButton';
 import BalanceOutput from '../output/BalanceOutput';
-import SavedNodes from '../standard_components/SavedNodes';
+import { globalCommands } from '../commands';
 import * as types from '../types';
 import Head from 'next/head';
 
@@ -32,11 +32,10 @@ const Balance = () => {
   const [isEnabled3, setIsEnabled3] = useState(false);
   const [isEnabled4, setIsEnabled4] = useState(false);
   const [data, setData] = useState(undefined);
-
   const [node, setNode] = useState('');
 
-  const getSavedNode = (data: string) => {
-    setNode(data);
+  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNode(event.target.value);
   };
 
   const toggleSwitch1 = () => {
@@ -75,7 +74,7 @@ const Balance = () => {
     };
 
     const { error, result } = await window.electronAPI.commandBalance(flags);
-    console.log(result);
+
     if (!!error) {
       window.alert(error);
       return;
@@ -131,7 +130,13 @@ const Balance = () => {
             control={<StandardSwitch checked={isEnabled4} onChange={toggleSwitch4} id={BalanceCommand.flags.onchain} />}
             label={BalanceCommand.flags.onchain}
           />
-          <SavedNodes getSavedNode={getSavedNode} />
+          <TextField
+            type="text"
+            placeholder={globalCommands.node.name}
+            label={globalCommands.node.name}
+            id={globalCommands.node.value}
+            onChange={handeNodeChange}
+          />
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>

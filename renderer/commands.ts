@@ -12,6 +12,13 @@ export type Commands = {
   };
 }[];
 
+export const globalCommands = {
+  node: {
+    name: 'Saved Node (Optional)',
+    value: 'node',
+  },
+};
+
 const commands: Commands = [
   {
     name: 'Balance',

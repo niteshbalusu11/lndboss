@@ -19,7 +19,7 @@ try {
         macaroon: lightning.macaroon,
         socket: lightning.socket,
         node,
-        is_default: true,
+        is_default: false,
       });
       expect(error).toBe(undefined);
       expect(result).toBeTruthy();

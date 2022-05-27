@@ -3,8 +3,20 @@
   "name": "lndboss",
   "description": "Desktop Application for BalanceOfSatoshis",
   "version": "1.0.0",
-  "author": "Nitesh Balusu",
+  "author": {
+    "name": "Nitesh Balusu",
+    "url": "https://twitter.com/nitesh_btc"
+  },
+  "bugs": {
+    "url": "https://github.com/niteshbalusu11/lndboss/issues"
+  },
+  "keywords": [
+    "lnd",
+    "lightning",
+    "lightning-network"
+  ],
   "main": "app/background.js",
+  "license": "MIT",
   "scripts": {
     "dev": "nextron",
     "build": "nextron build",
