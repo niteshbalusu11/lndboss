@@ -24,7 +24,9 @@
     "lint:fix": "eslint \"{main,renderer}/**/*.{ts,tsx}\" --fix",
     "postinstall": "electron-builder install-app-deps",
     "prettier": "prettier --write \"{renderer,main}/**/*.{ts,tsx}\"",
-    "test": "playwright test"
+    "test": "playwright test",
+    "test:client" : "playwright test tests/client",
+    "test:server" : "playwright test tests/server"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",

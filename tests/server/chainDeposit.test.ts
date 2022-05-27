@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import spawnLightningServer from '../utils/spawn_lightning_server.js';
 import { SpawnLightningServerType } from '../utils/spawn_lightning_server.js';
-import chainDepositCommand from '../../main/commands/chainDeposit/chain_deposit';
+import { chainDepositCommand } from '../../main/commands';
 
 try {
   test.describe('Test ChainDeposit command on the node.js side', async () => {

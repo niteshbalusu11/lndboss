@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import tagsCommand from '../../main/commands/tags/tags_command';
+import { tagsCommand } from '../../main/commands';
 
 type Args = {
   add: string[];

@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import spawnLightningServer from '../utils/spawn_lightning_server.js';
 import { SpawnLightningServerType } from '../utils/spawn_lightning_server.js';
-import balanceCommand from '../../main/commands/balance/balance_command';
+import { balanceCommand } from '../../main/commands';
 
 try {
   test.describe('Test Balance command on the node.js side', async () => {

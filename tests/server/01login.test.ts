@@ -1,8 +1,7 @@
 import { expect, test } from '@playwright/test';
 import spawnLightning from '../utils/spawn_lightning.js';
 import { SpawnLightningType } from '../utils/spawn_lightning.js';
-import putSavedCredentials from '../../main/lnd/put_saved_credentials.js';
-import lndCredentials from '../../main/lnd/lnd_credentials.js';
+import * as lnd from '../../main/lnd';
 
 try {
   test.describe('Test authentication from node.js side', async () => {
@@ -14,7 +13,7 @@ try {
 
     test('add a new saved node credential', async () => {
       const node = 'testnode1';
-      const { error, result } = await putSavedCredentials({
+      const { error, result } = await lnd.putSavedCredentials({
         cert: lightning.cert,
         macaroon: lightning.macaroon,
         socket: lightning.socket,
@@ -28,7 +27,7 @@ try {
 
     test('get saved node credential', async () => {
       const node = 'testnode1';
-      const { error, macaroon, socket } = await lndCredentials({ node });
+      const { error, macaroon, socket } = await lnd.lndCredentials({ node });
       expect(error).toBe(undefined);
       expect(macaroon).toBeTruthy();
       expect(socket).toBeTruthy();
