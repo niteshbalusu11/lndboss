@@ -28,6 +28,7 @@ try {
       await page.check(`#${BalanceCommand.flags.detailed}`);
       await page.check(`#${BalanceCommand.flags.offchain}`);
       await page.check(`#${BalanceCommand.flags.onchain}`);
+      await page.type('#node', 'testnode1');
       await page.click('text=home');
     });
 

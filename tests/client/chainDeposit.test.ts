@@ -23,6 +23,7 @@ try {
       await page.click('text=Chain Deposit');
       await expect(page).toHaveTitle('Chain Deposit');
       await page.type(`#${ChainDepositCommand.flags.amount}`, '1000');
+      await page.type('#node', 'testnode1');
       await page.click('text=home');
     });
 
