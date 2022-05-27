@@ -1,15 +1,14 @@
-import { CssBaseline, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import commands, { globalCommands } from '../commands';
-import StandardButtonLink from '../standard_components/StandardButtonLink';
-import StartFlexBox from '../standard_components/StartFlexBox';
-import SubmitButton from '../standard_components/SubmitButton';
-import ChainDepositOutput from '../output/ChainDepositOutput';
-import * as types from '../types';
+import { CssBaseline, Stack, TextField } from '@mui/material';
 import Head from 'next/head';
+import commands, { globalCommands } from '../commands';
+import { ChainDepositOutput } from '../output';
+import { StandardButtonLink, StartFlexBox, SubmitButton } from '../standard_components';
+import * as types from '../types';
 
 /*
   Renders the bos chain-deposit command
+  Sends IPC to the main process to get chain address
 */
 
 const ChainDepositCommand = commands.find(n => n.value === 'ChainDeposit');

@@ -20,9 +20,10 @@
   "scripts": {
     "dev": "nextron",
     "build": "nextron build",
-    "postinstall": "electron-builder install-app-deps",
     "lint:check": "eslint \"{renderer,main}/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"{main,renderer}/**/*.{ts,tsx}\" --fix",
+    "postinstall": "electron-builder install-app-deps",
+    "prettier": "prettier --write \"{renderer,main}/**/*.{ts,tsx}\"",
     "test": "playwright test"
   },
   "dependencies": {

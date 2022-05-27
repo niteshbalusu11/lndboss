@@ -8,7 +8,7 @@ import getSavedCredentials from './get_saved_credentials';
   @returns via Promise
   {
     result: <Public Key String>
-    error: <Error String>
+    [error]: <Error String>
   }
 */
 

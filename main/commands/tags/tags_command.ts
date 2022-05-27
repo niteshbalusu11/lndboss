@@ -61,7 +61,7 @@ type Tasks = {
   };
 };
 
-const tags = async (args: Args) => {
+const tagsCommand = async (args: Args) => {
   try {
     const result = await auto<Tasks>({
       // Validate
@@ -235,4 +235,4 @@ const tags = async (args: Args) => {
   }
 };
 
-export default tags;
+export default tagsCommand;

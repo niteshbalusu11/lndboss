@@ -12,7 +12,7 @@ const stringify = (obj: any) => JSON.stringify(obj, null, 2);
 
   {
     [cert]: <Base64 Encoded Node TLS Certificate String>
-    [macaroon]: <Base64 Encoded Macaroon String>
+    macaroon: <Base64 Encoded Macaroon String>
     node: <Node Name String>
     socket: <Node Socket String>
   }
@@ -20,7 +20,7 @@ const stringify = (obj: any) => JSON.stringify(obj, null, 2);
   @returns via cbk or Promise
   {
     result: <Did Write Credentials Bool>
-    error: <Error String>
+    [error]: <Error String>
   }
 */
 

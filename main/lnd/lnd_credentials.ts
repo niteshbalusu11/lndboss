@@ -20,7 +20,7 @@ const stringify = (obj: any) => JSON.stringify(obj, null, 2);
     cert: <Cert String>
     macaroon: <Macaroon String>
     socket: <Socket String>
-    error: <Error String>
+    [error]: <Error String>
   }
 */
 

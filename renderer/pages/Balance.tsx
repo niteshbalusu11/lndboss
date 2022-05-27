@@ -1,17 +1,15 @@
-import { CssBaseline, FormControlLabel, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import commands from '../commands';
-import StandardButtonLink from '../standard_components/StandardButtonLink';
-import StandardSwitch from '../standard_components/StandardSwitch';
-import StartFlexBox from '../standard_components/StartFlexBox';
-import SubmitButton from '../standard_components/SubmitButton';
-import BalanceOutput from '../output/BalanceOutput';
-import { globalCommands } from '../commands';
-import * as types from '../types';
+import { CssBaseline, FormControlLabel, Stack, TextField } from '@mui/material';
 import Head from 'next/head';
+import commands from '../commands';
+import { globalCommands } from '../commands';
+import { BalanceOutput } from '../output';
+import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
+import * as types from '../types';
 
 /*
   Renders the bos balance command
+  Sends IPC to main process to get balance related information
 */
 
 const BalanceCommand = commands.find(n => n.value === 'Balance');

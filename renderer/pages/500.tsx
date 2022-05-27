@@ -1,7 +1,6 @@
 import React from 'react';
 import { CssBaseline } from '@mui/material';
-import StandardButtonLink from '../standard_components/StandardButtonLink';
-import StartFlexBox from '../standard_components/StartFlexBox';
+import { StandardButtonLink, StartFlexBox } from '../standard_components';
 
 const styles = {
   h1: {

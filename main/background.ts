@@ -1,11 +1,9 @@
 import { app, ipcMain } from 'electron';
 import serve from 'electron-serve';
 import { createWindow } from './helpers';
-import balanceCommand from './commands/balance/balance_command';
-import chainDepositCommand from './commands/chainDeposit/chain_deposit';
+import { balanceCommand, chainDepositCommand, tagsCommand } from './commands';
 import authenticatedLnd from './lnd/authenticated_lnd';
 import * as types from '../renderer/types';
-import tagsCommand from './commands/tags/tags_command';
 import * as lnd from './lnd';
 
 const isProd: boolean = process.env.NODE_ENV === 'production';

@@ -12,9 +12,6 @@ const stringify = (obj: any) => JSON.stringify(obj, null, 2);
 /** Get saved credentials for node
 
   {
-    fs: {
-      getFile: <Read File Contents Function> (path, cbk) => {}
-    }
     node: <Node Name String>
   }
 
@@ -22,8 +19,6 @@ const stringify = (obj: any) => JSON.stringify(obj, null, 2);
   {
     [credentials]: {
       [cert]: <Base64 or Hex Serialized LND TLS Cert>
-      [encrypted_macaroon]: <Encrypted Macaroon String>
-      [encrypted_to]: [<Encrypted to GPG Recipient String>]
       [macaroon]: <Base64 or Hex Serialized Macaroon String>
       socket: <Host:Port Network Address String>
     }

@@ -13,7 +13,7 @@ const stringify = (obj: any) => JSON.stringify(obj, null, 2);
   @returns via cbk or Promise
   {
     lnd: <Authenticated LND gRPC API Object>
-    error: <Error String>
+    [error]: <Error String>
   }
 */
 

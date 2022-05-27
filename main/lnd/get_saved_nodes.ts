@@ -8,12 +8,13 @@ const config = 'config.json';
 const stringify = (obj: any) => JSON.stringify(obj, null, 2);
 const { parse } = JSON;
 
-/** Write saved credentials for node
+/** Get saved nodes list
 
   @returns via cbk or Promise
   {
+    defaultSavedNode: <Default Saved Node String>
     savedNodes: <Saved Nodes Array>
-    error: <Error String>
+    [error]: <Error String>
   }
 */
 

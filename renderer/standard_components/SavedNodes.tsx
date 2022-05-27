@@ -6,7 +6,7 @@ import React from 'react';
   Sends IPC to the main process to get saved node folders.
 */
 
-const SavedNode = ({ getSavedNode }) => {
+const SavedNodes = ({ getSavedNode }) => {
   const [defaultNode, setDefaultNode] = React.useState('');
   const [savedNode, setSavedNode] = React.useState('');
   const [nodeList, setNodeList] = React.useState(['']);
@@ -58,4 +58,4 @@ const SavedNode = ({ getSavedNode }) => {
   );
 };
 
-export default SavedNode;
+export default SavedNodes;

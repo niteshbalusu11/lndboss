@@ -1,6 +1,10 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import React from 'react';
 
+/*
+  Renders the output of the Tags command
+*/
+
 type Props = {
   result: string;
 };

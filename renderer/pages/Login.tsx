@@ -1,11 +1,8 @@
+import React, { useState } from 'react';
 import { Alert, CssBaseline, Dialog, FormControlLabel, Stack, TextField } from '@mui/material';
 import Head from 'next/head';
-import React, { useState } from 'react';
 import { createUseStyles } from 'react-jss';
-import SubmitButton from '../standard_components/SubmitButton';
-import StandardButtonLink from '../standard_components/StandardButtonLink';
-import StartFlexBox from '../standard_components/StartFlexBox';
-import StandardSwitch from '../standard_components/StandardSwitch';
+import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
 
 /*
   Renders the login page that takes in the macaroon, cert, and socket.

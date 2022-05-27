@@ -9,19 +9,21 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField,
   SelectChangeEvent,
+  TextField,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import commands from '../commands';
-import StandardButtonLink from '../standard_components/StandardButtonLink';
-import StartFlexBox from '../standard_components/StartFlexBox';
-import SubmitButton from '../standard_components/SubmitButton';
-import TagsOutput from '../output/TagsOutput';
+import { TagsOutput } from '../output';
+import { StandardButtonLink, StartFlexBox, SubmitButton } from '../standard_components';
 import * as types from '../types';
 
 const stringify = (obj: any) => JSON.stringify(obj, null, 2);
 const tagsCommand = commands.find(n => n.value === 'Tags');
+
+/*
+  Renders the Tags command
+*/
 
 const styles: any = {
   form: {
