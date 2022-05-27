@@ -7,6 +7,7 @@ export type Commands = {
   name: string;
   value: string;
   description: string;
+  longDescription?: string;
   flags: {
     [key: string]: string;
   };
@@ -42,29 +43,13 @@ const commands: Commands = [
     },
   },
   {
-    name: 'Chain Fees',
-    value: 'ChainFees',
-    description: 'Lookup chain fee estimates at various confirm targets',
-    flags: {
-      above: 'Above',
-      below: 'Below',
-      confirmed: 'Confirmed',
-      detailed: 'Detailed',
-      offchain: 'Offchain',
-      onchain: 'Onchain',
-    },
-  },
-  {
     name: 'Chart Chain Fees',
     value: 'ChartChainFees',
-    description: 'Show the routing fees earned',
+    description: 'Show chart of mining fee expenditure over time',
+    longDescription:
+      'Show chart of mining fee expenditure over time. Privacy note: this requests tx data from third parties',
     flags: {
-      above: 'Above',
-      below: 'Below',
-      confirmed: 'Confirmed',
-      detailed: 'Detailed',
-      offchain: 'Offchain',
-      onchain: 'Onchain',
+      days: 'Days',
     },
   },
   {

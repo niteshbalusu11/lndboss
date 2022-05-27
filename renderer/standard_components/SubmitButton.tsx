@@ -14,6 +14,7 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   },
   marginTop: '30px',
   fontWeight: 'bold',
+  width: '250px',
 }));
 
 const SubmitButton = (props: ButtonProps) => {

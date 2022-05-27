@@ -36,7 +36,7 @@ export type commandBalance = {
 };
 
 export type commandBalanceReturn = {
-  result?: {
+  result: {
     Balance: number;
     ChannelBalance: number;
     ClosingBalance: string;
@@ -55,10 +55,20 @@ export type commandChainDeposit = {
 };
 
 export type commandChainDepositReturn = {
-  result?: {
+  result: {
     address: string;
     url: string;
   };
+  error?: string;
+};
+
+export type commandChartChainFees = {
+  days?: number;
+  node?: string;
+};
+
+export type commandChartChainFeesReturn = {
+  result: any;
   error?: string;
 };
 
@@ -69,4 +79,15 @@ export type commandTags = {
   is_avoided?: boolean;
   remove: string[];
   tag?: string;
+};
+
+export type commandTagsReturn = {
+  result: {
+    alias: string;
+    id: string;
+    icon?: string;
+    is_avoided?: boolean;
+    nodes?: string[];
+  }[];
+  error?: string;
 };

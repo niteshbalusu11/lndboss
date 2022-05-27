@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { CssBaseline, Stack, TextField } from '@mui/material';
 import Head from 'next/head';
-import commands, { globalCommands } from '../commands';
-import { ChainDepositOutput } from '../output';
 import { StandardButtonLink, StartFlexBox, SubmitButton } from '../standard_components';
+import commands, { globalCommands } from '../commands';
+import { ChartChainFeesOutput } from '../output';
 import * as types from '../types';
 
-/*
-  Renders the bos chain-deposit command
-  Sends IPC to the main process to get chain address
-*/
+const ChartChainFeesCommand = commands.find(n => n.value === 'ChartChainFees');
 
-const ChainDepositCommand = commands.find(n => n.value === 'ChainDeposit');
+/*
+  Renders the bos chart-chain-fees command
+  IPC to the main process to get chain fees data
+*/
 
 const styles = {
   form: {
@@ -24,26 +24,26 @@ const styles = {
   },
 };
 
-const ChainDeposit = () => {
-  const [amount, setAmount] = useState('');
-  const [data, setData] = useState({ address: '', url: '' });
+const ChartChainFees = () => {
+  const [data, setData] = useState(undefined);
+  const [days, setDays] = useState('60');
   const [node, setNode] = useState('');
 
   const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
-  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(event.target.value);
+  const handleDaysChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDays(event.target.value);
   };
 
   const fetchData = async () => {
-    const flags: types.commandChainDeposit = {
+    const flags: types.commandChartChainFees = {
       node,
-      amount: Number(amount),
+      days: Number(days),
     };
 
-    const { error, result } = await window.electronAPI.commandChainDeposit(flags);
+    const { error, result } = await window.electronAPI.commandChartChainFees(flags);
 
     if (!!error) {
       window.alert(error);
@@ -54,20 +54,23 @@ const ChainDeposit = () => {
       setData(result);
     }
   };
+
   return (
     <CssBaseline>
       <Head>
-        <title>Chain Deposit</title>
+        <title>Chart Chain Fees</title>
       </Head>
       <StartFlexBox>
         <StandardButtonLink label="Home" destination="/Commands" />
         <Stack spacing={3} style={styles.form}>
+          <h2>{ChartChainFeesCommand.name}</h2>
+          <h4 style={{ marginTop: '0px' }}>{ChartChainFeesCommand.longDescription}</h4>
           <TextField
             type="text"
-            placeholder="Above (Number)"
-            label={ChainDepositCommand.flags.amount}
-            id={ChainDepositCommand.flags.amount}
-            onChange={handleAmountChange}
+            placeholder={`${ChartChainFeesCommand.flags.days} (Default 60)`}
+            label={`${ChartChainFeesCommand.flags.days} (Default 60)`}
+            id={ChartChainFeesCommand.flags.days}
+            onChange={handleDaysChange}
             style={styles.textField}
           />
           <TextField
@@ -81,11 +84,11 @@ const ChainDeposit = () => {
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
-          {!!data.address && !!data.url ? <ChainDepositOutput data={data} /> : null}
+          {!!data && <ChartChainFeesOutput data={data} />}
         </Stack>
       </StartFlexBox>
     </CssBaseline>
   );
 };
 
-export default ChainDeposit;
+export default ChartChainFees;
