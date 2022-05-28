@@ -94,6 +94,8 @@ const Balance = () => {
       <StartFlexBox>
         <StandardButtonLink label="Home" destination="/Commands" />
         <Stack spacing={3} style={styles.form}>
+          <h2>{BalanceCommand.name}</h2>
+          <h4 style={{ marginTop: '0px' }}>{BalanceCommand.description}</h4>
           <TextField
             type="text"
             placeholder="Above (Number)"

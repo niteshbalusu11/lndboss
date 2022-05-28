@@ -49,8 +49,8 @@ ipcMain.handle('command:chainDeposit', async (_event, args: types.commandChainDe
 });
 
 ipcMain.handle('command:chartChainFees', async (_event, args: types.commandChartChainFees) => {
-  const { lnd } = await authenticatedLnd({ node: args.node });
-  const { result, error } = await chartChainFeesCommand(args, [lnd]);
+  const { lnds } = await lnd.getLnds({ nodes: args.nodes });
+  const { result, error } = await chartChainFeesCommand(args, lnds);
 
   return { result, error };
 });

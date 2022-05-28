@@ -1,29 +1,31 @@
 import { expect, test } from '@playwright/test';
-import spawnLightningServer from '../utils/spawn_lightning_server.js';
-import { SpawnLightningServerType } from '../utils/spawn_lightning_server.js';
+import spawnCluster from '../utils/spawn_lightning_cluster.js';
 import { chartChainFeesCommand } from '../../main/commands';
 
 try {
   test.describe('Test ChainDeposit command on the node.js side', async () => {
-    let lightning: SpawnLightningServerType;
+    let lightning: any[];
 
     test.beforeAll(async () => {
-      lightning = await spawnLightningServer();
+      lightning = await spawnCluster(2);
     });
 
     test('run ChainDeposit command', async () => {
       const args = {
         days: 10,
+        nodes: [],
       };
 
-      const { error, result } = await chartChainFeesCommand(args, [lightning.lnd]);
+      const lnds = lightning.map(({ lnd }) => lnd);
+      const { error, result } = await chartChainFeesCommand(args, lnds);
+
       console.log('Chart Chain Fees----', result);
       expect(error).toBe(undefined);
       expect(result).toBeTruthy();
     });
 
     test.afterAll(async () => {
-      await lightning.kill({});
+      await Promise.all(lightning.map(({ kill }) => kill({})));
     });
   });
 } catch (error) {

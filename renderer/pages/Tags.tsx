@@ -19,7 +19,7 @@ import { StandardButtonLink, StartFlexBox, SubmitButton } from '../standard_comp
 import * as types from '../types';
 
 const stringify = (obj: any) => JSON.stringify(obj, null, 2);
-const tagsCommand = commands.find(n => n.value === 'Tags');
+const TagsCommand = commands.find(n => n.value === 'Tags');
 
 /*
   Renders the Tags command
@@ -96,6 +96,8 @@ const Tags = () => {
       <StartFlexBox>
         <StandardButtonLink label="Home" destination="/Commands" />
         <Box style={{ marginTop: '100px', minWidth: '600px' }}>
+          <h2>{TagsCommand.name}</h2>
+          <h4 style={{ marginTop: '0px' }}>{TagsCommand.description}</h4>
           <div>
             <InputLabel id="demo-simple-select-standard-label" style={{ fontWeight: 'bold', color: 'black' }}>
               Pick a value
@@ -127,10 +129,10 @@ const Tags = () => {
               <div>
                 <TextField
                   type="text"
-                  name={tagsCommand.flags.tag}
-                  id={tagsCommand.flags.tag}
-                  placeholder={tagsCommand.flags.tag}
-                  label={tagsCommand.flags.tag}
+                  name={TagsCommand.flags.tag}
+                  id={TagsCommand.flags.tag}
+                  placeholder={TagsCommand.flags.tag}
+                  label={TagsCommand.flags.tag}
                   onChange={handleTagNameChange}
                   style={{ width: '500px', marginTop: '12px' }}
                   value={tagName}

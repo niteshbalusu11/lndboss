@@ -23,7 +23,10 @@ try {
       await page.click('text=Chart Chain Fees');
       await expect(page).toHaveTitle('Chart Chain Fees');
       await page.type(`#${ChartChainFeesCommand.flags.days}`, '10');
-      await page.type('#node', 'testnode1');
+      await page.click('text=Add');
+      await page.type('#node-1', 'testnode2');
+      await page.click('text=Add');
+      await page.type('#node-2', 'testnode3');
       await page.click('text=home');
     });
 

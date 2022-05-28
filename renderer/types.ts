@@ -65,6 +65,7 @@ export type commandChainDepositReturn = {
 export type commandChartChainFees = {
   days?: number;
   node?: string;
+  nodes: string[];
 };
 
 export type commandChartChainFeesReturn = {

@@ -10,7 +10,7 @@ const Startup = () => {
   useEffect(() => {
     const id = setTimeout(() => {
       Router.push('/Commands');
-    }, 3000);
+    }, 1000);
 
     return () => clearTimeout(id);
   }, []);

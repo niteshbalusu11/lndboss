@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { CssBaseline, Stack, TextField } from '@mui/material';
+import { Button, CssBaseline, IconButton, Stack, TextField } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
 import { StandardButtonLink, StartFlexBox, SubmitButton } from '../standard_components';
 import commands, { globalCommands } from '../commands';
@@ -22,25 +23,46 @@ const styles = {
   textField: {
     width: '300px',
   },
+  button: {
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    width: '50px',
+  },
 };
 
 const ChartChainFees = () => {
+  const [formValues, setFormValues] = useState([{ node: '' }]);
   const [data, setData] = useState(undefined);
   const [days, setDays] = useState('60');
-  const [node, setNode] = useState('');
-
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNode(event.target.value);
-  };
 
   const handleDaysChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDays(event.target.value);
   };
 
+  const addFormFields = () => {
+    setFormValues([...formValues, { node: '' }]);
+  };
+
+  const removeFormFields = (i: number) => {
+    const newFormValues = [...formValues];
+    newFormValues.splice(i, 1);
+    setFormValues(newFormValues);
+  };
+
+  const handleChange = (i: number, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const newFormValues = [...formValues];
+    newFormValues[i][e.target.name] = e.target.value;
+    setFormValues(newFormValues);
+  };
+
   const fetchData = async () => {
     const flags: types.commandChartChainFees = {
-      node,
+      node: '',
       days: !!days ? Number(days) : 60,
+      nodes: formValues.map(n => n.node),
     };
 
     const { error, result } = await window.electronAPI.commandChartChainFees(flags);
@@ -73,14 +95,31 @@ const ChartChainFees = () => {
             onChange={handleDaysChange}
             style={styles.textField}
           />
-          <TextField
-            type="text"
-            placeholder={globalCommands.node.name}
-            label={globalCommands.node.name}
-            id={globalCommands.node.value}
-            onChange={handeNodeChange}
-            style={styles.textField}
-          />
+          <>
+            <Button href="#text-buttons" onClick={() => addFormFields()} style={styles.button}>
+              Add +
+            </Button>
+            {formValues.map((element, index) => (
+              <>
+                <TextField
+                  type="text"
+                  label={globalCommands.node.name}
+                  name={globalCommands.node.value}
+                  placeholder={globalCommands.node.name}
+                  value={element.node || ''}
+                  onChange={e => handleChange(index, e)}
+                  style={styles.textField}
+                  key={`node-${index}`}
+                  id={`node-${index}`}
+                />
+                {!!index ? (
+                  <IconButton aria-label="delete" onClick={() => removeFormFields(index)} style={{ width: '10px' }}>
+                    <DeleteIcon />
+                  </IconButton>
+                ) : null}
+              </>
+            ))}
+          </>
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>

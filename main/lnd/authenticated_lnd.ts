@@ -28,7 +28,7 @@ type Tasks = {
   };
 };
 
-const authenticatedLnd = async ({ node }: { node: string }) => {
+const authenticatedLnd = async ({ node }: { node?: string }) => {
   try {
     const result = await auto<Tasks>({
       // Credentials

@@ -62,6 +62,8 @@ const ChainDeposit = () => {
       <StartFlexBox>
         <StandardButtonLink label="Home" destination="/Commands" />
         <Stack spacing={3} style={styles.form}>
+          <h2>{ChainDepositCommand.name}</h2>
+          <h4 style={{ marginTop: '0px' }}>{ChainDepositCommand.description}</h4>
           <TextField
             type="text"
             placeholder="Above (Number)"
