@@ -60,6 +60,7 @@ const styles: any = {
 
 const Tags = () => {
   const [formValues, setFormValues] = useState([{ pubkey: '' }]);
+  const [icon, setIcon] = useState('');
   const [tagType, setTagType] = React.useState('');
   const [tagName, setTagName] = React.useState('');
   const [data, setData] = useState('');
@@ -69,6 +70,11 @@ const Tags = () => {
     setFormValues([{ pubkey: '' }]);
     setTagName('');
     setData('');
+    setIcon('');
+  };
+
+  const handleIconChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIcon(event.target.value);
   };
 
   const handleTagNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,6 +99,7 @@ const Tags = () => {
 
   const fetchData = async () => {
     const flags: types.commandTags = {
+      icon,
       add: tagType === 'add' ? formValues.map(n => n.pubkey) : [],
       remove: tagType === 'remove' ? formValues.map(n => n.pubkey) : [],
       tag: tagName,
@@ -154,6 +161,16 @@ const Tags = () => {
                   onChange={handleTagNameChange}
                   style={styles.textField}
                   value={tagName}
+                />
+                <TextField
+                  type="text"
+                  name={TagsCommand.flags.icon}
+                  id={TagsCommand.flags.icon}
+                  placeholder={`${TagsCommand.flags.icon} (Emoji optional)`}
+                  label={TagsCommand.flags.icon}
+                  onChange={handleIconChange}
+                  style={styles.textField}
+                  value={icon}
                 />
               </div>
               <Button href="#text-buttons" onClick={() => addFormFields()} style={styles.button}>

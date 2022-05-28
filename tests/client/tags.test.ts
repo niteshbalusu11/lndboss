@@ -30,6 +30,7 @@ try {
       await page.locator('#tag-type').click();
       await page.locator('#add').click();
       await page.type(`#${TagsCommand.args.tag}`, 'test');
+      await page.type(`#${TagsCommand.flags.icon}`, '🚀');
       await page.type('#pubkey-0', 'test');
 
       // Tag type remove
@@ -37,6 +38,7 @@ try {
       await page.locator('#remove').click();
       await page.type(`#${TagsCommand.args.tag}`, 'test');
       await page.type('#pubkey-0', 'test');
+      await page.type(`#${TagsCommand.flags.icon}`, '🚀');
 
       await page.click('text=home');
     });
