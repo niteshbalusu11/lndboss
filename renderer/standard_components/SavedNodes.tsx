@@ -6,6 +6,16 @@ import React from 'react';
   Sends IPC to the main process to get saved node folders.
 */
 
+const styles = {
+  select: {
+    marginTop: '0px',
+  },
+  inputLabel: {
+    fontWeight: 'bold',
+    color: 'black',
+  },
+};
+
 const SavedNodes = ({ getSavedNode }) => {
   const [defaultNode, setDefaultNode] = React.useState('');
   const [savedNode, setSavedNode] = React.useState('');
@@ -34,7 +44,7 @@ const SavedNodes = ({ getSavedNode }) => {
 
   return (
     <>
-      <InputLabel id="demo-simple-select-standard-label" style={{ fontWeight: 'bold', color: 'black' }}>
+      <InputLabel id="demo-simple-select-standard-label" style={styles.inputLabel}>
         Saved Node
       </InputLabel>
       <Select
@@ -43,7 +53,7 @@ const SavedNodes = ({ getSavedNode }) => {
         value={savedNode || defaultNode || ''}
         onChange={handleChoiceChange}
         label="Saved Nodes"
-        style={{ marginTop: '0px' }}
+        style={styles.select}
       >
         <MenuItem value={defaultNode}>{defaultNode}</MenuItem>
         {nodeList.map((node: string) => {

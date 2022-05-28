@@ -38,6 +38,24 @@ const styles: any = {
     border: '1px solid black',
     marginTop: '20px',
   },
+  box: {
+    marginTop: '100px',
+    minWidth: '600px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+  inputLabel: {
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  select: {
+    width: '300px',
+  },
+  textField: {
+    width: '500px',
+    marginTop: '12px',
+  },
 };
 
 const Tags = () => {
@@ -95,11 +113,11 @@ const Tags = () => {
       </Head>
       <StartFlexBox>
         <StandardButtonLink label="Home" destination="/Commands" />
-        <Box style={{ marginTop: '100px', minWidth: '600px' }}>
+        <Box style={styles.box}>
           <h2>{TagsCommand.name}</h2>
-          <h4 style={{ marginTop: '0px' }}>{TagsCommand.description}</h4>
+          <h4 style={styles.h4}>{TagsCommand.description}</h4>
           <div>
-            <InputLabel id="demo-simple-select-standard-label" style={{ fontWeight: 'bold', color: 'black' }}>
+            <InputLabel id="demo-simple-select-standard-label" style={styles.inputLabel}>
               Pick a value
             </InputLabel>
             <Select
@@ -108,7 +126,7 @@ const Tags = () => {
               value={tagType}
               onChange={handleChoiceChange}
               label="TagType"
-              style={{ width: '300px' }}
+              style={styles.select}
             >
               <MenuItem value="">
                 <em>None</em>
@@ -134,7 +152,7 @@ const Tags = () => {
                   placeholder={TagsCommand.flags.tag}
                   label={TagsCommand.flags.tag}
                   onChange={handleTagNameChange}
-                  style={{ width: '500px', marginTop: '12px' }}
+                  style={styles.textField}
                   value={tagName}
                 />
               </div>
@@ -151,7 +169,7 @@ const Tags = () => {
                       label="Pubkey"
                       value={element.pubkey || ''}
                       onChange={e => handleChange(index, e)}
-                      style={{ width: '500px', marginTop: '12px' }}
+                      style={styles.textField}
                       key={index}
                       id={`pubkey-${index}`}
                     />

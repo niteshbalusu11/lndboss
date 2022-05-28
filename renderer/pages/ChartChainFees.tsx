@@ -31,6 +31,12 @@ const styles = {
     marginTop: '20px',
     width: '50px',
   },
+  iconButton: {
+    marginLeft: '10px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
 };
 
 const ChartChainFees = () => {
@@ -86,7 +92,7 @@ const ChartChainFees = () => {
         <StandardButtonLink label="Home" destination="/Commands" />
         <Stack spacing={3} style={styles.form}>
           <h2>{ChartChainFeesCommand.name}</h2>
-          <h4 style={{ marginTop: '0px' }}>{ChartChainFeesCommand.longDescription}</h4>
+          <h4 style={styles.h4}>{ChartChainFeesCommand.longDescription}</h4>
           <TextField
             type="text"
             placeholder={`${ChartChainFeesCommand.flags.days} (Default 60)`}
@@ -110,10 +116,10 @@ const ChartChainFees = () => {
                   onChange={e => handleChange(index, e)}
                   style={styles.textField}
                   id={`node-${index}`}
-                  key={index.toString()}
+                  key={`node-${index}`}
                 />
                 {!!index ? (
-                  <IconButton aria-label="delete" onClick={() => removeFormFields(index)} style={{ width: '10px' }}>
+                  <IconButton aria-label="delete" onClick={() => removeFormFields(index)} style={styles.iconButton}>
                     <DeleteIcon />
                   </IconButton>
                 ) : null}

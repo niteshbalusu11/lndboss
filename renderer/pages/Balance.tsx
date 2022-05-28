@@ -23,6 +23,9 @@ const styles = {
   textField: {
     width: '300px',
   },
+  h4: {
+    marginTop: '0px',
+  },
 };
 
 const Balance = () => {
@@ -95,7 +98,7 @@ const Balance = () => {
         <StandardButtonLink label="Home" destination="/Commands" />
         <Stack spacing={3} style={styles.form}>
           <h2>{BalanceCommand.name}</h2>
-          <h4 style={{ marginTop: '0px' }}>{BalanceCommand.description}</h4>
+          <h4 style={styles.h4}>{BalanceCommand.description}</h4>
           <TextField
             type="text"
             placeholder="Above (Number)"

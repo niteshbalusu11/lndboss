@@ -22,6 +22,9 @@ const styles = {
   textField: {
     width: '300px',
   },
+  h4: {
+    marginTop: '0px',
+  },
 };
 
 const ChainDeposit = () => {
@@ -63,7 +66,7 @@ const ChainDeposit = () => {
         <StandardButtonLink label="Home" destination="/Commands" />
         <Stack spacing={3} style={styles.form}>
           <h2>{ChainDepositCommand.name}</h2>
-          <h4 style={{ marginTop: '0px' }}>{ChainDepositCommand.description}</h4>
+          <h4 style={styles.h4}>{ChainDepositCommand.description}</h4>
           <TextField
             type="text"
             placeholder="Above (Number)"
