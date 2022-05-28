@@ -109,8 +109,8 @@ const ChartChainFees = () => {
                   value={element.node || ''}
                   onChange={e => handleChange(index, e)}
                   style={styles.textField}
-                  key={`node-${index}`}
                   id={`node-${index}`}
+                  key={index.toString()}
                 />
                 {!!index ? (
                   <IconButton aria-label="delete" onClick={() => removeFormFields(index)} style={{ width: '10px' }}>
