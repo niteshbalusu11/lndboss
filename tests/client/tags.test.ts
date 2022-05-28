@@ -2,7 +2,7 @@ import { ElectronApplication, expect, Page, test } from '@playwright/test';
 import { _electron as electron } from 'playwright';
 import commands from '../../renderer/commands';
 
-const tagsCommand = commands.find(n => n.value === 'Tags');
+const TagsCommand = commands.find(n => n.value === 'Tags');
 
 try {
   test.describe('Test the Tags command client page', async () => {
@@ -29,13 +29,13 @@ try {
       // Tag type add
       await page.locator('#tag-type').click();
       await page.locator('#add').click();
-      await page.type(`#${tagsCommand.flags.tag}`, 'test');
+      await page.type(`#${TagsCommand.args.tag}`, 'test');
       await page.type('#pubkey-0', 'test');
 
       // Tag type remove
       await page.locator('#tag-type').click();
       await page.locator('#remove').click();
-      await page.type(`#${tagsCommand.flags.tag}`, 'test');
+      await page.type(`#${TagsCommand.args.tag}`, 'test');
       await page.type('#pubkey-0', 'test');
 
       await page.click('text=home');

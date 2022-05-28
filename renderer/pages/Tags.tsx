@@ -147,10 +147,10 @@ const Tags = () => {
               <div>
                 <TextField
                   type="text"
-                  name={TagsCommand.flags.tag}
-                  id={TagsCommand.flags.tag}
-                  placeholder={TagsCommand.flags.tag}
-                  label={TagsCommand.flags.tag}
+                  name={TagsCommand.args.tag}
+                  id={TagsCommand.args.tag}
+                  placeholder={TagsCommand.args.tag}
+                  label={TagsCommand.args.tag}
                   onChange={handleTagNameChange}
                   style={styles.textField}
                   value={tagName}

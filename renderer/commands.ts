@@ -4,6 +4,9 @@
 */
 
 export type Commands = {
+  args?: {
+    [key: string]: string;
+  };
   name: string;
   value: string;
   description: string;
@@ -35,6 +38,9 @@ const commands: Commands = [
     },
   },
   {
+    args: {
+      amount: 'Amount',
+    },
     name: 'Chain Deposit',
     value: 'ChainDeposit',
     description: 'Generate an onchain deposit address',
@@ -79,6 +85,9 @@ const commands: Commands = [
     },
   },
   {
+    args: {
+      tag: 'Tag',
+    },
     name: 'Tags',
     value: 'Tags',
     description: 'Tags can be used in other commands via tag and avoid options',

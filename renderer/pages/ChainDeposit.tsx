@@ -70,8 +70,8 @@ const ChainDeposit = () => {
           <TextField
             type="text"
             placeholder="Above (Number)"
-            label={ChainDepositCommand.flags.amount}
-            id={ChainDepositCommand.flags.amount}
+            label={ChainDepositCommand.args.amount}
+            id={ChainDepositCommand.args.amount}
             onChange={handleAmountChange}
             style={styles.textField}
           />
