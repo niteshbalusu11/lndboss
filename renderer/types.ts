@@ -23,7 +23,7 @@ export type getSavedNodesReturn = {
   savedNodes: string[];
 };
 
-//=========================Command Types=====================================
+//=========================Balance Command=====================================
 
 export type commandBalance = {
   above?: number;
@@ -49,6 +49,8 @@ export type commandBalanceReturn = {
   error?: string;
 };
 
+//=========================Chain Deposit Command=====================================
+
 export type commandChainDeposit = {
   node?: string;
   amount?: number;
@@ -62,9 +64,10 @@ export type commandChainDepositReturn = {
   error?: string;
 };
 
+//=========================Chart Chain Fees Command=====================================
+
 export type commandChartChainFees = {
   days?: number;
-  node?: string;
   nodes: string[];
 };
 
@@ -72,6 +75,23 @@ export type commandChartChainFeesReturn = {
   result: any;
   error?: string;
 };
+
+//=========================Chart Fees Earned Command=====================================
+
+export type commandChartFeesEarned = {
+  days?: number;
+  is_count?: boolean;
+  is_forwarded?: boolean;
+  nodes?: string[];
+  via?: string;
+};
+
+export type commandChartFeesEarnedReturn = {
+  result: any;
+  error?: string;
+};
+
+//=========================Tags Command=====================================
 
 export type commandTags = {
   add: string[];

@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { Button, CssBaseline, IconButton, Stack, TextField } from '@mui/material';
+import { Button, CssBaseline, IconButton, FormControlLabel, Stack, TextField } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
-import { StandardButtonLink, StartFlexBox, SubmitButton } from '../standard_components';
+import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
 import commands, { globalCommands } from '../commands';
-import { ChartChainFeesOutput } from '../output';
+import { ChartFeesEarnedOutput } from '../output';
 import * as types from '../types';
 
-const ChartChainFeesCommand = commands.find(n => n.value === 'ChartChainFees');
+const ChartFeesEarnedCommand = commands.find(n => n.value === 'ChartFeesEarned');
 
 /*
-  Renders the bos chart-chain-fees command
-  IPC to the main process to get chain fees data
+  Renders the bos chart-fees-earned command
+  IPC to the main process to get fee earnings data
 */
 
 const styles = {
@@ -21,7 +21,7 @@ const styles = {
     width: '700px',
   },
   textField: {
-    width: '350px',
+    width: '380px',
   },
   button: {
     color: 'white',
@@ -40,13 +40,28 @@ const styles = {
   },
 };
 
-const ChartChainFees = () => {
+const ChartFeesEarned = () => {
+  const [count, setCount] = useState(false);
+  const [forwarded, setForwarded] = useState(false);
   const [formValues, setFormValues] = useState([{ node: '' }]);
   const [data, setData] = useState({ data: [], title: '', description: '' });
   const [days, setDays] = useState('60');
+  const [via, setVia] = useState('');
+
+  const handleCountChange = () => {
+    setCount((previousState: boolean) => !previousState);
+  };
 
   const handleDaysChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDays(event.target.value);
+  };
+
+  const handleForwardedChange = () => {
+    setForwarded((previousState: boolean) => !previousState);
+  };
+
+  const handleViaChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setVia(event.target.value);
   };
 
   const addFormFields = () => {
@@ -66,12 +81,15 @@ const ChartChainFees = () => {
   };
 
   const fetchData = async () => {
-    const flags: types.commandChartChainFees = {
+    const flags: types.commandChartFeesEarned = {
+      via,
       days: !!days ? Number(days) : 60,
+      is_count: count,
+      is_forwarded: forwarded,
       nodes: formValues.map(n => n.node),
     };
 
-    const { error, result } = await window.electronAPI.commandChartChainFees(flags);
+    const { error, result } = await window.electronAPI.commandChartFeesEarned(flags);
 
     if (!!error) {
       window.alert(error);
@@ -86,20 +104,44 @@ const ChartChainFees = () => {
   return (
     <CssBaseline>
       <Head>
-        <title>Chart Chain Fees</title>
+        <title>Chart Fees Earned</title>
       </Head>
       <StartFlexBox>
         <StandardButtonLink label="Home" destination="/Commands" />
         <Stack spacing={3} style={styles.form}>
-          <h2>{ChartChainFeesCommand.name}</h2>
-          <h4 style={styles.h4}>{ChartChainFeesCommand.longDescription}</h4>
+          <h2>{ChartFeesEarnedCommand.name}</h2>
+          <h4 style={styles.h4}>{ChartFeesEarnedCommand.description}</h4>
           <TextField
             type="text"
-            placeholder={`${ChartChainFeesCommand.flags.days} (Default 60)`}
-            label={`${ChartChainFeesCommand.flags.days} (Default 60)`}
-            id={ChartChainFeesCommand.flags.days}
+            placeholder="Routing fees earned via a specified node or tag"
+            label={ChartFeesEarnedCommand.args.via}
+            id={ChartFeesEarnedCommand.args.via}
+            onChange={handleViaChange}
+            style={styles.textField}
+          />
+          <FormControlLabel
+            control={
+              <StandardSwitch checked={count} onChange={handleCountChange} id={ChartFeesEarnedCommand.flags.count} />
+            }
+            label={ChartFeesEarnedCommand.flags.count}
+          />
+          <TextField
+            type="text"
+            placeholder={`${ChartFeesEarnedCommand.flags.days} (Default 60)`}
+            label={`${ChartFeesEarnedCommand.flags.days} (Default 60)`}
+            id={ChartFeesEarnedCommand.flags.days}
             onChange={handleDaysChange}
             style={styles.textField}
+          />
+          <FormControlLabel
+            control={
+              <StandardSwitch
+                checked={forwarded}
+                onChange={handleForwardedChange}
+                id={ChartFeesEarnedCommand.flags.forwarded}
+              />
+            }
+            label={ChartFeesEarnedCommand.flags.forwarded}
           />
           <>
             <Button href="#text-buttons" onClick={() => addFormFields()} style={styles.button}>
@@ -129,11 +171,11 @@ const ChartChainFees = () => {
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
-          {!!data.data.length && <ChartChainFeesOutput data={data} />}
+          {!!data.data.length && <ChartFeesEarnedOutput data={data} />}
         </Stack>
       </StartFlexBox>
     </CssBaseline>
   );
 };
 
-export default ChartChainFees;
+export default ChartFeesEarned;

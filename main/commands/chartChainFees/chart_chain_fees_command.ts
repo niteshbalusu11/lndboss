@@ -5,6 +5,23 @@ import * as types from '../../../renderer/types';
 
 const stringify = (data: any) => JSON.stringify(data);
 
+/** Get Blockchain fees paid
+
+  {
+    days: <Chain Fees Paid Over Days Count Number>
+    is_monochrome: <Omit Colors Bool>
+    lnds: [<Authenticated LND API Object>]
+    request: <Request Function>
+  }
+
+  @returns via Promise
+  {
+    data: [<Chain Fee Tokens Number>]
+    description: <Chart Description String>
+    title: <Chart Title String>
+  }
+*/
+
 const chartChainFeesCommand = async (args: types.commandChartChainFees, lnd: AuthenticatedLnd[]) => {
   try {
     const result = await getChainFeesChart({

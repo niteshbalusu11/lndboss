@@ -59,16 +59,16 @@ const commands: Commands = [
     },
   },
   {
-    name: 'Chart Fees Paid',
-    value: 'ChartFeesPaid',
-    description: 'Show the routing fees paid to forwarding nodes',
+    args: {
+      via: 'Via',
+    },
+    name: 'Chart Fees Earned',
+    value: 'ChartFeesEarned',
+    description: 'Show the routing fees earned',
     flags: {
-      above: 'Above',
-      below: 'Below',
-      confirmed: 'Confirmed',
-      detailed: 'Detailed',
-      offchain: 'Offchain',
-      onchain: 'Onchain',
+      count: 'Count',
+      days: 'Days',
+      forwarded: 'Forwarded',
     },
   },
   {
