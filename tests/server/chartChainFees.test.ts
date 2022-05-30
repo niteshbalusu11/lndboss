@@ -3,14 +3,14 @@ import spawnCluster from '../utils/spawn_lightning_cluster.js';
 import { chartChainFeesCommand } from '../../main/commands';
 
 try {
-  test.describe('Test ChainDeposit command on the node.js side', async () => {
+  test.describe('Test ChartChainFees command on the node.js side', async () => {
     let lightning: any[];
 
     test.beforeAll(async () => {
       lightning = await spawnCluster(2);
     });
 
-    test('run ChainDeposit command', async () => {
+    test('run ChartChainFees command', async () => {
       const args = {
         days: 10,
         nodes: [],

@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   CssBaseline,
+  FormControlLabel,
   Grid,
   IconButton,
   InputLabel,
@@ -15,7 +16,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import commands from '../commands';
 import { TagsOutput } from '../output';
-import { StandardButtonLink, StartFlexBox, SubmitButton } from '../standard_components';
+import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
 import * as types from '../types';
 
 const stringify = (obj: any) => JSON.stringify(obj, null, 2);
@@ -59,11 +60,16 @@ const styles: any = {
 };
 
 const Tags = () => {
+  const [avoid, setAvoid] = useState(false);
   const [formValues, setFormValues] = useState([{ pubkey: '' }]);
   const [icon, setIcon] = useState('');
   const [tagType, setTagType] = React.useState('');
   const [tagName, setTagName] = React.useState('');
   const [data, setData] = useState('');
+
+  const handleAvoidChange = () => {
+    setAvoid((previousState: boolean) => !previousState);
+  };
 
   const handleChoiceChange = (event: SelectChangeEvent) => {
     setTagType(event.target.value);
@@ -71,6 +77,7 @@ const Tags = () => {
     setTagName('');
     setData('');
     setIcon('');
+    setAvoid(false);
   };
 
   const handleIconChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,6 +108,7 @@ const Tags = () => {
     const flags: types.commandTags = {
       icon,
       add: tagType === 'add' ? formValues.map(n => n.pubkey) : [],
+      is_avoided: avoid,
       remove: tagType === 'remove' ? formValues.map(n => n.pubkey) : [],
       tag: tagName,
     };
@@ -161,6 +169,11 @@ const Tags = () => {
                   onChange={handleTagNameChange}
                   style={styles.textField}
                   value={tagName}
+                />
+                <FormControlLabel
+                  control={<StandardSwitch checked={avoid} onChange={handleAvoidChange} id={TagsCommand.flags.avoid} />}
+                  label="Mark to globally avoid all tagged nodes"
+                  style={styles.textField}
                 />
                 <TextField
                   type="text"
