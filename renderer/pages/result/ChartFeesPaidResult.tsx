@@ -1,12 +1,12 @@
 import { CssBaseline, Stack } from '@mui/material';
 import React from 'react';
-import { ChartFeesEarnedOutput } from '../../output';
+import { ChartFeesPaidOutput, ChartFeesPaidOutputTable } from '../../output';
 import { StartFlexBox } from '../../standard_components';
 import * as types from '../../types';
 
 /*
   Renders the bos chart-chain-fees command output in chart format.
-  IPC to the main process to get chart-fees earned data.
+  IPC to the main process to get fees paid data.
 */
 
 const styles = {
@@ -14,16 +14,16 @@ const styles = {
     marginLeft: '50px',
     marginRight: '50px',
     marginTop: '50px',
-    width: '700px',
+    width: '1200px',
   },
 };
 
-const ChartFeesEarnedResult = () => {
-  const [data, setData] = React.useState({ data: [], title: '', description: '' });
+const ChartFeesPaidResult = () => {
+  const [data, setData] = React.useState({ data: [], title: '', description: '', rows: [] });
 
   React.useEffect(() => {
-    window.electronAPI.passArgs(async (_event: any, flags: types.commandChartFeesEarned) => {
-      const { error, result } = await window.electronAPI.commandChartFeesEarned(flags);
+    window.electronAPI.passArgs(async (_event: any, flags: types.commandChartFeesPaid) => {
+      const { error, result } = await window.electronAPI.commandChartFeesPaid(flags);
       if (!!error) {
         window.alert(error);
         return;
@@ -39,11 +39,12 @@ const ChartFeesEarnedResult = () => {
     <CssBaseline>
       <StartFlexBox>
         <Stack spacing={3} style={styles.form}>
-          {!!data.data.length ? <ChartFeesEarnedOutput data={data} /> : <h2>Loading...</h2>}
+          {!!data.rows && !!data.rows.length ? <ChartFeesPaidOutputTable data={data} /> : null}
+          {!!data.data.length ? <ChartFeesPaidOutput data={data} /> : <h2>Loading...</h2>}
         </Stack>
       </StartFlexBox>
     </CssBaseline>
   );
 };
 
-export default ChartFeesEarnedResult;
+export default ChartFeesPaidResult;

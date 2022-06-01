@@ -10,7 +10,7 @@ const ChartChainFeesCommand = commands.find(n => n.value === 'ChartChainFees');
 
 /*
   Renders the bos chart-chain-fees command
-  IPC to the main process to get chain fees data
+  IPC to the main process to pass flags and render in a child window.
 */
 
 const styles = {

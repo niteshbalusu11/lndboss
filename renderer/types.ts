@@ -98,6 +98,25 @@ export type commandChartFeesEarnedReturn = {
   error?: string;
 };
 
+//=========================Chart Fees Pid Command=====================================
+
+export type commandChartFeesPaid = {
+  days?: number;
+  in?: string;
+  is_most_fees_table?: boolean;
+  is_most_forwarded_table?: boolean;
+  is_network?: boolean;
+  is_peer?: boolean;
+  is_rebalances_only?: boolean;
+  nodes: string[];
+  out?: string;
+};
+
+export type commandChartFeesPaidReturn = {
+  result: any;
+  error?: string;
+};
+
 //=========================Tags Command=====================================
 
 export type commandTags = {

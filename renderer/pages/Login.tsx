@@ -143,7 +143,7 @@ const Login = () => {
           />
           <TextField
             type="password"
-            placeholder="Admin/Read-Only Macaroon"
+            placeholder="Admin/Nospend Macaroon"
             className={classes.input}
             id="macaroon"
             inputProps={{

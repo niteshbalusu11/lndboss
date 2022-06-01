@@ -6,6 +6,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   commandChainDeposit: (args: types.commandChainDeposit) => ipcRenderer.invoke('command:chainDeposit', args),
   commandChartChainFees: (args: types.commandChartChainFees) => ipcRenderer.invoke('command:chartChainFees', args),
   commandChartFeesEarned: (args: types.commandChartFeesEarned) => ipcRenderer.invoke('command:chartFeesEarned', args),
+  commandChartFeesPaid: (args: types.commandChartFeesPaid) => ipcRenderer.invoke('command:chartFeesPaid', args),
   credentialsCreate: (args: types.credentialsCreate) => ipcRenderer.invoke('credentials:create', args),
   commandTags: (args: types.commandTags) => ipcRenderer.invoke('command:tags', args),
   getSavedNodes: () => ipcRenderer.invoke('credentials:getSavedNodes'),
