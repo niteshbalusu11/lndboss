@@ -4,7 +4,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
 import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
 import commands, { globalCommands } from '../commands';
-import { ChartFeesEarnedOutput } from '../output';
 import * as types from '../types';
 
 const ChartFeesEarnedCommand = commands.find(n => n.value === 'ChartFeesEarned');
@@ -44,7 +43,6 @@ const ChartFeesEarned = () => {
   const [count, setCount] = useState(false);
   const [forwarded, setForwarded] = useState(false);
   const [formValues, setFormValues] = useState([{ node: '' }]);
-  const [data, setData] = useState({ data: [], title: '', description: '' });
   const [days, setDays] = useState('60');
   const [via, setVia] = useState('');
 
@@ -89,16 +87,7 @@ const ChartFeesEarned = () => {
       nodes: formValues.map(n => n.node),
     };
 
-    const { error, result } = await window.electronAPI.commandChartFeesEarned(flags);
-
-    if (!!error) {
-      window.alert(error);
-      return;
-    }
-
-    if (!!result) {
-      setData(result);
-    }
+    await window.electronAPI.createChildWindow(flags, 'result/ChartFeesEarnedResult', 'ChartFeesEarnedResult');
   };
 
   return (
@@ -171,7 +160,7 @@ const ChartFeesEarned = () => {
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
-          {!!data.data.length && <ChartFeesEarnedOutput data={data} />}
+          {/* {!!data.data.length && <ChartFeesEarnedOutput data={data} />} */}
         </Stack>
       </StartFlexBox>
     </CssBaseline>

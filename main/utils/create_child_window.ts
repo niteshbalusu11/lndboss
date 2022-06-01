@@ -8,7 +8,6 @@ type Args = {
 };
 
 const createChildWindow = async ({ app, createWindow, flags, isProd, path, windowName }: Args) => {
-  console.log('pass-info', flags);
   await app.whenReady();
 
   const childWindow = createWindow(`${windowName}`, {
@@ -25,7 +24,7 @@ const createChildWindow = async ({ app, createWindow, flags, isProd, path, windo
 
   const id = setTimeout(() => {
     childWindow.webContents.send('pass-args', flags);
-  }, 1000);
+  }, 2000);
 
   return () => clearTimeout(id);
 };

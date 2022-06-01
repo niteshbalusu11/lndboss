@@ -4,7 +4,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
 import { StandardButtonLink, StartFlexBox, SubmitButton } from '../standard_components';
 import commands, { globalCommands } from '../commands';
-import { ChartChainFeesOutput } from '../output';
 import * as types from '../types';
 
 const ChartChainFeesCommand = commands.find(n => n.value === 'ChartChainFees');
@@ -42,7 +41,6 @@ const styles = {
 
 const ChartChainFees = () => {
   const [formValues, setFormValues] = useState([{ node: '' }]);
-  const [data, setData] = useState({ data: [], title: '', description: '' });
   const [days, setDays] = useState('60');
 
   const handleDaysChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,16 +69,7 @@ const ChartChainFees = () => {
       nodes: formValues.map(n => n.node),
     };
 
-    const { error, result } = await window.electronAPI.commandChartChainFees(flags);
-
-    if (!!error) {
-      window.alert(error);
-      return;
-    }
-
-    if (!!result) {
-      setData(result);
-    }
+    await window.electronAPI.createChildWindow(flags, 'result/ChartChainFeesResult', 'ChartChainFeesResult');
   };
 
   return (
@@ -129,7 +118,6 @@ const ChartChainFees = () => {
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
-          {!!data.data.length && <ChartChainFeesOutput data={data} />}
         </Stack>
       </StartFlexBox>
     </CssBaseline>
