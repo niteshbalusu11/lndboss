@@ -2504,9 +2504,9 @@ balanced-match@^1.0.0:
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
 
 balanceofsatoshis@^12.8.2:
-  version "12.8.4"
-  resolved "https://registry.yarnpkg.com/balanceofsatoshis/-/balanceofsatoshis-12.8.4.tgz#5ba2726da2d040366e42ea4f7dc3ecabb589b135"
-  integrity sha512-Tfe6LCsEhqmTQ+5pRjrfpJ1emxcU/UU1QFGRJcetXKRcbolENwOmBzaUmJHwiBsNQI67UNPCF7j4UjN0jvO12A==
+  version "12.8.5"
+  resolved "https://registry.yarnpkg.com/balanceofsatoshis/-/balanceofsatoshis-12.8.5.tgz#e60e3ababaacf892fc42b6da422f06eb7e9e910e"
+  integrity sha512-xnow8ODpcmmnvG9bTfiNrWjGgCp1AmDlL8DeMPSt6Q2qCzJr0bXaQ7wuy1CeHbATBUN1ZR/jTR9T/VPyETpmLg==
   dependencies:
     "@alexbosworth/caporal" "1.4.4"
     "@alexbosworth/fiat" "1.0.2"
@@ -3283,17 +3283,17 @@ cookie@0.5.0:
   integrity sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==
 
 core-js-compat@^3.21.0, core-js-compat@^3.22.1:
-  version "3.22.7"
-  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.22.7.tgz#8359eb66ecbf726dd0cfced8e48d5e73f3224239"
-  integrity sha512-uI9DAQKKiiE/mclIC5g4AjRpio27g+VMRhe6rQoz+q4Wm4L6A/fJhiLtBw+sfOpDG9wZ3O0pxIw7GbfOlBgjOA==
+  version "3.22.8"
+  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.22.8.tgz#46fa34ce1ddf742acd7f95f575f66bbb21e05d62"
+  integrity sha512-pQnwg4xtuvc2Bs/5zYQPaEYYSuTxsF7LBWF0SvnVhthZo/Qe+rJpcEekrdNK5DWwDJ0gv0oI9NNX5Mppdy0ctg==
   dependencies:
     browserslist "^4.20.3"
     semver "7.0.0"
 
 core-js-pure@^3.20.2:
-  version "3.22.7"
-  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.22.7.tgz#f58489d9b309fa7b26486a0f70d4ec19a418084e"
-  integrity sha512-wTriFxiZI+C8msGeh7fJcbC/a0V8fdInN1oS2eK79DMBGs8iIJiXhtFJCiT3rBa8w6zroHWW3p8ArlujZ/Mz+w==
+  version "3.22.8"
+  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.22.8.tgz#f2157793b58719196ccf9673cc14f3683adc0957"
+  integrity sha512-bOxbZIy9S5n4OVH63XaLVXZ49QKicjowDx/UELyJ68vxfCRpYsbyh/WNZNfEfAk+ekA8vSjt+gCDpvh672bc3w==
 
 core-util-is@1.0.2:
   version "1.0.2"
@@ -3770,9 +3770,9 @@ electron-to-chromium@^1.4.118:
   integrity sha512-2hIgvu0+pDfXIqmVmV5X6iwMjQ2KxDsWKwM+oI1fABEOy/Dqmll0QJRmIQ3rm+XaoUa/qKrmy5h7LSTFQ6Ldzg==
 
 electron@^18.2.4:
-  version "18.3.1"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-18.3.1.tgz#822ca54bd0a32098712377376617cfdd230846d6"
-  integrity sha512-46lH3iEdvbbDSa0s2JiOysGruQlJwGUae0UrEfZ4NgHZUnHbglkvezfKSoRSOEob3c9rENZlvgEv9gCbhYx5Yw==
+  version "18.3.2"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-18.3.2.tgz#015a8f4c92c62855d7f33206f2166d3e33b053b7"
+  integrity sha512-Q1ciZ1M90L71WvyLbkD8Iwaq4YCwo8NUpBiLQUsd6M4E7i5vrzsA4g5Ylfzyela8DgRCNVknDVDfj6s+7YVWpA==
   dependencies:
     "@electron/get" "^1.13.0"
     "@types/node" "^16.11.26"
@@ -6769,7 +6769,7 @@ path-type@^4.0.0:
 pend@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/pend/-/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
-  integrity sha1-elfrVQpng/kRUzH89GY9XI4AelA=
+  integrity sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==
 
 picocolors@^1.0.0:
   version "1.0.0"
@@ -6784,19 +6784,19 @@ picomatch@^2.3.1:
 pify@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-3.0.0.tgz#e5a4acd2c101fdf3d9a4d07f0dbc4db49dd28176"
-  integrity sha1-5aSs0sEB/fPZpNB/DbxNtJ3SgXY=
+  integrity sha512-C3FsVNH1udSEX48gGX1xfvwTWfsYWj5U+8/uK15BGzIGrKoUpghX8hWZwa/OFnakBiiVNmBvemTJR5mcy7iPcg==
 
 pinkie-promise@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/pinkie-promise/-/pinkie-promise-2.0.1.tgz#2135d6dfa7a358c069ac9b178776288228450ffa"
-  integrity sha1-ITXW36ejWMBprJsXh3YogihFD/o=
+  integrity sha512-0Gni6D4UcLTbv9c57DfxDGdr41XfgUjqWZu492f0cIGr16zDU06BWP/RAEvOuo7CQ0CNjHaLlM59YJJFm3NWlw==
   dependencies:
     pinkie "^2.0.0"
 
 pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
-  integrity sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
+  integrity sha512-MnUuEycAemtSaeFSjXKW/aroV7akBbY+Sv+RkyqFjgAe73F+MR0TBWKBRDkmfWq/HiFmdavfZ1G7h4SPZXaCSg==
 
 pkg-dir@^4.1.0:
   version "4.2.0"
