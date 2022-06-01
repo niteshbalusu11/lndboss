@@ -6336,6 +6336,11 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+next-electron-server@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/next-electron-server/-/next-electron-server-0.0.8.tgz#bc17772636a099d678a6f0c3f9bc8e952ee75967"
+  integrity sha512-LQhqf1Lrw9QVPntWN8NtqQk4WMufxXinsfg2ODgfqiHpvhcG58MOVIfvtDL37yGRvswORLXUHYRNB+p59LAd/w==
+
 next@^12.1.6:
   version "12.1.6"
   resolved "https://registry.yarnpkg.com/next/-/next-12.1.6.tgz#eb205e64af1998651f96f9df44556d47d8bbc533"

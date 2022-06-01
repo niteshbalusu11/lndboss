@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer } from 'electron';
+import { contextBridge, ipcRenderer, webFrame } from 'electron';
 import * as types from '../renderer/types';
 
 contextBridge.exposeInMainWorld('electronAPI', {
@@ -9,4 +9,22 @@ contextBridge.exposeInMainWorld('electronAPI', {
   credentialsCreate: (args: types.credentialsCreate) => ipcRenderer.invoke('credentials:create', args),
   commandTags: (args: types.commandTags) => ipcRenderer.invoke('command:tags', args),
   getSavedNodes: () => ipcRenderer.invoke('credentials:getSavedNodes'),
+  passInfo: (args: any) => ipcRenderer.send('pass-info', args),
+  passInfoResponse: (callback: any) => {
+    console.log('inside preload');
+    return ipcRenderer.on('pass-info-response', callback);
+  },
 });
+
+webFrame.executeJavaScript(`Object.defineProperty(globalThis, 'WebSocket', {
+  value: new Proxy(WebSocket, {
+    construct: (Target, [url, protocols]) => {
+      if (url.endsWith('/_next/webpack-hmr')) {
+        // Fix the Next.js hmr client url
+        return new Target("ws://localhost:8888/_next/webpack-hmr", protocols)
+      } else {
+        return new Target(url, protocols)
+      }
+    }
+  })
+});`);
