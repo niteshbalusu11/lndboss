@@ -12,19 +12,14 @@ import {
 import authenticatedLnd from './lnd/authenticated_lnd';
 import * as types from '../renderer/types';
 import * as lnd from './lnd';
-// import path from 'path';
 
 const isProd: boolean = process.env.NODE_ENV === 'production';
 
-if (isProd) {
-  serve({ directory: 'app' });
-} else {
-  app.setPath('userData', `${app.getPath('userData')} (development)`);
-}
-// serveNextAt('next://app', {
-//   outputDir: './app',
-//   port: 8888,
-// });
+serveNextAt('next://app', {
+  outputDir: './app',
+  port: 8888,
+});
+
 (async () => {
   await app.whenReady();
 
@@ -33,14 +28,10 @@ if (isProd) {
     height: 600,
   });
 
-  // await mainWindow.loadURL('next://app/home');
-  // mainWindow.webContents.openDevTools();
-
-  if (isProd) {
-    await mainWindow.loadURL('app://./home.html');
+  if (!!isProd) {
+    await mainWindow.loadURL('next://app/home');
   } else {
-    const port = process.argv[2];
-    await mainWindow.loadURL(`http://localhost:${port}/home`);
+    await mainWindow.loadURL('next://app/home');
     mainWindow.webContents.openDevTools();
   }
 })();
@@ -103,37 +94,25 @@ ipcMain.handle('credentials:getSavedNodes', async () => {
   return { defaultSavedNode, savedNodes, error };
 });
 
-// ipcMain.on('pass-info', async (event, args: any) => {
-//   console.log('pass-info', args);
-//   await app.whenReady();
+ipcMain.on('pass-info', async (event, args: any) => {
+  console.log('pass-info', args);
+  await app.whenReady();
 
-//   const childWindow = createWindow('child', {
-//     width: 1000,
-//     height: 600,
-//   });
+  const childWindow = createWindow('child', {
+    width: 1000,
+    height: 600,
+  });
 
-//   // if (!isProd) {
-//   //   const prodPath = path.join(__dirname, '../app/test.html');
-//   //   const homeFile = path.join(app.getAppPath(), 'app/test.html');
-//   //   console.log(homeFile);
-//   //   // await childWindow.loadURL(`file://${prodPath}`);
-//   //   // await childWindow.loadFile(prodPath);
-//   //   await childWindow.loadFile(homeFile);
-//   // } else {
-//   //   const port = process.argv[2];
-//   //   await childWindow.loadURL(`http://localhost:${port}/test`);
-//   //   childWindow.webContents.openDevTools();
-//   // }
-//   if (isProd) {
-//     await childWindow.loadURL('next://app/test');
-//   } else {
-//     await childWindow.loadURL('next://app/test');
-//     childWindow.webContents.openDevTools();
-//   }
+  if (isProd) {
+    await childWindow.loadURL('next://app/test');
+  } else {
+    await childWindow.loadURL('next://app/test');
+    childWindow.webContents.openDevTools();
+  }
 
-//   const id = setTimeout(() => {
-//     childWindow.webContents.send('pass-info-response', args);
-//   }, 1000);
+  const id = setTimeout(() => {
+    childWindow.webContents.send('pass-info-response', args);
+  }, 1000);
 
-//   return () => clearTimeout(id);
-// });
+  return () => clearTimeout(id);
+});

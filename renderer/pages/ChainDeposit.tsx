@@ -46,7 +46,7 @@ const ChainDeposit = () => {
       amount: Number(amount),
     };
 
-    // await window.electronAPI.passInfo(flags);
+    await window.electronAPI.passInfo(flags);
 
     const { error, result } = await window.electronAPI.commandChainDeposit(flags);
 
