@@ -35,7 +35,7 @@ yarn build
 
 yarn prettier
 
-then try building again
+# then try building again
 
 yarn build
 
