@@ -30,6 +30,15 @@ yarn
 yarn build
 
 # Check the dist folder for the application
+
+** Note: If you get a lot of build errors from ES Lint, try running
+
+yarn prettier
+
+then try building again
+
+yarn build
+
 ```
 
 
