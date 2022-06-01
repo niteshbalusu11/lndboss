@@ -1,13 +1,7 @@
 import { app, ipcMain } from 'electron';
 import serveNextAt from 'next-electron-server';
 import { createWindow } from './helpers';
-import {
-  balanceCommand,
-  chainDepositCommand,
-  chartChainFeesCommand,
-  chartFeesEarnedCommand,
-  tagsCommand,
-} from './commands';
+import * as bosCommands from './commands';
 import * as lnd from './lnd';
 import authenticatedLnd from './lnd/authenticated_lnd';
 import * as types from '../renderer/types';
@@ -43,7 +37,7 @@ app.on('window-all-closed', () => {
 // ==========================Balance Command=====================================
 ipcMain.handle('command:balance', async (_event, args: types.commandBalance) => {
   const { lnd } = await authenticatedLnd({ node: args.node });
-  const { result, error } = await balanceCommand(args, lnd);
+  const { result, error } = await bosCommands.balanceCommand(args, lnd);
 
   return { result, error };
 });
@@ -51,7 +45,7 @@ ipcMain.handle('command:balance', async (_event, args: types.commandBalance) => 
 // ==========================Chain Deposit Command=====================================
 ipcMain.handle('command:chainDeposit', async (_event, args: types.commandChainDeposit) => {
   const { lnd } = await authenticatedLnd({ node: args.node });
-  const { result, error } = await chainDepositCommand(args, lnd);
+  const { result, error } = await bosCommands.chainDepositCommand(args, lnd);
 
   return { result, error };
 });
@@ -59,7 +53,7 @@ ipcMain.handle('command:chainDeposit', async (_event, args: types.commandChainDe
 // ==========================Chart Chain Fees Command=====================================
 ipcMain.handle('command:chartChainFees', async (_event, args: types.commandChartChainFees) => {
   const { lnds } = await lnd.getLnds({ nodes: args.nodes });
-  const { result, error } = await chartChainFeesCommand(args, lnds);
+  const { result, error } = await bosCommands.chartChainFeesCommand(args, lnds);
 
   return { result, error };
 });
@@ -67,14 +61,22 @@ ipcMain.handle('command:chartChainFees', async (_event, args: types.commandChart
 // ==========================Chart Fees Earned Command=====================================
 ipcMain.handle('command:chartFeesEarned', async (_event, args: types.commandChartFeesEarned) => {
   const { lnds } = await lnd.getLnds({ nodes: args.nodes });
-  const { result, error } = await chartFeesEarnedCommand(args, lnds);
+  const { result, error } = await bosCommands.chartFeesEarnedCommand(args, lnds);
+
+  return { result, error };
+});
+
+// ==========================Chart Fees Paid Command=====================================
+ipcMain.handle('command:chartFeesPaid', async (_event, args: types.commandChartFeesPaid) => {
+  const { lnds } = await lnd.getLnds({ nodes: args.nodes });
+  const { result, error } = await bosCommands.chartFeesPaidCommand(args, lnds);
 
   return { result, error };
 });
 
 // ==========================Tags Command=====================================
 ipcMain.handle('command:tags', async (_event, args: types.commandTags) => {
-  const { result, error } = await tagsCommand(args);
+  const { result, error } = await bosCommands.tagsCommand(args);
 
   return { result, error };
 });

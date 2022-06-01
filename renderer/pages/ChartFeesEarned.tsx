@@ -10,7 +10,7 @@ const ChartFeesEarnedCommand = commands.find(n => n.value === 'ChartFeesEarned')
 
 /*
   Renders the bos chart-fees-earned command
-  IPC to the main process to get fee earnings data
+  IPC to the main process to pass flags and render in a child window.
 */
 
 const styles = {
