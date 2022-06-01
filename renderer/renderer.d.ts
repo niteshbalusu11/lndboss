@@ -9,8 +9,8 @@ export interface IElectronAPI {
   checkconnectionGet: () => Promise<types.checkConnectionReturn>;
   commandTags: (args: types.commandTags) => Promise<types.commandTagsReturn>;
   getSavedNodes: () => Promise<types.getSavedNodesReturn>;
-  passInfo: (args: any) => any;
-  passInfoResponse: (args: any) => any;
+  createChildWindow: (flags: any, path: string, windowName: string) => any;
+  passArgs: (args: any) => any;
 }
 
 declare global {

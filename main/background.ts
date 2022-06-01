@@ -1,5 +1,4 @@
 import { app, ipcMain } from 'electron';
-import serve from 'electron-serve';
 import serveNextAt from 'next-electron-server';
 import { createWindow } from './helpers';
 import {
@@ -9,9 +8,10 @@ import {
   chartFeesEarnedCommand,
   tagsCommand,
 } from './commands';
+import * as lnd from './lnd';
 import authenticatedLnd from './lnd/authenticated_lnd';
 import * as types from '../renderer/types';
-import * as lnd from './lnd';
+import createChildWindow from './utils/create_child_window';
 
 const isProd: boolean = process.env.NODE_ENV === 'production';
 
@@ -94,25 +94,13 @@ ipcMain.handle('credentials:getSavedNodes', async () => {
   return { defaultSavedNode, savedNodes, error };
 });
 
-ipcMain.on('pass-info', async (event, args: any) => {
-  console.log('pass-info', args);
-  await app.whenReady();
-
-  const childWindow = createWindow('child', {
-    width: 1000,
-    height: 600,
+ipcMain.on('create-child-window', async (_event, flags: types.childWindow, path: string, windowName: string) => {
+  await createChildWindow({
+    app,
+    createWindow,
+    isProd,
+    flags,
+    path,
+    windowName,
   });
-
-  if (isProd) {
-    await childWindow.loadURL('next://app/test');
-  } else {
-    await childWindow.loadURL('next://app/test');
-    childWindow.webContents.openDevTools();
-  }
-
-  const id = setTimeout(() => {
-    childWindow.webContents.send('pass-info-response', args);
-  }, 1000);
-
-  return () => clearTimeout(id);
 });

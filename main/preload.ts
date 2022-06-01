@@ -9,11 +9,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
   credentialsCreate: (args: types.credentialsCreate) => ipcRenderer.invoke('credentials:create', args),
   commandTags: (args: types.commandTags) => ipcRenderer.invoke('command:tags', args),
   getSavedNodes: () => ipcRenderer.invoke('credentials:getSavedNodes'),
-  passInfo: (args: any) => ipcRenderer.send('pass-info', args),
-  passInfoResponse: (callback: any) => {
-    console.log('inside preload');
-    return ipcRenderer.on('pass-info-response', callback);
-  },
+  createChildWindow: (args: types.childWindow, path: string, windowName: string) =>
+    ipcRenderer.send('create-child-window', args, path, windowName),
+  passArgs: (callback: any) => ipcRenderer.on('pass-args', callback),
 });
 
 webFrame.executeJavaScript(`Object.defineProperty(globalThis, 'WebSocket', {

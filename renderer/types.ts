@@ -1,3 +1,10 @@
+// ========================Child Window Creation Types==========================
+export type childWindow = {
+  flags: any;
+  path: string;
+  windowName: string;
+};
+
 //=========================Credential Create Types=====================================
 
 export type credentialsCreate = {

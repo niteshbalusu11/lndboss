@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 const Test = () => {
   const [amount, setAmount] = useState('');
   React.useEffect(() => {
-    window.electronAPI.passInfoResponse((event, data) => {
+    window.electronAPI.passArgs((event, data) => {
       // alert(data);
       console.log(data);
       setAmount(data.amount);
