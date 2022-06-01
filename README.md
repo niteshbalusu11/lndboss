@@ -1,5 +1,16 @@
 <h1>Building a gui for balanceofsatoshis, work in progress</h1>
 
+## To build from source, you will NodeJS and yarn.
+
+You can install NodeJS from here:
+https://nodejs.dev/download
+
+```
+# After installing nodejs, you can install yarn
+
+npm install --global yarn
+```
+
 ## Development
 ```
 # Clone the repository
