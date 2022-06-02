@@ -2,7 +2,7 @@
   "private": true,
   "name": "lndboss",
   "description": "Desktop Application for BalanceOfSatoshis",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": {
     "name": "Nitesh Balusu",
     "url": "https://twitter.com/nitesh_btc"
@@ -56,6 +56,7 @@
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "electron": "^18.2.4",
     "electron-builder": "^23.0.3",
+    "electron-notarize": "^1.2.1",
     "electron-playwright-helpers": "^1.1.1",
     "eslint": "^8.0.1",
     "eslint-config-next": "^12.1.6",

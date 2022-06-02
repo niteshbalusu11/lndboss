@@ -7,3 +7,6 @@ out
 /test-results/
 /playwright-report/
 /playwright/.cache/
+electron-builder.yml
+entitlements.mac.plist
+notarize.js
