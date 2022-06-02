@@ -2,7 +2,7 @@
   "private": true,
   "name": "lndboss",
   "description": "Desktop Application for BalanceOfSatoshis",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "author": {
     "name": "Nitesh Balusu",
     "url": "https://twitter.com/nitesh_btc"
