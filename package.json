@@ -25,7 +25,7 @@
     "lint:fix": "eslint \"{main,renderer}/**/*.{ts,tsx}\" --fix",
     "postinstall": "electron-builder install-app-deps",
     "prettier": "prettier --write \"{renderer,main}/**/*.{ts,tsx}\"",
-    "publish": "nextron build --mac --win --x64 --arm64 --publish always",
+    "release": "nextron build --mac --win --x64 --arm64 --publish always",
     "test": "playwright test",
     "test:client": "playwright test tests/client",
     "test:server": "playwright test tests/server"
