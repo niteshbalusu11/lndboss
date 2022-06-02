@@ -20,11 +20,12 @@
   "license": "MIT",
   "scripts": {
     "dev": "nextron",
-    "nextron:build": "nextron build --mac --win --x64 --arm64 --config electron-builder.yml --publish onTag",
+    "build": "nextron build --mac --win --x64 --arm64 --publish never",
     "lint:check": "eslint \"{renderer,main}/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"{main,renderer}/**/*.{ts,tsx}\" --fix",
     "postinstall": "electron-builder install-app-deps",
     "prettier": "prettier --write \"{renderer,main}/**/*.{ts,tsx}\"",
+    "publish": "nextron build --mac --win --x64 --arm64 --publish always",
     "test": "playwright test",
     "test:client": "playwright test tests/client",
     "test:server": "playwright test tests/server"

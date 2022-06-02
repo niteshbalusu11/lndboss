@@ -9,11 +9,6 @@ files:
       - package.json
       - app
 mac:
-  category: "public.app-category.lifestyle"
-  target: "dmg"
-  publish:
-    - github
-win:
-  target: "nsis"
-  publish:
-    - github
+  category: "public.app-category.productivity"
+dmg:
+  icon: false
