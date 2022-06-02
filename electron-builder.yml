@@ -1,4 +1,4 @@
-appId: com.example.nextron
+appId: com.nitesh.balusu.lndboss
 productName: LND BOSS
 directories:
   output: dist

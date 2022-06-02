@@ -171,7 +171,7 @@ const Login = () => {
         </Stack>
         <Dialog open={successDialog} id="loginsuccess" onClose={handleSuccessClick}>
           <Alert severity="success" id="loginsuccess">
-            Credentials saved and Authenticated to LND!
+            Credentials saved and Authenticated to LND! You can start running commands! 🚀
           </Alert>
         </Dialog>
         <Dialog open={failureDialog} id="loginerror" onClose={handleFailureClick}>
