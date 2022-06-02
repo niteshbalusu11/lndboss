@@ -14,7 +14,7 @@ const styles = {
     marginLeft: '50px',
     marginRight: '50px',
     marginTop: '50px',
-    width: '1200px',
+    midWidth: '600px',
   },
 };
 

@@ -222,7 +222,6 @@ const ChartFeesPaid = () => {
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
-          {/* {!!data.data.length && <ChartFeesEarnedOutput data={data} />} */}
         </Stack>
       </StartFlexBox>
     </CssBaseline>

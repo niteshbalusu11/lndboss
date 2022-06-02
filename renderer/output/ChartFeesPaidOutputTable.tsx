@@ -45,7 +45,7 @@ const ChartFeesPaidOutputTable = ({ data }: Props) => {
     columns.push({
       id: name,
       label: name,
-      minWidth: 170,
+      minWidth: 100,
       align: 'center',
     });
   });

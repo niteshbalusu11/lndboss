@@ -8,4 +8,10 @@ files:
     filter:
       - package.json
       - app
-publish: null
+mac:
+  category: "public.app-category.lifestyle"
+dmg:
+  icon: false
+publish:
+  - github
+  choices: "onTag"
