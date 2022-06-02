@@ -11,6 +11,7 @@
     "url": "https://github.com/niteshbalusu11/lndboss/issues"
   },
   "keywords": [
+    "balanceofsatoshis",
     "lnd",
     "lightning",
     "lightning-network"
@@ -38,7 +39,7 @@
     "chart.js": "^3.8.0",
     "electron-serve": "^1.1.0",
     "electron-store": "^8.0.1",
-    "lightning": "^5.15.1",
+    "lightning": "^5.16.1",
     "next-electron-server": "^0.0.8",
     "pretty-error": "^4.0.0",
     "react-chartjs-2": "^4.1.0",
