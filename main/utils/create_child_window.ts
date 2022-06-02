@@ -11,7 +11,7 @@ const createChildWindow = async ({ app, createWindow, flags, isProd, path, windo
   await app.whenReady();
 
   const childWindow = createWindow(`${windowName}`, {
-    width: 1000,
+    width: 800,
     height: 600,
   });
 
