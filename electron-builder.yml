@@ -10,8 +10,8 @@ files:
       - app
 mac:
   category: "public.app-category.lifestyle"
-dmg:
-  icon: false
-publish:
-  - github
-  choices: "onTag"
+  target: "dmg"
+  publish: ["github"]
+win:
+  target: "nsis"
+  publish: ["github"]

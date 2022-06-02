@@ -20,8 +20,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nextron",
-    "build": "nextron build",
-    "build:all": "nextron build --win --mac --x64 --arm64",
+    "build": "nextron build --mac --win --x64 --arm64 --publish onTag",
     "lint:check": "eslint \"{renderer,main}/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"{main,renderer}/**/*.{ts,tsx}\" --fix",
     "postinstall": "electron-builder install-app-deps",
