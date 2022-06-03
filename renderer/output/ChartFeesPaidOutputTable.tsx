@@ -74,7 +74,7 @@ const ChartFeesPaidOutputTable = ({ data }: Props) => {
   return (
     <Paper sx={{ width: '100%' }}>
       <TableContainer sx={{ maxHeight: 800 }}>
-        <Table>
+        <Table id="ChartFeesPaidOutputTable">
           <TableHead>
             <TableRow>
               {columns.map(column => (

@@ -1,4 +1,5 @@
 import { ElectronApplication, expect, Page, test } from '@playwright/test';
+import path from 'path';
 import { _electron as electron } from 'playwright';
 import commands from '../../renderer/commands';
 
@@ -10,7 +11,10 @@ try {
     let page: Page;
 
     test.beforeAll(async () => {
-      electronApp = await electron.launch({ args: ['http://localhost:8888/Commands'] });
+      // lightning = await createLogin();
+      const launchPath = path.join(__dirname, '../../app/background.js');
+
+      electronApp = await electron.launch({ args: [launchPath] });
 
       const appPath = await electronApp.evaluate(async ({ app }) => {
         return app.getAppPath();
@@ -22,6 +26,7 @@ try {
     test('Test the Balance command page and input values', async () => {
       await page.click('text=Balance');
       await expect(page).toHaveTitle('Balance');
+
       await page.type(`#${BalanceCommand.flags.above}`, '1000');
       await page.type(`#${BalanceCommand.flags.below}`, '1000');
       await page.check(`#${BalanceCommand.flags.confirmed}`);
@@ -29,6 +34,16 @@ try {
       await page.check(`#${BalanceCommand.flags.offchain}`);
       await page.check(`#${BalanceCommand.flags.onchain}`);
       await page.type('#node', 'testnode1');
+
+      await page.click('text=run command');
+      await page.waitForTimeout(1000);
+
+      await expect(page.locator('text=OnchainBalance')).toBeVisible();
+      await expect(page.locator('text=OffchainBalance')).toBeVisible();
+      await expect(page.locator('text=ClosingBalance')).toBeVisible();
+      await expect(page.locator('text=ConflictedPending')).toBeVisible();
+      await expect(page.locator('text=InvalidPending')).toBeVisible();
+
       await page.click('text=home');
     });
 
