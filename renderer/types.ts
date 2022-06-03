@@ -86,7 +86,7 @@ export type commandChartChainFeesReturn = {
 //=========================Chart Fees Earned Command=====================================
 
 export type commandChartFeesEarned = {
-  days?: number;
+  days: number;
   is_count?: boolean;
   is_forwarded?: boolean;
   nodes?: string[];
@@ -98,10 +98,10 @@ export type commandChartFeesEarnedReturn = {
   error?: string;
 };
 
-//=========================Chart Fees Pid Command=====================================
+//=========================Chart Fees Paid Command=====================================
 
 export type commandChartFeesPaid = {
-  days?: number;
+  days: number;
   in?: string;
   is_most_fees_table?: boolean;
   is_most_forwarded_table?: boolean;
@@ -113,6 +113,18 @@ export type commandChartFeesPaid = {
 };
 
 export type commandChartFeesPaidReturn = {
+  result: any;
+  error?: string;
+};
+
+// ========================Chart Payments Received Command=====================================
+
+export type commandChartPaymentsReceived = {
+  days: number;
+  nodes?: string[];
+};
+
+export type commandChartPaymentsReceivedReturn = {
   result: any;
   error?: string;
 };

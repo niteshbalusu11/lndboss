@@ -89,6 +89,14 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Chart Payments Received',
+    value: 'ChartPaymentsReceived',
+    description: 'Show chart for settled invoices from external parties',
+    flags: {
+      days: 'Days',
+    },
+  },
+  {
     args: {
       tag: 'Tag',
     },

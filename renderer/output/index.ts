@@ -4,6 +4,7 @@ import ChartChainFeesOutput from './ChartChainFeesOutput';
 import ChartFeesEarnedOutput from './ChartFeesEarnedOutput';
 import ChartFeesPaidOutput from './ChartFeesPaidOutput';
 import ChartFeesPaidOutputTable from './ChartFeesPaidOutputTable';
+import ChartPaymentsReceivedOutput from './ChartPaymentsReceivedOutput';
 import TagsOutput from './TagsOutput';
 
 export {
@@ -13,5 +14,6 @@ export {
   ChartFeesEarnedOutput,
   ChartFeesPaidOutput,
   ChartFeesPaidOutputTable,
+  ChartPaymentsReceivedOutput,
   TagsOutput,
 };

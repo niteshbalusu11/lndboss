@@ -74,6 +74,14 @@ ipcMain.handle('command:chartFeesPaid', async (_event, args: types.commandChartF
   return { result, error };
 });
 
+// ==========================Chart Payments Received Command=====================================
+ipcMain.handle('command:chartPaymentsReceived', async (_event, args: types.commandChartPaymentsReceived) => {
+  const { lnds } = await lnd.getLnds({ nodes: args.nodes });
+  const { result, error } = await bosCommands.chartPaymentsReceivedCommand(args, lnds);
+
+  return { result, error };
+});
+
 // ==========================Tags Command=====================================
 ipcMain.handle('command:tags', async (_event, args: types.commandTags) => {
   const { result, error } = await bosCommands.tagsCommand(args);
