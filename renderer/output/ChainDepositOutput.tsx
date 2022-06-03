@@ -31,7 +31,7 @@ type Data = {
 const ChainDepositOutput = ({ data }: Data) => {
   return (
     <div style={styles.div}>
-      <QRCode value={data.url} size={250} style={styles.qr} bgColor="white" fgColor="black" />
+      <QRCode value={data.url} size={250} style={styles.qr} id="qrcode" bgColor="white" fgColor="black" />
       <p style={styles.text}>{data.address}</p>
     </div>
   );

@@ -1,4 +1,5 @@
 import { CssBaseline, Stack } from '@mui/material';
+import Head from 'next/head';
 import React from 'react';
 import { ChartFeesEarnedOutput } from '../../output';
 import { StartFlexBox } from '../../standard_components';
@@ -37,6 +38,9 @@ const ChartFeesEarnedResult = () => {
 
   return (
     <CssBaseline>
+      <Head>
+        <title>Chart Fees Earned Result</title>
+      </Head>
       <StartFlexBox>
         <Stack spacing={3} style={styles.form}>
           {!!data.data.length ? <ChartFeesEarnedOutput data={data} /> : <h2>Loading...</h2>}

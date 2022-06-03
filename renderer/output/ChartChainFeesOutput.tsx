@@ -20,7 +20,7 @@ const ChartChainFeesOutput = ({ data }: Props) => {
   return (
     <div>
       <h3>{data.title}</h3>
-      <Line data={chartData} options={options} />
+      <Line data={chartData} options={options} id="ChartChainFeesOutput" />
     </div>
   );
 };

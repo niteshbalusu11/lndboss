@@ -1,5 +1,6 @@
 import { ElectronApplication, expect, Page, test } from '@playwright/test';
 import { _electron as electron } from 'playwright';
+import path from 'path';
 
 try {
   test.describe('Test the login page and check authentication', async () => {
@@ -7,7 +8,9 @@ try {
     let page: Page;
 
     test.beforeAll(async () => {
-      electronApp = await electron.launch({ args: ['http://localhost:8888/Commands'] });
+      const launchPath = path.join(__dirname, '../../app/background.js');
+
+      electronApp = await electron.launch({ args: [launchPath] });
 
       const appPath = await electronApp.evaluate(async ({ app }) => {
         return app.getAppPath();
@@ -20,9 +23,11 @@ try {
       await page.click('text=LOGIN');
       await expect(page).toHaveTitle('Authentication');
       await page.type('#node', 'testnode');
-      await page.type('#cert', 'lightning.cert');
-      await page.type('#macaroon', 'lightning.macaroon');
-      await page.type('#socket', 'lightning.socket');
+      await page.type('#cert', 'cert');
+      await page.type('#macaroon', 'macaroon');
+      await page.type('#socket', 'socket');
+
+      await page.click('text=authenticate');
       await page.click('text=home');
     });
 

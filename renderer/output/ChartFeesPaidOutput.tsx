@@ -27,7 +27,7 @@ const ChartFeesPaidOutput = ({ data }: Props) => {
   return (
     <div style={styles.div}>
       <h3>{data.title}</h3>
-      <Line data={chartData} options={options} />
+      <Line data={chartData} options={options} id="ChartFeesPaidOutput" />
     </div>
   );
 };

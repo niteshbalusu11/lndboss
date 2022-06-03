@@ -1,4 +1,5 @@
 import { ElectronApplication, expect, Page, test } from '@playwright/test';
+import path from 'path';
 import { _electron as electron } from 'playwright';
 import commands from '../../renderer/commands';
 
@@ -10,7 +11,11 @@ try {
     let page: Page;
 
     test.beforeAll(async () => {
-      electronApp = await electron.launch({ args: ['http://localhost:8888/Commands'] });
+      // lightning = await createLogin();
+
+      const launchPath = path.join(__dirname, '../../app/background.js');
+
+      electronApp = await electron.launch({ args: [launchPath] });
 
       const appPath = await electronApp.evaluate(async ({ app }) => {
         return app.getAppPath();
@@ -33,17 +38,24 @@ try {
       );
       await page.check(`#${ChartFeesPaidCommand.flags.is_most_fees_table}`);
       await page.check(`#${ChartFeesPaidCommand.flags.is_most_forwarded_table}`);
-      await page.check(`#${ChartFeesPaidCommand.flags.is_network}`);
       await page.check(`#${ChartFeesPaidCommand.flags.is_peer}`);
       await page.check(`#${ChartFeesPaidCommand.flags.is_rebalances_only}`);
-      await page.click('text=Add');
-      await page.type('#node-1', 'testnode2');
-      await page.click('text=Add');
-      await page.type('#node-2', 'testnode3');
+      await page.type('#node-0', 'testnode1');
+
+      await page.click('text=run command');
+      page = await electronApp.waitForEvent('window');
+
+      await expect(page).toHaveTitle('Chart Fees Paid Result');
+      await page.waitForTimeout(1000);
+      await expect(page.locator('#ChartFeesPaidOutput')).toBeVisible();
+      await expect(page.locator('#ChartFeesPaidOutputTable')).toBeVisible();
+
+      page = electronApp.windows()[0];
       await page.click('text=home');
     });
 
     test.afterAll(async () => {
+      // await lightning.kill({});
       await electronApp.close();
     });
   });

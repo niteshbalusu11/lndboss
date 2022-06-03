@@ -64,7 +64,6 @@ const putSavedCredentials = async (args: Args) => {
         'validate',
         ({}, cbk: any) => {
           const nodeDirectory = join(...[homedir(), home, args.node]);
-          console.log('nodeDirectory', nodeDirectory);
 
           return fs.mkdir(nodeDirectory, { recursive: true }, () => {
             // Ignore errors, the directory may already be there

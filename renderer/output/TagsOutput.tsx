@@ -39,7 +39,7 @@ const TagsOutput = ({ result }: Props) => {
   const rows = data.map((n: Data) => createData(n.alias, n.id, n.nodes.join('\n')));
   return (
     <TableContainer component={Paper} style={styles.table}>
-      <Table sx={{ minWidth: 100 }} aria-label="simple table">
+      <Table sx={{ minWidth: 100 }} aria-label="simple table" id="tags">
         <TableHead>
           <TableRow>
             <TableCell align="center" style={styles.cell}>
