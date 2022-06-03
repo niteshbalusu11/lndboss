@@ -6,6 +6,9 @@ export interface IElectronAPI {
   commandChartChainFees: (args: types.commandChartChainFees) => Promise<types.commandChartChainFeesReturn>;
   commandChartFeesEarned: (args: types.commandChartFeesEarned) => Promise<types.commandChartFeesEarnedReturn>;
   commandChartFeesPaid: (args: types.commandChartFeesPaid) => Promise<types.commandChartFeesPaidReturn>;
+  commandChartPaymentsReceived: (
+    args: types.commandChartPaymentsReceived
+  ) => Promise<types.commandChartPaymentsReceivedReturn>;
   credentialsCreate: (args: types.credentialsCreate) => Promise<types.createCredentialsReturn>;
   checkconnectionGet: () => Promise<types.checkConnectionReturn>;
   commandTags: (args: types.commandTags) => Promise<types.commandTagsReturn>;
