@@ -2,7 +2,7 @@
   "private": true,
   "name": "lndboss",
   "description": "Desktop Application for BalanceOfSatoshis",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "author": {
     "name": "Nitesh Balusu",
     "url": "https://twitter.com/nitesh_btc"
@@ -20,7 +20,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nextron",
-    "build": "nextron build --mac --win --x64 --arm64 --publish never",
+    "build": "nextron build --mac --win --x64 --arm64 --publish never --config electron-builder-dev.yml",
     "lint:check": "eslint \"{renderer,main}/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"{main,renderer}/**/*.{ts,tsx}\" --fix",
     "postinstall": "electron-builder install-app-deps",
