@@ -8,4 +8,13 @@ files:
     filter:
       - package.json
       - app
+mac:
+  target: dmg
+  category: public.app-category.productivity
+win:
+  target: nsis
+nsis:
+  differentialPackage: false
+dmg:
+  writeUpdateInfo: false
 publish: null
