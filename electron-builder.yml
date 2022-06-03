@@ -14,11 +14,10 @@ dmg:
 afterSign: notarize.js
 mac:
   category: public.app-category.productivity
-  target: dmg
-win:
-  target: nsis
 #  gatekeeperAssess: true
   target: [dmg, zip] # zip is required for auto-updating because of electron-userland/electron-builder#2199
   entitlements: ./entitlements.mac.plist
   entitlementsInherit: ./entitlements.mac.plist
   hardenedRuntime: true
+win:
+  target: nsis

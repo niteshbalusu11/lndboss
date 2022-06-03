@@ -44,6 +44,13 @@ yarn build
 
 ```
 
+## Authenticating
+
+- You will need base64 encoded Macaroon, TLS Cert and Socket to authenticate to LND.
+- Easiest way to obtain them is by running `bos credentials --cleartext --nospend` command on your node if you have [BalanceOfSatoshis](https://github.com/alexbosworth/balanceofsatoshis) installed.
+- Click Login inside the app and enter the values and click `Authenticate`, you will be prompted with a success dialog if connection is established.
+- After that simply go to the homepage and you should be able to start running commands.
+
 
 
 
