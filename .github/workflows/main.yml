@@ -17,6 +17,11 @@ jobs:
         os: [windows-latest, macOS-latest]
 
     steps:
+      - name: set git config
+        run: |
+          git config --global core.eol lf
+          git config --global core.autocrlf false
+
       - uses: actions/checkout@v1
 
       - name: setup nodejs
@@ -31,7 +36,7 @@ jobs:
         run: yarn
 
       - name: run prettier
-      - name: yarn run prettier
+      - run: yarn run prettier
 
       - name: electron build
         run: yarn release
