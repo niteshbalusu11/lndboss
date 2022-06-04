@@ -26,11 +26,11 @@ afterSign: notarize.js
 # mac config
 mac:
   category: public.app-category.productivity
-    target:
-      - target: dmg
-        arch:
-          - x64
-          - arm64
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
   entitlements: ./entitlements.mac.plist
   entitlementsInherit: ./entitlements.mac.plist
   hardenedRuntime: true
