@@ -35,9 +35,6 @@ jobs:
       - name: install dependencies
         run: yarn
 
-      - name: run prettier
-      - run: yarn run prettier
-
       - name: electron build
         run: yarn release
         env:

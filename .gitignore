@@ -7,5 +7,3 @@ out
 /test-results/
 /playwright-report/
 /playwright/.cache/
-entitlements.mac.plist
-notarize.js
