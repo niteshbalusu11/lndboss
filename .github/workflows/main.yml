@@ -36,7 +36,7 @@ jobs:
         run: yarn
 
       - name: run prettier
-      - run: yarn run prettier
+        run: yarn run prettier
 
       - name: electron build
         run: yarn release
