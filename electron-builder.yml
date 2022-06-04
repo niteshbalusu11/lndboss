@@ -26,6 +26,8 @@ afterSign: notarize.js
 # mac config
 mac:
   category: public.app-category.productivity
+  publish:
+    - github
   target:
     - target: dmg
       arch:
@@ -37,6 +39,8 @@ mac:
 
 # windows config
 win:
+  publish:
+    - github
   target:
     - target: nsis
       arch:
