@@ -37,5 +37,5 @@ jobs:
 
       - name: electron build
         run: yarn release
-        with:
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
