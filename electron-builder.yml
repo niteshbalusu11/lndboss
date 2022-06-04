@@ -2,8 +2,6 @@ appId: com.nitesh.balusu.lndboss
 
 productName: LND BOSS
 
-artifactName: LndBoss-${os}-${arch}-v${version}.${ext},
-
 directories:
   output: dist
   buildResources: resources

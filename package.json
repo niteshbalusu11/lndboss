@@ -22,11 +22,12 @@
     "dev": "nextron",
     "build:dev": "nextron build --win --mac --publish never --config electron-builder-dev.yml",
     "build:prod": "nextron build --win --mac --publish never",
+    "build:windows": "nextron build --win --publish never --config electron-builder-win.yml",
     "lint:check": "eslint \"{renderer,main}/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"{main,renderer}/**/*.{ts,tsx}\" --fix",
     "postinstall": "electron-builder install-app-deps",
     "prettier": "prettier --write \"{renderer,main}/**/*.{ts,tsx}\"",
-    "release": "nextron build --win --mac",
+    "release": "nextron build --mac",
     "test": "playwright test",
     "test:client": "playwright test tests/client",
     "test:server": "playwright test tests/server"

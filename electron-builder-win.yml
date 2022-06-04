@@ -11,26 +11,15 @@ files:
     filter:
       - package.json
       - app
-# dmg config
-dmg:
-  icon: false
-  sign: false
-  writeUpdateInfo: false
+
 # nsis config
 nsis:
   differentialPackage: false
 
-# mac config
-mac:
-  category: public.app-category.productivity
-  target:
-    - target: dmg
-      arch:
-        - x64
-        - arm64
-
-# windows config
+#windows config
 win:
+  publish:
+    - github
   target:
     - target: nsis
       arch:
