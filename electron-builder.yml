@@ -27,7 +27,10 @@ afterSign: notarize.js
 mac:
   category: public.app-category.productivity
   publish:
-    - github
+    provider: github
+    host: github.com
+    protocol: https
+    token: ${{ secrets.github_token }}
   target:
     - target: dmg
       arch:
