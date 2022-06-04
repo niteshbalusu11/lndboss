@@ -21,11 +21,12 @@
   "scripts": {
     "dev": "nextron",
     "build": "nextron build --mac --win --x64 --arm64 --publish never --config electron-builder-dev.yml",
+    "build:prod": "nextron build --mac --win --publish never --config electron-builder-dev.yml",
     "lint:check": "eslint \"{renderer,main}/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"{main,renderer}/**/*.{ts,tsx}\" --fix",
     "postinstall": "electron-builder install-app-deps",
     "prettier": "prettier --write \"{renderer,main}/**/*.{ts,tsx}\"",
-    "release": "nextron build --mac --win --x64 --arm64 --publish always",
+    "release": "nextron build --publish always",
     "test": "playwright test",
     "test:client": "playwright test tests/client",
     "test:server": "playwright test tests/server"
