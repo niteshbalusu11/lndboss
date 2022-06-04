@@ -40,6 +40,9 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         run: yarn
+      
+      - name: run prettier
+      - name: yarn run prettier
 
       - name: electron build
         run: yarn release
