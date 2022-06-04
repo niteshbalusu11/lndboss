@@ -1,5 +1,7 @@
 appId: com.nitesh.balusu.lndboss
 
+artifactName: LndBoss-${os}-${arch}-v${version}.${ext},
+
 productName: LND BOSS
 
 directories:
