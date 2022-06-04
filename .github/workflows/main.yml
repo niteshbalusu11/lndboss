@@ -1,4 +1,4 @@
-name: CI
+name: Build/release
 
 on:
   push:
@@ -6,15 +6,12 @@ on:
       - 'master'
 
 jobs:
-  test:
-    name: Run tests on ${{ matrix.os }}
+  release:
     runs-on: ${{ matrix.os }}
-    if: "!contains(github.event.head_commit.message, 'ci skip')"
 
     strategy:
       matrix:
-        node_version: [16.x]
-        os: [windows-latest]
+        os: [macos-latest, windows-latest]
 
     steps:
       - name: set git config
@@ -22,12 +19,13 @@ jobs:
           git config --global core.eol lf
           git config --global core.autocrlf false
 
-      - uses: actions/checkout@v1
+      - name: Check out Git repository
+        uses: actions/checkout@v1
 
-      - name: setup nodejs
+      - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node_version }}
+          node-version: 16
 
       - name: install yarn
         run: npm install -g yarn
@@ -35,7 +33,13 @@ jobs:
       - name: install dependencies
         run: yarn
 
-      - name: electron build
-        run: yarn release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build/release Electron app
+        uses: samuelmeuli/action-electron-builder@v1
+        with:
+          # GitHub token, automatically provided to the action
+          # (No need to define this secret in the repo settings)
+          github_token: ${{ secrets.github_token }}
+
+          # If the commit is tagged with a version (e.g. "v1.0.0"),
+          # release the app after building
+          release: ${{ startsWith(github.ref, 'refs/tags/v') }}

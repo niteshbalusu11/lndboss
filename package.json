@@ -20,7 +20,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nextron",
-    "build": "nextron build --mac --win --x64 --arm64 --publish never --config electron-builder-dev.yml",
+    "build:dev": "nextron build --mac --win --x64 --arm64 --publish never --config electron-builder-dev.yml",
     "build:prod": "nextron build --mac --win --publish never --config electron-builder-dev.yml",
     "lint:check": "eslint \"{renderer,main}/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"{main,renderer}/**/*.{ts,tsx}\" --fix",
