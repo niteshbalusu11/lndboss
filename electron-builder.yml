@@ -21,7 +21,7 @@ nsis:
   differentialPackage: false
 
 # notarize
-# afterSign: notarize.js
+afterSign: notarize.js
 
 # mac config
 mac:
@@ -33,11 +33,11 @@ mac:
       arch:
         - x64
         - arm64
-  # entitlements: ./entitlements.mac.plist
-  # entitlementsInherit: ./entitlements.mac.plist
-  # hardenedRuntime: true
+  entitlements: ./entitlements.mac.plist
+  entitlementsInherit: ./entitlements.mac.plist
+  hardenedRuntime: true
 
-# windows config
+windows config
 win:
   publish:
     - github
