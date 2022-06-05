@@ -42,6 +42,6 @@ win:
   publish:
     - github
   target:
-    - target: [nsis, zip]
+    - target: zip
       arch:
         - x64
