@@ -19,6 +19,14 @@ jobs:
         with:
           node-version: 16
 
+      - name: Retry script
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 8
+          max_attempts: 3
+          retry_on: error
+          command: yarn
+
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
         with:
