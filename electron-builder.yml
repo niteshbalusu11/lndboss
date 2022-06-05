@@ -42,6 +42,9 @@ win:
   publish:
     - github
   target:
-    - target: nsis
+    - target: [nsis, zip]
       arch:
         - x64
+
+nsis:
+  allowToChangeInstallationDirectory: true
