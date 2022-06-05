@@ -45,6 +45,3 @@ win:
     - target: [nsis, zip]
       arch:
         - x64
-
-nsis:
-  allowToChangeInstallationDirectory: true
