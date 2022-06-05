@@ -20,6 +20,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nextron",
+    "prebuild": "nextron build --nopack",
     "build:dev": "nextron build --win --mac --publish never --config electron-builder-dev.yml",
     "build:prod": "nextron build --win --mac --publish never",
     "build:windows": "nextron build --win --publish never --config electron-builder-win.yml",
@@ -67,6 +68,7 @@
     "ln-docker-daemons": "^2.2.11",
     "next": "^12.1.6",
     "nextron": "^8.1.0",
+    "niteshbalusu-nextron": "^8.2.0",
     "playwright": "^1.22.1",
     "prettier": "2.6.2",
     "react": "^18.1.0",
