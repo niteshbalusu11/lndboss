@@ -10,22 +10,6 @@ https://nodejs.dev/download
 npm install --global yarn
 ```
 
-## Development
-
-```
-# Clone the repository
-git clone https://github.com/niteshbalusu11/lndboss.git
-
-# Change directory
-cd lndboss
-
-# Install dependencies
-yarn
-
-# Start dev server
-yarn dev
-```
-
 ## Build from source
 
 ```
@@ -43,6 +27,22 @@ yarn build
 
 # Run the app
 yarn start
+```
+
+## Development
+
+```
+# Clone the repository
+git clone https://github.com/niteshbalusu11/lndboss.git
+
+# Change directory
+cd lndboss
+
+# Install dependencies
+yarn
+
+# Start dev server
+yarn dev
 ```
 
 ## Authenticating
