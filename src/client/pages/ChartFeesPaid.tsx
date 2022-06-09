@@ -7,6 +7,7 @@ import commands, { globalCommands } from '../commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
+import Link from 'next/link';
 
 const ChartFeesPaidCommand = commands.find(n => n.value === 'ChartFeesPaid');
 
@@ -99,20 +100,16 @@ const ChartFeesPaid = () => {
     setFormValues(newFormValues);
   };
 
-  const fetchData = async () => {
-    const flags: types.commandChartFeesPaid = {
-      days: !!days ? Number(days) : 60,
-      in: inNode,
-      is_most_fees_table: isMostFees,
-      is_most_forwarded_table: isMostForwarded,
-      is_network: isNetwork,
-      is_rebalances_only: isRebalances,
-      is_peer: isPeer,
-      nodes: formValues.map(n => n.node),
-      out: outNode,
-    };
-
-    // await window.electronAPI.createChildWindow(flags, 'result/ChartFeesPaidResult', 'ChartFeesPaidResult');
+  const flags: types.commandChartFeesPaid = {
+    days: !!days ? Number(days) : 60,
+    in: inNode,
+    is_most_fees_table: isMostFees,
+    is_most_forwarded_table: isMostForwarded,
+    is_network: isNetwork,
+    is_rebalances_only: isRebalances,
+    is_peer: isPeer,
+    nodes: formValues.map(n => n.node),
+    out: outNode,
   };
 
   return (
@@ -221,8 +218,12 @@ const ChartFeesPaid = () => {
               </>
             ))}
           </>
-          <SubmitButton variant="contained" onClick={fetchData}>
-            Run Command
+          <SubmitButton>
+            <Link href={{ pathname: '/result/ChartFeesPaidResult', query: flags }}>
+              <a target="_blank" style={{ color: 'white', textDecoration: 'none' }}>
+                Run Command
+              </a>
+            </Link>
           </SubmitButton>
         </Stack>
       </StartFlexBox>

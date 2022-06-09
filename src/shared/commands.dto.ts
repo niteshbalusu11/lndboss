@@ -78,6 +78,45 @@ export class chartFeesEarnedDto {
   via: string;
 }
 
+export class chartFeesPaidDto {
+  @Transform(({ value }) => toNumber(value))
+  @IsNumber()
+  days: number;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  in?: string;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsBoolean()
+  is_most_fees_table?: boolean;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsBoolean()
+  is_most_forwarded_table?: boolean;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsBoolean()
+  is_network?: boolean;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsBoolean()
+  is_peer?: boolean;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsBoolean()
+  is_rebalances_only?: boolean;
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsArray()
+  @IsOptional()
+  nodes: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  out?: string;
+}
+
 export class loginDto {
   @Transform(({ value }) => trim(value))
   @IsString()

@@ -4,6 +4,8 @@ import { CssBaseline, Stack } from '@mui/material';
 import Head from 'next/head';
 import React from 'react';
 import { StartFlexBox } from '../../standard_components';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 /*
   Renders the bos chart-chain-fees command output in chart format.
@@ -20,19 +22,46 @@ const styles = {
 };
 
 const ChartFeesPaidResult = () => {
+  const router = useRouter();
+
+  const query = {
+    days: router.query.days,
+    in: router.query.in,
+    is_most_fees_table: router.query.is_most_fees_table,
+    is_most_forwarded_table: router.query.is_most_forwarded_table,
+    is_network: router.query.is_network,
+    is_peer: router.query.is_peer,
+    is_rebalances_only: router.query.is_rebalances_only,
+    nodes: router.query.nodes,
+    out: router.query.out,
+  };
+
   const [data, setData] = React.useState({ data: [], title: '', description: '', rows: [] });
 
   React.useEffect(() => {
-    // window.electronAPI.passArgs(async (_event: any, flags: types.commandChartFeesPaid) => {
-    //   const { error, result } = await window.electronAPI.commandChartFeesPaid(flags);
-    //   if (!!error) {
-    //     window.alert(error);
-    //     return;
-    //   }
-    //   if (!!result) {
-    //     setData(result);
-    //   }
-    // });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8055/api/chart-fees-paid`, {
+          params: query,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        const { error, result } = await response.data;
+
+        if (!!error) {
+          window.alert(error);
+        }
+        if (!!result) {
+          setData(result);
+        }
+      } catch (error) {
+        window.alert(`Status: ${error.response.data.statusCode}\nMessage: ${error.response.data.message}`);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -49,5 +78,11 @@ const ChartFeesPaidResult = () => {
     </CssBaseline>
   );
 };
+
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}
 
 export default ChartFeesPaidResult;
