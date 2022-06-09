@@ -7,6 +7,7 @@ import commands, { globalCommands } from '../commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
+import Link from 'next/link';
 
 const ChartPaymentsReceivedCommand = commands.find(n => n.value === 'ChartPaymentsReceived');
 
@@ -65,17 +66,9 @@ const ChartPaymentsReceived = () => {
     setFormValues(newFormValues);
   };
 
-  const fetchData = async () => {
-    const flags: types.commandChartPaymentsReceived = {
-      days: !!days ? Number(days) : 60,
-      nodes: formValues.map(n => n.node),
-    };
-
-    // await window.electronAPI.createChildWindow(
-    //   flags,
-    //   'result/ChartPaymentsReceivedResult',
-    //   'ChartPaymentsReceivedResult'
-    // );
+  const flags: types.commandChartPaymentsReceived = {
+    days: !!days ? Number(days) : 60,
+    nodes: formValues.map(n => n.node),
   };
 
   return (
@@ -121,8 +114,12 @@ const ChartPaymentsReceived = () => {
               </>
             ))}
           </>
-          <SubmitButton variant="contained" onClick={fetchData}>
-            Run Command
+          <SubmitButton>
+            <Link href={{ pathname: '/result/ChartPaymentsReceivedResult', query: flags }}>
+              <a target="_blank" style={{ color: 'white', textDecoration: 'none' }}>
+                Run Command
+              </a>
+            </Link>
           </SubmitButton>
         </Stack>
       </StartFlexBox>

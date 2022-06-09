@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   env: {
     browser: true,
@@ -8,6 +10,7 @@ module.exports = {
     'standard',
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:@next/next/recommended',
   ],
   globals: {
     Atomics: 'readonly',
@@ -29,17 +32,18 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
-    'new-cap': 'off',
+    '@next/next/no-html-link-for-pages': ['error', path.join(__dirname, 'src/client/pages')],
+    'new-cap': 'error',
     'no-empty-pattern': 'off',
     'no-extra-boolean-cast': 'off',
     'no-control-regex': 'off',
     'no-useless-constructor': 'off',
-    'prefer-const': 'warn',
+    'prefer-const': 'error',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-useless-constructor': ['error'],
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['off'],
-    'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'off',
+    'react/react-in-jsx-scope': 'error',
+    'react/prop-types': 'error',
   },
 };

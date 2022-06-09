@@ -117,6 +117,17 @@ export class chartFeesPaidDto {
   out?: string;
 }
 
+export class chartPaymentsReceivedDto {
+  @Transform(({ value }) => toNumber(value))
+  @IsNumber()
+  days: number;
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsArray()
+  @IsOptional()
+  nodes: string[];
+}
+
 export class loginDto {
   @Transform(({ value }) => trim(value))
   @IsString()

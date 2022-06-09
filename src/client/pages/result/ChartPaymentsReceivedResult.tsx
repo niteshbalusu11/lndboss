@@ -4,6 +4,8 @@ import { ChartPaymentsReceivedOutput } from '../../output';
 import Head from 'next/head';
 import React from 'react';
 import { StartFlexBox } from '../../standard_components';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 /*
   Renders the bos chart-payments-received command output in chart format.
@@ -20,19 +22,39 @@ const styles = {
 };
 
 const ChartPaymentsReceivedResult = () => {
+  const router = useRouter();
+
+  const query = {
+    days: router.query.days,
+    nodes: router.query.nodes,
+  };
+
   const [data, setData] = React.useState({ data: [], title: '', description: '' });
 
   React.useEffect(() => {
-    // window.electronAPI.passArgs(async (_event: any, flags: types.commandChartPaymentsReceived) => {
-    //   const { error, result } = await window.electronAPI.commandChartPaymentsReceived(flags);
-    //   if (!!error) {
-    //     window.alert(error);
-    //     return;
-    //   }
-    //   if (!!result) {
-    //     setData(result);
-    //   }
-    // });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8055/api/chart-payments-received`, {
+          params: query,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        const { error, result } = await response.data;
+
+        if (!!error) {
+          window.alert(error);
+        }
+        if (!!result) {
+          setData(result);
+        }
+      } catch (error) {
+        window.alert(`Status: ${error.response.data.statusCode}\nMessage: ${error.response.data.message}`);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -48,5 +70,11 @@ const ChartPaymentsReceivedResult = () => {
     </CssBaseline>
   );
 };
+
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}
 
 export default ChartPaymentsReceivedResult;
