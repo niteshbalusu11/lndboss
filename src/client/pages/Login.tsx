@@ -88,7 +88,7 @@ const Login = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:3000/api/login', {
+      const response = await axios.post('http://localhost:8055/api/login', {
         headers: { 'Content-Type': 'application/json' },
         cert: flags.cert,
         is_default: flags.is_default,

@@ -36,7 +36,7 @@ const ChartFeesEarnedResult = () => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`http://localhost:3000/api/chart-fees-earned`, {
+      const response = await axios.get(`http://localhost:8055/api/chart-fees-earned`, {
         params: query,
         headers: {
           'Content-Type': 'application/json',

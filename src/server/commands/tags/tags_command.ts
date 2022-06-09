@@ -102,7 +102,6 @@ const tagsCommand = async (args: Args) => {
       ],
 
       // Get the current tags from the tag file
-      // Get the current tags from the tag file
       getTags: [
         'registerHomeDir',
         ({}, cbk: any) => {

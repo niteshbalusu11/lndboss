@@ -19,9 +19,9 @@ import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
 import { TagsOutput } from '../output';
+import axios from 'axios';
 import commands from '../commands';
 
-const stringify = (obj: any) => JSON.stringify(obj, null, 2);
 const TagsCommand = commands.find(n => n.value === 'Tags');
 
 /*
@@ -67,7 +67,7 @@ const Tags = () => {
   const [icon, setIcon] = useState('');
   const [tagType, setTagType] = React.useState('');
   const [tagName, setTagName] = React.useState('');
-  const [data, setData] = useState('');
+  const [data, setData] = useState(null);
 
   const handleAvoidChange = () => {
     setAvoid((previousState: boolean) => !previousState);
@@ -109,19 +109,30 @@ const Tags = () => {
   const fetchData = async () => {
     const flags: types.commandTags = {
       icon,
-      add: tagType === 'add' ? formValues.map(n => n.pubkey) : [],
+      add: tagType === 'add' ? formValues.map(n => n.pubkey) : '',
+      id: '',
       is_avoided: avoid,
-      remove: tagType === 'remove' ? formValues.map(n => n.pubkey) : [],
+      remove: tagType === 'remove' ? formValues.map(n => n.pubkey) : '',
       tag: tagName,
     };
 
-    // const { error, result } = await window.electronAPI.commandTags(flags);
-    // if (!!error) {
-    //   window.alert(error);
-    // }
-    // if (!!result) {
-    //   setData(stringify(result));
-    // }
+    try {
+      const response = await axios.get('http://localhost:8055/api/tags', {
+        params: flags,
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      const { error, result } = await response.data;
+      if (!!error) {
+        window.alert(error);
+      }
+
+      if (!!result) {
+        setData(result);
+      }
+    } catch (error) {
+      window.alert(`Status: ${error.response.data.statusCode}\nMessage: ${error.response.data.message}`);
+    }
   };
   return (
     <CssBaseline>

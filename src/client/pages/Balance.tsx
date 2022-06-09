@@ -80,7 +80,7 @@ const Balance = () => {
     };
 
     try {
-      const response = await axios.get('http://localhost:3000/api/balance', {
+      const response = await axios.get('http://localhost:8055/api/balance', {
         params: flags,
         headers: { 'Content-Type': 'application/json' },
       });
@@ -88,7 +88,6 @@ const Balance = () => {
 
       if (!!error) {
         window.alert(error);
-        return;
       }
 
       if (!!result) {

@@ -7,7 +7,7 @@ import React from 'react';
 */
 
 type Props = {
-  result: string;
+  result: [];
 };
 
 const styles = {
@@ -35,9 +35,7 @@ type Data = {
 };
 
 const TagsOutput = ({ result }: Props) => {
-  const data = JSON.parse(result);
-
-  const rows = data.map((n: Data) => createData(n.alias, n.id, n.nodes.join('\n')));
+  const rows = result.map((n: Data) => createData(n.alias, n.id, n.nodes.join('\n')));
   return (
     <TableContainer component={Paper} style={styles.table}>
       <Table sx={{ minWidth: 100 }} aria-label="simple table" id="tags">

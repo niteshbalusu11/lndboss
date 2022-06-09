@@ -125,11 +125,11 @@ export type commandChartPaymentsReceivedReturn = {
 // ========================Tags Command=====================================
 
 export type commandTags = {
-  add: string[];
+  add: string[] | string;
   icon?: string;
   id?: string;
   is_avoided?: boolean;
-  remove: string[];
+  remove: string[] | string;
   tag?: string;
 };
 

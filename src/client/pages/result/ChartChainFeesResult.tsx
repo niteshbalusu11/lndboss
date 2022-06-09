@@ -33,7 +33,7 @@ const ChartChainFeesResult = () => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`http://localhost:3000/api/chart-chain-fees`, {
+      const response = await axios.get(`http://localhost:8055/api/chart-chain-fees`, {
         params: query,
         headers: {
           'Content-Type': 'application/json',

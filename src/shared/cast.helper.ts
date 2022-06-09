@@ -18,12 +18,11 @@ export function toNumber(value: string): number {
   return newValue;
 }
 
-export function toNodes(value: string | string[] | undefined): string[] {
+export function toStringArray(value: string | string[] | undefined): string[] {
   const { isArray } = Array;
   const isString = n => typeof n === 'string';
-
   if (!value) {
-    return [''];
+    return [];
   }
 
   if (!!isArray(value)) {

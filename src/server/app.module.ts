@@ -5,6 +5,7 @@ import { ChartFeesEarnedModule } from './modules/chart-fees-earned/chart-fees-ea
 import { LndModule } from './modules/lnd/lnd.module';
 import { LoginModule } from './modules/login/login.module';
 import { Module } from '@nestjs/common';
+import { TagsModule } from './modules/tags/tags.module';
 import { ViewModule } from '~server/modules/view/view.module';
 
 @Module({
@@ -15,6 +16,7 @@ import { ViewModule } from '~server/modules/view/view.module';
     ChartFeesEarnedModule,
     LndModule,
     LoginModule,
+    TagsModule,
     ViewModule,
   ],
   controllers: [],

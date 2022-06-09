@@ -1,5 +1,5 @@
 import { IsArray, IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
-import { toBoolean, toNodes, toNumber, trim } from './cast.helper';
+import { toBoolean, toNumber, toStringArray, trim } from './cast.helper';
 
 import { Transform } from 'class-transformer';
 
@@ -49,7 +49,7 @@ export class chartChainFeesDto {
   @IsNumber()
   days: number;
 
-  @Transform(({ value }) => toNodes(value))
+  @Transform(({ value }) => toStringArray(value))
   @IsArray()
   @IsOptional()
   nodes: string[];
@@ -68,7 +68,7 @@ export class chartFeesEarnedDto {
   @IsBoolean()
   is_forwarded: boolean;
 
-  @Transform(({ value }) => toNodes(value))
+  @Transform(({ value }) => toStringArray(value))
   @IsArray()
   @IsOptional()
   nodes: string[];
@@ -97,4 +97,30 @@ export class loginDto {
   @Transform(({ value }) => trim(value))
   @IsString()
   socket: string;
+}
+
+export class tagsDto {
+  @Transform(({ value }) => toStringArray(value))
+  @IsArray()
+  add: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  icon: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  id: string;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsBoolean()
+  is_avoided: boolean;
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsArray()
+  remove: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  tag: string;
 }

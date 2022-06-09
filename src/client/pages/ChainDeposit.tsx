@@ -50,7 +50,7 @@ const ChainDeposit = () => {
     };
 
     try {
-      const response = await axios.get('http://localhost:3000/api/chain-deposit', {
+      const response = await axios.get('http://localhost:8055/api/chain-deposit', {
         params: flags,
         headers: { 'Content-Type': 'application/json' },
       });
