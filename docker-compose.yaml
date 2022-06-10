@@ -1,0 +1,6 @@
+services:
+  lndboss:
+    build: .
+    volumes:
+      - ~/.bosgui:/home/node/.bosgui
+    network_mode: "host"
