@@ -7,7 +7,7 @@ import commands, { globalCommands } from '../commands';
 
 import { BalanceOutput } from '../output';
 import Head from 'next/head';
-import axios from 'axios';
+import { axiosGet } from '~client/axios/axios';
 
 /*
   Renders the bos balance command
@@ -69,7 +69,7 @@ const Balance = () => {
   };
 
   const fetchData = async () => {
-    const flags: types.commandBalance = {
+    const query: types.commandBalance = {
       above: Number(above),
       below: Number(below),
       node,
@@ -79,22 +79,10 @@ const Balance = () => {
       is_onchain_only: isEnabled4,
     };
 
-    try {
-      const response = await axios.get('http://localhost:8055/api/balance', {
-        params: flags,
-        headers: { 'Content-Type': 'application/json' },
-      });
-      const { error, result } = await response.data;
+    const result = await axiosGet({ path: 'chain-deposit', query });
 
-      if (!!error) {
-        window.alert(error);
-      }
-
-      if (!!result) {
-        setData(result);
-      }
-    } catch (error) {
-      window.alert(error);
+    if (!!result) {
+      setData(result);
     }
   };
 

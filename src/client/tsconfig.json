@@ -16,6 +16,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../shared/types.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../shared/types.ts", "next.config.js"],
   "exclude": ["node_modules", ".next", "server/**/*.*"]
 }

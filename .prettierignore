@@ -1,1 +1,9 @@
 docker-compose.yaml
+yarn.lock
+package.json
+node_modules
+dist
+Dockerfile
+yarn-error.log
+LICENSE
+README.md

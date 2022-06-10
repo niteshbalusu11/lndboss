@@ -7,7 +7,7 @@ import commands, { globalCommands } from '../commands';
 
 import { ChainDepositOutput } from '../output';
 import Head from 'next/head';
-import axios from 'axios';
+import { axiosGet } from '~client/axios/axios';
 
 /*
   Renders the bos chain-deposit command
@@ -44,28 +44,15 @@ const ChainDeposit = () => {
   };
 
   const fetchData = async () => {
-    const flags: types.commandChainDeposit = {
+    const query: types.commandChainDeposit = {
       node,
       amount: Number(amount),
     };
 
-    try {
-      const response = await axios.get('http://localhost:8055/api/chain-deposit', {
-        params: flags,
-        headers: { 'Content-Type': 'application/json' },
-      });
-      const { error, result } = await response.data;
+    const result = await axiosGet({ path: 'chain-deposit', query });
 
-      if (!!error) {
-        window.alert(error);
-        return;
-      }
-
-      if (!!result) {
-        setData(result);
-      }
-    } catch (error) {
-      window.alert(error);
+    if (!!result) {
+      setData(result);
     }
   };
 

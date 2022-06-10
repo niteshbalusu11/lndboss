@@ -4,7 +4,7 @@ import { ChartPaymentsReceivedOutput } from '../../output';
 import Head from 'next/head';
 import React from 'react';
 import { StartFlexBox } from '../../standard_components';
-import axios from 'axios';
+import { axiosGet } from '~client/axios/axios';
 import { useRouter } from 'next/router';
 
 /*
@@ -33,24 +33,10 @@ const ChartPaymentsReceivedResult = () => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8055/api/chart-payments-received`, {
-          params: query,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+      const result = await axiosGet({ path: 'chart-payments-received', query });
 
-        const { error, result } = await response.data;
-
-        if (!!error) {
-          window.alert(error);
-        }
-        if (!!result) {
-          setData(result);
-        }
-      } catch (error) {
-        window.alert(`Status: ${error.response.data.statusCode}\nMessage: ${error.response.data.message}`);
+      if (!!result) {
+        setData(result);
       }
     };
 

@@ -5,6 +5,10 @@ import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '
 import Head from 'next/head';
 import axios from 'axios';
 import { createUseStyles } from 'react-jss';
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
+const { apiUrl } = publicRuntimeConfig;
 
 /*
   Renders the login page that takes in the macaroon, cert, and socket.
@@ -88,7 +92,9 @@ const Login = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:8055/api/login', {
+      const url = `${apiUrl}/login`;
+
+      const response = await axios.post(url, {
         headers: { 'Content-Type': 'application/json' },
         cert: flags.cert,
         is_default: flags.is_default,

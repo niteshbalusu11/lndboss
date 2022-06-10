@@ -19,7 +19,7 @@ import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
 import { TagsOutput } from '../output';
-import axios from 'axios';
+import { axiosGet } from '~client/axios/axios';
 import commands from '../commands';
 
 const TagsCommand = commands.find(n => n.value === 'Tags');
@@ -107,7 +107,7 @@ const Tags = () => {
   };
 
   const fetchData = async () => {
-    const flags: types.commandTags = {
+    const query: types.commandTags = {
       icon,
       add: tagType === 'add' ? formValues.map(n => n.pubkey) : '',
       id: '',
@@ -116,22 +116,10 @@ const Tags = () => {
       tag: tagName,
     };
 
-    try {
-      const response = await axios.get('http://localhost:8055/api/tags', {
-        params: flags,
-        headers: { 'Content-Type': 'application/json' },
-      });
+    const result = await axiosGet({ path: 'tags', query });
 
-      const { error, result } = await response.data;
-      if (!!error) {
-        window.alert(error);
-      }
-
-      if (!!result) {
-        setData(result);
-      }
-    } catch (error) {
-      window.alert(`Status: ${error.response.data.statusCode}\nMessage: ${error.response.data.message}`);
+    if (!!result) {
+      setData(result);
     }
   };
   return (
