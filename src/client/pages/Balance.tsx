@@ -79,7 +79,7 @@ const Balance = () => {
       is_onchain_only: isEnabled4,
     };
 
-    const result = await axiosGet({ path: 'chain-deposit', query });
+    const result = await axiosGet({ path: 'balance', query });
 
     if (!!result) {
       setData(result);
