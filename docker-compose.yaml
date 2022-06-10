@@ -3,4 +3,5 @@ services:
     build: .
     volumes:
       - ~/.bosgui:/home/node/.bosgui
-    network_mode: "host"
+    ports:
+      - "8055:8055"

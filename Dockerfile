@@ -7,9 +7,6 @@ ENV GROUP_ID=$GROUP_ID
 
 RUN apk add --no-cache --upgrade bash
 RUN apk add --no-cache git
-# RUN apk add --no-cache curl
-
-# RUN curl http://host.docker.internal:10009
 
 RUN git clone https://github.com/niteshbalusu11/lndboss.git
 
