@@ -17,6 +17,9 @@ lerna-debug.log*
 # Tests
 /coverage
 /.nyc_output
+/test-results/
+/playwright-report/
+/playwright/.cache/
 
 # IDEs and editors
 /.idea
@@ -33,3 +36,6 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+/test-results/
+/playwright-report/
+/playwright/.cache/

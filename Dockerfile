@@ -20,8 +20,6 @@ RUN mkdir /home/node/.bosgui
 RUN yarn install
 RUN yarn build
 
-ENV NODE_ENV production
-
 EXPOSE 8055
 
 CMD [ "yarn", "start:prod" ]
