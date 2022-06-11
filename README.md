@@ -26,7 +26,7 @@ yarn
 yarn build
 
 # Run the app
-yarn start
+yarn start:prod
 ```
 
 ## Development

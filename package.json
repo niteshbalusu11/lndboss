@@ -26,9 +26,10 @@
     "start:prod": "node dist/server/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "playwright test --headed",
-    "release": "standard-version",
-    "release:test": "standard-version --dry-run",
-    "release:minor": "standard-version --release-as minor",
+    "release": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
+    "release:patch": "standard-version --release-as patch",
+    "release:test": "standard-version --dry-run --release-as minor",
     "test:client": "playwright test tests/client",
     "test:server": "playwright test tests/server"
   },
