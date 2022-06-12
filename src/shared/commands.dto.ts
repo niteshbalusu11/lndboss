@@ -1,7 +1,16 @@
-import { IsArray, IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
+import { Transform, Type } from 'class-transformer';
 import { toBoolean, toNumber, toStringArray, trim } from './cast.helper';
 
-import { Transform } from 'class-transformer';
+export class authenticationDto {
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  accountName: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  password: string;
+}
 
 export class balanceDto {
   @Transform(({ value }) => toNumber(value))
@@ -128,7 +137,7 @@ export class chartPaymentsReceivedDto {
   nodes: string[];
 }
 
-export class loginDto {
+class credentials {
   @Transform(({ value }) => trim(value))
   @IsString()
   cert: string;
@@ -147,6 +156,11 @@ export class loginDto {
   @Transform(({ value }) => trim(value))
   @IsString()
   socket: string;
+}
+export class credentialsDto {
+  @ValidateNested()
+  @Type(() => credentials)
+  credentials: credentials;
 }
 
 export class tagsDto {
