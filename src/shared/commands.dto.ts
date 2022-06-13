@@ -160,7 +160,7 @@ class credentials {
 export class credentialsDto {
   @ValidateNested()
   @Type(() => credentials)
-  credentials: credentials;
+  postBody: credentials;
 }
 
 export class tagsDto {

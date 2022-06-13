@@ -74,7 +74,7 @@ const Authenticate = () => {
   };
 
   const handleEvents = async () => {
-    const credentials = {
+    const postBody = {
       cert,
       macaroon,
       socket,
@@ -87,7 +87,7 @@ const Authenticate = () => {
 
       const response = await axios.post(url, {
         headers: { 'Content-Type': 'application/json' },
-        credentials,
+        postBody,
       });
 
       const { connection, error, result } = await response.data;
