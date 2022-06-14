@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.3.0](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.2.1...v1.3.0) (2022-06-14)
 
-### [1.2.2](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.2.1...v1.2.2) (2022-06-14)
+- API to insert credentials is now secure
 
 ### [1.2.1](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.2.0...v1.2.1) (2022-06-14)
 
