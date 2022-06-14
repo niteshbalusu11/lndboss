@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.2.0](https://github.com/niteshbalusu11/nextronbosgui/compare/v2.0.0...v1.2.0) (2022-06-14)
 
+- Added Authentication using JWT Tokens
+- Updated all test cases to support Authentication
+- All API Routes of NestJS are now protected
+
 ## [1.1.0](https://github.com/niteshbalusu11/nextronbosgui/compare/v2.0.0...v1.1.0) (2022-06-14)
 
 ### 1.0.1 (2022-06-11)
