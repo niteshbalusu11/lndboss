@@ -1,7 +1,9 @@
 import { Controller, Get, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ViewService } from '~server/modules/view/view.service';
+import { Public } from '../../utils/constants';
 
+@Public()
 @Controller('/')
 export class ViewController {
   constructor(private viewService: ViewService) {}

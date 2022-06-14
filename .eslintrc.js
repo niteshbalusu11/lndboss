@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
 
 module.exports = {
@@ -33,6 +34,7 @@ module.exports = {
   plugins: ['react', '@typescript-eslint'],
   rules: {
     '@next/next/no-html-link-for-pages': ['error', path.join(__dirname, 'src/client/pages')],
+    '@typescript-eslint/no-non-null-assertion': 'off',
     'new-cap': 'error',
     'no-empty-pattern': 'off',
     'no-extra-boolean-cast': 'off',

@@ -1,10 +1,15 @@
 import { expect, test } from '@playwright/test';
+import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
 
 const BalanceCommand = commands.find(n => n.value === 'Balance');
 
 test.describe('Test the Balance command client page', async () => {
+  test.beforeEach(async ({ page }) => {
+    await setAccessToken({ page });
+  });
+
   test('Test the Balance command page and input values', async ({ page }) => {
     await page.goto('/Commands');
     await page.click('text=Balance');
@@ -28,5 +33,9 @@ test.describe('Test the Balance command client page', async () => {
     await expect(page.locator('text=InvalidPending')).toBeVisible();
 
     await page.click('text=home');
+  });
+
+  test.afterEach(async ({ page }) => {
+    await removeAccessToken({ page });
   });
 });

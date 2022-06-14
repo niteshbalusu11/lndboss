@@ -19,7 +19,7 @@ import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
 import { TagsOutput } from '../output';
-import { axiosGet } from '~client/axios/axios';
+import { axiosGet } from '~client/utils/axios';
 import commands from '../commands';
 
 const TagsCommand = commands.find(n => n.value === 'Tags');

@@ -1,10 +1,15 @@
 import { expect, test } from '@playwright/test';
+import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
 
 const ChartFeesEarnedCommand = commands.find(n => n.value === 'ChartFeesEarned');
 
 test.describe('Test the ChartFeesEarned command client page', async () => {
+  test.beforeEach(async ({ page }) => {
+    await setAccessToken({ page });
+  });
+
   test('test the ChartFeesEarned command page and input values', async ({ page }) => {
     await page.goto('/Commands');
     await page.click('text=Chart Fees Earned');
@@ -26,5 +31,9 @@ test.describe('Test the ChartFeesEarned command client page', async () => {
 
     await page.bringToFront();
     await page.click('text=home');
+  });
+
+  test.afterEach(async ({ page }) => {
+    await removeAccessToken({ page });
   });
 });

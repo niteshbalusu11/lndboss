@@ -22,7 +22,7 @@ const stringify = (data: any) => JSON.stringify(data);
     [out]: <Out Node Public Key or Alias String>
   }
 
-  @returns via cbk or Promise
+  @returns via Promise
   {
     data: [<Earned Fee Tokens Number>]
     description: <Chart Description String>

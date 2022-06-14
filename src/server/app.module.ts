@@ -1,29 +1,45 @@
+import { AppController } from './app.controller';
+import { AuthModule } from './modules/auth/auth.module';
 import { BalanceModule } from './modules/balance/balance.module';
 import { ChainDepositModule } from './modules/chain-deposit/chain-deposit.module';
 import { ChartChainFeesModule } from './modules/chart-chain-fees/chart-chain-fees.module';
 import { ChartFeesEarnedModule } from './modules/chart-fees-earned/chart-fees-earned.module';
 import { ChartFeesPaidModule } from './modules/chart-fees-paid/chart-fees-paid.module';
 import { ChartPaymentsReceivedModule } from './modules/chart-payments-received/chart-payments-received.module';
+import { ConfigModule } from '@nestjs/config';
+import { CredentialsModule } from './modules/credentials/credentials.module';
+import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
 import { LndModule } from './modules/lnd/lnd.module';
-import { LoginModule } from './modules/login/login.module';
 import { Module } from '@nestjs/common';
 import { TagsModule } from './modules/tags/tags.module';
 import { ViewModule } from '~server/modules/view/view.module';
 
+// App Module: Global Module for the entire application
+
 @Module({
   imports: [
+    AuthModule,
     BalanceModule,
     ChainDepositModule,
     ChartChainFeesModule,
     ChartFeesEarnedModule,
     ChartFeesPaidModule,
+    CredentialsModule,
     ChartPaymentsReceivedModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: ['.env', '.env.local'],
+    }),
     LndModule,
-    LoginModule,
     TagsModule,
     ViewModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AppController],
+  providers: [
+    {
+      provide: 'APP_GUARD',
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
 export class AppModule {}

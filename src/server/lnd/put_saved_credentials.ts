@@ -18,7 +18,7 @@ const stringify = (obj: any) => JSON.stringify(obj, null, 2);
     socket: <Node Socket String>
   }
 
-  @returns via cbk or Promise
+  @returns via Promise
   {
     result: <Did Write Credentials Bool>
     [error]: <Error String>

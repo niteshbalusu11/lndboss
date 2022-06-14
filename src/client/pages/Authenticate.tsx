@@ -43,18 +43,9 @@ const styles = createUseStyles({
     color: 'black',
     marginTop: '50px',
   },
-  sx: {
-    height: '100vh',
-    width: '100vw',
-    background: 'linear-gradient(200.96deg, #fedc2a -29.09%, #dd5789 51.77%, #7a2c9e 129.35%)',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'start',
-    flexGrow: 1,
-  },
 });
 
-const Login = () => {
+const Authenticate = () => {
   const [cert, setCert] = useState('');
   const [macaroon, setMacaroon] = useState('');
   const [nodeName, setNodeName] = useState('');
@@ -83,7 +74,7 @@ const Login = () => {
   };
 
   const handleEvents = async () => {
-    const flags = {
+    const postBody = {
       cert,
       macaroon,
       socket,
@@ -92,16 +83,13 @@ const Login = () => {
     };
 
     try {
-      const url = `${apiUrl}/login`;
+      const url = `${apiUrl}/credentials`;
 
       const response = await axios.post(url, {
         headers: { 'Content-Type': 'application/json' },
-        cert: flags.cert,
-        is_default: flags.is_default,
-        macaroon: flags.macaroon,
-        node: flags.node,
-        socket: flags.socket,
+        postBody,
       });
+
       const { connection, error, result } = await response.data;
 
       if (!!error) {
@@ -204,4 +192,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Authenticate;

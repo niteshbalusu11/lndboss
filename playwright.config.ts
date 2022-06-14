@@ -1,6 +1,8 @@
 import type { PlaywrightTestConfig } from '@playwright/test';
 import { devices } from '@playwright/test';
+import dotenv from 'dotenv';
 import { join } from 'path';
+
 const path = join(__dirname, './tests/utils');
 
 /**
@@ -12,6 +14,14 @@ const path = join(__dirname, './tests/utils');
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+
+// Read from default ".env" file.
+dotenv.config();
+
+// Alternatively, read from "../my.env" file.
+dotenv.config({ path: join(__dirname, '../.env') });
+dotenv.config({ path: join(__dirname, '../.env.local') });
+
 const config: PlaywrightTestConfig = {
   globalSetup: join(path, 'global-setup.ts'),
   globalTeardown: join(path, 'global-teardown.ts'),

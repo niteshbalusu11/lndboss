@@ -1,10 +1,15 @@
 import { expect, test } from '@playwright/test';
+import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
 
 const ChainDepositCommand = commands.find(n => n.value === 'ChainDeposit');
 
 test.describe('Test the ChainDeposit command client page', async () => {
+  test.beforeEach(async ({ page }) => {
+    await setAccessToken({ page });
+  });
+
   test('test the ChainDeposit command page and input values', async ({ page }) => {
     await page.goto('/Commands');
     await page.click('text=Chain Deposit');
@@ -18,5 +23,9 @@ test.describe('Test the ChainDeposit command client page', async () => {
 
     await expect(page.locator('#qrcode')).toBeVisible();
     await page.click('text=home');
+  });
+
+  test.afterEach(async ({ page }) => {
+    await removeAccessToken({ page });
   });
 });

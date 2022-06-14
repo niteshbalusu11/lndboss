@@ -3,6 +3,8 @@ import { chainDepositDto } from '~shared/commands.dto';
 
 import { ChainDepositService } from './chain-deposit.service';
 
+// Chain deposit controller: Handles routes to the chain deposit service
+
 @Controller('api/chain-deposit')
 export class ChainDepositController {
   constructor(private chainDepositService: ChainDepositService) {}

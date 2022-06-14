@@ -22,7 +22,7 @@ type Tasks = {
     [tokens]: <Tokens to Receive Number>
   }
 
-  @returns via cbk or Promise
+  @returns via Promise
   {
     url: <Deposit Address URL string>
   }

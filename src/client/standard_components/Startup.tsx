@@ -20,14 +20,14 @@ const styles: any = {
 const Startup = () => {
   useEffect(() => {
     const id = setTimeout(() => {
-      Router.push('/Commands');
+      Router.push('/auth/Login');
     }, 3000);
 
     return () => clearTimeout(id);
   }, []);
   return (
     <CssBaseline>
-      <video autoPlay style={styles.video}>
+      <video autoPlay muted style={styles.video}>
         <source src="/startup.mp4" type="video/mp4" id="startup_video" />
       </video>
     </CssBaseline>

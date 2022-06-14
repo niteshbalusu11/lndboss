@@ -1,10 +1,15 @@
 import { expect, test } from '@playwright/test';
+import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
 
 const TagsCommand = commands.find(n => n.value === 'Tags');
 
 test.describe('Test the Tags command client page', async () => {
+  test.beforeEach(async ({ page }) => {
+    await setAccessToken({ page });
+  });
+
   test('test the Tags command page and input values', async ({ page }) => {
     await page.goto('/Commands');
     // Tag type display
@@ -41,5 +46,9 @@ test.describe('Test the Tags command client page', async () => {
     await expect(page.locator('#tags')).toBeVisible();
 
     await page.click('text=home');
+  });
+
+  test.afterEach(async ({ page }) => {
+    await removeAccessToken({ page });
   });
 });
