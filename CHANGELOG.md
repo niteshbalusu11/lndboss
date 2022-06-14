@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.2.1](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.2.0...v1.2.1) (2022-06-14)
 
+- Fix a bug where adding credentials was failing
+
 ## [1.2.0](https://github.com/niteshbalusu11/nextronbosgui/compare/v2.0.0...v1.2.0) (2022-06-14)
 
 - Added Authentication using JWT Tokens
