@@ -2,43 +2,34 @@ import { CssBaseline, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { StandardButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components';
 
-import { createUseStyles } from 'react-jss';
+import Head from 'next/head';
+import Router from 'next/router';
+import getConfig from 'next/config';
 import { usePasswordValidation } from '~client/hooks/usePasswordValidation';
 
-const styles = createUseStyles({
+const { publicRuntimeConfig } = getConfig();
+const { apiUrl } = publicRuntimeConfig;
+
+const styles = {
   form: {
-    marginLeft: '20px',
+    marginLeft: '50px',
     marginTop: '100px',
-    width: '300px',
-  },
-  input: {
     width: '700px',
-    height: '110px',
-    marginBottom: '0px',
+  },
+  textField: {
+    width: '300px',
+    marginTop: '10px',
+  },
+  h4: {
     marginTop: '0px',
-  },
-  inputStyle: {
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    '&::placeholder': {
-      fontSize: '15px',
-      fontWeight: 'bold',
-      color: 'black',
-      opacity: '0.9',
-    },
-  },
-  h1: {
-    color: 'black',
-    marginTop: '50px',
   },
   ul: {
     fontWeight: 'bold',
   },
-});
+};
 
 const Register = () => {
-  const [accountName, setAccountName] = useState('');
+  const [username, setUserName] = useState('');
 
   const [password, setPassword] = useState({
     firstPassword: '',
@@ -46,7 +37,7 @@ const Register = () => {
   });
 
   const handleAccountNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAccountName(event.target.value);
+    setUserName(event.target.value);
   };
 
   const [validLength, hasNumber, upperCase, lowerCase, match, specialChar]: boolean[] = usePasswordValidation({
@@ -62,23 +53,51 @@ const Register = () => {
     setPassword({ ...password, secondPassword: event.target.value });
   };
 
-  const isDisabled = !validLength || !hasNumber || !upperCase || !lowerCase || !match || !specialChar || !accountName;
+  const isDisabled = !validLength || !hasNumber || !upperCase || !lowerCase || !match || !specialChar || !username;
 
-  const classes = styles();
+  const fetchData = async () => {
+    const url = `${apiUrl}/auth/register`;
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password: password.firstPassword,
+        }),
+      });
+
+      const result: boolean = await response.json();
+
+      if (!!result) {
+        window.alert('Account created successfully, you will be redirected to the login page.');
+        Router.push('/auth/Login');
+      } else {
+        window.alert('Failed to create account');
+      }
+    } catch (error) {
+      window.alert(`Status: ${error.response.status}\nMessage: ${error.response.data.message}`);
+    }
+  };
+
   return (
     <CssBaseline>
+      <Head>
+        <title>Balance</title>
+      </Head>
       <StartFlexBox>
         <StandardButtonLink destination="/auth/Login" label="Login" />
-        <Stack spacing="3" className={classes.form}>
+        <Stack spacing="3" style={styles.form}>
+          <h2>Register</h2>
           <TextField
             type="text"
             placeholder="Account Name"
             label="Account Name"
             id="accountName"
-            className={classes.input}
-            inputProps={{
-              className: classes.inputStyle,
-            }}
+            style={styles.textField}
             onChange={handleAccountNameChange}
           />
           <TextField
@@ -86,11 +105,8 @@ const Register = () => {
             placeholder="Password"
             label="Password"
             id="password"
-            className={classes.input}
+            style={styles.textField}
             onChange={setFirst}
-            inputProps={{
-              className: classes.inputStyle,
-            }}
           />
           <TextField
             type="password"
@@ -98,13 +114,10 @@ const Register = () => {
             label="Retype Password"
             id="retypePassword"
             onChange={setSecond}
-            className={classes.input}
-            inputProps={{
-              className: classes.inputStyle,
-            }}
+            style={styles.textField}
           />
           <div>
-            <ul className={classes.ul}>
+            <ul style={styles.ul}>
               <li>8 Characters: {!!validLength ? <span>✅</span> : <span>👎</span>}</li>
               <li>Has a Number: {!!hasNumber ? <span>✅</span> : <span>👎</span>}</li>
               <li>UpperCase: {!!upperCase ? <span>✅</span> : <span>👎</span>}</li>
@@ -113,7 +126,7 @@ const Register = () => {
               <li>Match: {!!match ? <span>✅</span> : <span>👎</span>}</li>
             </ul>
           </div>
-          <SubmitButton variant="contained" disabled={isDisabled}>
+          <SubmitButton variant="contained" disabled={isDisabled} onClick={fetchData}>
             Register
           </SubmitButton>
         </Stack>

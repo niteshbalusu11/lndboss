@@ -5,7 +5,7 @@ import { toBoolean, toNumber, toStringArray, trim } from './cast.helper';
 export class authenticationDto {
   @Transform(({ value }) => trim(value))
   @IsString()
-  accountName: string;
+  username: string;
 
   @Transform(({ value }) => trim(value))
   @IsString()
