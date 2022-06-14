@@ -87,13 +87,11 @@ const Authenticate = () => {
 
       const url = `${apiUrl}/credentials`;
 
-      const response = await axios.post(url, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        },
-        postBody,
-      });
+      const config = {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      };
+
+      const response = await axios.post(url, postBody, config);
 
       const { connection, error, result } = await response.data;
 

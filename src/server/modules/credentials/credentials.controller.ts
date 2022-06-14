@@ -1,5 +1,4 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { Public } from '~server/utils/constants';
 import { credentialsDto } from '~shared/commands.dto';
 import { CredentialsService } from './credentials.service';
 
@@ -9,9 +8,8 @@ import { CredentialsService } from './credentials.service';
 export class CredentialsController {
   constructor(private credentialsService: CredentialsService) {}
 
-  @Public()
   @Post()
   async credentials(@Body() args: credentialsDto) {
-    return this.credentialsService.post(args);
+    return await this.credentialsService.post(args);
   }
 }

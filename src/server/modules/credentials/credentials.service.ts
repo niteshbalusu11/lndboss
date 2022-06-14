@@ -21,9 +21,8 @@ import { credentialsDto } from '~shared/commands.dto';
 @Injectable()
 export class CredentialsService {
   async post(args: credentialsDto) {
-    const { postBody } = args;
-    const { result, error } = await putSavedCredentials(postBody);
-    const connection = await checkConnection({ node: postBody.node });
+    const { result, error } = await putSavedCredentials(args);
+    const connection = await checkConnection({ node: args.node });
     return { connection, error, result };
   }
 }
