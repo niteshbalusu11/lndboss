@@ -83,10 +83,15 @@ const Authenticate = () => {
     };
 
     try {
+      const accessToken = localStorage.getItem('accessToken');
+
       const url = `${apiUrl}/credentials`;
 
       const response = await axios.post(url, {
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
         postBody,
       });
 
