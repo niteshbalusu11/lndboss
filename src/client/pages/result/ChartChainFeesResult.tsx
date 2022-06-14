@@ -4,7 +4,7 @@ import { ChartChainFeesOutput } from '../../output';
 import Head from 'next/head';
 import React from 'react';
 import { StartFlexBox } from '../../standard_components';
-import { axiosGet } from '~client/axios/axios';
+import { axiosGet } from '~client/utils/axios';
 import { useRouter } from 'next/router';
 
 /*

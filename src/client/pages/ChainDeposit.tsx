@@ -7,7 +7,7 @@ import commands, { globalCommands } from '../commands';
 
 import { ChainDepositOutput } from '../output';
 import Head from 'next/head';
-import { axiosGet } from '~client/axios/axios';
+import { axiosGet } from '~client/utils/axios';
 
 /*
   Renders the bos chain-deposit command

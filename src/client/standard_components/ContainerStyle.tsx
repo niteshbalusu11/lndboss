@@ -13,7 +13,10 @@ const ContainerStyle = () => {
   return (
     <CssBaseline>
       <CenterFlexBox>
-        <StandardButtonLink label="Authenticate" destination="/Authenticate" />
+        <div style={{ width: '50px' }}>
+          <StandardButtonLink label="Authenticate" destination="/Authenticate" />
+          <StandardButtonLink label="Login" destination="/auth/Login" />
+        </div>
         <ResponsiveGrid gridArray={commands} />
       </CenterFlexBox>
     </CssBaseline>

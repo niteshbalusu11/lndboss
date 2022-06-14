@@ -4,6 +4,7 @@ import { StandardButtonLink, StartFlexBox, SubmitButton } from '~client/standard
 
 import Head from 'next/head';
 import Router from 'next/router';
+import axios from 'axios';
 import getConfig from 'next/config';
 import { usePasswordValidation } from '~client/hooks/usePasswordValidation';
 
@@ -59,18 +60,13 @@ const Register = () => {
     const url = `${apiUrl}/auth/register`;
 
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          password: password.firstPassword,
-        }),
+      const response = await axios.post(url, {
+        headers: { 'Content-Type': 'application/json' },
+        password: password.firstPassword,
+        username,
       });
 
-      const result: boolean = await response.json();
+      const result: boolean = await response.data;
 
       if (!!result) {
         window.alert('Account created successfully, you will be redirected to the login page.');

@@ -16,11 +16,13 @@ type ArgsPost = {
 const axiosGet = async ({ path, query }: ArgsGet) => {
   try {
     const url = `${apiUrl}/${path}`;
+    const accessToken = localStorage.getItem('accessToken');
 
     const response = await axios.get(url, {
       params: query,
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
       },
     });
 
@@ -28,12 +30,14 @@ const axiosGet = async ({ path, query }: ArgsGet) => {
 
     if (!!error) {
       window.alert(error);
+      window.close();
     }
     if (!!result) {
       return result;
     }
   } catch (error) {
     window.alert(`Status: ${error.response.data.statusCode}\nMessage: ${error.response.data.message}`);
+    window.close();
   }
 };
 

@@ -16,8 +16,9 @@ const getAccountInfo = async (): Promise<any> => {
       const path = join(...[homedir(), home, auth]);
 
       return readFile(path, (err: any, data: any) => {
+        // Ignore errors, the file may not exist
         if (!!err) {
-          return cbk([503, 'UnexpectedErrorReadingCredentialsFile', { err }]);
+          return cbk();
         }
 
         return cbk(null, data);

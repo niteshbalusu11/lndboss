@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
+
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { authenticationDto } from '~shared/commands.dto';
@@ -18,6 +19,12 @@ export class AuthService {
   }
 
   async registerUser(user: authenticationDto) {
+    const result = await this.usersService.isRegistered();
+
+    if (!!result) {
+      throw new HttpException('OnlyOneUserRegistrationIsAllowed', 401);
+    }
+
     return await this.usersService.register(user);
   }
 
