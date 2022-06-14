@@ -20,7 +20,7 @@
     "build:nest": "nest build",
     "build:next": "cd src/client && next build",
     "dev": "nest start --watch",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
     "start": "nest start",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/server/main",
