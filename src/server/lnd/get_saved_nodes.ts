@@ -11,7 +11,7 @@ const { parse } = JSON;
 
 /** Get saved nodes list
 
-  @returns via cbk or Promise
+  @returns via Promise
   {
     defaultSavedNode: <Default Saved Node String>
     savedNodes: <Saved Nodes Array>

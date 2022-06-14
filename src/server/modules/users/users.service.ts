@@ -6,8 +6,38 @@ import { authenticationDto } from '~shared/commands.dto';
 
 const { parse } = JSON;
 
-// This should be a real class/interface representing a user entity
-export type User = any;
+/**
+  Users Service: Handles requests from auth service
+  Register: Registers a new user
+  {
+    username: <Username String>
+    password: <Password String>
+  }
+  @returns via Promise
+  {
+    result: <Success Boolean>
+  }
+
+  findOne: Finds a user by username
+  {
+    username: <Username String>
+  }
+  @returns via Promise
+  {
+    result: <User Object>
+  }
+
+  isRegistered: Checks if a user is registered
+  @returns via Promise
+  {
+    result: <Success/Failure Boolean>
+  }
+ */
+
+export type UserInfo = {
+  username: string;
+  passwordHash: string;
+};
 
 @Injectable()
 export class UsersService {
@@ -20,7 +50,7 @@ export class UsersService {
     return result;
   }
 
-  async findOne(username: string): Promise<User | undefined> {
+  async findOne(username: string): Promise<UserInfo | undefined> {
     const result = await getAccountInfo();
 
     if (!result) {

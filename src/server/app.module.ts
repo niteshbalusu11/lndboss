@@ -14,6 +14,8 @@ import { Module } from '@nestjs/common';
 import { TagsModule } from './modules/tags/tags.module';
 import { ViewModule } from '~server/modules/view/view.module';
 
+// App Module: Global Module for the entire application
+
 @Module({
   imports: [
     AuthModule,

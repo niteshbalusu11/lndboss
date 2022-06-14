@@ -15,7 +15,7 @@ const stringify = (obj: any) => JSON.stringify(obj, null, 2);
     [node]: <Node Name String>
   }
 
-  @returns via cbk or Promise
+  @returns via Promise
   {
     cert: <Cert String>
     macaroon: <Macaroon String>

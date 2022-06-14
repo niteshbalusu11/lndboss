@@ -4,6 +4,12 @@ import { AuthService } from './auth.service';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 
+/*
+  Implementation of the local strategy, validate the user's credentials
+  Call the auth service to validate the user's credentials
+  If the user is valid, return the user's JWT
+*/
+
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private authService: AuthService) {

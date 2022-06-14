@@ -4,6 +4,8 @@ import { AuthService } from '~server/modules/auth/auth.service';
 import { authenticationDto } from '~shared/commands.dto';
 import { Public } from './utils/constants';
 
+// App Controller: Handles routes to the auth service
+
 @Controller()
 export class AppController {
   constructor(private authService: AuthService) {}

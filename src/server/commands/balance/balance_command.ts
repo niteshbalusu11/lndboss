@@ -17,7 +17,7 @@ const stringify = (data: any) => JSON.stringify(data);
     [is_offchain_only]: <Boolean>
     [is_onchain_only]: <Boolean>
   }
-  @returns via cbk or Promise
+  @returns via Promise
   {
     result: <Balance Object>
     error: <Error String>

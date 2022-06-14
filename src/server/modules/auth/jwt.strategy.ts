@@ -11,6 +11,8 @@ type Payload = {
   exp: number;
 };
 
+// Local strategy for JWT, validate the user's credentials
+
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {

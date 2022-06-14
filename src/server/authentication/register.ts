@@ -8,6 +8,19 @@ const auth = 'auth.json';
 const home = '.bosgui';
 const stringify = (obj: any) => JSON.stringify(obj, null, 2);
 
+/** Register a new user
+
+  {
+    username: <Username String>
+    password_hash: <Password Hash String>
+  }
+
+  @returns via Promise
+  {
+    result: <Did User Register Bool>
+  }
+*/
+
 type Args = {
   username: string;
   passwordHash: string;

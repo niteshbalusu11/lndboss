@@ -5,6 +5,31 @@ import { UsersService } from '../users/users.service';
 import { authenticationDto } from '~shared/commands.dto';
 import { compare } from 'bcrypt';
 
+/**
+  Validate User: Gets the user from the database and compares the password
+  {
+    username: string,
+    password: string
+  }
+  @returns Promise<boolean | undefined>
+
+  Register User: Creates a new user in the database, throws an error if inserting more than one user
+  {
+    user: <User Object>
+  }
+  @returns Promise<boolean>
+
+  Login User: Logs in a user and returns a JWT
+  {
+    username: string,
+    password: string
+  }
+  @returns via Promise
+  {
+    accessToken: string
+  }
+*/
+
 @Injectable()
 export class AuthService {
   constructor(private usersService: UsersService, private jwtService: JwtService) {}

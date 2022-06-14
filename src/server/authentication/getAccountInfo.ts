@@ -6,6 +6,14 @@ import { readFile } from 'fs';
 const auth = 'auth.json';
 const home = '.bosgui';
 
+/** Read account info from auth.json
+
+  @returns via Promise
+  {
+    result: <Account Info Object>
+  }
+*/
+
 type Tasks = {
   readFile: any;
 };

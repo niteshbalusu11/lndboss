@@ -7,6 +7,8 @@ import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from '../users/users.module';
 import { jwtConstants } from '../../utils/constants';
 
+// AuthModule: Module for the authentication service
+
 @Module({
   imports: [
     UsersModule,

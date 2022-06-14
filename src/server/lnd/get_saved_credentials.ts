@@ -1,7 +1,7 @@
 import { auto } from 'async';
-import { readFile } from 'fs';
 import { homedir } from 'os';
 import { join } from 'path';
+import { readFile } from 'fs';
 
 const home = '.bosgui';
 const credentials = 'credentials.json';
@@ -15,7 +15,7 @@ const stringify = (obj: any) => JSON.stringify(obj, null, 2);
     node: <Node Name String>
   }
 
-  @returns via cbk or Promise
+  @returns via Promise
   {
     [credentials]: {
       [cert]: <Base64 or Hex Serialized LND TLS Cert>
