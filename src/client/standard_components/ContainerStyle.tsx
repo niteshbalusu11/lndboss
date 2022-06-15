@@ -1,8 +1,8 @@
+import { PositionedMenu, ResponsiveGrid } from './index';
+
 import CenterFlexBox from './CenterFlexBox';
 import CssBaseline from '@mui/material/CssBaseline';
 import React from 'react';
-import ResponsiveAppBar from './PositionedMenu';
-import ResponsiveGrid from './ResponsiveGrid';
 import commands from '../commands';
 
 /*
@@ -13,7 +13,7 @@ const ContainerStyle = () => {
   return (
     <CssBaseline>
       <CenterFlexBox>
-        <ResponsiveAppBar />
+        <PositionedMenu />
         <ResponsiveGrid gridArray={commands} />
       </CenterFlexBox>
     </CssBaseline>

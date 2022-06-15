@@ -43,6 +43,17 @@ export class balanceDto {
   is_onchain_only: boolean;
 }
 
+export class certValidityDaysDto {
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  below: number;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  node: string;
+}
+
 export class chainDepositDto {
   @Transform(({ value }) => toNumber(value))
   @IsOptional()

@@ -27,10 +27,9 @@ test.describe('Test Tags command on the node.js side', async () => {
       icon: '❤️',
       is_avoided: true,
     };
-    const { result, error } = await tagsCommand(args);
+    const { result } = await tagsCommand(args);
     console.log(result);
     expect(result).toBeTruthy();
-    expect(error).toBe(undefined);
   });
 
   test('run tags command, print all tags', async () => {
@@ -38,9 +37,9 @@ test.describe('Test Tags command on the node.js side', async () => {
       add: [],
       remove: [],
     };
-    const { result, error } = await tagsCommand(args);
+    const { result } = await tagsCommand(args);
     console.log(result);
-    expect(error).toBe(undefined);
+
     expect(result).toBeTruthy();
   });
 
@@ -53,9 +52,9 @@ test.describe('Test Tags command on the node.js side', async () => {
       ],
       tag: 'testtag',
     };
-    const { result, error } = await tagsCommand(args);
+    const { result } = await tagsCommand(args);
     console.log(result);
-    expect(error).toBe(undefined);
+
     expect(result).toBeTruthy();
   });
 

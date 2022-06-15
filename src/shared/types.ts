@@ -1,28 +1,3 @@
-// ========================Credential Create Types=====================================
-
-export type credentialsCreate = {
-  cert: string;
-  macaroon: string;
-  node: string;
-  socket: string;
-  is_default: boolean;
-};
-
-export type createCredentialsReturn = {
-  connection: {
-    hasAccess: boolean;
-    error: string;
-  };
-  error: string;
-  result: boolean;
-};
-
-export type getSavedNodesReturn = {
-  defaultSavedNode: string | null;
-  error: string;
-  savedNodes: string[];
-};
-
 // ========================Balance Command=====================================
 
 export type commandBalance = {
@@ -35,18 +10,11 @@ export type commandBalance = {
   is_onchain_only?: boolean;
 };
 
-export type commandBalanceReturn = {
-  result: {
-    Balance: number;
-    ChannelBalance: number;
-    ClosingBalance: string;
-    ConflictedPending: string;
-    InvalidPending: string;
-    OffchainBalance: string;
-    OffchainPending: string;
-    OnchainBalance: string;
-  };
-  error?: string;
+// ========================Cert Validity Days=====================================
+
+export type commandCertValidityDays = {
+  below?: number;
+  node?: string;
 };
 
 // ========================Chain Deposit Command=====================================
@@ -56,24 +24,11 @@ export type commandChainDeposit = {
   amount?: number;
 };
 
-export type commandChainDepositReturn = {
-  result: {
-    address: string;
-    url: string;
-  };
-  error?: string;
-};
-
 // ========================Chart Chain Fees Command=====================================
 
 export type commandChartChainFees = {
   days: number;
   nodes: string[];
-};
-
-export type commandChartChainFeesReturn = {
-  result: any;
-  error?: string;
 };
 
 // ========================Chart Fees Earned Command=====================================
@@ -84,11 +39,6 @@ export type commandChartFeesEarned = {
   is_forwarded?: boolean;
   nodes?: string[];
   via?: string;
-};
-
-export type commandChartFeesEarnedReturn = {
-  result: any;
-  error?: string;
 };
 
 // ========================Chart Fees Paid Command=====================================
@@ -105,21 +55,11 @@ export type commandChartFeesPaid = {
   out?: string;
 };
 
-export type commandChartFeesPaidReturn = {
-  result: any;
-  error?: string;
-};
-
 // ========================Chart Payments Received Command=====================================
 
 export type commandChartPaymentsReceived = {
   days: number;
   nodes?: string[];
-};
-
-export type commandChartPaymentsReceivedReturn = {
-  result: any;
-  error?: string;
 };
 
 // ========================Tags Command=====================================
@@ -131,15 +71,4 @@ export type commandTags = {
   is_avoided?: boolean;
   remove: string[] | string;
   tag?: string;
-};
-
-export type commandTagsReturn = {
-  result: {
-    alias: string;
-    id: string;
-    icon?: string;
-    is_avoided?: boolean;
-    nodes?: string[];
-  }[];
-  error?: string;
 };

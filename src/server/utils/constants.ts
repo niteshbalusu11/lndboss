@@ -19,5 +19,5 @@ export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
 // These constants are for setting @Private() decorator
 
 export const jwtConstants = {
-  secret: !!isProduction ? process.env.JWT_SECRET_DEV : randomBytes(64).toString('hex'),
+  secret: !!isProduction ? randomBytes(64).toString('hex') : process.env.JWT_SECRET_DEV,
 };
