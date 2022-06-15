@@ -17,21 +17,17 @@ export type SpawnLightningType = {
 };
 
 const spawnLightning = async (): Promise<SpawnLightningType> => {
-  try {
-    const { cert, kill, macaroon, socket }: SpawnLightningType = await spawnLightningDocker({
-      chain_p2p_port: ports.chain_p2p_port,
-      chain_rpc_port: ports.chain_rpc_port,
-      chain_zmq_block_port: ports.chain_zmq_block_port,
-      chain_zmq_tx_port: ports.chain_zmq_tx_port,
-      generate_address: address,
-      lightning_p2p_port: ports.lightning_p2p_port,
-      lightning_rpc_port: ports.lightning_rpc_port,
-    });
+  const { cert, kill, macaroon, socket }: SpawnLightningType = await spawnLightningDocker({
+    chain_p2p_port: ports.chain_p2p_port,
+    chain_rpc_port: ports.chain_rpc_port,
+    chain_zmq_block_port: ports.chain_zmq_block_port,
+    chain_zmq_tx_port: ports.chain_zmq_tx_port,
+    generate_address: address,
+    lightning_p2p_port: ports.lightning_p2p_port,
+    lightning_rpc_port: ports.lightning_rpc_port,
+  });
 
-    return { cert, kill, macaroon, socket };
-  } catch (error) {
-    throw error;
-  }
+  return { cert, kill, macaroon, socket };
 };
 
 export default spawnLightning;

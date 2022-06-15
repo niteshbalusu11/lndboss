@@ -38,6 +38,14 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Cert Validity Days',
+    value: 'CertValidityDays',
+    description: 'Number of days until the cert is invalid',
+    flags: {
+      below: 'Below',
+    },
+  },
+  {
     args: {
       amount: 'Amount',
     },

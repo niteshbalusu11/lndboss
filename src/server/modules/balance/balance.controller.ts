@@ -8,6 +8,7 @@ import { BalanceService } from './balance.service';
 @Controller('api/balance')
 export class BalanceController {
   constructor(private balanceService: BalanceService) {}
+
   @Get()
   async balance(@Query() args: balanceDto) {
     return this.balanceService.get(args);

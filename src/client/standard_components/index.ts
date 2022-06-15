@@ -1,5 +1,6 @@
 import CenterFlexBox from './CenterFlexBox';
 import ContainerStyle from './ContainerStyle';
+import PositionedMenu from './PositionedMenu';
 import ResponsiveGrid from './ResponsiveGrid';
 import SavedNodes from './SavedNodes';
 import StandardButtonLink from './StandardButtonLink';
@@ -12,6 +13,7 @@ import SubmitButton from './SubmitButton';
 export {
   CenterFlexBox,
   ContainerStyle,
+  PositionedMenu,
   ResponsiveGrid,
   SavedNodes,
   StandardButtonLink,
