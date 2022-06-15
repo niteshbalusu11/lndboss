@@ -1,5 +1,6 @@
 import axios from 'axios';
 import getConfig from 'next/config';
+import { useNotify } from '~client/hooks/useNotify';
 const { publicRuntimeConfig } = getConfig();
 const { apiUrl } = publicRuntimeConfig;
 
@@ -26,18 +27,16 @@ const axiosGet = async ({ path, query }: ArgsGet) => {
       },
     });
 
-    const { error, result } = await response.data;
+    const { result } = await response.data;
 
-    if (!!error) {
-      window.alert(error);
-      window.close();
-    }
     if (!!result) {
       return result;
     }
   } catch (error) {
-    window.alert(`Status: ${error.response.data.statusCode}\nMessage: ${error.response.data.message}`);
-    window.close();
+    useNotify({
+      type: 'error',
+      message: `Status: ${error.response.data.statusCode}\nMessage: ${error.response.data.message}`,
+    });
   }
 };
 

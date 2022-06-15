@@ -1,6 +1,8 @@
 import * as request from 'balanceofsatoshis/commands/simple_request';
 import * as types from '../../../shared/types';
 
+import { HttpException, Logger } from '@nestjs/common';
+
 import { AuthenticatedLnd } from 'lightning';
 import { getChainFeesChart } from 'balanceofsatoshis/routing';
 
@@ -33,7 +35,8 @@ const chartChainFeesCommand = async (args: types.commandChartChainFees, lnd: Aut
 
     return { result };
   } catch (error) {
-    return { error: stringify(error) };
+    Logger.error(stringify(error));
+    throw new HttpException('UnexpectedErrorGettingInformation', 503);
   }
 };
 

@@ -21,11 +21,11 @@ import { balanceDto } from '~shared/commands.dto';
 
 @Injectable()
 export class BalanceService {
-  async get(args: balanceDto): Promise<{ result: any; error: string }> {
+  async get(args: balanceDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result, error } = await balanceCommand(args, lnd);
+    const { result } = await balanceCommand(args, lnd);
 
-    return { result, error };
+    return { result };
   }
 }

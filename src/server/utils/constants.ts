@@ -5,5 +5,5 @@ export const IS_PUBLIC_KEY = 'isPublic';
 export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
 
 export const jwtConstants = {
-  secret: randomBytes(64).toString('hex'),
+  secret: '123456' || randomBytes(64).toString('hex'),
 };

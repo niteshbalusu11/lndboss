@@ -1,5 +1,7 @@
 import * as types from '../../../shared/types';
 
+import { HttpException, Logger } from '@nestjs/common';
+
 import { AuthenticatedLnd } from 'lightning';
 import { getFeesChart } from 'balanceofsatoshis/routing';
 import { readFile } from 'fs';
@@ -36,7 +38,8 @@ const chartFeesEarnedCommand = async (args: types.commandChartFeesEarned, lnd: A
 
     return { result };
   } catch (error) {
-    return { error: stringify(error) };
+    Logger.error(stringify(error));
+    throw new HttpException('UnexpectedErrorGettingInformation', 503);
   }
 };
 

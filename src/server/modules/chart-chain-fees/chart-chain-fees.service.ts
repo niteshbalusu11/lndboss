@@ -22,11 +22,11 @@ import { chartChainFeesDto } from '~shared/commands.dto';
 
 @Injectable()
 export class ChartChainFeesService {
-  async get(args: chartChainFeesDto): Promise<{ result: any; error: string }> {
+  async get(args: chartChainFeesDto): Promise<{ result: any }> {
     const lnds = await LndService.getLnds({ nodes: args.nodes });
 
-    const { error, result } = await chartChainFeesCommand(args, lnds);
+    const { result } = await chartChainFeesCommand(args, lnds);
 
-    return { error, result };
+    return { result };
   }
 }

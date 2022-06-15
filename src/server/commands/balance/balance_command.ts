@@ -1,5 +1,6 @@
 import * as types from '../../../shared/types';
 
+import { HttpException, Logger } from '@nestjs/common';
 import { getBalance, getDetailedBalance } from 'balanceofsatoshis/balances';
 
 import { AuthenticatedLnd } from 'lightning';
@@ -59,7 +60,8 @@ const balanceCommand = async (args: types.commandBalance, lnd: AuthenticatedLnd)
 
     return { result };
   } catch (error) {
-    return { error: stringify(error) };
+    Logger.error(stringify(error));
+    throw new HttpException('UnexpectedErrorGettingInformation', 503);
   }
 };
 

@@ -16,11 +16,11 @@ import { chainDepositDto } from '~shared/commands.dto';
 
 @Injectable()
 export class ChainDepositService {
-  async get(args: chainDepositDto): Promise<{ result: any; error: string }> {
+  async get(args: chainDepositDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result, error } = await chainDepositCommand(args, lnd);
+    const { result } = await chainDepositCommand(args, lnd);
 
-    return { result, error };
+    return { result };
   }
 }

@@ -29,11 +29,11 @@ import { chartFeesPaidDto } from '~shared/commands.dto';
 
 @Injectable()
 export class ChartFeesPaidService {
-  async get(args: chartFeesPaidDto): Promise<{ result: any; error: string }> {
+  async get(args: chartFeesPaidDto): Promise<{ result: any }> {
     const lnds = await LndService.getLnds({ nodes: args.nodes });
 
-    const { error, result } = await chartFeesPaidCommand(args, lnds);
+    const { result } = await chartFeesPaidCommand(args, lnds);
 
-    return { error, result };
+    return { result };
   }
 }

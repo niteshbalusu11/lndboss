@@ -1,6 +1,7 @@
 import * as types from '../../../shared/types';
 
 import { AuthenticatedLnd, CreateChainAddressResult, createChainAddress } from 'lightning';
+import { HttpException, Logger } from '@nestjs/common';
 
 import { auto } from 'async';
 
@@ -59,7 +60,8 @@ const chainDepositCommand = async (args: types.commandChainDeposit, lnd: Authent
 
     return { result: result.url };
   } catch (error) {
-    return { error: stringify(error) };
+    Logger.error(stringify(error));
+    throw new HttpException('UnexpectedErrorGettingInformation', 503);
   }
 };
 

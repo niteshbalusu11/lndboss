@@ -55,6 +55,7 @@
     "dotenv": "^16.0.1",
     "lightning": "^5.16.2",
     "next": "^12.1.6",
+    "notiflix": "^3.2.5",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",

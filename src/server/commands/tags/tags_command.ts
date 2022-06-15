@@ -1,3 +1,4 @@
+import { HttpException, Logger } from '@nestjs/common';
 import { mkdir, readFile, writeFile } from 'fs';
 
 import { auto } from 'async';
@@ -231,7 +232,8 @@ const tagsCommand = async (args: Args) => {
 
     return { result: result.result.tags };
   } catch (error) {
-    return { error: stringify(error) };
+    Logger.error(stringify(error));
+    throw new HttpException('UnexpectedErrorGettingInformation', 503);
   }
 };
 
