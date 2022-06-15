@@ -6,6 +6,7 @@ import Head from 'next/head';
 import Router from 'next/router';
 import axios from 'axios';
 import getConfig from 'next/config';
+import { useNotify } from '~client/hooks/useNotify';
 import { usePasswordValidation } from '~client/hooks/usePasswordValidation';
 
 const { publicRuntimeConfig } = getConfig();
@@ -69,13 +70,16 @@ const Register = () => {
       const result: boolean = await response.data;
 
       if (!!result) {
-        window.alert('Account created successfully, you will be redirected to the login page.');
         Router.push('/auth/Login');
+        useNotify({ type: 'success', message: 'Account created successfully' });
       } else {
-        window.alert('Failed to create account');
+        useNotify({ type: 'error', message: 'Failed to create account' });
       }
     } catch (error) {
-      window.alert(`Status: ${error.response.status}\nMessage: ${error.response.data.message}`);
+      useNotify({
+        type: 'error',
+        message: `Status: ${error.response.status}\nMessage: ${error.response.data.message}`,
+      });
     }
   };
 

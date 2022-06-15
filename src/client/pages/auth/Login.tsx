@@ -6,6 +6,7 @@ import Router from 'next/router';
 import axios from 'axios';
 import { createUseStyles } from 'react-jss';
 import getConfig from 'next/config';
+import { useNotify } from '~client/hooks/useNotify';
 
 const { publicRuntimeConfig } = getConfig();
 const { apiUrl } = publicRuntimeConfig;
@@ -73,6 +74,7 @@ const Login = () => {
       localStorage.setItem('accessToken', data.accessToken);
 
       Router.push('/Commands');
+      useNotify({ type: 'success', message: 'Successfully logged in' });
     } catch (error) {
       window.alert(`Status: ${error.response.status}\nMessage: ${error.response.data.message}`);
     }

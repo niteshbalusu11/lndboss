@@ -1,4 +1,4 @@
-import { Alert, CssBaseline, Dialog, FormControlLabel, Stack, TextField } from '@mui/material';
+import { CssBaseline, FormControlLabel, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
 
@@ -6,6 +6,7 @@ import Head from 'next/head';
 import axios from 'axios';
 import { createUseStyles } from 'react-jss';
 import getConfig from 'next/config';
+import { useNotify } from '~client/hooks/useNotify';
 
 const { publicRuntimeConfig } = getConfig();
 const { apiUrl } = publicRuntimeConfig;
@@ -50,8 +51,6 @@ const Authenticate = () => {
   const [macaroon, setMacaroon] = useState('');
   const [nodeName, setNodeName] = useState('');
   const [socket, setSocket] = useState('');
-  const [successDialog, setSuccessDialog] = useState(false);
-  const [failureDialog, setFailureDialog] = useState(false);
   const [defaultNode, setDefaultNode] = useState(true);
 
   const classes = styles();
@@ -96,27 +95,19 @@ const Authenticate = () => {
       const { connection, error, result } = await response.data;
 
       if (!!error) {
-        setFailureDialog(true);
+        useNotify({ type: 'error', message: 'Failed to connect to LND' });
       }
 
       if (!result || !!connection.error) {
-        setFailureDialog(true);
+        useNotify({ type: 'error', message: 'Failed to connect to LND' });
       }
 
       if (!!result && !!connection.hasAccess) {
-        setSuccessDialog(true);
+        useNotify({ type: 'success', message: 'Credentials saved and Authenticated to LND! 🚀' });
       }
     } catch (error) {
       window.alert(error);
     }
-  };
-
-  const handleSuccessClick = () => {
-    setSuccessDialog(!successDialog);
-  };
-
-  const handleFailureClick = () => {
-    setFailureDialog(!failureDialog);
   };
 
   return (
@@ -180,16 +171,6 @@ const Authenticate = () => {
             Authenticate
           </SubmitButton>
         </Stack>
-        <Dialog open={successDialog} id="loginsuccess" onClose={handleSuccessClick}>
-          <Alert severity="success" id="loginsuccess">
-            Credentials saved and Authenticated to LND! 🚀
-          </Alert>
-        </Dialog>
-        <Dialog open={failureDialog} id="loginerror" onClose={handleFailureClick}>
-          <Alert severity="error" id="loginerror">
-            Failed to connect to LND!
-          </Alert>
-        </Dialog>
       </StartFlexBox>
     </CssBaseline>
   );
