@@ -3,6 +3,7 @@ import { expect, test } from '@playwright/test';
 test.describe('Test the login page and check authentication', async () => {
   test('Test the login page and input values', async ({ page }) => {
     await page.goto('/Commands');
+    await page.click('text=Menu');
     await page.click('text=Authenticate');
     await expect(page).toHaveTitle('Authentication');
     await page.type('#node', 'testnode');

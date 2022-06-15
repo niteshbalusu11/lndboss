@@ -88,6 +88,7 @@ const Login = () => {
       <StartFlexBox>
         <StandardButtonLink destination="/auth/Register" label="Register" />
         <Stack spacing="3" className={classes.form}>
+          <h2>Login</h2>
           <TextField
             type="text"
             placeholder="Account Name"

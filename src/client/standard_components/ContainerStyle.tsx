@@ -1,8 +1,8 @@
 import CenterFlexBox from './CenterFlexBox';
 import CssBaseline from '@mui/material/CssBaseline';
 import React from 'react';
+import ResponsiveAppBar from './PositionedMenu';
 import ResponsiveGrid from './ResponsiveGrid';
-import StandardButtonLink from './StandardButtonLink';
 import commands from '../commands';
 
 /*
@@ -13,10 +13,7 @@ const ContainerStyle = () => {
   return (
     <CssBaseline>
       <CenterFlexBox>
-        <div style={{ width: '50px' }}>
-          <StandardButtonLink label="Authenticate" destination="/Authenticate" />
-          <StandardButtonLink label="Login" destination="/auth/Login" />
-        </div>
+        <ResponsiveAppBar />
         <ResponsiveGrid gridArray={commands} />
       </CenterFlexBox>
     </CssBaseline>
