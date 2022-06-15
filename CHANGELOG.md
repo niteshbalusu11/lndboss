@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.4.0](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.3.0...v1.4.0) (2022-06-15)
 
+- All API Errors are logged to the console
+- Custom alerts for success and failures
+
 ## [1.3.0](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.2.1...v1.3.0) (2022-06-14)
 
 - API to insert credentials is now secure
