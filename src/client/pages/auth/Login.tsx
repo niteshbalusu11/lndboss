@@ -76,7 +76,10 @@ const Login = () => {
       Router.push('/Commands');
       useNotify({ type: 'success', message: 'Successfully logged in' });
     } catch (error) {
-      window.alert(`Status: ${error.response.status}\nMessage: ${error.response.data.message}`);
+      useNotify({
+        type: 'error',
+        message: `Status: ${error.response.status}\nMessage: ${error.response.data.message}`,
+      });
     }
   };
 
