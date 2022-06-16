@@ -3,10 +3,11 @@ import { readFile, readdirSync } from 'fs';
 import { auto } from 'async';
 import { homedir } from 'os';
 import { join } from 'path';
+import { logger } from '~server/utils/global_functions';
 
 const home = '.bosgui';
 const config = 'config.json';
-const stringify = (obj: any) => JSON.stringify(obj, null, 2);
+
 const { parse } = JSON;
 
 /** Get saved nodes list
@@ -65,7 +66,7 @@ const getSavedNodes = async () => {
     });
     return { defaultSavedNode: result.getDefaultSavedNode, savedNodes: result.getSavedNodes };
   } catch (error) {
-    return { error: stringify(error) };
+    logger({ error });
   }
 };
 

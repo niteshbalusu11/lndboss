@@ -1,9 +1,9 @@
-import { HttpException, Logger } from '@nestjs/common';
 import { mkdir, readFile, writeFile } from 'fs';
 
 import { auto } from 'async';
 import { homedir } from 'os';
 import { join } from 'path';
+import { logger } from '~server/utils/global_functions';
 import { randomBytes } from 'crypto';
 
 const defaultTagsFile = { tags: [] };
@@ -232,8 +232,7 @@ const tagsCommand = async (args: Args) => {
 
     return { result: result.result.tags };
   } catch (error) {
-    Logger.error(stringify(error));
-    throw new HttpException('UnexpectedErrorGettingInformation', 503);
+    logger({ error });
   }
 };
 

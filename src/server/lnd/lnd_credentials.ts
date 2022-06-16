@@ -2,12 +2,12 @@ import { auto } from 'async';
 import getSavedCredentials from './get_saved_credentials';
 import { homedir } from 'os';
 import { join } from 'path';
+import { logger } from '~server/utils/global_functions';
 import { readFile } from 'fs';
 
 const config = 'config.json';
 const home = '.bosgui';
 const { parse } = JSON;
-const stringify = (obj: any) => JSON.stringify(obj, null, 2);
 
 /** LND credentials
 
@@ -103,7 +103,7 @@ const lndCredentials = async (args: Args) => {
     });
     return { cert: result.credentials.cert, macaroon: result.credentials.macaroon, socket: result.credentials.socket };
   } catch (error) {
-    return { error: stringify(error) };
+    logger({ error });
   }
 };
 

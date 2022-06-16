@@ -106,7 +106,7 @@ const Authenticate = () => {
         useNotify({ type: 'success', message: 'Credentials saved and Authenticated to LND! 🚀' });
       }
     } catch (error) {
-      window.alert(error);
+      useNotify({ type: 'error', message: 'Failed to connect to LND' });
     }
   };
 

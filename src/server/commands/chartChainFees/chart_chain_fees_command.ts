@@ -1,12 +1,9 @@
 import * as request from 'balanceofsatoshis/commands/simple_request';
 import * as types from '../../../shared/types';
 
-import { HttpException, Logger } from '@nestjs/common';
-
 import { AuthenticatedLnd } from 'lightning';
 import { getChainFeesChart } from 'balanceofsatoshis/routing';
-
-const stringify = (data: any) => JSON.stringify(data);
+import { logger } from '~server/utils/global_functions';
 
 /** Get Blockchain fees paid
 
@@ -35,8 +32,7 @@ const chartChainFeesCommand = async (args: types.commandChartChainFees, lnd: Aut
 
     return { result };
   } catch (error) {
-    Logger.error(stringify(error));
-    throw new HttpException('UnexpectedErrorGettingInformation', 503);
+    logger({ error });
   }
 };
 

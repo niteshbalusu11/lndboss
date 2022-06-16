@@ -3,6 +3,7 @@ import { mkdir, writeFile } from 'fs';
 import { auto } from 'async';
 import { homedir } from 'os';
 import { join } from 'path';
+import { logger } from '~server/utils/global_functions';
 
 const credentials = 'credentials.json';
 const home = '.bosgui';
@@ -122,7 +123,7 @@ const putSavedCredentials = async (args: Args) => {
     });
     return { result: result.writeCredentials };
   } catch (error) {
-    return { error: stringify(error) };
+    logger({ error });
   }
 };
 

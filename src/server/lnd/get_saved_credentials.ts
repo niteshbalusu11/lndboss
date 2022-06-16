@@ -1,13 +1,13 @@
 import { auto } from 'async';
 import { homedir } from 'os';
 import { join } from 'path';
+import { logger } from '~server/utils/global_functions';
 import { readFile } from 'fs';
 
 const home = '.bosgui';
 const credentials = 'credentials.json';
 const { isArray } = Array;
 const { parse } = JSON;
-const stringify = (obj: any) => JSON.stringify(obj, null, 2);
 
 /** Get saved credentials for node
 
@@ -157,7 +157,7 @@ const getSavedCredentials = async ({ node }) => {
       socket: result.credentials.credentials.socket,
     };
   } catch (error) {
-    return { error: stringify(error) };
+    logger({ error });
   }
 };
 

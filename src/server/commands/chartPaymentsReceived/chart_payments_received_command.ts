@@ -1,11 +1,8 @@
 import * as types from '../../../shared/types';
 
-import { HttpException, Logger } from '@nestjs/common';
-
 import { AuthenticatedLnd } from 'lightning';
 import { getReceivedChart } from 'balanceofsatoshis/wallets';
-
-const stringify = (obj: any) => JSON.stringify(obj);
+import { logger } from '~server/utils/global_functions';
 
 /** Get data for received payments chart
 
@@ -30,8 +27,7 @@ const chartPaymentsReceivedCommand = async (args: types.commandChartPaymentsRece
     });
     return { result };
   } catch (error) {
-    Logger.error(stringify(error));
-    throw new HttpException('UnexpectedErrorGettingInformation', 503);
+    logger({ error });
   }
 };
 

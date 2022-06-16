@@ -1,13 +1,12 @@
 import * as types from '../../../shared/types';
 
-import { HttpException, Logger } from '@nestjs/common';
 import { getBalance, getDetailedBalance } from 'balanceofsatoshis/balances';
 
 import { AuthenticatedLnd } from 'lightning';
+import { logger } from '~server/utils/global_functions';
 
 const parseAnsi = (n: string) =>
   n.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
-const stringify = (data: any) => JSON.stringify(data);
 
 /** Get on-chain and off-chain balances
   {
@@ -60,8 +59,7 @@ const balanceCommand = async (args: types.commandBalance, lnd: AuthenticatedLnd)
 
     return { result };
   } catch (error) {
-    Logger.error(stringify(error));
-    throw new HttpException('UnexpectedErrorGettingInformation', 503);
+    logger({ error });
   }
 };
 

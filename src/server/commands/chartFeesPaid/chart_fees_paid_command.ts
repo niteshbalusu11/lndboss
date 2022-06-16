@@ -1,12 +1,9 @@
 import * as types from '../../../shared/types';
 
-import { HttpException, Logger } from '@nestjs/common';
-
 import { AuthenticatedLnd } from 'lightning';
 import { getFeesPaid } from 'balanceofsatoshis/routing';
+import { logger } from '~server/utils/global_functions';
 import { readFile } from 'fs';
-
-const stringify = (data: any) => JSON.stringify(data);
 
 /** Get routing fees paid
 
@@ -49,8 +46,7 @@ const chartFeesPaidCommand = async (args: types.commandChartFeesPaid, lnd: Authe
 
     return { result };
   } catch (error) {
-    Logger.error(stringify(error));
-    throw new HttpException('UnexpectedErrorGettingInformation', 503);
+    logger({ error });
   }
 };
 

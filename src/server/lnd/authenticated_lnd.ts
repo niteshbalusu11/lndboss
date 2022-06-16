@@ -2,8 +2,7 @@ import { AuthenticatedLnd, authenticatedLndGrpc } from 'lightning';
 
 import { auto } from 'async';
 import lndCredentials from './lnd_credentials';
-
-const stringify = (obj: any) => JSON.stringify(obj, null, 2);
+import { logger } from '~server/utils/global_functions';
 
 /** Authenticated LND
 
@@ -53,7 +52,7 @@ const authenticatedLnd = async ({ node }: { node?: string }) => {
     const { lnd } = result.lnd;
     return { lnd };
   } catch (error) {
-    return { error: stringify(error) };
+    logger({ error });
   }
 };
 

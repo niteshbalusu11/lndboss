@@ -4,6 +4,7 @@ import { Button, Menu, MenuItem } from '@mui/material';
 
 import Link from 'next/link';
 import { purple } from '@mui/material/colors';
+import { useNotify } from '~client/hooks/useNotify';
 
 // Menu button on the commands page
 
@@ -35,6 +36,7 @@ const PositionedMenu = () => {
   const handleLogout = () => {
     setAnchorEl(null);
     localStorage.removeItem('accessToken');
+    useNotify({ type: 'info', message: 'Logged out successfully' });
   };
 
   return (

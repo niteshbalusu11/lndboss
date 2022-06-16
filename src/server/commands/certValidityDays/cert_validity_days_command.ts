@@ -2,6 +2,7 @@ import { HttpException, Logger } from '@nestjs/common';
 import { certExpiration, pemAsDer } from 'balanceofsatoshis/encryption';
 
 import { lndCredentials } from '~server/lnd';
+import { logger } from '~server/utils/global_functions';
 
 const base64AsString = base64 => Buffer.from(base64, 'base64').toString();
 const bufferAsHex = buffer => buffer.toString('hex');
@@ -27,7 +28,7 @@ const certValidityDaysCommand = async ({ below, node }) => {
     const credentials = await lndCredentials({ node });
 
     const pem = base64AsString(credentials.cert);
-    console.log(pem);
+
     const cert = bufferAsHex(pemAsDer({ pem }).der);
 
     const expiryDate: any = new Date(certExpiration({ cert }).expires_at);
@@ -40,8 +41,7 @@ const certValidityDaysCommand = async ({ below, node }) => {
 
     return { result: round(days) };
   } catch (error) {
-    Logger.error(stringify(error));
-    throw new HttpException('UnexpectedErrorGettingInformation', 503);
+    logger({ error });
   }
 };
 

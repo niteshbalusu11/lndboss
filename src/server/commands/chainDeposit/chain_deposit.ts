@@ -1,13 +1,12 @@
 import * as types from '../../../shared/types';
 
 import { AuthenticatedLnd, CreateChainAddressResult, createChainAddress } from 'lightning';
-import { HttpException, Logger } from '@nestjs/common';
 
 import { auto } from 'async';
+import { logger } from '~server/utils/global_functions';
 
 const bigTok = (tokens: number) => (!tokens ? '0' : (tokens / 1e8).toFixed(8));
 const format = 'p2wpkh';
-const stringify = (data: any) => JSON.stringify(data);
 
 type Tasks = {
   validate: undefined;
@@ -60,8 +59,7 @@ const chainDepositCommand = async (args: types.commandChainDeposit, lnd: Authent
 
     return { result: result.url };
   } catch (error) {
-    Logger.error(stringify(error));
-    throw new HttpException('UnexpectedErrorGettingInformation', 503);
+    logger({ error });
   }
 };
 
