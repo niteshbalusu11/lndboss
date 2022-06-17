@@ -36,10 +36,10 @@ test.describe('Test Balance command on the node.js side', async () => {
       is_detailed: true,
       node: '',
     };
-    const { result, error } = await balanceCommand(args, lightning.lnd);
+    const { result } = await balanceCommand(args, lightning.lnd);
 
     console.log('balance----', result);
-    expect(error).toBe(undefined);
+
     expect(result).toBeTruthy();
   });
 

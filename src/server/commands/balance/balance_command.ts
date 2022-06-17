@@ -23,7 +23,7 @@ const parseAnsi = (n: string) =>
     error: <Error String>
   }
 */
-const balanceCommand = async (args: types.commandBalance, lnd: AuthenticatedLnd) => {
+const balanceCommand = async (args: types.commandBalance, lnd: AuthenticatedLnd): Promise<{ result: any }> => {
   try {
     if (!!args.is_detailed) {
       const detailed = await getDetailedBalance({

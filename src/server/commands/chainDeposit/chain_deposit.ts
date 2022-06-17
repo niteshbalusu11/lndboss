@@ -8,15 +8,6 @@ import { logger } from '~server/utils/global_functions';
 const bigTok = (tokens: number) => (!tokens ? '0' : (tokens / 1e8).toFixed(8));
 const format = 'p2wpkh';
 
-type Tasks = {
-  validate: undefined;
-  getAddress: CreateChainAddressResult;
-  url: {
-    address: string;
-    url: string;
-  };
-};
-
 /** Get deposit address
   {
     [tokens]: <Tokens to Receive Number>
@@ -27,7 +18,25 @@ type Tasks = {
     url: <Deposit Address URL string>
   }
 */
-const chainDepositCommand = async (args: types.commandChainDeposit, lnd: AuthenticatedLnd) => {
+
+type Tasks = {
+  validate: undefined;
+  getAddress: CreateChainAddressResult;
+  url: {
+    address: string;
+    url: string;
+  };
+};
+
+type Return = {
+  address: string;
+  url: string;
+};
+
+const chainDepositCommand = async (
+  args: types.commandChainDeposit,
+  lnd: AuthenticatedLnd
+): Promise<{ result: Return }> => {
   try {
     const result = await auto<Tasks>({
       // Validate

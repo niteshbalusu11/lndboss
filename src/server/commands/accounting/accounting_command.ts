@@ -28,7 +28,7 @@ import { logger } from '~server/utils/global_functions';
   }
 */
 
-const accountingCommand = async (args: types.commandAccounting, lnd: AuthenticatedLnd) => {
+const accountingCommand = async (args: types.commandAccounting, lnd: AuthenticatedLnd): Promise<{ result: any }> => {
   try {
     const result = await getAccountingReport({
       lnd,

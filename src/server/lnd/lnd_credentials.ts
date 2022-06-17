@@ -44,7 +44,13 @@ type Args = {
   node: string;
 };
 
-const lndCredentials = async (args: Args) => {
+type Return = {
+  cert: string;
+  macaroon: string;
+  socket: string;
+};
+
+const lndCredentials = async (args: Args): Promise<Return> => {
   try {
     const result = await auto<Tasks>({
       // Figure out which node the credentials are for

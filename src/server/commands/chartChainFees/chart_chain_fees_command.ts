@@ -22,7 +22,10 @@ import { logger } from '~server/utils/global_functions';
   }
 */
 
-const chartChainFeesCommand = async (args: types.commandChartChainFees, lnd: AuthenticatedLnd[]) => {
+const chartChainFeesCommand = async (
+  args: types.commandChartChainFees,
+  lnd: AuthenticatedLnd[]
+): Promise<{ result: any }> => {
   try {
     const result = await getChainFeesChart({
       request,
