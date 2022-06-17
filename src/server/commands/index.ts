@@ -1,3 +1,4 @@
+import accountingCommand from './accounting/accounting_command';
 import balanceCommand from './balance/balance_command';
 import certValidityDaysCommand from './certValidityDays/cert_validity_days_command';
 import chainDepositCommand from './chainDeposit/chain_deposit';
@@ -8,6 +9,7 @@ import chartPaymentsReceivedCommand from './chartPaymentsReceived/chart_payments
 import tagsCommand from './tags/tags_command';
 
 export {
+  accountingCommand,
   balanceCommand,
   certValidityDaysCommand,
   chainDepositCommand,

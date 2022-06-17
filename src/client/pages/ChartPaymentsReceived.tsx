@@ -102,7 +102,6 @@ const ChartPaymentsReceived = () => {
                   placeholder={globalCommands.node.name}
                   value={element.node || ''}
                   onChange={e => handleChange(index, e)}
-                  key={index}
                   style={styles.textField}
                   id={`node-${index}`}
                 />

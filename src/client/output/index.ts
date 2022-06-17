@@ -1,3 +1,5 @@
+import AccountingOutput from './AccountingOutput';
+import AccountingOutputSummary from './AccountingOutputSummary';
 import BalanceOutput from './BalanceOutput';
 import CertValidityDaysOutput from './CertValidityDaysOutput';
 import ChainDepositOutput from './ChainDepositOutput';
@@ -9,6 +11,8 @@ import ChartPaymentsReceivedOutput from './ChartPaymentsReceivedOutput';
 import TagsOutput from './TagsOutput';
 
 export {
+  AccountingOutput,
+  AccountingOutputSummary,
   BalanceOutput,
   CertValidityDaysOutput,
   ChainDepositOutput,
