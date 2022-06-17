@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 
 /*
   Renders the bos chart-payments-received command output in chart format.
-  IPC to the main process to get offchain-payments-received.
+  GET call to the  NestJs process to get Chart Payments Received data.
 */
 
 const styles = {

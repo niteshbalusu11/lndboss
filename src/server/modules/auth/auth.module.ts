@@ -1,3 +1,5 @@
+import { isProduction, jwtConstants } from '../../utils/constants';
+
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
@@ -5,7 +7,6 @@ import { LocalStrategy } from './local.strategy';
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from '../users/users.module';
-import { jwtConstants } from '../../utils/constants';
 
 // AuthModule: Module for the authentication service
 
@@ -15,7 +16,7 @@ import { jwtConstants } from '../../utils/constants';
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '15m' },
+      signOptions: { expiresIn: !!isProduction ? '15m' : '1h' },
     }),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],

@@ -1,6 +1,8 @@
 import Notiflix from 'notiflix';
 const timeout = 3000;
 
+// Hook for all pop-up notifications in the app.
+
 export const useNotify = ({ type, message }) => {
   if (type === 'error') {
     Notiflix.Notify.failure(message, { timeout });

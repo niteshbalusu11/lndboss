@@ -1,15 +1,14 @@
-import { AccountingOutput, AccountingOutputSummary } from '../../output';
 import { CssBaseline, Stack } from '@mui/material';
+import { StandardTableOutput, StartFlexBox } from '../../standard_components';
 
 import Head from 'next/head';
 import React from 'react';
-import { StartFlexBox } from '../../standard_components';
 import { axiosGet } from '~client/utils/axios';
 import { useRouter } from 'next/router';
 
 /*
   Renders the bos accounting command output in chart format.
-  IPC to the main process to get chain-fees data.
+  GET call to the  NestJs process to get Accounting data data.
 */
 
 const styles = {
@@ -74,13 +73,13 @@ const AccountingResult = () => {
               {query.is_csv !== 'true' && !!summary.rows.length && (
                 <>
                   <h3>{`Accounting ${query.category} summary`}</h3>
-                  <AccountingOutputSummary data={summary} />
+                  <StandardTableOutput data={summary} />
                 </>
               )}
               {query.is_csv !== 'true' && !!data.rows.length && (
                 <>
                   <h3>{`Accounting ${query.category} summary`}</h3>
-                  <AccountingOutput data={data} />
+                  <StandardTableOutput data={data} />
                 </>
               )}
             </>

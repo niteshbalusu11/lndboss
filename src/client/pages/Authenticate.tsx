@@ -13,8 +13,8 @@ const { apiUrl } = publicRuntimeConfig;
 
 /*
   Renders the login page that takes in the macaroon, cert, and socket.
-  Sends IPC to the main process to create the credentials.
-  Sends IPC to the main process to check the connection to LND.
+  POST call to the NestJs process to insert credentials.
+  Verifies connection to LND.
 */
 
 const styles = createUseStyles({

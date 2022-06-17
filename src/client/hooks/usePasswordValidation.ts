@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+// Hook for validatating password strength
+
 export const usePasswordValidation = ({ firstPassword = '', secondPassword = '', requiredLength }) => {
   const [validLength, setValidLength] = useState(null);
   const [hasNumber, setHasNumber] = useState(null);

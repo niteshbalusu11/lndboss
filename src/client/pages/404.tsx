@@ -3,6 +3,8 @@ import { StandardButtonLink, StartFlexBox } from '../standard_components';
 import { CssBaseline } from '@mui/material';
 import React from 'react';
 
+// Standard 404 page not found page to be used for all 404 errors
+
 const styles = {
   h1: {
     marginTop: '100px',

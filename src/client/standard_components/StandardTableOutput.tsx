@@ -11,16 +11,13 @@ import {
 import React, { useMemo } from 'react';
 
 /*
-  Renders the table data for ChartFeesPaid command
+  Renders the a standard table output.
 
 */
 
 type Props = {
   data: {
-    data: number[];
-    title: string;
-    description: string;
-    rows: string[][];
+    rows: any;
   };
 };
 
@@ -37,10 +34,9 @@ function createData(record: string[], columnNames: string[]): Data {
   return obj;
 }
 
-const ChartFeesPaidOutputTable = ({ data }: Props) => {
+const StandardTableOutput = ({ data }: Props) => {
   const columns = [];
   const columnNames = data.rows[0];
-
   columnNames.forEach(name => {
     columns.push({
       id: name,
@@ -74,11 +70,15 @@ const ChartFeesPaidOutputTable = ({ data }: Props) => {
   return (
     <Paper sx={{ width: '100%' }}>
       <TableContainer sx={{ maxHeight: 800 }}>
-        <Table id="ChartFeesPaidOutputTable">
+        <Table id="StandardTableOutput">
           <TableHead>
             <TableRow>
               {columns.map(column => (
-                <TableCell key={column.id} align={column.align} style={{ top: 57, minWidth: column.minWidth }}>
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ top: 57, minWidth: column.minWidth, fontWeight: 'bold' }}
+                >
                   {column.label}
                 </TableCell>
               ))}
@@ -115,4 +115,4 @@ const ChartFeesPaidOutputTable = ({ data }: Props) => {
   );
 };
 
-export default ChartFeesPaidOutputTable;
+export default StandardTableOutput;

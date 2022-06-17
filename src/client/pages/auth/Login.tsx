@@ -11,6 +11,11 @@ import { useNotify } from '~client/hooks/useNotify';
 const { publicRuntimeConfig } = getConfig();
 const { apiUrl } = publicRuntimeConfig;
 
+/*
+  Renders the login page
+  POST call to the NestJs process to verify credentials and get back JWT token.
+*/
+
 const styles = createUseStyles({
   form: {
     marginLeft: '20px',

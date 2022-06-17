@@ -10,6 +10,11 @@ import Link from 'next/link';
 
 const AccountingCommand = commands.find(n => n.value === 'Accounting');
 
+/*
+  Renders the Accounting page
+  Passes query parameters to the accounting results page
+*/
+
 const styles = {
   form: {
     marginLeft: '50px',

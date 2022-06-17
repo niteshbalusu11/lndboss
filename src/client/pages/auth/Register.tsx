@@ -12,6 +12,11 @@ import { usePasswordValidation } from '~client/hooks/usePasswordValidation';
 const { publicRuntimeConfig } = getConfig();
 const { apiUrl } = publicRuntimeConfig;
 
+/*
+  Renders the register page
+  POST call to the NestJs process to insert auth credentials and redirect to login page on success.
+*/
+
 const styles = {
   form: {
     marginLeft: '50px',

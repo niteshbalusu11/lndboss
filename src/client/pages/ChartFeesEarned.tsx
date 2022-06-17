@@ -13,7 +13,7 @@ const ChartFeesEarnedCommand = commands.find(n => n.value === 'ChartFeesEarned')
 
 /*
   Renders the bos chart-fees-earned command
-  IPC to the main process to pass flags and render in a child window.
+  Passes query parameters to the chart-fees-earned results page
 */
 
 const styles = {

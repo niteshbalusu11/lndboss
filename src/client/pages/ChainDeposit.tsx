@@ -11,7 +11,7 @@ import { axiosGet } from '~client/utils/axios';
 
 /*
   Renders the bos chain-deposit command
-  Sends IPC to the main process to get chain address
+  GET call to the NestJs process to get chain deposit address
 */
 
 const ChainDepositCommand = commands.find(n => n.value === 'ChainDeposit');
