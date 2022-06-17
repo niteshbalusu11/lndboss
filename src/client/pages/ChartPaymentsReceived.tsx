@@ -94,7 +94,7 @@ const ChartPaymentsReceived = () => {
               Add +
             </Button>
             {formValues.map((element, index) => (
-              <>
+              <div key={index}>
                 <TextField
                   type="text"
                   label={globalCommands.node.name}
@@ -111,13 +111,14 @@ const ChartPaymentsReceived = () => {
                     <DeleteIcon />
                   </IconButton>
                 ) : null}
-              </>
+              </div>
             ))}
           </>
           <SubmitButton>
             <Link href={{ pathname: '/result/ChartPaymentsReceivedResult', query: flags }}>
               <a target="_blank" style={{ color: 'white', textDecoration: 'none' }}>
-                Run Command
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Run
+                Command&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </a>
             </Link>
           </SubmitButton>

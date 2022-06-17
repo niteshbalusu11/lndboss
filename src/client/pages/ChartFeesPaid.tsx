@@ -198,7 +198,7 @@ const ChartFeesPaid = () => {
               Add +
             </Button>
             {formValues.map((element, index) => (
-              <>
+              <div key={index}>
                 <TextField
                   type="text"
                   label={globalCommands.node.name}
@@ -206,7 +206,6 @@ const ChartFeesPaid = () => {
                   placeholder={globalCommands.node.name}
                   value={element.node || ''}
                   onChange={e => handleChange(index, e)}
-                  key={index}
                   style={styles.textField}
                   id={`node-${index}`}
                 />
@@ -215,13 +214,14 @@ const ChartFeesPaid = () => {
                     <DeleteIcon />
                   </IconButton>
                 ) : null}
-              </>
+              </div>
             ))}
           </>
           <SubmitButton>
             <Link href={{ pathname: '/result/ChartFeesPaidResult', query: flags }}>
               <a target="_blank" style={{ color: 'white', textDecoration: 'none' }}>
-                Run Command
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Run
+                Command&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </a>
             </Link>
           </SubmitButton>
