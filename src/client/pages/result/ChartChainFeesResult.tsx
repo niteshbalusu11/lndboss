@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 
 /*
   Renders the bos chart-chain-fees command output in chart format.
-  IPC to the main process to get chain-fees data.
+  GET call to the  NestJs process to get Chart Chain Fees data.
 */
 
 const styles = {

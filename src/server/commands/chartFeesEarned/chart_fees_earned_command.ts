@@ -22,7 +22,10 @@ import { readFile } from 'fs';
   }
 */
 
-const chartFeesEarnedCommand = async (args: types.commandChartFeesEarned, lnd: AuthenticatedLnd[]) => {
+const chartFeesEarnedCommand = async (
+  args: types.commandChartFeesEarned,
+  lnd: AuthenticatedLnd[]
+): Promise<{ result: any }> => {
   try {
     const result = await getFeesChart({
       days: args.days,

@@ -11,7 +11,7 @@ import { axiosGet } from '~client/utils/axios';
 
 /*
   Renders the bos balance command
-  Sends IPC to main process to get balance related information
+  GET call to the NestJs process to balance information
 */
 
 const BalanceCommand = commands.find(n => n.value === 'Balance');

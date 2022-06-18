@@ -41,7 +41,7 @@ type Args = {
   is_default: boolean;
 };
 
-const putSavedCredentials = async (args: Args) => {
+const putSavedCredentials = async (args: Args): Promise<{ result: boolean }> => {
   try {
     const result = await auto<Tasks>({
       // Check arguments

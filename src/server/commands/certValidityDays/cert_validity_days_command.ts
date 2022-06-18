@@ -1,4 +1,3 @@
-import { HttpException, Logger } from '@nestjs/common';
 import { certExpiration, pemAsDer } from 'balanceofsatoshis/encryption';
 
 import { lndCredentials } from '~server/lnd';
@@ -8,8 +7,6 @@ const base64AsString = base64 => Buffer.from(base64, 'base64').toString();
 const bufferAsHex = buffer => buffer.toString('hex');
 const msPerDay = 1000 * 60 * 60 * 24;
 const { round } = Math;
-
-const stringify = (data: any) => JSON.stringify(data);
 
 /** Get the number of days until the certificate expires
   {
@@ -23,7 +20,7 @@ const stringify = (data: any) => JSON.stringify(data);
   }
  */
 
-const certValidityDaysCommand = async ({ below, node }) => {
+const certValidityDaysCommand = async ({ below, node }): Promise<{ result: number }> => {
   try {
     const credentials = await lndCredentials({ node });
 

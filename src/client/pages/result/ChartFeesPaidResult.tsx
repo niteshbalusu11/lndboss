@@ -1,15 +1,15 @@
-import { ChartFeesPaidOutput, ChartFeesPaidOutputTable } from '../../output';
 import { CssBaseline, Stack } from '@mui/material';
+import { StandardTableOutput, StartFlexBox } from '../../standard_components';
 
+import { ChartFeesPaidOutput } from '../../output';
 import Head from 'next/head';
 import React from 'react';
-import { StartFlexBox } from '../../standard_components';
 import { axiosGet } from '~client/utils/axios';
 import { useRouter } from 'next/router';
 
 /*
   Renders the bos chart-chain-fees command output in chart format.
-  IPC to the main process to get fees paid data.
+  GET call to the  NestJs process to get Chart Fees Paid data.
 */
 
 const styles = {
@@ -57,7 +57,7 @@ const ChartFeesPaidResult = () => {
       </Head>
       <StartFlexBox>
         <Stack spacing={3} style={styles.form}>
-          {!!data.rows && !!data.rows.length ? <ChartFeesPaidOutputTable data={data} /> : null}
+          {!!data.rows && !!data.rows.length ? <StandardTableOutput data={data} tableId="ChartFeesPaidResult" /> : null}
           {!!data.data.length ? <ChartFeesPaidOutput data={data} /> : <h2>Loading...</h2>}
         </Stack>
       </StartFlexBox>

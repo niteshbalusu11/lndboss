@@ -25,6 +25,28 @@ export const globalCommands = {
 
 const commands: Commands = [
   {
+    args: {
+      chainFees: 'chain-fees',
+      chainReceives: 'chain-receives',
+      chainSends: 'chain-sends',
+      forwards: 'forwards',
+      invoices: 'invoices',
+      payments: 'payments',
+    },
+    name: 'Accounting',
+    value: 'Accounting',
+    description: 'Get an accounting rundown of your node',
+    longDescription:
+      'Get an accounting rundown of your node. Rate providers: coindesk, coingecko. Privacy note: this requests tx related data from third parties.',
+    flags: {
+      is_csv: 'CSV',
+      is_fiat_disabled: 'DisableFiat',
+      month: 'Month',
+      rate_provider: 'RateProvider',
+      year: 'Year',
+    },
+  },
+  {
     name: 'Balance',
     value: 'Balance',
     description: 'Sums balances on-chain, in channels, and pending, plus commit fees',

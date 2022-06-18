@@ -15,22 +15,22 @@ test.describe('Test authentication from node.js side', async () => {
 
   test('add a new saved node credential', async () => {
     const node = 'playwrightservertest';
-    const { error, result } = await putSavedCredentials({
+    const { result } = await putSavedCredentials({
       cert: lightning.cert,
       macaroon: lightning.macaroon,
       socket: lightning.socket,
       node,
       is_default: false,
     });
-    expect(error).toBe(undefined);
+
     expect(result).toBeTruthy();
     console.log(`credentials----${result}`);
   });
 
   test('get saved node credential', async () => {
     const node = 'testnode1';
-    const { error, macaroon, socket } = await lndCredentials({ node });
-    expect(error).toBe(undefined);
+    const { macaroon, socket } = await lndCredentials({ node });
+
     expect(macaroon).toBeTruthy();
     expect(socket).toBeTruthy();
     console.log(`credentials----${macaroon} ${socket}`);

@@ -26,6 +26,7 @@ const TagsCommand = commands.find(n => n.value === 'Tags');
 
 /*
   Renders the Tags command
+  GET call to the NestJs process to get the tags
 */
 
 const styles: any = {

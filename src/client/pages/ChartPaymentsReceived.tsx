@@ -13,7 +13,7 @@ const ChartPaymentsReceivedCommand = commands.find(n => n.value === 'ChartPaymen
 
 /*
   Renders the bos chart-payments-received command
-  IPC to the main process to pass flags and render in a child window.
+  Passes query parameters to the chart-payments-received results page
 */
 
 const styles = {
@@ -102,7 +102,6 @@ const ChartPaymentsReceived = () => {
                   placeholder={globalCommands.node.name}
                   value={element.node || ''}
                   onChange={e => handleChange(index, e)}
-                  key={index}
                   style={styles.textField}
                   id={`node-${index}`}
                 />

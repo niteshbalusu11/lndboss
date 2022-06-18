@@ -16,7 +16,8 @@ test.describe('Test ChainDeposit command on the node.js side', async () => {
     };
     const { result } = await chainDepositCommand(args, lightning.lnd);
     console.log('chain deposit----', result);
-    expect(result).toBeTruthy();
+    expect(result.address).toBeTruthy();
+    expect(result.url).toBeTruthy();
   });
 
   test.afterAll(async () => {

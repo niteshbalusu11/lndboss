@@ -19,7 +19,10 @@ import { logger } from '~server/utils/global_functions';
   }
 */
 
-const chartPaymentsReceivedCommand = async (args: types.commandChartPaymentsReceived, lnd: AuthenticatedLnd[]) => {
+const chartPaymentsReceivedCommand = async (
+  args: types.commandChartPaymentsReceived,
+  lnd: AuthenticatedLnd[]
+): Promise<{ result: any }> => {
   try {
     const result = await getReceivedChart({
       lnds: lnd,

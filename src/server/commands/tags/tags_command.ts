@@ -63,7 +63,7 @@ type Tasks = {
   };
 };
 
-const tagsCommand = async (args: Args) => {
+const tagsCommand = async (args: Args): Promise<{ result: any }> => {
   try {
     const result = await auto<Tasks>({
       // Validate

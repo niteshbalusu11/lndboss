@@ -17,11 +17,11 @@ type Props = {
 };
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  backgroundColor: '#042b57',
   ...theme.typography.body2,
   padding: theme.spacing(2),
   textAlign: 'center',
-  color: theme.palette.text.secondary,
+  color: 'white',
   height: '130px',
   borderRadius: '30px',
   marginRight: '10px',

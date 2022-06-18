@@ -1,3 +1,14 @@
+// ========================Command Accouting==============================
+export type commandAccounting = {
+  category: string;
+  is_csv: boolean;
+  is_fiat_disabled: boolean;
+  month: string;
+  node: string;
+  rate_provider: string;
+  year: string;
+};
+
 // ========================Balance Command=====================================
 
 export type commandBalance = {

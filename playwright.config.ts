@@ -36,7 +36,7 @@ const config: PlaywrightTestConfig = {
     timeout: 5000,
   },
   /* Run tests in files in parallel */
-  // fullyParallel: true,
+  fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -85,7 +85,7 @@ const config: PlaywrightTestConfig = {
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'yarn dev',
+    command: 'yarn start:prod',
     port: 8055,
     timeout: 120 * 1000,
   },

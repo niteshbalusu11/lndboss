@@ -3,6 +3,39 @@ import { toBoolean, toNumber, toStringArray, trim } from './cast.helper';
 
 import { Transform } from 'class-transformer';
 
+export class accountingDto {
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  category: string;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsBoolean()
+  is_csv: boolean;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsBoolean()
+  is_fiat_disabled: boolean;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  month: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  rate_provider: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  year: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  node: string;
+}
+
 export class authenticationDto {
   @Transform(({ value }) => trim(value))
   @IsString()

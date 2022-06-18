@@ -1,3 +1,4 @@
+import { AccountingModule } from './modules/accounting/accounting.module';
 import { AppController } from './app.controller';
 import { AuthModule } from './modules/auth/auth.module';
 import { BalanceModule } from './modules/balance/balance.module';
@@ -19,6 +20,7 @@ import { ViewModule } from '~server/modules/view/view.module';
 
 @Module({
   imports: [
+    AccountingModule,
     AuthModule,
     BalanceModule,
     CertValidityDaysModule,
