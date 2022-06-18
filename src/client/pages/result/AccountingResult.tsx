@@ -65,7 +65,11 @@ const AccountingResult = () => {
             <>
               <div>
                 {!!dataInCSV && query.is_csv === 'true' && (
-                  <a href={`data:text/csv;charset=utf-8,${dataInCSV}`} download={`${query.category}.csv`}>
+                  <a
+                    href={`data:text/csv;charset=utf-8,${dataInCSV}`}
+                    download={`${query.category}.csv`}
+                    id="accountingCsv"
+                  >
                     Results are ready, click here to download
                   </a>
                 )}
@@ -73,13 +77,13 @@ const AccountingResult = () => {
               {query.is_csv !== 'true' && !!summary.rows.length && (
                 <>
                   <h3>{`Accounting ${query.category} summary`}</h3>
-                  <StandardTableOutput data={summary} />
+                  <StandardTableOutput data={summary} tableId="AccountingSummary" />
                 </>
               )}
               {query.is_csv !== 'true' && !!data.rows.length && (
                 <>
                   <h3>{`Accounting ${query.category} summary`}</h3>
-                  <StandardTableOutput data={data} />
+                  <StandardTableOutput data={data} tableId="AccountingData" />
                 </>
               )}
             </>

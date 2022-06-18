@@ -35,7 +35,7 @@ test.describe('Test the ChartFeesPaid command client page', async () => {
     await expect(popup).toHaveTitle('Chart Fees Paid Result');
     await popup.waitForTimeout(1000);
     await expect(popup.locator('#ChartFeesPaidOutput')).toBeVisible();
-    await expect(popup.locator('#StandardTableOutput')).toBeVisible();
+    await expect(popup.locator('#ChartFeesPaidResult')).toBeVisible();
 
     await popup.close();
 

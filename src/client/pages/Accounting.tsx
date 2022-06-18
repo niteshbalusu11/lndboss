@@ -51,7 +51,7 @@ const styles = {
 const Accounting = () => {
   const [node, setNode] = useState('');
   const [isCsv, setIsCsv] = useState(false);
-  const [isFiatDisabled, setIsFiatDisabled] = useState(false);
+  const [isFiatDisabled, setIsFiatDisabled] = useState(true);
   const [month, setMonth] = useState(null);
   const [year, setYear] = useState(null);
   const [category, setCategory] = useState('');
@@ -155,7 +155,7 @@ const Accounting = () => {
                 id={AccountingCommand.flags.is_fiat_disabled}
               />
             }
-            label={AccountingCommand.flags.is_fiat_disabled}
+            label={`${AccountingCommand.flags.is_fiat_disabled} (Defaulted to true for faster results)`}
           />
           <TextField
             type="text"

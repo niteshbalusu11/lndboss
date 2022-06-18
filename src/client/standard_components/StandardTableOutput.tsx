@@ -19,6 +19,7 @@ type Props = {
   data: {
     rows: any;
   };
+  tableId: string;
 };
 
 type Data = {
@@ -34,7 +35,7 @@ function createData(record: string[], columnNames: string[]): Data {
   return obj;
 }
 
-const StandardTableOutput = ({ data }: Props) => {
+const StandardTableOutput = ({ data, tableId }: Props) => {
   const columns = [];
   const columnNames = data.rows[0];
   columnNames.forEach(name => {
@@ -70,7 +71,7 @@ const StandardTableOutput = ({ data }: Props) => {
   return (
     <Paper sx={{ width: '100%' }}>
       <TableContainer sx={{ maxHeight: 800 }}>
-        <Table id="StandardTableOutput">
+        <Table id={tableId}>
           <TableHead>
             <TableRow>
               {columns.map(column => (
