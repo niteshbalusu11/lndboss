@@ -85,7 +85,7 @@ const config: PlaywrightTestConfig = {
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'yarn start:prod',
+    command: 'yarn dev',
     port: 8055,
     timeout: 120 * 1000,
   },
