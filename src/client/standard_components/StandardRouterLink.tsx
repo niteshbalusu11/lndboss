@@ -15,7 +15,7 @@ const styles = {
     fontSize: '20px',
     margin: '0px',
     cursor: 'pointer',
-    color: 'black',
+    color: 'white',
   },
 };
 

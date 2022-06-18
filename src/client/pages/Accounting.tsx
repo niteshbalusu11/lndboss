@@ -108,7 +108,7 @@ const Accounting = () => {
           <h4>{AccountingCommand.longDescription}</h4>
           <div>
             <InputLabel id="accounting-category" style={styles.inputLabel}>
-              Pick a value
+              Pick a value (Required)
             </InputLabel>
             <Select
               labelId="category"
