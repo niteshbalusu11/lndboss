@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.6.0](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.5.0...v1.6.0) (2022-06-18)
 
+- Added support for accounting command
+- Changed homepage theme colors
+- Fixed react bug where react children don't have a unique key
+
 ## [1.5.0](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.4.0...v1.5.0) (2022-06-15)
 
 - Added cert-validity-days command
