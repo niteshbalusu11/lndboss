@@ -72,6 +72,7 @@ On your browser go to http://umbrel.local:8055
 <br></br>
 ## To build from source, you will need Node.js 16 and yarn.
 
+### For Linux:
 Download Node.js
 ```
 curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
@@ -80,6 +81,10 @@ Install it:
 ```
 sudo apt-get install -y nodejs
 ```
+
+### For Mac or Windows
+https://nodejs.dev/
+
 
 Setup Node.js to prevent using sudo (optional)
 ```
@@ -101,7 +106,7 @@ y
 . ~/.profile
 ```
 
-### After installing Node.js, you can install yarn
+### After installing Node.js, you can install yarn, (use sudo if permission is denied)
 ```
 npm install --global yarn
 ```
