@@ -3,5 +3,6 @@ services:
     image: niteshbalusu/lndboss:latest
     volumes:
       - ~/.bosgui:/home/node/.bosgui
+      - /path/to/your/lnd/directory:/home/node/.lnd
     ports:
       - "8055:8055"
