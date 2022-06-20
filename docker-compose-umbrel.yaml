@@ -7,7 +7,7 @@ services:
     ports:
       - '8055:8055'
     extra_hosts:
-      - 'umbrel.local:10.21.21.9'
+      - 'localhost:10.21.21.9'
 networks:
   default:
     external: true
