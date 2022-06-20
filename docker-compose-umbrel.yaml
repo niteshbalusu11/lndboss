@@ -1,6 +1,6 @@
 services:
   lndboss:
-    build: .
+    image: niteshbalusu/lndboss:latest
     volumes:
       - ~/.bosgui:/home/node/.bosgui
       - ~/umbrel/app-data/lightning/data/lnd:/home/node/.lnd
