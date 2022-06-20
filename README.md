@@ -80,7 +80,7 @@ https://nodejs.dev/download
 npm install --global yarn
 ```
 
-## Build from source
+## Build from source (Raspblitz and Raspibolt)
 
 ```
 # Clone the repository
@@ -98,6 +98,7 @@ yarn build
 # Run the app
 yarn start:prod
 ```
+App will run on http://localhost:8055. If you installed the app on your node machine and trying to access it on the browser on a different machine, then use the hostname of the machine the app is running on, example: http://raspberrypi.local:8055
 
 <br></br>
 ## Development
@@ -115,6 +116,7 @@ yarn
 # Start dev server
 yarn dev
 ```
+App will run on http://localhost:8055. If you installed the app on your node machine and trying to access it on the browser on a different machine, then use the hostname of the machine the app is running on, example: http://raspberrypi.local:8055
 
 ## Authenticating
 
