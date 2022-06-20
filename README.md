@@ -86,7 +86,7 @@ sudo apt-get install -y nodejs
 https://nodejs.dev/
 
 
-Setup Node.js to prevent using sudo (optional)
+Setup Node.js to install packages without using sudo (optional)
 ```
 mkdir ~/.npm-global
 
