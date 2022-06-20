@@ -51,66 +51,62 @@ type Return = {
 };
 
 const lndCredentials = async (args: Args): Promise<Return> => {
-  try {
-    const result = await auto<Tasks>({
-      // Figure out which node the credentials are for
-      forNode: (cbk: any) => {
-        try {
-          if (!!args.node) {
-            return cbk(null, args.node);
+  const result = await auto<Tasks>({
+    // Figure out which node the credentials are for
+    forNode: (cbk: any) => {
+      try {
+        if (!!args.node) {
+          return cbk(null, args.node);
+        }
+
+        const path = join(...[homedir(), home, config]);
+
+        return readFile(path, (err, res) => {
+          // Exit early on errors, there is no config found
+          if (!!err || !res) {
+            return cbk();
           }
 
-          const path = join(...[homedir(), home, config]);
+          try {
+            parse(res.toString());
+          } catch (err) {
+            return cbk(logger({ error: [400, 'ExpectedValidConfigFileToGetCredentials', { err }] }));
+          }
 
-          return readFile(path, (err, res) => {
-            // Exit early on errors, there is no config found
-            if (!!err || !res) {
-              return cbk();
-            }
+          const config = parse(res.toString());
 
-            try {
-              parse(res.toString());
-            } catch (err) {
-              return cbk([400, 'ConfigurationFileIsInvalidFormat', { err }]);
-            }
+          if (!!config.default_saved_node) {
+            return cbk(null, config.default_saved_node);
+          }
 
-            const config = parse(res.toString());
+          return cbk();
+        });
+      } catch (err) {
+        return cbk(err);
+      }
+    },
 
-            if (!!config.default_saved_node) {
-              return cbk(null, config.default_saved_node);
-            }
-
-            return cbk();
-          });
-        } catch (err) {
-          return cbk(err);
-        }
+    // Get the node credentials, if applicable
+    getNodeCredentials: [
+      'forNode',
+      async ({ forNode }) => {
+        return await getSavedCredentials({ node: forNode });
       },
+    ],
 
-      // Get the node credentials, if applicable
-      getNodeCredentials: [
-        'forNode',
-        async ({ forNode }) => {
-          return await getSavedCredentials({ node: forNode });
-        },
-      ],
-
-      credentials: [
-        'getNodeCredentials',
-        ({ getNodeCredentials }, cbk) => {
-          // Exit early with the default credentials when no node is specified
-          return cbk(null, {
-            cert: getNodeCredentials.cert,
-            macaroon: getNodeCredentials.macaroon,
-            socket: getNodeCredentials.socket,
-          });
-        },
-      ],
-    });
-    return { cert: result.credentials.cert, macaroon: result.credentials.macaroon, socket: result.credentials.socket };
-  } catch (error) {
-    logger({ error });
-  }
+    credentials: [
+      'getNodeCredentials',
+      ({ getNodeCredentials }, cbk) => {
+        // Exit early with the default credentials when no node is specified
+        return cbk(null, {
+          cert: getNodeCredentials.cert,
+          macaroon: getNodeCredentials.macaroon,
+          socket: getNodeCredentials.socket,
+        });
+      },
+    ],
+  });
+  return { cert: result.credentials.cert, macaroon: result.credentials.macaroon, socket: result.credentials.socket };
 };
 
 export default lndCredentials;

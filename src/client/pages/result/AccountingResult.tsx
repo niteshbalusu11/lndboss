@@ -87,9 +87,7 @@ const AccountingResult = () => {
                 </>
               )}
             </>
-          ) : (
-            <h2>Loading...</h2>
-          )}
+          ) : null}
         </Stack>
       </StartFlexBox>
     </CssBaseline>

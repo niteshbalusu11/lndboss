@@ -2,7 +2,6 @@ import { AuthenticatedLnd, authenticatedLndGrpc } from 'lightning';
 
 import { auto } from 'async';
 import lndCredentials from './lnd_credentials';
-import { logger } from '~server/utils/global_functions';
 
 /** Authenticated LND
 
@@ -29,31 +28,27 @@ type Tasks = {
 };
 
 const authenticatedLnd = async ({ node }: { node?: string }) => {
-  try {
-    const result = await auto<Tasks>({
-      // Credentials
-      credentials: async () => {
-        return await lndCredentials({ node });
-      },
+  const result = await auto<Tasks>({
+    // Credentials
+    credentials: async () => {
+      return await lndCredentials({ node });
+    },
 
-      // Lnd
-      lnd: [
-        'credentials',
-        ({ credentials }, cbk) => {
-          const { lnd } = authenticatedLndGrpc({
-            cert: credentials.cert,
-            macaroon: credentials.macaroon,
-            socket: credentials.socket,
-          });
-          return cbk(null, { lnd });
-        },
-      ],
-    });
-    const { lnd } = result.lnd;
-    return { lnd };
-  } catch (error) {
-    logger({ error });
-  }
+    // Lnd
+    lnd: [
+      'credentials',
+      ({ credentials }, cbk) => {
+        const { lnd } = authenticatedLndGrpc({
+          cert: credentials.cert,
+          macaroon: credentials.macaroon,
+          socket: credentials.socket,
+        });
+        return cbk(null, { lnd });
+      },
+    ],
+  });
+  const { lnd } = result.lnd;
+  return { lnd };
 };
 
 export default authenticatedLnd;

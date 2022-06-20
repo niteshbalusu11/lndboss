@@ -1,5 +1,6 @@
 import axios from 'axios';
 import getConfig from 'next/config';
+import { useLoading } from '~client/hooks/useLoading';
 import { useNotify } from '~client/hooks/useNotify';
 const { publicRuntimeConfig } = getConfig();
 const { apiUrl } = publicRuntimeConfig;
@@ -16,6 +17,8 @@ type ArgsPost = {
 
 const axiosGet = async ({ path, query }: ArgsGet) => {
   try {
+    useLoading({ isLoading: true });
+
     const url = `${apiUrl}/${path}`;
     const accessToken = localStorage.getItem('accessToken');
 
@@ -29,10 +32,13 @@ const axiosGet = async ({ path, query }: ArgsGet) => {
 
     const { result } = await response.data;
 
+    useLoading({ isLoading: false });
+
     if (!!result) {
       return result;
     }
   } catch (error) {
+    useLoading({ isLoading: false });
     useNotify({
       type: 'error',
       message: `Status: ${error.response.data.statusCode}\nMessage: ${error.response.data.message}`,

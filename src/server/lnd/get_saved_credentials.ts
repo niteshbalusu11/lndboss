@@ -1,7 +1,6 @@
 import { auto } from 'async';
 import { homedir } from 'os';
 import { join } from 'path';
-import { logger } from '~server/utils/global_functions';
 import { readFile } from 'fs';
 
 const home = '.bosgui';
@@ -54,111 +53,106 @@ type Tasks = {
 };
 
 const getSavedCredentials = async ({ node }) => {
-  try {
-    const result = await auto<Tasks>({
-      // Check arguments
-      validate: (cbk: any) => {
-        if (!node) {
-          return cbk([400, 'ExpectedNodeNameToGetSavedCredentials']);
-        }
+  const result = await auto<Tasks>({
+    // Check arguments
+    validate: (cbk: any) => {
+      if (!node) {
+        return cbk([400, 'ExpectedNodeNameToGetSavedCredentials']);
+      }
 
-        if (!!isArray(node)) {
-          return cbk([400, 'ExpectedSingleSavedNodeNameToGetCredentialsFor']);
-        }
+      if (!!isArray(node)) {
+        return cbk([400, 'ExpectedSingleSavedNodeNameToGetCredentialsFor']);
+      }
 
-        return cbk();
+      return cbk();
+    },
+
+    // Get the credentials file
+    getFile: [
+      'validate',
+      ({}, cbk: any) => {
+        const path = join(...[homedir(), home, node, credentials]);
+
+        return readFile(path, (err, res) => {
+          if (!!err || !res) {
+            return cbk([404, 'SavedNodeCredentialsFileNotFound', { err }]);
+          }
+
+          try {
+            parse(res.toString());
+          } catch (err) {
+            return cbk([400, 'SavedNodeHasInvalidCredentials']);
+          }
+
+          const credentials = parse(res.toString());
+
+          return cbk(null, credentials);
+        });
       },
+    ],
 
-      // Get the credentials file
-      getFile: [
-        'validate',
-        ({}, cbk: any) => {
-          const path = join(...[homedir(), home, node, credentials]);
+    // Get cert from path if necessary
+    getCert: [
+      'getFile',
+      ({ getFile }, cbk: any) => {
+        if (!getFile.cert_path) {
+          return cbk(null, getFile.cert);
+        }
 
-          return readFile(path, (err, res) => {
-            // Exit early on errors, there is no credential found
-            if (!!err || !res) {
-              return cbk(null, { node });
-            }
-
-            try {
-              parse(res.toString());
-            } catch (err) {
-              return cbk([400, 'SavedNodeHasInvalidCredentials']);
-            }
-
-            const credentials = parse(res.toString());
-
-            return cbk(null, credentials);
-          });
-        },
-      ],
-
-      // Get cert from path if necessary
-      getCert: [
-        'getFile',
-        ({ getFile }, cbk: any) => {
-          if (!getFile.cert_path) {
-            return cbk(null, getFile.cert);
+        return readFile(getFile.cert_path, (err, res) => {
+          if (!!err) {
+            return cbk([404, 'SavedNodeCertFileNotFound', { err }]);
           }
 
-          return readFile(getFile.cert_path, (err, res) => {
-            if (!!err) {
-              return cbk([400, 'SavedNodeCertFileNotFoundAtCertPath', { err }]);
-            }
+          return cbk(null, res.toString('base64'));
+        });
+      },
+    ],
 
-            return cbk(null, res.toString('base64'));
-          });
-        },
-      ],
+    // Get macaroon from path if necessary
+    getMacaroon: [
+      'getFile',
+      ({ getFile }, cbk: any) => {
+        if (!getFile.macaroon_path) {
+          return cbk(null, getFile.macaroon);
+        }
 
-      // Get macaroon from path if necessary
-      getMacaroon: [
-        'getFile',
-        ({ getFile }, cbk: any) => {
-          if (!getFile.macaroon_path) {
-            return cbk(null, getFile.macaroon);
+        return readFile(getFile.macaroon_path, (err, res) => {
+          if (!!err) {
+            return cbk([400, 'SavedNodeMacaroonNotFoundAtPath', { err }]);
           }
 
-          return readFile(getFile.macaroon_path, (err, res) => {
-            if (!!err) {
-              return cbk([400, 'SavedNodeMacaroonNotFoundAtPath', { err }]);
-            }
+          return cbk(null, res.toString('base64'));
+        });
+      },
+    ],
 
-            return cbk(null, res.toString('base64'));
-          });
-        },
-      ],
+    // Final credentials
+    credentials: [
+      'getCert',
+      'getFile',
+      'getMacaroon',
+      ({ getCert, getFile, getMacaroon }, cbk: any) => {
+        if (!getFile.socket) {
+          return cbk([400, 'SavedNodeMissingSocket']);
+        }
 
-      // Final credentials
-      credentials: [
-        'getCert',
-        'getFile',
-        'getMacaroon',
-        ({ getCert, getFile, getMacaroon }, cbk: any) => {
-          if (!getFile.socket) {
-            return cbk([400, 'SavedNodeMissingSocket']);
-          }
-
-          return cbk(null, {
-            node,
-            credentials: {
-              cert: getCert || undefined,
-              macaroon: getMacaroon,
-              socket: getFile.socket,
-            },
-          });
-        },
-      ],
-    });
-    return {
-      cert: result.credentials.credentials.cert,
-      macaroon: result.credentials.credentials.macaroon,
-      socket: result.credentials.credentials.socket,
-    };
-  } catch (error) {
-    logger({ error });
-  }
+        return cbk(null, {
+          node,
+          credentials: {
+            cert: getCert || undefined,
+            macaroon: getMacaroon,
+            socket: getFile.socket,
+          },
+        });
+      },
+    ],
+  });
+  return {
+    cert: result.credentials.credentials.cert,
+    macaroon: result.credentials.credentials.macaroon,
+    socket: result.credentials.credentials.socket,
+  };
 };
 
 export default getSavedCredentials;
