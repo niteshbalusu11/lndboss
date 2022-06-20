@@ -35,6 +35,14 @@
     async "3.2.3"
     asyncjs-util "1.2.9"
 
+"@alexbosworth/fiat@1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@alexbosworth/fiat/-/fiat-1.0.3.tgz#cfc88547c089da1b699d910f4577ed72675a40a0"
+  integrity sha512-M1OE/iyK+H77lrOEZz93f9QIi7B4RaD66O3ICRv24ECDbZogddwPWwG9HK9QDJvdGPlni67PYu8krpzEsTvFPg==
+  dependencies:
+    async "3.2.4"
+    asyncjs-util "1.2.10"
+
 "@alexbosworth/html2unicode@1.1.5":
   version "1.1.5"
   resolved "https://registry.npmjs.org/@alexbosworth/html2unicode/-/html2unicode-1.1.5.tgz"
@@ -307,30 +315,6 @@
   resolved "https://registry.npmjs.org/@grammyjs/types/-/types-2.7.2.tgz"
   integrity sha512-zaZH34j/tXhz9fmCv+7dUkvHgp4q/uIuQ2SEWn7hJ7TEuUUa764bNguVHillqTwTgOL1XkbaTSMczbbCnjeB4Q==
 
-"@grpc/grpc-js@1.6.1":
-  version "1.6.1"
-  resolved "https://registry.npmjs.org/@grpc/grpc-js/-/grpc-js-1.6.1.tgz"
-  integrity sha512-ix3rQS64rKL1s6CfIaRgnts+RNYZZ2NaYyTK7iimai6an/0GGDbukzy990hJ5vtKHjhaqJxJMB6Qq7BMZ0zZSQ==
-  dependencies:
-    "@grpc/proto-loader" "^0.6.4"
-    "@types/node" ">=12.12.47"
-
-"@grpc/grpc-js@1.6.2":
-  version "1.6.2"
-  resolved "https://registry.npmjs.org/@grpc/grpc-js/-/grpc-js-1.6.2.tgz"
-  integrity sha512-9+89Ne1K8F9u86T+l1yIV2DS+dWHYVK61SsDZN4MFTFehOOaJ4rHxa1cW8Lwdn2/6tOx7N3+SY/vfcjztOHopA==
-  dependencies:
-    "@grpc/proto-loader" "^0.6.4"
-    "@types/node" ">=12.12.47"
-
-"@grpc/grpc-js@1.6.4":
-  version "1.6.4"
-  resolved "https://registry.npmjs.org/@grpc/grpc-js/-/grpc-js-1.6.4.tgz"
-  integrity sha512-Jqq8t3ylPLPK4XXnYPj2uuESirRCAaQ0//GxRLPK6Xq2TBHb2DlmSzJUh15a6R4uUIjBwA8wI69JuKleZXz4jQ==
-  dependencies:
-    "@grpc/proto-loader" "^0.6.4"
-    "@types/node" ">=12.12.47"
-
 "@grpc/grpc-js@1.6.7":
   version "1.6.7"
   resolved "https://registry.npmjs.org/@grpc/grpc-js/-/grpc-js-1.6.7.tgz"
@@ -359,17 +343,6 @@
     lodash.camelcase "^4.3.0"
     long "^4.0.0"
     protobufjs "^6.11.3"
-    yargs "^16.2.0"
-
-"@grpc/proto-loader@0.6.9":
-  version "0.6.9"
-  resolved "https://registry.npmjs.org/@grpc/proto-loader/-/proto-loader-0.6.9.tgz"
-  integrity sha512-UlcCS8VbsU9d3XTXGiEVFonN7hXk+oMXZtoHHG2oSA1/GcDP1q6OUgs20PzHDGizzyi8ufGSUDlk3O2NyY7leg==
-  dependencies:
-    "@types/long" "^4.0.1"
-    lodash.camelcase "^4.3.0"
-    long "^4.0.0"
-    protobufjs "^6.10.0"
     yargs "^16.2.0"
 
 "@handsontable/formulajs@^2.0.2":
@@ -972,16 +945,6 @@
   version "16.11.39"
   resolved "https://registry.npmjs.org/@types/node/-/node-16.11.39.tgz"
   integrity sha512-K0MsdV42vPwm9L6UwhIxMAOmcvH/1OoVkZyCgEtVu4Wx7sElGloy/W7kMBNe/oJ7V/jW9BVt1F6RahH6e7tPXw==
-
-"@types/node@17.0.23":
-  version "17.0.23"
-  resolved "https://registry.npmjs.org/@types/node/-/node-17.0.23.tgz"
-  integrity sha512-UxDxWn7dl97rKVeVS61vErvw086aCYhDLyvRQZ5Rk65rZKepaFdm53GeqXaKBuOhED4e9uWq34IC3TdSdJJ2Gw==
-
-"@types/node@17.0.25":
-  version "17.0.25"
-  resolved "https://registry.npmjs.org/@types/node/-/node-17.0.25.tgz"
-  integrity sha512-wANk6fBrUwdpY4isjWrKTufkrXdu1D2YHCot2fD/DfWxF5sMrVSA+KN7ydckvaTCh0HiqX9IVl0L5/ZoXg5M7w==
 
 "@types/node@17.0.33":
   version "17.0.33"
@@ -1612,13 +1575,6 @@ asyncjs-util@1.2.10:
   dependencies:
     async "3.2.4"
 
-asyncjs-util@1.2.8:
-  version "1.2.8"
-  resolved "https://registry.npmjs.org/asyncjs-util/-/asyncjs-util-1.2.8.tgz"
-  integrity sha512-wUcEKoAxBWWNE1wXkoIvIyM1vVDfvItYXANYTgwemeRL8FgV6z70XdLGLBMty0WiQSub0fBuKIyF+Hz3DCahOg==
-  dependencies:
-    async "3.2.3"
-
 asyncjs-util@1.2.9:
   version "1.2.9"
   resolved "https://registry.npmjs.org/asyncjs-util/-/asyncjs-util-1.2.9.tgz"
@@ -1653,19 +1609,19 @@ balanced-match@^1.0.0:
   resolved "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
 
-balanceofsatoshis@^12.11.0:
-  version "12.11.0"
-  resolved "https://registry.npmjs.org/balanceofsatoshis/-/balanceofsatoshis-12.11.0.tgz"
-  integrity sha512-ajrj5cYPvL1MAEwFi7i3PQA3eYwJ/Pyr74P/xoQELHPgTz6hq+HY3KWGJMc8A6UF10QsgySW/nMAeAkJcb5/5w==
+balanceofsatoshis@^12.13.2:
+  version "12.13.2"
+  resolved "https://registry.yarnpkg.com/balanceofsatoshis/-/balanceofsatoshis-12.13.2.tgz#a0aa293118f8cfedcea03da913a1b1cc4dc0e9eb"
+  integrity sha512-B0npHfggvMlrBadnd/FZSX+dOT/GsgoNkOzLQsmt5J/qJxg/tqE0Z0bUhTJkWmNCkfE7/1ZgacWvPUD1t6BRyw==
   dependencies:
     "@alexbosworth/caporal" "1.4.4"
-    "@alexbosworth/fiat" "1.0.2"
+    "@alexbosworth/fiat" "1.0.3"
     "@alexbosworth/html2unicode" "1.1.5"
     "@alexbosworth/node-fetch" "2.6.2"
     abort-controller "3.0.0"
     asciichart "1.5.25"
-    async "3.2.3"
-    asyncjs-util "1.2.9"
+    async "3.2.4"
+    asyncjs-util "1.2.10"
     bech32 "2.0.0"
     bip66 "1.1.5"
     bitcoinjs-lib "6.0.1"
@@ -1673,24 +1629,24 @@ balanceofsatoshis@^12.11.0:
     bolt03 "1.2.14"
     bolt07 "1.8.2"
     cbor "8.1.0"
-    colorette "2.0.17"
+    colorette "2.0.19"
     crypto-js "4.1.1"
-    csv-parse "5.1.0"
+    csv-parse "5.2.0"
     ecpair "2.0.1"
-    goldengate "11.2.2"
+    goldengate "11.2.3"
     grammy "1.8.3"
     hot-formula-parser "4.0.0"
     import-lazy "4.0.0"
     ini "3.0.0"
     inquirer "8.2.4"
     ln-accounting "5.0.7"
-    ln-service "53.17.2"
-    ln-sync "3.12.1"
-    ln-telegram "3.22.1"
+    ln-service "53.17.3"
+    ln-sync "3.13.0"
+    ln-telegram "3.22.2"
     moment "2.29.3"
-    paid-services "3.16.0"
+    paid-services "3.16.3"
     probing "2.0.6"
-    psbt "2.4.0"
+    psbt "2.6.0"
     qrcode-terminal "0.12.0"
     sanitize-filename "1.6.3"
     socks-proxy-agent "7.0.0"
@@ -1812,22 +1768,6 @@ bn.js@5.2.1:
   resolved "https://registry.npmjs.org/bn.js/-/bn.js-5.2.1.tgz"
   integrity sha512-eXRvHzWyYPBuB4NBy0cmYQjGitUrtqwbvlzP3G6VFnNRbsZQIxQ10PbKKHt8gZ/HW/D/747aDl+QkDqg3KQLMQ==
 
-body-parser@1.19.2:
-  version "1.19.2"
-  resolved "https://registry.npmjs.org/body-parser/-/body-parser-1.19.2.tgz"
-  integrity sha512-SAAwOxgoCKMGs9uUAUFHygfLAyaniaoun6I8mFY9pRAJL9+Kec34aU+oIjDhTycub1jozEfEwx1W1IuOYxVSFw==
-  dependencies:
-    bytes "3.1.2"
-    content-type "~1.0.4"
-    debug "2.6.9"
-    depd "~1.1.2"
-    http-errors "1.8.1"
-    iconv-lite "0.4.24"
-    on-finished "~2.3.0"
-    qs "6.9.7"
-    raw-body "2.4.3"
-    type-is "~1.6.18"
-
 body-parser@1.20.0:
   version "1.20.0"
   resolved "https://registry.npmjs.org/body-parser/-/body-parser-1.20.0.tgz"
@@ -1868,13 +1808,6 @@ bolt03@1.2.14:
     bitcoin-ops "1.4.1"
     bitcoinjs-lib "6.0.1"
 
-bolt07@1.8.0:
-  version "1.8.0"
-  resolved "https://registry.npmjs.org/bolt07/-/bolt07-1.8.0.tgz"
-  integrity sha512-UJq+p94UK9QsU3P1npJyWF3r8TuJd6kv6P4m656VQK/m5ifw0bWCkYF0ngcHbFGq3j8u3gP8/tkGtB8WwPPRbQ==
-  dependencies:
-    bn.js "5.2.0"
-
 bolt07@1.8.1:
   version "1.8.1"
   resolved "https://registry.npmjs.org/bolt07/-/bolt07-1.8.1.tgz"
@@ -1888,16 +1821,6 @@ bolt07@1.8.2:
   integrity sha512-jq1b/ZdMambhh+yi+pm+1PJBAnlYvQYljaBgSajvVAINHrHg32ovCBra8d0ADE3BAoj6G/tK7OSV4t/yT9A+/g==
   dependencies:
     bn.js "5.2.1"
-
-bolt09@0.2.1:
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/bolt09/-/bolt09-0.2.1.tgz"
-  integrity sha512-ON1CY0awM/VsOxcmCtz7WggxjGRH+G5rSEAdWp1UoU43BHiGw1T6eEt1t4gFvLi8eUSV0hB7vF1QOba65k/7FA==
-
-bolt09@0.2.2:
-  version "0.2.2"
-  resolved "https://registry.npmjs.org/bolt09/-/bolt09-0.2.2.tgz"
-  integrity sha512-m533YWZ/R/p1buxEK/19v94Ay1vS1PJNwfP30BCVj6l96NGpOa9t40HYuMpoX+xFYwOx8kZs+GGTb9TbJund0w==
 
 bolt09@0.2.3:
   version "0.2.3"
@@ -2298,6 +2221,11 @@ colorette@2.0.17:
   resolved "https://registry.npmjs.org/colorette/-/colorette-2.0.17.tgz"
   integrity sha512-hJo+3Bkn0NCHybn9Tu35fIeoOKGOk5OCC32y4Hz2It+qlCO2Q3DeQ1hRn/tDDMQKRYUEzqsl7jbF6dYKjlE60g==
 
+colorette@2.0.19:
+  version "2.0.19"
+  resolved "https://registry.yarnpkg.com/colorette/-/colorette-2.0.19.tgz#cdf044f47ad41a0f4b56b3a0d5b4e6e1a2d5a798"
+  integrity sha512-3tlv/dIP7FWvj3BsbHrGLJ6l/oKh1O3TcgBqMn+yyCagOxc23fyzDS6HypQbgxWbkpDnf52p1LuR4eWDQ/K9WQ==
+
 colorette@^1.0.1:
   version "1.4.0"
   resolved "https://registry.npmjs.org/colorette/-/colorette-1.4.0.tgz"
@@ -2585,11 +2513,6 @@ cookie-signature@1.0.6:
   resolved "https://registry.npmjs.org/cookie-signature/-/cookie-signature-1.0.6.tgz"
   integrity sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==
 
-cookie@0.4.2:
-  version "0.4.2"
-  resolved "https://registry.npmjs.org/cookie/-/cookie-0.4.2.tgz"
-  integrity sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==
-
 cookie@0.5.0:
   version "0.5.0"
   resolved "https://registry.npmjs.org/cookie/-/cookie-0.5.0.tgz"
@@ -2695,10 +2618,10 @@ csstype@^3.0.2, csstype@^3.1.0:
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.1.0.tgz"
   integrity sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==
 
-csv-parse@5.1.0:
-  version "5.1.0"
-  resolved "https://registry.npmjs.org/csv-parse/-/csv-parse-5.1.0.tgz"
-  integrity sha512-JL+Q6YEikT2uoe57InjFFa6VejhSv0tDwOxeQ1bVQKeUC/NCnLAAZ8n3PzowPQQLuZ37fysDYZipB2UJkH9C6A==
+csv-parse@5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-5.2.0.tgz#492b5ca2e5e87e3672ca834e83ab3a0e2486d5cb"
+  integrity sha512-ZuLjTp3Qx2gycoB7FKS9q11KgDL3f0wQszTlNOajS3fHa0jypN/zgjmkam+rczX5dXw5z7+KrDW2hWkM4542Ug==
 
 dargs@^7.0.0:
   version "7.0.0"
@@ -2808,20 +2731,10 @@ depd@2.0.0, depd@~2.0.0:
   resolved "https://registry.npmjs.org/depd/-/depd-2.0.0.tgz"
   integrity sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==
 
-depd@~1.1.2:
-  version "1.1.2"
-  resolved "https://registry.npmjs.org/depd/-/depd-1.1.2.tgz"
-  integrity sha512-7emPTl6Dpo6JRXOXjLRxck+FlLRX5847cLKEn00PLAgc3g2hTZZgr+e4c2v6QpSmLeFP3n5yUo7ft6avBK/5jQ==
-
 destroy@1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/destroy/-/destroy-1.2.0.tgz"
   integrity sha512-2sJGJTaXIIaR1w4iJSNoN0hnMY7Gpc/n8D4qSCJw8QqFWXf7cuAgnEHxBpweaVcPevC2l3KpjYCx3NypQQgaJg==
-
-destroy@~1.0.4:
-  version "1.0.4"
-  resolved "https://registry.npmjs.org/destroy/-/destroy-1.0.4.tgz"
-  integrity sha512-3NdhDuEXnfun/z7x9GOElY49LoqVHoGScmOKwmxhsS8N5Y+Z8KyPPDnaSzqWgYt/ji4mqwfTS34Htrk0zPIXVg==
 
 detect-indent@^6.0.0:
   version "6.1.0"
@@ -3324,42 +3237,6 @@ exit-hook@^1.0.0:
   resolved "https://registry.npmjs.org/exit-hook/-/exit-hook-1.1.1.tgz"
   integrity sha512-MsG3prOVw1WtLXAZbM3KiYtooKR1LvxHh3VHsVtIy0uiUu8usxgB/94DP2HxtD/661lLdB6yzQ09lGJSQr6nkg==
 
-express@4.17.3:
-  version "4.17.3"
-  resolved "https://registry.npmjs.org/express/-/express-4.17.3.tgz"
-  integrity sha512-yuSQpz5I+Ch7gFrPCk4/c+dIBKlQUxtgwqzph132bsT6qhuzss6I8cLJQz7B3rFblzd6wtcI0ZbGltH/C4LjUg==
-  dependencies:
-    accepts "~1.3.8"
-    array-flatten "1.1.1"
-    body-parser "1.19.2"
-    content-disposition "0.5.4"
-    content-type "~1.0.4"
-    cookie "0.4.2"
-    cookie-signature "1.0.6"
-    debug "2.6.9"
-    depd "~1.1.2"
-    encodeurl "~1.0.2"
-    escape-html "~1.0.3"
-    etag "~1.8.1"
-    finalhandler "~1.1.2"
-    fresh "0.5.2"
-    merge-descriptors "1.0.1"
-    methods "~1.1.2"
-    on-finished "~2.3.0"
-    parseurl "~1.3.3"
-    path-to-regexp "0.1.7"
-    proxy-addr "~2.0.7"
-    qs "6.9.7"
-    range-parser "~1.2.1"
-    safe-buffer "5.2.1"
-    send "0.17.2"
-    serve-static "1.14.2"
-    setprototypeof "1.2.0"
-    statuses "~1.5.0"
-    type-is "~1.6.18"
-    utils-merge "1.0.1"
-    vary "~1.1.2"
-
 express@4.18.1:
   version "4.18.1"
   resolved "https://registry.npmjs.org/express/-/express-4.18.1.tgz"
@@ -3508,19 +3385,6 @@ finalhandler@1.2.0:
     on-finished "2.4.1"
     parseurl "~1.3.3"
     statuses "2.0.1"
-    unpipe "~1.0.0"
-
-finalhandler@~1.1.2:
-  version "1.1.2"
-  resolved "https://registry.npmjs.org/finalhandler/-/finalhandler-1.1.2.tgz"
-  integrity sha512-aAWcW57uxVNrQZqFXjITpW3sIUQmHGG3qSb9mUah9MgMC4NeWhNOlNjXEYq3HjRAvL6arUviZGGJsBg6z0zsWA==
-  dependencies:
-    debug "2.6.9"
-    encodeurl "~1.0.2"
-    escape-html "~1.0.3"
-    on-finished "~2.3.0"
-    parseurl "~1.3.3"
-    statuses "~1.5.0"
     unpipe "~1.0.0"
 
 find-free-ports@3.0.0:
@@ -3867,36 +3731,6 @@ globby@^11.1.0:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
-goldengate@11.2.1:
-  version "11.2.1"
-  resolved "https://registry.npmjs.org/goldengate/-/goldengate-11.2.1.tgz"
-  integrity sha512-v0REhYrm8fUJMvDAGzYhymB3R9BqTEulUcD740zNEsH2umNc9Jv+RI4sXGygIXUtUi9FSlBrO4udVerBoRMBLQ==
-  dependencies:
-    "@alexbosworth/node-fetch" "2.6.2"
-    "@grpc/grpc-js" "1.6.4"
-    "@grpc/proto-loader" "0.6.9"
-    "@mitmaro/http-authorization-header" "1.0.0"
-    async "3.2.3"
-    asyncjs-util "1.2.9"
-    bech32 "2.0.0"
-    bip65 "1.0.3"
-    bip68 "1.0.4"
-    bitcoin-ops "1.4.1"
-    bitcoinjs-lib "6.0.1"
-    bn.js "5.2.0"
-    body-parser "1.20.0"
-    bolt01 "1.2.4"
-    cbor "8.1.0"
-    ecpair "2.0.1"
-    ln-service "53.11.0"
-    ln-sync "3.12.0"
-    macaroon "3.0.4"
-    p2tr "1.3.1"
-    psbt "2.0.1"
-    pushdata-bitcoin "1.0.1"
-    tiny-secp256k1 "2.2.1"
-    varuint-bitcoin "1.1.2"
-
 goldengate@11.2.2:
   version "11.2.2"
   resolved "https://registry.npmjs.org/goldengate/-/goldengate-11.2.2.tgz"
@@ -3923,6 +3757,36 @@ goldengate@11.2.2:
     macaroon "3.0.4"
     p2tr "1.3.1"
     psbt "2.4.0"
+    pushdata-bitcoin "1.0.1"
+    tiny-secp256k1 "2.2.1"
+    varuint-bitcoin "1.1.2"
+
+goldengate@11.2.3:
+  version "11.2.3"
+  resolved "https://registry.yarnpkg.com/goldengate/-/goldengate-11.2.3.tgz#9f57ba38af2c63a05de82f218c15f34bbed35b0a"
+  integrity sha512-V09p/DRD2q51vK3HJgPjWRTw3FFhMkb2E2flizWaE9oZmetFpXrxcp8be1pVbzWZrDykj2FMc68K0GeerO6KsQ==
+  dependencies:
+    "@alexbosworth/node-fetch" "2.6.2"
+    "@grpc/grpc-js" "1.6.7"
+    "@grpc/proto-loader" "0.6.13"
+    "@mitmaro/http-authorization-header" "1.0.0"
+    async "3.2.4"
+    asyncjs-util "1.2.10"
+    bech32 "2.0.0"
+    bip65 "1.0.3"
+    bip68 "1.0.4"
+    bitcoin-ops "1.4.1"
+    bitcoinjs-lib "6.0.1"
+    bn.js "5.2.1"
+    body-parser "1.20.0"
+    bolt01 "1.2.5"
+    cbor "8.1.0"
+    ecpair "2.0.1"
+    ln-service "53.17.3"
+    ln-sync "3.12.2"
+    macaroon "3.0.4"
+    p2tr "1.3.1"
+    psbt "2.6.0"
     pushdata-bitcoin "1.0.1"
     tiny-secp256k1 "2.2.1"
     varuint-bitcoin "1.1.2"
@@ -4074,17 +3938,6 @@ http-cache-semantics@^4.0.0:
   version "4.1.0"
   resolved "https://registry.npmjs.org/http-cache-semantics/-/http-cache-semantics-4.1.0.tgz"
   integrity sha512-carPklcUh7ROWRK7Cv27RPtdhYhUsela/ue5/jKzjegVvXDqM2ILE9Q2BGn9JZJh1g87cp56su/FgQSzcWS8cQ==
-
-http-errors@1.8.1:
-  version "1.8.1"
-  resolved "https://registry.npmjs.org/http-errors/-/http-errors-1.8.1.tgz"
-  integrity sha512-Kpk9Sm7NmI+RHhnj6OIWDI1d6fIoFAtFt9RLaTMRlg/8w49juAStsrBgp0Dp4OdxdVbRIeKhtCUvoi/RuAhO4g==
-  dependencies:
-    depd "~1.1.2"
-    inherits "2.0.4"
-    setprototypeof "1.2.0"
-    statuses ">= 1.5.0 < 2"
-    toidentifier "1.0.1"
 
 http-errors@2.0.0:
   version "2.0.0"
@@ -4281,30 +4134,6 @@ interpret@^1.0.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/interpret/-/interpret-1.4.0.tgz"
   integrity sha512-agE4QfB2Lkp9uICn7BAqoscw4SZP9kTE2hxiFI3jBPmXJfdqiahTbUuKGsMoN2GtqL9AxhYioAcVvgsb1HvRbA==
-
-invoices@2.0.4:
-  version "2.0.4"
-  resolved "https://registry.npmjs.org/invoices/-/invoices-2.0.4.tgz"
-  integrity sha512-+Np4KWjNSlYm7Qp12zkRN5eu9tkA7FAFIP60bmpbMbwQbgz5gV9go3bkY8CpGj+Z1zifw5N8U+pH+wko/XSjpw==
-  dependencies:
-    bech32 "2.0.0"
-    bitcoinjs-lib "6.0.1"
-    bn.js "5.2.0"
-    bolt07 "1.8.0"
-    bolt09 "0.2.1"
-    tiny-secp256k1 "2.2.0"
-
-invoices@2.0.5:
-  version "2.0.5"
-  resolved "https://registry.npmjs.org/invoices/-/invoices-2.0.5.tgz"
-  integrity sha512-097isfZK3qaDJXQOEqTr3IfnrFZnGCAsbyqWNHAESdG12vBC39dprZWFwPLtnv7I8exhJG6WFFlaC51qaJan/w==
-  dependencies:
-    bech32 "2.0.0"
-    bitcoinjs-lib "6.0.1"
-    bn.js "5.2.0"
-    bolt07 "1.8.1"
-    bolt09 "0.2.2"
-    tiny-secp256k1 "2.2.1"
 
 invoices@2.0.6:
   version "2.0.6"
@@ -4915,58 +4744,6 @@ libphonenumber-js@^1.9.43:
   resolved "https://registry.npmjs.org/libphonenumber-js/-/libphonenumber-js-1.10.6.tgz"
   integrity sha512-CIjT100/SmntsUjsLVs2t3ufeN4KdNXUxhD07tH153pdbaCWuAjv0jK/gPuywR3IImB/U/MQM+x9RfhMs5XZiA==
 
-lightning@5.10.1:
-  version "5.10.1"
-  resolved "https://registry.npmjs.org/lightning/-/lightning-5.10.1.tgz"
-  integrity sha512-dIrN4vPzmzq9DaMD6c+9DqQwJCMl1lOleWrhIrv+HIpzq6rdNJvUXaVJOFz1OV8P3zy2Q3+s9VxnzeN70ee+ow==
-  dependencies:
-    "@grpc/grpc-js" "1.6.2"
-    "@grpc/proto-loader" "0.6.9"
-    "@types/express" "4.17.13"
-    "@types/node" "17.0.23"
-    "@types/request" "2.48.8"
-    "@types/ws" "8.5.3"
-    async "3.2.3"
-    asyncjs-util "1.2.9"
-    bitcoinjs-lib "6.0.1"
-    bn.js "5.2.0"
-    body-parser "1.20.0"
-    bolt07 "1.8.1"
-    bolt09 "0.2.3"
-    cbor "8.1.0"
-    ecpair "2.0.1"
-    express "4.17.3"
-    invoices "2.0.5"
-    psbt "2.0.1"
-    tiny-secp256k1 "2.2.1"
-    type-fest "2.12.2"
-
-lightning@5.14.0:
-  version "5.14.0"
-  resolved "https://registry.npmjs.org/lightning/-/lightning-5.14.0.tgz"
-  integrity sha512-T8NGH6F+t4sajEbC3CT2MbjqGyzTu0fH/X/UnnO8YlKoSUlU3Y9LFkmQDjMyDkxWN+peJmUQt8Em+OZu5XHLaw==
-  dependencies:
-    "@grpc/grpc-js" "1.6.7"
-    "@grpc/proto-loader" "0.6.9"
-    "@types/express" "4.17.13"
-    "@types/node" "17.0.25"
-    "@types/request" "2.48.8"
-    "@types/ws" "8.5.3"
-    async "3.2.3"
-    asyncjs-util "1.2.9"
-    bitcoinjs-lib "6.0.1"
-    bn.js "5.2.0"
-    body-parser "1.20.0"
-    bolt07 "1.8.1"
-    bolt09 "0.2.3"
-    cbor "8.1.0"
-    ecpair "2.0.1"
-    express "4.17.3"
-    invoices "2.0.6"
-    psbt "2.0.1"
-    tiny-secp256k1 "2.2.1"
-    type-fest "2.12.2"
-
 lightning@5.16.0:
   version "5.16.0"
   resolved "https://registry.npmjs.org/lightning/-/lightning-5.16.0.tgz"
@@ -5019,32 +4796,6 @@ lightning@5.16.1:
     tiny-secp256k1 "2.2.1"
     type-fest "2.13.0"
 
-lightning@5.16.2, lightning@^5.16.2:
-  version "5.16.2"
-  resolved "https://registry.npmjs.org/lightning/-/lightning-5.16.2.tgz"
-  integrity sha512-qKbf39l3k4xoY8ia0uDOvUkw8Zm3hlfiSrZasVdELlo4TJvrfZmHF5YadlWHdYFz9zFEeF4jINL3KQKGcYwliQ==
-  dependencies:
-    "@grpc/grpc-js" "1.6.7"
-    "@grpc/proto-loader" "0.6.12"
-    "@types/express" "4.17.13"
-    "@types/node" "17.0.38"
-    "@types/request" "2.48.8"
-    "@types/ws" "8.5.3"
-    async "3.2.3"
-    asyncjs-util "1.2.9"
-    bitcoinjs-lib "6.0.1"
-    bn.js "5.2.1"
-    body-parser "1.20.0"
-    bolt07 "1.8.2"
-    bolt09 "0.2.3"
-    cbor "8.1.0"
-    ecpair "2.0.1"
-    express "4.18.1"
-    invoices "2.0.7"
-    psbt "2.4.0"
-    tiny-secp256k1 "2.2.1"
-    type-fest "2.13.0"
-
 lightning@5.16.3:
   version "5.16.3"
   resolved "https://registry.yarnpkg.com/lightning/-/lightning-5.16.3.tgz#f3dc2319ef6cbc5c6a9c3d9c9a897592b23d1393"
@@ -5071,31 +4822,31 @@ lightning@5.16.3:
     tiny-secp256k1 "2.2.1"
     type-fest "2.13.0"
 
-lightning@5.9.0:
-  version "5.9.0"
-  resolved "https://registry.npmjs.org/lightning/-/lightning-5.9.0.tgz"
-  integrity sha512-o084Z7QAUaxR7+nLgr+DlL2XiMJGHDq/SRhKcanP10qR0irTK1oSHDyaFmrwz33y5V/d6Tla+5yjdD217LMWAA==
+lightning@^5.16.2:
+  version "5.16.2"
+  resolved "https://registry.npmjs.org/lightning/-/lightning-5.16.2.tgz"
+  integrity sha512-qKbf39l3k4xoY8ia0uDOvUkw8Zm3hlfiSrZasVdELlo4TJvrfZmHF5YadlWHdYFz9zFEeF4jINL3KQKGcYwliQ==
   dependencies:
-    "@grpc/grpc-js" "1.6.1"
-    "@grpc/proto-loader" "0.6.9"
+    "@grpc/grpc-js" "1.6.7"
+    "@grpc/proto-loader" "0.6.12"
     "@types/express" "4.17.13"
-    "@types/node" "17.0.23"
+    "@types/node" "17.0.38"
     "@types/request" "2.48.8"
     "@types/ws" "8.5.3"
     async "3.2.3"
-    asyncjs-util "1.2.8"
+    asyncjs-util "1.2.9"
     bitcoinjs-lib "6.0.1"
-    bn.js "5.2.0"
-    body-parser "1.19.2"
-    bolt07 "1.8.0"
-    bolt09 "0.2.2"
+    bn.js "5.2.1"
+    body-parser "1.20.0"
+    bolt07 "1.8.2"
+    bolt09 "0.2.3"
     cbor "8.1.0"
     ecpair "2.0.1"
-    express "4.17.3"
-    invoices "2.0.4"
-    psbt "2.0.0"
+    express "4.18.1"
+    invoices "2.0.7"
+    psbt "2.4.0"
     tiny-secp256k1 "2.2.1"
-    type-fest "2.12.2"
+    type-fest "2.13.0"
 
 lines-and-columns@^1.1.6:
   version "1.2.4"
@@ -5127,48 +4878,6 @@ ln-docker-daemons@^2.3.1:
     lightning "5.16.3"
     tar-stream "2.2.0"
 
-ln-service@53.10.0:
-  version "53.10.0"
-  resolved "https://registry.npmjs.org/ln-service/-/ln-service-53.10.0.tgz"
-  integrity sha512-YXpywZVf/oSWiuntp5v6IRPYNCCMlsGkWkFsX4eygnXqZnKDOaBSgvBHYJ871C0SJuyQD4oN0wazTYD+PhQUGA==
-  dependencies:
-    bolt07 "1.8.0"
-    cors "2.8.5"
-    express "4.17.3"
-    invoices "2.0.4"
-    lightning "5.9.0"
-    macaroon "3.0.4"
-    morgan "1.10.0"
-    ws "8.5.0"
-
-ln-service@53.11.0:
-  version "53.11.0"
-  resolved "https://registry.npmjs.org/ln-service/-/ln-service-53.11.0.tgz"
-  integrity sha512-qdsgLRFGdn8+zfSDgbGw584fS2QQromxp4VRXzj9nk3qveTD6IwBjaEhC1xtY73MQCHQ3ALkWVn3aYMoy5erFw==
-  dependencies:
-    bolt07 "1.8.1"
-    cors "2.8.5"
-    express "4.17.3"
-    invoices "2.0.5"
-    lightning "5.10.1"
-    macaroon "3.0.4"
-    morgan "1.10.0"
-    ws "8.5.0"
-
-ln-service@53.15.0:
-  version "53.15.0"
-  resolved "https://registry.npmjs.org/ln-service/-/ln-service-53.15.0.tgz"
-  integrity sha512-7WHV5uP0BrnXX3me4OsdaFI8J81LMJRENCREbxR/CQuvLW6rvLe0KlZmuLVBxwVAYKcXc0CcfiZPX0js2+8NKA==
-  dependencies:
-    bolt07 "1.8.1"
-    cors "2.8.5"
-    express "4.17.3"
-    invoices "2.0.6"
-    lightning "5.14.0"
-    macaroon "3.0.4"
-    morgan "1.10.0"
-    ws "8.5.0"
-
 ln-service@53.17.0:
   version "53.17.0"
   resolved "https://registry.npmjs.org/ln-service/-/ln-service-53.17.0.tgz"
@@ -5197,35 +4906,19 @@ ln-service@53.17.1:
     morgan "1.10.0"
     ws "8.7.0"
 
-ln-service@53.17.2:
-  version "53.17.2"
-  resolved "https://registry.npmjs.org/ln-service/-/ln-service-53.17.2.tgz"
-  integrity sha512-cmPDZUENkwB3Wvef16qvpYgpyEFE8eSpdkf00eMIWgUWqMcw4YYxMYrHlMvq0mELcyzQRmYld5yXUAQdQ43VAw==
+ln-service@53.17.3:
+  version "53.17.3"
+  resolved "https://registry.yarnpkg.com/ln-service/-/ln-service-53.17.3.tgz#bc828f7c76149e486d58fc0252c25e4cb6dc58f3"
+  integrity sha512-Ulk35FIMF1E+iKgImlYVESWlf9eznhd/ZYw6qycQlcjp686QccKi6Otng8H49JSfc1/kj/ObOuFipP9mtil3Wg==
   dependencies:
     bolt07 "1.8.2"
     cors "2.8.5"
     express "4.18.1"
     invoices "2.0.7"
-    lightning "5.16.2"
+    lightning "5.16.3"
     macaroon "3.0.4"
     morgan "1.10.0"
-    ws "8.7.0"
-
-ln-sync@3.12.0:
-  version "3.12.0"
-  resolved "https://registry.npmjs.org/ln-sync/-/ln-sync-3.12.0.tgz"
-  integrity sha512-+TFRyMVvUU9jAqRGPiawPY8cGSmfd2bKfofGsH95zTlQ4DeQLYyEPFxzqJZrkmddqdohfuF0XVW9y7+4v4eq5A==
-  dependencies:
-    async "3.2.3"
-    asyncjs-util "1.2.9"
-    bech32 "2.0.0"
-    bitcoinjs-lib "6.0.1"
-    bolt07 "1.8.1"
-    colorette "2.0.16"
-    ecpair "2.0.1"
-    ln-service "53.10.0"
-    psbt "2.0.1"
-    tiny-secp256k1 "2.2.1"
+    ws "8.8.0"
 
 ln-sync@3.12.1:
   version "3.12.1"
@@ -5243,21 +4936,53 @@ ln-sync@3.12.1:
     psbt "2.3.0"
     tiny-secp256k1 "2.2.1"
 
-ln-telegram@3.22.1:
-  version "3.22.1"
-  resolved "https://registry.npmjs.org/ln-telegram/-/ln-telegram-3.22.1.tgz"
-  integrity sha512-chYAssyd0UN97gCIoN1WDm4Ymlhs1xGIIsl9F5QHYV/ogpSZPsWHWyDPnQPMNhC3ik27H+LD5R7YjmQj8fEPlA==
+ln-sync@3.12.2:
+  version "3.12.2"
+  resolved "https://registry.yarnpkg.com/ln-sync/-/ln-sync-3.12.2.tgz#d4fdda17f4c31da159bfcfaab7df9d0bff430e61"
+  integrity sha512-Ae6SGG1ItbARuZuUevCp3S/1HiFep7G5UNuSkjsG8ohA4d6VN6RajcEbjsU1SdEtE7oQHJt0p52ye/R3SONDIg==
   dependencies:
-    async "3.2.3"
-    asyncjs-util "1.2.9"
+    async "3.2.4"
+    asyncjs-util "1.2.10"
+    bech32 "2.0.0"
+    bitcoinjs-lib "6.0.1"
     bolt07 "1.8.2"
-    goldengate "11.2.2"
+    colorette "2.0.17"
+    ecpair "2.0.1"
+    ln-service "53.17.3"
+    psbt "2.6.0"
+    tiny-secp256k1 "2.2.1"
+
+ln-sync@3.13.0:
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/ln-sync/-/ln-sync-3.13.0.tgz#5eb5dca465ebb19f0d64effee5f032c3ed4620f0"
+  integrity sha512-f5s60wyijcp67gN86VuVSax1xtoc7djwiDLYWIsJPU7uro4F3n8sU76HI1xZxwNL8Q7mMbWEMm/SIeA7ds9yEw==
+  dependencies:
+    async "3.2.4"
+    asyncjs-util "1.2.10"
+    bech32 "2.0.0"
+    bitcoinjs-lib "6.0.1"
+    bolt07 "1.8.2"
+    colorette "2.0.17"
+    ecpair "2.0.1"
+    ln-service "53.17.3"
+    psbt "2.6.0"
+    tiny-secp256k1 "2.2.1"
+
+ln-telegram@3.22.2:
+  version "3.22.2"
+  resolved "https://registry.yarnpkg.com/ln-telegram/-/ln-telegram-3.22.2.tgz#d2e31d31e23f0eb82f20ff1042a91763e93433ee"
+  integrity sha512-Vqnx7Pmgbn6ENX5b13P7pK02k29LcFFyOznFsbbI9WFjfmVHskJ6ymIuA7GX+oEy6XgyMA9/nDYh1BQhnPNcgA==
+  dependencies:
+    async "3.2.4"
+    asyncjs-util "1.2.10"
+    bolt07 "1.8.2"
+    goldengate "11.2.3"
     grammy "1.8.3"
     ln-accounting "5.0.7"
-    ln-service "53.17.2"
-    ln-sync "3.12.1"
+    ln-service "53.17.3"
+    ln-sync "3.13.0"
     luxon "2.4.0"
-    paid-services "3.16.0"
+    paid-services "3.16.2"
     table "6.8.0"
 
 load-json-file@^4.0.0:
@@ -6095,24 +5820,44 @@ package-json@^6.3.0:
     registry-url "^5.0.0"
     semver "^6.2.0"
 
-paid-services@3.16.0:
-  version "3.16.0"
-  resolved "https://registry.npmjs.org/paid-services/-/paid-services-3.16.0.tgz"
-  integrity sha512-1NJojLf8qLulTuhO//XqpQWsK/cE/kMrM0hmX6ggToOWJQC+5wSiqwjlaAKRARLwX/uAMOpCTlm3n/EoBrEuQA==
+paid-services@3.16.2:
+  version "3.16.2"
+  resolved "https://registry.yarnpkg.com/paid-services/-/paid-services-3.16.2.tgz#317874647e93c53f1cc6f1605205ce22e520e735"
+  integrity sha512-4KmT09JNTk9RMOXVZiaQCiiUbgf0ucmFqKzAV8H5iwOH2dRk8QWlmrWRmvZdwTbjjNePnhuy/QvJMXki9ox0sw==
   dependencies:
     "@alexbosworth/fiat" "1.0.2"
-    async "3.2.3"
+    async "3.2.4"
     asyncjs-util "1.2.9"
     bech32 "2.0.0"
-    bolt01 "1.2.4"
-    bolt07 "1.8.1"
+    bolt01 "1.2.5"
+    bolt07 "1.8.2"
     ecpair "2.0.1"
-    goldengate "11.2.1"
-    invoices "2.0.6"
-    ln-service "53.15.0"
-    ln-sync "3.12.0"
+    goldengate "11.2.2"
+    invoices "2.0.7"
+    ln-service "53.17.3"
+    ln-sync "3.12.1"
     p2tr "1.3.1"
-    psbt "2.0.1"
+    psbt "2.6.0"
+    tiny-secp256k1 "2.2.1"
+
+paid-services@3.16.3:
+  version "3.16.3"
+  resolved "https://registry.yarnpkg.com/paid-services/-/paid-services-3.16.3.tgz#03331499579e2dbfcb2dd047b024f1043eafaeeb"
+  integrity sha512-LmthAiL2EP/iYorDmSZFpi8ocQmciYWAirzPYWGhIPOLs409btO2tfjM/fY839qFzxzHpONRVx8CwuyqKLtolg==
+  dependencies:
+    "@alexbosworth/fiat" "1.0.3"
+    async "3.2.4"
+    asyncjs-util "1.2.10"
+    bech32 "2.0.0"
+    bolt01 "1.2.5"
+    bolt07 "1.8.2"
+    ecpair "2.0.1"
+    goldengate "11.2.3"
+    invoices "2.0.7"
+    ln-service "53.17.3"
+    ln-sync "3.13.0"
+    p2tr "1.3.1"
+    psbt "2.6.0"
     tiny-secp256k1 "2.2.1"
 
 parent-module@^1.0.0:
@@ -6357,18 +6102,6 @@ proxy-addr@~2.0.7:
     forwarded "0.2.0"
     ipaddr.js "1.9.1"
 
-psbt@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/psbt/-/psbt-2.0.0.tgz"
-  integrity sha512-V3RueLeXhP/WZETCtUxFn9aaEjHKdJIp2jir1rgK3iU0fV4hC0f45wDRDrrtcFHIUyvudgzhg6Bcgr8cGaWXlA==
-  dependencies:
-    bip66 "1.1.5"
-    bitcoin-ops "1.4.1"
-    bitcoinjs-lib "6.0.1"
-    bn.js "5.2.0"
-    pushdata-bitcoin "1.0.1"
-    varuint-bitcoin "1.1.2"
-
 psbt@2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/psbt/-/psbt-2.0.1.tgz"
@@ -6466,11 +6199,6 @@ qs@6.10.3:
   dependencies:
     side-channel "^1.0.4"
 
-qs@6.9.7:
-  version "6.9.7"
-  resolved "https://registry.npmjs.org/qs/-/qs-6.9.7.tgz"
-  integrity sha512-IhMFgUmuNpyRfxA90umL7ByLlgRXu6tIfKPpF5TmcfRLlLCckfP/g3IQmju6jjpu+Hh8rA+2p6A27ZSPOOHdKw==
-
 queue-microtask@^1.2.2:
   version "1.2.3"
   resolved "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
@@ -6492,16 +6220,6 @@ range-parser@~1.2.1:
   version "1.2.1"
   resolved "https://registry.npmjs.org/range-parser/-/range-parser-1.2.1.tgz"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
-
-raw-body@2.4.3:
-  version "2.4.3"
-  resolved "https://registry.npmjs.org/raw-body/-/raw-body-2.4.3.tgz"
-  integrity sha512-UlTNLIcu0uzb4D2f4WltY6cVjLi+/jEN4lgEUj3E04tpMDpUlkBo/eSn6zou9hum2VMNpCCUone0O0WeJim07g==
-  dependencies:
-    bytes "3.1.2"
-    http-errors "1.8.1"
-    iconv-lite "0.4.24"
-    unpipe "1.0.0"
 
 raw-body@2.5.1:
   version "2.5.1"
@@ -6894,25 +6612,6 @@ semver@^7.0.0, semver@^7.1.1, semver@^7.3.4, semver@^7.3.5, semver@^7.3.7:
   dependencies:
     lru-cache "^6.0.0"
 
-send@0.17.2:
-  version "0.17.2"
-  resolved "https://registry.npmjs.org/send/-/send-0.17.2.tgz"
-  integrity sha512-UJYB6wFSJE3G00nEivR5rgWp8c2xXvJ3OPWPhmuteU0IKj8nKbG3DrjiOmLwpnHGYWAVwA69zmTm++YG0Hmwww==
-  dependencies:
-    debug "2.6.9"
-    depd "~1.1.2"
-    destroy "~1.0.4"
-    encodeurl "~1.0.2"
-    escape-html "~1.0.3"
-    etag "~1.8.1"
-    fresh "0.5.2"
-    http-errors "1.8.1"
-    mime "1.6.0"
-    ms "2.1.3"
-    on-finished "~2.3.0"
-    range-parser "~1.2.1"
-    statuses "~1.5.0"
-
 send@0.18.0:
   version "0.18.0"
   resolved "https://registry.npmjs.org/send/-/send-0.18.0.tgz"
@@ -6938,16 +6637,6 @@ serialize-javascript@^6.0.0:
   integrity sha512-Qr3TosvguFt8ePWqsvRfrKyQXIiW+nGbYpy8XK24NQHE83caxWt+mIymTT19DGFbNWNLfEwsrkSmN64lVWB9ag==
   dependencies:
     randombytes "^2.1.0"
-
-serve-static@1.14.2:
-  version "1.14.2"
-  resolved "https://registry.npmjs.org/serve-static/-/serve-static-1.14.2.tgz"
-  integrity sha512-+TMNA9AFxUEGuC0z2mevogSnn9MXKb4fa7ngeRMJaaGv8vTwnIEkKi+QGvPt33HSnf8pRS+WGM0EbMtCJLKMBQ==
-  dependencies:
-    encodeurl "~1.0.2"
-    escape-html "~1.0.3"
-    parseurl "~1.3.3"
-    send "0.17.2"
 
 serve-static@1.15.0:
   version "1.15.0"
@@ -7191,11 +6880,6 @@ statuses@2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/statuses/-/statuses-2.0.1.tgz"
   integrity sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==
-
-"statuses@>= 1.5.0 < 2", statuses@~1.5.0:
-  version "1.5.0"
-  resolved "https://registry.npmjs.org/statuses/-/statuses-1.5.0.tgz"
-  integrity sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=
 
 streamsearch@0.1.2:
   version "0.1.2"
@@ -7502,13 +7186,6 @@ tiny-emitter@^2.1.0:
   resolved "https://registry.npmjs.org/tiny-emitter/-/tiny-emitter-2.1.0.tgz"
   integrity sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==
 
-tiny-secp256k1@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.npmjs.org/tiny-secp256k1/-/tiny-secp256k1-2.2.0.tgz"
-  integrity sha512-2hPuUGCroLrxh6xxwoe+1RgPpOOK1w2uTnhgiHBpvoutBR+krNuT4hOXQyOaaYnZgoXBB6hBYkuAJHxyeBOPzQ==
-  dependencies:
-    uint8array-tools "0.0.6"
-
 tiny-secp256k1@2.2.1:
   version "2.2.1"
   resolved "https://registry.npmjs.org/tiny-secp256k1/-/tiny-secp256k1-2.2.1.tgz"
@@ -7754,11 +7431,6 @@ uglify-js@^3.1.4:
   version "3.16.0"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.16.0.tgz#b778ba0831ca102c1d8ecbdec2d2bdfcc7353190"
   integrity sha512-FEikl6bR30n0T3amyBh3LoiBdqHRy/f4H80+My34HOesOKyHfOsxAPAxOoqC0JUnC1amnO0IwkYC3sko51caSw==
-
-uint8array-tools@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.npmjs.org/uint8array-tools/-/uint8array-tools-0.0.6.tgz"
-  integrity sha512-aIvEHNRX1AlOYAr6qSUjQBn4mCduxx6MtC967aRDTb2UUBPj0Ix2ZFQDcmXUUO/UxRPHcw1f5a5nVbCSKDSOqA==
 
 uint8array-tools@0.0.7:
   version "0.0.7"
@@ -8062,11 +7734,6 @@ write-file-atomic@^3.0.0:
     signal-exit "^3.0.2"
     typedarray-to-buffer "^3.1.5"
 
-ws@8.5.0:
-  version "8.5.0"
-  resolved "https://registry.npmjs.org/ws/-/ws-8.5.0.tgz"
-  integrity sha512-BWX0SWVgLPzYwF8lTzEy1egjhS4S4OEAHfsO8o65WOVsrnSRGaSiUaa9e0ggGlkMTtBlmOpEXiie9RUcBO86qg==
-
 ws@8.6.0:
   version "8.6.0"
   resolved "https://registry.npmjs.org/ws/-/ws-8.6.0.tgz"
@@ -8076,6 +7743,11 @@ ws@8.7.0:
   version "8.7.0"
   resolved "https://registry.npmjs.org/ws/-/ws-8.7.0.tgz"
   integrity sha512-c2gsP0PRwcLFzUiA8Mkr37/MI7ilIlHQxaEAtd0uNMbVMoy8puJyafRlm0bV9MbGSabUPeLrRRaqIBcFcA2Pqg==
+
+ws@8.8.0:
+  version "8.8.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.8.0.tgz#8e71c75e2f6348dbf8d78005107297056cb77769"
+  integrity sha512-JDAgSYQ1ksuwqfChJusw1LSJ8BizJ2e/vVu5Lxjq3YvNJNlROv1ui4i+c/kUUrPheBvQl4c5UbERhTwKa6QBJQ==
 
 xdg-basedir@^4.0.0:
   version "4.0.0"
