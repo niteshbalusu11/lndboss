@@ -1,13 +1,24 @@
+import * as getCert from 'balanceofsatoshis/lnd/get_cert';
+import * as getMacaroon from 'balanceofsatoshis/lnd/get_macaroon';
+import * as getPath from 'balanceofsatoshis/lnd/get_path';
+import * as getSocket from 'balanceofsatoshis/lnd/get_socket';
+
+import { homedir, platform, userInfo } from 'os';
+
 import { auto } from 'async';
 import getSavedCredentials from './get_saved_credentials';
-import { homedir } from 'os';
 import { join } from 'path';
 import { logger } from '~server/utils/global_functions';
 import { readFile } from 'fs';
 
 const config = 'config.json';
+const defaultLndDirPath = process.env.BOS_DEFAULT_LND_PATH;
+const defaultNodeName = process.env.BOS_DEFAULT_SAVED_NODE;
+const fs = { getFile: readFile };
 const home = '.bosgui';
+const os = { homedir, platform, userInfo };
 const { parse } = JSON;
+const socket = 'localhost:10009';
 
 /** LND credentials
 
@@ -38,6 +49,18 @@ type Tasks = {
     macaroon: string;
     socket: string;
   };
+  getPath: {
+    path: string;
+  };
+  getCert: {
+    cert: string | undefined;
+  };
+  getMacaroon: {
+    macaroon: string;
+  };
+  getSocket: {
+    socket: string;
+  };
 };
 
 type Args = {
@@ -57,6 +80,10 @@ const lndCredentials = async (args: Args): Promise<Return> => {
       try {
         if (!!args.node) {
           return cbk(null, args.node);
+        }
+
+        if (!!defaultNodeName) {
+          return cbk(null, defaultNodeName);
         }
 
         const path = join(...[homedir(), home, config]);
@@ -86,18 +113,94 @@ const lndCredentials = async (args: Args): Promise<Return> => {
       }
     },
 
+    // Look for a special path
+    getPath: [
+      'forNode',
+      async ({ forNode }) => {
+        // Exit early when a specific node is used
+        if (!!forNode) {
+          return {};
+        }
+
+        // Exit early when there is a default LND path
+        if (!!defaultLndDirPath) {
+          return { path: defaultLndDirPath };
+        }
+
+        return await getPath({ fs, os });
+      },
+    ],
+
+    // Get the default cert
+    getCert: [
+      'forNode',
+      'getPath',
+      async ({ forNode, getPath }) => {
+        // Exit early when a specific node is used
+        if (!!forNode) {
+          return { cert: '' };
+        }
+
+        return await getCert({ fs, os, node: forNode, path: getPath.path });
+      },
+    ],
+
+    // Get the default macaroon
+    getMacaroon: [
+      'forNode',
+      'getPath',
+      async ({ forNode, getPath }) => {
+        // Exit early when a specific node is used
+
+        if (!!forNode) {
+          return { macaroon: '' };
+        }
+
+        return await getMacaroon({ fs, os, node: forNode, path: getPath.path });
+      },
+    ],
+
+    // Get the socket out of the ini file
+    getSocket: [
+      'forNode',
+      'getPath',
+      async ({ forNode, getPath }) => {
+        // Exit early when a specific node is used
+        if (!!forNode) {
+          return { socket: '' };
+        }
+
+        return await getSocket({ fs, os, node: forNode, path: getPath.path });
+      },
+    ],
+
     // Get the node credentials, if applicable
     getNodeCredentials: [
       'forNode',
       async ({ forNode }) => {
+        if (!forNode) {
+          return;
+        }
         return await getSavedCredentials({ node: forNode });
       },
     ],
 
     credentials: [
       'getNodeCredentials',
-      ({ getNodeCredentials }, cbk) => {
+      'getCert',
+      'getMacaroon',
+      'getPath',
+      'getSocket',
+      ({ forNode, getNodeCredentials, getCert, getMacaroon, getSocket }, cbk) => {
         // Exit early with the default credentials when no node is specified
+        if (!forNode) {
+          return cbk(null, {
+            cert: getCert.cert,
+            macaroon: getMacaroon.macaroon,
+            socket: getSocket.socket || socket,
+          });
+        }
+
         return cbk(null, {
           cert: getNodeCredentials.cert,
           macaroon: getNodeCredentials.macaroon,
