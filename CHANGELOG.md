@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.7.0](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.6.0...v1.7.0) (2022-06-20)
 
+- Added support for setting path to LND directory
+- Added loading dialog when waiting for response from server
+- Updated test cases
+
 ## [1.6.0](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.5.0...v1.6.0) (2022-06-18)
 
 - Added support for accounting command
