@@ -1,5 +1,38 @@
 <h1>Building a gui for balanceofsatoshis, work in progress</h1>
 
+## Docker Instructions
+
+Make a .bosgui directory and change directory
+```
+mkdir ~/.bosgui && cd ~/.bosgui
+```
+
+Make a docker-compose.yaml file
+```
+nano docker-compose.yaml
+```
+
+Paste the following contents
+```
+services:
+services:
+  lndboss:
+    image: niteshbalusu/lndboss:latest
+    volumes:
+      - ~/.bosgui:/home/node/.bosgui
+      - /path/to/your/lnd/directory:/home/node/.lnd
+    ports:
+      - "8055:8055"
+```
+
+Start the app
+```
+docker-compose up -d
+```
+On your browser go to http://localhost:8055
+
+<br></br>
+
 ## Docker Instructions (Umbrel)
 
 Make a .bosgui directory and change directory
@@ -35,38 +68,6 @@ Start the app
 docker-compose up -d
 ```
 On your browser go to http://umbrel.local:8055
-
-<br></br>
-## Docker Instructions
-
-Make a .bosgui directory and change directory
-```
-mkdir ~/.bosgui && cd ~/.bosgui
-```
-
-Make a docker-compose.yaml file
-```
-nano docker-compose.yaml
-```
-
-Paste the following contents
-```
-services:
-services:
-  lndboss:
-    image: niteshbalusu/lndboss:latest
-    volumes:
-      - ~/.bosgui:/home/node/.bosgui
-      - /path/to/your/lnd/directory:/home/node/.lnd
-    ports:
-      - "8055:8055"
-```
-
-Start the app
-```
-docker-compose up -d
-```
-On your browser go to http://localhost:8055
 
 <br></br>
 ## To build from source, you will need Node.js 16 and yarn.
