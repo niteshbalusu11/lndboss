@@ -44,7 +44,7 @@ docker-compose up -d
 
 <br></br>
 
-## Docker Instructions (Umbrel 0.5 and higher) 
+## Docker Instructions (Umbrel version 0.5 and higher) 
 
 Make a .bosgui directory and change directory
 ```
@@ -64,6 +64,36 @@ services:
     volumes:
       - ~/.bosgui:/home/node/.bosgui
       - ~/umbrel/app-data/lightning/data/lnd:/home/node/.lnd
+    ports:
+      - '8055:8055'
+    extra_hosts:
+      - 'localhost:10.21.21.9'
+networks:
+  default:
+    external: true
+    name: umbrel_main_network
+```
+
+## Docker Instructions (Umbrel lower than version 0.5) 
+
+Make a .bosgui directory and change directory
+```
+mkdir ~/.bosgui && cd ~/.bosgui
+```
+
+Make a docker-compose.yaml file
+```
+nano docker-compose.yaml
+```
+
+Paste the following contents
+```
+services:
+  lndboss:
+    image: niteshbalusu/lndboss:latest
+    volumes:
+      - ~/.bosgui:/home/node/.bosgui
+      - ~/umbrel/lnd:/home/node/.lnd
     ports:
       - '8055:8055'
     extra_hosts:
