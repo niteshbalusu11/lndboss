@@ -7,6 +7,7 @@ import Router from 'next/router';
 import axios from 'axios';
 import { createUseStyles } from 'react-jss';
 import getConfig from 'next/config';
+import { useLoading } from '~client/hooks/useLoading';
 import { useNotify } from '~client/hooks/useNotify';
 
 const { publicRuntimeConfig } = getConfig();
@@ -101,6 +102,8 @@ const Authenticate = () => {
   };
 
   const handleEvents = async () => {
+    useLoading({ isLoading: true });
+
     const postBody = {
       cert,
       macaroon,
@@ -125,6 +128,8 @@ const Authenticate = () => {
 
       const { connection, error, result } = await response.data;
 
+      useLoading({ isLoading: false });
+
       if (!!error) {
         useNotify({ type: 'error', message: 'Failed to connect to LND' });
       }
@@ -138,6 +143,8 @@ const Authenticate = () => {
         useNotify({ type: 'success', message: 'Credentials saved and Authenticated to LND! 🚀' });
       }
     } catch (error) {
+      useLoading({ isLoading: false });
+
       useNotify({ type: 'error', message: 'Failed to connect to LND' });
       useNotify({
         type: 'error',

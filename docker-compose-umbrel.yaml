@@ -3,6 +3,7 @@ services:
     build: .
     volumes:
       - ~/.bosgui:/home/node/.bosgui
+      - ~/umbrel/app-data/lightning/data/lnd:~/umbrel/app-data/lightning/data/lnd
     ports:
       - '8055:8055'
 networks:
