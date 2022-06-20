@@ -31,6 +31,17 @@ docker-compose up -d
 ```
 On your browser go to http://localhost:8055
 
+### Updating docker images for new releases
+```
+cd ~/.bos
+
+docker-compose down
+
+docker-compose pull
+
+docker-compose up -d
+```
+
 <br></br>
 
 ## Docker Instructions (Umbrel)
@@ -68,6 +79,17 @@ Start the app
 docker-compose up -d
 ```
 On your browser go to http://umbrel.local:8055
+
+### Updating docker images for new releases
+```
+cd ~/.bos
+
+docker-compose down
+
+docker-compose pull
+
+docker-compose up -d
+```
 
 <br></br>
 ## To build from source, you will need Node.js 16 and yarn.
