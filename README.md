@@ -44,7 +44,7 @@ docker-compose up -d
 
 <br></br>
 
-## Docker Instructions (Umbrel)
+## Docker Instructions (Umbrel 0.5 and higher) 
 
 Make a .bosgui directory and change directory
 ```
