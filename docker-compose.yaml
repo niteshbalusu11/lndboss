@@ -1,8 +1,7 @@
 services:
   lndboss:
-    build: .
+    image: niteshbalusu/lndboss:latest
     volumes:
       - ~/.bosgui:/home/node/.bosgui
-      - /path/to/lnd/directory:/home/node/.lnd
     ports:
       - "8055:8055"
