@@ -74,6 +74,23 @@ networks:
     name: umbrel_main_network
 ```
 
+Start the app
+```
+docker-compose up -d
+```
+On your browser go to http://umbrel.local:8055
+
+### Updating docker images for new releases
+```
+cd ~/.bos
+
+docker-compose down
+
+docker-compose pull
+
+docker-compose up -d
+```
+
 ## Docker Instructions (Umbrel lower than version 0.5) 
 
 Make a .bosgui directory and change directory
