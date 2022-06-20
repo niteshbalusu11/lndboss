@@ -1,0 +1,11 @@
+services:
+  lndboss:
+    build: .
+    volumes:
+      - ~/.bosgui:/home/node/.bosgui
+    ports:
+      - '8055:8055'
+networks:
+  default:
+    external: true
+    name: umbrel_main_network
