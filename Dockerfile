@@ -17,6 +17,7 @@ RUN chown -R $USER_ID:$GROUP_ID /lndboss/
 USER $USER_ID:$GROUP_ID
 
 RUN mkdir /home/node/.bosgui
+RUN mkdir /home/node/.lnd
 RUN yarn install
 RUN yarn build
 
