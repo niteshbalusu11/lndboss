@@ -53,7 +53,7 @@ const ChartFeesEarnedResult = () => {
       </Head>
       <StartFlexBox>
         <Stack spacing={3} style={styles.form}>
-          {!!data.data.length ? <ChartFeesEarnedOutput data={data} /> : <h2>Loading...</h2>}
+          {!!data.data.length ? <ChartFeesEarnedOutput data={data} /> : null}
         </Stack>
       </StartFlexBox>
     </CssBaseline>

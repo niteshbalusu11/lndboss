@@ -14,8 +14,9 @@ test.describe('Test authentication from node.js side', async () => {
   });
 
   test('add a new saved node credential', async () => {
-    const node = 'playwrightservertest';
+    const node = 'playwrightservertestcredential';
     const { result } = await putSavedCredentials({
+      auth_type: 'credentials',
       cert: lightning.cert,
       macaroon: lightning.macaroon,
       socket: lightning.socket,

@@ -8,7 +8,8 @@ const startGlobalContainer = async () => {
   lightning = await spawnLightning();
   const node = 'testnode1';
 
-  const { error } = await putSavedCredentials({
+  const { result } = await putSavedCredentials({
+    auth_type: 'credentials',
     cert: lightning.cert,
     macaroon: lightning.macaroon,
     socket: lightning.socket,
@@ -16,8 +17,8 @@ const startGlobalContainer = async () => {
     is_default: false,
   });
 
-  if (!!error) {
-    throw new Error(error);
+  if (!result) {
+    throw new Error('Failed to put saved credentials');
   }
 
   return lightning;

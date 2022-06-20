@@ -173,7 +173,6 @@ test.describe('Test the Accounting command client page', async () => {
   });
 
   test('test the Accounting command page: CSV', async ({ page }) => {
-    await test.slow();
     await page.goto('/Commands');
     await page.click('text=Accounting');
     await expect(page).toHaveTitle('Accounting');

@@ -185,14 +185,30 @@ export class chartPaymentsReceivedDto {
 export class credentialsDto {
   @Transform(({ value }) => trim(value))
   @IsString()
+  auth_type: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
   cert: string;
 
   @IsBoolean()
   is_default: boolean;
 
   @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  lnd_directory: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
   @IsString()
   macaroon: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  network_type: string;
 
   @Transform(({ value }) => trim(value))
   @IsString()
