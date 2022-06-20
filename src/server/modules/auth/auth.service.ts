@@ -3,7 +3,7 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { authenticationDto } from '~shared/commands.dto';
-import { compare } from 'bcrypt';
+import { compare } from 'bcryptjs';
 
 /**
   Validate User: Gets the user from the database and compares the password

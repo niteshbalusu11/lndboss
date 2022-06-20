@@ -1,5 +1,5 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { genSalt, hash } from 'bcrypt';
+import { genSalt, hash } from 'bcryptjs';
 import { getAccountInfo, register } from '~server/authentication';
 
 import { authenticationDto } from '~shared/commands.dto';
