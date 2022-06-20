@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.6.0...v1.7.0) (2022-06-20)
+
 ## [1.6.0](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.5.0...v1.6.0) (2022-06-18)
 
 - Added support for accounting command
