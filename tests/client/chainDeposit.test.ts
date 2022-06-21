@@ -17,6 +17,7 @@ test.describe('Test the ChainDeposit command client page', async () => {
 
     await page.type(`#${ChainDepositCommand?.args?.amount}`, '1000');
     await page.type('#node', 'testnode1');
+    await page.type(`#${ChainDepositCommand?.flags?.format}`, 'p2wpkh');
 
     await page.click('text=run command');
     await page.waitForTimeout(1000);

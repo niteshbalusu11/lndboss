@@ -31,8 +31,9 @@ export type commandCertValidityDays = {
 // ========================Chain Deposit Command=====================================
 
 export type commandChainDeposit = {
-  node?: string;
   amount?: number;
+  node?: string;
+  format: any;
 };
 
 // ========================Chart Chain Fees Command=====================================

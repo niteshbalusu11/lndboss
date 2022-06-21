@@ -75,7 +75,7 @@ const commands: Commands = [
     value: 'ChainDeposit',
     description: 'Generate an onchain deposit address',
     flags: {
-      amount: 'Amount',
+      format: 'Format',
     },
   },
   {

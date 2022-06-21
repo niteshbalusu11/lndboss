@@ -94,6 +94,11 @@ export class chainDepositDto {
   amount: number;
 
   @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  format: string;
+
+  @Transform(({ value }) => trim(value))
   @IsString()
   node: string;
 }

@@ -13,6 +13,7 @@ test.describe('Test ChainDeposit command on the node.js side', async () => {
   test('run ChainDeposit command', async () => {
     const args = {
       amount: 1000,
+      format: 'p2wpkh',
     };
     const { result } = await chainDepositCommand(args, lightning.lnd);
     console.log('chain deposit----', result);

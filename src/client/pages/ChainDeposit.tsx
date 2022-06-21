@@ -23,7 +23,7 @@ const styles = {
     width: '700px',
   },
   textField: {
-    width: '300px',
+    width: '500px',
   },
   h4: {
     marginTop: '0px',
@@ -34,6 +34,7 @@ const ChainDeposit = () => {
   const [amount, setAmount] = useState('');
   const [data, setData] = useState({ address: '', url: '' });
   const [node, setNode] = useState('');
+  const [format, setFormat] = useState('');
 
   const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
@@ -43,9 +44,14 @@ const ChainDeposit = () => {
     setAmount(event.target.value);
   };
 
+  const handleFormatChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormat(event.target.value);
+  };
+
   const fetchData = async () => {
     const query: types.commandChainDeposit = {
       node,
+      format,
       amount: Number(amount),
     };
 
@@ -72,6 +78,14 @@ const ChainDeposit = () => {
             label={ChainDepositCommand.args.amount}
             id={ChainDepositCommand.args.amount}
             onChange={handleAmountChange}
+            style={styles.textField}
+          />
+          <TextField
+            type="text"
+            placeholder="Format np2wpkh, p2tr, p2wpkh (default)"
+            label={ChainDepositCommand.flags.format}
+            id={ChainDepositCommand.flags.format}
+            onChange={handleFormatChange}
             style={styles.textField}
           />
           <TextField

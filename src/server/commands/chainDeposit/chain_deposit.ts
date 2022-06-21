@@ -6,7 +6,6 @@ import { auto } from 'async';
 import { logger } from '~server/utils/global_functions';
 
 const bigTok = (tokens: number) => (!tokens ? '0' : (tokens / 1e8).toFixed(8));
-const format = 'p2wpkh';
 
 /** Get deposit address
   {
@@ -51,7 +50,7 @@ const chainDepositCommand = async (
       getAddress: [
         'validate',
         ({}, cbk: any) => {
-          return createChainAddress({ format, lnd, is_unused: true }, cbk);
+          return createChainAddress({ format: args.format, lnd, is_unused: true }, cbk);
         },
       ],
 
