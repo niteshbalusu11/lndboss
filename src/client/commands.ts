@@ -25,6 +25,11 @@ export const globalCommands = {
 
 const commands: Commands = [
   {
+    name: 'Accounting',
+    value: 'Accounting',
+    description: 'Get an accounting rundown of your node',
+    longDescription:
+      'Get an accounting rundown of your node. Rate providers: coindesk, coingecko. Privacy note: this requests tx related data from third parties.',
     args: {
       chainFees: 'chain-fees',
       chainReceives: 'chain-receives',
@@ -33,11 +38,6 @@ const commands: Commands = [
       invoices: 'invoices',
       payments: 'payments',
     },
-    name: 'Accounting',
-    value: 'Accounting',
-    description: 'Get an accounting rundown of your node',
-    longDescription:
-      'Get an accounting rundown of your node. Rate providers: coindesk, coingecko. Privacy note: this requests tx related data from third parties.',
     flags: {
       is_csv: 'CSV',
       is_fiat_disabled: 'DisableFiat',
@@ -89,12 +89,12 @@ const commands: Commands = [
     },
   },
   {
-    args: {
-      via: 'Via',
-    },
     name: 'Chart Fees Earned',
     value: 'ChartFeesEarned',
     description: 'Show the routing fees earned',
+    args: {
+      via: 'Via',
+    },
     flags: {
       count: 'Count',
       days: 'Days',
@@ -127,12 +127,22 @@ const commands: Commands = [
     },
   },
   {
-    args: {
-      tag: 'Tag',
+    name: 'Closed',
+    value: 'Closed',
+    description: 'Channel closes with chain-transaction derived resolution details',
+    longDescription:
+      'Channel closes with chain-transaction derived resolution details. Privacy note: this requests tx data from third parties.',
+    flags: {
+      limit: 'Limit',
     },
+  },
+  {
     name: 'Tags',
     value: 'Tags',
     description: 'Tags can be used in other commands via tag and avoid options',
+    args: {
+      tag: 'Tag',
+    },
     flags: {
       tag: 'Tag',
       add: 'Add',

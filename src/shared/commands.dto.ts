@@ -224,6 +224,17 @@ export class credentialsDto {
   socket: string;
 }
 
+export class closedDto {
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  limit: number;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  node: string;
+}
+
 export class tagsDto {
   @Transform(({ value }) => toStringArray(value))
   @IsArray()
