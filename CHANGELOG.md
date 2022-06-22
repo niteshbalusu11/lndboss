@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file. See [standa
 ## [1.9.0](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.8.0...v1.9.0) (2022-06-22)
 
 - Support for bos closed command
+- Add taproot format support for chain-deposit
 - Fixed docker release issues
 - Fix for replacing bcrypt library
 
