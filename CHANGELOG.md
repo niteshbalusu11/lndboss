@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.9.0](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.8.0...v1.9.0) (2022-06-22)
 
+- Support for bos closed command
+- Fixed docker release issues
+- Fix for replacing bcrypt library
+
 ## [1.8.0](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.7.0...v1.8.0) (2022-06-20)
 
 - Support for auto pulling credentials from lnd directory if found
