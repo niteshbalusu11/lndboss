@@ -74,6 +74,13 @@ export type commandChartPaymentsReceived = {
   nodes?: string[];
 };
 
+// ========================Closed Command=====================================
+
+export type commandClosed = {
+  limit?: number;
+  node?: string;
+};
+
 // ========================Tags Command=====================================
 
 export type commandTags = {

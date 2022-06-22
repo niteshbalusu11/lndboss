@@ -8,6 +8,7 @@ import { ChartChainFeesModule } from './modules/chart-chain-fees/chart-chain-fee
 import { ChartFeesEarnedModule } from './modules/chart-fees-earned/chart-fees-earned.module';
 import { ChartFeesPaidModule } from './modules/chart-fees-paid/chart-fees-paid.module';
 import { ChartPaymentsReceivedModule } from './modules/chart-payments-received/chart-payments-received.module';
+import { ClosedModule } from './modules/closed/closed.module';
 import { ConfigModule } from '@nestjs/config';
 import { CredentialsModule } from './modules/credentials/credentials.module';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
@@ -30,6 +31,7 @@ import { ViewModule } from '~server/modules/view/view.module';
     ChartFeesPaidModule,
     CredentialsModule,
     ChartPaymentsReceivedModule,
+    ClosedModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.env', '.env.local'],
