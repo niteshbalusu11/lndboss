@@ -42,7 +42,7 @@ const StandardTableOutput = ({ data, tableId }: Props) => {
     columns.push({
       id: name,
       label: name,
-      minWidth: 100,
+      minWidth: 50,
       align: 'center',
     });
   });

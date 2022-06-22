@@ -20,7 +20,7 @@ const styles = {
   form: {
     marginLeft: '50px',
     marginTop: '100px',
-    width: '700px',
+    minWidth: '700px',
   },
   textField: {
     width: '300px',
