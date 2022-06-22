@@ -35,7 +35,7 @@ On your browser go to http://localhost:8055
 ```
 cd ~/.bos
 
-docker-compose down --rmi all --volumes
+docker-compose down
 
 docker-compose pull
 
@@ -84,7 +84,7 @@ On your browser go to http://umbrel.local:8055
 ```
 cd ~/.bos
 
-docker-compose down --rmi all --volumes
+docker-compose down
 
 docker-compose pull
 
@@ -131,7 +131,7 @@ On your browser go to http://umbrel.local:8055
 ```
 cd ~/.bos
 
-docker-compose down --rmi all --volumes
+docker-compose down
 
 docker-compose pull
 

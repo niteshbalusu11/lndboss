@@ -5,7 +5,7 @@ ARG GROUP_ID=1000
 ENV USER_ID=$USER_ID
 ENV GROUP_ID=$GROUP_ID
 
-RUN apt-get update && apt-get install -y git jq
+RUN apt-get update && apt-get install -y git
 
 RUN git clone https://github.com/niteshbalusu11/lndboss.git
 
