@@ -33,7 +33,7 @@ On your browser go to http://localhost:8055
 
 ### Updating docker images for new releases
 ```
-cd ~/.bos
+cd ~/.bosgui
 
 docker-compose down --rmi all --volumes
 
@@ -82,7 +82,7 @@ On your browser go to http://umbrel.local:8055
 
 ### Updating docker images for new releases
 ```
-cd ~/.bos
+cd ~/.bosgui
 
 docker-compose down --rmi all --volumes
 
@@ -129,7 +129,7 @@ On your browser go to http://umbrel.local:8055
 
 ### Updating docker images for new releases
 ```
-cd ~/.bos
+cd ~/.bosgui
 
 docker-compose down --rmi all --volumes
 
