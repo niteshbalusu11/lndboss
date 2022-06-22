@@ -35,7 +35,7 @@ On your browser go to http://localhost:8055
 ```
 cd ~/.bos
 
-docker-compose down
+docker-compose down --rmi all --volumes
 
 docker-compose pull
 
@@ -84,7 +84,7 @@ On your browser go to http://umbrel.local:8055
 ```
 cd ~/.bos
 
-docker-compose down
+docker-compose down --rmi all --volumes
 
 docker-compose pull
 
@@ -131,7 +131,7 @@ On your browser go to http://umbrel.local:8055
 ```
 cd ~/.bos
 
-docker-compose down
+docker-compose down --rmi all --volumes
 
 docker-compose pull
 
@@ -190,7 +190,7 @@ git clone https://github.com/niteshbalusu11/lndboss.git
 cd lndboss
 
 # Install dependencies
-yarn
+yarn install --network-timeout 1000000
 
 # Build the app
 yarn build
