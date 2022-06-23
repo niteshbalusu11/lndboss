@@ -1,0 +1,9 @@
+services:
+  lndboss:
+    build:
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ~/.bosgui:/home/node/.bosgui
+      - /Users/nitesh/Library/Application Support/Lnd:/home/node/.lnd
+    ports:
+      - '8055:8055'
