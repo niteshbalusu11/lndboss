@@ -1,9 +1,10 @@
+import { encryptString, logger } from '~server/utils/global_functions';
 import { existsSync, mkdir, writeFile } from 'fs';
 
 import { auto } from 'async';
+import { encryptionKey } from '~server/utils/constants';
 import { homedir } from 'os';
 import { join } from 'path';
-import { logger } from '~server/utils/global_functions';
 
 const credentials = 'credentials.json';
 const home = '.bosgui';
@@ -32,6 +33,15 @@ type Tasks = {
   registerDirectory: null;
   writeCredentials: boolean;
   writePathToCredentials: boolean;
+  encryptMacaroon: {
+    encryptedMacaroon: string;
+    iv: string;
+  };
+  finalCredentials: {
+    cert: string;
+    macaroon: string;
+    socket: string;
+  };
   writeConfig: null;
 };
 
@@ -167,21 +177,67 @@ const putSavedCredentials = async (args: Args): Promise<{ result: boolean }> => 
       },
     ],
 
-    // Write credentials
-    writeCredentials: [
+    // Encrypt macaroon
+    encryptMacaroon: [
       'isValidPath',
       'registerDirectory',
       ({}, cbk: any) => {
+        // Exit early if there is no encryption key
+        if (args.auth_type !== 'credentials' || !encryptionKey || encryptionKey === '') {
+          return cbk();
+        }
+
+        const macaroon = args.macaroon;
+
+        const { iv, encryptedData, error } = encryptString({ text: macaroon });
+
+        if (!!error) {
+          return cbk(logger({ error: [503, 'UnexpectedErrorEncryptingMacaroon', { error }] }));
+        }
+
+        return cbk(null, {
+          encryptedMacaroon: encryptedData,
+          iv,
+        });
+      },
+    ],
+
+    finalCredentials: [
+      'encryptMacaroon',
+      'isValidPath',
+      'registerDirectory',
+      ({ encryptMacaroon }, cbk: any) => {
+        // Exit early if macaroon is not encrypted
+        if (!encryptMacaroon || !encryptMacaroon.encryptedMacaroon || !encryptMacaroon.iv) {
+          return cbk(null, {
+            cert: args.cert,
+            macaroon: args.macaroon,
+            socket: args.socket,
+          });
+        }
+
+        return cbk(null, {
+          cert: args.cert,
+          macaroon: encryptMacaroon.encryptedMacaroon,
+          iv: encryptMacaroon.iv,
+          socket: args.socket,
+        });
+      },
+    ],
+
+    // Write credentials
+    writeCredentials: [
+      'encryptMacaroon',
+      'finalCredentials',
+      'isValidPath',
+      'registerDirectory',
+      ({ finalCredentials }, cbk: any) => {
         // Exit early if cert and macaroon are paths
         if (args.auth_type !== 'credentials') {
           return cbk();
         }
 
-        const file = stringify({
-          cert: args.cert || undefined,
-          macaroon: args.macaroon || undefined,
-          socket: args.socket,
-        });
+        const file = stringify(finalCredentials);
 
         const path = join(...[homedir(), home, args.node, credentials]);
 
