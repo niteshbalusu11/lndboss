@@ -17,7 +17,6 @@ RUN mkdir /home/node/.bosgui
 RUN mkdir /home/node/.lnd
 RUN touch .env
 RUN yarn install --network-timeout 1000000
-RUN yarn build
 
 EXPOSE 8055
 
