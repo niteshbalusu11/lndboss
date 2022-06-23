@@ -20,7 +20,7 @@
     "build:nest": "nest build",
     "build:next": "cd src/client && next build",
     "dev": "nest start --watch",
-    "docker:build": "docker buildx build . --platform linux/amd64,linux/arm/v7 --no-cache",
+    "docker:build": "docker build -t niteshbalusu/lndboss . && docker save niteshbalusu/lndboss > lndboss.tar && gzip lndboss.tar",
     "docker:release": "docker buildx build --platform linux/arm64,linux/arm/v7,linux/amd64 --no-cache -t niteshbalusu/lndboss --push .",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
     "start": "PRODUCTION=true nest start ",

@@ -43,3 +43,7 @@ lerna-debug.log*
 # Env files
 .env
 .env.local
+
+# Docker
+lndboss.tar
+lndboss.tar.gz
