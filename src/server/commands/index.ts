@@ -7,6 +7,7 @@ import chartFeesEarnedCommand from './chartFeesEarned/chart_fees_earned_command'
 import chartFeesPaidCommand from './chartFeesPaid/chart_fees_paid_command';
 import chartPaymentsReceivedCommand from './chartPaymentsReceived/chart_payments_received_command';
 import closedCommand from './closed/closed_command';
+import findCommand from './find/find_command';
 import tagsCommand from './tags/tags_command';
 
 export {
@@ -19,5 +20,6 @@ export {
   chartFeesPaidCommand,
   chartPaymentsReceivedCommand,
   closedCommand,
+  findCommand,
   tagsCommand,
 };

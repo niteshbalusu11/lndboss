@@ -91,3 +91,10 @@ export type commandTags = {
   remove: string[] | string;
   tag?: string;
 };
+
+// ========================Find Command=====================================
+
+export type commandFind = {
+  query: string;
+  node?: string;
+};

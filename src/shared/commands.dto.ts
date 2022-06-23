@@ -235,6 +235,16 @@ export class closedDto {
   node: string;
 }
 
+export class findDto {
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  node: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  query: string;
+}
+
 export class tagsDto {
   @Transform(({ value }) => toStringArray(value))
   @IsArray()

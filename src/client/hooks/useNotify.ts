@@ -5,7 +5,7 @@ const timeout = 3000;
 
 export const useNotify = ({ type, message }) => {
   Notiflix.Notify.init({
-    fontSize: '16px',
+    fontSize: '14px',
     success: {
       background: '#049451',
       textColor: '#fff',

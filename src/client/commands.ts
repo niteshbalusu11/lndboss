@@ -11,7 +11,7 @@ export type Commands = {
   value: string;
   description: string;
   longDescription?: string;
-  flags: {
+  flags?: {
     [key: string]: string;
   };
 }[];
@@ -134,6 +134,14 @@ const commands: Commands = [
       'Channel closes with chain-transaction derived resolution details. Privacy note: this requests tx data from third parties.',
     flags: {
       limit: 'Limit',
+    },
+  },
+  {
+    name: 'Find',
+    value: 'Find',
+    description: 'Look for something in the node db that matches a query',
+    args: {
+      query: 'Query',
     },
   },
   {
