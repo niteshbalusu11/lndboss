@@ -1,4 +1,5 @@
 import { auto } from 'async';
+import { decryptString } from '~server/utils/global_functions';
 import { homedir } from 'os';
 import { join } from 'path';
 import { readFile } from 'fs';
@@ -27,9 +28,13 @@ const { parse } = JSON;
 
 type Tasks = {
   validate: () => void;
+  decryptMacaroon: {
+    macaroon: string;
+  };
   getFile: {
     cert_path?: string;
     macaroon_path?: string;
+    iv?: string;
     cert: string;
     macaroon: string;
     socket: string;
@@ -38,10 +43,7 @@ type Tasks = {
     cert_path: string;
     cert: string;
   };
-  getMacaroon: {
-    macaroon_path: string;
-    macaroon: string;
-  };
+  getMacaroon: string;
   credentials: {
     node: string;
     credentials: {
@@ -127,12 +129,38 @@ const getSavedCredentials = async ({ node }) => {
       },
     ],
 
+    // Decrypt macaroon if necessary
+    decryptMacaroon: [
+      'getMacaroon',
+      'getFile',
+      ({ getMacaroon, getFile }, cbk: any) => {
+        // Exit early if there is no macaroon to decrypt, macaroon is a path or base64
+        if (!getFile.macaroon || !getFile.iv) {
+          return cbk(null, {
+            macaroon: getMacaroon,
+          });
+        }
+
+        // Decrypt macaroon
+        const { decryptedData, error } = decryptString({ iv: getFile.iv, encryptedData: getMacaroon });
+
+        if (!!error) {
+          return cbk([400, 'SavedNodeMacaroonDecryptionFailed']);
+        }
+
+        return cbk(null, {
+          macaroon: decryptedData,
+        });
+      },
+    ],
+
     // Final credentials
     credentials: [
+      'decryptMacaroon',
       'getCert',
       'getFile',
       'getMacaroon',
-      ({ getCert, getFile, getMacaroon }, cbk: any) => {
+      ({ getCert, getFile, decryptMacaroon }, cbk: any) => {
         if (!getFile.socket) {
           return cbk([400, 'SavedNodeMissingSocket']);
         }
@@ -141,7 +169,7 @@ const getSavedCredentials = async ({ node }) => {
           node,
           credentials: {
             cert: getCert || undefined,
-            macaroon: getMacaroon,
+            macaroon: decryptMacaroon.macaroon,
             socket: getFile.socket,
           },
         });

@@ -18,6 +18,14 @@ export const IS_PUBLIC_KEY = 'isPublic';
 export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
 // These constants are for setting @Private() decorator
 
+// JWT secret key
 export const jwtConstants = {
   secret: !!isProduction ? randomBytes(64).toString('hex') : process.env.JWT_SECRET_DEV,
 };
+
+// Encryption key
+export const encryptionKey =
+  !!process.env.ENCRYPTION_KEY && process.env.ENCRYPTION_KEY !== '' ? process.env.ENCRYPTION_KEY : undefined;
+
+// Encryption algorithm
+export const algorithm = 'aes-256-cbc';
