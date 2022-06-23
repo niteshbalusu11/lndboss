@@ -248,6 +248,32 @@ If not, you have 2 options to authenticate to LND:
 - Click `Authenticate`, your credentials will be verified and presented with a success/failure message.
 - If it succeeds, you can start running commands.
 
+### Encryping Macaroon
+If you authenticated using option 2 above, there is a way to encrypt your macaroon.
+
+<b>For docker:</b>
+
+- Create a .env file in any location of your choice
+- Inside the .env file set `ENCRYPTION_KEY="yourEncryptionKey"`
+- The key should be 32 characters long, humans are terrible at generating passwords and random strings, easiest way to generate an encryption key would be running `openssl rand -hex 32` on your terminal.
+- A sample encryption key would look like this: `ENCRYPTION_KEY="b4970320a3601d19b876c18ce2eb895d687962d3f0b72e0d4de05ed74be34d9a"`
+- Inside the docker-compose file add the path to the .env file under the volumes section:
+```
+volumes:
+  - ~/.bosgui:/home/node/.bosgui
+  - /path/to/Lnd:/home/node/.lnd
+  - type: bind
+    source: /path/to/.env
+    target: /lndboss/.env
+```
+
+<b>For Build from source</b>
+
+- Create a .env file in the root of the project folder (lndboss folder)
+- Inside the .env file set `ENCRYPTION_KEY="yourEncryptionKey"`
+- The key should be 32 characters long, humans are terrible at generating passwords and random strings, easiest way to generate an encryption key would be running `openssl rand -hex 32` on your terminal.
+- A sample encryption key would look like this: `ENCRYPTION_KEY="b4970320a3601d19b876c18ce2eb895d687962d3f0b72e0d4de05ed74be34d9a"`
+
 ## Demo
 
 https://user-images.githubusercontent.com/84944042/172693877-a19c1ba3-0579-4537-8322-924fe1ab0f70.mp4
