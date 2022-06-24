@@ -2,7 +2,7 @@
 
 ## Supported commands
 
-```
+```shell
 Accounting: Get an accounting rundown of your node
 
 Balance: Sums balances on-chain, in channels, and pending, plus commit fees
