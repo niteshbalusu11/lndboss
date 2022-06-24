@@ -37,6 +37,9 @@ cd ~/.bosgui
 
 docker-compose down
 
+# If you want to clean up old images and save disk space (Caution: Run this in the right directory)
+docker-compose down --rmi all --volumes
+
 docker-compose pull
 
 docker-compose up -d
@@ -86,6 +89,9 @@ cd ~/.bosgui
 
 docker-compose down
 
+# If you want to clean up old images and save disk space (Caution: Run this in the right directory)
+docker-compose down --rmi all --volumes
+
 docker-compose pull
 
 docker-compose up -d
@@ -132,6 +138,9 @@ On your browser go to http://umbrel.local:8055
 cd ~/.bosgui
 
 docker-compose down
+
+# If you want to clean up old images and save disk space (Caution: Run this in the right directory)
+docker-compose down --rmi all --volumes
 
 docker-compose pull
 
