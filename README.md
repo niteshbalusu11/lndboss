@@ -1,5 +1,33 @@
 <h1>Building a gui for balanceofsatoshis, work in progress</h1>
 
+## Supported commands
+
+```
+Accounting: Get an accounting rundown of your node
+
+Balance: Sums balances on-chain, in channels, and pending, plus commit fees
+
+CertValidityDays: Number of days until the cert is invalid
+
+ChainDeposit: Generate an onchain deposit address
+
+ChartChainFees: Show chart of mining fee expenditure over time
+
+ChartFeesEarned: Show the routing fees earned
+
+ChartFeesPaid: Show the routing fees paid to forwarding nodes
+
+ChartPaymentsReceived: Show chart for settled invoices from external parties
+
+Closed: Channel closes with chain-transaction derived resolution details
+
+Find: Look for something in the node db that matches a query
+
+Forwards: Peers where routing has taken place from inbound and outbound sides
+
+Tags: Tags can be used in other commands via tag and avoid options
+```
+
 ## Docker Instructions
 
 Make a .bosgui directory and change directory
