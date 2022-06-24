@@ -70,7 +70,7 @@ services:
     ports:
       - '8055:8055'
     extra_hosts:
-      - 'localhost:10.21.21.9'
+      - 'umbrel.local:10.21.21.9'
 networks:
   default:
     external: true
@@ -120,7 +120,7 @@ services:
     ports:
       - '8055:8055'
     extra_hosts:
-      - 'localhost:10.21.21.9'
+      - 'umbrel.local:10.21.21.9'
 networks:
   default:
     external: true
