@@ -15,6 +15,9 @@ bos cert-validity-days
 # Receive on-chain funds via a regular address
 bos chain-deposit
 
+# See the current fee estimates confirmation targets
+bos chainfees
+
 # Show chain fees paid
 bos chart-chain-fees
 
