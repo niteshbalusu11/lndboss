@@ -145,6 +145,19 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Forwards',
+    value: 'Forwards',
+    description: 'Peers where routing has taken place from inbound and outbound sides',
+    longDescription:
+      'Peers where routing has taken place from inbound and outbound sides. Sorts: earned_in/earned_out/earned_total/inbound/liquidity/outbound',
+    flags: {
+      days: 'Days',
+      from: 'From',
+      sort: 'Sort',
+      to: 'To',
+    },
+  },
+  {
     name: 'Tags',
     value: 'Tags',
     description: 'Tags can be used in other commands via tag and avoid options',

@@ -245,6 +245,32 @@ export class findDto {
   query: string;
 }
 
+export class forwardsDto {
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  days: number;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  from: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  node: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  sort: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  to: string;
+}
+
 export class tagsDto {
   @Transform(({ value }) => toStringArray(value))
   @IsArray()
