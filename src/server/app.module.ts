@@ -4,6 +4,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { BalanceModule } from './modules/balance/balance.module';
 import { CertValidityDaysModule } from './modules/cert-validity-days/cert-validity-days.module';
 import { ChainDepositModule } from './modules/chain-deposit/chain-deposit.module';
+import { ChainfeesModule } from './modules/chainfees/chainfees.module';
 import { ChartChainFeesModule } from './modules/chart-chain-fees/chart-chain-fees.module';
 import { ChartFeesEarnedModule } from './modules/chart-fees-earned/chart-fees-earned.module';
 import { ChartFeesPaidModule } from './modules/chart-fees-paid/chart-fees-paid.module';
@@ -28,6 +29,7 @@ import { ViewModule } from '~server/modules/view/view.module';
     BalanceModule,
     CertValidityDaysModule,
     ChainDepositModule,
+    ChainfeesModule,
     ChartChainFeesModule,
     ChartFeesEarnedModule,
     ChartFeesPaidModule,

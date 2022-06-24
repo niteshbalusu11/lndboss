@@ -36,6 +36,14 @@ export type commandChainDeposit = {
   format: any;
 };
 
+// ========================Chainfees Command=====================================
+
+export type commandChainfees = {
+  blocks?: number;
+  file?: boolean;
+  node?: string;
+};
+
 // ========================Chart Chain Fees Command=====================================
 
 export type commandChartChainFees = {

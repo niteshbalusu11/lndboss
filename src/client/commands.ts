@@ -68,14 +68,23 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Chain Deposit',
+    value: 'ChainDeposit',
     args: {
       amount: 'Amount',
     },
-    name: 'Chain Deposit',
-    value: 'ChainDeposit',
     description: 'Generate an onchain deposit address',
     flags: {
       format: 'Format',
+    },
+  },
+  {
+    name: 'Chain Fees',
+    value: 'Chainfees',
+    description: 'Lookup chain fee estimates at various confirm targets',
+    flags: {
+      blocks: 'Blocks',
+      file: 'File',
     },
   },
   {

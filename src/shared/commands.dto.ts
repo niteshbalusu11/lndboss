@@ -103,6 +103,22 @@ export class chainDepositDto {
   node: string;
 }
 
+export class chainfeesDto {
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  blocks: number;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
+  @IsBoolean()
+  file: boolean;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  node: string;
+}
+
 export class chartChainFeesDto {
   @Transform(({ value }) => toNumber(value))
   @IsNumber()

@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { StandardButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components';
 import commands, { globalCommands } from '~client/commands';
 
-import FindOutput from '~client/output/FindOutput';
+import { FindOutput } from '~client/output';
 import Head from 'next/head';
 import { axiosGet } from '~client/utils/axios';
 
