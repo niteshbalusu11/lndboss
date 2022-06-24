@@ -81,6 +81,23 @@ export type commandClosed = {
   node?: string;
 };
 
+// ========================Find Command=====================================
+
+export type commandFind = {
+  query: string;
+  node?: string;
+};
+
+// ========================Forwards Command=====================================
+
+export type commandForwards = {
+  days?: number;
+  from?: string;
+  node?: string;
+  sort?: string;
+  to?: string;
+};
+
 // ========================Tags Command=====================================
 
 export type commandTags = {
@@ -90,11 +107,4 @@ export type commandTags = {
   is_avoided?: boolean;
   remove: string[] | string;
   tag?: string;
-};
-
-// ========================Find Command=====================================
-
-export type commandFind = {
-  query: string;
-  node?: string;
 };
