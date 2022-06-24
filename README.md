@@ -3,29 +3,41 @@
 ## Supported commands
 
 ```shell
-Accounting: Get an accounting rundown of your node
+# See an accounting formatted list of various types of transactions
+bos accounting "category"
 
-Balance: Sums balances on-chain, in channels, and pending, plus commit fees
+# See total balance, including pending funds, excluding future commit fees
+bos balance
 
-CertValidityDays: Number of days until the cert is invalid
+# Get the number of days the node cert remains valid
+bos cert-validity-days
 
-ChainDeposit: Generate an onchain deposit address
+# Receive on-chain funds via a regular address
+bos chain-deposit
 
-ChartChainFees: Show chart of mining fee expenditure over time
+# Show chain fees paid
+bos chart-chain-fees
 
-ChartFeesEarned: Show the routing fees earned
+# Show routing fees earned
+bos chart-fees-earned
 
-ChartFeesPaid: Show the routing fees paid to forwarding nodes
+# Show routing fees paid
+bos chart-fees-paid
 
-ChartPaymentsReceived: Show chart for settled invoices from external parties
+# Show a chart of payments received
+bos chart-payments-received
 
-Closed: Channel closes with chain-transaction derived resolution details
+# See details on how closed channels resolved on-chain
+bos closed
 
-Find: Look for something in the node db that matches a query
+# Query the node to find something like a payment, channel or node
+bos find "query"
 
-Forwards: Peers where routing has taken place from inbound and outbound sides
+# Output a summarized version of peers forwarded towards
+bos forwards
 
-Tags: Tags can be used in other commands via tag and avoid options
+# Tags can be used in other commands via tag and avoid options
+bos tags
 ```
 
 ## Docker Instructions
