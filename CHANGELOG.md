@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.10.0](https://github.com/niteshbalusu11/lndboss/compare/v1.9.1...v1.10.0) (2022-06-24)
 
+- Added support for bos forwards command
+- Added support for bos find command
+- Added support for encrypting macaroon if credentials authentication is used
+- Docker images are slimmer
+
 ### [1.9.1](https://github.com/niteshbalusu11/nextronbosgui/compare/v1.9.0...v1.9.1) (2022-06-22)
 
 - Added support for table output for closed command
