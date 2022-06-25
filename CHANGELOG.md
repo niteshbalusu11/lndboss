@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.11.0](https://github.com/niteshbalusu11/lndboss/compare/v1.10.0...v1.11.0) (2022-06-25)
 
+- Added support for bos chainfees command
+- Added support for bos price command
+- Fixed bug where switch fields were too long in width for selection
+
 ## [1.10.0](https://github.com/niteshbalusu11/lndboss/compare/v1.9.1...v1.10.0) (2022-06-24)
 
 - Added support for bos forwards command
