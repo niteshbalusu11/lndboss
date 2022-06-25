@@ -28,6 +28,9 @@ const styles = {
   h4: {
     marginTop: '0px',
   },
+  switch: {
+    width: '100px',
+  },
 };
 
 const Chainfees = () => {
@@ -81,6 +84,7 @@ const Chainfees = () => {
             style={styles.textField}
           />
           <FormControlLabel
+            style={styles.switch}
             control={<StandardSwitch checked={file} onChange={handleFileChange} id={ChainfeesCommand.flags.file} />}
             label={ChainfeesCommand.flags.file}
           />

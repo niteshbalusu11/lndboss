@@ -28,6 +28,9 @@ const styles = {
   h4: {
     marginTop: '0px',
   },
+  switch: {
+    width: '100px',
+  },
 };
 
 const Balance = () => {
@@ -120,18 +123,21 @@ const Balance = () => {
             label={BalanceCommand.flags.confirmed}
           />
           <FormControlLabel
+            style={styles.switch}
             control={
               <StandardSwitch checked={isEnabled2} onChange={toggleSwitch2} id={BalanceCommand.flags.detailed} />
             }
             label={BalanceCommand.flags.detailed}
           />
           <FormControlLabel
+            style={styles.switch}
             control={
               <StandardSwitch checked={isEnabled3} onChange={toggleSwitch3} id={BalanceCommand.flags.offchain} />
             }
             label={BalanceCommand.flags.offchain}
           />
           <FormControlLabel
+            style={styles.switch}
             control={<StandardSwitch checked={isEnabled4} onChange={toggleSwitch4} id={BalanceCommand.flags.onchain} />}
             label={BalanceCommand.flags.onchain}
           />

@@ -40,6 +40,9 @@ const styles = {
   h4: {
     marginTop: '0px',
   },
+  switch: {
+    width: '100px',
+  },
 };
 
 const ChartFeesPaid = () => {
@@ -147,6 +150,7 @@ const ChartFeesPaid = () => {
             style={styles.textField}
           />
           <FormControlLabel
+            style={styles.switch}
             control={
               <StandardSwitch
                 checked={isMostFees}
@@ -158,6 +162,7 @@ const ChartFeesPaid = () => {
           />
 
           <FormControlLabel
+            style={styles.switch}
             control={
               <StandardSwitch
                 checked={isMostForwarded}
@@ -168,6 +173,7 @@ const ChartFeesPaid = () => {
             label={ChartFeesPaidCommand.flags.is_most_forwarded_table}
           />
           <FormControlLabel
+            style={styles.switch}
             control={
               <StandardSwitch
                 checked={isNetwork}
@@ -178,12 +184,14 @@ const ChartFeesPaid = () => {
             label={ChartFeesPaidCommand.flags.is_network}
           />
           <FormControlLabel
+            style={styles.switch}
             control={
               <StandardSwitch checked={isPeer} onChange={handleIsPeerChange} id={ChartFeesPaidCommand.flags.is_peer} />
             }
             label={ChartFeesPaidCommand.flags.is_peer}
           />
           <FormControlLabel
+            style={styles.switch}
             control={
               <StandardSwitch
                 checked={isRebalances}

@@ -287,6 +287,21 @@ export class forwardsDto {
   to: string;
 }
 
+export class priceDto {
+  @Transform(({ value }) => toBoolean(value))
+  @IsBoolean()
+  file: boolean;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  from: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  @IsOptional()
+  symbols: string;
+}
+
 export class tagsDto {
   @Transform(({ value }) => toStringArray(value))
   @IsArray()

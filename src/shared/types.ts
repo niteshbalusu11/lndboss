@@ -106,6 +106,14 @@ export type commandForwards = {
   to?: string;
 };
 
+// ========================Price Command=====================================
+
+export type commandPrice = {
+  file?: boolean;
+  from: string;
+  symbols: string;
+};
+
 // ========================Tags Command=====================================
 
 export type commandTags = {

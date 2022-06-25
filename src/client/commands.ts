@@ -167,6 +167,20 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Price',
+    value: 'Price',
+    description: 'Get the price of Bitcoin in fiat',
+    longDescription:
+      'Price is denominated in cents or equivalent. Rate provider options: coinbase, coindesk, or coingecko. Privacy note: this requests tx data from third parties.',
+    args: {
+      symbols: 'Symbols',
+    },
+    flags: {
+      file: 'File',
+      from: 'From',
+    },
+  },
+  {
     name: 'Tags',
     value: 'Tags',
     description: 'Tags can be used in other commands via tag and avoid options',
