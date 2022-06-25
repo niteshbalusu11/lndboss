@@ -46,6 +46,9 @@ const styles = {
   select: {
     width: '300px',
   },
+  switch: {
+    width: '100px',
+  },
 };
 
 const Accounting = () => {
@@ -142,12 +145,14 @@ const Accounting = () => {
             </Select>
           </div>
           <FormControlLabel
+            style={styles.switch}
             control={
               <StandardSwitch checked={isCsv} onChange={handleIsCsvChange} id={AccountingCommand.flags.is_csv} />
             }
             label={AccountingCommand.flags.is_csv}
           />
           <FormControlLabel
+            style={styles.switch}
             control={
               <StandardSwitch
                 checked={isFiatDisabled}

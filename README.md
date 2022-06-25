@@ -39,6 +39,9 @@ bos find "query"
 # Output a summarized version of peers forwarded towards
 bos forwards
 
+# Output the price of BTC
+bos price
+
 # Tags can be used in other commands via tag and avoid options
 bos tags
 ```

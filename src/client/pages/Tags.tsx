@@ -60,6 +60,9 @@ const styles: any = {
     width: '500px',
     marginTop: '12px',
   },
+  switch: {
+    width: '100px',
+  },
 };
 
 const Tags = () => {

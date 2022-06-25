@@ -17,6 +17,7 @@ import { ForwardsModule } from './modules/forwards/forwards.module';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
 import { LndModule } from './modules/lnd/lnd.module';
 import { Module } from '@nestjs/common';
+import { PriceModule } from './modules/price/price.module';
 import { TagsModule } from './modules/tags/tags.module';
 import { ViewModule } from '~server/modules/view/view.module';
 
@@ -43,6 +44,7 @@ import { ViewModule } from '~server/modules/view/view.module';
       envFilePath: ['.env', '.env.local'],
     }),
     LndModule,
+    PriceModule,
     TagsModule,
     ViewModule,
   ],

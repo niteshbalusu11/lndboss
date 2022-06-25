@@ -40,6 +40,9 @@ const styles = {
   h4: {
     marginTop: '0px',
   },
+  switch: {
+    width: '100px',
+  },
 };
 
 const ChartFeesEarned = () => {
@@ -108,6 +111,7 @@ const ChartFeesEarned = () => {
             style={styles.textField}
           />
           <FormControlLabel
+            style={styles.switch}
             control={
               <StandardSwitch checked={count} onChange={handleCountChange} id={ChartFeesEarnedCommand.flags.count} />
             }
@@ -122,6 +126,7 @@ const ChartFeesEarned = () => {
             style={styles.textField}
           />
           <FormControlLabel
+            style={styles.switch}
             control={
               <StandardSwitch
                 checked={forwarded}
