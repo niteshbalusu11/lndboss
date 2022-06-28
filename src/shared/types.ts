@@ -114,6 +114,23 @@ export type commandPrice = {
   symbols: string;
 };
 
+// ========================Rebalance Command=====================================
+
+export type commandRebalance = {
+  avoid?: string[];
+  in_filters?: string[];
+  in_outbound?: string;
+  in_through?: string;
+  max_fee?: number;
+  max_fee_rate?: number;
+  max_rebalance?: string;
+  node?: string;
+  out_filters?: string[];
+  out_inbound?: string;
+  out_through?: string;
+  timeout_minutes?: number;
+};
+
 // ========================Tags Command=====================================
 
 export type commandTags = {

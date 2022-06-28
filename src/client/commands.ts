@@ -181,6 +181,26 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Rebalance',
+    value: 'Rebalance',
+    description: 'Rebalance funds between peers',
+    longDescription:
+      'Change the liquidity profile of two peers \n Specifying target liquidity you can use CAPACITY/2, other formulas \n You can specify tags for --avoid, --in, --out (see help tags) \n --amount can take m/k variables: 5*m for 5 million, 250*k = 0.0025 \n --avoid can take a channel id or a public key to avoid \n --avoid can take a public_key/public_key to avoid a directed pair \n --avoid can take a FORMULA/public_key to avoid inbound peers \n --avoid can take a public_key/FORMULA to avoid outbound peers \n --avoid FORMULA variables: FEE_RATE, BASE_FEE, HEIGHT, AGE \n --in decreases the inbound liquidity with a specific peer/tag \n --in-filter/--out-filter vars: CAPACITY/HEIGHTS/INBOUND_LIQUIDITY \n --in-filter/--out-filter vars: OUTBOUND_LIQUIDITY/PENDING_PAYMENTS \n',
+    flags: {
+      avoid: 'Avoid',
+      in_filters: 'InFilters',
+      in_outbound: 'InTargetOutbound',
+      in_through: 'In',
+      max_fee: 'MaxFee',
+      max_fee_rate: 'MaxFeeRate',
+      max_rebalance: 'Amount',
+      out_filters: 'OutFilters',
+      out_inbound: 'OutTargetInbound',
+      out_through: 'Out',
+      timeout_minutes: 'Timeout',
+    },
+  },
+  {
     name: 'Tags',
     value: 'Tags',
     description: 'Tags can be used in other commands via tag and avoid options',

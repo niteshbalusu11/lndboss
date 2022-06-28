@@ -18,6 +18,8 @@ import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
 import { LndModule } from './modules/lnd/lnd.module';
 import { Module } from '@nestjs/common';
 import { PriceModule } from './modules/price/price.module';
+import { RebalanceModule } from './modules/rebalance/rebalance.module';
+import { SocketModule } from './modules/socket/socket.module';
 import { TagsModule } from './modules/tags/tags.module';
 import { ViewModule } from '~server/modules/view/view.module';
 
@@ -45,6 +47,8 @@ import { ViewModule } from '~server/modules/view/view.module';
     }),
     LndModule,
     PriceModule,
+    RebalanceModule,
+    SocketModule,
     TagsModule,
     ViewModule,
   ],
