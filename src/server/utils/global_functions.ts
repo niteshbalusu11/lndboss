@@ -15,7 +15,7 @@ export const logger = ({ error }: { error: any }) => {
   if (isArray(error) && !!error.length && isString(error[1]) && isNumber(error[0])) {
     throw new HttpException(String(error[1]), Number(error[0]));
   } else {
-    throw new HttpException('UnexpectedErrorGettingInformation', 503);
+    throw new HttpException(stringify(error), 503);
   }
 };
 

@@ -14,19 +14,19 @@ test.describe('Test the ChartFeesPaid command client page', async () => {
     await page.goto('/Commands');
     await page.click('text=Chart Fees Paid');
     await expect(page).toHaveTitle('Chart Fees Paid');
-    await page.type(`#${ChartFeesPaidCommand?.flags.days}`, '10');
+    await page.type(`#${ChartFeesPaidCommand?.flags?.days}`, '10');
     await page.type(
-      `#${ChartFeesPaidCommand?.flags.in}`,
+      `#${ChartFeesPaidCommand?.flags?.in}`,
       '021b0ea06c90e7e4ea85daff1a83f7a1b97646da652829178ad1bd5f309af632eb'
     );
     await page.type(
-      `#${ChartFeesPaidCommand?.flags.out}`,
+      `#${ChartFeesPaidCommand?.flags?.out}`,
       '021b0ea06c90e7e4ea85daff1a83f7a1b97646da652829178ad1bd5f309af632eb'
     );
-    await page.check(`#${ChartFeesPaidCommand?.flags.is_most_fees_table}`);
-    await page.check(`#${ChartFeesPaidCommand?.flags.is_most_forwarded_table}`);
-    await page.check(`#${ChartFeesPaidCommand?.flags.is_peer}`);
-    await page.check(`#${ChartFeesPaidCommand?.flags.is_rebalances_only}`);
+    await page.check(`#${ChartFeesPaidCommand?.flags?.is_most_fees_table}`);
+    await page.check(`#${ChartFeesPaidCommand?.flags?.is_most_forwarded_table}`);
+    await page.check(`#${ChartFeesPaidCommand?.flags?.is_peer}`);
+    await page.check(`#${ChartFeesPaidCommand?.flags?.is_rebalances_only}`);
     await page.type('#node-0', 'testnode1');
 
     await page.click('text=run command');

@@ -46,6 +46,32 @@ const axiosGet = async ({ path, query }: ArgsGet) => {
   }
 };
 
+const axiosGetWebSocket = async ({ path, query }: ArgsGet) => {
+  try {
+    const url = `${apiUrl}/${path}`;
+    const accessToken = localStorage.getItem('accessToken');
+
+    const response = await axios.get(url, {
+      params: query,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const { result } = await response.data;
+
+    if (!!result) {
+      return result;
+    }
+  } catch (error) {
+    useNotify({
+      type: 'error',
+      message: `Status: ${error.response.data.statusCode}\nMessage: ${error.response.data.message}`,
+    });
+  }
+};
+
 const axiosPost = async ({ path, postBody }: ArgsPost) => {
   try {
     const url = `${apiUrl}/${path}`;
@@ -63,4 +89,4 @@ const axiosPost = async ({ path, postBody }: ArgsPost) => {
   }
 };
 
-export { axiosGet, axiosPost };
+export { axiosGet, axiosGetWebSocket, axiosPost };

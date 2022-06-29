@@ -26,7 +26,7 @@ test.describe('Test the Tags command client page', async () => {
     await page.locator('#tag-type').click();
     await page.locator('#add').click();
     await page.type(`#${TagsCommand?.args?.tag}`, 'playwrighttest');
-    await page.type(`#${TagsCommand?.flags.icon}`, '🚀');
+    await page.type(`#${TagsCommand?.flags?.icon}`, '🚀');
     await page.type('#pubkey-0', '021b0ea06c90e7e4ea85daff1a83f7a1b97646da652829178ad1bd5f309af632eb');
     await page.click('text=run command');
     await page.waitForTimeout(1000);
@@ -39,7 +39,7 @@ test.describe('Test the Tags command client page', async () => {
     await page.locator('#remove').click();
     await page.type(`#${TagsCommand?.args?.tag}`, 'playwrighttest');
     await page.type('#pubkey-0', '021b0ea06c90e7e4ea85daff1a83f7a1b97646da652829178ad1bd5f309af632eb');
-    await page.type(`#${TagsCommand?.flags.icon}`, '🚀');
+    await page.type(`#${TagsCommand?.flags?.icon}`, '🚀');
     await page.click('text=run command');
     await page.waitForTimeout(1000);
 

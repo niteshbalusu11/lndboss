@@ -302,6 +302,72 @@ export class priceDto {
   symbols: string;
 }
 
+export class rebalanceDto {
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  avoid: string[];
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  in_filters: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  in_outbound: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  in_through: string;
+
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  max_fee: number;
+
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  max_fee_rate: number;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  max_rebalance: string;
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  out_filters: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  out_inbound: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  out_through: string;
+
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  timeout_minutes: number;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  node: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  message_id: string;
+}
+
 export class tagsDto {
   @Transform(({ value }) => toStringArray(value))
   @IsArray()
