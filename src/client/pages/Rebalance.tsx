@@ -172,6 +172,7 @@ const Rebalance = () => {
         <Stack spacing={3} style={styles.form}>
           <h1>Rebalance</h1>
           <pre style={styles.pre}>{RebalanceCommand.longDescription}</pre>
+          <h4>NOTE: THERE IS NO WAY TO STOP AN IN-FLIGHT REBALANCE, DOUBLE CHECK BEFORE RUNNING.</h4>
           <TextField
             type="text"
             placeholder={`${RebalanceCommand.flags.in_through} (Route in through a specific peer)`}

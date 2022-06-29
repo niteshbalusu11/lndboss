@@ -14,10 +14,28 @@ const setAccessToken = async ({ page }) => {
   const { accessToken } = data;
 
   await page.addInitScript(`localStorage.setItem('accessToken', '${accessToken}')`);
+
+  return accessToken;
+};
+
+const getAccessToken = async () => {
+  const url = 'http://[::1]:8055/api/auth/login';
+
+  const response = await axios.post(url, {
+    headers: { 'Content-Type': 'application/json' },
+    password: process.env.TESTING_PASSWORD,
+    username: process.env.TESTING_USERNAME,
+  });
+
+  const data = await response.data;
+
+  const { accessToken } = data;
+
+  return accessToken;
 };
 
 const removeAccessToken = async ({ page }) => {
   await page.addInitScript(`localStorage.removeItem('accessToken')`);
 };
 
-export { setAccessToken, removeAccessToken };
+export { getAccessToken, setAccessToken, removeAccessToken };

@@ -10,18 +10,18 @@ import stripAnsi from 'strip-ansi';
 import { useRouter } from 'next/router';
 
 const socket = io();
-const stringify = n => JSON.stringify(n);
+const stringify = (n: object) => JSON.stringify(n);
 
 /*
   Renders the output of the rebalance command
   Listens to the websocket events for logging rebalance output to the browser
 */
 
-const parseAnsi = n => {
+const parseAnsi = (n: string) => {
   try {
     const parsed = JSON.parse(n);
     if (!!parsed.options && !!parsed.options.evaluating && !!parsed.options.evaluating.length) {
-      parsed.options.evaluating = parsed.options.evaluating.map(n => stripAnsi(n));
+      parsed.options.evaluating = parsed.options.evaluating.map((n: string) => stripAnsi(n));
     }
 
     return parsed;
