@@ -14,7 +14,7 @@ test.describe('Test the ChartPaymentsReceived command client page', async () => 
     await page.goto('/Commands');
     await page.click('text=Chart Payments Received');
     await expect(page).toHaveTitle('Chart Payments Received');
-    await page.type(`#${ChartPaymentsReceivedCommand?.flags.days}`, '10');
+    await page.type(`#${ChartPaymentsReceivedCommand?.flags?.days}`, '10');
     await page.type('#node-0', 'testnode1');
 
     await page.click('text=run command');

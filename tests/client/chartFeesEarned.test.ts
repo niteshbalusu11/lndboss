@@ -16,9 +16,9 @@ test.describe('Test the ChartFeesEarned command client page', async () => {
     await expect(page).toHaveTitle('Chart Fees Earned');
 
     await page.type(`#${ChartFeesEarnedCommand?.args?.via}`, 'outpeers');
-    await page.type(`#${ChartFeesEarnedCommand?.flags.days}`, '10');
-    await page.check(`#${ChartFeesEarnedCommand?.flags.count}`);
-    await page.check(`#${ChartFeesEarnedCommand?.flags.forwarded}`);
+    await page.type(`#${ChartFeesEarnedCommand?.flags?.days}`, '10');
+    await page.check(`#${ChartFeesEarnedCommand?.flags?.count}`);
+    await page.check(`#${ChartFeesEarnedCommand?.flags?.forwarded}`);
     await page.type('#node-0', 'testnode1');
 
     await page.click('text=run command');

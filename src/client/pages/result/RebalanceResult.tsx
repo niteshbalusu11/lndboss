@@ -3,6 +3,7 @@ import * as YAML from 'json-to-pretty-yaml';
 import React, { useEffect, useState } from 'react';
 
 import { CssBaseline } from '@mui/material';
+import Head from 'next/head';
 import StartFlexBoxBlack from '~client/standard_components/StartFlexBoxBlack';
 import { axiosGetWebSocket } from '~client/utils/axios';
 import { io } from 'socket.io-client';
@@ -100,11 +101,14 @@ const RebalanceResult = () => {
 
   return (
     <CssBaseline>
+      <Head>
+        <title>Rebalance Result</title>
+      </Head>
       <StartFlexBoxBlack>
         <div style={styles.div}>
           <h1>Rebalancing...</h1>
           {data && (
-            <div>
+            <div id={'rebalanceResult'}>
               <pre style={styles.pre}>{data}</pre>
             </div>
           )}

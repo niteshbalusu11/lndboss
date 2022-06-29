@@ -231,7 +231,7 @@ const Rebalance = () => {
                   value={element.avoid}
                   onChange={e => handleAvoidChange(index, e)}
                   style={styles.textField}
-                  id={`node-${index}`}
+                  id={`avoid-${index}`}
                 />
                 {!!index ? (
                   <IconButton aria-label="delete" onClick={() => removeAvoidFields(index)} style={styles.iconButton}>
@@ -256,7 +256,7 @@ const Rebalance = () => {
                   value={element.inFilter || ''}
                   onChange={e => handleInFilterChange(index, e)}
                   style={styles.textField}
-                  id={`node-${index}`}
+                  id={`inFilter-${index}`}
                 />
                 {!!index ? (
                   <IconButton aria-label="delete" onClick={() => removeInFilterFields(index)} style={styles.iconButton}>
@@ -281,7 +281,7 @@ const Rebalance = () => {
                   value={element.outFilter || ''}
                   onChange={e => handleOutFilterChange(index, e)}
                   style={styles.textField}
-                  id={`node-${index}`}
+                  id={`outFilter-${index}`}
                 />
                 {!!index ? (
                   <IconButton

@@ -1,4 +1,4 @@
-import { AuthenticatedLnd, getWalletInfo } from 'lightning';
+import { AuthenticatedLnd, GetWalletInfoResult, getWalletInfo } from 'lightning';
 import { Logger, createLogger, format, transports } from 'winston';
 import { expect, test } from '@playwright/test';
 import { setupChannel, spawnLightningCluster } from 'ln-docker-daemons';
@@ -14,6 +14,9 @@ test.describe('Test Rebalance command on the node.js side', async () => {
   };
   let lightning: LightningCluster;
   let logger: Logger;
+  let bobWallet: GetWalletInfoResult;
+  let carolWallet: GetWalletInfoResult;
+  let [alice, bob, carol]: any[] = [];
 
   test.beforeAll(async () => {
     logger = createLogger({
@@ -28,18 +31,17 @@ test.describe('Test Rebalance command on the node.js side', async () => {
     });
 
     lightning = await spawnLightningCluster({ size: 3 });
-  });
-
-  test('run forwards command', async () => {
-    const [alice, bob, carol] = lightning.nodes;
+    [alice, bob, carol] = lightning.nodes;
 
     await setupChannel({ generate: alice.generate, lnd: alice.lnd, to: bob });
     await setupChannel({ generate: bob.generate, lnd: bob.lnd, to: carol });
     await setupChannel({ generate: carol.generate, lnd: carol.lnd, to: alice });
 
-    const bobWallet = await getWalletInfo({ lnd: bob.lnd });
-    const carolWallet = await getWalletInfo({ lnd: carol.lnd });
+    bobWallet = await getWalletInfo({ lnd: bob.lnd });
+    carolWallet = await getWalletInfo({ lnd: carol.lnd });
+  });
 
+  test('run forwards command', async () => {
     const args = {
       avoid: [],
       in_filters: [],
@@ -54,25 +56,30 @@ test.describe('Test Rebalance command on the node.js side', async () => {
       timeout_minutes: 1,
     };
 
-    const result = await manageRebalance({
-      lnd: alice.lnd,
-      logger,
-      avoid: args.avoid,
-      fs: { getFile: readFile },
-      in_filters: args.in_filters,
-      in_outbound: args.in_outbound || undefined,
-      in_through: args.in_through || undefined,
-      max_fee: args.max_fee || 1337,
-      max_fee_rate: args.max_fee_rate || 250,
-      max_rebalance: args.max_rebalance,
-      out_filters: args.out_filters,
-      out_inbound: args.out_inbound || undefined,
-      out_through: args.out_through || undefined,
-      timeout_minutes: args.timeout_minutes || 5,
-    });
+    try {
+      const result = await manageRebalance({
+        lnd: alice.lnd,
+        logger,
+        avoid: args.avoid,
+        fs: { getFile: readFile },
+        in_filters: args.in_filters,
+        in_outbound: args.in_outbound || undefined,
+        in_through: args.in_through || undefined,
+        max_fee: args.max_fee || 1337,
+        max_fee_rate: args.max_fee_rate || 250,
+        max_rebalance: args.max_rebalance,
+        out_filters: args.out_filters,
+        out_inbound: args.out_inbound || undefined,
+        out_through: args.out_through || undefined,
+        timeout_minutes: args.timeout_minutes || 5,
+      });
 
-    console.log('rebalance----', result);
-    expect(result).toBeTruthy();
+      console.log('rebalance----', result);
+      expect(result).toBeTruthy();
+    } catch (error) {
+      console.log('rebalance error----', error);
+      expect(error[1]).toBe('FailedToFindPathBetweenPeers');
+    }
   });
 
   test.afterAll(async () => {

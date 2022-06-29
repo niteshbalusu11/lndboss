@@ -15,7 +15,7 @@ test.describe('Test the ChartChainFees command client page', async () => {
     await page.click('text=Chart Chain Fees');
     await expect(page).toHaveTitle('Chart Chain Fees');
 
-    await page.type(`#${ChartChainFeesCommand?.flags.days}`, '10');
+    await page.type(`#${ChartChainFeesCommand?.flags?.days}`, '10');
     await page.type('#node-0', 'testnode1');
 
     await page.click('text=run command');

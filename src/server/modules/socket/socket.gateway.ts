@@ -8,8 +8,6 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 
-import { Logger } from '@nestjs/common';
-
 @WebSocketGateway({
   cors: {
     origin: '*',
@@ -26,7 +24,7 @@ export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGate
     this.server.emit('msgToClient', payload);
   }
 
-  afterInit(server: Server) {
+  afterInit() {
     console.log('Initialized');
   }
 
@@ -34,7 +32,7 @@ export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGate
     console.log('Client disconnected: ' + client.id);
   }
 
-  handleConnection(client: Socket, ...args: any[]) {
+  handleConnection(client: Socket) {
     console.log('Client connected: ' + client.id);
   }
 }
