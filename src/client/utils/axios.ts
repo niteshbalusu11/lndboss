@@ -75,11 +75,13 @@ const axiosGetWebSocket = async ({ path, query }: ArgsGet) => {
 const axiosPost = async ({ path, postBody }: ArgsPost) => {
   try {
     const url = `${apiUrl}/${path}`;
+    const accessToken = localStorage.getItem('accessToken');
 
-    const response = await axios.post(url, {
-      headers: { 'Content-Type': 'application/json' },
-      postBody,
-    });
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    };
+
+    const response = await axios.post(url, postBody, config);
 
     const data = await response.data;
 

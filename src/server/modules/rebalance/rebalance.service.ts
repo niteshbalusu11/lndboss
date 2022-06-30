@@ -1,8 +1,14 @@
+import { rebalanceDto, rebalanceScheduleDto } from '~shared/commands.dto';
+
 import { Injectable } from '@nestjs/common';
 import { LndService } from '../lnd/lnd.service';
 import { SocketGateway } from '../socket/socket.gateway';
+import manageRebalanceTriggers from '~server/commands/rebalance/manage_rebalance_triggers';
 import { rebalanceCommand } from '~server/commands';
-import { rebalanceDto } from '~shared/commands.dto';
+
+const actionAddRebalanceTrigger = 'action-add-rebalance-trigger';
+const actionDeleteTrigger = 'action-delete-trigger';
+const actionListTriggers = 'action-list-triggers';
 
 /** Manage rebalance attempts
 
@@ -44,5 +50,43 @@ export class RebalanceService {
     });
 
     return { result };
+  }
+
+  async scheduleRebalance(args: rebalanceScheduleDto): Promise<{ result: any }> {
+    const id = Date.now().toString();
+    const stringify = (obj: any) => JSON.stringify(obj);
+    const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+    const result = await manageRebalanceTriggers({
+      id,
+      lnd,
+      action: actionAddRebalanceTrigger,
+      data: stringify(args),
+    });
+
+    return { result: result.createRebalanceTrigger };
+  }
+
+  async getRebalances(args: { node: string }): Promise<{ result: any }> {
+    const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+    const result = await manageRebalanceTriggers({
+      action: actionListTriggers,
+      lnd,
+    });
+
+    return { result: result.getTriggers };
+  }
+
+  async deleteRebalance(args: { node: string; invoice_id: string }): Promise<{ result: any }> {
+    const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+    const result = await manageRebalanceTriggers({
+      action: actionDeleteTrigger,
+      invoiceId: args.invoice_id,
+      lnd,
+    });
+
+    return { result: result.deleteTrigger };
   }
 }
