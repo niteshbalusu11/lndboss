@@ -66,7 +66,6 @@ const getTriggers = async ({ lnd }) => {
 
                     return triggers.push({
                       id,
-                      rebalance_id: trigger.result.rebalance_id,
                       rebalance_data: trigger.result.rebalance_data,
                     });
                   } catch (err) {

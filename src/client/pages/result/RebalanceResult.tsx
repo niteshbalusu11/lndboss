@@ -49,7 +49,7 @@ const RebalanceResult = () => {
   const output = [];
 
   useEffect(() => {
-    const dateString = new Date().toString();
+    const dateString = Date.now().toString();
 
     const query = {
       avoid: router.query.avoid,

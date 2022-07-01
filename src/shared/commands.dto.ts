@@ -251,6 +251,17 @@ export class closedDto {
   node: string;
 }
 
+export class deleteRebalanceDto {
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  invoice_id: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  node: string;
+}
+
 export class findDto {
   @Transform(({ value }) => trim(value))
   @IsString()
@@ -285,6 +296,13 @@ export class forwardsDto {
   @IsOptional()
   @IsString()
   to: string;
+}
+
+export class getRebalancesDto {
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  node: string;
 }
 
 export class priceDto {
@@ -353,6 +371,11 @@ export class rebalanceDto {
   @IsString()
   out_through: string;
 
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  schedule: string;
+
   @Transform(({ value }) => toNumber(value))
   @IsOptional()
   @IsNumber()
@@ -403,6 +426,10 @@ export class rebalanceScheduleDto {
   @IsOptional()
   @IsString()
   max_rebalance: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  message_id: string;
 
   @Transform(({ value }) => toStringArray(value))
   @IsOptional()

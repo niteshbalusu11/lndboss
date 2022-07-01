@@ -29,16 +29,10 @@ import { readFile } from 'fs';
   @returns via Promise
 */
 
-const rebalanceCommand = async ({ args, emit, lnd }): Promise<{ result: any }> => {
-  const myFormat = format.printf(({ message }) => {
-    return emit(args.message_id, {
-      message: format.prettyPrint(message),
-    });
-  });
-
+const autoRebalanceCommand = async ({ args, lnd }): Promise<{ result: any }> => {
   const logger = createLogger({
     level: 'info',
-    format: format.combine(myFormat),
+    format: format.combine(format.prettyPrint()),
     defaultMeta: { service: 'rebalance' },
     transports: [
       new transports.Console({
@@ -71,4 +65,4 @@ const rebalanceCommand = async ({ args, emit, lnd }): Promise<{ result: any }> =
   return { result };
 };
 
-export default rebalanceCommand;
+export default autoRebalanceCommand;

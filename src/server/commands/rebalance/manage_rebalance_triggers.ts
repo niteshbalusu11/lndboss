@@ -4,20 +4,16 @@ import { auto } from 'async';
 import createRebalanceTrigger from './create_rebalance_trigger';
 import getTriggers from './get_triggers';
 
-// import subscribeToTriggers from './subscribe_to_triggers';
-
 const actionAddRebalanceTrigger = 'action-add-rebalance-trigger';
-const actionDeleteTrigger = 'action-delete-trigger';
-const actionListTriggers = 'action-list-triggers';
-const actionSubscribeToTriggers = 'action-subscribe-to-triggers';
+const actionDeleteRebalanceTrigger = 'action-delete-trigger';
+const actionListRebalancesTriggers = 'action-list-triggers';
 
 /** Manage trigger actions
 
   {
     action: <Action To Perform String>
     [data]: <Rebalance Data String>
-    [id]: <Rebalance ID String>
-    [invoiceId]: <Invoice ID String>
+    [id]: <Invoice ID String>
     lnd: <Authenticated LND API Object>
   }
 
@@ -33,11 +29,10 @@ type Args = {
   action: string;
   data?: string;
   id?: string;
-  invoiceId?: string;
   lnd: AuthenticatedLnd;
 };
 
-const manageRebalanceTriggers = async ({ action, data, id, invoiceId, lnd }: Args) => {
+const manageRebalanceTriggers = async ({ action, data, id, lnd }: Args) => {
   const result = await auto({
     // Check arguments
     validate: (cbk: any) => {
@@ -59,7 +54,6 @@ const manageRebalanceTriggers = async ({ action, data, id, invoiceId, lnd }: Arg
 
         const trigger = await createRebalanceTrigger({
           data,
-          id,
           lnd,
         });
 
@@ -72,7 +66,7 @@ const manageRebalanceTriggers = async ({ action, data, id, invoiceId, lnd }: Arg
       'validate',
       async ({}) => {
         // Exit early when not listing triggers
-        if (action !== actionListTriggers) {
+        if (action !== actionListRebalancesTriggers) {
           return;
         }
 
@@ -87,11 +81,11 @@ const manageRebalanceTriggers = async ({ action, data, id, invoiceId, lnd }: Arg
       'validate',
       async ({}) => {
         // Exit early when not deleting a triger
-        if (action !== actionDeleteTrigger) {
+        if (action !== actionDeleteRebalanceTrigger) {
           return;
         }
 
-        const deleteTrigger = await cancelHodlInvoice({ lnd, id: invoiceId });
+        const deleteTrigger = await cancelHodlInvoice({ lnd, id });
 
         return deleteTrigger;
       },

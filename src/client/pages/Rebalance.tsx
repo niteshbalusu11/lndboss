@@ -174,6 +174,7 @@ const Rebalance = () => {
     max_fee: Number(maxFee),
     max_fee_rate: Number(maxFeeRate),
     max_rebalance: amount,
+    message_id: Date.now().toString(),
     out_filters: outFilter.map(n => n.outFilter),
     out_inbound: outTargetInbound,
     out_through: outPeer,
@@ -183,7 +184,7 @@ const Rebalance = () => {
   const fetchData = async () => {
     if (schedule.startsWith('*')) {
       useNotify({ type: 'error', message: 'Running a job every minute is bad...' });
-      return;
+      // return;
     }
     const result = await axiosPost({ path: 'rebalance/schedule', postBody: flags });
 

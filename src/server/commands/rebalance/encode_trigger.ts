@@ -4,7 +4,6 @@ const hexAsBase64 = (hex: string) => Buffer.from(hex, 'hex').toString('base64');
 const stringToHex = (n: string) => Buffer.from(n, 'utf8').toString('hex');
 const triggerPrefix = 'lndboss-rebalance-trigger:';
 const typeRebalanceData = '5';
-const typeRebalanceId = '4';
 const typeVersion = '0';
 const version = '01';
 
@@ -34,12 +33,11 @@ const version = '01';
 
 type Args = {
   data: string;
-  id: string;
 };
 
-const encodeTrigger = ({ data, id }: Args) => {
-  if (!data || !id) {
-    throw new Error('ExpectedRebalanceDataAndIdToEncodeTrigger');
+const encodeTrigger = ({ data }: Args) => {
+  if (!data) {
+    throw new Error('ExpectedRebalanceDataToEncodeTrigger');
   }
 
   // Encode the trigger parameters for a follow trigger
@@ -48,10 +46,6 @@ const encodeTrigger = ({ data, id }: Args) => {
       {
         type: typeRebalanceData,
         value: stringToHex(data),
-      },
-      {
-        type: typeRebalanceId,
-        value: stringToHex(id),
       },
       {
         type: typeVersion,

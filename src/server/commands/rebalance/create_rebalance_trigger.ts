@@ -26,20 +26,15 @@ type Tasks = {
 
 type Args = {
   data: string;
-  id: string;
   lnd: AuthenticatedLnd;
 };
 
-const createRebalanceTrigger = async ({ data, id, lnd }: Args) => {
+const createRebalanceTrigger = async ({ data, lnd }: Args) => {
   return auto<Tasks>({
     // Check arguments
     validate: (cbk: any) => {
       if (!data) {
         return cbk([400, 'ExpectedRebalanceDataToCreateRebalanceTrigger']);
-      }
-
-      if (!id) {
-        return cbk([400, 'ExpectedNodeIdToCreateConnectivityTrigger']);
       }
 
       if (!lnd) {
@@ -54,7 +49,7 @@ const createRebalanceTrigger = async ({ data, id, lnd }: Args) => {
       'validate',
       ({}, cbk: any) => {
         try {
-          const { encoded } = encodeTrigger({ data, id });
+          const { encoded } = encodeTrigger({ data });
 
           return cbk(null, encoded);
         } catch (err) {

@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { rebalanceDto, rebalanceScheduleDto } from '~shared/commands.dto';
+import { deleteRebalanceDto, getRebalancesDto, rebalanceDto, rebalanceScheduleDto } from '~shared/commands.dto';
 import { RebalanceService } from './rebalance.service';
 
 // Rebalance controller: Defines routes for rebalance command
@@ -18,12 +18,12 @@ export class RebalanceController {
   }
 
   @Get('api/rebalance/getrebalances')
-  async getRebalances(@Query() args: { node: string }) {
+  async getRebalances(@Query() args: getRebalancesDto) {
     return this.rebalanceService.getRebalances(args);
   }
 
   @Get('api/rebalance/deleterebalance')
-  async deleteRebalance(@Query() args: { node: string; invoice_id: string }) {
+  async deleteRebalance(@Query() args: deleteRebalanceDto) {
     return this.rebalanceService.deleteRebalance(args);
   }
 }

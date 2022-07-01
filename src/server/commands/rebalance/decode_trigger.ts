@@ -7,7 +7,6 @@ const hexToString = (n: string) => Buffer.from(n, 'hex').toString('utf8');
 const knownVersions = ['00', '01'];
 const triggerPrefix = 'lndboss-rebalance-trigger:';
 const typeRebalanceData = '5';
-const typeRebalanceId = '4';
 const typeVersion = '0';
 
 /** Decode an encoded trigger
@@ -57,16 +56,8 @@ const decodeTrigger = ({ encoded }: Args) => {
     throw new Error('ExpectedRebalanceDataForEncodedTrigger');
   }
 
-  // Trigger parameters are encoded into a stream record
-  const rebalanceIdRecord = findRecord(records, typeRebalanceId);
-
-  if (!rebalanceIdRecord || !rebalanceIdRecord.value) {
-    throw new Error('ExpectedRebalanceIdForEncodedTrigger');
-  }
-
   return {
     result: {
-      rebalance_id: hexToString(rebalanceIdRecord.value),
       rebalance_data: hexToString(rebalanceRecord.value),
     },
   };
