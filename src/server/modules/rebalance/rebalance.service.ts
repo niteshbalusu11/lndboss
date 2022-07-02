@@ -88,7 +88,7 @@ export class RebalanceService implements OnModuleInit {
   async onModuleInit() {
     try {
       const { nodes } = await getSavedNodes({});
-
+      console.log('nodes', nodes);
       const rebalances = await Promise.all(
         nodes.nodes
           .filter(node => !!node.lnd && !!node.is_online)
