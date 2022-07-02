@@ -1,7 +1,7 @@
 import * as types from '../../shared/types';
 
 import { Button, CssBaseline, IconButton, Stack, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StandardButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components';
 import commands, { globalCommands } from '../commands';
 
@@ -63,7 +63,7 @@ const Rebalance = () => {
   const [maxFeeRate, setMaxFeeRate] = useState('250');
   const [timeout, setTimeout] = useState('5');
   const [schedule, setSchedule] = useState('30 5 * * 1,6');
-  const [cronUrl, setCronUrl] = useState('');
+  const [cronUrl, setCronUrl] = useState('https://crontab.guru/#30_5_*_*_1,6');
 
   const handleScheduleChange = (newSchedule: string) => {
     setSchedule(newSchedule);
@@ -174,7 +174,6 @@ const Rebalance = () => {
     max_fee: Number(maxFee),
     max_fee_rate: Number(maxFeeRate),
     max_rebalance: amount,
-    message_id: Date.now().toString(),
     out_filters: outFilter.map(n => n.outFilter),
     out_inbound: outTargetInbound,
     out_through: outPeer,
@@ -182,6 +181,23 @@ const Rebalance = () => {
   };
 
   const fetchData = async () => {
+    const flags: types.commandRebalance = {
+      node,
+      schedule,
+      avoid: avoid.map(n => n.avoid),
+      in_filters: inFilter.map(n => n.inFilter),
+      in_outbound: inTargetOutbound,
+      in_through: inPeer,
+      max_fee: Number(maxFee),
+      max_fee_rate: Number(maxFeeRate),
+      max_rebalance: amount,
+      message_id: Date.now().toString(),
+      out_filters: outFilter.map(n => n.outFilter),
+      out_inbound: outTargetInbound,
+      out_through: outPeer,
+      timeout_minutes: Number(timeout),
+    };
+
     if (schedule.startsWith('*')) {
       useNotify({ type: 'error', message: 'Running a job every minute is bad...' });
       // return;
