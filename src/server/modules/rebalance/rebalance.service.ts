@@ -5,7 +5,6 @@ import { CronService } from '../cron/cron.service';
 import { LndService } from '../lnd/lnd.service';
 import { SocketGateway } from '../socket/socket.gateway';
 import { getSavedNodes } from '~server/lnd';
-import { globalLogger } from '~server/utils/global_functions';
 import manageRebalanceTriggers from '~server/commands/rebalance/manage_rebalance_triggers';
 import { rebalanceCommand } from '~server/commands';
 
@@ -88,26 +87,28 @@ export class RebalanceService implements OnModuleInit {
   async onModuleInit() {
     try {
       const { nodes } = await getSavedNodes({});
-      console.log('nodes', nodes);
-      const rebalances = await Promise.all(
-        nodes.nodes
-          .filter(node => !!node.lnd && !!node.is_online)
-          .map(async node => {
-            return await this.getRebalances({ node: node.node_name });
-          })
-      );
 
-      rebalances
-        .filter(n => !!n.result && !!n.result.getTriggers && !!n.result.getTriggers.length)
-        .forEach(rebalance => {
-          rebalance.result.getTriggers.forEach(trigger => {
-            const args = JSON.parse(trigger.rebalance_data);
-            console.log(args);
-            this.cronService.createRebalanceCron({ args, id: trigger.id });
+      if (!!nodes.nodes && !!nodes.nodes.length) {
+        const rebalances = await Promise.all(
+          nodes.nodes
+            .filter(node => !!node.lnd && !!node.is_online)
+            .map(async node => {
+              return await this.getRebalances({ node: node.node_name });
+            })
+        );
+
+        rebalances
+          .filter(n => !!n.result && !!n.result.getTriggers && !!n.result.getTriggers.length)
+          .forEach(rebalance => {
+            rebalance.result.getTriggers.forEach(trigger => {
+              const args = JSON.parse(trigger.rebalance_data);
+              console.log(args);
+              this.cronService.createRebalanceCron({ args, id: trigger.id });
+            });
           });
-        });
+      }
     } catch (error) {
-      globalLogger({ type: 'error', data: error });
+      console.error(error);
     }
   }
 

@@ -232,8 +232,9 @@ const getSavedNodes = async ({ network }: Args) => {
           const node = filter.find(n => n.public_key === publicKey);
 
           if (!node) {
-            const newFilter = filter.push({ lnd, is_online: true, node_name: '', public_key: publicKey });
-            return newFilter;
+            filter.push({ lnd, is_online: true, node_name: '', public_key: publicKey });
+
+            return filter;
           }
           return filter;
         } catch (err) {
