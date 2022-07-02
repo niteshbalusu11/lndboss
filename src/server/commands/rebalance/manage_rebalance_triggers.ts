@@ -32,8 +32,15 @@ type Args = {
   lnd: AuthenticatedLnd;
 };
 
+type Tasks = {
+  validate: undefined;
+  createRebalanceTrigger: any;
+  getTriggers: string[];
+  deleteTrigger: undefined;
+};
+
 const manageRebalanceTriggers = async ({ action, data, id, lnd }: Args) => {
-  const result = await auto({
+  const result = await auto<Tasks>({
     // Check arguments
     validate: (cbk: any) => {
       if (!lnd) {

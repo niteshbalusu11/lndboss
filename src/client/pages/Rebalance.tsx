@@ -186,9 +186,8 @@ const Rebalance = () => {
       useNotify({ type: 'error', message: 'Running a job every minute is bad...' });
       // return;
     }
-    const result = await axiosPost({ path: 'rebalance/schedule', postBody: flags });
+    await axiosPost({ path: 'rebalance/schedule', postBody: flags });
 
-    console.log(result);
     useNotify({ type: 'success', message: 'Added schedule' });
   };
 

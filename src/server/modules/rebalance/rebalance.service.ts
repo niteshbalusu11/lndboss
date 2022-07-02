@@ -1,10 +1,11 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { deleteRebalanceDto, getRebalancesDto, rebalanceDto, rebalanceScheduleDto } from '~shared/commands.dto';
 
-import { CronJob } from 'cron';
 import { CronService } from '../cron/cron.service';
 import { LndService } from '../lnd/lnd.service';
 import { SocketGateway } from '../socket/socket.gateway';
+import { getSavedNodes } from '~server/lnd';
+import { globalLogger } from '~server/utils/global_functions';
 import manageRebalanceTriggers from '~server/commands/rebalance/manage_rebalance_triggers';
 import { rebalanceCommand } from '~server/commands';
 
@@ -82,13 +83,32 @@ Rebalance
 
 @Injectable()
 export class RebalanceService implements OnModuleInit {
-  constructor(private socketService: SocketGateway) {}
+  constructor(private socketService: SocketGateway, private cronService: CronService) {}
+  // On module init, get saved nodes and fetch rebalances and add to cron jobs
   async onModuleInit() {
-    const args = {
-      node: '',
-    };
+    try {
+      const { nodes } = await getSavedNodes({});
 
-    this.rebalanceCron('45 * * * * *');
+      const rebalances = await Promise.all(
+        nodes.nodes
+          .filter(node => !!node.lnd && !!node.is_online)
+          .map(async node => {
+            return await this.getRebalances({ node: node.node_name });
+          })
+      );
+
+      rebalances
+        .filter(n => !!n.result && !!n.result.getTriggers && !!n.result.getTriggers.length)
+        .forEach(rebalance => {
+          rebalance.result.getTriggers.forEach(trigger => {
+            const args = JSON.parse(trigger.rebalance_data);
+            console.log(args);
+            this.cronService.createRebalanceCron({ args, id: trigger.id });
+          });
+        });
+    } catch (error) {
+      globalLogger({ type: 'error', data: error });
+    }
   }
 
   async deleteRebalance(args: deleteRebalanceDto): Promise<{ result: any }> {
@@ -99,6 +119,8 @@ export class RebalanceService implements OnModuleInit {
       action: actionDeleteRebalanceTrigger,
       id: args.invoice_id,
     });
+
+    this.cronService.deleteCron({ name: args.invoice_id });
 
     return { result: 'rebalanceScheduleDeleted' };
   }
@@ -137,17 +159,9 @@ export class RebalanceService implements OnModuleInit {
     });
 
     if (!!result.createRebalanceTrigger) {
-      CronService.createRebalanceCron(args);
+      this.cronService.createRebalanceCron({ args, id: result.createRebalanceTrigger.create.id });
     }
 
     return { result: result.createRebalanceTrigger };
-  }
-
-  async rebalanceCron(args) {
-    const job = new CronJob(`${args}`, () => {
-      console.log(`time to run!`);
-    });
-
-    job.start();
   }
 }
