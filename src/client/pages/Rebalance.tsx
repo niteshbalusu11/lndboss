@@ -10,6 +10,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import ReactCron from '~client/standard_components/ReactCron';
 import { axiosPost } from '~client/utils/axios';
+import { clientConstants } from '~client/utils/constants';
 import { useNotify } from '~client/hooks/useNotify';
 
 const RebalanceCommand = commands.find(n => n.value === 'Rebalance');
@@ -221,6 +222,11 @@ const Rebalance = () => {
           <a href={cronUrl} target="blank" id="cronguruUrl" style={styles.url}>
             Click here to validate your schedule.
           </a>
+          <Link href={{ pathname: clientConstants.rebalanceSchedulerUrl }}>
+            <a target="blank" style={styles.url}>
+              Click to view current scheduled jobs
+            </a>
+          </Link>
           <SubmitButton variant="contained" onClick={fetchData}>
             Add Schedule
           </SubmitButton>

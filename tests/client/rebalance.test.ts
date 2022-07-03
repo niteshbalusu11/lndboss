@@ -50,13 +50,18 @@ test.describe('Test the Rebalance command client page', async () => {
   });
 
   test('test the rebalance scheduled page', async ({ page }) => {
-    await page.goto('/schedulers/RebalanceScheduler');
-    await expect(page).toHaveTitle('Rebalance Scheduler');
-    await page.type('#node', 'alice');
+    await page.goto('/Commands');
+    await page.click('text=Rebalance');
+    await page.click('text=Click to view current scheduled jobs');
 
-    await page.click('text=fetch rebalances for saved node');
+    const popup = await page.waitForEvent('popup');
 
-    await expect(page.locator('#scheduledRebalances')).toBeVisible();
+    await expect(popup).toHaveTitle('Rebalance Scheduler');
+    await popup.type('#node', 'alice');
+
+    await popup.click('text=fetch rebalances for saved node');
+
+    await expect(popup.locator('#scheduledRebalances')).toBeVisible();
   });
 
   test.afterEach(async ({ page }) => {
