@@ -102,7 +102,7 @@ export class RebalanceService implements OnModuleInit {
           .forEach(rebalance => {
             rebalance.result.getTriggers.forEach(trigger => {
               const args = JSON.parse(trigger.rebalance_data);
-              console.log(args);
+
               this.cronService.createRebalanceCron({ args, id: trigger.id });
             });
           });

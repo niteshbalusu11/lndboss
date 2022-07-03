@@ -1,7 +1,7 @@
 import * as types from '../../shared/types';
 
 import { Button, CssBaseline, IconButton, Stack, TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StandardButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components';
 import commands, { globalCommands } from '../commands';
 
