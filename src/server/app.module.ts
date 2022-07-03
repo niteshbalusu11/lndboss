@@ -12,6 +12,7 @@ import { ChartPaymentsReceivedModule } from './modules/chart-payments-received/c
 import { ClosedModule } from './modules/closed/closed.module';
 import { ConfigModule } from '@nestjs/config';
 import { CredentialsModule } from './modules/credentials/credentials.module';
+import { CronModule } from './modules/cron/cron.module';
 import { FindModule } from './modules/find/find.module';
 import { ForwardsModule } from './modules/forwards/forwards.module';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
@@ -19,6 +20,7 @@ import { LndModule } from './modules/lnd/lnd.module';
 import { Module } from '@nestjs/common';
 import { PriceModule } from './modules/price/price.module';
 import { RebalanceModule } from './modules/rebalance/rebalance.module';
+import { ScheduleModule } from '@nestjs/schedule';
 import { SocketModule } from './modules/socket/socket.module';
 import { TagsModule } from './modules/tags/tags.module';
 import { ViewModule } from '~server/modules/view/view.module';
@@ -36,9 +38,10 @@ import { ViewModule } from '~server/modules/view/view.module';
     ChartChainFeesModule,
     ChartFeesEarnedModule,
     ChartFeesPaidModule,
-    CredentialsModule,
     ChartPaymentsReceivedModule,
     ClosedModule,
+    CredentialsModule,
+    CronModule,
     FindModule,
     ForwardsModule,
     ConfigModule.forRoot({
@@ -48,6 +51,7 @@ import { ViewModule } from '~server/modules/view/view.module';
     LndModule,
     PriceModule,
     RebalanceModule,
+    ScheduleModule.forRoot(),
     SocketModule,
     TagsModule,
     ViewModule,

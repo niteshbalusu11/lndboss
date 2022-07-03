@@ -124,10 +124,12 @@ export type commandRebalance = {
   max_fee?: number;
   max_fee_rate?: number;
   max_rebalance?: string;
+  message_id?: string;
   node?: string;
   out_filters?: string[];
   out_inbound?: string;
   out_through?: string;
+  schedule?: string;
   timeout_minutes?: number;
 };
 

@@ -33,12 +33,13 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
 type Props = {
   label: string;
   destination: string;
+  dynamicStyle?: any;
 };
 
-const StandardButtonLink = ({ destination, label }: Props) => {
+const StandardButtonLink = ({ destination, label, dynamicStyle }: Props) => {
   return (
     <Link href={destination}>
-      <ColorButton style={styles.button} variant="contained" id={label}>
+      <ColorButton style={dynamicStyle || styles.button} variant="contained" id={label}>
         {label}
       </ColorButton>
     </Link>

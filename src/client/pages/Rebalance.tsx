@@ -8,6 +8,9 @@ import commands, { globalCommands } from '../commands';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
 import Link from 'next/link';
+import ReactCron from '~client/standard_components/ReactCron';
+import { axiosPost } from '~client/utils/axios';
+import { useNotify } from '~client/hooks/useNotify';
 
 const RebalanceCommand = commands.find(n => n.value === 'Rebalance');
 
@@ -40,6 +43,10 @@ const styles = {
     width: '50px',
     marginTop: '0px',
   },
+  url: {
+    fontWeight: 'bold',
+    color: 'blue',
+  },
 };
 
 const Rebalance = () => {
@@ -55,6 +62,16 @@ const Rebalance = () => {
   const [maxFee, setMaxFee] = useState('1337');
   const [maxFeeRate, setMaxFeeRate] = useState('250');
   const [timeout, setTimeout] = useState('5');
+  const [schedule, setSchedule] = useState('30 5 * * 1,6');
+  const [cronUrl, setCronUrl] = useState('https://crontab.guru/#30_5_*_*_1,6');
+
+  const handleScheduleChange = (newSchedule: string) => {
+    setSchedule(newSchedule);
+  };
+
+  const handleCronUrlChange = (newCronUrl: string) => {
+    setCronUrl(newCronUrl);
+  };
 
   const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
@@ -148,6 +165,8 @@ const Rebalance = () => {
   };
 
   const flags: types.commandRebalance = {
+    node,
+    schedule,
     avoid: avoid.map(n => n.avoid),
     in_filters: inFilter.map(n => n.inFilter),
     in_outbound: inTargetOutbound,
@@ -159,7 +178,33 @@ const Rebalance = () => {
     out_inbound: outTargetInbound,
     out_through: outPeer,
     timeout_minutes: Number(timeout),
-    node,
+  };
+
+  const fetchData = async () => {
+    const flags: types.commandRebalance = {
+      node,
+      schedule,
+      avoid: avoid.map(n => n.avoid),
+      in_filters: inFilter.map(n => n.inFilter),
+      in_outbound: inTargetOutbound,
+      in_through: inPeer,
+      max_fee: Number(maxFee),
+      max_fee_rate: Number(maxFeeRate),
+      max_rebalance: amount,
+      message_id: Date.now().toString(),
+      out_filters: outFilter.map(n => n.outFilter),
+      out_inbound: outTargetInbound,
+      out_through: outPeer,
+      timeout_minutes: Number(timeout),
+    };
+
+    if (schedule.startsWith('*')) {
+      useNotify({ type: 'error', message: 'Running a job every minute is bad...' });
+      // return;
+    }
+    await axiosPost({ path: 'rebalance/schedule', postBody: flags });
+
+    useNotify({ type: 'success', message: 'Added schedule' });
   };
 
   return (
@@ -170,9 +215,18 @@ const Rebalance = () => {
       <StartFlexBox>
         <StandardButtonLink destination="/Commands" label="Home" />
         <Stack spacing={3} style={styles.form}>
-          <h1>Rebalance</h1>
+          <h1>Auto Rebalance Scheduler</h1>
+          <h3>It is recommended that you manually test a rebalance before auto scheduling.</h3>
+          <ReactCron handleScheduleChange={handleScheduleChange} handleCronUrlChange={handleCronUrlChange} />
+          <a href={cronUrl} target="blank" id="cronguruUrl" style={styles.url}>
+            Click here to validate your schedule.
+          </a>
+          <SubmitButton variant="contained" onClick={fetchData}>
+            Add Schedule
+          </SubmitButton>
+          <h1>Manual Rebalance</h1>
           <pre style={styles.pre}>{RebalanceCommand.longDescription}</pre>
-          <h4>NOTE: THERE IS NO WAY TO STOP AN IN-FLIGHT REBALANCE, DOUBLE CHECK BEFORE RUNNING.</h4>
+          <h3>NOTE: THERE IS NO WAY TO STOP AN IN-FLIGHT REBALANCE, DOUBLE CHECK BEFORE RUNNING.</h3>
           <TextField
             type="text"
             placeholder={`${RebalanceCommand.flags.in_through} (Route in through a specific peer)`}

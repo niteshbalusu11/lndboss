@@ -34,6 +34,31 @@ test.describe('Test the Rebalance command client page', async () => {
     await page.click('text=home');
   });
 
+  test('test the Rebalance command page and input values and add schedule', async ({ page }) => {
+    await page.goto('/Commands');
+    await page.click('text=Rebalance');
+    await expect(page).toHaveTitle('Rebalance');
+    await page.type(`#avoid-0`, 'ban');
+    await page.type(`#${RebalanceCommand?.flags?.in_through}`, 'carol');
+    await page.type(`#${RebalanceCommand?.flags?.out_through}`, 'bob');
+    await page.type(`#${RebalanceCommand?.flags?.max_rebalance}`, '50000');
+    await page.type(`#${RebalanceCommand?.flags?.timeout_minutes}`, '1');
+    await page.type('#node', 'alice');
+
+    await page.click('text=Add Schedule');
+    await page.click('text=home');
+  });
+
+  test('test the rebalance scheduled page', async ({ page }) => {
+    await page.goto('/schedulers/RebalanceScheduler');
+    await expect(page).toHaveTitle('Rebalance Scheduler');
+    await page.type('#node', 'alice');
+
+    await page.click('text=fetch rebalances for saved node');
+
+    await expect(page.locator('#scheduledRebalances')).toBeVisible();
+  });
+
   test.afterEach(async ({ page }) => {
     await removeAccessToken({ page });
   });

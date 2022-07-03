@@ -19,6 +19,20 @@ export const logger = ({ error }: { error: any }) => {
   }
 };
 
+export const globalLogger = ({ type, data }: { type: string; data: any }) => {
+  if (type === 'error') {
+    Logger.error(data);
+  }
+
+  if (type === 'warn') {
+    Logger.warn(data);
+  }
+
+  if (type === 'info') {
+    Logger.log(data);
+  }
+};
+
 // Encrypt a string
 export const encryptString = ({ text }: { text: string }): { iv?: string; encryptedData?: string; error?: string } => {
   try {
