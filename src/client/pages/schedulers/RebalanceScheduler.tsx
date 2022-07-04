@@ -47,6 +47,8 @@ const columns = [
   'ID',
   'Node',
   'Schedule',
+  'InPeer',
+  'OutPeer',
   'Avoid',
   'InFilters',
   'MaxFee',
@@ -133,6 +135,9 @@ const RebalanceScheduler = () => {
         !!rebalanceData.node ? row.push(rebalanceData.node) : row.push('Default');
 
         row.push(rebalanceData.schedule);
+
+        row.push(rebalanceData.in_through);
+        row.push(rebalanceData.out_through);
 
         !!rebalanceData.avoid.length ? row.push(rebalanceData.avoid.join(', ')) : row.push('');
 
