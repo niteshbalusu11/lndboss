@@ -1,7 +1,11 @@
+import { WinstonModule, utilities as nestWinstonModuleUtilities } from 'nest-winston';
+import { format, transports } from 'winston';
+
 import { AccountingModule } from './modules/accounting/accounting.module';
 import { AppController } from './app.controller';
 import { AuthModule } from './modules/auth/auth.module';
 import { BalanceModule } from './modules/balance/balance.module';
+import { BosloggerModule } from './modules/boslogger/boslogger.module';
 import { CertValidityDaysModule } from './modules/cert-validity-days/cert-validity-days.module';
 import { ChainDepositModule } from './modules/chain-deposit/chain-deposit.module';
 import { ChainfeesModule } from './modules/chainfees/chainfees.module';
@@ -49,12 +53,22 @@ import { ViewModule } from '~server/modules/view/view.module';
       envFilePath: ['.env', '.env.local'],
     }),
     LndModule,
+    BosloggerModule,
     PriceModule,
     RebalanceModule,
     ScheduleModule.forRoot(),
     SocketModule,
     TagsModule,
     ViewModule,
+    WinstonModule.forRootAsync({
+      useFactory: () => ({
+        transports: [
+          new transports.Console({
+            format: format.combine(format.timestamp(), nestWinstonModuleUtilities.format.nestLike()),
+          }),
+        ],
+      }),
+    }),
   ],
   controllers: [AppController],
   providers: [
