@@ -15,7 +15,7 @@
     "lightning-network"
   ],
   "scripts": {
-    "prebuild": "rimraf dist",
+    "prebuild": "rimraf dist && rimraf src/client/.next",
     "build": "npm run build:nest && npm run build:next",
     "build:nest": "nest build",
     "build:next": "cd src/client && next build",
