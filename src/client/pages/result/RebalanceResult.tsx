@@ -49,6 +49,16 @@ const RebalanceResult = () => {
   const output = [];
 
   useEffect(() => {
+    if (!!data) {
+      window.scroll({
+        top: document.body.offsetHeight,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
+  }, [data]);
+
+  useEffect(() => {
     const dateString = Date.now().toString();
 
     const query = {
@@ -107,7 +117,7 @@ const RebalanceResult = () => {
       <StartFlexBoxBlack>
         <div style={styles.div}>
           <h1>Rebalancing...</h1>
-          {data && (
+          {!!data && (
             <div id={'rebalanceResult'}>
               <pre style={styles.pre}>{data}</pre>
             </div>
