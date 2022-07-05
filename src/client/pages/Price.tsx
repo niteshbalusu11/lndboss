@@ -2,7 +2,7 @@ import * as types from '../../shared/types';
 
 import { CssBaseline, FormControlLabel, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '~client/standard_components';
+import { StandardHomeButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '~client/standard_components';
 
 import Head from 'next/head';
 import PriceOutput from '~client/output/PriceOutput';
@@ -71,7 +71,7 @@ const Price = () => {
         <title>Price</title>
       </Head>
       <StartFlexBox>
-        <StandardButtonLink destination="/Commands" label="Home" />
+        <StandardHomeButtonLink />
         <Stack spacing={3} style={styles.form}>
           <h2>{PriceCommand.name}</h2>
           <h4 style={styles.h4}>{PriceCommand.longDescription}</h4>

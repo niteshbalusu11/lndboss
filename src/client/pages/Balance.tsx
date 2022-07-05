@@ -2,7 +2,7 @@ import * as types from '../../shared/types';
 
 import { CssBaseline, FormControlLabel, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
+import { StandardHomeButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
 import commands, { globalCommands } from '../commands';
 
 import { BalanceOutput } from '../output';
@@ -95,7 +95,8 @@ const Balance = () => {
         <title>Balance</title>
       </Head>
       <StartFlexBox>
-        <StandardButtonLink label="Home" destination="/Commands" />
+        <StandardHomeButtonLink />
+
         <Stack spacing={3} style={styles.form}>
           <h2>{BalanceCommand.name}</h2>
           <h4 style={styles.h4}>{BalanceCommand.description}</h4>

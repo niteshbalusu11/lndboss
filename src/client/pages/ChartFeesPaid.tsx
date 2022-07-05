@@ -2,7 +2,7 @@ import * as types from '../../shared/types';
 
 import { Button, CssBaseline, FormControlLabel, IconButton, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
+import { StandardHomeButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
 import commands, { globalCommands } from '../commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -121,7 +121,7 @@ const ChartFeesPaid = () => {
         <title>Chart Fees Paid</title>
       </Head>
       <StartFlexBox>
-        <StandardButtonLink label="Home" destination="/Commands" />
+        <StandardHomeButtonLink />
         <Stack spacing={3} style={styles.form}>
           <h2>{ChartFeesPaidCommand.name}</h2>
           <h4 style={styles.h4}>{ChartFeesPaidCommand.longDescription}</h4>

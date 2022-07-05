@@ -2,7 +2,7 @@ import * as types from '../../shared/types';
 
 import { CssBaseline, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardButtonLink, StartFlexBox, SubmitButton } from '../standard_components';
+import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '../standard_components';
 import commands, { globalCommands } from '../commands';
 
 import { ChainDepositOutput } from '../output';
@@ -68,7 +68,7 @@ const ChainDeposit = () => {
         <title>Chain Deposit</title>
       </Head>
       <StartFlexBox>
-        <StandardButtonLink label="Home" destination="/Commands" />
+        <StandardHomeButtonLink />
         <Stack spacing={3} style={styles.form}>
           <h2>{ChainDepositCommand.name}</h2>
           <h4 style={styles.h4}>{ChainDepositCommand.description}</h4>

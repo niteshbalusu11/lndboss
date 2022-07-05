@@ -2,7 +2,7 @@ import * as types from '../../shared/types';
 
 import { CssBaseline, FormControlLabel, InputLabel, MenuItem, Select, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '~client/standard_components';
+import { StandardHomeButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '~client/standard_components';
 import commands, { globalCommands } from '~client/commands';
 
 import Head from 'next/head';
@@ -104,7 +104,7 @@ const Accounting = () => {
         <title>Accounting</title>
       </Head>
       <StartFlexBox>
-        <StandardButtonLink label="Home" destination="/Commands" />
+        <StandardHomeButtonLink />
 
         <Stack spacing={3} style={styles.form}>
           <h2>{AccountingCommand.name}</h2>

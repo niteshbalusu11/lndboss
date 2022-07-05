@@ -5,6 +5,7 @@ import { StandardButtonLink, StartFlexBox, SubmitButton } from '~client/standard
 import Head from 'next/head';
 import Router from 'next/router';
 import axios from 'axios';
+import { clientConstants } from '~client/utils/constants';
 import getConfig from 'next/config';
 import { useNotify } from '~client/hooks/useNotify';
 import { usePasswordValidation } from '~client/hooks/usePasswordValidation';
@@ -94,7 +95,7 @@ const Register = () => {
         <title>Balance</title>
       </Head>
       <StartFlexBox>
-        <StandardButtonLink destination="/auth/Login" label="Login" />
+        <StandardButtonLink destination={clientConstants.loginUrl} label="Login" />
         <Stack spacing="3" style={styles.form}>
           <h2>Register</h2>
           <TextField

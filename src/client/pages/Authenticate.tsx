@@ -1,6 +1,6 @@
 import { CssBaseline, FormControlLabel, InputLabel, MenuItem, Select, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
+import { StandardHomeButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
 
 import Head from 'next/head';
 import Router from 'next/router';
@@ -159,7 +159,8 @@ const Authenticate = () => {
         <title>Authentication</title>
       </Head>
       <StartFlexBox>
-        <StandardButtonLink label="Home" destination="/Commands" />
+        <StandardHomeButtonLink />
+
         <Stack spacing={1} className={classes.form}>
           <h2 className={classes.h1}>Authenticate</h2>
           <InputLabel id="authtype" className={classes.inputLabel}>

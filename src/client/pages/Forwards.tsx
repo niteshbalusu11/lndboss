@@ -2,7 +2,7 @@ import * as types from '../../shared/types';
 
 import { CssBaseline, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components';
+import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components';
 import commands, { globalCommands } from '~client/commands';
 
 import { ForwardsOutput } from '~client/output';
@@ -80,7 +80,7 @@ const Forwards = () => {
         <title>Forwards</title>
       </Head>
       <StartFlexBox>
-        <StandardButtonLink label="Home" destination="/Commands" />
+        <StandardHomeButtonLink />
         <Stack spacing={3} style={styles.form}>
           <h2>{ForwardsCommand.name}</h2>
           <h4 style={styles.h4}>{ForwardsCommand.longDescription}</h4>

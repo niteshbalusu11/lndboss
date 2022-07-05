@@ -4,6 +4,7 @@ import { StandardButtonLink, StartFlexBox, SubmitButton } from '~client/standard
 
 import Router from 'next/router';
 import axios from 'axios';
+import { clientConstants } from '~client/utils/constants';
 import { createUseStyles } from 'react-jss';
 import getConfig from 'next/config';
 import { useNotify } from '~client/hooks/useNotify';
@@ -91,7 +92,7 @@ const Login = () => {
   return (
     <CssBaseline>
       <StartFlexBox>
-        <StandardButtonLink destination="/auth/Register" label="Register" />
+        <StandardButtonLink destination={clientConstants.registerUrl} label="Register" />
         <Stack spacing="3" className={classes.form}>
           <h2>Login</h2>
           <TextField

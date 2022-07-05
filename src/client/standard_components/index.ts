@@ -4,6 +4,7 @@ import PositionedMenu from './PositionedMenu';
 import ResponsiveGrid from './ResponsiveGrid';
 import SavedNodes from './SavedNodes';
 import StandardButtonLink from './StandardButtonLink';
+import StandardHomeButtonLink from './StandardHomeButtonLink';
 import StandardRouterLink from './StandardRouterLink';
 import StandardSwitch from './StandardSwitch';
 import StandardTableOutput from './StandardTableOutput';
@@ -18,6 +19,7 @@ export {
   ResponsiveGrid,
   SavedNodes,
   StandardButtonLink,
+  StandardHomeButtonLink,
   StandardRouterLink,
   StandardSwitch,
   StandardTableOutput,

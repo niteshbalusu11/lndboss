@@ -2,7 +2,7 @@ import * as types from '../../shared/types';
 
 import { Button, CssBaseline, IconButton, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components';
+import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components';
 import commands, { globalCommands } from '../commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -214,7 +214,7 @@ const Rebalance = () => {
         <title>Rebalance</title>
       </Head>
       <StartFlexBox>
-        <StandardButtonLink destination="/Commands" label="Home" />
+        <StandardHomeButtonLink />
         <Stack spacing={3} style={styles.form}>
           <h1>Auto Rebalance Scheduler</h1>
           <h3>It is recommended that you manually test a rebalance before auto scheduling.</h3>

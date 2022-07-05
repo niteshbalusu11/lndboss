@@ -2,7 +2,7 @@ import * as types from '../../shared/types';
 
 import { CssBaseline, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components';
+import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components';
 import commands, { globalCommands } from '~client/commands';
 
 import { CertValidityDaysOutput } from '~client/output';
@@ -59,7 +59,7 @@ const CertValidityDays = () => {
         <title>Cert Validity Days</title>
       </Head>
       <StartFlexBox>
-        <StandardButtonLink label="Home" destination="/Commands" />
+        <StandardHomeButtonLink />
         <Stack spacing={2} style={styles.form}>
           <h2>CertValidityDays</h2>
           <h4 style={styles.h4}>{CertValidityDaysCommand.description}</h4>

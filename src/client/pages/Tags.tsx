@@ -14,7 +14,7 @@ import {
   TextField,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
+import { StandardHomeButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
@@ -132,7 +132,7 @@ const Tags = () => {
         <title>Tags</title>
       </Head>
       <StartFlexBox>
-        <StandardButtonLink label="Home" destination="/Commands" />
+        <StandardHomeButtonLink />
         <Box style={styles.box}>
           <h2>{TagsCommand.name}</h2>
           <h4 style={styles.h4}>{TagsCommand.description}</h4>

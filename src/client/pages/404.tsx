@@ -1,4 +1,4 @@
-import { StandardButtonLink, StartFlexBox } from '../standard_components';
+import { StandardHomeButtonLink, StartFlexBox } from '../standard_components';
 
 import { CssBaseline } from '@mui/material';
 import React from 'react';
@@ -15,7 +15,7 @@ export default function Custom404() {
   return (
     <CssBaseline>
       <StartFlexBox>
-        <StandardButtonLink label="Home" destination="/Commands" />
+        <StandardHomeButtonLink />
         <h1 style={styles.h1}>404 - Page Not Found</h1>
       </StartFlexBox>
     </CssBaseline>
