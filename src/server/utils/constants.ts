@@ -9,7 +9,7 @@ dotenv.config({ path: join(__dirname, '../../../.env') });
 dotenv.config({ path: join(__dirname, '../../../.env.local') });
 
 // Check if the environment is production
-export const isProduction = !!process.env.PRODUCTION;
+export const isProduction = process.env.NODE_ENV === 'production';
 
 Logger.log(`isProduction: ${isProduction}`);
 

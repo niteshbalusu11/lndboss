@@ -15,9 +15,11 @@ FROM deps as build
 
 WORKDIR /lndboss
 
+RUN apt-get update && apt-get install -y jq
+
 COPY . .
-RUN rm -rf src/client/.next
 RUN yarn build
+RUN yarn remove $(cat package.json | jq -r '.devDependencies | keys | join(" ")')
 
 # ---------------
 # Release App
@@ -25,6 +27,10 @@ RUN yarn build
 FROM node:16-buster-slim as final
 
 WORKDIR /lndboss
+
+# Set environment to production
+ARG NODE_ENV="production"
+ENV NODE_ENV=${NODE_ENV}
 
 # Create a new user and group
 ARG USER_ID=1000
@@ -36,9 +42,6 @@ ENV GROUP_ID=$GROUP_ID
 COPY --from=build /lndboss/package.json ./
 COPY --from=build /lndboss/node_modules/ ./node_modules
 COPY --from=build /lndboss/nest-cli.json ./
-COPY --from=build /lndboss/tsconfig.build.json ./
-COPY --from=build /lndboss/tsconfig.json ./
-COPY --from=build /lndboss/tsconfig.paths.json ./
 COPY --from=build /lndboss/next-env.d.ts ./
 COPY --from=build /lndboss/src ./src
 COPY --from=build /lndboss/dist/ ./dist

@@ -1,23 +1,29 @@
 /* eslint-disable import/no-duplicates */
 import { Injectable, OnModuleInit } from '@nestjs/common';
 
+import { ConfigService } from '@nestjs/config';
 import { NextServer } from 'next/dist/server/next';
-import next from 'next';
+import createServer from 'next';
 
 @Injectable()
 export class ViewService implements OnModuleInit {
   private server: NextServer;
 
+  constructor(private configService: ConfigService) {}
+
   async onModuleInit(): Promise<void> {
     try {
-      this.server = next({ dev: true, dir: './src/client' });
+      this.server = createServer({
+        dev: this.configService.get<string>('NODE_ENV') !== 'production',
+        dir: './src/client',
+      });
       await this.server.prepare();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
-  getNextServer() {
+  getNextServer(): NextServer {
     return this.server;
   }
 }
