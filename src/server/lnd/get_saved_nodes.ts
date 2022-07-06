@@ -195,16 +195,37 @@ const getSavedNodes = async ({ network }: Args) => {
       },
     ],
 
+    // Get default node and adjust filter (from path or default directories)
+    removeDuplicates: [
+      'getNodes',
+      async ({ getNodes }) => {
+        try {
+          const { lnd } = await authenticatedLnd({});
+          const publicKey = (await getWalletInfo({ lnd })).public_key;
+          const node = getNodes.find(n => n.public_key === publicKey);
+
+          if (!node) {
+            getNodes.push({ lnd, is_online: true, node_name: '', public_key: publicKey });
+
+            return getNodes;
+          }
+          return getNodes;
+        } catch (err) {
+          return getNodes;
+        }
+      },
+    ],
+
     // Filter out nodes not on the specified network
     filter: [
-      'getNodes',
-      ({ getNodes }, cbk) => {
+      'removeDuplicates',
+      ({ removeDuplicates }, cbk) => {
         // Exit early when no network is specified
         if (!network) {
-          return cbk(null, getNodes);
+          return cbk(null, removeDuplicates);
         }
 
-        const nodes = getNodes.filter(n => !!n.is_online);
+        const nodes = removeDuplicates.filter(n => !!n.is_online);
 
         return filter(
           nodes,
@@ -222,29 +243,8 @@ const getSavedNodes = async ({ network }: Args) => {
       },
     ],
 
-    // Get default node and adjust filter (from path or default directories)
-    removeDuplicates: [
-      'filter',
-      async ({ filter }) => {
-        try {
-          const { lnd } = await authenticatedLnd({});
-          const publicKey = (await getWalletInfo({ lnd })).public_key;
-          const node = filter.find(n => n.public_key === publicKey);
-
-          if (!node) {
-            filter.push({ lnd, is_online: true, node_name: '', public_key: publicKey });
-
-            return filter;
-          }
-          return filter;
-        } catch (err) {
-          return filter;
-        }
-      },
-    ],
-
     // Final list of nodes
-    nodes: ['removeDuplicates', ({ removeDuplicates }, cbk) => cbk(null, { nodes: removeDuplicates })],
+    nodes: ['filter', ({ filter }, cbk) => cbk(null, { nodes: filter })],
   });
 };
 

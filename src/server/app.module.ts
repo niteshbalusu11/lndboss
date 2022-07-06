@@ -17,6 +17,7 @@ import { ClosedModule } from './modules/closed/closed.module';
 import { ConfigModule } from '@nestjs/config';
 import { CredentialsModule } from './modules/credentials/credentials.module';
 import { CronModule } from './modules/cron/cron.module';
+import { ExternalServicesModule } from './modules/external-services/external-services.module';
 import { FindModule } from './modules/find/find.module';
 import { ForwardsModule } from './modules/forwards/forwards.module';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
@@ -46,6 +47,7 @@ import { ViewModule } from '~server/modules/view/view.module';
     ClosedModule,
     CredentialsModule,
     CronModule,
+    ExternalServicesModule,
     FindModule,
     ForwardsModule,
     ConfigModule.forRoot({
@@ -62,6 +64,11 @@ import { ViewModule } from '~server/modules/view/view.module';
     ViewModule,
     WinstonModule.forRootAsync({
       useFactory: () => ({
+        levels: {
+          error: 0,
+          warn: 1,
+          info: 2,
+        },
         transports: [
           new transports.Console({
             format: format.combine(format.timestamp(), nestWinstonModuleUtilities.format.nestLike()),

@@ -3,19 +3,26 @@ import { CronJob } from 'cron';
 import { Injectable } from '@nestjs/common';
 import { LndService } from '../lnd/lnd.service';
 import { SchedulerRegistry } from '@nestjs/schedule';
+import { ambossHealthCheck } from '~server/external_services_utils';
 import autoRebalanceCommand from '~server/commands/rebalance/auto_rebalance_command';
 import { rebalanceScheduleDto } from '~shared/commands.dto';
 
 const stringify = (n: object) => JSON.stringify(n, null, 2);
 
 /**
- CreateRebalanceCron
+  @createRebalanceCron
   {
     args: <RebalanceScheduleDto>,
     id: <Rebalance Invoice ID String>,
   }
 
-  deleteCron
+  @createAmbossHealthCheckCron
+  Creates a cron job for AMBOSS_HEALTH_CHECK (every 30 minutes)
+  {
+    schedule: <Cron Schedule String>,
+  }
+
+  @deleteCron
   {
     name: <CronName/ID to delete String>,
   }
@@ -35,6 +42,18 @@ export class CronService {
         lnd,
         args,
       });
+    });
+
+    this.schedulerRegistry.addCronJob(id, job);
+    job.start();
+  }
+
+  createAmbossHealthCheckCron({ schedule }: { schedule: string }) {
+    this.logger.log({ message: `Adding amboss health check cron ${schedule}`, type: 'info' });
+    const id = 'amboss-health-check';
+
+    const job = new CronJob(schedule, async () => {
+      await ambossHealthCheck({ logger: this.logger });
     });
 
     this.schedulerRegistry.addCronJob(id, job);
