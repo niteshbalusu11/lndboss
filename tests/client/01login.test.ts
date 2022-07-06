@@ -1,6 +1,11 @@
 import { expect, test } from '@playwright/test';
+import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 test.describe('Test the login page and check authentication', async () => {
+  test.beforeEach(async ({ page }) => {
+    await setAccessToken({ page });
+  });
+
   test('Test the login page and input values: type credentials', async ({ page }) => {
     await page.goto('/Commands');
     await page.click('text=Menu');
@@ -34,5 +39,9 @@ test.describe('Test the login page and check authentication', async () => {
 
     await page.click('text=authenticate');
     await page.click('text=home');
+  });
+
+  test.afterEach(async ({ page }) => {
+    await removeAccessToken({ page });
   });
 });
