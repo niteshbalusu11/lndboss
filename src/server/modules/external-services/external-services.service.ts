@@ -22,15 +22,15 @@ import { ambossHealthCheckCronSchedule } from '~server/utils/constants';
 @Injectable()
 export class ExternalServicesService implements OnModuleInit {
   constructor(private logger: BosloggerService, private cronService: CronService) {}
-  onModuleInit() {
+  async onModuleInit(): Promise<void> {
     if (process.env.AMBOSS_HEALTH_CHECK === 'true') {
-      this.pingAmbossHealthCheck({ logger: this.logger });
+      await this.pingAmbossHealthCheck({ logger: this.logger });
 
-      this.cronService.createAmbossHealthCheckCron({ schedule: ambossHealthCheckCronSchedule });
+      await this.cronService.createAmbossHealthCheckCron({ schedule: ambossHealthCheckCronSchedule });
     }
   }
 
   async pingAmbossHealthCheck({ logger }) {
-    ambossHealthCheck({ logger });
+    await ambossHealthCheck({ logger });
   }
 }

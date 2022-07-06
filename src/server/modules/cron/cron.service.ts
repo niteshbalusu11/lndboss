@@ -48,7 +48,7 @@ export class CronService {
     job.start();
   }
 
-  createAmbossHealthCheckCron({ schedule }: { schedule: string }) {
+  async createAmbossHealthCheckCron({ schedule }: { schedule: string }) {
     this.logger.log({ message: `Adding amboss health check cron ${schedule}`, type: 'info' });
     const id = 'amboss-health-check';
 
