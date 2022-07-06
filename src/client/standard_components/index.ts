@@ -2,6 +2,7 @@ import CenterFlexBox from './CenterFlexBox';
 import ContainerStyle from './ContainerStyle';
 import PositionedMenu from './PositionedMenu';
 import ResponsiveGrid from './ResponsiveGrid';
+import RouteGuard from './RouteGuard';
 import SavedNodes from './SavedNodes';
 import StandardButtonLink from './StandardButtonLink';
 import StandardHomeButtonLink from './StandardHomeButtonLink';
@@ -17,6 +18,7 @@ export {
   ContainerStyle,
   PositionedMenu,
   ResponsiveGrid,
+  RouteGuard,
   SavedNodes,
   StandardButtonLink,
   StandardHomeButtonLink,

@@ -4,4 +4,5 @@ export const clientConstants = {
   loginUrl: '/auth/Login',
   rebalanceSchedulerUrl: '/schedulers/RebalanceScheduler',
   registerUrl: '/auth/Register',
+  publicPaths: ['/', '/auth/Login', '/auth/Register'],
 };
