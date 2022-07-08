@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.1](https://github.com/niteshbalusu11/lndboss/compare/v1.12.0...v1.12.1) (2022-07-08)
+
 ## [1.12.0](https://github.com/niteshbalusu11/lndboss/compare/v1.11.0...v1.12.0) (2022-07-08)
 
 - Added support for bos rebalance command
