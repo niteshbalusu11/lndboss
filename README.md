@@ -1,5 +1,8 @@
 <h1>Building a gui for balanceofsatoshis, work in progress</h1>
 
+#### For questions or support, please reach out on telegram.
+https://t.me/lndboss
+
 ## Supported commands
 
 ```shell
