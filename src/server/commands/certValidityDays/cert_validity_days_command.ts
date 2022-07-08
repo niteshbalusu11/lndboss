@@ -1,7 +1,7 @@
 import { certExpiration, pemAsDer } from 'balanceofsatoshis/encryption';
 
+import { httpLogger } from '~server/utils/global_functions';
 import { lndCredentials } from '~server/lnd';
-import { logger } from '~server/utils/global_functions';
 
 const base64AsString = base64 => Buffer.from(base64, 'base64').toString();
 const bufferAsHex = buffer => buffer.toString('hex');
@@ -38,7 +38,7 @@ const certValidityDaysCommand = async ({ below, node }): Promise<{ result: numbe
 
     return { result: round(days) };
   } catch (error) {
-    logger({ error });
+    httpLogger({ error });
   }
 };
 

@@ -3,7 +3,7 @@ import * as request from 'balanceofsatoshis/commands/simple_request';
 import { AuthenticatedLnd } from 'lightning';
 import { commandClosed } from '~shared/types';
 import { getChannelCloses } from 'balanceofsatoshis/chain';
-import { logger } from '~server/utils/global_functions';
+import { httpLogger } from '~server/utils/global_functions';
 
 /** Get the last channel close outcomes
 
@@ -46,7 +46,7 @@ const closedCommand = async (args: commandClosed, lnd: AuthenticatedLnd): Promis
 
     return { result };
   } catch (error) {
-    logger({ error });
+    httpLogger({ error });
   }
 };
 

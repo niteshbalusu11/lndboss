@@ -2,7 +2,7 @@ import * as types from '../../../shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
 import { getFeesChart } from 'balanceofsatoshis/routing';
-import { logger } from '~server/utils/global_functions';
+import { httpLogger } from '~server/utils/global_functions';
 import { readFile } from 'fs';
 
 /** Get data for fees chart
@@ -38,7 +38,7 @@ const chartFeesEarnedCommand = async (
 
     return { result };
   } catch (error) {
-    logger({ error });
+    httpLogger({ error });
   }
 };
 

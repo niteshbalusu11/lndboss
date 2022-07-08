@@ -2,7 +2,7 @@ import * as types from '../../../shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
 import { getChainFees } from 'balanceofsatoshis/chain';
-import { logger } from '~server/utils/global_functions';
+import { httpLogger } from '~server/utils/global_functions';
 
 /** Get chain fees
 
@@ -31,7 +31,7 @@ const chainfeesCommand = async (args: types.commandChainfees, lnd: Authenticated
 
     return { result };
   } catch (error) {
-    logger({ error });
+    httpLogger({ error });
   }
 };
 

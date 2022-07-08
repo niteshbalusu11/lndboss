@@ -24,12 +24,14 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class LndService {
+  // Get a single authenticated LND for a node
   static async authenticatedLnd(args: { node: string }) {
     const { lnd } = await authenticatedLnd({ node: args.node });
 
     return lnd;
   }
 
+  // Get multiple authenticated LNDs for a node array
   static async getLnds(args: { nodes?: string[] }) {
     const { lnds } = await getLnds({ nodes: args.nodes });
 

@@ -29,6 +29,8 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { SocketModule } from './modules/socket/socket.module';
 import { TagsModule } from './modules/tags/tags.module';
 import { ViewModule } from '~server/modules/view/view.module';
+import { homedir } from 'os';
+import { join } from 'path';
 
 // App Module: Global Module for the entire application
 
@@ -52,7 +54,7 @@ import { ViewModule } from '~server/modules/view/view.module';
     ForwardsModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['.env', '.env.local'],
+      envFilePath: ['.env', join(homedir(), '.bosgui', '.env')],
     }),
     LndModule,
     BosloggerModule,

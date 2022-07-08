@@ -8,31 +8,33 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 
+import { BosloggerService } from '../boslogger/boslogger.service';
+
 @WebSocketGateway({
   cors: {
     origin: '*',
   },
 })
 export class SocketGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
-  @WebSocketServer() server: Server;
+  constructor(private logger: BosloggerService) {}
 
-  // private logger: Logger = new Logger('AppGateway');
+  @WebSocketServer() server: Server;
 
   @SubscribeMessage('msgToServer')
   handleMessage(client: Socket, payload: string): void {
-    console.log('Message received: ' + client.id);
+    this.logger.log({ message: `Message Received: ${client.id}`, type: 'info' });
     this.server.emit('msgToClient', payload);
   }
 
   afterInit() {
-    console.log('Initialized');
+    this.logger.log({ message: 'Socket Gateway Initialized', type: 'info' });
   }
 
   handleDisconnect(client: Socket) {
-    console.log('Client disconnected: ' + client.id);
+    this.logger.log({ message: `Client disconnected: ${client.id}`, type: 'warn' });
   }
 
   handleConnection(client: Socket) {
-    console.log('Client connected: ' + client.id);
+    this.logger.log({ message: `Client connected: ${client.id}`, type: 'info' });
   }
 }

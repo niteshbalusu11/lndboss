@@ -3,7 +3,7 @@ import * as types from '../../../shared/types';
 import { AuthenticatedLnd, CreateChainAddressResult, createChainAddress } from 'lightning';
 
 import { auto } from 'async';
-import { logger } from '~server/utils/global_functions';
+import { httpLogger } from '~server/utils/global_functions';
 
 const bigTok = (tokens: number) => (!tokens ? '0' : (tokens / 1e8).toFixed(8));
 
@@ -67,7 +67,7 @@ const chainDepositCommand = async (
 
     return { result: result.url };
   } catch (error) {
-    logger({ error });
+    httpLogger({ error });
   }
 };
 

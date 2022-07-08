@@ -52,7 +52,7 @@
     "antd": "^4.21.5",
     "async": "^3.2.4",
     "axios": "^0.27.2",
-    "balanceofsatoshis": "^12.13.6",
+    "balanceofsatoshis": "^12.15.0",
     "bcryptjs": "^2.4.3",
     "chart.js": "^3.8.0",
     "class-sanitizer": "^1.0.1",

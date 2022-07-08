@@ -1,5 +1,6 @@
 import { createLogger, format, transports } from 'winston';
 
+import { httpLogger } from '~server/utils/global_functions';
 import { manageRebalance } from 'balanceofsatoshis/swaps';
 import { readFile } from 'fs';
 
@@ -51,24 +52,28 @@ const rebalanceCommand = async ({ args, emit, lnd }): Promise<{ result: any }> =
   const inFiltersArray = args.in_filters.filter(n => !!n);
   const outFiltersArray = args.out_filters.filter(n => !!n);
 
-  const result = await manageRebalance({
-    lnd,
-    logger,
-    avoid: avoidArray,
-    fs: { getFile: readFile },
-    in_filters: inFiltersArray,
-    in_outbound: args.in_outbound || undefined,
-    in_through: args.in_through || undefined,
-    max_fee: args.max_fee || 1337,
-    max_fee_rate: args.max_fee_rate || 250,
-    max_rebalance: args.max_rebalance,
-    out_filters: outFiltersArray,
-    out_inbound: args.out_inbound || undefined,
-    out_through: args.out_through || undefined,
-    timeout_minutes: args.timeout_minutes || 5,
-  });
+  try {
+    const result = await manageRebalance({
+      lnd,
+      logger,
+      avoid: avoidArray,
+      fs: { getFile: readFile },
+      in_filters: inFiltersArray,
+      in_outbound: args.in_outbound || undefined,
+      in_through: args.in_through || undefined,
+      max_fee: args.max_fee || 1337,
+      max_fee_rate: args.max_fee_rate || 250,
+      max_rebalance: args.max_rebalance,
+      out_filters: outFiltersArray,
+      out_inbound: args.out_inbound || undefined,
+      out_through: args.out_through || undefined,
+      timeout_minutes: args.timeout_minutes || 5,
+    });
 
-  return { result };
+    return { result };
+  } catch (error) {
+    httpLogger({ error });
+  }
 };
 
 export default rebalanceCommand;

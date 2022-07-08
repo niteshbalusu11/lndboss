@@ -3,11 +3,12 @@ import * as dotenv from 'dotenv';
 import { Logger, SetMetadata } from '@nestjs/common';
 
 import { CronExpression } from '@nestjs/schedule';
+import { homedir } from 'os';
 import { join } from 'path';
 import { randomBytes } from 'crypto';
 
 dotenv.config({ path: join(__dirname, '../../../.env') });
-dotenv.config({ path: join(__dirname, '../../../.env.local') });
+dotenv.config({ path: join(homedir(), '.bosgui', '.env') });
 
 // Check if the environment is production
 export const isProduction = process.env.NODE_ENV === 'production';
