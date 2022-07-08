@@ -3,7 +3,7 @@ import * as types from '../../../shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
 import { getChainFeesChart } from 'balanceofsatoshis/routing';
-import { logger } from '~server/utils/global_functions';
+import { httpLogger } from '~server/utils/global_functions';
 
 /** Get Blockchain fees paid
 
@@ -35,7 +35,7 @@ const chartChainFeesCommand = async (
 
     return { result };
   } catch (error) {
-    logger({ error });
+    httpLogger({ error });
   }
 };
 

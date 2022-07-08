@@ -2,8 +2,8 @@ import { mkdir, readFile, writeFile } from 'fs';
 
 import { auto } from 'async';
 import { homedir } from 'os';
+import { httpLogger } from '~server/utils/global_functions';
 import { join } from 'path';
-import { logger } from '~server/utils/global_functions';
 import { randomBytes } from 'crypto';
 
 const defaultTagsFile = { tags: [] };
@@ -232,7 +232,7 @@ const tagsCommand = async (args: Args): Promise<{ result: any }> => {
 
     return { result: result.result.tags };
   } catch (error) {
-    logger({ error });
+    httpLogger({ error });
   }
 };
 

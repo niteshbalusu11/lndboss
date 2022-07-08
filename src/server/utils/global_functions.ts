@@ -9,27 +9,13 @@ const { isArray } = Array;
 const isNumber = (n: any) => !isNaN(n);
 
 // Logger for throwing http errors
-export const logger = ({ error }: { error: any }) => {
+export const httpLogger = ({ error }: { error: any }) => {
   Logger.error(stringify(error));
 
   if (isArray(error) && !!error.length && isString(error[1]) && isNumber(error[0])) {
     throw new HttpException(String(error[1]), Number(error[0]));
   } else {
     throw new HttpException(stringify(error), 503);
-  }
-};
-
-export const globalLogger = ({ type, data }: { type: string; data: any }) => {
-  if (type === 'error') {
-    Logger.error(data);
-  }
-
-  if (type === 'warn') {
-    Logger.warn(data);
-  }
-
-  if (type === 'info') {
-    Logger.log(data);
   }
 };
 

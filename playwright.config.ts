@@ -20,7 +20,6 @@ dotenv.config();
 
 // Alternatively, read from "../my.env" file.
 dotenv.config({ path: join(__dirname, '../.env') });
-dotenv.config({ path: join(__dirname, '../.env.local') });
 
 const config: PlaywrightTestConfig = {
   globalSetup: join(path, 'global-setup.ts'),

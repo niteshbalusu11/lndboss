@@ -24,9 +24,9 @@ export class ExternalServicesService implements OnModuleInit {
   constructor(private logger: BosloggerService, private cronService: CronService) {}
   async onModuleInit(): Promise<void> {
     if (process.env.AMBOSS_HEALTH_CHECK === 'true') {
-      await this.pingAmbossHealthCheck({ logger: this.logger });
+      this.pingAmbossHealthCheck({ logger: this.logger });
 
-      await this.cronService.createAmbossHealthCheckCron({ schedule: ambossHealthCheckCronSchedule });
+      this.cronService.createAmbossHealthCheckCron({ schedule: ambossHealthCheckCronSchedule });
     }
   }
 

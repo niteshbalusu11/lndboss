@@ -2,7 +2,7 @@ import * as request from 'balanceofsatoshis/commands/simple_request';
 import * as types from '../../../shared/types';
 
 import { getPrices } from '@alexbosworth/fiat';
-import { logger } from '~server/utils/global_functions';
+import { httpLogger } from '~server/utils/global_functions';
 
 /** Get exchange rates from a rate provider
   {
@@ -38,7 +38,7 @@ const priceCommand = async (args: types.commandPrice): Promise<{ result: any }> 
 
     return { result };
   } catch (error) {
-    logger({ error });
+    httpLogger({ error });
   }
 };
 

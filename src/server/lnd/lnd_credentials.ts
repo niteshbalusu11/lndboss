@@ -7,8 +7,8 @@ import { homedir, platform, userInfo } from 'os';
 
 import { auto } from 'async';
 import getSavedCredentials from './get_saved_credentials';
+import { httpLogger } from '~server/utils/global_functions';
 import { join } from 'path';
-import { logger } from '~server/utils/global_functions';
 import { readFile } from 'fs';
 
 const config = 'config.json';
@@ -97,7 +97,7 @@ const lndCredentials = async (args: Args): Promise<Return> => {
           try {
             parse(res.toString());
           } catch (err) {
-            return cbk(logger({ error: [400, 'ExpectedValidConfigFileToGetCredentials', { err }] }));
+            return cbk(httpLogger({ error: [400, 'ExpectedValidConfigFileToGetCredentials', { err }] }));
           }
 
           const config = parse(res.toString());

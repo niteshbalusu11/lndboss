@@ -2,7 +2,7 @@ import * as types from '../../../shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
 import { getReceivedChart } from 'balanceofsatoshis/wallets';
-import { logger } from '~server/utils/global_functions';
+import { httpLogger } from '~server/utils/global_functions';
 
 /** Get data for received payments chart
 
@@ -30,7 +30,7 @@ const chartPaymentsReceivedCommand = async (
     });
     return { result };
   } catch (error) {
-    logger({ error });
+    httpLogger({ error });
   }
 };
 

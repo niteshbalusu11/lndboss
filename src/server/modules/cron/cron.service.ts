@@ -32,7 +32,8 @@ const stringify = (n: object) => JSON.stringify(n, null, 2);
 export class CronService {
   constructor(private schedulerRegistry: SchedulerRegistry, private logger: BosloggerService) {}
 
-  createRebalanceCron({ args, id }: { args: rebalanceScheduleDto; id: string }) {
+  // Create a cron job for rebalance
+  async createRebalanceCron({ args, id }: { args: rebalanceScheduleDto; id: string }) {
     this.logger.log({ message: `adding cron schedule ${stringify(args)}`, type: 'info' });
 
     const job = new CronJob(args.schedule, async () => {
@@ -48,6 +49,7 @@ export class CronService {
     job.start();
   }
 
+  // Create a cron job for Amboss health check
   async createAmbossHealthCheckCron({ schedule }: { schedule: string }) {
     this.logger.log({ message: `Adding amboss health check cron ${schedule}`, type: 'info' });
     const id = 'amboss-health-check';
@@ -60,7 +62,8 @@ export class CronService {
     job.start();
   }
 
-  deleteCron({ name }: { name: string }) {
+  // Delete a cron job
+  async deleteCron({ name }: { name: string }) {
     this.schedulerRegistry.deleteCronJob(name);
 
     this.logger.log({ message: `deleting cron schedule ${name}`, type: 'warn' });

@@ -2,7 +2,7 @@ import * as types from '../../../shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
 import { getFeesPaid } from 'balanceofsatoshis/routing';
-import { logger } from '~server/utils/global_functions';
+import { httpLogger } from '~server/utils/global_functions';
 import { readFile } from 'fs';
 
 /** Get routing fees paid
@@ -49,7 +49,7 @@ const chartFeesPaidCommand = async (
 
     return { result };
   } catch (error) {
-    logger({ error });
+    httpLogger({ error });
   }
 };
 

@@ -3,7 +3,7 @@ import * as types from '../../../shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
 import { getAccountingReport } from 'balanceofsatoshis/balances';
-import { logger } from '~server/utils/global_functions';
+import { httpLogger } from '~server/utils/global_functions';
 
 /** Get an accounting report
 
@@ -44,7 +44,7 @@ const accountingCommand = async (args: types.commandAccounting, lnd: Authenticat
 
     return { result };
   } catch (error) {
-    logger({ error });
+    httpLogger({ error });
   }
 };
 

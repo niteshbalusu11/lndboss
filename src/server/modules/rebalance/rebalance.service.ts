@@ -1,6 +1,7 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { deleteRebalanceDto, getRebalancesDto, rebalanceDto, rebalanceScheduleDto } from '~shared/commands.dto';
 
+import { BosloggerService } from '../boslogger/boslogger.service';
 import { CronService } from '../cron/cron.service';
 import { LndService } from '../lnd/lnd.service';
 import { SocketGateway } from '../socket/socket.gateway';
@@ -76,42 +77,56 @@ Rebalance
 
   @returns via Promise
   {
-    created_at:
+  validate: undefined,
+  description: <Rebalance Description Hex Encoded String>,
+  create: {
+    chain_address: undefined,
+    created_at: <Date String>,
+    description: <Rebalance Description Hex Encoded String>,
+    id: <Rebalance (Invoice) ID String>,
   }
 */
 
 @Injectable()
 export class RebalanceService implements OnModuleInit {
-  constructor(private socketService: SocketGateway, private cronService: CronService) {}
+  constructor(
+    private socketService: SocketGateway,
+    private cronService: CronService,
+    private logger: BosloggerService
+  ) {}
+
   // On module init, get saved nodes and fetch rebalances and add to cron jobs
   async onModuleInit() {
     try {
       const { nodes } = await getSavedNodes({});
 
-      if (!!nodes.nodes && !!nodes.nodes.length) {
-        const rebalances = await Promise.all(
-          nodes.nodes
-            .filter(node => !!node.lnd && !!node.is_online)
-            .map(async node => {
-              return await this.getRebalances({ node: node.node_name });
-            })
-        );
-
-        rebalances
-          .filter(n => !!n.result && !!n.result.getTriggers && !!n.result.getTriggers.length)
-          .forEach(rebalance => {
-            rebalance.result.getTriggers.forEach(trigger => {
-              const args = JSON.parse(trigger.rebalance_data);
-
-              this.cronService.createRebalanceCron({ args, id: trigger.id });
-            });
-          });
+      if (!nodes.nodes && !nodes.nodes.length) {
+        return;
       }
+
+      const rebalances = await Promise.all(
+        nodes.nodes
+          .filter(node => !!node.lnd && !!node.is_online)
+          .map(async node => {
+            return await this.getRebalances({ node: node.node_name });
+          })
+      );
+
+      rebalances
+        .filter(n => !!n.result && !!n.result.getTriggers && !!n.result.getTriggers.length)
+        .forEach(rebalance => {
+          rebalance.result.getTriggers.forEach(trigger => {
+            const args = JSON.parse(trigger.rebalance_data);
+
+            this.cronService.createRebalanceCron({ args, id: trigger.id });
+          });
+        });
     } catch (error) {
-      console.error(error);
+      this.logger.log({ type: 'error', message: error.message });
     }
   }
 
+  // Delete a rebalance cron job
   async deleteRebalance(args: deleteRebalanceDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
@@ -121,11 +136,12 @@ export class RebalanceService implements OnModuleInit {
       id: args.invoice_id,
     });
 
-    this.cronService.deleteCron({ name: args.invoice_id });
+    await this.cronService.deleteCron({ name: args.invoice_id });
 
     return { result: 'rebalanceScheduleDeleted' };
   }
 
+  // Get a list of rebalance cron jobs
   async getRebalances(args: getRebalancesDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
@@ -137,6 +153,7 @@ export class RebalanceService implements OnModuleInit {
     return { result: result.getTriggers };
   }
 
+  // Manual rebalance
   async rebalance(args: rebalanceDto | rebalanceScheduleDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
@@ -149,6 +166,7 @@ export class RebalanceService implements OnModuleInit {
     return { result };
   }
 
+  // Schedule a rebalance
   async scheduleRebalance(args: rebalanceScheduleDto): Promise<{ result: any }> {
     const stringify = (obj: any) => JSON.stringify(obj);
     const lnd = await LndService.authenticatedLnd({ node: args.node });

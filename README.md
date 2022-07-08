@@ -42,6 +42,9 @@ bos forwards
 # Output the price of BTC
 bos price
 
+# Rebalance funds between peers
+bos rebalance
+
 # Tags can be used in other commands via tag and avoid options
 bos tags
 ```
@@ -260,6 +263,39 @@ Raspblitz/Raspibolt might have a firewall blocking from accessing your app in th
 sudo ufw allow 8055
 ```
 
+### Autostart App using systemd (Build from source ONLY, does NOT work for docker)
+- Running `which yarn` will return the path to yarn.
+- Create a systemd file like this `sudo nano /etc/systemd/system/lndboss.service`.
+- Replaces paths and User in the sample.
+- In the sample file, `StandardOutput=journal+console` removing `+console` will reduce the amount of logs in `journalctl`.
+- Add the service, enable the service using `sudo systemctl enable lndboss.service`.
+- Start the service using `sudo systemctl start lndboss.service`.
+- To stop the service, run `sudo systemctl stop lndboss.service`.
+
+Here's a sample systemd config file.
+```
+#Systemd unit for LndBoss App
+#/etc/systemd/system/lndboss.service
+[Unit]
+Description=lndboss
+Wants=lnd.service
+After=lnd.service
+
+
+[Service]
+WorkingDirectory=/home/ubuntu/utils/lndboss
+ExecStart=/path/to/yarn --cwd /path/to/lndboss/ start:prod
+User=ubuntu
+Restart=always
+TimeoutSec=120
+RestartSec=30
+StandardOutput=journal+console
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+
 <br></br>
 ## Development
 
@@ -303,29 +339,28 @@ If not, you have 2 options to authenticate to LND:
 - Click `Authenticate`, your credentials will be verified and presented with a success/failure message.
 - If it succeeds, you can start running commands.
 
+<br></br>
+
+### DotEnv (.env) Settings
+Some settings of lndboss can be controlled via a .env file.
+- For docker setup, create a .env file in the .bosgui directory.
+- If building from source, create a .env file in the root (lndboss folder) of the project OR in the .bosgui directory.
+- Check out the file called .env.example for instructions on what settings can be controlled.
+
+<br></br>
+
 ### Encryping Macaroon
 If you authenticated using option 2 above, there is a way to encrypt your macaroon.
 
 <b>For docker:</b>
 
-- Create a .env file in any location of your choice
-- Inside the .env file set `ENCRYPTION_KEY="yourEncryptionKey"`
+- Inside the .env file set `ENCRYPTION_KEY="yourEncryptionKey"` (Check the .env.example file which shows an example)
 - The key should be 32 characters long, humans are terrible at generating passwords and random strings, easiest way to generate an encryption key would be running `openssl rand -hex 32` on your terminal.
 - A sample encryption key would look like this: `ENCRYPTION_KEY="b4970320a3601d19b876c18ce2eb895d687962d3f0b72e0d4de05ed74be34d9a"`
-- Inside the docker-compose file add the path to the .env file under the volumes section:
-```
-volumes:
-  - ~/.bosgui:/home/node/.bosgui
-  - /path/to/Lnd:/home/node/.lnd
-  - type: bind
-    source: /path/to/.env
-    target: /lndboss/.env
-```
 
 <b>For Build from source</b>
 
-- Create a .env file in the root of the project folder (lndboss folder)
-- Inside the .env file set `ENCRYPTION_KEY="yourEncryptionKey"`
+- Inside the .env file set `ENCRYPTION_KEY="yourEncryptionKey"` (Check the .env.example file which shows an example)
 - The key should be 32 characters long, humans are terrible at generating passwords and random strings, easiest way to generate an encryption key would be running `openssl rand -hex 32` on your terminal.
 - A sample encryption key would look like this: `ENCRYPTION_KEY="b4970320a3601d19b876c18ce2eb895d687962d3f0b72e0d4de05ed74be34d9a"`
 

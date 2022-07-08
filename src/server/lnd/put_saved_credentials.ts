@@ -1,4 +1,4 @@
-import { encryptString, logger } from '~server/utils/global_functions';
+import { encryptString, httpLogger } from '~server/utils/global_functions';
 import { existsSync, mkdir, writeFile } from 'fs';
 
 import { auto } from 'async';
@@ -61,19 +61,19 @@ const putSavedCredentials = async (args: Args): Promise<{ result: boolean }> => 
     // Check arguments
     validate: (cbk: any) => {
       if (!args.auth_type) {
-        return cbk(logger({ error: [400, 'ExpectedAuthTypeToPutSavedCredentials'] }));
+        return cbk(httpLogger({ error: [400, 'ExpectedAuthTypeToPutSavedCredentials'] }));
       }
 
       if (args.auth_type === 'credentials' && !args.macaroon) {
-        return cbk(logger({ error: [400, 'ExpectedMacaroonToPutSavedCredentials'] }));
+        return cbk(httpLogger({ error: [400, 'ExpectedMacaroonToPutSavedCredentials'] }));
       }
 
       if (!args.node) {
-        return cbk(logger({ error: [400, 'ExpectedSavedNodeNameToPutSavedCredentials'] }));
+        return cbk(httpLogger({ error: [400, 'ExpectedSavedNodeNameToPutSavedCredentials'] }));
       }
 
       if (!args.socket) {
-        return cbk(logger({ error: [400, 'ExpectedSocketForNodeToPutSavedCredentials'] }));
+        return cbk(httpLogger({ error: [400, 'ExpectedSocketForNodeToPutSavedCredentials'] }));
       }
 
       return cbk();
@@ -88,17 +88,17 @@ const putSavedCredentials = async (args: Args): Promise<{ result: boolean }> => 
         }
 
         if (!existsSync(args.lnd_directory)) {
-          return cbk(logger({ error: [400, 'ExpectedValidLndDirectoryToPutSavedCredentials'] }));
+          return cbk(httpLogger({ error: [400, 'ExpectedValidLndDirectoryToPutSavedCredentials'] }));
         }
 
         const certPath = join(args.lnd_directory, 'tls.cert');
         if (!existsSync(certPath)) {
-          return cbk(logger({ error: [400, 'ExpectedLndCertificateAtPathToPutSavedCredentials'] }));
+          return cbk(httpLogger({ error: [400, 'ExpectedLndCertificateAtPathToPutSavedCredentials'] }));
         }
 
         const macPath = join(args.lnd_directory, 'data', 'chain', 'bitcoin', args.network_type, 'admin.macaroon');
         if (!existsSync(macPath)) {
-          return cbk(logger({ error: [400, 'ExpectedLndMacaroonAtPathToPutSavedCredentials'] }));
+          return cbk(httpLogger({ error: [400, 'ExpectedLndMacaroonAtPathToPutSavedCredentials'] }));
         }
 
         return cbk();
@@ -137,7 +137,7 @@ const putSavedCredentials = async (args: Args): Promise<{ result: boolean }> => 
 
         return writeFile(path, file, (err: any) => {
           if (!!err) {
-            return cbk(logger({ error: [503, 'UnexpectedErrorWritingConfigFile', { err }] }));
+            return cbk(httpLogger({ error: [503, 'UnexpectedErrorWritingConfigFile', { err }] }));
           }
 
           return cbk();
@@ -169,7 +169,7 @@ const putSavedCredentials = async (args: Args): Promise<{ result: boolean }> => 
 
         return writeFile(path, file, (err: any) => {
           if (!!err) {
-            return cbk(logger({ error: [503, 'UnexpectedErrorWritingSavedCredentials', { err }] }));
+            return cbk(httpLogger({ error: [503, 'UnexpectedErrorWritingSavedCredentials', { err }] }));
           }
 
           return cbk(null, true);
@@ -192,7 +192,7 @@ const putSavedCredentials = async (args: Args): Promise<{ result: boolean }> => 
         const { iv, encryptedData, error } = encryptString({ text: macaroon });
 
         if (!!error) {
-          return cbk(logger({ error: [503, 'UnexpectedErrorEncryptingMacaroon', { error }] }));
+          return cbk(httpLogger({ error: [503, 'UnexpectedErrorEncryptingMacaroon', { error }] }));
         }
 
         return cbk(null, {
@@ -243,7 +243,7 @@ const putSavedCredentials = async (args: Args): Promise<{ result: boolean }> => 
 
         return writeFile(path, file, (err: any) => {
           if (!!err) {
-            return cbk(logger({ error: [503, 'UnexpectedErrorWritingSavedCredentials', { err }] }));
+            return cbk(httpLogger({ error: [503, 'UnexpectedErrorWritingSavedCredentials', { err }] }));
           }
 
           return cbk(null, true);

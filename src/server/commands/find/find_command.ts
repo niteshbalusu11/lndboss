@@ -2,7 +2,7 @@ import * as types from '../../../shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
 import { findRecord } from 'balanceofsatoshis/lnd';
-import { logger } from '~server/utils/global_functions';
+import { httpLogger } from '~server/utils/global_functions';
 
 /** Get record
 
@@ -49,7 +49,7 @@ const findCommand = async (args: types.commandFind, lnd: AuthenticatedLnd): Prom
 
     return { result };
   } catch (error) {
-    logger({ error });
+    httpLogger({ error });
   }
 };
 

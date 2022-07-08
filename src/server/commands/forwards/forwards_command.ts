@@ -2,7 +2,7 @@ import * as types from '../../../shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
 import { getForwards } from 'balanceofsatoshis/network';
-import { logger } from '~server/utils/global_functions';
+import { httpLogger } from '~server/utils/global_functions';
 import { readFile } from 'fs';
 
 /** Get recent forwarding activity
@@ -46,7 +46,7 @@ const forwardsCommand = async (args: types.commandForwards, lnd: AuthenticatedLn
 
     return { result };
   } catch (error) {
-    logger({ error });
+    httpLogger({ error });
   }
 };
 

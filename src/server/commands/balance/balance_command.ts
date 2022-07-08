@@ -3,7 +3,7 @@ import * as types from '../../../shared/types';
 import { getBalance, getDetailedBalance } from 'balanceofsatoshis/balances';
 
 import { AuthenticatedLnd } from 'lightning';
-import { logger } from '~server/utils/global_functions';
+import { httpLogger } from '~server/utils/global_functions';
 
 const parseAnsi = (n: string) =>
   n.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
@@ -59,7 +59,7 @@ const balanceCommand = async (args: types.commandBalance, lnd: AuthenticatedLnd)
 
     return { result };
   } catch (error) {
-    logger({ error });
+    httpLogger({ error });
   }
 };
 
