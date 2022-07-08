@@ -23,7 +23,7 @@ const RouteGuard = ({ router, children }: any) => {
     }
 
     if (!accessToken) {
-      useNotify({ type: 'info', message: 'Session expired. Please login again.' });
+      useNotify({ type: 'info', message: 'Please login again.' });
       router.push(clientConstants.loginUrl);
 
       return;
