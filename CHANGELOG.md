@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.12.0](https://github.com/niteshbalusu11/lndboss/compare/v1.11.0...v1.12.0) (2022-07-08)
 
+- Added support for bos rebalance command
+- Added support for scheduled rebalances
+- Added support for sending health check updates to Amboss
+- Redirects to login page if session expires
+- Fixed a bug where some commands were finding tags in the wrong directory
+- Docker image is 3 times smaller
+- Improved logging
+
 ## [1.11.0](https://github.com/niteshbalusu11/lndboss/compare/v1.10.0...v1.11.0) (2022-06-25)
 
 - Added support for bos chainfees command
