@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.12.1](https://github.com/niteshbalusu11/lndboss/compare/v1.12.0...v1.12.1) (2022-07-08)
 
+- Update umbrel config
+
 ## [1.12.0](https://github.com/niteshbalusu11/lndboss/compare/v1.11.0...v1.12.0) (2022-07-08)
 
 - Added support for bos rebalance command
