@@ -32,6 +32,11 @@ WORKDIR /lndboss
 ARG NODE_ENV="production"
 ENV NODE_ENV=${NODE_ENV}
 
+# Set lndboss directory
+ARG BOS_DATA_PATH=$HOME"/.bosgui"
+ENV BOS_DATA_PATH=${BOS_DATA_PATH}
+RUN echo "BOS_DATA_PATH="${BOS_DATA_PATH}
+
 # Create a new user and group
 ARG USER_ID=1000
 ARG GROUP_ID=1000
