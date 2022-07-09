@@ -1,8 +1,7 @@
-name: Build on tag
+name: Build on push
 
 permissions:
   packages: write
-
 
 on:
     push:
