@@ -1,25 +1,28 @@
 # ---------------
 # Install Dependencies
 # ---------------
-FROM node:16-buster-slim as deps
+FROM amd64/node:16-buster-slim as build
 
 WORKDIR /lndboss
 
 COPY package.json yarn.lock ./
 RUN yarn install --network-timeout 1000000
+RUN apt update && apt install -y libssl1.1
 
 # ---------------
 # Build App
 # ---------------
-FROM deps as build
-
-WORKDIR /lndboss
-
-RUN apt-get update && apt-get install -y jq
 
 COPY . .
 RUN yarn build
-RUN yarn remove $(cat package.json | jq -r '.devDependencies | keys | join(" ")')
+
+FROM node:16-buster-slim as deps
+
+WORKDIR /lndboss
+
+COPY package.json yarn.lock ./
+
+RUN yarn install --production --network-timeout 1000000
 
 # ---------------
 # Release App
@@ -40,7 +43,7 @@ ENV GROUP_ID=$GROUP_ID
 
 # Copy files from build
 COPY --from=build /lndboss/package.json ./
-COPY --from=build /lndboss/node_modules/ ./node_modules
+COPY --from=deps /lndboss/node_modules/ ./node_modules
 COPY --from=build /lndboss/nest-cli.json ./
 COPY --from=build /lndboss/next-env.d.ts ./
 COPY --from=build /lndboss/src ./src
