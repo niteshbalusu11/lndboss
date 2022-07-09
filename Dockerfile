@@ -1,7 +1,7 @@
 # ---------------
 # Install Dependencies
 # ---------------
-FROM node:16-buster-slim as deps
+FROM node:16-buster-slim as build
 
 WORKDIR /lndboss
 
@@ -11,9 +11,6 @@ RUN yarn
 # ---------------
 # Build App
 # ---------------
-FROM deps as build
-
-WORKDIR /lndboss
 
 COPY . .
 RUN yarn build
