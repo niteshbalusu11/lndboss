@@ -7,6 +7,7 @@ WORKDIR /lndboss
 
 COPY package.json yarn.lock ./
 RUN yarn install --network-timeout 1000000
+RUN apt update && apt install -y libssl1.1
 
 # ---------------
 # Build App
