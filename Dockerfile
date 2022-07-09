@@ -6,7 +6,7 @@ FROM node:16-buster-slim as build
 WORKDIR /lndboss
 
 COPY package.json yarn.lock ./
-RUN yarn
+RUN yarn install --network-timeout 1000000
 
 # ---------------
 # Build App
