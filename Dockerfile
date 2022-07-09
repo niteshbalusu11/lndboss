@@ -6,7 +6,7 @@ FROM node:16-buster-slim as deps
 WORKDIR /lndboss
 
 COPY package.json yarn.lock ./
-RUN yarn install --network-timeout 1000000
+RUN yarn
 
 # ---------------
 # Build App
@@ -15,11 +15,9 @@ FROM deps as build
 
 WORKDIR /lndboss
 
-RUN apt-get update && apt-get install -y jq
-
 COPY . .
 RUN yarn build
-RUN yarn remove $(cat package.json | jq -r '.devDependencies | keys | join(" ")')
+RUN yarn install --production --ignore-scripts --prefer-offline
 
 # ---------------
 # Release App
