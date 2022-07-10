@@ -5,7 +5,6 @@ import { StandardButtonLink, StartFlexBox, SubmitButton } from '~client/standard
 import Router from 'next/router';
 import axios from 'axios';
 import { clientConstants } from '~client/utils/constants';
-import { createUseStyles } from 'react-jss';
 import getConfig from 'next/config';
 import { useNotify } from '~client/hooks/useNotify';
 
@@ -17,7 +16,7 @@ const { apiUrl } = publicRuntimeConfig;
   POST call to the NestJs process to verify credentials and get back JWT token.
 */
 
-const styles = createUseStyles({
+const styles = {
   form: {
     marginLeft: '20px',
     marginTop: '100px',
@@ -44,11 +43,9 @@ const styles = createUseStyles({
     color: 'black',
     marginTop: '50px',
   },
-});
+};
 
 const Login = () => {
-  const classes = styles();
-
   const [username, setUsername] = useState('');
 
   const [password, setPassword] = useState('');
@@ -93,17 +90,14 @@ const Login = () => {
     <CssBaseline>
       <StartFlexBox>
         <StandardButtonLink destination={clientConstants.registerUrl} label="Register" />
-        <Stack spacing="3" className={classes.form}>
+        <Stack spacing="3" style={styles.form}>
           <h2>Login</h2>
           <TextField
             type="text"
             placeholder="Account Name"
             label="Account Name"
             id="accountName"
-            className={classes.input}
-            inputProps={{
-              className: classes.inputStyle,
-            }}
+            style={styles.input}
             onChange={handleAccountNameChange}
           />
           <TextField
@@ -111,10 +105,7 @@ const Login = () => {
             placeholder="Password"
             label="Password"
             id="password"
-            className={classes.input}
-            inputProps={{
-              className: classes.inputStyle,
-            }}
+            style={styles.input}
             onChange={handlePasswordChange}
           />
           <SubmitButton variant="contained" disabled={!username || !password} onClick={loginUser}>
