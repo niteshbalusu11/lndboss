@@ -1,8 +1,5 @@
 name: Build on push
 
-permissions:
-  packages: write
-
 on:
   push:
     branches:
@@ -17,12 +14,11 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v3
 
-      - name: Login to docker hub
-        env:
-          DOCKER_USER: ${{secrets.DOCKER_USER}}
-          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-        run: |
-          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
