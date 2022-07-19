@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
+import { testConstants } from '../utils/constants';
 
 const ClosedCommand = commands.find(n => n.value === 'Closed');
 
@@ -11,7 +12,7 @@ test.describe('Test the Closed command client page', async () => {
   });
 
   test('test the Forwards command page and input values', async ({ page }) => {
-    await page.goto('/Commands');
+    await page.goto(testConstants.commandsPage);
     await page.click('text=Closed');
     await expect(page).toHaveTitle('Closed');
 

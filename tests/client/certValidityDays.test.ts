@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
+import { testConstants } from '../utils/constants';
 
 const CertValidityDaysCommand = commands.find(n => n.value === 'CertValidityDays');
 
@@ -11,7 +12,7 @@ test.describe('Test the CertValidityDays command client page', async () => {
   });
 
   test('test the CertValidityDays command page and input values', async ({ page }) => {
-    await page.goto('/Commands');
+    await page.goto(testConstants.commandsPage);
     await page.click('text=Cert Validity Days');
     await expect(page).toHaveTitle('Cert Validity Days');
 

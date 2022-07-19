@@ -77,7 +77,7 @@ const RebalanceScheduler = () => {
       return <StandardTableOutput data={{ rows }} tableId={'scheduledRebalances'} />;
     }
 
-    return <h2>No Scheduled Rebalances</h2>;
+    return <h2 id={'noRebalanceSchedules'}>No Scheduled Rebalances</h2>;
   };
 
   const fetchDataOnClick = async () => {

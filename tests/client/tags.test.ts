@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
+import { testConstants } from '../utils/constants';
 
 const TagsCommand = commands.find(n => n.value === 'Tags');
 
@@ -11,8 +12,7 @@ test.describe('Test the Tags command client page', async () => {
   });
 
   test('test the Tags command page and input values', async ({ page }) => {
-    await page.goto('/Commands');
-    // Tag type display
+    await page.goto(testConstants.commandsPage); // Tag type display
     await page.click('text=Tags');
     await expect(page).toHaveTitle('Tags');
     await page.locator('#tag-type').click();

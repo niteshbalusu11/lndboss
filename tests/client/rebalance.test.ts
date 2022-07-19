@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
+import { testConstants } from '../utils/constants';
 
 const RebalanceCommand = commands.find(n => n.value === 'Rebalance');
 
@@ -11,7 +12,7 @@ test.describe('Test the Rebalance command client page', async () => {
   });
 
   test('test the Rebalance command page and input values', async ({ page }) => {
-    await page.goto('/Commands');
+    await page.goto(testConstants.commandsPage);
     await page.click('text=Rebalance');
     await expect(page).toHaveTitle('Rebalance');
     await page.type(`#avoid-0`, 'ban');
@@ -26,7 +27,7 @@ test.describe('Test the Rebalance command client page', async () => {
 
     await expect(popup).toHaveTitle('Rebalance Result');
     await popup.waitForTimeout(1000);
-    await expect(popup.locator('#rebalanceResult')).toBeVisible();
+    await expect(popup.locator('#rebalanceResultTitle')).toBeVisible();
 
     await popup.close();
 
@@ -35,7 +36,7 @@ test.describe('Test the Rebalance command client page', async () => {
   });
 
   test('test the Rebalance command page and input values and add schedule', async ({ page }) => {
-    await page.goto('/Commands');
+    await page.goto(testConstants.commandsPage);
     await page.click('text=Rebalance');
     await expect(page).toHaveTitle('Rebalance');
     await page.type(`#avoid-0`, 'ban');
@@ -50,7 +51,7 @@ test.describe('Test the Rebalance command client page', async () => {
   });
 
   test('test the rebalance scheduled page', async ({ page }) => {
-    await page.goto('/Commands');
+    await page.goto(testConstants.commandsPage);
     await page.click('text=Rebalance');
     await page.click('text=Click to view current scheduled jobs');
 
@@ -61,7 +62,7 @@ test.describe('Test the Rebalance command client page', async () => {
 
     await popup.click('text=fetch rebalances for saved node');
 
-    await expect(popup.locator('#scheduledRebalances')).toBeVisible();
+    await expect(popup.locator('#noRebalanceSchedules')).toBeVisible();
   });
 
   test.afterEach(async ({ page }) => {

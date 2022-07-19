@@ -461,6 +461,66 @@ export class rebalanceScheduleDto {
   node: string;
 }
 
+export class sendDto {
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  amount: string;
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  avoid: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  destination: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  in_through: string;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
+  @IsBoolean()
+  is_dry_run: boolean;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
+  @IsBoolean()
+  is_omitting_message_from: boolean;
+
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  max_fee: number;
+
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  max_fee_rate: number;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  message: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  message_id: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  out_through: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  node: string;
+}
+
 export class tagsDto {
   @Transform(({ value }) => toStringArray(value))
   @IsArray()

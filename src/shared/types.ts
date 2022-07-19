@@ -133,6 +133,23 @@ export type commandRebalance = {
   timeout_minutes?: number;
 };
 
+// ========================Send command================================
+
+export type commandSend = {
+  amount?: string;
+  avoid?: string[];
+  destination?: string;
+  in_through?: string;
+  is_dry_run?: boolean;
+  is_omitting_message_from?: boolean;
+  max_fee?: number;
+  max_fee_rate?: number;
+  message?: string;
+  message_id?: string;
+  node?: string;
+  out_through?: string;
+};
+
 // ========================Tags Command=====================================
 
 export type commandTags = {
