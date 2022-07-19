@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
+import { testConstants } from '../utils/constants';
 
 const ChainfeesCommand = commands.find(n => n.value === 'Chainfees');
 
@@ -11,7 +12,7 @@ test.describe('Test the Chainfees command client page', async () => {
   });
 
   test('test the Chainfees command page and input values', async ({ page }) => {
-    await page.goto('/Commands');
+    await page.goto(testConstants.commandsPage);
     await page.click('text=Chain Fees');
     await expect(page).toHaveTitle('Chain Fees');
 
@@ -27,7 +28,7 @@ test.describe('Test the Chainfees command client page', async () => {
   });
 
   test('test the Chainfees command page and input values with file', async ({ page }) => {
-    await page.goto('/Commands');
+    await page.goto(testConstants.commandsPage);
     await page.click('text=Chain Fees');
     await expect(page).toHaveTitle('Chain Fees');
 

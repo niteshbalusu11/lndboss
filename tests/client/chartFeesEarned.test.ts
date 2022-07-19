@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
+import { testConstants } from '../utils/constants';
 
 const ChartFeesEarnedCommand = commands.find(n => n.value === 'ChartFeesEarned');
 
@@ -11,7 +12,7 @@ test.describe('Test the ChartFeesEarned command client page', async () => {
   });
 
   test('test the ChartFeesEarned command page and input values', async ({ page }) => {
-    await page.goto('/Commands');
+    await page.goto(testConstants.commandsPage);
     await page.click('text=Chart Fees Earned');
     await expect(page).toHaveTitle('Chart Fees Earned');
 

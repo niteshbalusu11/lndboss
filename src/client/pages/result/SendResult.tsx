@@ -14,8 +14,8 @@ const socket = io();
 const stringify = (n: object) => JSON.stringify(n);
 
 /*
-  Renders the output of the rebalance command
-  Listens to the websocket events for logging rebalance output to the browser
+  Renders the output of the send command
+  Listens to the websocket events for logging send output to the browser
 */
 
 const parseAnsi = (n: string) => {
@@ -42,7 +42,7 @@ const styles = {
   },
 };
 
-const RebalanceResult = () => {
+const SendResult = () => {
   const router = useRouter();
 
   const [data, setData] = useState(undefined);
@@ -62,19 +62,18 @@ const RebalanceResult = () => {
     const dateString = Date.now().toString();
 
     const query = {
+      amount: router.query.amount,
       avoid: router.query.avoid,
-      in_filters: router.query.in_filters,
-      in_outbound: router.query.in_outbound,
+      destination: router.query.destination,
       in_through: router.query.in_through,
+      is_dry_run: router.query.is_dry_run,
+      is_omitting_message_from: router.query.is_omitting_message_from,
       max_fee: router.query.max_fee,
       max_fee_rate: router.query.max_fee_rate,
-      max_rebalance: router.query.max_rebalance,
-      out_filters: router.query.out_filters,
-      out_inbound: router.query.out_inbound,
-      out_through: router.query.out_through,
-      timeout_minutes: router.query.timeout_minutes,
-      node: router.query.node,
+      message: router.query.message,
       message_id: dateString,
+      node: router.query.node,
+      out_through: router.query.out_through,
     };
 
     socket.on('connect', () => {
@@ -98,7 +97,7 @@ const RebalanceResult = () => {
     });
 
     const fetchData = async () => {
-      const result = await axiosGetWebSocket({ path: 'rebalance', query });
+      const result = await axiosGetWebSocket({ path: 'send', query });
 
       if (!!result) {
         output.push(YAML.stringify(result));
@@ -112,13 +111,13 @@ const RebalanceResult = () => {
   return (
     <CssBaseline>
       <Head>
-        <title>Rebalance Result</title>
+        <title>Send Result</title>
       </Head>
       <StartFlexBoxBlack>
         <div style={styles.div}>
-          <h1 id={'rebalanceResultTitle'}>Rebalancing...</h1>
+          <h1 id={'sendResultTitle'}>Paying offchain...</h1>
           {!!data && (
-            <div id={'rebalanceResult'}>
+            <div id={'sendResult'}>
               <pre style={styles.pre}>{data}</pre>
             </div>
           )}
@@ -134,4 +133,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default RebalanceResult;
+export default SendResult;

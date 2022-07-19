@@ -201,6 +201,27 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Send',
+    value: 'Send',
+    args: {
+      destination: 'Destination',
+    },
+    description: 'Send funds to a node off-chain via keysend or lnurl/lightning address',
+    longDescription:
+      'Formulas supported in amount, and N*USD or N*EUR. Also supported in formulas: LIQUIDITY, INBOUND, OUTBOUND (with peer), OUT_INBOUND, OUT_OUTBOUND (when specifying outbound peer)',
+    flags: {
+      amount: 'Amount',
+      avoid: 'Avoid',
+      in_through: 'In',
+      is_dry_run: 'Dryrun',
+      is_omitting_message_from: 'messageOmitFromKey',
+      max_fee: 'MaxFee',
+      max_fee_rate: 'MaxFeeRate',
+      message: 'Message',
+      out_through: 'Out',
+    },
+  },
+  {
     name: 'Tags',
     value: 'Tags',
     description: 'Tags can be used in other commands via tag and avoid options',

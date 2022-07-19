@@ -26,6 +26,7 @@ import { Module } from '@nestjs/common';
 import { PriceModule } from './modules/price/price.module';
 import { RebalanceModule } from './modules/rebalance/rebalance.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { SendModule } from './modules/send/send.module';
 import { SocketModule } from './modules/socket/socket.module';
 import { TagsModule } from './modules/tags/tags.module';
 import { ViewModule } from '~server/modules/view/view.module';
@@ -61,6 +62,7 @@ import { join } from 'path';
     PriceModule,
     RebalanceModule,
     ScheduleModule.forRoot(),
+    SendModule,
     SocketModule,
     TagsModule,
     ViewModule,

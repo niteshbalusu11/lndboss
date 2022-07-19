@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
+import { testConstants } from '../utils/constants';
 
 const AccountingCommand = commands.find(n => n.value === 'Accounting');
 
@@ -11,7 +12,7 @@ test.describe('Test the Accounting command client page', async () => {
   });
 
   test('test the Accounting command page: chain-fees', async ({ page }) => {
-    await page.goto('/Commands');
+    await page.goto(testConstants.commandsPage);
     await page.click('text=Accounting');
     await expect(page).toHaveTitle('Accounting');
     await page.locator('#category').click();
@@ -38,7 +39,7 @@ test.describe('Test the Accounting command client page', async () => {
   });
 
   test('test the Accounting command page: chain-receives', async ({ page }) => {
-    await page.goto('/Commands');
+    await page.goto(testConstants.commandsPage);
     await page.click('text=Accounting');
     await expect(page).toHaveTitle('Accounting');
     await page.locator('#category').click();
@@ -65,7 +66,7 @@ test.describe('Test the Accounting command client page', async () => {
   });
 
   test('test the Accounting command page: chain-sends', async ({ page }) => {
-    await page.goto('/Commands');
+    await page.goto(testConstants.commandsPage);
     await page.click('text=Accounting');
     await expect(page).toHaveTitle('Accounting');
     await page.locator('#category').click();
@@ -92,7 +93,7 @@ test.describe('Test the Accounting command client page', async () => {
   });
 
   test('test the Accounting command page: forwards', async ({ page }) => {
-    await page.goto('/Commands');
+    await page.goto(testConstants.commandsPage);
     await page.click('text=Accounting');
     await expect(page).toHaveTitle('Accounting');
     await page.locator('#category').click();
@@ -119,7 +120,7 @@ test.describe('Test the Accounting command client page', async () => {
   });
 
   test('test the Accounting command page: invoices', async ({ page }) => {
-    await page.goto('/Commands');
+    await page.goto(testConstants.commandsPage);
     await page.click('text=Accounting');
     await expect(page).toHaveTitle('Accounting');
     await page.locator('#category').click();
@@ -146,7 +147,7 @@ test.describe('Test the Accounting command client page', async () => {
   });
 
   test('test the Accounting command page: payments', async ({ page }) => {
-    await page.goto('/Commands');
+    await page.goto(testConstants.commandsPage);
     await page.click('text=Accounting');
     await expect(page).toHaveTitle('Accounting');
     await page.locator('#category').click();
@@ -173,7 +174,7 @@ test.describe('Test the Accounting command client page', async () => {
   });
 
   test('test the Accounting command page: CSV', async ({ page }) => {
-    await page.goto('/Commands');
+    await page.goto(testConstants.commandsPage);
     await page.click('text=Accounting');
     await expect(page).toHaveTitle('Accounting');
     await page.locator('#category').click();
