@@ -48,6 +48,9 @@ bos price
 # Rebalance funds between peers
 bos rebalance
 
+# Send funds using keysend or lnurl/lightning address and an optional message to a node
+bos send
+
 # Tags can be used in other commands via tag and avoid options
 bos tags
 ```
