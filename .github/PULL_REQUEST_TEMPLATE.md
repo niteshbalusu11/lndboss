@@ -17,5 +17,6 @@ Fixes # (issue)
 ## Checklist if applicable:
 
 - [ ] Appropriate comments have been added along with code?
-- [ ] Test case has been added?
+- [ ] Test case has been added/updated?
 - [ ] ReadMe has been updated?
+- [ ] Ran test cases?
