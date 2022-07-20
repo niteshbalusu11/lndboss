@@ -43,6 +43,7 @@ export class ExternalServicesService implements OnModuleInit {
       }
     } catch (err) {
       this.logger.log({ type: 'error', message: `NoOnlineNodesToStartAmbossHealthCheckCron---SkippingCronJob` });
+      throw new Error(err);
     }
   }
 }

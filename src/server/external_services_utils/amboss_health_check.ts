@@ -5,12 +5,16 @@ import axios from 'axios';
 import { getSavedNodes } from '~server/lnd';
 import { signature } from '~server/commands/grpc_utils/grpc_utils';
 
-const retryInterval = 10000;
-const retryTimes = 10;
+const retryInterval = 30000;
+const retryTimes = 15;
 
 /** Post amboss health checks
   {
     logger: <NestJS Logger Object>,
+  }
+  @returns via Promise
+  {
+    postToAmboss: <Boolean>,
   }
  */
 
