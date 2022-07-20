@@ -6,7 +6,7 @@ import { getSavedNodes } from '~server/lnd';
 import { signature } from '~server/commands/grpc_utils/grpc_utils';
 
 const retryInterval = 30000;
-const retryTimes = 15;
+const retryTimes = 10;
 
 /** Post amboss health checks
   {
