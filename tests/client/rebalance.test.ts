@@ -62,7 +62,7 @@ test.describe('Test the Rebalance command client page', async () => {
 
     await popup.click('text=fetch rebalances for saved node');
 
-    await expect(popup.locator('#noRebalanceSchedules')).toBeVisible();
+    await expect(popup.locator('#scheduledRebalances')).toBeVisible();
   });
 
   test.afterEach(async ({ page }) => {
