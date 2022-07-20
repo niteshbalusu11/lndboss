@@ -17,6 +17,12 @@ import { ambossHealthCheckCronSchedule } from '~server/utils/constants';
   {
     logger: <BosloggerService>,
   }
+  @returns via Promise
+  {
+    result: {
+      postToAmboss: <Boolean>,
+    }
+  }
  */
 
 @Injectable()
@@ -25,12 +31,19 @@ export class ExternalServicesService implements OnModuleInit {
   async onModuleInit(): Promise<void> {
     if (process.env.AMBOSS_HEALTH_CHECK === 'true') {
       this.pingAmbossHealthCheck({ logger: this.logger });
-
-      this.cronService.createAmbossHealthCheckCron({ schedule: ambossHealthCheckCronSchedule });
     }
   }
 
   async pingAmbossHealthCheck({ logger }) {
-    await ambossHealthCheck({ logger });
+    try {
+      const result = await ambossHealthCheck({ logger });
+
+      if (!!result.postToAmboss) {
+        this.cronService.createAmbossHealthCheckCron({ schedule: ambossHealthCheckCronSchedule });
+      }
+    } catch (err) {
+      this.logger.log({ type: 'error', message: `NoOnlineNodesToStartAmbossHealthCheckCron---SkippingCronJob` });
+      throw new Error(err);
+    }
   }
 }

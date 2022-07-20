@@ -100,7 +100,7 @@ export class RebalanceService implements OnModuleInit {
     try {
       const { nodes } = await getSavedNodes({});
 
-      if (!nodes.nodes && !nodes.nodes.length) {
+      if (!nodes.nodes || !nodes.nodes.length) {
         return;
       }
 

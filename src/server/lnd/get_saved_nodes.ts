@@ -225,14 +225,13 @@ const getSavedNodes = async ({ network }: Args) => {
           return cbk(null, removeDuplicates);
         }
 
-        const nodes = removeDuplicates.filter(n => !!n.is_online);
-
         return filter(
-          nodes,
+          removeDuplicates,
           ({ lnd }, cbk) => {
             return getNetwork({ lnd }, (err, res) => {
+              // Ignore errors, node may not be connected
               if (!!err) {
-                return cbk(err);
+                return cbk();
               }
 
               return cbk(null, res.network === network);
