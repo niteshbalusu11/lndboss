@@ -1,5 +1,5 @@
 import { CssBaseline, Stack } from '@mui/material';
-import { StandardTableOutput, StartFlexBox } from '../../standard_components';
+import { StandardTableOutput, StartFlexBox } from '../../standard_components/app-components';
 
 import Head from 'next/head';
 import React from 'react';

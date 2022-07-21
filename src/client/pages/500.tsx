@@ -1,4 +1,4 @@
-import { StandardHomeButtonLink, StartFlexBox } from '../standard_components';
+import { StandardHomeButtonLink, StartFlexBox } from '../standard_components/app-components';
 
 import { CssBaseline } from '@mui/material';
 import React from 'react';

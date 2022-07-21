@@ -305,6 +305,13 @@ export class getRebalancesDto {
   node: string;
 }
 
+export class grpcDto {
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  node: string;
+}
+
 export class priceDto {
   @Transform(({ value }) => toBoolean(value))
   @IsBoolean()

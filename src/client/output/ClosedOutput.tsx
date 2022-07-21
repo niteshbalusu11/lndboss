@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { StandardTableOutput } from '~client/standard_components';
+import { StandardTableOutput } from '~client/standard_components/app-components';
 
 // Renders the output of the bos closed command
 

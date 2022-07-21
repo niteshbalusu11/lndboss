@@ -2,7 +2,12 @@ import * as types from '../../shared/types';
 
 import { CssBaseline, FormControlLabel, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardHomeButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '~client/standard_components';
+import {
+  StandardHomeButtonLink,
+  StandardSwitch,
+  StartFlexBox,
+  SubmitButton,
+} from '~client/standard_components/app-components';
 
 import Head from 'next/head';
 import PriceOutput from '~client/output/PriceOutput';

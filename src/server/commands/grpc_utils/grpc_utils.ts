@@ -18,6 +18,7 @@ type SignMessage = {
   lnd: AuthenticatedLnd;
   message: string;
 };
+
 export const signature = async ({ lnd, message }: SignMessage): Promise<{ result: SignMessageResult }> => {
   try {
     const result: SignMessageResult = await signMessage({

@@ -1,6 +1,11 @@
 import { CssBaseline, FormControlLabel, InputLabel, MenuItem, Select, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardHomeButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
+import {
+  StandardHomeButtonLink,
+  StandardSwitch,
+  StartFlexBox,
+  SubmitButton,
+} from '../standard_components/app-components';
 
 import Head from 'next/head';
 import Router from 'next/router';

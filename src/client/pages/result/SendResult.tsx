@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 import { CssBaseline } from '@mui/material';
 import Head from 'next/head';
-import StartFlexBoxBlack from '~client/standard_components/StartFlexBoxBlack';
+import { StartFlexBoxBlack } from '~client/standard_components/app-components';
 import { axiosGetWebSocket } from '~client/utils/axios';
 import { io } from 'socket.io-client';
 import stripAnsi from 'strip-ansi';

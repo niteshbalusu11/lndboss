@@ -1,4 +1,4 @@
-import { RouteGuard } from '~client/standard_components';
+import { RouteGuard } from '~client/standard_components/app-components';
 
 // First page that gets rendered before every page.
 

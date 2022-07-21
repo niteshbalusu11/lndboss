@@ -1,4 +1,4 @@
-import { ContainerStyle } from '../standard_components';
+import { ContainerStyle } from '../standard_components/app-components';
 import React from 'react';
 
 /*

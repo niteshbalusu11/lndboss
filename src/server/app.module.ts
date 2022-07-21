@@ -20,6 +20,7 @@ import { CronModule } from './modules/cron/cron.module';
 import { ExternalServicesModule } from './modules/external-services/external-services.module';
 import { FindModule } from './modules/find/find.module';
 import { ForwardsModule } from './modules/forwards/forwards.module';
+import { GrpcModule } from './modules/grpc/grpc.module';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
 import { LndModule } from './modules/lnd/lnd.module';
 import { Module } from '@nestjs/common';
@@ -53,6 +54,7 @@ import { join } from 'path';
     ExternalServicesModule,
     FindModule,
     ForwardsModule,
+    GrpcModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.env', join(homedir(), '.bosgui', '.env')],
