@@ -13,6 +13,7 @@ import commands, { globalCommands } from '../commands';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
 import Link from 'next/link';
+import { PeersList } from '~client/standard_components/lndboss';
 import { axiosPost } from '~client/utils/axios';
 import { clientConstants } from '~client/utils/constants';
 import { useNotify } from '~client/hooks/useNotify';
@@ -149,14 +150,6 @@ const Rebalance = () => {
     setOutTargetInbound(e.target.value);
   };
 
-  const handleInPeerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInPeer(e.target.value);
-  };
-
-  const handleOutPeerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOutPeer(e.target.value);
-  };
-
   const handleMaxFeeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMaxFee(e.target.value);
   };
@@ -205,7 +198,6 @@ const Rebalance = () => {
 
     if (schedule.startsWith('*')) {
       useNotify({ type: 'error', message: 'Running a job every minute is bad...' });
-      // return;
     }
     await axiosPost({ path: 'rebalance/schedule', postBody: flags });
 
@@ -237,22 +229,18 @@ const Rebalance = () => {
           <h1>Manual Rebalance</h1>
           <pre style={styles.pre}>{RebalanceCommand.longDescription}</pre>
           <h3>NOTE: THERE IS NO WAY TO STOP AN IN-FLIGHT REBALANCE, DOUBLE CHECK BEFORE RUNNING.</h3>
-          <TextField
-            type="text"
-            placeholder={`${RebalanceCommand.flags.in_through} (Route in through a specific peer)`}
+          <PeersList
+            setPeer={setInPeer}
             label={RebalanceCommand.flags.in_through}
+            placeholder={`${RebalanceCommand.flags.in_through} (Route in through a specific peer)`}
             id={RebalanceCommand.flags.in_through}
-            onChange={handleInPeerChange}
-            style={styles.textField}
           />
 
-          <TextField
-            type="text"
-            placeholder={`${RebalanceCommand.flags.out_through} (Route out through a specific peer)`}
+          <PeersList
+            setPeer={setOutPeer}
             label={RebalanceCommand.flags.out_through}
+            placeholder={`${RebalanceCommand.flags.out_through} (Route out through a specific peer)`}
             id={RebalanceCommand.flags.out_through}
-            onChange={handleOutPeerChange}
-            style={styles.textField}
           />
 
           <TextField

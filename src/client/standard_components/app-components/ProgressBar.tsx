@@ -1,3 +1,16 @@
+/** Returns a progress bar component with a given percentage completed.
+  {
+    bgcolor: <String>,
+    completed: <Number>,
+    display: <String>,
+    id: <String>,
+  }
+  @returns
+  {
+    ProgressBar: <Component>
+  }
+ */
+
 type Args = {
   bgcolor: string;
   completed: number;

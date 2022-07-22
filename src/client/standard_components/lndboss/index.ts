@@ -1,3 +1,4 @@
 import PeersList from './PeersList';
+import TagsList from './TagsList';
 
-export { PeersList };
+export { PeersList, TagsList };

@@ -1,6 +1,7 @@
 import CenterFlexBox from './CenterFlexBox';
 import ContainerStyle from './ContainerStyle';
 import PositionedMenu from './PositionedMenu';
+import ProgressBar from './ProgressBar';
 import ReactCron from './ReactCron';
 import ResponsiveGrid from './ResponsiveGrid';
 import RouteGuard from './RouteGuard';
@@ -18,6 +19,7 @@ export {
   CenterFlexBox,
   ContainerStyle,
   PositionedMenu,
+  ProgressBar,
   ReactCron,
   ResponsiveGrid,
   RouteGuard,
