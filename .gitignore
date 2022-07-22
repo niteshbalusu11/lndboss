@@ -47,3 +47,6 @@ lerna-debug.log*
 # Docker
 lndboss.tar
 lndboss.tar.gz
+/test-results/
+/playwright-report/
+/playwright/.cache/
