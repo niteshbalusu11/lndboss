@@ -3,7 +3,7 @@ import { CssBaseline, Stack } from '@mui/material';
 import { ChartPaymentsReceivedOutput } from '../../output';
 import Head from 'next/head';
 import React from 'react';
-import { StartFlexBox } from '../../standard_components';
+import { StartFlexBox } from '../../standard_components/app-components';
 import { axiosGet } from '~client/utils/axios';
 import { useRouter } from 'next/router';
 

@@ -1,6 +1,11 @@
 import { CssBaseline, Stack, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { StandardButtonLink, StandardTableOutput, StartFlexBox, SubmitButton } from '~client/standard_components';
+import {
+  StandardButtonLink,
+  StandardTableOutput,
+  StartFlexBox,
+  SubmitButton,
+} from '~client/standard_components/app-components';
 
 import Head from 'next/head';
 import { axiosGet } from '~client/utils/axios';

@@ -1,6 +1,6 @@
 import { CssBaseline, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components';
+import { StandardButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components/app-components';
 
 import Router from 'next/router';
 import axios from 'axios';

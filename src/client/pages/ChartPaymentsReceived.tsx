@@ -2,7 +2,7 @@ import * as types from '../../shared/types';
 
 import { Button, CssBaseline, IconButton, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '../standard_components';
+import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '../standard_components/app-components';
 import commands, { globalCommands } from '../commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';

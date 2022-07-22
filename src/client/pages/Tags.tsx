@@ -14,7 +14,12 @@ import {
   TextField,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardHomeButtonLink, StandardSwitch, StartFlexBox, SubmitButton } from '../standard_components';
+import {
+  StandardHomeButtonLink,
+  StandardSwitch,
+  StartFlexBox,
+  SubmitButton,
+} from '../standard_components/app-components';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';

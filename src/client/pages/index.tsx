@@ -1,5 +1,5 @@
 import React from 'react';
-import { Startup } from '../standard_components';
+import { Startup } from '../standard_components/app-components';
 
 /*
   App starts here
