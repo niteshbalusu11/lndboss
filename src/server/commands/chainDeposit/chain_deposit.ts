@@ -9,6 +9,7 @@ const bigTok = (tokens: number) => (!tokens ? '0' : (tokens / 1e8).toFixed(8));
 
 /** Get deposit address
   {
+    [format]: <Address format String>
     [tokens]: <Tokens to Receive Number>
   }
 

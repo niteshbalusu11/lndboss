@@ -63,7 +63,7 @@ const Send = () => {
   const [isDryrun, setIsDryRun] = useState(false);
   const [outPeer, setOutPeer] = useState(undefined);
   const [maxFee, setMaxFee] = useState('1337');
-  const [maxFeeRate, setMaxFeeRate] = useState('250');
+  const [maxFeeRate, setMaxFeeRate] = useState('');
   const [message, setMessage] = useState('');
   const [isOmittingMessageFrom, setIsOmittingMessageFrom] = useState(false);
 

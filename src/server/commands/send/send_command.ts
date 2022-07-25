@@ -26,7 +26,6 @@ import { readFile } from 'fs';
     [message]: <Message to Include With Payment String>
     [out_through]: <Pay Out Through Peer String>
     request: <Request Function>
-    [timeout_minutes]: <Stop Searching For Route After N Minutes Number>
   }
 */
 
@@ -51,7 +50,7 @@ const sendCommand = async ({ args, lnd, logger }: Args): Promise<{ result: any }
       is_dry_run: args.is_dry_run,
       is_omitting_message_from: args.is_omitting_message_from,
       max_fee: args.max_fee || 1337,
-      max_fee_rate: args.max_fee_rate,
+      max_fee_rate: args.max_fee_rate || undefined,
       message: args.message,
       quiz_answers: [],
       out_through: args.out_through,
