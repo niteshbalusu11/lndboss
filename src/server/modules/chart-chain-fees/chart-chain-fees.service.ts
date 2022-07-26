@@ -24,7 +24,6 @@ import { chartChainFeesDto } from '~shared/commands.dto';
 export class ChartChainFeesService {
   async get(args: chartChainFeesDto): Promise<{ result: any }> {
     const lnds = await LndService.getLnds({ nodes: args.nodes });
-
     const { result } = await chartChainFeesCommand(args, lnds);
 
     return { result };

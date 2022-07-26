@@ -2,7 +2,6 @@ import { expect, test } from '@playwright/test';
 import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
-import { testConstants } from '../utils/constants';
 
 const SendCommand = commands.find(n => n.value === 'Send');
 
@@ -12,8 +11,7 @@ test.describe('Test the Send command client page', async () => {
   });
 
   test('test the Send command page and input values', async ({ page }) => {
-    await page.goto(testConstants.commandsPage);
-    await page.click('text=Send');
+    await page.goto('/commands/Send');
     await expect(page).toHaveTitle('Send Command');
     await page.type(`#avoid-0`, 'ban');
     await page.type(`#${SendCommand?.args?.destination}`, 'pubkey');

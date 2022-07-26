@@ -33,7 +33,7 @@ const priceCommand = async (args: types.commandPrice): Promise<{ result: any }> 
     const result = await getPrices({
       request,
       symbols,
-      from: args.from,
+      from: args.from || 'coindesk',
     });
 
     return { result };
