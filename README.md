@@ -761,6 +761,8 @@ http://localhost:8055/api/probe
   }
  */
 
+import { io } from 'socket.io-client';
+
 try {
   const url = 'http://localhost:8055/api/probe';
   const dateString = Date.now().toString();
@@ -774,6 +776,28 @@ try {
     message_id: dateString,
     tokens: '100',
   };
+
+  // To get live logs while probing, you can start a websocket and add an event listener.
+  const socket = io();
+
+  socket.on('connect', () => {
+    console.log('connected');
+  });
+
+  socket.on('disconnect', () => {
+    console.log('disconnected');
+  });
+
+// Make sure to pass the same dateString from above
+  socket.on(`${dateString}`, data => {
+    console.log(data);
+  });
+
+  socket.on('error', err => {
+    throw err;
+  });
+
+// End websocket code.
 
   const response = await axios.get(url, {
     params: query,
