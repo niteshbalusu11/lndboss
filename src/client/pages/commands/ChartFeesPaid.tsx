@@ -7,8 +7,8 @@ import {
   StandardSwitch,
   StartFlexBox,
   SubmitButton,
-} from '../standard_components/app-components';
-import commands, { globalCommands } from '../commands';
+} from '~client/standard_components/app-components';
+import commands, { globalCommands } from '../../commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';

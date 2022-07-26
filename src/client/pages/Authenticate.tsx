@@ -5,7 +5,7 @@ import {
   StandardSwitch,
   StartFlexBox,
   SubmitButton,
-} from '../standard_components/app-components';
+} from '~client/standard_components/app-components';
 
 import Head from 'next/head';
 import Router from 'next/router';

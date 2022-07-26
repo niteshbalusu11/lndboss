@@ -7,10 +7,10 @@ import {
   StandardSwitch,
   StartFlexBox,
   SubmitButton,
-} from '../standard_components/app-components';
-import commands, { globalCommands } from '../commands';
+} from '~client/standard_components/app-components';
+import commands, { globalCommands } from '../../commands';
 
-import { BalanceOutput } from '../output';
+import { BalanceOutput } from '../../output';
 import Head from 'next/head';
 import { axiosGet } from '~client/utils/axios';
 

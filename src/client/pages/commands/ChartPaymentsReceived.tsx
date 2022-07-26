@@ -2,18 +2,18 @@ import * as types from '~shared/types';
 
 import { Button, CssBaseline, IconButton, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '../standard_components/app-components';
-import commands, { globalCommands } from '../commands';
+import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components/app-components';
+import commands, { globalCommands } from '../../commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
 import Link from 'next/link';
 
-const ChartChainFeesCommand = commands.find(n => n.value === 'ChartChainFees');
+const ChartPaymentsReceivedCommand = commands.find(n => n.value === 'ChartPaymentsReceived');
 
 /*
-  Renders the bos chart-chain-fees command
-  Passes query parameters to the chart-chain-fees results page
+  Renders the bos chart-payments-received command
+  Passes query parameters to the chart-payments-received results page
 */
 
 const styles = {
@@ -42,7 +42,7 @@ const styles = {
   },
 };
 
-const ChartChainFees = () => {
+const ChartPaymentsReceived = () => {
   const [formValues, setFormValues] = useState([{ node: '' }]);
   const [days, setDays] = useState('60');
 
@@ -66,7 +66,7 @@ const ChartChainFees = () => {
     setFormValues(newFormValues);
   };
 
-  const flags: types.commandChartChainFees = {
+  const flags: types.commandChartPaymentsReceived = {
     days: !!days ? Number(days) : 60,
     nodes: formValues.map(n => n.node),
   };
@@ -74,18 +74,18 @@ const ChartChainFees = () => {
   return (
     <CssBaseline>
       <Head>
-        <title>Chart Chain Fees</title>
+        <title>Chart Payments Received</title>
       </Head>
       <StartFlexBox>
         <StandardHomeButtonLink />
         <Stack spacing={3} style={styles.form}>
-          <h2>{ChartChainFeesCommand.name}</h2>
-          <h4 style={styles.h4}>{ChartChainFeesCommand.longDescription}</h4>
+          <h2>{ChartPaymentsReceivedCommand.name}</h2>
+          <h4 style={styles.h4}>{ChartPaymentsReceivedCommand.description}</h4>
           <TextField
             type="text"
-            placeholder={`${ChartChainFeesCommand.flags.days} (Default 60)`}
-            label={`${ChartChainFeesCommand.flags.days} (Default 60)`}
-            id={ChartChainFeesCommand.flags.days}
+            placeholder={`${ChartPaymentsReceivedCommand.flags.days} (Default 60)`}
+            label={`${ChartPaymentsReceivedCommand.flags.days} (Default 60)`}
+            id={ChartPaymentsReceivedCommand.flags.days}
             onChange={handleDaysChange}
             style={styles.textField}
           />
@@ -114,7 +114,7 @@ const ChartChainFees = () => {
             ))}
           </>
           <SubmitButton>
-            <Link href={{ pathname: '/result/ChartChainFeesResult', query: flags }}>
+            <Link href={{ pathname: '/result/ChartPaymentsReceivedResult', query: flags }}>
               <a target="_blank" style={{ color: 'white', textDecoration: 'none' }}>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Run
                 Command&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -127,4 +127,4 @@ const ChartChainFees = () => {
   );
 };
 
-export default ChartChainFees;
+export default ChartPaymentsReceived;

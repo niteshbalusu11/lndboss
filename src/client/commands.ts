@@ -181,6 +181,23 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Probe',
+    value: 'Probe',
+    description: 'Check if a payment request is sendable',
+    longDescription: 'Simulate paying a payment request without actually paying it',
+    args: {
+      amount: 'Amount',
+      to: 'To',
+    },
+    flags: {
+      avoid: 'Avoid',
+      find_max: 'FindMax',
+      in: 'In',
+      max_paths: 'MaxPaths',
+      out: 'Out',
+    },
+  },
+  {
     name: 'Rebalance',
     value: 'Rebalance',
     description: 'Rebalance funds between peers',

@@ -8,7 +8,7 @@ import {
   StartFlexBox,
   SubmitButton,
 } from '~client/standard_components/app-components';
-import commands, { globalCommands } from '../commands';
+import commands, { globalCommands } from '../../commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';

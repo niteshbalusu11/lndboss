@@ -1,19 +1,24 @@
 import * as types from '~shared/types';
 
-import { Button, CssBaseline, IconButton, Stack, TextField } from '@mui/material';
+import { Button, CssBaseline, FormControlLabel, IconButton, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '../standard_components/app-components';
-import commands, { globalCommands } from '../commands';
+import {
+  StandardHomeButtonLink,
+  StandardSwitch,
+  StartFlexBox,
+  SubmitButton,
+} from '~client/standard_components/app-components';
+import commands, { globalCommands } from '../../commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
 import Link from 'next/link';
 
-const ChartPaymentsReceivedCommand = commands.find(n => n.value === 'ChartPaymentsReceived');
+const ChartFeesEarnedCommand = commands.find(n => n.value === 'ChartFeesEarned');
 
 /*
-  Renders the bos chart-payments-received command
-  Passes query parameters to the chart-payments-received results page
+  Renders the bos chart-fees-earned command
+  Passes query parameters to the chart-fees-earned results page
 */
 
 const styles = {
@@ -23,7 +28,7 @@ const styles = {
     width: '700px',
   },
   textField: {
-    width: '350px',
+    width: '380px',
   },
   button: {
     color: 'white',
@@ -40,14 +45,32 @@ const styles = {
   h4: {
     marginTop: '0px',
   },
+  switch: {
+    width: '100px',
+  },
 };
 
-const ChartPaymentsReceived = () => {
+const ChartFeesEarned = () => {
+  const [count, setCount] = useState(false);
+  const [forwarded, setForwarded] = useState(false);
   const [formValues, setFormValues] = useState([{ node: '' }]);
   const [days, setDays] = useState('60');
+  const [via, setVia] = useState('');
+
+  const handleCountChange = () => {
+    setCount((previousState: boolean) => !previousState);
+  };
 
   const handleDaysChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDays(event.target.value);
+  };
+
+  const handleForwardedChange = () => {
+    setForwarded((previousState: boolean) => !previousState);
+  };
+
+  const handleViaChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setVia(event.target.value);
   };
 
   const addFormFields = () => {
@@ -66,28 +89,57 @@ const ChartPaymentsReceived = () => {
     setFormValues(newFormValues);
   };
 
-  const flags: types.commandChartPaymentsReceived = {
+  const flags: types.commandChartFeesEarned = {
+    via,
     days: !!days ? Number(days) : 60,
-    nodes: formValues.map(n => n.node),
+    is_count: count,
+    is_forwarded: forwarded,
+    nodes: formValues.map(n => n.node) || [''],
   };
 
   return (
     <CssBaseline>
       <Head>
-        <title>Chart Payments Received</title>
+        <title>Chart Fees Earned</title>
       </Head>
       <StartFlexBox>
         <StandardHomeButtonLink />
         <Stack spacing={3} style={styles.form}>
-          <h2>{ChartPaymentsReceivedCommand.name}</h2>
-          <h4 style={styles.h4}>{ChartPaymentsReceivedCommand.description}</h4>
+          <h2>{ChartFeesEarnedCommand.name}</h2>
+          <h4 style={styles.h4}>{ChartFeesEarnedCommand.description}</h4>
           <TextField
             type="text"
-            placeholder={`${ChartPaymentsReceivedCommand.flags.days} (Default 60)`}
-            label={`${ChartPaymentsReceivedCommand.flags.days} (Default 60)`}
-            id={ChartPaymentsReceivedCommand.flags.days}
+            placeholder="Routing fees earned via a specified node or tag"
+            label={ChartFeesEarnedCommand.args.via}
+            id={ChartFeesEarnedCommand.args.via}
+            onChange={handleViaChange}
+            style={styles.textField}
+          />
+          <FormControlLabel
+            style={styles.switch}
+            control={
+              <StandardSwitch checked={count} onChange={handleCountChange} id={ChartFeesEarnedCommand.flags.count} />
+            }
+            label={ChartFeesEarnedCommand.flags.count}
+          />
+          <TextField
+            type="text"
+            placeholder={`${ChartFeesEarnedCommand.flags.days} (Default 60)`}
+            label={`${ChartFeesEarnedCommand.flags.days} (Default 60)`}
+            id={ChartFeesEarnedCommand.flags.days}
             onChange={handleDaysChange}
             style={styles.textField}
+          />
+          <FormControlLabel
+            style={styles.switch}
+            control={
+              <StandardSwitch
+                checked={forwarded}
+                onChange={handleForwardedChange}
+                id={ChartFeesEarnedCommand.flags.forwarded}
+              />
+            }
+            label={ChartFeesEarnedCommand.flags.forwarded}
           />
           <>
             <Button href="#text-buttons" onClick={() => addFormFields()} style={styles.button}>
@@ -114,7 +166,7 @@ const ChartPaymentsReceived = () => {
             ))}
           </>
           <SubmitButton>
-            <Link href={{ pathname: '/result/ChartPaymentsReceivedResult', query: flags }}>
+            <Link href={{ pathname: '/result/ChartFeesEarnedResult', query: flags }}>
               <a target="_blank" style={{ color: 'white', textDecoration: 'none' }}>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Run
                 Command&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -127,4 +179,4 @@ const ChartPaymentsReceived = () => {
   );
 };
 
-export default ChartPaymentsReceived;
+export default ChartFeesEarned;

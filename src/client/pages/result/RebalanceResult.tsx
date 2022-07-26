@@ -37,8 +37,10 @@ const styles = {
     color: 'white',
   },
   div: {
-    color: 'white',
     marginLeft: '20px',
+  },
+  h1: {
+    color: 'white',
   },
 };
 
@@ -116,7 +118,9 @@ const RebalanceResult = () => {
       </Head>
       <StartFlexBoxBlack>
         <div style={styles.div}>
-          <h1 id={'rebalanceResultTitle'}>Rebalancing...</h1>
+          <h1 id={'rebalanceResultTitle'} style={styles.h1}>
+            Rebalancing...
+          </h1>
           {!!data && (
             <div id={'rebalanceResult'}>
               <pre style={styles.pre}>{data}</pre>

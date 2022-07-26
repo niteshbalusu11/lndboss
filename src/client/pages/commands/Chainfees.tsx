@@ -8,7 +8,7 @@ import {
   StartFlexBox,
   SubmitButton,
 } from '~client/standard_components/app-components';
-import commands, { globalCommands } from '../commands';
+import commands, { globalCommands } from '../../commands';
 
 import { ChainfeesOutput } from '~client/output';
 import Head from 'next/head';
