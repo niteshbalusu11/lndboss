@@ -1,4 +1,4 @@
-import * as types from '../../../shared/types';
+import * as types from '~shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
 import { getForwards } from 'balanceofsatoshis/network';

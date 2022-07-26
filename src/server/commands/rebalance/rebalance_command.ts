@@ -1,5 +1,3 @@
-import { createLogger, format, transports } from 'winston';
-
 import { httpLogger } from '~server/utils/global_functions';
 import { manageRebalance } from 'balanceofsatoshis/swaps';
 import { readFile } from 'fs';
@@ -30,27 +28,10 @@ import { readFile } from 'fs';
   @returns via Promise
 */
 
-const rebalanceCommand = async ({ args, emit, lnd }): Promise<{ result: any }> => {
-  const myFormat = format.printf(({ message }) => {
-    return emit(args.message_id, {
-      message: format.prettyPrint(message),
-    });
-  });
-
-  const logger = createLogger({
-    level: 'info',
-    format: format.combine(myFormat),
-    defaultMeta: { service: 'rebalance' },
-    transports: [
-      new transports.Console({
-        format: format.combine(format.prettyPrint()),
-      }),
-    ],
-  });
-
-  const avoidArray = args.avoid.filter(n => !!n);
-  const inFiltersArray = args.in_filters.filter(n => !!n);
-  const outFiltersArray = args.out_filters.filter(n => !!n);
+const rebalanceCommand = async ({ args, lnd, logger }): Promise<{ result: any }> => {
+  const avoidArray = !!args.avoid ? args.avoid.filter((n: string) => !!n) : [];
+  const inFiltersArray = !!args.in_filters ? args.in_filters.filter((n: string) => !!n) : [];
+  const outFiltersArray = !!args.out_filters ? args.out_filters.filter((n: string) => !!n) : [];
 
   try {
     const result = await manageRebalance({
@@ -72,6 +53,7 @@ const rebalanceCommand = async ({ args, emit, lnd }): Promise<{ result: any }> =
 
     return { result };
   } catch (error) {
+    logger.error({ error });
     httpLogger({ error });
   }
 };

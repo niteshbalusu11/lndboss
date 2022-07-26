@@ -347,3 +347,57 @@ try {
   console.error(error);
 }
 ```
+
+<br></br>
+
+### Probe
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/probe
+
+@Query
+  {
+    [avoid]: <Avoid String Array>
+    [destination]: <Destination pubkey/Payment Request string>
+    [find_max]: <Boolean>
+    [in_through]: <Pay In Through Public Key Hex String>
+    [max_paths]: <Maximum Probe Paths Number>
+    out: [<Out Through Peer With Public Key Hex String Array>]
+    [tokens]: <Tokens Amount String>
+  }
+
+@Response
+  {
+    [fee]: <Total Fee Tokens To Destination Number>
+    [latency_ms]: <Latency Milliseconds Number>
+    [relays]: [[<Relaying Public Key Hex String>]]
+    [routes_maximum]: <Maximum Sendable Tokens on Paths Number>
+  }
+ */
+
+try {
+  const url = 'http://localhost:8055/api/chart-chain-fees';
+
+  const query = {
+    avoid: ['ban'],
+    destination: '02dc8800af7b6f18b7eefbfb3112b99f2c0f0196475f99b8210b73ecd0c638f0e3',
+    in_through: '02ce4aea072f54422d35eb8d82aebe966b033d4e98b470907f601a025c5c29a7dc',
+    max_paths: 1,
+    tokens: '100',
+  };
+
+  const response = await axios.get(url, {
+    params: query,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+```

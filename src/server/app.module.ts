@@ -25,6 +25,7 @@ import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
 import { LndModule } from './modules/lnd/lnd.module';
 import { Module } from '@nestjs/common';
 import { PriceModule } from './modules/price/price.module';
+import { ProbeModule } from './modules/probe/probe.module';
 import { RebalanceModule } from './modules/rebalance/rebalance.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { SendModule } from './modules/send/send.module';
@@ -62,6 +63,7 @@ import { join } from 'path';
     LndModule,
     BosloggerModule,
     PriceModule,
+    ProbeModule,
     RebalanceModule,
     ScheduleModule.forRoot(),
     SendModule,

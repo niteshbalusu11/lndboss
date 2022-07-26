@@ -1,4 +1,4 @@
-import * as types from '../../../shared/types';
+import * as types from '~shared/types';
 
 import { Autocomplete, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';

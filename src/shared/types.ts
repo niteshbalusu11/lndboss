@@ -114,6 +114,19 @@ export type commandPrice = {
   symbols: string;
 };
 
+// ========================Probe Command=====================================
+
+export type commandProbe = {
+  avoid: string[];
+  destination: string;
+  find_max: boolean;
+  in_through: string;
+  max_paths: number;
+  node: string;
+  out: string[];
+  tokens: string;
+};
+
 // ========================Rebalance Command=====================================
 
 export type commandRebalance = {

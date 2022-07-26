@@ -1,4 +1,4 @@
-import * as types from '../../../shared/types';
+import * as types from '~shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
 import { findRecord } from 'balanceofsatoshis/lnd';

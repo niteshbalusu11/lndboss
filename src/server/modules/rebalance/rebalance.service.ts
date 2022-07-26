@@ -1,4 +1,5 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Logger, createLogger, format, transports } from 'winston';
 import { deleteRebalanceDto, getRebalancesDto, rebalanceDto, rebalanceScheduleDto } from '~shared/commands.dto';
 
 import { BosloggerService } from '../boslogger/boslogger.service';
@@ -126,6 +127,30 @@ export class RebalanceService implements OnModuleInit {
     }
   }
 
+  // Create logger
+  createLogger({ messageId }: { messageId: string }): Logger {
+    const emit = this.socketService.server.emit.bind(this.socketService.server);
+
+    const myFormat = format.printf(({ message }) => {
+      return emit(messageId, {
+        message: format.prettyPrint(message),
+      });
+    });
+
+    const logger: Logger = createLogger({
+      level: 'info',
+      format: format.combine(myFormat),
+      defaultMeta: { service: 'send' },
+      transports: [
+        new transports.Console({
+          format: format.combine(format.prettyPrint()),
+        }),
+      ],
+    });
+
+    return logger;
+  }
+
   // Delete a rebalance cron job
   async deleteRebalance(args: deleteRebalanceDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
@@ -156,11 +181,12 @@ export class RebalanceService implements OnModuleInit {
   // Manual rebalance
   async rebalance(args: rebalanceDto | rebalanceScheduleDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
+    const logger = this.createLogger({ messageId: args.message_id });
 
     const { result } = await rebalanceCommand({
       args,
       lnd,
-      emit: this.socketService.server.emit.bind(this.socketService.server),
+      logger,
     });
 
     return { result };

@@ -1,4 +1,4 @@
-import * as types from '../../shared/types';
+import * as types from '~shared/types';
 
 import { CssBaseline, FormControlLabel, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
