@@ -442,7 +442,7 @@ try {
 
 ## 2. Logging in (POST Request):
 
-- To perform any API calls, you need an authentication token, the login API call returns a JWT Authentication token that is valid for 15 mins, which needs to be used make calls any other calls to the server.
+- To perform any API calls, you need an authentication token, the login API call returns a JWT Authentication token that is valid for 15 mins, which needs to be used to make any subsequent calls to the server.
 
 ```javascript
 /** 
@@ -493,7 +493,7 @@ headers: {
 },
 ```
 
-- Every command except `Tags` takes `node` query parameter as LndBoss supports multiple nodes, if you have a default node setup, you can ignore the flag or pass the node name or the node string array.
+- Every command except `Tags` and `Price` takes `node` query parameter as LndBoss supports multiple nodes, you can ignore the node flag if you're using a default node or pass the flag if you want to specify a saved node(s) as a `string` or `string[]` depending on the command, check `@Query` in the help for every command in this document to check what type the command accepts.
 
 - In the query parameters or body of a request, in the below examples, if a query/body is enclosed in square brackets `[]` it is optional to pass, else it is required. Example, in the accounting command `[month]` is optional, `is_csv` is required.
   <br></br>
