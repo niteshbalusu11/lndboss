@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://github.com/niteshbalusu11/lndboss/compare/v1.13.0...v1.14.0) (2022-07-26)
+
 ## [1.13.0](https://github.com/niteshbalusu11/lndboss/compare/v1.12.1...v1.13.0) (2022-07-20)
 
 - Added support for bos send command
