@@ -747,6 +747,7 @@ http://localhost:8055/api/probe
     [find_max]: <Boolean>
     [in_through]: <Pay In Through Public Key Hex String>
     [max_paths]: <Maximum Probe Paths Number>
+    message_id: <DateTime stamp string>
     out: [<Out Through Peer With Public Key Hex String Array>]
     [tokens]: <Tokens Amount String>
   }
@@ -761,7 +762,7 @@ http://localhost:8055/api/probe
  */
 
 try {
-  const url = 'http://localhost:8055/api/chart-chain-fees';
+  const url = 'http://localhost:8055/api/probe';
 
   const query = {
     avoid: ['ban'],
