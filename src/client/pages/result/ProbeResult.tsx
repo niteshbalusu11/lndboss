@@ -75,7 +75,7 @@ const ProbeResult = () => {
 
   useEffect(() => {
     const dateString = Date.now().toString();
-    console.log(dateString);
+
     const query = {
       avoid: router.query.avoid,
       destination: router.query.destination,
