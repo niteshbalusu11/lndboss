@@ -11,6 +11,7 @@ import closedCommand from './closed/closed_command';
 import findCommand from './find/find_command';
 import forwardsCommand from './forwards/forwards_command';
 import priceCommand from './price/price_command';
+import probeCommand from './probe/probe_command';
 import rebalanceCommand from './rebalance/rebalance_command';
 import sendCommand from './send/send_command';
 import tagsCommand from './tags/tags_command';
@@ -29,6 +30,7 @@ export {
   findCommand,
   forwardsCommand,
   priceCommand,
+  probeCommand,
   rebalanceCommand,
   sendCommand,
   tagsCommand,

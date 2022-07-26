@@ -1,5 +1,5 @@
 import * as request from 'balanceofsatoshis/commands/simple_request';
-import * as types from '../../../shared/types';
+import * as types from '~shared/types';
 
 import { getPrices } from '@alexbosworth/fiat';
 import { httpLogger } from '~server/utils/global_functions';

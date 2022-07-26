@@ -1,4 +1,4 @@
-import * as types from '../../shared/types';
+import * as types from '~shared/types';
 
 import { CssBaseline, FormControlLabel, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
@@ -12,7 +12,7 @@ import {
 import Head from 'next/head';
 import PriceOutput from '~client/output/PriceOutput';
 import { axiosGet } from '~client/utils/axios';
-import commands from '../commands';
+import commands from '../../commands';
 
 const PriceCommand = commands.find(n => n.value === 'Price');
 

@@ -1766,10 +1766,10 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
 
-balanceofsatoshis@^12.16.1:
-  version "12.16.1"
-  resolved "https://registry.yarnpkg.com/balanceofsatoshis/-/balanceofsatoshis-12.16.1.tgz#64a8e61ca86641620eb2d2b9c5283c8f021c5f73"
-  integrity sha512-P4F7zVmoLpqx5qoVh2DHWOUkFNeoH7M2u4Y1IIIxa2bFjooVpgAESsIExcMA5v99iPFMZONmctDoWniYG5f5BA==
+balanceofsatoshis@^12.16.2:
+  version "12.16.2"
+  resolved "https://registry.yarnpkg.com/balanceofsatoshis/-/balanceofsatoshis-12.16.2.tgz#a2d3431654fbbc6e46b54960a7b170262b1855a7"
+  integrity sha512-59CzwyBE1C+8URV52sVbHofUdI44BymtvoLvu/qD3TASa95y1FzLIwhVgnqF7MvX6z7HzGpV7w9Xn7ip+UTD/Q==
   dependencies:
     "@alexbosworth/caporal" "1.4.4"
     "@alexbosworth/fiat" "1.0.3"
@@ -1791,11 +1791,11 @@ balanceofsatoshis@^12.16.1:
     csv-parse "5.3.0"
     ecpair "2.0.1"
     goldengate "11.2.3"
-    grammy "1.9.1"
+    grammy "1.9.2"
     hot-formula-parser "4.0.0"
     import-lazy "4.0.0"
     ini "3.0.0"
-    inquirer "9.0.1"
+    inquirer "9.0.2"
     ln-accounting "5.0.7"
     ln-service "53.17.4"
     ln-sync "3.13.0"
@@ -3985,10 +3985,10 @@ grammy@1.9.0:
     debug "^4.3.4"
     node-fetch "^2.6.7"
 
-grammy@1.9.1:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/grammy/-/grammy-1.9.1.tgz#0d9a352e5b82a81f5aeee7dc3ab2babd064bf2a0"
-  integrity sha512-gdLHwDFrurCf2acoqiWRIfHbLE2iujCb8/USwENLwrXj26LVuQvEWmU9jWrPtHq+Psotd6RtqgQJh+75WWSotA==
+grammy@1.9.2:
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/grammy/-/grammy-1.9.2.tgz#0192756800113b634610454fd9987cc0e312818e"
+  integrity sha512-3u73ov2dJZeUiWKN/N7jgF3XtMFCOcBYsRB+/YjOGVPnk2CDo8n7VLnhH+jznhrqJEgeRB/CqKsP+PIPOUpizA==
   dependencies:
     "@grammyjs/types" "^2.8.1"
     abort-controller "^3.0.0"
@@ -4233,10 +4233,10 @@ inquirer@8.2.4:
     through "^2.3.6"
     wrap-ansi "^7.0.0"
 
-inquirer@9.0.1:
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-9.0.1.tgz#72879aa2bffa0e6ce74a8d84a59950a1e19d3070"
-  integrity sha512-NO601wvGO4Zm25ctJUhuglRBShQKJSGKGQlgbeyjs3cvXqq4Ud1jhwR36zf3pTC9mmfH3uHJHb/sL3/YJPqMzw==
+inquirer@9.0.2:
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-9.0.2.tgz#81d830044718528485d7b9f7d47c6d590ccd1a7f"
+  integrity sha512-AqmDHmz3bIe573OiM4svTZzajBzff1xpuzYAimW8gjzW5ncuPllWB8t/GKl+NSuKRJaKyIF2bU2RCx8H1dwqyQ==
   dependencies:
     ansi-escapes "^5.0.0"
     chalk "^5.0.1"

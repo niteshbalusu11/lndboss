@@ -12,10 +12,11 @@ import { useRouter } from 'next/router';
 
 const socket = io();
 const stringify = (n: object) => JSON.stringify(n);
+const { isArray } = Array;
 
 /*
-  Renders the output of the probe command
-  Listens to the websocket events for logging probe output to the browser
+  Renders the output of the send command
+  Listens to the websocket events for logging send output to the browser
 */
 
 const parseAnsi = (n: string) => {
@@ -23,6 +24,18 @@ const parseAnsi = (n: string) => {
     const parsed = JSON.parse(n);
     if (!!parsed.options && !!parsed.options.evaluating && !!parsed.options.evaluating.length) {
       parsed.options.evaluating = parsed.options.evaluating.map((n: string) => stripAnsi(n));
+    }
+    if (
+      !!parsed.options &&
+      !!parsed.options.probing &&
+      !!isArray(parsed.options.probing) &&
+      !!parsed.options.probing.length
+    ) {
+      parsed.options.probing = parsed.options.probing.map((n: string) => stripAnsi(n));
+    }
+
+    if (!!parsed.options && !!parsed.options.total_liquidity && !!parsed.options.total_liquidity.length) {
+      parsed.options.total_liquidity = stripAnsi(parsed.options.total_liquidity);
     }
 
     return parsed;
@@ -44,7 +57,7 @@ const styles = {
   },
 };
 
-const SendResult = () => {
+const ProbeResult = () => {
   const router = useRouter();
 
   const [data, setData] = useState(undefined);
@@ -62,20 +75,17 @@ const SendResult = () => {
 
   useEffect(() => {
     const dateString = Date.now().toString();
-
+    console.log(dateString);
     const query = {
-      amount: router.query.amount,
       avoid: router.query.avoid,
       destination: router.query.destination,
       in_through: router.query.in_through,
-      is_dry_run: router.query.is_dry_run,
-      is_omitting_message_from: router.query.is_omitting_message_from,
-      max_fee: router.query.max_fee,
-      max_fee_rate: router.query.max_fee_rate,
-      message: router.query.message,
+      find_max: router.query.find_max,
+      max_paths: router.query.max_paths,
       message_id: dateString,
       node: router.query.node,
-      out_through: router.query.out_through,
+      out: router.query.out,
+      tokens: router.query.tokens,
     };
 
     socket.on('connect', () => {
@@ -99,7 +109,7 @@ const SendResult = () => {
     });
 
     const fetchData = async () => {
-      const result = await axiosGetWebSocket({ path: 'send', query });
+      const result = await axiosGetWebSocket({ path: 'probe', query });
 
       if (!!result) {
         output.push(YAML.stringify(result));
@@ -113,15 +123,15 @@ const SendResult = () => {
   return (
     <CssBaseline>
       <Head>
-        <title>Send Result</title>
+        <title>Probe Result</title>
       </Head>
       <StartFlexBoxBlack>
         <div style={styles.div}>
-          <h1 id={'sendResultTitle'} style={styles.h1}>
-            Paying offchain...
+          <h1 id={'probeResultTitle'} style={styles.h1}>
+            Probing...
           </h1>
           {!!data && (
-            <div id={'sendResult'}>
+            <div id={'probeResult'}>
               <pre style={styles.pre}>{data}</pre>
             </div>
           )}
@@ -137,4 +147,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default SendResult;
+export default ProbeResult;

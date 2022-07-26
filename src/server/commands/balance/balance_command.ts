@@ -1,8 +1,9 @@
-import * as types from '../../../shared/types';
+import * as types from '~shared/types';
 
 import { getBalance, getDetailedBalance } from 'balanceofsatoshis/balances';
 
 import { AuthenticatedLnd } from 'lightning';
+import { Logger } from '@nestjs/common';
 import { httpLogger } from '~server/utils/global_functions';
 
 const parseAnsi = (n: string) =>
@@ -38,6 +39,7 @@ const balanceCommand = async (args: types.commandBalance, lnd: AuthenticatedLnd)
         ClosingBalance: !!detailed.closing_balance ? parseAnsi(detailed.closing_balance) : '0',
         ConflictedPending: !!detailed.conflicted_pending ? parseAnsi(detailed.conflicted_pending) : '0',
         InvalidPending: !!detailed.invalid_pending ? parseAnsi(detailed.invalid_pending) : '0',
+        OnchainVbytes: !!detailed.onchain_vbytes ? detailed.onchain_vbytes : '0',
       };
 
       return { result };
@@ -59,6 +61,7 @@ const balanceCommand = async (args: types.commandBalance, lnd: AuthenticatedLnd)
 
     return { result };
   } catch (error) {
+    Logger.error(error);
     httpLogger({ error });
   }
 };

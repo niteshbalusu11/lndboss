@@ -1,4 +1,4 @@
-import * as types from '../../shared/types';
+import * as types from '~shared/types';
 
 import {
   Box,
@@ -19,13 +19,13 @@ import {
   StandardSwitch,
   StartFlexBox,
   SubmitButton,
-} from '../standard_components/app-components';
+} from '~client/standard_components/app-components';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
-import { TagsOutput } from '../output';
+import { TagsOutput } from '../../output';
 import { axiosGet } from '~client/utils/axios';
-import commands from '../commands';
+import commands from '../../commands';
 
 const TagsCommand = commands.find(n => n.value === 'Tags');
 

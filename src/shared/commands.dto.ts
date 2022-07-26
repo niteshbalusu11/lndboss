@@ -327,6 +327,50 @@ export class priceDto {
   symbols: string;
 }
 
+export class probeDto {
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  avoid: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  destination: string;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
+  @IsBoolean()
+  find_max: boolean;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  in_through: string;
+
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  max_paths: number;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  message_id: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  node: string;
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  out: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  tokens: string;
+}
+
 export class rebalanceDto {
   @Transform(({ value }) => toStringArray(value))
   @IsOptional()

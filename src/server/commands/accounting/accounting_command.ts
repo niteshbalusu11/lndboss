@@ -1,5 +1,5 @@
 import * as request from 'balanceofsatoshis/commands/simple_request';
-import * as types from '../../../shared/types';
+import * as types from '~shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
 import { getAccountingReport } from 'balanceofsatoshis/balances';

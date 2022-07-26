@@ -42,7 +42,7 @@ const ResponsiveGrid = ({ gridArray }: Props) => {
       {gridArray.map(grid => (
         <Grid item xs={2} sm={3} md={4} key={grid.value}>
           <Item>
-            <StandardRouterLink label={grid.name} destination={`/${grid.value}`} />
+            <StandardRouterLink label={grid.name} destination={`/commands/${grid.value}`} />
             <p>{grid.description}</p>
           </Item>
         </Grid>

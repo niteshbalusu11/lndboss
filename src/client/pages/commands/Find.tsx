@@ -1,79 +1,77 @@
-import * as types from '../../shared/types';
+import * as types from '~shared/types';
 
 import { CssBaseline, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components/app-components';
 import commands, { globalCommands } from '~client/commands';
 
-import { ClosedOutput } from '~client/output';
+import { FindOutput } from '~client/output';
 import Head from 'next/head';
 import { axiosGet } from '~client/utils/axios';
 
-const ClosedCommand = commands.find(n => n.value === 'Closed');
+const FindCommand = commands.find(n => n.value === 'Find');
 
 /*
-  Renders the bos closed command
-  GET call to the NestJs process to get closed transactions
+  Renders the bos find command
+  GET call to the NestJs process to fetch data from node db
 */
 
 const styles = {
   form: {
     marginLeft: '50px',
     marginTop: '100px',
-    minWidth: '700px',
+    width: '700px',
   },
   textField: {
-    width: '300px',
+    width: '500px',
   },
   h4: {
     marginTop: '0px',
   },
 };
 
-const Closed = () => {
+const Find = () => {
   const [node, setNode] = useState('');
-  const [limit, setLimit] = useState('');
+  const [queryString, setQueryString] = useState('');
   const [data, setData] = useState(undefined);
 
   const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
-  const handleLimitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLimit(event.target.value);
+  const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQueryString(event.target.value);
   };
 
   const fetchData = async () => {
-    const query: types.commandClosed = {
+    const query: types.commandFind = {
       node,
-      limit: Number(limit),
+      query: queryString,
     };
 
-    const result = await axiosGet({ path: 'closed', query });
+    const result = await axiosGet({ path: 'find', query });
 
     if (!!result) {
       setData(result);
     }
-
-    return result;
   };
 
   return (
     <CssBaseline>
       <Head>
-        <title>Closed</title>
+        <title>Find</title>
       </Head>
       <StartFlexBox>
         <StandardHomeButtonLink />
         <Stack spacing={3} style={styles.form}>
-          <h2>{ClosedCommand.name}</h2>
-          <h4>{ClosedCommand.longDescription}</h4>
+          <h2>{FindCommand.name}</h2>
+          <h4 style={styles.h4}>{FindCommand.description}</h4>
           <TextField
-            type={'text'}
-            id={ClosedCommand.flags.limit}
-            label={ClosedCommand.flags.limit}
-            placeholder={'Limit (Default : 20)'}
-            onChange={handleLimitChange}
+            type="text"
+            placeholder="Query String"
+            label={FindCommand.args.query}
+            id={FindCommand.args.query}
+            onChange={handleQueryChange}
             style={styles.textField}
           />
           <TextField
@@ -87,11 +85,11 @@ const Closed = () => {
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
-          {!!data ? <ClosedOutput data={data} /> : null}
+          {!!data ? <FindOutput data={data} /> : null}
         </Stack>
       </StartFlexBox>
     </CssBaseline>
   );
 };
 
-export default Closed;
+export default Find;
