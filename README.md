@@ -484,7 +484,7 @@ try {
 
 ## Running commands:
 
-- All commands take the following headers for authentication:
+- All commands take the following headers for authorization:
 
 ```javascript
 headers: {
@@ -493,7 +493,7 @@ headers: {
 },
 ```
 
-- Every command except `Tags` takes `node` query parameter as LndBoss supports multiple nodes, if you have a default node setup, you can pass a blank string or blank string array based on command you're trying to call.
+- Every command except `Tags` takes `node` query parameter as LndBoss supports multiple nodes, if you have a default node setup, you can ignore the flag or pass the node name or the node string array.
 
 - In the query parameters or body of a request, in the below examples, if a query/body is enclosed in square brackets `[]` it is optional to pass, else it is required. Example, in the accounting command `[month]` is optional, `is_csv` is required.
   <br></br>
@@ -510,20 +510,20 @@ http://localhost:8055/api/accounting
 @Query
   {
     category: <Accounting Category String>
-    is_csv: <Boolean>
-    is_fiat_disabled: <Boolean>
+    is_csv: <Is CSV Output Boolean>
+    is_fiat_disabled: <Is fiat disabled Boolean>
     [month]: <String>
-    [rate_provider]: <String>
+    [rate_provider]: <Fiat rate providerString>
     [year]: <String>
-    node: <String>
+    [node]: <Saved Node String>
   }
 
-   @Response
+@Response
   {
     [rows]: [[<Column String>]]
     [rows_summary]: [[<Column String>]]
   }
- */
+*/
 
 try {
   const url = 'http://localhost:8055/api/accounting';
@@ -533,7 +533,6 @@ try {
     is_csv: false,
     is_fiat_disabled: true,
     month: '6',
-    node: '',
     rate_provider: '',
     year: '2022',
   };
@@ -564,21 +563,20 @@ http://localhost:8055/api/cert-validity-days
 @Query
   {
     [below]: <Number>
-    node: <String>
+    [node]: <Saved Node String>
   }
 
 @Response
   {
     days: <Number>
   }
- */
+*/
 
 try {
   const url = 'http://localhost:8055/api/cert-validity-days';
 
   const query = {
     below: 1000,
-    node: '',
   };
 
   const response = await axios.get(url, {
@@ -606,16 +604,16 @@ http://localhost:8055/api/chain-deposit
 
 @Query
   {
-    [amount]: <Number>
-    [format]: <String>
-    node: <String>
+    [amount]: <Amount Number>
+    [format]: <Address format String>
+    [node]: <Saved Node String>
   }
 
 @Response
   {
     url: <Deposit Address URL string>
   }
- */
+*/
 
 try {
   const url = 'http://localhost:8055/api/chain-deposit';
@@ -623,7 +621,6 @@ try {
   const query = {
     amount: 1000,
     format: 'p2tr',
-    node: '',
   };
 
   const response = await axios.get(url, {
@@ -653,7 +650,7 @@ http://localhost:8055/api/chainfees
   {
     [blocks]: <Number>
     [file]: <Boolean>
-    node: <String>
+    [node]: <Saved Node String>
   }
 
 @Response
@@ -663,7 +660,7 @@ http://localhost:8055/api/chainfees
       $number: <Kvbyte Fee Rate Number>
     }
   }
- */
+*/
 
 try {
   const url = 'http://localhost:8055/api/chainfees';
@@ -698,7 +695,7 @@ http://localhost:8055/api/chart-chain-fees
 @Query
   {
     days: <Number>
-    [nodes]: <Nodes String Array>
+    [nodes]: <Saved Nodes String Array>
   }
 
 @Response
@@ -707,14 +704,13 @@ http://localhost:8055/api/chart-chain-fees
     description: <Chart Description String>
     title: <Chart Title String>
   }
- */
+*/
 
 try {
   const url = 'http://localhost:8055/api/chart-chain-fees';
 
   const query = {
     days: 10,
-    nodes: [],
   };
 
   const response = await axios.get(url, {
@@ -748,6 +744,7 @@ http://localhost:8055/api/probe
     [in_through]: <Pay In Through Public Key Hex String>
     [max_paths]: <Maximum Probe Paths Number>
     message_id: <DateTime stamp string>
+    [node]: <Saved Node String>
     out: [<Out Through Peer With Public Key Hex String Array>]
     [tokens]: <Tokens Amount String>
   }
@@ -759,14 +756,15 @@ http://localhost:8055/api/probe
     [relays]: [[<Relaying Public Key Hex String>]]
     [routes_maximum]: <Maximum Sendable Tokens on Paths Number>
   }
- */
+*/
 
 import { io } from 'socket.io-client';
 
 try {
   const url = 'http://localhost:8055/api/probe';
-  const dateString = Date.now().toString();
 
+  // Unique connection name for websocket connection.
+  const dateString = Date.now().toString();
 
   const query = {
     avoid: ['ban'],
@@ -777,7 +775,9 @@ try {
     tokens: '100',
   };
 
-  // To get live logs while probing, you can start a websocket and add an event listener.
+  // To get live logs while probing, you can start a websocket connection with the server and add an event listener.
+  // Websocket url is the same as the server url http://localhost:8055
+  // Messages from the server are passed to client using the dateString passed from above.
   const socket = io();
 
   socket.on('connect', () => {

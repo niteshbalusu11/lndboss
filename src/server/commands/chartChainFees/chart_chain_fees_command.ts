@@ -30,7 +30,7 @@ const chartChainFeesCommand = async (
     const result = await getChainFeesChart({
       request,
       lnds: lnd,
-      days: args.days,
+      days: args.days || 60,
     });
 
     return { result };

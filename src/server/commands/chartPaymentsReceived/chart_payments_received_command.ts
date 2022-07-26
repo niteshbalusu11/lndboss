@@ -26,7 +26,7 @@ const chartPaymentsReceivedCommand = async (
   try {
     const result = await getReceivedChart({
       lnds: lnd,
-      days: args.days,
+      days: args.days || 60,
     });
     return { result };
   } catch (error) {

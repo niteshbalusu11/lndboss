@@ -32,6 +32,7 @@ export class accountingDto {
   year: string;
 
   @Transform(({ value }) => trim(value))
+  @IsOptional()
   @IsString()
   node: string;
 }
@@ -48,30 +49,37 @@ export class authenticationDto {
 
 export class balanceDto {
   @Transform(({ value }) => toNumber(value))
+  @IsOptional()
   @IsNumber()
   above: number;
 
   @Transform(({ value }) => toNumber(value))
+  @IsOptional()
   @IsNumber()
   below: number;
 
   @Transform(({ value }) => trim(value))
+  @IsOptional()
   @IsString()
   node: string;
 
   @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
   @IsBoolean()
   is_confirmed: boolean;
 
   @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
   @IsBoolean()
   is_detailed: boolean;
 
   @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
   @IsBoolean()
   is_offchain_only: boolean;
 
   @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
   @IsBoolean()
   is_onchain_only: boolean;
 }
@@ -83,6 +91,7 @@ export class certValidityDaysDto {
   below: number;
 
   @Transform(({ value }) => trim(value))
+  @IsOptional()
   @IsString()
   node: string;
 }
@@ -99,6 +108,7 @@ export class chainDepositDto {
   format: string;
 
   @Transform(({ value }) => trim(value))
+  @IsOptional()
   @IsString()
   node: string;
 }
@@ -115,12 +125,14 @@ export class chainfeesDto {
   file: boolean;
 
   @Transform(({ value }) => trim(value))
+  @IsOptional()
   @IsString()
   node: string;
 }
 
 export class chartChainFeesDto {
   @Transform(({ value }) => toNumber(value))
+  @IsOptional()
   @IsNumber()
   days: number;
 
@@ -132,14 +144,17 @@ export class chartChainFeesDto {
 
 export class chartFeesEarnedDto {
   @Transform(({ value }) => toNumber(value))
+  @IsOptional()
   @IsNumber()
   days: number;
 
   @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
   @IsBoolean()
   is_count: boolean;
 
   @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
   @IsBoolean()
   is_forwarded: boolean;
 
@@ -149,36 +164,44 @@ export class chartFeesEarnedDto {
   nodes: string[];
 
   @Transform(({ value }) => trim(value))
+  @IsOptional()
   @IsString()
   via: string;
 }
 
 export class chartFeesPaidDto {
   @Transform(({ value }) => toNumber(value))
+  @IsOptional()
   @IsNumber()
   days: number;
 
   @Transform(({ value }) => trim(value))
+  @IsOptional()
   @IsString()
   in?: string;
 
   @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
   @IsBoolean()
   is_most_fees_table?: boolean;
 
   @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
   @IsBoolean()
   is_most_forwarded_table?: boolean;
 
   @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
   @IsBoolean()
   is_network?: boolean;
 
   @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
   @IsBoolean()
   is_peer?: boolean;
 
   @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
   @IsBoolean()
   is_rebalances_only?: boolean;
 
@@ -188,12 +211,14 @@ export class chartFeesPaidDto {
   nodes: string[];
 
   @Transform(({ value }) => trim(value))
+  @IsOptional()
   @IsString()
   out?: string;
 }
 
 export class chartPaymentsReceivedDto {
   @Transform(({ value }) => toNumber(value))
+  @IsOptional()
   @IsNumber()
   days: number;
 
@@ -247,6 +272,7 @@ export class closedDto {
   limit: number;
 
   @Transform(({ value }) => trim(value))
+  @IsOptional()
   @IsString()
   node: string;
 }
@@ -264,6 +290,7 @@ export class deleteRebalanceDto {
 
 export class findDto {
   @Transform(({ value }) => trim(value))
+  @IsOptional()
   @IsString()
   node: string;
 
@@ -284,6 +311,7 @@ export class forwardsDto {
   from: string;
 
   @Transform(({ value }) => trim(value))
+  @IsOptional()
   @IsString()
   node: string;
 
@@ -314,10 +342,12 @@ export class grpcDto {
 
 export class priceDto {
   @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
   @IsBoolean()
   file: boolean;
 
   @Transform(({ value }) => trim(value))
+  @IsOptional()
   @IsString()
   from: string;
 

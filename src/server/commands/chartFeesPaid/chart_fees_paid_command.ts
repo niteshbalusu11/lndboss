@@ -35,7 +35,7 @@ const chartFeesPaidCommand = async (
 ): Promise<{ result: any }> => {
   try {
     const result = await getFeesPaid({
-      days: args.days,
+      days: args.days || 60,
       fs: { getFile: readFile },
       in: args.in || undefined,
       is_most_fees_table: args.is_most_fees_table || undefined,
