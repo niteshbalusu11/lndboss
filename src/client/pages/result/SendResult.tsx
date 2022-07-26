@@ -14,8 +14,8 @@ const socket = io();
 const stringify = (n: object) => JSON.stringify(n);
 
 /*
-  Renders the output of the send command
-  Listens to the websocket events for logging send output to the browser
+  Renders the output of the probe command
+  Listens to the websocket events for logging probe output to the browser
 */
 
 const parseAnsi = (n: string) => {
