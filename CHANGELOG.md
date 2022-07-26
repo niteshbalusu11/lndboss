@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.14.0](https://github.com/niteshbalusu11/lndboss/compare/v1.13.0...v1.14.0) (2022-07-26)
 
+- Added support for bos probe command
+- Bug fixes for bos send command
+- Clean JSX Code for Pages
+
 ## [1.13.0](https://github.com/niteshbalusu11/lndboss/compare/v1.12.1...v1.13.0) (2022-07-20)
 
 - Added support for bos send command
