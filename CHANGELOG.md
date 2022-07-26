@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.14.2](https://github.com/niteshbalusu11/lndboss/compare/v1.14.1...v1.14.2) (2022-07-26)
+
 ### [1.14.1](https://github.com/niteshbalusu11/lndboss/compare/v1.14.0...v1.14.1) (2022-07-26)
 
 - Saved node flag is now optional in all API calls.
