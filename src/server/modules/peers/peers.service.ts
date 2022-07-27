@@ -39,18 +39,17 @@ import { peersDto } from '~shared/commands.dto';
 */
 
 type Result = {
-  result: {
-    peers: {
-      alias: string;
-      fee_earnings?: number;
-      first_connected: string;
-      last_activity?: string;
-      inbound_fee_rate: string;
-      inbound_liquidity: number;
-      outbound_liquidity: number;
-      public_key: string;
-    };
+  peers: {
+    alias: string;
+    fee_earnings?: number;
+    first_connected: string;
+    last_activity?: string;
+    inbound_fee_rate: string;
+    inbound_liquidity: number;
+    outbound_liquidity: number;
+    public_key: string;
   };
+  rows?: any[];
 };
 @Injectable()
 export class PeersService {

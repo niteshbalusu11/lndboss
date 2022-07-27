@@ -34,7 +34,6 @@ const TagsList = ({ id, label, placeholder, setTag }: Args) => {
     const fetchData = async () => {
       const result = await axiosGet({ path: 'tags', query });
 
-      console.log(result);
       if (!!result) {
         setTags(result);
       }

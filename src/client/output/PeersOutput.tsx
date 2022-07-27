@@ -29,7 +29,6 @@ type Args = {
   isComplete: boolean;
 };
 const PeersOutput = ({ data, isComplete }: Args) => {
-  console.log(data);
   const RenderOutput = () => {
     if (!isComplete && !!data.rows) {
       const dataSet = [];
@@ -55,7 +54,7 @@ const PeersOutput = ({ data, isComplete }: Args) => {
     if (!!data.peers) {
       const output = YAML.stringify(data);
       return (
-        <div id={'findoutput'}>
+        <div id={'forwardsOutputComplete'}>
           {Object.keys(data).length ? <pre style={styles.pre}>{output}</pre> : <h3>NoPeersDataToDisplay</h3>}
         </div>
       );

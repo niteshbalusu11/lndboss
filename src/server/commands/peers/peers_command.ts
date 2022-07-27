@@ -46,18 +46,17 @@ type Args = {
   lnd: AuthenticatedLnd;
 };
 type Result = {
-  result: {
-    peers: {
-      alias: string;
-      fee_earnings?: number;
-      first_connected: string;
-      last_activity?: string;
-      inbound_fee_rate: string;
-      inbound_liquidity: number;
-      outbound_liquidity: number;
-      public_key: string;
-    };
+  peers: {
+    alias: string;
+    fee_earnings?: number;
+    first_connected: string;
+    last_activity?: string;
+    inbound_fee_rate: string;
+    inbound_liquidity: number;
+    outbound_liquidity: number;
+    public_key: string;
   };
+  rows?: any[];
 };
 const peersCommand = async ({ args, lnd }: Args): Promise<{ result: Result }> => {
   try {

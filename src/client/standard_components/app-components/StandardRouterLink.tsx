@@ -26,8 +26,8 @@ type Props = {
 
 const StandardRouterLink = ({ label, destination }: Props) => {
   return (
-    <Link href={destination}>
-      <MULink style={styles.link} underline="hover">
+    <Link href={destination} id={label}>
+      <MULink style={styles.link} underline="hover" id={label}>
         {label}
       </MULink>
     </Link>
