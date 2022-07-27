@@ -12,7 +12,13 @@ import commands, { globalCommands } from '~client/commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
+import PeersOutput from '~client/output/PeersOutput';
 import { axiosGet } from '~client/utils/axios';
+
+/*
+  Renders the bos peers command
+  GET call to the NestJs process to peers information
+*/
 
 const PeersCommand = commands.find(n => n.value === 'Peers');
 
@@ -62,6 +68,7 @@ const Peers = () => {
   const [isPublic, setIsPublic] = useState(false);
   const [sort, setSort] = useState('');
   const [tags, setTags] = useState([{ tags: '' }]);
+  const [data, setData] = useState(undefined);
 
   const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
@@ -165,7 +172,9 @@ const Peers = () => {
 
     const result = await axiosGet({ path: 'peers', query });
 
-    console.log(result);
+    if (!!result) {
+      setData(result);
+    }
   };
 
   return (
@@ -324,7 +333,7 @@ const Peers = () => {
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
-          {/* {!!data ? <PeersOutput data={data} /> : null} */}
+          {!!data && (!!data.rows || data.peers) ? <PeersOutput data={data} isComplete={isComplete} /> : null}
         </Stack>
       </StartFlexBox>
     </CssBaseline>
