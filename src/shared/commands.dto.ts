@@ -178,32 +178,32 @@ export class chartFeesPaidDto {
   @Transform(({ value }) => trim(value))
   @IsOptional()
   @IsString()
-  in?: string;
+  in: string;
 
   @Transform(({ value }) => toBoolean(value))
   @IsOptional()
   @IsBoolean()
-  is_most_fees_table?: boolean;
+  is_most_fees_table: boolean;
 
   @Transform(({ value }) => toBoolean(value))
   @IsOptional()
   @IsBoolean()
-  is_most_forwarded_table?: boolean;
+  is_most_forwarded_table: boolean;
 
   @Transform(({ value }) => toBoolean(value))
   @IsOptional()
   @IsBoolean()
-  is_network?: boolean;
+  is_network: boolean;
 
   @Transform(({ value }) => toBoolean(value))
   @IsOptional()
   @IsBoolean()
-  is_peer?: boolean;
+  is_peer: boolean;
 
   @Transform(({ value }) => toBoolean(value))
   @IsOptional()
   @IsBoolean()
-  is_rebalances_only?: boolean;
+  is_rebalances_only: boolean;
 
   @Transform(({ value }) => toStringArray(value))
   @IsArray()
@@ -213,7 +213,7 @@ export class chartFeesPaidDto {
   @Transform(({ value }) => trim(value))
   @IsOptional()
   @IsString()
-  out?: string;
+  out: string;
 }
 
 export class chartPaymentsReceivedDto {

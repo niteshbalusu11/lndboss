@@ -12,36 +12,36 @@ export type commandAccounting = {
 // ========================Balance Command=====================================
 
 export type commandBalance = {
-  above?: number;
-  below?: number;
-  node?: string;
-  is_confirmed?: boolean;
-  is_detailed?: boolean;
-  is_offchain_only?: boolean;
-  is_onchain_only?: boolean;
+  above: number;
+  below: number;
+  node: string;
+  is_confirmed: boolean;
+  is_detailed: boolean;
+  is_offchain_only: boolean;
+  is_onchain_only: boolean;
 };
 
 // ========================Cert Validity Days=====================================
 
 export type commandCertValidityDays = {
-  below?: number;
-  node?: string;
+  below: number;
+  node: string;
 };
 
 // ========================Chain Deposit Command=====================================
 
 export type commandChainDeposit = {
-  amount?: number;
-  node?: string;
+  amount: number;
+  node: string;
   format: any;
 };
 
 // ========================Chainfees Command=====================================
 
 export type commandChainfees = {
-  blocks?: number;
-  file?: boolean;
-  node?: string;
+  blocks: number;
+  file: boolean;
+  node: string;
 };
 
 // ========================Chart Chain Fees Command=====================================
@@ -55,55 +55,55 @@ export type commandChartChainFees = {
 
 export type commandChartFeesEarned = {
   days: number;
-  is_count?: boolean;
-  is_forwarded?: boolean;
-  nodes?: string[];
-  via?: string;
+  is_count: boolean;
+  is_forwarded: boolean;
+  nodes: string[];
+  via: string;
 };
 
 // ========================Chart Fees Paid Command=====================================
 
 export type commandChartFeesPaid = {
   days: number;
-  in?: string;
-  is_most_fees_table?: boolean;
-  is_most_forwarded_table?: boolean;
-  is_network?: boolean;
-  is_peer?: boolean;
-  is_rebalances_only?: boolean;
+  in: string;
+  is_most_fees_table: boolean;
+  is_most_forwarded_table: boolean;
+  is_network: boolean;
+  is_peer: boolean;
+  is_rebalances_only: boolean;
   nodes: string[];
-  out?: string;
+  out: string;
 };
 
 // ========================Chart Payments Received Command=====================================
 
 export type commandChartPaymentsReceived = {
   days: number;
-  nodes?: string[];
+  nodes: string[];
 };
 
 // ========================Closed Command=====================================
 
 export type commandClosed = {
-  limit?: number;
-  node?: string;
+  limit: number;
+  node: string;
 };
 
 // ========================Find Command=====================================
 
 export type commandFind = {
   query: string;
-  node?: string;
+  node: string;
 };
 
 // ========================Forwards Command=====================================
 
 export type commandForwards = {
-  days?: number;
-  from?: string;
-  node?: string;
-  sort?: string;
-  to?: string;
+  days: number;
+  from: string;
+  node: string;
+  sort: string;
+  to: string;
 };
 
 // ========================Peers Command=====================================
@@ -125,7 +125,7 @@ export type commandPeers = {
 // ========================Price Command=====================================
 
 export type commandPrice = {
-  file?: boolean;
+  file: boolean;
   from: string;
   symbols: string;
 };
@@ -146,46 +146,46 @@ export type commandProbe = {
 // ========================Rebalance Command=====================================
 
 export type commandRebalance = {
-  avoid?: string[];
-  in_filters?: string[];
-  in_outbound?: string;
-  in_through?: string;
-  max_fee?: number;
-  max_fee_rate?: number;
-  max_rebalance?: string;
+  avoid: string[];
+  in_filters: string[];
+  in_outbound: string;
+  in_through: string;
+  max_fee: number;
+  max_fee_rate: number;
+  max_rebalance: string;
   message_id?: string;
-  node?: string;
-  out_filters?: string[];
-  out_inbound?: string;
-  out_through?: string;
-  schedule?: string;
-  timeout_minutes?: number;
+  node: string;
+  out_filters: string[];
+  out_inbound: string;
+  out_through: string;
+  schedule: string;
+  timeout_minutes: number;
 };
 
 // ========================Send command================================
 
 export type commandSend = {
-  amount?: string;
-  avoid?: string[];
-  destination?: string;
-  in_through?: string;
-  is_dry_run?: boolean;
-  is_omitting_message_from?: boolean;
-  max_fee?: number;
-  max_fee_rate?: number;
-  message?: string;
+  amount: string;
+  avoid: string[];
+  destination: string;
+  in_through: string;
+  is_dry_run: boolean;
+  is_omitting_message_from: boolean;
+  max_fee: number;
+  max_fee_rate: number;
+  message: string;
   message_id?: string;
-  node?: string;
-  out_through?: string;
+  node: string;
+  out_through: string;
 };
 
 // ========================Tags Command=====================================
 
 export type commandTags = {
   add: string[] | string;
-  icon?: string;
-  id?: string;
-  is_avoided?: boolean;
+  icon: string;
+  id: string;
+  is_avoided: boolean;
   remove: string[] | string;
-  tag?: string;
+  tag: string;
 };
