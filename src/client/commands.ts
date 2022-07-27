@@ -167,6 +167,26 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Peers',
+    value: 'Peers',
+    description: 'Get a list of channel-connected peers',
+    longDescription:
+      'Sort options: alias, est_disk_usage_mb, fee_earnings, first_connected, inbound_fee_rate, inbound_liquidity, outbound_liquidity, public_key. Icons: 🤢 often d/c, 💸 active HTLC, 💀 d/c, 🌚 private, 🧊 delayed coop close, ⏳ pending channel, 🚫 in disabled, 🦐 limited max htlc. Filters can take formula expressions to limit results. Filter variable AGE: "age > 144 * 7" for peers older than a week. Filter variable CAPACITY: "capacity > 8*m". Filter variable DISK_USAGE_MB: "disk_usage_mb > 9" for disk estimate. Filter variable INBOUND_LIQUIDITY: "inbound_liquidity > 1*m". Filter variable OUTBOUND_LIQUIDITY: "outbound_liquidity > 1*m"',
+    flags: {
+      active: 'Active',
+      complete: 'Complete',
+      fee_days: 'FeeDays',
+      filter: 'Filter',
+      idle_days: 'IdleDays',
+      offline: 'Offline',
+      omit: 'Omit',
+      private: 'Private',
+      public: 'Public',
+      sort: 'Sort',
+      tag: 'Tag',
+    },
+  },
+  {
     name: 'Price',
     value: 'Price',
     description: 'Get the price of Bitcoin in fiat',

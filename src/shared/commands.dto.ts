@@ -340,6 +340,68 @@ export class grpcDto {
   node: string;
 }
 
+export class peersDto {
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  earnings_days: string;
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  filters: string[];
+
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  idle_days: number;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
+  @IsBoolean()
+  is_active: boolean;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
+  @IsBoolean()
+  is_offline: boolean;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
+  @IsBoolean()
+  is_private: boolean;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
+  @IsBoolean()
+  is_public: boolean;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
+  @IsBoolean()
+  is_table: boolean;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  node: string;
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  omit: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  sort_by: string;
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  tags: string[];
+}
+
 export class priceDto {
   @Transform(({ value }) => toBoolean(value))
   @IsOptional()

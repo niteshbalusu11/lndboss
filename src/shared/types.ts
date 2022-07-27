@@ -106,6 +106,22 @@ export type commandForwards = {
   to?: string;
 };
 
+// ========================Peers Command=====================================
+export type commandPeers = {
+  earnings_days: string;
+  filters: string[];
+  idle_days: number;
+  is_active: boolean;
+  is_offline: boolean;
+  is_private: boolean;
+  is_public: boolean;
+  is_table: boolean;
+  node: string;
+  omit: string[];
+  sort_by: string;
+  tags: string[];
+};
+
 // ========================Price Command=====================================
 
 export type commandPrice = {
