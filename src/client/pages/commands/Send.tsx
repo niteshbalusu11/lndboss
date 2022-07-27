@@ -140,7 +140,7 @@ const Send = () => {
   return (
     <CssBaseline>
       <Head>
-        <title>Send Command</title>
+        <title>Send</title>
       </Head>
       <StartFlexBox>
         <StandardHomeButtonLink />

@@ -42,6 +42,9 @@ bos find "query"
 # Output a summarized version of peers forwarded towards
 bos forwards
 
+# Show channel-connected peers
+bos peers
+
 # Output the price of BTC
 bos price
 
@@ -725,6 +728,63 @@ try {
 }
 ```
 
+<br></br>
+
+### Peers
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/peers
+
+@Query
+  {
+    [earnings_days]: <Routing Fee Earnings Days Number>
+    [filters]: [<Formula Expression String>]
+    [idle_days]: <Not Active For Days Number>
+    [is_active]: <Active Channels Only Bool>
+    [is_offline]: <Offline Channels Only Bool>
+    [is_private]: <Private Channels Only Bool>
+    [is_public]: <Public Channels Only Bool>
+    [is_table]: <Peers As Table Bool>
+    [omit]: [<Omit Peer With Public Key Hex String>]
+    [sort_by]: <Sort Results By Attribute String>
+    [tags]: [<Tag Identifier String>]
+  }
+
+@Response
+  {
+    [fee]: <Total Fee Tokens To Destination Number>
+    [latency_ms]: <Latency Milliseconds Number>
+    [relays]: [[<Relaying Public Key Hex String>]]
+    [routes_maximum]: <Maximum Sendable Tokens on Paths Number>
+  }
+*/
+
+try {
+  const url = 'http://localhost:8055/api/peers';
+
+  const query = {
+    earnings_days: 10,
+    filters: ['capacity>10*m', 'disk_usage_mb > 9'],
+    is_public: true,
+    omit: ['02b3a846aaaea071639703900bbe72fec3fd2f9badc59ce80b089c6b7f7f4841f7'],
+    tags: ['inPeers']
+  };
+
+  const response = await axios.get(url, {
+    params: query,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+```
 <br></br>
 
 ### Probe

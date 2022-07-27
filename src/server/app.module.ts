@@ -24,6 +24,7 @@ import { GrpcModule } from './modules/grpc/grpc.module';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
 import { LndModule } from './modules/lnd/lnd.module';
 import { Module } from '@nestjs/common';
+import { PeersModule } from './modules/peers/peers.module';
 import { PriceModule } from './modules/price/price.module';
 import { ProbeModule } from './modules/probe/probe.module';
 import { RebalanceModule } from './modules/rebalance/rebalance.module';
@@ -62,6 +63,7 @@ import { join } from 'path';
     }),
     LndModule,
     BosloggerModule,
+    PeersModule,
     PriceModule,
     ProbeModule,
     RebalanceModule,
