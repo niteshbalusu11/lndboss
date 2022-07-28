@@ -14,6 +14,7 @@ import peersCommand from './peers/peers_command';
 import priceCommand from './price/price_command';
 import probeCommand from './probe/probe_command';
 import rebalanceCommand from './rebalance/rebalance_command';
+import reconnectCommand from './reconnect/reconnect_command';
 import sendCommand from './send/send_command';
 import tagsCommand from './tags/tags_command';
 
@@ -34,6 +35,7 @@ export {
   priceCommand,
   probeCommand,
   rebalanceCommand,
+  reconnectCommand,
   sendCommand,
   tagsCommand,
 };

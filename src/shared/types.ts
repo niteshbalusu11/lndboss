@@ -162,6 +162,11 @@ export type commandRebalance = {
   timeout_minutes: number;
 };
 
+// ========================Reconnect Command=====================================
+export type commandReconnect = {
+  node: string;
+};
+
 // ========================Send command================================
 
 export type commandSend = {

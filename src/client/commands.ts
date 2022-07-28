@@ -238,6 +238,13 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Reconnect',
+    value: 'Reconnect',
+    description: 'Reconnect to disconnected channel partners',
+    longDescription:
+      'Reconnect to disconnected channel partners. Inactive channels are also treated as disconnected channels.',
+  },
+  {
     name: 'Send',
     value: 'Send',
     args: {

@@ -604,6 +604,13 @@ export class rebalanceScheduleDto {
   node: string;
 }
 
+export class reconnectDto {
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  node: string;
+}
+
 export class sendDto {
   @Transform(({ value }) => trim(value))
   @IsOptional()
