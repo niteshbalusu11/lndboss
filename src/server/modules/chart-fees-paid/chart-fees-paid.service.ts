@@ -7,15 +7,11 @@ import { chartFeesPaidDto } from '~shared/commands.dto';
 
   {
     days: <Fees Earned Over Days Count Number>
-    fs: {
-      getFile: <Read File Contents Function> (path, cbk) => {}
-    }
     [in]: <In Node Public Key or Alias String>
     [is_most_fees_table]: <Is Most Fees Table Bool>
     [is_most_forwarded_table]: <Is Most Forwarded Bool>
     [is_network]: <Show Only Non-Peers In Table Bool>
     [is_peer]: <Show Only Peers In Table Bool>
-    lnds: [<Authenticated LND API Object>]
     [out]: <Out Node Public Key or Alias String>
   }
 

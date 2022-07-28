@@ -554,6 +554,64 @@ try {
 
 <br></br>
 
+### Balance (GET Request)
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/balance
+
+@Query
+  {
+    [above]: <Number>
+    [below]: <Number>
+    [is_confirmed]: <Boolean>
+    [is_detailed]: <Boolean>
+    [is_offchain_only]: <Boolean>
+    [is_onchain_only]: <Boolean>
+  }
+
+if (is_detailed === true)
+@Returns
+  {
+    [offchain_balance]: <Total Value of Channel Balances String>
+    [offchain_pending]: <Total Pending Local Balance String>
+    [onchain_balance]: <Collective Value of UTXOs String>
+    [onchain_vbytes]: <Estimated Size of Spending On Chain Funds Number>
+  }
+
+if (is_detailed === false)
+@Returns
+  {
+    balance: <Tokens Number>
+    channel_balance: <Channel Balance Minus Commit Fees Tokens Number>
+  }
+*/
+
+try {
+  const url = 'http://localhost:8055/api/balance';
+
+  const query = {
+    is_detailed: true,
+    is_confirmed: true
+  };
+
+  const response = await axios.get(url, {
+    params: query,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
+
 ### Cert-Validity-Days (GET Request)
 
 ```javascript
@@ -730,6 +788,327 @@ try {
 
 <br></br>
 
+### ChartFeesEarned
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/chart-fees-earned
+
+@Query
+  {
+    [days]: <Fees Earned Over Days Count Number>
+    [is_count]: <Return Only Count of Forwards Boolean>
+    [is_forwarded]: <Return Only Forwards Boolean>
+    [nodes]: <Saved Nodes String Array>
+    [via]: <Via Public Key Hex or Tag Id or Alias String>
+  }
+
+@Response
+  {
+    data: [<Earned Fee Tokens Number>]
+    description: <Chart Description String>
+    title: <Chart Title String>
+  }
+*/
+
+try {
+  const url = 'http://localhost:8055/api/chart-fees-earned';
+
+  const query = {
+    days: 90,
+    is_fowarded: true,
+  };
+
+  const response = await axios.get(url, {
+    params: query,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
+
+### ChartFeesPaid
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/chart-fees-paid
+
+@Query
+  {
+    [days]: <Fees Earned Over Days Count Number>
+    [in]: <In Node Public Key or Alias String>
+    [is_most_fees_table]: <Is Most Fees Table Bool>
+    [is_most_forwarded_table]: <Is Most Forwarded Bool>
+    [is_network]: <Show Only Non-Peers In Table Bool>
+    [is_peer]: <Show Only Peers In Table Bool>
+    [nodes]: <Saved Nodes String Array>
+    [out]: <Out Node Public Key or Alias String>
+  }
+
+@Response
+  {
+    data: [<Earned Fee Tokens Number>]
+    description: <Chart Description String>
+    title: <Chart Title String>
+  }
+*/
+
+try {
+  const url = 'http://localhost:8055/api/chart-fees-paid';
+
+  const query = {
+    days: 90,
+    in: 'yalls',
+    is_peer: true,
+  };
+
+  const response = await axios.get(url, {
+    params: query,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
+
+### ChartPaymentsReceived
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/chart-payments-received
+
+@Query
+  {
+    [days]: <Fees Earned Over Days Count Number>
+    [nodes]: <Saved Nodes String Array>
+  }
+
+@Response
+  {
+    data: [<Earned Fee Tokens Number>]
+    description: <Chart Description String>
+    title: <Chart Title String>
+  }
+*/
+
+try {
+  const url = 'http://localhost:8055/api/chart-payments-received';
+
+  const query = {
+    days: 90,
+  };
+
+  const response = await axios.get(url, {
+    params: query,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
+
+### Closed
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/closed
+
+@Query
+  {
+    [limit]: <Limit Number>
+    [node]: <Saved Node String>
+  }
+
+@Response
+  {
+    peer_public_key: <Peer Public Key Hex String>
+    [peer_alias]: <Peer Alias Strring>
+    [is_local_force_close]: <Channel Was Locally Force Closed Bool>
+    [is_cooperative_close]: <Channel Was Cooperatively Closed Bool>
+    [is_remote_force_close]: <Channel was Remotely Force Closed Bool>
+    [peer_closed_channel]: <Peer Closed the Channel Bool>
+    blocks_since_close: <Count of Blocks Since Close Number>
+    capacity: <Channel Capacity Tokens Number>
+    [channel_id]: <Channel Id String>
+    channel_open: <Channel Funding Outpoint String>
+    channel_close: <Channel Close Transaction Id Hex String>
+    [channel_balance_spend]: <Channel Balance Spent In Tx Id Hex String>
+    [channel_resolutions]: [{
+      type: <Resolution Type String>
+      value: <Value Number>
+    }]
+    [is_breach_close]: <Channel Was Breach Closed Bool>
+    [closing_fee_paid]: <Closing Fees Paid Related To Channel Tokens Number>
+  }
+*/
+
+try {
+  const url = 'http://localhost:8055/api/closed';
+
+  const query = {
+    limit: 30,
+  };
+
+  const response = await axios.get(url, {
+    params: query,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
+
+### Find
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/find
+
+@Query
+  {
+    query: <Query String>
+    [node]: <Saved Node String>
+  }
+
+@Response
+  {
+    [chain_transaction]: {
+      [chain_fee]: <Paid Transaction Fee Tokens Number>
+      [received]: <Received Tokens Number>
+      related_channels: [{
+        action: <Channel Action String>
+        [balance]: <Channel Balance Tokens Number>
+        [capacity]: <Channel Capacity Value Number>
+        [channel]: <Channel Standard Format Id String>
+        [close_tx]: <Channel Closing Transaction Id Hex String>
+        [open_tx]: <Channel Opening Transaction id Hex String>
+        [timelock]: <Channel Funds Timelocked Until Height Number>
+        with: <Channel Peer Public Key Hex String>
+      }]
+      [sent]: <Sent Tokens Number>
+      [sent_to]: [<Sent to Address String>]
+      [tx]: <Transaction Id Hex String>
+    }
+    [channels]: [<Channel Object>]
+    [nodes]: [<Node Object>]
+    [payment]: <Payment Object>
+    [payment_failed]: <Payment Failed Object>
+    [payment_pending]: <Payment Pending Bool>
+  }
+*/
+
+try {
+  const url = 'http://localhost:8055/api/find';
+
+  const query = {
+    query: 'bitrefill',
+  };
+
+  const response = await axios.get(url, {
+    params: query,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
+
+### Forwards
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/forwards
+
+@Query
+  {
+    [days]: <Days Number>
+    [from]: <Query Alias/Pubkey String>
+    [node]: <Saved Node String>
+    [sort]: <Sort By Field String>
+    [to]: <Query Alias/Pubkey String>
+  }
+
+@Response
+  {
+    peers: [{
+      alias: <Peer Alias String>
+      earned_inbound_fees: <Earned Inbound Fee Tokens Number>
+      earned_outbound_fees: <Earned Outbound Fee Tokens Number>
+      last_inbound_at: <Last Inbound Forward At ISO 8601 Date String>
+      last_outbound_at: <Last Forward At ISO 8601 Date String>
+      liquidity_inbound: <Inbound Liquidity Big Tokens Number>
+      outbound_liquidity: <Outbound Liquidity Big Tokens Number>
+      public_key: <Public Key String>
+    }]
+  }
+*/
+
+try {
+  const url = 'http://localhost:8055/api/forwards';
+
+  const query = {
+    days: 90,
+    to: 'walletofsatoshi'
+  };
+
+  const response = await axios.get(url, {
+    params: query,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
+
 ### Peers
 
 ```javascript
@@ -785,6 +1164,53 @@ try {
   console.error(error);
 }
 ```
+<br></br>
+
+### Price (GET Request)
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/price
+
+@Query
+  {
+    [from]: <Price provider String (coinbase, coindesk(default), coingecko)>
+    [node]: <Saved Node String>
+    symbols: [<Fiat Symbol String>] Defaults to USD
+  }
+
+@Response
+  {
+    tickers: [{
+      date: <Rate Updated At ISO 8601 Date String>
+      rate: <Exchange Rate in Cents Number>
+      ticker: <Ticker Symbol String>
+    }]
+  }
+*/
+
+try {
+  const url = 'http://localhost:8055/api/price';
+
+  const query = {
+    symbols: ['USD', 'GBP'],
+  };
+
+  const response = await axios.get(url, {
+    params: query,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+```
+
 <br></br>
 
 ### Probe
@@ -871,5 +1297,204 @@ try {
 }
 ```
 
+<br></br>
 
+### Rebalance
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/rebalance
+
+@Query
+  {
+    [avoid]: [<Avoid Forwarding Through Node With Public Key Hex String>]
+    [in_filters]: [<Inbound Filter Formula String>]
+    [in_outbound]: <Inbound Target Outbound Liquidity Tokens Number>
+    [in_through]: <Pay In Through Peer String>
+    [max_fee]: <Maximum Fee Tokens Number>
+    [max_fee_rate]: <Max Fee Rate Tokens Per Million Number>
+    [max_rebalance]: <Maximum Amount to Rebalance Tokens String>
+    message_id: <DateTime stamp string>
+    [node]: <Saved Node String>
+    [out_filters]: [<Outbound Filter Formula String>]
+    [out_inbound]: <Outbound Target Inbound Liquidity Tokens Number>
+    [out_through]: <Pay Out Through Peer String>
+    [timeout_minutes]: <Deadline To Stop Rebalance Minutes Number>
+  }
+
+@Response
+  {
+    rebalance: [
+      {
+        [increased_inbound_on]: <Number>,
+        [liquidity_inbound]: <Number>,
+        [liquidity_inbound_opening]: <Number>,
+        [liquidity_inbound_pending]: <Number>,
+        [liquidity_outbound]: <Number>,
+        [liquidity_outbound_opening]: <Number>,
+        [liquidity_outbound_pending]: <Number>,
+      },
+      {
+        [decreased_inbound_on]: <Number>,
+        [liquidity_inbound]: <Number>,
+        [liquidity_inbound_opening]: <Number>,
+        [liquidity_inbound_pending]: <Number>,
+        [liquidity_outbound]: <Number>,
+        [liquidity_outbound_opening]: <Number>,
+        [liquidity_outbound_pending]: <Number>,
+      },
+      {
+        [rebalanced]: <Number>,
+        [rebalance_fees_spent]: <Number>,
+        [rebalance_fee_rate]: <Number>,
+      },
+    ],
+  }
+*/
+
+import { io } from 'socket.io-client';
+
+try {
+  const url = 'http://localhost:8055/api/rebalance';
+
+  // Unique connection name for websocket connection.
+  const dateString = Date.now().toString();
+
+  const query = {
+    avoid: ['ban'],
+    out_through: 'acinq',
+    in_through: 'yalls',
+    message_id: dateString,
+    max_fee: 1000,
+    max_fee_rate: 500,
+    max_rebalance: '2000000'
+  };
+
+  // To get live logs while rebalancing, you can start a websocket connection with the server and add an event listener.
+  // Websocket url is the same as the server url http://localhost:8055
+  // Messages from the server are passed to client using the dateString passed from above.
+  const socket = io();
+
+  socket.on('connect', () => {
+    console.log('connected');
+  });
+
+  socket.on('disconnect', () => {
+    console.log('disconnected');
+  });
+
+// Make sure to pass the same dateString from above
+  socket.on(`${dateString}`, data => {
+    console.log(data);
+  });
+
+  socket.on('error', err => {
+    throw err;
+  });
+
+// End websocket code.
+
+  const response = await axios.get(url, {
+    params: query,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
+
+
+### Send
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/send
+
+@Query
+  {
+    amount: <Amount to Push Tokens String>
+    avoid: [<Avoid Forwarding Through String>]
+    destination: <Destination Public Key Hex String>
+    [in_through]: <Pay In Through Peer String>
+    [is_dry_run]: <Do Not Push Payment Bool>
+    [is_omitting_message_from]: <Do Not Include From Key In Message Bool>
+    [max_fee]: <Maximum Fee Tokens Number>
+    [max_fee_rate]: <Max Fee Rate Tokens Per Million Number>
+    [message]: <Message to Include With Payment String>
+    message_id: <DateTime stamp string>
+    [node]: <Saved Node String>
+    [out_through]: <Pay Out Through Peer String>
+  }
+
+@Response
+  {
+    IT DOES NOT RETURN A RESPONSE, WEBSOCKET STREAMING IS REQUIRED FOR LOGGING OUTPUT
+  }
+*/
+
+import { io } from 'socket.io-client';
+
+try {
+  const url = 'http://localhost:8055/api/send';
+
+  // Unique connection name for websocket connection.
+  const dateString = Date.now().toString();
+
+  const query = {
+    avoid: ['ban'],
+    destination: '02dc8800af7b6f18b7eefbfb3112b99f2c0f0196475f99b8210b73ecd0c638f0e3',
+    in_through: '02ce4aea072f54422d35eb8d82aebe966b033d4e98b470907f601a025c5c29a7dc',
+    max_fee: 20,
+    message_id: dateString,
+    tokens: '100',
+  };
+
+  // To get live logs while pushing a payment, you can start a websocket connection with the server and add an event listener.
+  // Websocket url is the same as the server url http://localhost:8055
+  // Messages from the server are passed to client using the dateString passed from above.
+  const socket = io();
+
+  socket.on('connect', () => {
+    console.log('connected');
+  });
+
+  socket.on('disconnect', () => {
+    console.log('disconnected');
+  });
+
+// Make sure to pass the same dateString from above
+  socket.on(`${dateString}`, data => {
+    console.log(data);
+  });
+
+  socket.on('error', err => {
+    throw err;
+  });
+
+// End websocket code.
+
+  const response = await axios.get(url, {
+    params: query,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
 

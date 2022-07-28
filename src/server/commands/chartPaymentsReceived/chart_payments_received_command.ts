@@ -7,7 +7,7 @@ import { httpLogger } from '~server/utils/global_functions';
 /** Get data for received payments chart
 
   {
-    days: <Received Over Days Count Number>
+    [days]: <Received Over Days Count Number>
     lnds: [<Authenticated LND API Object>]
   }
 

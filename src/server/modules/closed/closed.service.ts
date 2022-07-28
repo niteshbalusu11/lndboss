@@ -7,8 +7,7 @@ import { closedDto } from '~shared/commands.dto';
 
   {
     [limit]: <Limit Number>
-    lnd: <Authenticated LND API Object>
-    request: <Request Function>
+    [node]: <Saved node String>
   }
 
   @returns via Promise

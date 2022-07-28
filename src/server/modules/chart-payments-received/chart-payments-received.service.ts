@@ -6,7 +6,7 @@ import { chartPaymentsReceivedDto } from '~shared/commands.dto';
 /** ChartPaymentsReceived Service: Handles routes to the chart-payments-received service
 
   {
-    days: <Received Over Days Count Number>
+    [days]: <Received Over Days Count Number>
     lnds: [<Authenticated LND API Object>]
   }
 

@@ -8,8 +8,8 @@ import { readFile } from 'fs';
 /** Get data for fees chart
 
   {
-    days: <Fees Earned Over Days Count Number>
-    is_count: <Return Only Count of Forwards Bool>
+    [days]: <Fees Earned Over Days Count Number>
+    [is_count]: <Return Only Count of Forwards Bool>
     lnds: [<Authenticated LND API Object>]
     [via]: <Via Public Key Hex or Tag Id or Alias String>
   }

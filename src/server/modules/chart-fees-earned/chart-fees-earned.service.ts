@@ -6,8 +6,8 @@ import { chartFeesEarnedDto } from '~shared/commands.dto';
 /** Chart Fees Earned service: Handles the chart fees earned command
 
   {
-    days: <Fees Earned Over Days Count Number>
-    is_count: <Return Only Count of Forwards Bool>
+    [days]: <Fees Earned Over Days Count Number>
+    [is_count]: <Return Only Count of Forwards Bool>
     lnds: [<Authenticated LND API Object>]
     [via]: <Via Public Key Hex or Tag Id or Alias String>
   }

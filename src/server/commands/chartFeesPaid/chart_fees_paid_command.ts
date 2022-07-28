@@ -8,10 +8,7 @@ import { readFile } from 'fs';
 /** Get routing fees paid
 
   {
-    days: <Fees Earned Over Days Count Number>
-    fs: {
-      getFile: <Read File Contents Function> (path, cbk) => {}
-    }
+    [days]: <Fees Earned Over Days Count Number>
     [in]: <In Node Public Key or Alias String>
     [is_most_fees_table]: <Is Most Fees Table Bool>
     [is_most_forwarded_table]: <Is Most Forwarded Bool>

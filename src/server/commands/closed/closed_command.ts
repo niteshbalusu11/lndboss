@@ -10,7 +10,6 @@ import { httpLogger } from '~server/utils/global_functions';
   {
     [limit]: <Limit Number>
     lnd: <Authenticated LND API Object>
-    request: <Request Function>
   }
 
   @returns via Promise
