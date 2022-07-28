@@ -1439,7 +1439,14 @@ http://localhost:8055/api/send
 
 @Response
   {
-    IT DOES NOT RETURN A RESPONSE, WEBSOCKET STREAMING IS REQUIRED FOR LOGGING OUTPUT
+    [fee]: <Fee Tokens To Destination Number>
+    [id]: <Payment Hash Hex String>
+    [latency_ms]: <Latency Milliseconds Number>
+    [route_maximum]: <Maximum Sendable Tokens On Successful Probe Path Number>
+    [paid]: <Paid Tokens Number>
+    [preimage]: <Payment HTLC Preimage Hex String>
+    [relays]: [<Relaying Node Public Key Hex String]
+    [success]: [<Standard Format Channel Id String>]
   }
 */
 
