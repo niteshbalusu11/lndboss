@@ -54,6 +54,9 @@ bos probe "payment_request/public_key"
 # Rebalance funds between peers
 bos rebalance
 
+# Reconnect to offline peers
+bos reconnect
+
 # Send funds using keysend or lnurl/lightning address and an optional message to a node
 bos send
 
