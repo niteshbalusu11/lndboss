@@ -1411,6 +1411,52 @@ try {
 
 <br></br>
 
+### Reconnect
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/reconnect
+
+@Query
+  {
+    [node]: <Saved Node String>
+  }
+
+@Response
+  {
+    offline: [{
+      alias: <Node Alias String>
+      public_key: <Node Identity Public Key Hex String
+    ]}
+    reconnected: [{
+      alias: <Node Alias String>
+      public_key: <Node Identity Public Key Hex String
+    }]
+  }
+*/
+
+try {
+  const url = 'http://localhost:8055/api/reconnect';
+
+  const query = {};
+
+  const response = await axios.get(url, {
+    params: query,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
+
 
 ### Send
 

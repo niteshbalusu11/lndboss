@@ -28,6 +28,7 @@ import { PeersModule } from './modules/peers/peers.module';
 import { PriceModule } from './modules/price/price.module';
 import { ProbeModule } from './modules/probe/probe.module';
 import { RebalanceModule } from './modules/rebalance/rebalance.module';
+import { ReconnectModule } from './modules/reconnect/reconnect.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { SendModule } from './modules/send/send.module';
 import { SocketModule } from './modules/socket/socket.module';
@@ -67,6 +68,7 @@ import { join } from 'path';
     PriceModule,
     ProbeModule,
     RebalanceModule,
+    ReconnectModule,
     ScheduleModule.forRoot(),
     SendModule,
     SocketModule,
