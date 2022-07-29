@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.15.1](https://github.com/niteshbalusu11/lndboss/compare/v1.15.0...v1.15.1) (2022-07-29)
 
+- Improved retry for amboss health check
+
 ## [1.15.0](https://github.com/niteshbalusu11/lndboss/compare/v1.14.2...v1.15.0) (2022-07-28)
 
 - Added support for bos peers command.
