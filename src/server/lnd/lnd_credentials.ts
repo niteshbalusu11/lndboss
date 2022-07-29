@@ -14,6 +14,7 @@ import { readFile } from 'fs';
 const config = 'config.json';
 const defaultLndDirPath = process.env.BOS_DEFAULT_LND_PATH;
 const defaultNodeName = process.env.BOS_DEFAULT_SAVED_NODE;
+const defaultSocket = process.env.BOS_DEFAULT_LND_SOCKET;
 const fs = { getFile: readFile };
 const home = '.bosgui';
 const os = { homedir, platform, userInfo };
@@ -165,6 +166,10 @@ const lndCredentials = async (args: Args): Promise<Return> => {
       'forNode',
       'getPath',
       async ({ forNode, getPath }) => {
+        // Exit early when a socket is specified in env variable
+        if (!!defaultSocket) {
+          return { socket: defaultSocket };
+        }
         // Exit early when a specific node is used
         if (!!forNode) {
           return { socket: '' };
