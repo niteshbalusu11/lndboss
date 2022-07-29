@@ -1,20 +1,17 @@
-import { auto, each, retry } from 'async';
+import { SignMessageResult, signMessage } from 'lightning';
+import { auto, each, forever, retry } from 'async';
 
 import { ambossUrl } from '~server/utils/constants';
 import axios from 'axios';
 import { getSavedNodes } from '~server/lnd';
-import { signature } from '~server/commands/grpc_utils/grpc_utils';
 
-const retryInterval = 30000;
-const retryTimes = 10;
+const postDelayMs = 1000 * 60 * 2;
+const retryInterval = 1000 * 60 * 5;
+const retryTimes = 10 * 10;
 
-/** Post amboss health checks
+/** Post health check to Amboss
   {
-    logger: <NestJS Logger Object>,
-  }
-  @returns via Promise
-  {
-    postToAmboss: <Boolean>,
+    logger: <NestJsLoggerObject>,
   }
  */
 
@@ -23,9 +20,10 @@ type Tasks = {
   getSavedNodes: {
     nodes: any[];
   };
-  postToAmboss: boolean | undefined;
+  postToAmboss: any;
 };
-const ambossHealthCheck = async ({ logger }): Promise<{ postToAmboss: boolean }> => {
+
+const ambossHealthCheck = async ({ logger }): Promise<{ postToAmboss: any }> => {
   return auto<Tasks>({
     // Check arguments
     validate: (cbk: any) => {
@@ -67,7 +65,7 @@ const ambossHealthCheck = async ({ logger }): Promise<{ postToAmboss: boolean }>
 
         retry({ times: retryTimes, interval: retryInterval }, retryGetSavedNodes, (err, res) => {
           if (!!err) {
-            return cbk([500, 'UnexpectedErrorGettingSavedNodes', err]);
+            return cbk([500, 'UnexpectedErrorGettingSavedNodesToPostAmbossHealthCheck', err]);
           }
 
           return cbk(null, res);
@@ -75,43 +73,55 @@ const ambossHealthCheck = async ({ logger }): Promise<{ postToAmboss: boolean }>
       },
     ],
 
-    // Post to amboss
+    // Post to Amboss
     postToAmboss: [
       'getSavedNodes',
       ({ getSavedNodes }, cbk: any) => {
-        if (!getSavedNodes.nodes || !getSavedNodes.nodes.length) {
-          return cbk();
+        const { nodes } = getSavedNodes;
+
+        if (!nodes || !nodes.length) {
+          return cbk([400, 'ExpectedOnlineNodesToPostAmbossHealthCheck']);
         }
 
-        const { nodes } = getSavedNodes;
-        const date = new Date().toISOString();
+        return forever(
+          function () {
+            const postToAmboss = () => {
+              const date = new Date().toISOString();
+              each(nodes, async node => {
+                try {
+                  const result: SignMessageResult = await signMessage({ lnd: node.lnd, message: date });
 
-        each(nodes, async node => {
-          try {
-            const { result } = await signature({ lnd: node.lnd, message: date });
-            const config = {
-              headers: { contentType: 'application/json' },
+                  const config = {
+                    headers: { contentType: 'application/json' },
+                  };
+
+                  const postBody = {
+                    query: `mutation HealthCheck($signature: String!, $timestamp: String!) {
+              healthCheck(signature: $signature, timestamp: $timestamp)
+            }`,
+                    variables: {
+                      signature: result.signature,
+                      timestamp: date,
+                    },
+                  };
+
+                  const axiosResult = await axios.post(ambossUrl, postBody, config);
+
+                  logger.log({ message: axiosResult.data, type: 'json' });
+                } catch (error) {
+                  logger.log({ message: JSON.stringify(error), type: 'error' });
+                }
+              });
             };
 
-            const postBody = {
-              query: `mutation HealthCheck($signature: String!, $timestamp: String!) {
-                    healthCheck(signature: $signature, timestamp: $timestamp)
-                  }`,
-              variables: {
-                signature: result.signature,
-                timestamp: date,
-              },
-            };
+            setInterval(postToAmboss, postDelayMs);
 
-            const axiosResult = await axios.post(ambossUrl, postBody, config);
-
-            logger.log({ message: axiosResult.data, type: 'json' });
-          } catch (error) {
-            logger.log({ message: error.message, type: 'error' });
+            return cbk();
+          },
+          function (err) {
+            return cbk([500, 'UnexpectedErrorPostingHealthCheckToAmboss', err]);
           }
-        });
-
-        return cbk(null, true);
+        );
       },
     ],
   });

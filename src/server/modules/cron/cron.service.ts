@@ -3,7 +3,6 @@ import { CronJob } from 'cron';
 import { Injectable } from '@nestjs/common';
 import { LndService } from '../lnd/lnd.service';
 import { SchedulerRegistry } from '@nestjs/schedule';
-import { ambossHealthCheck } from '~server/external_services_utils';
 import autoRebalanceCommand from '~server/commands/rebalance/auto_rebalance_command';
 import { rebalanceScheduleDto } from '~shared/commands.dto';
 
@@ -43,19 +42,6 @@ export class CronService {
         lnd,
         args,
       });
-    });
-
-    this.schedulerRegistry.addCronJob(id, job);
-    job.start();
-  }
-
-  // Create a cron job for Amboss health check
-  async createAmbossHealthCheckCron({ schedule }: { schedule: string }) {
-    this.logger.log({ message: `Adding amboss health check cron ${schedule}`, type: 'info' });
-    const id = 'amboss-health-check';
-
-    const job = new CronJob(schedule, async () => {
-      await ambossHealthCheck({ logger: this.logger });
     });
 
     this.schedulerRegistry.addCronJob(id, job);
