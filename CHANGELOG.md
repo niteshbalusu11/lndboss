@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.15.2](https://github.com/niteshbalusu11/lndboss/compare/v1.15.1...v1.15.2) (2022-07-29)
 
+- Add ability to set default via BOS_DEFAULT_LND_SOCKET env variable.
+
 ### [1.15.1](https://github.com/niteshbalusu11/lndboss/compare/v1.15.0...v1.15.1) (2022-07-29)
 
 - Improved retry for amboss health check
