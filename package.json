@@ -1,12 +1,12 @@
 {
   "name": "lndboss",
-  "version": "1.15.2",
+  "version": "1.15.4",
   "description": "Web Application for BalanceOfSatoshis",
   "author": {
     "name": "Nitesh Balusu",
     "url": "https://twitter.com/nitesh_btc"
   },
-  "private": true,
+  "bin": "NODE_ENV=production node dist/server/main",
   "license": "MIT",
   "keywords": [
     "balanceofsatoshis",
@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist && rimraf src/client/.next",
-    "build": "npm run build:nest && npm run build:next",
+    "build:prod": "npm run build:nest && npm run build:next",
     "build:nest": "nest build",
     "build:next": "cd src/client && next build",
     "dev": "NODE_ENV=development nest start --watch",
