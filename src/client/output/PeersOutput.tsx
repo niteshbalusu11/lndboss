@@ -45,7 +45,7 @@ const PeersOutput = ({ data, isComplete }: Args) => {
       }, [dataSet]);
 
       return !!rows.length ? (
-        <StandardTableOutput data={{ rows }} tableId={'forwardsOutput'} />
+        <StandardTableOutput data={{ rows }} tableId={'peersOutput'} />
       ) : (
         <h2>NoPeersDataToDisplay</h2>
       );
@@ -54,7 +54,7 @@ const PeersOutput = ({ data, isComplete }: Args) => {
     if (!!data.peers) {
       const output = YAML.stringify(data);
       return (
-        <div id={'forwardsOutputComplete'}>
+        <div id={'peersOutputComplete'}>
           {Object.keys(data).length ? <pre style={styles.pre}>{output}</pre> : <h3>NoPeersDataToDisplay</h3>}
         </div>
       );
