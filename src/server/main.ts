@@ -28,6 +28,12 @@ async function bootstrap() {
 
   Logger.log(`LNDBOSS_DIRECTORY: ${process.env.BOS_DATA_PATH}`);
 
+  Logger.log(
+    `BOS_DEFAULT_LND_SOCKET: ${
+      !!process.env.BOS_DEFAULT_LND_SOCKET ? process.env.BOS_DEFAULT_LND_SOCKET : 'NoDefaultSocket'
+    }`
+  );
+
   Logger.log(`isProduction: ${isProduction}`);
 
   Logger.log(`Application is running on: ${await app.getUrl()}`);
