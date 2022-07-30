@@ -24,7 +24,7 @@ test.describe('Test the Peers command client page', async () => {
     await page.click('text=run command');
     await page.waitForTimeout(1000);
 
-    await expect(page.locator('#forwardsOutput')).toBeVisible();
+    await expect(page.locator('#peersOutput')).toBeVisible();
     await page.click('text=home');
   });
 
@@ -42,7 +42,7 @@ test.describe('Test the Peers command client page', async () => {
     await page.click('text=run command');
     await page.waitForTimeout(1000);
 
-    await expect(page.locator('#forwardsOutputComplete')).toBeVisible();
+    await expect(page.locator('#peersOutputComplete')).toBeVisible();
     await page.click('text=home');
   });
 
