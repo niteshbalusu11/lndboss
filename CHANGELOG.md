@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.6](https://github.com/niteshbalusu11/lndboss/compare/v1.15.5...v1.15.6) (2022-08-01)
+
 ### [1.15.2](https://github.com/niteshbalusu11/lndboss/compare/v1.15.1...v1.15.2) (2022-07-29)
 
 - Add ability to set default socket via BOS_DEFAULT_LND_SOCKET env variable.
