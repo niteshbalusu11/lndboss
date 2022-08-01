@@ -5,17 +5,18 @@ services:
     environment:
       APP_HOST: $APP_LNDBOSS_IP
       APP_PORT: $APP_LNDBOSS_PORT
-
   web:
-    image: niteshbalusu/lndboss:v1.12.0@sha256:98443ae685da7fd30282a0e0d56c7bf8341afef34cf52b28400b632c773a02c3
+    image: niteshbalusu/lndboss:v1.15.2@sha256:c6fecdb6a4a0c1960d6ae22eba9ad73abaed45224d3c3cfd3d6f1d04f52a1c36
     restart: on-failure
     stop_grace_period: 1m
     volumes:
       - ${APP_LIGHTNING_NODE_DATA_DIR}:/home/node/.lnd:ro
       - ${APP_DATA_DIR}/.bosgui:/home/node/.bosgui
     environment:
+      BOS_DATA_PATH: '/home/node/.bosgui'
       NODE_ENV: 'production'
       PORT: $APP_LNDBOSS_PORT
+      BOS_DEFAULT_LND_SOCKET: $APP_LIGHTNING_NODE_IP:$APP_LIGHTNING_NODE_GRPC_PORT
     networks:
       default:
         ipv4_address: $APP_LNDBOSS_IP
