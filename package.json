@@ -6,9 +6,6 @@
     "name": "Nitesh Balusu",
     "url": "https://twitter.com/nitesh_btc"
   },
-  "bin": {
-    "lndboss": "NODE_ENV=production node dist/server/main"
-  },
   "license": "MIT",
   "keywords": [
     "balanceofsatoshis",
@@ -23,17 +20,16 @@
     "build:next": "cd src/client && next build",
     "dev": "NODE_ENV=development nest start --watch",
     "docker:build": "docker build -t niteshbalusu/lndboss . && docker save niteshbalusu/lndboss > lndboss.tar && gzip lndboss.tar",
-    "docker:release": "docker buildx build --platform linux/arm64,linux/arm/v7,linux/amd64 --no-cache -t niteshbalusu/lndboss:v1.12.1 --push .",
+    "docker:release": "docker buildx build --platform linux/arm64,linux/amd64 --no-cache -t niteshbalusu/lndboss:v1.15.8 --push .",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
-    "prepublish": "yarn build:prod",
     "push:github": "git push --follow-tags origin master",
     "start": "NODE_ENV=production nest start ",
     "start:debug": "nest start --debug --watch",
     "start:prod": "NODE_ENV=production node dist/server/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "release": "standard-version --release-as minor && yarn publish",
-    "release:major": "standard-version --release-as major && yarn publish",
-    "release:patch": "standard-version --release-as patch && yarn publish",
+    "release": "standard-version --release-as minor && yarn build:prod && yarn publish",
+    "release:major": "standard-version --release-as major && yarn build:prod && yarn publish",
+    "release:patch": "standard-version --release-as patch && yarn build:prod && yarn publish",
     "release:test": "standard-version --dry-run --release-as minor",
     "test": "playwright test",
     "test:client": "playwright test tests/client --headed",
