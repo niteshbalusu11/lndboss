@@ -14,6 +14,7 @@ RUN apt update && apt install -y libssl1.1
 # ---------------
 
 COPY . .
+ENV NEXT_TELEMETRY_DISABLED=1
 RUN yarn build:prod
 
 FROM node:16-buster-slim as deps
@@ -34,6 +35,7 @@ WORKDIR /lndboss
 # Set environment to production
 ARG NODE_ENV="production"
 ENV NODE_ENV=${NODE_ENV}
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Create a new user and group
 ARG USER_ID=1000
