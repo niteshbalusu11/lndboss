@@ -1,7 +1,7 @@
 # ---------------
 # Install Dependencies
 # ---------------
-FROM amd64/node:16-buster-slim as build
+FROM node:16-buster-slim as build
 
 WORKDIR /lndboss
 
@@ -14,7 +14,7 @@ RUN apt update && apt install -y libssl1.1
 # ---------------
 
 COPY . .
-RUN yarn build
+RUN yarn build:prod
 
 FROM node:16-buster-slim as deps
 
