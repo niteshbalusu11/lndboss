@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.15.9](https://github.com/niteshbalusu11/lndboss/compare/v1.15.8...v1.15.9) (2022-08-01)
 
+- Fix docker build issues
+
 ### [1.15.8](https://github.com/niteshbalusu11/lndboss/compare/v1.15.7...v1.15.8) (2022-08-01)
 
 - Bug fixes with yarn global install
