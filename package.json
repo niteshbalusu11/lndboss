@@ -24,6 +24,7 @@
     "docker:release": "docker buildx build --platform linux/arm64,linux/arm/v7,linux/amd64 --no-cache -t niteshbalusu/lndboss:v1.12.1 --push .",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
     "push:github": "git push --follow-tags origin master",
+    "prepublish": "yarn build:prod",
     "start": "NODE_ENV=production nest start ",
     "start:debug": "nest start --debug --watch",
     "start:prod": "NODE_ENV=production node dist/server/main",

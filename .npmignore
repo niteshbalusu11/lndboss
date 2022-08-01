@@ -1,0 +1,8 @@
+node-modules
+tests
+.env
+dev.Dockerfile
+Dockerfile
+docker-compose-dev.yaml
+docker-compose-umbrel.yaml
+.dockerignore
