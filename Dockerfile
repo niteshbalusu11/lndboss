@@ -1,7 +1,7 @@
 # ---------------
 # Install Dependencies
 # ---------------
-FROM node:16-buster-slim as build
+FROM amd64/node:16-buster-slim as build
 
 WORKDIR /lndboss
 

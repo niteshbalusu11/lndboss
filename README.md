@@ -347,7 +347,7 @@ cd lndboss
 yarn install --network-timeout 1000000
 
 # Build the app
-yarn build
+yarn build:prod
 
 # Run the app
 yarn start:prod
