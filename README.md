@@ -64,6 +64,87 @@ bos send
 bos tags
 ```
 
+## Yarn global install instructions (Requires NodeJs and Yarn)
+
+### For Linux:
+Download Node.js
+```
+curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+```
+Install it:
+```
+sudo apt-get install -y nodejs
+```
+
+### For Mac or Windows download and install from:
+https://nodejs.dev/
+
+
+Setup Node.js to install packages without using sudo (optional)
+```
+mkdir ~/.npm-global
+
+npm config set prefix '~/.npm-global'
+
+nano ~/.profile
+
+# Add a new line to the end:
+
+PATH="$HOME/.npm-global/bin:$PATH"
+
+# Save
+ctrl + x
+y
+
+# Update shell
+. ~/.profile
+```
+
+### After installing Node.js, you can install yarn.
+```
+npm install --global yarn
+```
+
+### Install LndBoss
+```
+yarn global add lndboss
+```
+
+### Run the app
+```
+# Assuming default yarn global install path
+
+yarn --cwd ~/.config/yarn/global/node_modules/lndboss start:prod
+```
+
+### Sample systemd instructions to run the app in the background
+```shell
+#Systemd unit for LndBoss App
+#/etc/systemd/system/lndboss.service
+[Unit]
+Description=lndboss
+Wants=lnd.service
+After=lnd.service
+
+
+[Service]
+ExecStart=/home/ubuntu/.npm-global/bin/yarn --cwd /home/ubuntu/.config/yarn/global/node_modules/lndboss start:prod
+User=ubuntu
+Restart=always
+TimeoutSec=120
+RestartSec=30
+StandardOutput=journal+console
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### To Update the app:
+```
+yarn global add lndboss
+```
+
 ## Docker Instructions
 
 Make a .bosgui directory and change directory
@@ -248,7 +329,7 @@ y
 . ~/.profile
 ```
 
-### After installing Node.js, you can install yarn, (use sudo if permission is denied)
+### After installing Node.js, you can install yarn.
 ```
 npm install --global yarn
 ```

@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.15.8](https://github.com/niteshbalusu11/lndboss/compare/v1.15.7...v1.15.8) (2022-08-01)
 
+- Bug fixes with yarn global install
+
 ### [1.15.6](https://github.com/niteshbalusu11/lndboss/compare/v1.15.5...v1.15.6) (2022-08-01)
 
 - Add support to publish to npm
