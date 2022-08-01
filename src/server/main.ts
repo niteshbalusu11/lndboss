@@ -7,9 +7,6 @@ import { homedir } from 'os';
 import { isProduction } from './utils/constants';
 import { join } from 'path';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { version } = require('../../package.json');
-
 // Main file to start app server
 
 async function bootstrap() {
@@ -39,7 +36,7 @@ async function bootstrap() {
 
   Logger.log(`isProduction: ${isProduction}`);
 
-  Logger.log(`LNDBOSS_VERSION: ${version}`);
+  Logger.log(`LNDBOSS_VERSION: ${process.env.npm_package_version}`);
 
   Logger.log(`Application is running on: ${await app.getUrl()}`);
 }
