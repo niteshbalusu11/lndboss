@@ -6,8 +6,8 @@ FROM amd64/node:16-buster-slim as build
 WORKDIR /lndboss
 
 COPY package.json yarn.lock ./
+RUN apt update && apt install -y libssl1.1 python3 cmake g++
 RUN yarn install --network-timeout 1000000
-RUN apt update && apt install -y libssl1.1
 
 # ---------------
 # Build App
