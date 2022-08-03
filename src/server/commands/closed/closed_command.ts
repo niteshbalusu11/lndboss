@@ -35,7 +35,11 @@ import { httpLogger } from '~server/utils/global_functions';
   }
 */
 
-const closedCommand = async (args: commandClosed, lnd: AuthenticatedLnd): Promise<{ result: any }> => {
+type Args = {
+  args: commandClosed;
+  lnd: AuthenticatedLnd;
+};
+const closedCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
   try {
     const result = await getChannelCloses({
       lnd,

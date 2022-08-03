@@ -20,7 +20,12 @@ const { round } = Math;
   }
  */
 
-const certValidityDaysCommand = async ({ below, node }): Promise<{ result: number }> => {
+type Args = {
+  below: number;
+  node: string;
+};
+
+const certValidityDaysCommand = async ({ below, node }: Args): Promise<{ result: number }> => {
   try {
     const credentials = await lndCredentials({ node });
 

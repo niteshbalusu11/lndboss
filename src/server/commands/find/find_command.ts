@@ -40,7 +40,11 @@ import { httpLogger } from '~server/utils/global_functions';
   }
 */
 
-const findCommand = async (args: types.commandFind, lnd: AuthenticatedLnd): Promise<{ result: any }> => {
+type Args = {
+  args: types.commandFind;
+  lnd: AuthenticatedLnd;
+};
+const findCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
   try {
     const result = await findRecord({
       lnd,

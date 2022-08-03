@@ -28,7 +28,7 @@ export class ChartFeesPaidService {
   async get(args: chartFeesPaidDto): Promise<{ result: any }> {
     const lnds = await LndService.getLnds({ nodes: args.nodes });
 
-    const { result } = await chartFeesPaidCommand(args, lnds);
+    const { result } = await chartFeesPaidCommand({ args, lnd: lnds });
 
     return { result };
   }

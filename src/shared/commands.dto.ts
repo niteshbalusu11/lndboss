@@ -299,6 +299,28 @@ export class findDto {
   query: string;
 }
 
+export class graphDto {
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  filters: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  node: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  query: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  sort: string;
+}
+
 export class forwardsDto {
   @Transform(({ value }) => toNumber(value))
   @IsOptional()

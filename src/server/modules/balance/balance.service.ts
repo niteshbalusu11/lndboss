@@ -24,7 +24,7 @@ export class BalanceService {
   async get(args: balanceDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await balanceCommand(args, lnd);
+    const { result } = await balanceCommand({ args, lnd });
 
     return { result };
   }

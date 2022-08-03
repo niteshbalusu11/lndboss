@@ -106,6 +106,15 @@ export type commandForwards = {
   to: string;
 };
 
+// ========================Graph Command=====================================
+
+export type commandGraph = {
+  filters: string[];
+  node: string;
+  query: string;
+  sort: string;
+};
+
 // ========================Peers Command=====================================
 export type commandPeers = {
   earnings_days: string;

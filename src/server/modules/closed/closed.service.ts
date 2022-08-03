@@ -38,7 +38,7 @@ export class ClosedService {
   async get(args: closedDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await closedCommand(args, lnd);
+    const { result } = await closedCommand({ args, lnd });
 
     return { result };
   }

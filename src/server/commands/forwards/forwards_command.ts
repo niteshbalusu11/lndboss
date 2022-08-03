@@ -33,7 +33,11 @@ import { readFile } from 'fs';
   }
 */
 
-const forwardsCommand = async (args: types.commandForwards, lnd: AuthenticatedLnd): Promise<{ result: any }> => {
+type Args = {
+  args: types.commandForwards;
+  lnd: AuthenticatedLnd;
+};
+const forwardsCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
   try {
     const result = await getForwards({
       lnd,

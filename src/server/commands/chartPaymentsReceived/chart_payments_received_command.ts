@@ -19,10 +19,11 @@ import { httpLogger } from '~server/utils/global_functions';
   }
 */
 
-const chartPaymentsReceivedCommand = async (
-  args: types.commandChartPaymentsReceived,
-  lnd: AuthenticatedLnd[]
-): Promise<{ result: any }> => {
+type Args = {
+  args: types.commandChartPaymentsReceived;
+  lnd: AuthenticatedLnd[];
+};
+const chartPaymentsReceivedCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
   try {
     const result = await getReceivedChart({
       lnds: lnd,

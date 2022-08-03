@@ -26,10 +26,11 @@ import { readFile } from 'fs';
   }
 */
 
-const chartFeesPaidCommand = async (
-  args: types.commandChartFeesPaid,
-  lnd: AuthenticatedLnd[]
-): Promise<{ result: any }> => {
+type Args = {
+  args: types.commandChartFeesPaid;
+  lnd: AuthenticatedLnd[];
+};
+const chartFeesPaidCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
   try {
     const result = await getFeesPaid({
       days: args.days || 60,

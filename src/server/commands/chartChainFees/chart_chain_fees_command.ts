@@ -22,10 +22,11 @@ import { httpLogger } from '~server/utils/global_functions';
   }
 */
 
-const chartChainFeesCommand = async (
-  args: types.commandChartChainFees,
-  lnd: AuthenticatedLnd[]
-): Promise<{ result: any }> => {
+type Args = {
+  args: types.commandChartChainFees;
+  lnd: AuthenticatedLnd[];
+};
+const chartChainFeesCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
   try {
     const result = await getChainFeesChart({
       request,
