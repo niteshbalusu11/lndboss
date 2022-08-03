@@ -1,6 +1,7 @@
 import * as request from 'balanceofsatoshis/commands/simple_request';
 
 import { AuthenticatedLnd } from 'lightning';
+import { Logger } from '@nestjs/common';
 import { commandClosed } from '~shared/types';
 import { getChannelCloses } from 'balanceofsatoshis/chain';
 import { httpLogger } from '~server/utils/global_functions';
@@ -49,6 +50,7 @@ const closedCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
 
     return { result };
   } catch (error) {
+    Logger.error(error);
     httpLogger({ error });
   }
 };
