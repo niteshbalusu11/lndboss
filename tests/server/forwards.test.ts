@@ -17,7 +17,7 @@ test.describe('Test Forwards command on the node.js side', async () => {
       sort: 'earned_in',
       to: 'bob',
     };
-    const { result } = await forwardsCommand(args, lightning.lnd);
+    const { result } = await forwardsCommand({ args, lnd: lightning.lnd });
     console.log('forwards----', result);
     expect(result.peers).toBeTruthy();
   });

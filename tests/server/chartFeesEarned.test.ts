@@ -22,7 +22,7 @@ test.describe('Test ChartFeesEarned command on the node.js side', async () => {
     };
 
     const lnds = lightning.map(({ lnd }) => lnd);
-    const { result } = await chartFeesEarnedCommand(args, lnds);
+    const { result } = await chartFeesEarnedCommand({ args, lnd: lnds });
 
     console.log('ChartFeesEarned----', result);
     expect(result).toBeTruthy();
@@ -39,7 +39,7 @@ test.describe('Test ChartFeesEarned command on the node.js side', async () => {
     };
 
     const lnds = lightning.map(({ lnd }) => lnd);
-    const { result } = await chartFeesEarnedCommand(args, lnds);
+    const { result } = await chartFeesEarnedCommand({ args, lnd: lnds });
 
     console.log('ChartFeesEarned----', result);
 

@@ -17,7 +17,7 @@ test.describe('Test ChartChainFees command on the node.js side', async () => {
     };
 
     const lnds = lightning.map(({ lnd }) => lnd);
-    const { result } = await chartChainFeesCommand(args, lnds);
+    const { result } = await chartChainFeesCommand({ args, lnd: lnds });
 
     console.log('Chart Chain Fees----', result);
     expect(result).toBeTruthy();

@@ -21,7 +21,7 @@ test.describe('Test Accounting command on the node.js side', async () => {
       rate_provider: '',
     };
 
-    const { result } = await accountingCommand(args, lightning.lnd);
+    const { result } = await accountingCommand({ args, lnd: lightning.lnd });
 
     console.log('accounting chain-fees----', result);
     expect(result).toBeTruthy();
@@ -38,7 +38,7 @@ test.describe('Test Accounting command on the node.js side', async () => {
       rate_provider: '',
     };
 
-    const { result } = await accountingCommand(args, lightning.lnd);
+    const { result } = await accountingCommand({ args, lnd: lightning.lnd });
 
     console.log('accounting chain-receives----', result);
     expect(result).toBeTruthy();
@@ -55,7 +55,7 @@ test.describe('Test Accounting command on the node.js side', async () => {
       rate_provider: '',
     };
 
-    const { result } = await accountingCommand(args, lightning.lnd);
+    const { result } = await accountingCommand({ args, lnd: lightning.lnd });
 
     console.log('accounting chain-sends----', result);
     expect(result).toBeTruthy();
@@ -72,7 +72,7 @@ test.describe('Test Accounting command on the node.js side', async () => {
       rate_provider: '',
     };
 
-    const { result } = await accountingCommand(args, lightning.lnd);
+    const { result } = await accountingCommand({ args, lnd: lightning.lnd });
 
     console.log('accounting forwards----', result);
     expect(result).toBeTruthy();
@@ -89,7 +89,7 @@ test.describe('Test Accounting command on the node.js side', async () => {
       rate_provider: '',
     };
 
-    const { result } = await accountingCommand(args, lightning.lnd);
+    const { result } = await accountingCommand({ args, lnd: lightning.lnd });
 
     console.log('accounting invoices----', result);
     expect(result).toBeTruthy();
@@ -106,7 +106,7 @@ test.describe('Test Accounting command on the node.js side', async () => {
       rate_provider: '',
     };
 
-    const { result } = await accountingCommand(args, lightning.lnd);
+    const { result } = await accountingCommand({ args, lnd: lightning.lnd });
 
     console.log('accounting payments----', result);
     expect(result).toBeTruthy();
@@ -123,7 +123,7 @@ test.describe('Test Accounting command on the node.js side', async () => {
       rate_provider: '',
     };
 
-    const { result } = await accountingCommand(args, lightning.lnd);
+    const { result } = await accountingCommand({ args, lnd: lightning.lnd });
 
     console.log('accounting payments with csv----', result);
     expect(result).toBeTruthy();
