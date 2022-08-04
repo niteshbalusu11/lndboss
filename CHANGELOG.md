@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.16.1](https://github.com/niteshbalusu11/lndboss/compare/v1.16.0...v1.16.1) (2022-08-04)
 
+- Fix Dockerfile node version
+
 ## [1.16.0](https://github.com/niteshbalusu11/lndboss/compare/v1.15.9...v1.16.0) (2022-08-04)
 
 - Reduce docker image size by 50%

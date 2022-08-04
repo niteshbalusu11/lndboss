@@ -16,7 +16,7 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN yarn build:prod
 
-FROM node:16-buster-slim as deps
+FROM node:node:16-alpine as deps
 
 WORKDIR /lndboss
 
