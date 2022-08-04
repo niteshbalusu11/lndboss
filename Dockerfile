@@ -1,12 +1,11 @@
 # ---------------
 # Install Dependencies
 # ---------------
-FROM amd64/node:16-buster-slim as build
+FROM amd64/node:16-alpine as build
 
 WORKDIR /lndboss
 
 COPY package.json yarn.lock ./
-RUN apt update && apt install -y libssl1.1 python3 cmake g++
 RUN yarn install --network-timeout 1000000
 
 # ---------------
@@ -28,7 +27,7 @@ RUN yarn install --production --network-timeout 1000000
 # ---------------
 # Release App
 # ---------------
-FROM node:16-buster-slim as final
+FROM node:16-alpine as final
 
 WORKDIR /lndboss
 
@@ -43,16 +42,23 @@ ARG GROUP_ID=1000
 ENV USER_ID=$USER_ID
 ENV GROUP_ID=$GROUP_ID
 
-# Copy files from build
-COPY --from=build /lndboss/package.json ./
-COPY --from=deps /lndboss/node_modules/ ./node_modules
-COPY --from=build /lndboss/nest-cli.json ./
-COPY --from=build /lndboss/next-env.d.ts ./
-COPY --from=build /lndboss/src ./src
-COPY --from=build /lndboss/dist/ ./dist
-
-# Change ownership of files to use the new user
+RUN touch .env
 RUN chown -R $USER_ID:$GROUP_ID /lndboss/
+
+# Copy files from build
+COPY --from=build --chown=$USER_ID:$GROUP_ID /lndboss/package.json ./
+COPY --from=deps --chown=$USER_ID:$GROUP_ID /lndboss/node_modules/ ./node_modules
+
+# Copy NestJS files from build
+COPY --from=build --chown=$USER_ID:$GROUP_ID /lndboss/nest-cli.json ./
+COPY --from=build --chown=$USER_ID:$GROUP_ID /lndboss/dist/ ./dist
+
+# Copy NextJS files from build
+COPY --from=build --chown=$USER_ID:$GROUP_ID /lndboss/next-env.d.ts ./
+COPY --from=build --chown=$USER_ID:$GROUP_ID /lndboss/src/client/.next ./src/client/.next
+COPY --from=build --chown=$USER_ID:$GROUP_ID /lndboss/src/client/public ./src/client/public
+COPY --from=build --chown=$USER_ID:$GROUP_ID /lndboss/src/client/next-env.d.ts ./src/client/next-env.d.ts
+COPY --from=build --chown=$USER_ID:$GROUP_ID /lndboss/src/client/next.config.js ./src/client/next.config.js
 
 # Switch to the new user
 USER $USER_ID:$GROUP_ID
@@ -62,7 +68,6 @@ USER $USER_ID:$GROUP_ID
 # way the process will run as a non-root user
 RUN mkdir /home/node/.bosgui
 RUN mkdir /home/node/.lnd
-RUN touch .env
 
 # Expose the port the app runs on
 EXPOSE 8055
