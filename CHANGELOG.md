@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.16.0](https://github.com/niteshbalusu11/lndboss/compare/v1.15.9...v1.16.0) (2022-08-04)
 
+- Reduce docker image size by 50%
+- Add support for graph command server side
+- Consolidate several commands modules into one single module
+
 ### [1.15.9](https://github.com/niteshbalusu11/lndboss/compare/v1.15.8...v1.15.9) (2022-08-01)
 
 - Fix docker build issues
