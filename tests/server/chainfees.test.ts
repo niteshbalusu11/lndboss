@@ -14,7 +14,7 @@ test.describe('Test Chainfees command on the node.js side', async () => {
     const args = {
       blocks: 6,
     };
-    const { result } = await chainfeesCommand(args, lightning.lnd);
+    const { result } = await chainfeesCommand({ args, lnd: lightning.lnd });
     console.log('chain fees----', result);
     expect(result.current_block_hash).toBeTruthy();
     expect(result.fee_by_block_target).toBeTruthy();

@@ -17,7 +17,7 @@ test.describe('Test ChartPaymentsReceived command on the node.js side', async ()
     };
 
     const lnds = lightning.map(({ lnd }) => lnd);
-    const { result } = await chartPaymentsReceivedCommand(args, lnds);
+    const { result } = await chartPaymentsReceivedCommand({ args, lnd: lnds });
 
     console.log('ChartPaymentsReceived----', result);
 

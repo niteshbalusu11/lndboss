@@ -1,6 +1,7 @@
 import * as types from '~shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
+import { Logger } from '@nestjs/common';
 import { getFeesPaid } from 'balanceofsatoshis/routing';
 import { httpLogger } from '~server/utils/global_functions';
 import { readFile } from 'fs';
@@ -26,10 +27,11 @@ import { readFile } from 'fs';
   }
 */
 
-const chartFeesPaidCommand = async (
-  args: types.commandChartFeesPaid,
-  lnd: AuthenticatedLnd[]
-): Promise<{ result: any }> => {
+type Args = {
+  args: types.commandChartFeesPaid;
+  lnd: AuthenticatedLnd[];
+};
+const chartFeesPaidCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
   try {
     const result = await getFeesPaid({
       days: args.days || 60,
@@ -46,6 +48,7 @@ const chartFeesPaidCommand = async (
 
     return { result };
   } catch (error) {
+    Logger.error(error);
     httpLogger({ error });
   }
 };

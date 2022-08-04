@@ -2,7 +2,8 @@ import * as request from 'balanceofsatoshis/commands/simple_request';
 import * as types from '~shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
-import { Logger } from 'winston';
+import { Logger } from '@nestjs/common';
+import { Logger as LoggerType } from 'winston';
 import { httpLogger } from '~server/utils/global_functions';
 import { pushPayment } from 'balanceofsatoshis/network';
 import { readFile } from 'fs';
@@ -31,7 +32,7 @@ import { readFile } from 'fs';
 
 type Args = {
   args: types.commandSend;
-  logger: Logger;
+  logger: LoggerType;
   lnd: AuthenticatedLnd;
 };
 const sendCommand = async ({ args, lnd, logger }: Args): Promise<{ result: any }> => {
@@ -58,6 +59,7 @@ const sendCommand = async ({ args, lnd, logger }: Args): Promise<{ result: any }
 
     return { result };
   } catch (error) {
+    Logger.error(error);
     httpLogger({ error });
   }
 };

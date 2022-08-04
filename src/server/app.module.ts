@@ -20,6 +20,7 @@ import { CronModule } from './modules/cron/cron.module';
 import { ExternalServicesModule } from './modules/external-services/external-services.module';
 import { FindModule } from './modules/find/find.module';
 import { ForwardsModule } from './modules/forwards/forwards.module';
+import { GraphModule } from './modules/graph/graph.module';
 import { GrpcModule } from './modules/grpc/grpc.module';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
 import { LndModule } from './modules/lnd/lnd.module';
@@ -57,6 +58,7 @@ import { join } from 'path';
     ExternalServicesModule,
     FindModule,
     ForwardsModule,
+    GraphModule,
     GrpcModule,
     ConfigModule.forRoot({
       isGlobal: true,

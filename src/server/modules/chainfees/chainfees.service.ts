@@ -26,7 +26,7 @@ export class ChainfeesService {
   async get(args: chainfeesDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await chainfeesCommand(args, lnd);
+    const { result } = await chainfeesCommand({ args, lnd });
 
     return { result };
   }

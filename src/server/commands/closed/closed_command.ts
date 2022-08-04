@@ -1,6 +1,7 @@
 import * as request from 'balanceofsatoshis/commands/simple_request';
 
 import { AuthenticatedLnd } from 'lightning';
+import { Logger } from '@nestjs/common';
 import { commandClosed } from '~shared/types';
 import { getChannelCloses } from 'balanceofsatoshis/chain';
 import { httpLogger } from '~server/utils/global_functions';
@@ -35,7 +36,11 @@ import { httpLogger } from '~server/utils/global_functions';
   }
 */
 
-const closedCommand = async (args: commandClosed, lnd: AuthenticatedLnd): Promise<{ result: any }> => {
+type Args = {
+  args: commandClosed;
+  lnd: AuthenticatedLnd;
+};
+const closedCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
   try {
     const result = await getChannelCloses({
       lnd,
@@ -45,6 +50,7 @@ const closedCommand = async (args: commandClosed, lnd: AuthenticatedLnd): Promis
 
     return { result };
   } catch (error) {
+    Logger.error(error);
     httpLogger({ error });
   }
 };

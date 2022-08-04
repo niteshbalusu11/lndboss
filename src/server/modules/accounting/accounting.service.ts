@@ -31,7 +31,7 @@ export class AccountingService {
   async get(args: accountingDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await accountingCommand(args, lnd);
+    const { result } = await accountingCommand({ args, lnd });
 
     return { result };
   }

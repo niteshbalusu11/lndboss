@@ -26,7 +26,7 @@ test.describe('Test ChartFeesEarned command on the node.js side', async () => {
     };
 
     const lnds = lightning.map(({ lnd }) => lnd);
-    const { result } = await chartFeesPaidCommand(args, lnds);
+    const { result } = await chartFeesPaidCommand({ args, lnd: lnds });
 
     console.log('ChartFeesPaid----', result);
 
@@ -49,7 +49,7 @@ test.describe('Test ChartFeesEarned command on the node.js side', async () => {
     };
 
     const lnds = lightning.map(({ lnd }) => lnd);
-    const { result } = await chartFeesPaidCommand(args, lnds);
+    const { result } = await chartFeesPaidCommand({ args, lnd: lnds });
 
     console.log('ChartFeesPaid----', result);
 

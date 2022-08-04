@@ -44,7 +44,7 @@ export class FindService {
   async get(args: findDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await findCommand(args, lnd);
+    const { result } = await findCommand({ args, lnd });
 
     return { result };
   }

@@ -14,7 +14,7 @@ test.describe('Test Closed command on the node.js side', async () => {
     const args = {
       limit: 1,
     };
-    const { result } = await closedCommand(args, lightning.lnd);
+    const { result } = await closedCommand({ args, lnd: lightning.lnd });
     console.log('closed----', result);
     expect(result.closes).toBeTruthy();
   });

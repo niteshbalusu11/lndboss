@@ -2,6 +2,7 @@ import * as request from 'balanceofsatoshis/commands/simple_request';
 import * as types from '~shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
+import { Logger } from '@nestjs/common';
 import { getChainFeesChart } from 'balanceofsatoshis/routing';
 import { httpLogger } from '~server/utils/global_functions';
 
@@ -22,10 +23,11 @@ import { httpLogger } from '~server/utils/global_functions';
   }
 */
 
-const chartChainFeesCommand = async (
-  args: types.commandChartChainFees,
-  lnd: AuthenticatedLnd[]
-): Promise<{ result: any }> => {
+type Args = {
+  args: types.commandChartChainFees;
+  lnd: AuthenticatedLnd[];
+};
+const chartChainFeesCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
   try {
     const result = await getChainFeesChart({
       request,
@@ -35,6 +37,7 @@ const chartChainFeesCommand = async (
 
     return { result };
   } catch (error) {
+    Logger.error(error);
     httpLogger({ error });
   }
 };

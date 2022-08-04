@@ -167,6 +167,20 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Graph',
+    value: 'Graph',
+    description: 'List out the connections a node has with other nodes',
+    longDescription:
+      'List out the connections a node has with other nodes. --filter variables: AGE/CAPACITY/HOPS/IN_FEE_RATE/OUT_FEE_RATE. --filter "age<7*144" for connections in the last week',
+    args: {
+      alias_or_pubkey: 'AliasOrPubkey',
+    },
+    flags: {
+      filter: 'Filter',
+      sort: 'Sort',
+    },
+  },
+  {
     name: 'Peers',
     value: 'Peers',
     description: 'Get a list of channel-connected peers',

@@ -10,6 +10,7 @@ import chartPaymentsReceivedCommand from './chartPaymentsReceived/chart_payments
 import closedCommand from './closed/closed_command';
 import findCommand from './find/find_command';
 import forwardsCommand from './forwards/forwards_command';
+import graphCommand from './graph/graph_command';
 import peersCommand from './peers/peers_command';
 import priceCommand from './price/price_command';
 import probeCommand from './probe/probe_command';
@@ -31,6 +32,7 @@ export {
   closedCommand,
   findCommand,
   forwardsCommand,
+  graphCommand,
   peersCommand,
   priceCommand,
   probeCommand,

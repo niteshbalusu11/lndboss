@@ -19,7 +19,7 @@ export class ChainDepositService {
   async get(args: chainDepositDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await chainDepositCommand(args, lnd);
+    const { result } = await chainDepositCommand({ args, lnd });
 
     return { result };
   }

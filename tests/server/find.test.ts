@@ -14,7 +14,7 @@ test.describe('Test Find command on the node.js side', async () => {
     const args = {
       query: 'alice',
     };
-    const { result } = await findCommand(args, lightning.lnd);
+    const { result } = await findCommand({ args, lnd: lightning.lnd });
     console.log('find----', result);
     expect(result).toBeTruthy();
   });

@@ -1,6 +1,7 @@
 import * as types from '~shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
+import { Logger } from '@nestjs/common';
 import { getForwards } from 'balanceofsatoshis/network';
 import { httpLogger } from '~server/utils/global_functions';
 import { readFile } from 'fs';
@@ -33,7 +34,11 @@ import { readFile } from 'fs';
   }
 */
 
-const forwardsCommand = async (args: types.commandForwards, lnd: AuthenticatedLnd): Promise<{ result: any }> => {
+type Args = {
+  args: types.commandForwards;
+  lnd: AuthenticatedLnd;
+};
+const forwardsCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
   try {
     const result = await getForwards({
       lnd,
@@ -46,6 +51,7 @@ const forwardsCommand = async (args: types.commandForwards, lnd: AuthenticatedLn
 
     return { result };
   } catch (error) {
+    Logger.error(error);
     httpLogger({ error });
   }
 };

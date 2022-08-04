@@ -19,6 +19,11 @@ const bigTok = (tokens: number) => (!tokens ? '0' : (tokens / 1e8).toFixed(8));
   }
 */
 
+type Args = {
+  args: types.commandChainDeposit;
+  lnd: AuthenticatedLnd;
+};
+
 type Tasks = {
   validate: undefined;
   getAddress: CreateChainAddressResult;
@@ -33,10 +38,7 @@ type Return = {
   url: string;
 };
 
-const chainDepositCommand = async (
-  args: types.commandChainDeposit,
-  lnd: AuthenticatedLnd
-): Promise<{ result: Return }> => {
+const chainDepositCommand = async ({ args, lnd }: Args): Promise<{ result: Return }> => {
   try {
     const result = await auto<Tasks>({
       // Validate

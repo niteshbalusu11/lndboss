@@ -23,7 +23,7 @@ export class ChartPaymentsReceivedService {
   async get(args: chartPaymentsReceivedDto): Promise<{ result: any }> {
     const lnds = await LndService.getLnds({ nodes: args.nodes });
 
-    const { result } = await chartPaymentsReceivedCommand(args, lnds);
+    const { result } = await chartPaymentsReceivedCommand({ args, lnd: lnds });
 
     return { result };
   }

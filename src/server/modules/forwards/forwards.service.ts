@@ -36,7 +36,7 @@ export class ForwardsService {
   async get(args: forwardsDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await forwardsCommand(args, lnd);
+    const { result } = await forwardsCommand({ args, lnd });
 
     return { result };
   }

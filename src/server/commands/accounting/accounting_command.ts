@@ -2,6 +2,7 @@ import * as request from 'balanceofsatoshis/commands/simple_request';
 import * as types from '~shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
+import { Logger } from '@nestjs/common';
 import { getAccountingReport } from 'balanceofsatoshis/balances';
 import { httpLogger } from '~server/utils/global_functions';
 
@@ -28,7 +29,12 @@ import { httpLogger } from '~server/utils/global_functions';
   }
 */
 
-const accountingCommand = async (args: types.commandAccounting, lnd: AuthenticatedLnd): Promise<{ result: any }> => {
+type Args = {
+  args: types.commandAccounting;
+  lnd: AuthenticatedLnd;
+};
+
+const accountingCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
   try {
     const result = await getAccountingReport({
       lnd,
@@ -44,6 +50,7 @@ const accountingCommand = async (args: types.commandAccounting, lnd: Authenticat
 
     return { result };
   } catch (error) {
+    Logger.error(error);
     httpLogger({ error });
   }
 };
