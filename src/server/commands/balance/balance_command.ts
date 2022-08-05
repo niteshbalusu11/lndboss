@@ -38,13 +38,15 @@ const balanceCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => 
       });
 
       const result = {
-        OnchainBalance: !!detailed.onchain_balance ? parseAnsi(detailed.onchain_balance) : '0',
+        OnchainBalance: !!detailed.onchain_confirmed ? parseAnsi(detailed.onchain_confirmed) : '0',
         OffchainBalance: !!detailed.offchain_balance ? parseAnsi(detailed.offchain_balance) : '0',
+        OnchainPending: !!detailed.onchain_pending ? parseAnsi(detailed.onchain_pending) : '0',
         OffchainPending: !!detailed.offchain_pending ? parseAnsi(detailed.offchain_pending) : '0',
         ClosingBalance: !!detailed.closing_balance ? parseAnsi(detailed.closing_balance) : '0',
         ConflictedPending: !!detailed.conflicted_pending ? parseAnsi(detailed.conflicted_pending) : '0',
         InvalidPending: !!detailed.invalid_pending ? parseAnsi(detailed.invalid_pending) : '0',
         OnchainVbytes: !!detailed.onchain_vbytes ? detailed.onchain_vbytes : '0',
+        UtxosCount: !!detailed.utxos_count ? detailed.utxos_count : '0',
       };
 
       return { result };
