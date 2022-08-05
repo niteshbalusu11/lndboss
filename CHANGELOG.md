@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.16.4](https://github.com/niteshbalusu11/lndboss/compare/v1.16.3...v1.16.4) (2022-08-05)
 
+- Fix balance command detailed output
+
 ### [1.16.3](https://github.com/niteshbalusu11/lndboss/compare/v1.16.2...v1.16.3) (2022-08-04)
 
 - Fix Dockerfile node version
