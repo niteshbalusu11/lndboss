@@ -1,4 +1,4 @@
-import QRCode from 'react-qr-code';
+import QRCode from 'qrcode.react';
 import React from 'react';
 
 /*
