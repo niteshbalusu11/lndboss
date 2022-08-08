@@ -42,6 +42,9 @@ bos find "query"
 # Output a summarized version of peers forwarded towards
 bos forwards
 
+# Look up the channels and fee rates of a node by its public key
+bos graph "pubkey"
+
 # Show channel-connected peers
 bos peers
 
@@ -1177,6 +1180,51 @@ try {
   const query = {
     days: 90,
     to: 'walletofsatoshi'
+  };
+
+  const response = await axios.get(url, {
+    params: query,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
+
+### Graph
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/graph
+
+@Query
+  {
+    [filters]: [<Graph filters String Array>]
+    Query: <Query Alias/Pubkey String>
+    [node]: <Saved Node String>
+    [sort]: <Sort By Field String>
+  }
+
+@Response
+  {
+    rows: [[<Table Cell String>]]
+  }
+*/
+
+try {
+  const url = 'http://localhost:8055/api/graph';
+
+  const query = {
+    query: 'walletofsatoshi',
+    filters: ['capacity>10000000', 'age<2000']
   };
 
   const response = await axios.get(url, {

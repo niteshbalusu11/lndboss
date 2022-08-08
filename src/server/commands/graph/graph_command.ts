@@ -7,6 +7,9 @@ import { getGraphEntry } from 'balanceofsatoshis/network';
 import { httpLogger } from '~server/utils/global_functions';
 import { readFile } from 'fs';
 
+const parseAnsi = (n: string) =>
+  n.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+
 /** Get a graph entry
 
   {
@@ -30,7 +33,7 @@ type Args = {
 };
 type Result = {
   result: {
-    rows: any[];
+    rows: string[];
   };
 };
 const graphCommand = async ({ args, lnd, logger }: Args): Promise<{ result: Result }> => {
@@ -44,7 +47,21 @@ const graphCommand = async ({ args, lnd, logger }: Args): Promise<{ result: Resu
       sort: args.sort,
     });
 
-    return { result };
+    const rows = result.rows.map((row: string[], index: number) => {
+      if (index > 0) {
+        return row.map((n: string, i: number) => {
+          if (i === 3) {
+            return parseAnsi(n);
+          }
+
+          return n;
+        });
+      }
+
+      return row;
+    });
+
+    return { result: rows };
   } catch (error) {
     Logger.error(error);
     httpLogger({ error });
