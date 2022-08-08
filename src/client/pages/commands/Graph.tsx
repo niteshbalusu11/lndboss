@@ -92,7 +92,7 @@ const Graph = () => {
     };
 
     const result = await axiosGet({ path: 'graph', query });
-    console.log(result);
+
     if (!!result) {
       setData(result);
     }
@@ -160,7 +160,7 @@ const Graph = () => {
           <SubmitButton variant="contained" onClick={fetchData}>
             Run Command
           </SubmitButton>
-          {!!data ? <GraphOutput data={data} /> : null}
+          {!!data ? <GraphOutput data={data.rows} summary={data.summary} /> : null}
         </Stack>
       </StartFlexBox>
     </CssBaseline>

@@ -1215,7 +1215,17 @@ http://localhost:8055/api/graph
 
 @Response
   {
-    rows: [[<Table Cell String>]]
+    rows: [[<Table Cell String>]],
+    summary: {
+      id: <Node Public Key String>,
+      node: <Node Alias String>,
+      capacity: <Node Capacity String>,
+      [is_accepting_large_channels]: <Accepting Large Channels Boolean>,
+      [is_onion]: <Supports Onion Boolean>,
+      [is_clearnet]: <Supports Clearnet Boolean>,
+      [is_unconnectable]: <Unconnectable Boolean>,
+      peer_count: <Peer Count Number>,
+    }
   }
 */
 

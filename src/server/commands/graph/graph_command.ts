@@ -4,6 +4,7 @@ import { AuthenticatedLnd } from 'lightning';
 import { Logger } from '@nestjs/common';
 import { Logger as LoggerType } from 'winston';
 import { getGraphEntry } from 'balanceofsatoshis/network';
+import graphSummary from './graph_summary';
 import { httpLogger } from '~server/utils/global_functions';
 import { readFile } from 'fs';
 
@@ -23,6 +24,16 @@ const parseAnsi = (n: string) =>
   @returns via Promise
   {
     rows: [[<Table Cell String>]]
+    summary: {
+      id: <Node Public Key String>,
+      node: <Node Alias String>,
+      capacity: <Node Capacity String>,
+      [is_accepting_large_channels]: <Accepting Large Channels Boolean>,
+      [is_onion]: <Supports Onion Boolean>,
+      [is_clearnet]: <Supports Clearnet Boolean>,
+      [is_unconnectable]: <Unconnectable Boolean>,
+      peer_count: <Peer Count Number>,
+    }
   }
 */
 
@@ -31,23 +42,27 @@ type Args = {
   lnd: AuthenticatedLnd;
   logger: LoggerType;
 };
-type Result = {
-  result: {
-    rows: string[];
-  };
-};
-const graphCommand = async ({ args, lnd, logger }: Args): Promise<{ result: Result }> => {
+const graphCommand = async ({ args, lnd, logger }: Args): Promise<{ result: any }> => {
   try {
-    const result = await getGraphEntry({
-      lnd,
-      logger,
-      filters: !!args.filters ? args.filters : [],
-      fs: { getFile: readFile },
-      query: args.query.trim(),
-      sort: args.sort,
-    });
+    const [data, summary] = await Promise.all([
+      getGraphEntry({
+        lnd,
+        logger,
+        filters: !!args.filters ? args.filters : [],
+        fs: { getFile: readFile },
+        query: args.query.trim(),
+        sort: args.sort,
+      }),
+      graphSummary({
+        args: {
+          fs: { getFile: readFile },
+          query: args.query,
+        },
+        lnd,
+      }),
+    ]);
 
-    const rows = result.rows.map((row: string[], index: number) => {
+    const rows = data.rows.map((row: string[], index: number) => {
       if (index > 0) {
         return row.map((n: string, i: number) => {
           if (i === 3) {
@@ -61,7 +76,7 @@ const graphCommand = async ({ args, lnd, logger }: Args): Promise<{ result: Resu
       return row;
     });
 
-    return { result: rows };
+    return { result: { rows, summary: summary.nodeDetails } };
   } catch (error) {
     Logger.error(error);
     httpLogger({ error });

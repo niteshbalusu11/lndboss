@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.17.1](https://github.com/niteshbalusu11/lndboss/compare/v1.17.0...v1.17.1) (2022-08-08)
 
+- Added support for graph summary for bos graph command.
+
 ## [1.17.0](https://github.com/niteshbalusu11/lndboss/compare/v1.16.4...v1.17.0) (2022-08-08)
 
 - Added support for bos graph command
