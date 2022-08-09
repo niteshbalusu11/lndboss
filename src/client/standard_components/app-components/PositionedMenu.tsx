@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Button, Menu, MenuItem } from '@mui/material';
 
 import Link from 'next/link';
+import { clientConstants } from '~client/utils/constants';
 import { purple } from '@mui/material/colors';
 import { useNotify } from '~client/hooks/useNotify';
 
@@ -66,13 +67,16 @@ const PositionedMenu = () => {
           horizontal: 'left',
         }}
       >
-        <Link href={`/Authenticate`}>
+        <Link href={clientConstants.authenticatePage}>
           <MenuItem onClick={handleClose}>Authenticate</MenuItem>
         </Link>
-        <Link href={`/auth/Login`}>
+        <Link href={clientConstants.dashboardPage}>
+          <MenuItem onClick={handleClose}>Dashboard</MenuItem>
+        </Link>
+        <Link href={clientConstants.loginUrl}>
           <MenuItem onClick={handleClose}>Login</MenuItem>
         </Link>
-        <Link href={`/auth/Login`}>
+        <Link href={clientConstants.loginUrl}>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Link>
       </Menu>

@@ -15,4 +15,19 @@ export class GrpcController {
   async getPeersAllNodes() {
     return this.grpcService.getPeersAllNodes();
   }
+
+  @Get('api/grpc/get-wallet-info')
+  async getWalletInfo(@Query() args: grpcDto) {
+    return this.grpcService.getWalletInfo(args);
+  }
+
+  @Get('api/grpc/get-channel-balance')
+  async getChannelBalance(@Query() args: grpcDto) {
+    return this.grpcService.getChannelBalance(args);
+  }
+
+  @Get('api/grpc/get-saved-nodes')
+  async getSavedNodes() {
+    return this.grpcService.getSavedNodes();
+  }
 }
