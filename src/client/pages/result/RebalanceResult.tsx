@@ -7,29 +7,14 @@ import Head from 'next/head';
 import { StartFlexBoxBlack } from '~client/standard_components/app-components';
 import { axiosGetWebSocket } from '~client/utils/axios';
 import { io } from 'socket.io-client';
-import stripAnsi from 'strip-ansi';
 import { useRouter } from 'next/router';
 
 const socket = io();
-const stringify = (n: object) => JSON.stringify(n);
 
 /*
   Renders the output of the rebalance command
   Listens to the websocket events for logging rebalance output to the browser
 */
-
-const parseAnsi = (n: string) => {
-  try {
-    const parsed = JSON.parse(n);
-    if (!!parsed.options && !!parsed.options.evaluating && !!parsed.options.evaluating.length) {
-      parsed.options.evaluating = parsed.options.evaluating.map((n: string) => stripAnsi(n));
-    }
-
-    return parsed;
-  } catch (e) {
-    return n;
-  }
-};
 
 const styles = {
   pre: {
@@ -88,7 +73,7 @@ const RebalanceResult = () => {
     });
 
     socket.on(`${dateString}`, data => {
-      const message = parseAnsi(stringify(data.message));
+      const message = data.message;
 
       output.push(YAML.stringify(message));
 

@@ -1,11 +1,13 @@
 import * as types from '~shared/types';
 
 import React, { useEffect, useState } from 'react';
+import { selectedSavedNode, tokensAsBigTokens } from '~client/utils/constants';
 
 import Title from './Title';
 import Typography from '@mui/material/Typography';
 import { axiosGet } from '~client/utils/axios';
-import { selectedSavedNode } from '~client/utils/constants';
+
+// Renders the balance info section of the dashboard.
 
 const BalanceInfo = () => {
   const [offchainBalance, setOffchainBalance] = useState(0);
@@ -65,13 +67,17 @@ const BalanceInfo = () => {
     <React.Fragment>
       <Title>Balance Info</Title>
       <Typography component="p" variant="h5" style={{ marginBottom: '20px' }}>
-        {`Balance: ${totalBalance}`}
+        {`Balance: ${tokensAsBigTokens(totalBalance)}`}
       </Typography>
-      <Typography color="text.secondary" variant="body1">{`Offchain Balance: ${offchainBalance}`}</Typography>
+      <Typography color="text.secondary" variant="body1">{`Offchain Balance: ${tokensAsBigTokens(
+        offchainBalance
+      )}`}</Typography>
       <Typography color="text.secondary" variant="body1">
-        {`Onchain Balance: ${onchainBalance}`}
+        {`Onchain Balance: ${tokensAsBigTokens(onchainBalance)}`}
       </Typography>
-      <Typography color="text.secondary" variant="body1">{`Inbound Liquidity: ${inboundLiquidity}`}</Typography>
+      <Typography color="text.secondary" variant="body1">{`Inbound Liquidity: ${tokensAsBigTokens(
+        inboundLiquidity
+      )}`}</Typography>
     </React.Fragment>
   );
 };

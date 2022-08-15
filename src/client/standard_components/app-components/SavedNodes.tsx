@@ -49,7 +49,7 @@ const SavedNodes = () => {
         query: {},
       });
 
-      if (!!result && !!result.nodes && !!result.nodes.length) {
+      if (!!result && !!result.nodes && !!result.nodes.length && result.nodes.length > 1) {
         setSavedNodes(result.nodes.filter(node => !!node.node_name).map(node => node.node_name));
       }
     };
@@ -59,7 +59,7 @@ const SavedNodes = () => {
 
   return (
     <>
-      {!!nodes && nodes.length ? (
+      {!!nodes && !!nodes.length && nodes.length > 1 ? (
         <>
           <Button
             id="saved-nodes-button"

@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 import { axiosGet } from '~client/utils/axios';
 import { selectedSavedNode } from '~client/utils/constants';
 
+// Renders the node info section of the dashboard.
+
 const styles = {
   textMargin: {
     marginBottom: '10px',

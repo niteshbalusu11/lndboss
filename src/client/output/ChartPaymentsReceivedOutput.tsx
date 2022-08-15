@@ -1,5 +1,6 @@
 import { Line } from 'react-chartjs-2';
 import React from 'react';
+import { removeStyling } from '~client/utils/constants';
 import resgisterCharts from '../register_charts';
 
 /*
@@ -14,11 +15,17 @@ type Props = {
   };
 };
 
+const styles = {
+  div: {
+    width: '700px',
+  },
+};
+
 const ChartPaymentsReceivedOutput = ({ data }: Props) => {
   resgisterCharts();
   const { chartData, options } = renderChart({ data });
   return (
-    <div>
+    <div style={styles.div}>
       <h3>{data.title}</h3>
       <Line data={chartData} options={options} id="ChartPaymentsReceivedOutput" />
     </div>
@@ -32,7 +39,7 @@ const renderChart = ({ data }: Props): any => {
     labels: data.data.map((n: number, i: number) => i),
     datasets: [
       {
-        label: data.description,
+        label: removeStyling(data.description),
         fill: false,
         lineTension: 0.1,
         backgroundColor: 'rgba(75,192,192,0.4)',
@@ -77,7 +84,7 @@ const renderChart = ({ data }: Props): any => {
           font: {
             size: 18, // 'size' now within object 'font {}'
           },
-          stepSize: 5000,
+          stepSize: 2000,
           beginAtZero: true,
         },
       },

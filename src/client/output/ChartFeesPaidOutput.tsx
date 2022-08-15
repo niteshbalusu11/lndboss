@@ -17,7 +17,6 @@ type Props = {
     data: number[];
     title: string;
     description: string;
-    rows: string[][];
   };
 };
 
