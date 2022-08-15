@@ -10,7 +10,6 @@ import { useNotify } from '~client/hooks/useNotify';
 
 const { publicRuntimeConfig } = getConfig();
 const { apiUrl } = publicRuntimeConfig;
-
 /*
   Renders the login page
   POST call to the NestJs process to verify credentials and get back JWT token.
@@ -76,7 +75,7 @@ const Login = () => {
 
       localStorage.setItem('accessToken', data.accessToken);
 
-      Router.push('/Commands');
+      Router.push(clientConstants.dashboardPage);
       useNotify({ type: 'success', message: 'Successfully logged in' });
     } catch (error) {
       useNotify({

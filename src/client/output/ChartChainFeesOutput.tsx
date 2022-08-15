@@ -14,11 +14,17 @@ type Props = {
   };
 };
 
+const styles = {
+  div: {
+    width: '700px',
+  },
+};
+
 const ChartChainFeesOutput = ({ data }: Props) => {
   resgisterCharts();
   const { chartData, options } = renderChart({ data });
   return (
-    <div>
+    <div style={styles.div}>
       <h3>{data.title}</h3>
       <Line data={chartData} options={options} id="ChartChainFeesOutput" />
     </div>

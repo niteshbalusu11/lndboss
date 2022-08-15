@@ -37,3 +37,15 @@ export const ambossUrl = 'https://api.amboss.space/graphql';
 
 // Amboss Health Check Cron Schedule
 export const ambossHealthCheckCronSchedule = CronExpression.EVERY_10_MINUTES;
+
+// Parse Ansi escape sequences
+export const removeStyling = o =>
+  JSON.parse(
+    JSON.stringify(o, (k, v) =>
+      typeof v === 'string'
+        ? v.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '')
+        : v === undefined
+          ? null
+          : v
+    )
+  );

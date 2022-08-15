@@ -1,69 +1,101 @@
-import { InputLabel, MenuItem, Select } from '@mui/material';
+import * as React from 'react';
 
-import React from 'react';
+import { Button, Menu, MenuItem } from '@mui/material';
+import { useEffect, useState } from 'react';
 
-/*
-  Gets the list of saved nodes and populates the saved nodes dropdown menu in all commands
-  Sends IPC to the main process to get saved node folders.
-*/
+import Router from 'next/router';
+import { axiosGet } from '~client/utils/axios';
+import { grey } from '@mui/material/colors';
+
+// Menu button on the commands page
 
 const styles = {
-  select: {
-    marginTop: '0px',
+  backgroundColor: grey[900],
+  '&:hover': {
+    backgroundColor: grey[700],
   },
-  inputLabel: {
-    fontWeight: 'bold',
-    color: 'black',
-  },
+  margin: '10px',
+  fontWeight: 'bold',
+  color: 'white',
+  height: '30px',
+  fontSize: '14px',
+  marginLeft: '20px',
+  marginTop: '15px',
 };
 
-const SavedNodes = ({ getSavedNode }) => {
-  const [defaultNode, setDefaultNode] = React.useState('');
-  const [savedNode, setSavedNode] = React.useState('');
-  const [nodeList, setNodeList] = React.useState(['']);
+const SavedNodes = () => {
+  const [nodes, setSavedNodes] = useState(undefined);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
 
-  React.useEffect(() => {
-    // const fetchData = async () => {
-    //   const { defaultSavedNode, savedNodes, error } = await window.electronAPI.getSavedNodes();
-    //   if (!!error) {
-    //     window.alert(error);
-    //   }
-    //   if (!!savedNodes) {
-    //     setDefaultNode(defaultSavedNode);
-    //     setNodeList(savedNodes.filter(node => node !== defaultSavedNode));
-    //     getSavedNode(defaultSavedNode);
-    //   }
-    // };
-    // fetchData();
-  }, []);
-
-  const handleChoiceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSavedNode(event.target.value);
-    getSavedNode(event.target.value);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
   };
+
+  const handleClose = event => {
+    const { nodeValue } = event.currentTarget.dataset;
+    if (!!nodeValue) {
+      localStorage.setItem('SELECTED_SAVED_NODE', nodeValue);
+      Router.reload();
+    }
+
+    setAnchorEl(null);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axiosGet({
+        path: 'grpc/get-saved-nodes',
+        query: {},
+      });
+
+      if (!!result && !!result.nodes && !!result.nodes.length && result.nodes.length > 1) {
+        setSavedNodes(result.nodes.filter(node => !!node.node_name).map(node => node.node_name));
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
-      <InputLabel id="demo-simple-select-standard-label" style={styles.inputLabel}>
-        Saved Node
-      </InputLabel>
-      <Select
-        labelId="saved-nodes"
-        id="saved-nodes"
-        value={savedNode || defaultNode || ''}
-        onChange={handleChoiceChange}
-        label="Saved Nodes"
-        style={styles.select}
-      >
-        <MenuItem value={defaultNode}>{defaultNode}</MenuItem>
-        {nodeList.map((node: string) => {
-          return (
-            <MenuItem value={node} key={node}>
-              {node}
-            </MenuItem>
-          );
-        })}
-      </Select>
+      {!!nodes && !!nodes.length && nodes.length > 1 ? (
+        <>
+          <Button
+            id="saved-nodes-button"
+            aria-controls={open ? 'saved-nodes-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}
+            style={styles}
+          >
+            Switch Saved Node
+          </Button>
+          <Menu
+            id="saved-nodes-menu"
+            aria-labelledby="saved-nodes-button"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+          >
+            {!!nodes
+              ? nodes.map((node, index) => (
+                  <MenuItem onClick={handleClose} key={index} data-node-value={node} id={node}>
+                    {node}
+                  </MenuItem>
+                ))
+              : null}
+          </Menu>
+        </>
+      ) : null}
     </>
   );
 };

@@ -45,6 +45,7 @@ import {
 import { Injectable } from '@nestjs/common';
 import { LndService } from '../lnd/lnd.service';
 import { SocketGateway } from '../socket/socket.gateway';
+import { removeStyling } from '~server/utils/constants';
 
 @Injectable()
 export class CommandsService {
@@ -181,7 +182,7 @@ export class CommandsService {
 
     const myFormat = format.printf(({ message }) => {
       return emit(args.message_id, {
-        message: format.prettyPrint(message),
+        message: format.prettyPrint(removeStyling(message)),
       });
     });
 
@@ -216,7 +217,7 @@ export class CommandsService {
 
     const myFormat = format.printf(({ message }) => {
       return emit(args.message_id, {
-        message: format.prettyPrint(message),
+        message: format.prettyPrint(removeStyling(message)),
       });
     });
 

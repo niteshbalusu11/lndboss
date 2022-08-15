@@ -10,7 +10,6 @@ import {
 import Head from 'next/head';
 import Router from 'next/router';
 import axios from 'axios';
-import { createUseStyles } from 'react-jss';
 import getConfig from 'next/config';
 import { useLoading } from '~client/hooks/useLoading';
 import { useNotify } from '~client/hooks/useNotify';
@@ -24,7 +23,7 @@ const { apiUrl } = publicRuntimeConfig;
   Verifies connection to LND.
 */
 
-const styles = createUseStyles({
+const styles = {
   form: {
     marginLeft: '20px',
     marginTop: '50px',
@@ -58,7 +57,7 @@ const styles = createUseStyles({
   select: {
     marginBottom: '20px',
   },
-});
+};
 
 const Authenticate = () => {
   const [cert, setCert] = useState('');
@@ -69,8 +68,6 @@ const Authenticate = () => {
   const [authType, setAuthType] = useState('');
   const [networkType, setNetworkType] = useState('');
   const [directorypath, setDirectorypath] = useState('');
-
-  const classes = styles();
 
   const handleCertChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCert(event.target.value);
@@ -166,9 +163,9 @@ const Authenticate = () => {
       <StartFlexBox>
         <StandardHomeButtonLink />
 
-        <Stack spacing={1} className={classes.form}>
-          <h2 className={classes.h1}>Authenticate</h2>
-          <InputLabel id="authtype" className={classes.inputLabel}>
+        <Stack spacing={1} sx={styles.form}>
+          <h2 style={styles.h1}>Authenticate</h2>
+          <InputLabel id="authtype" sx={styles.inputLabel}>
             Pick a Authentication Type (Required)
           </InputLabel>
           <Select
@@ -194,11 +191,11 @@ const Authenticate = () => {
               <TextField
                 type="text"
                 placeholder="Saved Node Name"
-                className={classes.input}
+                sx={styles.input}
                 id="node"
                 onChange={handleNodeNameChange}
                 inputProps={{
-                  className: classes.inputStyle,
+                  sx: styles.inputStyle,
                 }}
               />
               <FormControlLabel
@@ -213,30 +210,30 @@ const Authenticate = () => {
               <TextField
                 type="text"
                 placeholder="TLS Cert"
-                className={classes.input}
-                id="cert"
+                sx={styles.input}
                 inputProps={{
-                  className: classes.inputStyle,
+                  sx: styles.inputStyle,
                 }}
+                id="cert"
                 onChange={handleCertChange}
               />
               <TextField
                 type="password"
                 placeholder="Admin/Nospend Macaroon"
-                className={classes.input}
-                id="macaroon"
+                sx={styles.input}
                 inputProps={{
-                  className: classes.inputStyle,
+                  sx: styles.inputStyle,
                 }}
+                id="macaroon"
                 onChange={handleMacaroonChange}
               />
               <TextField
                 type="text"
                 placeholder="Socket (host:port)"
-                className={classes.inputStyle}
+                sx={styles.inputStyle}
                 id="socket"
                 inputProps={{
-                  className: classes.inputStyle,
+                  sx: styles.inputStyle,
                 }}
                 onChange={handleSocketChange}
               />
@@ -252,7 +249,7 @@ const Authenticate = () => {
 
           {authType === 'path' ? (
             <>
-              <InputLabel id="network" className={classes.inputLabel}>
+              <InputLabel id="network" sx={styles.inputLabel}>
                 Pick a Network (Required)
               </InputLabel>
               <Select
@@ -261,7 +258,7 @@ const Authenticate = () => {
                 value={networkType}
                 onChange={handleNetworkTypeChange}
                 label="Network Type"
-                className={classes.select}
+                sx={styles.select}
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -282,20 +279,20 @@ const Authenticate = () => {
               <TextField
                 type="text"
                 placeholder="Path to LND Directory"
-                className={classes.input}
+                sx={styles.input}
                 id="directorypath"
                 inputProps={{
-                  className: classes.inputStyle,
+                  sx: styles.inputStyle,
                 }}
                 onChange={handleDirectoryPathChange}
               />
               <TextField
                 type="text"
                 placeholder="Socket (host:port)"
-                className={classes.inputStyle}
+                sx={styles.inputStyle}
                 id="socket"
                 inputProps={{
-                  className: classes.inputStyle,
+                  sx: styles.inputStyle,
                 }}
                 onChange={handleSocketChange}
               />

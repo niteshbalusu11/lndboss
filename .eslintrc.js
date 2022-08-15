@@ -47,5 +47,6 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': ['off'],
     'react/react-in-jsx-scope': 'error',
     'react/prop-types': 'error',
+    'prettier/prettier': 'off',
   },
 };

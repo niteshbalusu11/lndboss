@@ -3,7 +3,7 @@ import * as YAML from 'json-to-pretty-yaml';
 import React, { useMemo } from 'react';
 
 import { StandardTableOutput } from '~client/standard_components/app-components';
-import stripAnsi from 'strip-ansi';
+import { removeStyling } from '~client/utils/constants';
 
 // Renders the table output of the bos peers command
 
@@ -35,7 +35,7 @@ const PeersOutput = ({ data, isComplete }: Args) => {
       data.rows.forEach((row: string[]) => {
         const newRow = [];
         row.forEach((n: string) => {
-          newRow.push(stripAnsi(String(n)));
+          newRow.push(removeStyling(String(n)));
         });
         dataSet.push(newRow);
       });

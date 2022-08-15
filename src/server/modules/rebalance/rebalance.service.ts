@@ -9,6 +9,7 @@ import { SocketGateway } from '../socket/socket.gateway';
 import { getSavedNodes } from '~server/lnd';
 import manageRebalanceTriggers from '~server/commands/rebalance/manage_rebalance_triggers';
 import { rebalanceCommand } from '~server/commands';
+import { removeStyling } from '~server/utils/constants';
 
 const actionAddRebalanceTrigger = 'action-add-rebalance-trigger';
 const actionDeleteRebalanceTrigger = 'action-delete-trigger';
@@ -133,14 +134,14 @@ export class RebalanceService implements OnModuleInit {
 
     const myFormat = format.printf(({ message }) => {
       return emit(messageId, {
-        message: format.prettyPrint(message),
+        message: format.prettyPrint(removeStyling(message)),
       });
     });
 
     const logger: Logger = createLogger({
       level: 'info',
       format: format.combine(myFormat),
-      defaultMeta: { service: 'send' },
+      defaultMeta: { service: 'rebalance' },
       transports: [
         new transports.Console({
           format: format.combine(format.prettyPrint()),
