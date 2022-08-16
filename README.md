@@ -222,10 +222,10 @@ services:
       NODE_ENV: 'production'
       PORT: 8055
       BOS_DEFAULT_LND_SOCKET: 10.21.21.9:10009
-    networks:
-      default:
-        external: true
-        name: umbrel_main_network
+networks:
+  default:
+    name: umbrel_main_network
+    external: true
 ```
 
 Start the app
@@ -275,10 +275,10 @@ services:
       NODE_ENV: 'production'
       PORT: 8055
       BOS_DEFAULT_LND_SOCKET: 10.21.21.9:10009
-    networks:
-      default:
-        external: true
-        name: umbrel_main_network
+networks:
+  default:
+    name: umbrel_main_network
+    external: true
 ```
 
 Start the app
