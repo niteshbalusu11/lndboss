@@ -99,6 +99,11 @@ export class RebalanceService implements OnModuleInit {
 
   // On module init, get saved nodes and fetch rebalances and add to cron jobs
   async onModuleInit() {
+    this.initRebalances();
+  }
+
+  // Run on module init
+  async initRebalances() {
     try {
       const { nodes } = await getSavedNodes({});
 
