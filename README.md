@@ -217,12 +217,15 @@ services:
       - ~/umbrel/app-data/lightning/data/lnd:/home/node/.lnd
     ports:
       - '8055:8055'
-    extra_hosts:
-      - 'umbrel.local:10.21.21.9'
-networks:
-  default:
-    external: true
-    name: umbrel_main_network
+    environment:
+      BOS_DATA_PATH: '/home/node/.bosgui'
+      NODE_ENV: 'production'
+      PORT: 8055
+      BOS_DEFAULT_LND_SOCKET: 10.21.21.9:10009
+    networks:
+      default:
+        external: true
+        name: umbrel_main_network
 ```
 
 Start the app
@@ -267,12 +270,15 @@ services:
       - ~/umbrel/lnd:/home/node/.lnd
     ports:
       - '8055:8055'
-    extra_hosts:
-      - 'umbrel.local:10.21.21.9'
-networks:
-  default:
-    external: true
-    name: umbrel_main_network
+    environment:
+      BOS_DATA_PATH: '/home/node/.bosgui'
+      NODE_ENV: 'production'
+      PORT: 8055
+      BOS_DEFAULT_LND_SOCKET: 10.21.21.9:10009
+    networks:
+      default:
+        external: true
+        name: umbrel_main_network
 ```
 
 Start the app
