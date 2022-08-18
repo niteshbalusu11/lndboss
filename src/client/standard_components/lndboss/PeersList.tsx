@@ -2,6 +2,7 @@ import { Autocomplete, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 import { axiosGet } from '~client/utils/axios';
+import { tokensAsBigTokens } from '~client/utils/constants';
 
 /** GET call to NestJs process to get peers list
   {
@@ -40,7 +41,11 @@ const PeersList = ({ id, label, placeholder, setPeer }: Args) => {
       if (!!response) {
         response.forEach(peers => {
           peers.result.forEach(p => {
-            newArray.push(`${p.alias}->${p.public_key}->${p.outbound}/${p.inbound} Node: ${peers.node}`);
+            newArray.push(
+              `${p.alias}\n${p.public_key}\n${tokensAsBigTokens(p.outbound)}/${tokensAsBigTokens(p.inbound)}\nNode: ${
+                peers.node
+              }`
+            );
           });
         });
 
@@ -59,7 +64,7 @@ const PeersList = ({ id, label, placeholder, setPeer }: Args) => {
         options={peers}
         renderInput={params => <TextField {...params} label={label} placeholder={placeholder} id={id} />}
         onChange={(_event: any, newValue: any) => {
-          setPeer(!!newValue ? newValue.split('->')[1] : '');
+          setPeer(!!newValue ? newValue.split('\n')[1] : '');
         }}
         style={styles.textField}
       />
