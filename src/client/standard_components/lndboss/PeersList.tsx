@@ -40,7 +40,7 @@ const PeersList = ({ id, label, placeholder, setPeer }: Args) => {
       if (!!response) {
         response.forEach(peers => {
           peers.result.forEach(p => {
-            newArray.push(`${p.alias}-${p.public_key}-${p.outbound}/${p.inbound} Node: ${peers.node}`);
+            newArray.push(`${p.alias}->${p.public_key}->${p.outbound}/${p.inbound} Node: ${peers.node}`);
           });
         });
 
@@ -59,7 +59,7 @@ const PeersList = ({ id, label, placeholder, setPeer }: Args) => {
         options={peers}
         renderInput={params => <TextField {...params} label={label} placeholder={placeholder} id={id} />}
         onChange={(_event: any, newValue: any) => {
-          setPeer(!!newValue ? newValue.split('-')[1] : '');
+          setPeer(!!newValue ? newValue.split('->')[1] : '');
         }}
         style={styles.textField}
       />

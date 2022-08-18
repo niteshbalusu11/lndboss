@@ -229,18 +229,19 @@ const Rebalance = () => {
           <h1>Manual Rebalance</h1>
           <pre style={styles.pre}>{RebalanceCommand.longDescription}</pre>
           <h3>NOTE: THERE IS NO WAY TO STOP AN IN-FLIGHT REBALANCE, DOUBLE CHECK BEFORE RUNNING.</h3>
-          <PeersList
-            setPeer={setInPeer}
-            label={RebalanceCommand.flags.in_through}
-            placeholder={`${RebalanceCommand.flags.in_through} (Route in through a specific peer)`}
-            id={RebalanceCommand.flags.in_through}
-          />
 
           <PeersList
             setPeer={setOutPeer}
             label={RebalanceCommand.flags.out_through}
             placeholder={`${RebalanceCommand.flags.out_through} (Route out through a specific peer)`}
             id={RebalanceCommand.flags.out_through}
+          />
+
+          <PeersList
+            setPeer={setInPeer}
+            label={RebalanceCommand.flags.in_through}
+            placeholder={`${RebalanceCommand.flags.in_through} (Route in through a specific peer)`}
+            id={RebalanceCommand.flags.in_through}
           />
 
           <TextField
