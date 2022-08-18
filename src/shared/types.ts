@@ -115,6 +115,20 @@ export type commandGraph = {
   sort: string;
 };
 
+// ========================Pay command================================
+
+export type commandPay = {
+  avoid: string[];
+  in_through: string;
+  max_fee: number;
+  max_paths: number;
+  message: string;
+  message_id?: string;
+  node: string;
+  out: string[];
+  request: string;
+};
+
 // ========================Peers Command=====================================
 export type commandPeers = {
   earnings_days: string;

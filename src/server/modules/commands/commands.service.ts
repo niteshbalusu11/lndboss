@@ -13,6 +13,7 @@ import {
   findCommand,
   forwardsCommand,
   graphCommand,
+  payCommand,
   peersCommand,
   priceCommand,
   probeCommand,
@@ -34,6 +35,7 @@ import {
   findDto,
   forwardsDto,
   graphDto,
+  payDto,
   peersDto,
   priceDto,
   probeDto,
@@ -159,6 +161,37 @@ export class CommandsService {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
     const { result } = await graphCommand({ args, lnd, logger });
+
+    return { result };
+  }
+
+  async payCommand(args: payDto): Promise<{ result: any }> {
+    const emit = this.socketService.server.emit.bind(this.socketService.server);
+
+    const myFormat = format.printf(({ message }) => {
+      return emit(args.message_id, {
+        message: format.prettyPrint(removeStyling(message)),
+      });
+    });
+
+    const logger: Logger = createLogger({
+      level: 'info',
+      format: format.combine(myFormat),
+      defaultMeta: { service: 'pay' },
+      transports: [
+        new transports.Console({
+          format: format.combine(format.prettyPrint()),
+        }),
+      ],
+    });
+
+    const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+    const { result } = await payCommand({
+      args,
+      lnd,
+      logger,
+    });
 
     return { result };
   }

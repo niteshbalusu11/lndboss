@@ -13,6 +13,7 @@ import {
   findDto,
   forwardsDto,
   graphDto,
+  payDto,
   peersDto,
   priceDto,
   probeDto,
@@ -89,6 +90,11 @@ export class CommandsController {
   @Get('graph')
   async graphCommand(@Query() args: graphDto) {
     return this.commandsService.graphCommand(args);
+  }
+
+  @Get('pay')
+  async payCommand(@Query() args: payDto) {
+    return this.commandsService.payCommand(args);
   }
 
   @Get('peers')

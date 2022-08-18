@@ -181,6 +181,22 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Pay',
+    value: 'Pay',
+    args: {
+      request: 'PaymentRequest',
+    },
+    description: 'Pay a payment request, probing first',
+    flags: {
+      avoid: 'Avoid',
+      in: 'In',
+      max_fee: 'MaxFee',
+      max_paths: 'MaxPaths',
+      message: 'Message',
+      out: 'Out',
+    },
+  },
+  {
     name: 'Peers',
     value: 'Peers',
     description: 'Get a list of channel-connected peers',

@@ -362,6 +362,51 @@ export class grpcDto {
   node: string;
 }
 
+export class payDto {
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  avoid: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  in_through: string;
+
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  max_fee: number;
+
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  max_paths: number;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  message: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  message_id: string;
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  out: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  node: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  request: string;
+}
+
 export class peersDto {
   @Transform(({ value }) => trim(value))
   @IsOptional()
