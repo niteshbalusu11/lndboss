@@ -28,6 +28,18 @@ import { readFile } from 'fs';
     [out_through]: <Pay Out Through Peer String>
     request: <Request Function>
   }
+
+  @Returns via Promise
+  {
+    [fee]: <Fee Tokens To Destination Number>
+    [id]: <Payment Hash Hex String>
+    [latency_ms]: <Latency Milliseconds Number>
+    [route_maximum]: <Maximum Sendable Tokens On Successful Probe Path Number>
+    [paid]: <Paid Tokens Number>
+    [preimage]: <Payment HTLC Preimage Hex String>
+    [relays]: [<Relaying Node Public Key Hex String]
+    [success]: [<Standard Format Channel Id String>]
+  }
 */
 
 type Args = {
@@ -36,7 +48,7 @@ type Args = {
   lnd: AuthenticatedLnd;
 };
 const sendCommand = async ({ args, lnd, logger }: Args): Promise<{ result: any }> => {
-  const avoidArray = args.avoid.filter(n => !!n);
+  const avoidArray = !!args.avoid ? args.avoid.filter(n => !!n) : [];
 
   try {
     const result = await pushPayment({

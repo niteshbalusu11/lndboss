@@ -12,8 +12,8 @@ import { useRouter } from 'next/router';
 const socket = io();
 
 /*
-  Renders the output of the send command
-  Listens to the websocket events for logging send output to the browser
+  Renders the output of the pay command
+  Listens to the websocket events for logging pay output to the browser
 */
 
 const styles = {
@@ -29,7 +29,7 @@ const styles = {
   },
 };
 
-const SendResult = () => {
+const PayResult = () => {
   const router = useRouter();
 
   const [data, setData] = useState(undefined);
@@ -49,18 +49,15 @@ const SendResult = () => {
     const dateString = Date.now().toString();
 
     const query = {
-      amount: router.query.amount,
       avoid: router.query.avoid,
-      destination: router.query.destination,
       in_through: router.query.in_through,
-      is_dry_run: router.query.is_dry_run,
-      is_omitting_message_from: router.query.is_omitting_message_from,
       max_fee: router.query.max_fee,
-      max_fee_rate: router.query.max_fee_rate,
+      max_paths: router.query.max_paths,
       message: router.query.message,
       message_id: dateString,
       node: router.query.node,
-      out_through: router.query.out_through,
+      out: router.query.out,
+      request: router.query.request,
     };
 
     socket.on('connect', () => {
@@ -84,7 +81,7 @@ const SendResult = () => {
     });
 
     const fetchData = async () => {
-      const result = await axiosGetWebSocket({ path: 'send', query });
+      const result = await axiosGetWebSocket({ path: 'pay', query });
 
       if (!!result) {
         output.push(YAML.stringify(result));
@@ -98,15 +95,15 @@ const SendResult = () => {
   return (
     <CssBaseline>
       <Head>
-        <title>Send Result</title>
+        <title>Pay Result</title>
       </Head>
       <StartFlexBoxBlack>
         <div style={styles.div}>
-          <h1 id={'sendResultTitle'} style={styles.h1}>
+          <h1 id={'payResultTitle'} style={styles.h1}>
             Paying offchain...
           </h1>
           {!!data && (
-            <div id={'sendResult'}>
+            <div id={'payResult'}>
               <pre style={styles.pre}>{data}</pre>
             </div>
           )}
@@ -122,4 +119,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default SendResult;
+export default PayResult;

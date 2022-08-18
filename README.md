@@ -45,6 +45,9 @@ bos forwards
 # Look up the channels and fee rates of a node by its public key
 bos graph "pubkey"
 
+# Pay a payment request (invoice), probing first
+bos pay "payment_request"
+
 # Show channel-connected peers
 bos peers
 
@@ -1242,6 +1245,96 @@ try {
     query: 'walletofsatoshi',
     filters: ['capacity>10000000', 'age<2000']
   };
+
+  const response = await axios.get(url, {
+    params: query,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
+
+### Pay
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/pay
+
+@Query
+  {
+    amount: <Amount to Push Tokens String>
+    avoid: [<Avoid Forwarding Through String>]
+    [in_through]: <Pay In Through Peer String>
+    [max_fee]: <Maximum Fee Tokens Number>
+    [max_paths]: <Max Paths to take Number>
+    [message]: <Message to Include With Payment String>
+    message_id: <DateTime stamp string>
+    [node]: <Saved Node String>
+    [out]: [<Pay Out Through Peer String Array>]
+    request: <BOLT 11 Payment Request String>
+  }
+
+@Response
+  {
+    [fee]: <Fee Tokens To Destination Number>
+    [id]: <Payment Hash Hex String>
+    [latency_ms]: <Latency Milliseconds Number>
+    [paid]: <Paid Tokens Number>
+    [preimage]: <Payment HTLC Preimage Hex String>
+    [relays]: [<Relaying Node Public Key Hex String]
+    [success]: [<Standard Format Channel Id String>]
+  }
+*/
+
+import { io } from 'socket.io-client';
+
+try {
+  const url = 'http://localhost:8055/api/pay';
+
+  // Unique connection name for websocket connection.
+  const dateString = Date.now().toString();
+
+  const query = {
+    avoid: ['ban'],
+    in_through: '02ce4aea072f54422d35eb8d82aebe966b033d4e98b470907f601a025c5c29a7dc',
+    max_fee: 20,
+    message_id: dateString,
+    out: ['02ce4aea072f54422d35eb8d82aebe966b033d4e98b470907f601a025c5c29a7dc'],
+    request: 'lnbcrt500n1p30ust0pp5n07x3ckwhxunpxy4gp2azckwqk8tlaqgl3hu036u5qa77dfj2f6sdqqcqzpgxqyz5vqsp54eg7zhnnrcnkhr848asghvuu349k00a5cltx56ctnt7a80jcjgxq9qyyssqsms9wv8d9244l03wasz40mfaw3xgfxjth4c02mk958gjj0yzm6cx6mne28auz3vk0kypqwnsp37pde958wxu7vrqmmpxp9f3td64jnqp0q0gas',
+  };
+
+  // To get live logs while pushing a payment, you can start a websocket connection with the server and add an event listener.
+  // Websocket url is the same as the server url http://localhost:8055
+  // Messages from the server are passed to client using the dateString passed from above.
+  const socket = io();
+
+  socket.on('connect', () => {
+    console.log('connected');
+  });
+
+  socket.on('disconnect', () => {
+    console.log('disconnected');
+  });
+
+// Make sure to pass the same dateString from above
+  socket.on(`${dateString}`, data => {
+    console.log(data);
+  });
+
+  socket.on('error', err => {
+    throw err;
+  });
+
+// End websocket code.
 
   const response = await axios.get(url, {
     params: query,
