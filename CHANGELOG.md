@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.19.0](https://github.com/niteshbalusu11/lndboss/compare/v1.18.0...v1.19.0) (2022-08-19)
+
 ## [1.18.0](https://github.com/niteshbalusu11/lndboss/compare/v1.17.2...v1.18.0) (2022-08-15)
 
 - Added support for a dashboard page to view node and accounting summary.
