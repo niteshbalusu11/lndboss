@@ -13,6 +13,7 @@ import {
   findCommand,
   forwardsCommand,
   graphCommand,
+  lnurlCommand,
   payCommand,
   peersCommand,
   priceCommand,
@@ -52,6 +53,29 @@ import { removeStyling } from '~server/utils/constants';
 @Injectable()
 export class CommandsService {
   constructor(private socketService: SocketGateway) {}
+
+  async logger({ messageId, service }) {
+    const emit = this.socketService.server.emit.bind(this.socketService.server);
+
+    const myFormat = format.printf(({ message }) => {
+      return emit(messageId, {
+        message: format.prettyPrint(removeStyling(message)),
+      });
+    });
+
+    const logger: Logger = createLogger({
+      level: 'info',
+      format: format.combine(myFormat),
+      defaultMeta: { service },
+      transports: [
+        new transports.Console({
+          format: format.combine(format.prettyPrint()),
+        }),
+      ],
+    });
+
+    return logger;
+  }
 
   async accountingCommand(args: accountingDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
@@ -161,6 +185,17 @@ export class CommandsService {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
     const { result } = await graphCommand({ args, lnd, logger });
+
+    return { result };
+  }
+
+
+  async lnurlCommand(args): Promise<{ result: any }> {
+    const logger = await this.logger({ messageId: args.message_id, service: 'lnurl' });
+
+    const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+    const result = await lnurlCommand({ args, lnd, logger });
 
     return { result };
   }

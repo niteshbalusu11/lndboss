@@ -92,6 +92,11 @@ export class CommandsController {
     return this.commandsService.graphCommand(args);
   }
 
+  @Get('lnurl')
+  async lnurlCommand(@Query() args) {
+    return this.commandsService.lnurlCommand(args);
+  }
+
   @Get('pay')
   async payCommand(@Query() args: payDto) {
     return this.commandsService.payCommand(args);
