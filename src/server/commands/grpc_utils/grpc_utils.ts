@@ -8,7 +8,6 @@ import {
   signMessage,
 } from 'lightning';
 
-import { Logger } from '@nestjs/common';
 import { httpLogger } from '~server/utils/global_functions';
 
 /**
@@ -37,7 +36,6 @@ export const signature = async ({ lnd, message }: SignMessage): Promise<{ result
 
     return { result };
   } catch (error) {
-    Logger.error(error);
     httpLogger({ error });
   }
 };
@@ -58,7 +56,6 @@ export const walletInfo = async ({ lnd }: { lnd: AuthenticatedLnd }): Promise<{ 
 
     return { result };
   } catch (error) {
-    Logger.error(error);
     httpLogger({ error });
   }
 };
@@ -84,7 +81,6 @@ export const channelBalance = async ({
 
     return { result };
   } catch (error) {
-    Logger.error(error);
     httpLogger({ error });
   }
 };

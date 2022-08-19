@@ -1,6 +1,5 @@
 import { certExpiration, pemAsDer } from 'balanceofsatoshis/encryption';
 
-import { Logger } from '@nestjs/common';
 import { httpLogger } from '~server/utils/global_functions';
 import { lndCredentials } from '~server/lnd';
 
@@ -44,7 +43,6 @@ const certValidityDaysCommand = async ({ below, node }: Args): Promise<{ result:
 
     return { result: round(days) };
   } catch (error) {
-    Logger.error(error);
     httpLogger({ error });
   }
 };

@@ -53,7 +53,6 @@ const rebalanceCommand = async ({ args, lnd, logger }): Promise<{ result: any }>
 
     return { result };
   } catch (error) {
-    logger.error({ error });
     httpLogger({ error });
   }
 };

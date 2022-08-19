@@ -55,7 +55,7 @@ type Tasks = {
     is_authenticated: boolean;
   }
 };
-const auth = async (args) => {
+const auth = async (args): Promise<Tasks> => {
   return auto<Tasks>({
     // Import the ECPair library
     ecp: (cbk) => cbk(null, ECPairFactory(tinysecp)),
@@ -126,10 +126,7 @@ const auth = async (args) => {
     }],
 
     // Sign the canonical phrase for LUD-13 signMessage based seed generation
-    seed: ['parse', async ({}) => {
-      console.log('signing message');
-      return await signMessage({ lnd: args.lnd, message: lud13AuthPhrase })
-    }],
+    seed: ['parse', async ({}) => await signMessage({ lnd: args.lnd, message: lud13AuthPhrase })],
 
     // Derive keys and get signatures
     sign: ['ecp', 'parse', 'seed', ({ ecp, parse, seed }, cbk) => {

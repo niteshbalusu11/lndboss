@@ -36,7 +36,6 @@ const chainfeesCommand = async ({ args, lnd }: Args): Promise<{ result: any }> =
 
     return { result };
   } catch (error) {
-    Logger.error(error);
     httpLogger({ error });
   }
 };

@@ -10,7 +10,6 @@ const functionAuth = 'auth';
 const functionChannel = 'channel';
 const functionPay = 'pay';
 const functionWithdraw = 'withdraw';
-const { isArray } = Array;
 const supportedFunctions = ['auth', 'channel', 'pay', 'withdraw'];
 
 /** Manage Lnurl functions
@@ -33,10 +32,6 @@ const lnurlCommand = async ({ args, lnd, logger }) => {
   return auto({
     // Check arguments
     validate: (cbk: any) => {
-      // if (!isArray(args.avoid)) {
-      //   return cbk([400, 'ExpectedArrayOfAvoidsToManageLnurl']);
-      // }
-
       if (!supportedFunctions.includes(args.function)) {
         return cbk([400, 'ExpectedLnurlFunctionToManageLnurl']);
       }
@@ -53,10 +48,6 @@ const lnurlCommand = async ({ args, lnd, logger }) => {
         return cbk([400, 'ExpectedLoggerToManageLnurl']);
       }
 
-      // if (!isArray(args.out)) {
-      //   return cbk([400, 'ExpectedArrayOfOutPeersToManageLnurl']);
-      // }
-
       return cbk();
     },
 
@@ -67,12 +58,12 @@ const lnurlCommand = async ({ args, lnd, logger }) => {
         return;
       }
 
-      return await auth({
+      return (await auth({
         lnd,
         logger,
         request,
         lnurl: args.lnurl,
-      });
+      })).send;
     }],
 
     // Request inbound channel
@@ -82,12 +73,12 @@ const lnurlCommand = async ({ args, lnd, logger }) => {
         return;
       }
 
-      return await channel({
+      return (await channel({
         lnd,
         logger,
         request,
         lnurl: args.lnurl,
-      });
+      })).sendConfirmation;
     }],
 
     // Pay to lnurl

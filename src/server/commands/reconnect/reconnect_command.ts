@@ -1,5 +1,4 @@
 import { AuthenticatedLnd } from 'lightning';
-import { Logger } from '@nestjs/common';
 import { httpLogger } from '~server/utils/global_functions';
 import { reconnect } from 'balanceofsatoshis/network';
 
@@ -41,7 +40,6 @@ const reconnectCommand = async ({ lnd }: Args): Promise<{ result: Result }> => {
 
     return { result };
   } catch (error) {
-    Logger.error(error);
     httpLogger({ error });
   }
 };

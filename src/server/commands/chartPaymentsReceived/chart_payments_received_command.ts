@@ -1,7 +1,6 @@
 import * as types from '~shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
-import { Logger } from '@nestjs/common';
 import { getReceivedChart } from 'balanceofsatoshis/wallets';
 import { httpLogger } from '~server/utils/global_functions';
 
@@ -32,7 +31,6 @@ const chartPaymentsReceivedCommand = async ({ args, lnd }: Args): Promise<{ resu
     });
     return { result };
   } catch (error) {
-    Logger.error(error);
     httpLogger({ error });
   }
 };

@@ -50,7 +50,7 @@ type Tasks = {
     requested_channel_open: boolean;
   };
 };
-const channel = async (args) => {
+const channel = async (args): Promise<any> => {
   return auto<Tasks>({
     // Check arguments
     validate: (cbk: any) => {
@@ -185,7 +185,6 @@ const channel = async (args) => {
 
     // Make the request to confirm a request for an inbound channel
     sendConfirmation: [
-      'connect',
       'getIdentity',
       'getTerms',
       ({ getIdentity, getTerms }, cbk: any) => {
@@ -222,8 +221,7 @@ const channel = async (args) => {
             return cbk(null, { requested_channel_open: true });
           });
       }],
-  },
-  );
+  })
 };
 
 export default channel;

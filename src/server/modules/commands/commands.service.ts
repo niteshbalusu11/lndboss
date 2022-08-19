@@ -48,6 +48,7 @@ import {
 import { Injectable } from '@nestjs/common';
 import { LndService } from '../lnd/lnd.service';
 import { SocketGateway } from '../socket/socket.gateway';
+import { httpLogger } from '~server/utils/global_functions';
 import { removeStyling } from '~server/utils/constants';
 
 @Injectable()
@@ -191,34 +192,21 @@ export class CommandsService {
 
 
   async lnurlCommand(args): Promise<{ result: any }> {
-    const logger = await this.logger({ messageId: args.message_id, service: 'lnurl' });
+    try {
+      const logger = await this.logger({ messageId: args.message_id, service: 'lnurl' });
 
-    const lnd = await LndService.authenticatedLnd({ node: args.node });
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const result = await lnurlCommand({ args, lnd, logger });
+      const result = await lnurlCommand({ args, lnd, logger });
 
-    return { result };
+      return { result };
+    } catch (error) {
+      httpLogger({ error });
+    }
   }
 
   async payCommand(args: payDto): Promise<{ result: any }> {
-    const emit = this.socketService.server.emit.bind(this.socketService.server);
-
-    const myFormat = format.printf(({ message }) => {
-      return emit(args.message_id, {
-        message: format.prettyPrint(removeStyling(message)),
-      });
-    });
-
-    const logger: Logger = createLogger({
-      level: 'info',
-      format: format.combine(myFormat),
-      defaultMeta: { service: 'pay' },
-      transports: [
-        new transports.Console({
-          format: format.combine(format.prettyPrint()),
-        }),
-      ],
-    });
+    const logger = await this.logger({ messageId: args.message_id, service: 'pay' });
 
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
@@ -246,24 +234,7 @@ export class CommandsService {
   }
 
   async probeCommand(args: probeDto): Promise<{ result: any }> {
-    const emit = this.socketService.server.emit.bind(this.socketService.server);
-
-    const myFormat = format.printf(({ message }) => {
-      return emit(args.message_id, {
-        message: format.prettyPrint(removeStyling(message)),
-      });
-    });
-
-    const logger: Logger = createLogger({
-      level: 'info',
-      format: format.combine(myFormat),
-      defaultMeta: { service: 'probe' },
-      transports: [
-        new transports.Console({
-          format: format.combine(format.prettyPrint()),
-        }),
-      ],
-    });
+    const logger = await this.logger({ messageId: args.message_id, service: 'probe' });
 
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
@@ -281,24 +252,7 @@ export class CommandsService {
   }
 
   async sendCommand(args: sendDto): Promise<{ result: any }> {
-    const emit = this.socketService.server.emit.bind(this.socketService.server);
-
-    const myFormat = format.printf(({ message }) => {
-      return emit(args.message_id, {
-        message: format.prettyPrint(removeStyling(message)),
-      });
-    });
-
-    const logger: Logger = createLogger({
-      level: 'info',
-      format: format.combine(myFormat),
-      defaultMeta: { service: 'send' },
-      transports: [
-        new transports.Console({
-          format: format.combine(format.prettyPrint()),
-        }),
-      ],
-    });
+    const logger = await this.logger({ messageId: args.message_id, service: 'send' });
 
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 

@@ -1,7 +1,6 @@
 import * as request from 'balanceofsatoshis/commands/simple_request';
 import * as types from '~shared/types';
 
-import { Logger } from '@nestjs/common';
 import { getPrices } from '@alexbosworth/fiat';
 import { httpLogger } from '~server/utils/global_functions';
 
@@ -25,10 +24,10 @@ const priceCommand = async (args: types.commandPrice): Promise<{ result: any }> 
   try {
     const symbols = !!args.symbols
       ? args.symbols
-          .toUpperCase()
-          .trim()
-          .split(',')
-          .map(n => n.trim())
+        .toUpperCase()
+        .trim()
+        .split(',')
+        .map(n => n.trim())
       : ['USD'];
 
     const result = await getPrices({
@@ -39,7 +38,6 @@ const priceCommand = async (args: types.commandPrice): Promise<{ result: any }> 
 
     return { result };
   } catch (error) {
-    Logger.error(error);
     httpLogger({ error });
   }
 };
