@@ -27,7 +27,7 @@ const wordsAsUtf8 = n => Buffer.from(bech32.fromWords(n)).toString('utf8');
     url: <Callback Url String>
   }
 */
-const parseUrl = ({ url }) => {
+const parseUrl = ({ url }: { url: string }): { url: string } => {
   if (!url) {
     throw new Error('ExpectedLnurlOrLightningAddressToParse');
   }

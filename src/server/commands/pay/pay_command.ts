@@ -38,7 +38,6 @@ type Args = {
   lnd: AuthenticatedLnd;
 };
 const payCommand = async ({ args, lnd, logger }: Args): Promise<{ result: any }> => {
-  console.log(args);
   const avoidArray = !!args.avoid ? args.avoid.filter(n => !!n) : [];
   const outArray = !!args.out ? args.out.filter(n => !!n) : [];
 

@@ -1,3 +1,5 @@
+import { AuthenticatedLnd } from 'lightning';
+import { Logger } from 'winston';
 import { auto } from 'async';
 import { getNodeAlias } from 'ln-sync';
 import getPayRequest from './get_pay_request';
@@ -5,7 +7,7 @@ import getPayTerms from './get_pay_terms';
 import parseUrl from './parse_url';
 import { pay as payInvoice } from 'balanceofsatoshis/network';
 
-const { isArray } = Array;
+const tokensAsMtokens = (tokens: number): string => Math.floor(tokens * 1e3).toString();
 
 /** Pay to lnurl
 
@@ -21,24 +23,39 @@ const { isArray } = Array;
     request: <Request Function>
   }
 
-  @returns via cbk or Promise
+  @returns via Promise
 */
+
+type Args = {
+  amount: number;
+  avoid: string[];
+  lnd: AuthenticatedLnd;
+  lnurl: string;
+  logger: Logger;
+  max_fee: number;
+  max_paths: number;
+  out: string[];
+  request: any;
+}
 
 type Tasks = {
   validate: undefined;
-  getTerms: { url: string; hash: string };
+  getTerms: {
+    description: string;
+    hash: string;
+    max: number;
+    min: number;
+    url: string;
+  };
+  validateTerms: undefined;
   getRequest: { destination: string; request: string };
   getAlias: { alias: string };
   pay: any;
 }
-const pay = async (args) => {
+const pay = async (args: Args): Promise<Tasks> => {
   return auto<Tasks>({
     // Check arguments
     validate: (cbk: any) => {
-      if (!isArray(args.avoid)) {
-        return cbk([400, 'ExpectedAvoidArrayToGetPaymentRequestFromLnurl']);
-      }
-
       if (!args.lnurl) {
         return cbk([400, 'ExpectedUrlToGetPaymentRequestFromLnurl']);
       }
@@ -65,12 +82,12 @@ const pay = async (args) => {
         return cbk([400, 'ExpectedMaxPathsCountToPayViaLnurl']);
       }
 
-      if (!isArray(args.out)) {
-        return cbk([400, 'ExpectedArrayOfOutPeersToPayViaLnurl']);
-      }
-
       if (!args.request) {
         return cbk([400, 'ExpectedRequestFunctionToGetLnurlData']);
+      }
+
+      if (!args.amount) {
+        return cbk([400, 'ExpectedAmountToPayViaLnurl']);
       }
 
       return cbk();
@@ -78,20 +95,33 @@ const pay = async (args) => {
 
     // Get accepted terms from the encoded url
     getTerms: ['validate', async ({}) => {
-      return getPayTerms({
+      return (await getPayTerms({
         request: args.request,
         url: parseUrl({ url: args.lnurl }).url,
-      });
+      })).getTerms;
+    }],
+
+    // Validate terms
+    validateTerms: ['getTerms', ({ getTerms }, cbk: any) => {
+      if (getTerms.min > args.amount) {
+        return cbk([400, 'AmountBelowMinimumAcceptedAmountToPayViaLnurl', getTerms.min]);
+      }
+
+      if (getTerms.max < args.amount) {
+        return cbk([400, 'AmountAboveMaximumAcceptedAmountToPayViaLnurl', getTerms.max]);
+      }
+
+      return cbk();
     }],
 
     // Get payment request
-    getRequest: ['getTerms', async ({ getTerms }) => {
-      return getPayRequest({
+    getRequest: ['getTerms', 'validateTerms', async ({ getTerms }) => {
+      return (await getPayRequest({
         hash: getTerms.hash,
-        mtokens: args.amount,
+        mtokens: tokensAsMtokens(args.amount),
         request: args.request,
         url: getTerms.url,
-      });
+      })).getRequest;
     }],
 
     // Get the destination node alias
@@ -103,13 +133,16 @@ const pay = async (args) => {
     pay: ['getAlias', 'getRequest', async ({ getAlias, getRequest }) => {
       args.logger.info({ paying: getAlias.alias });
 
+      const avoidArray = !!args.avoid ? args.avoid.filter(n => !!n) : [];
+      const outArray = !!args.out ? args.out.filter(n => !!n) : [];
+
       return await payInvoice({
-        avoid: args.avoid,
+        avoid: avoidArray,
         lnd: args.lnd,
         logger: args.logger,
         max_fee: args.max_fee,
         max_paths: args.max_paths,
-        out: args.out,
+        out: outArray,
         request: getRequest.request,
       });
     }],

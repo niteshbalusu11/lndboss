@@ -1,6 +1,7 @@
+import { AuthenticatedLnd, SignMessageResult, signMessage } from 'lightning';
 import { ECPairFactory, TinySecp256k1Interface } from 'ecpair';
-import { SignMessageResult, signMessage } from 'lightning';
 
+import { Logger } from 'winston';
 import { auto } from 'async';
 import { bech32 } from 'bech32';
 import signAuthChallenge from './sign_auth_challenge';
@@ -37,6 +38,13 @@ const tinysecp: TinySecp256k1Interface = require('tiny-secp256k1');
   }
 */
 
+type Args = {
+  lnurl: string;
+  lnd: AuthenticatedLnd;
+  request: any;
+  logger: Logger;
+}
+
 type Tasks = {
   ecp: any;
   validate: undefined;
@@ -55,7 +63,7 @@ type Tasks = {
     is_authenticated: boolean;
   }
 };
-const auth = async (args): Promise<Tasks> => {
+const auth = async (args: Args): Promise<Tasks> => {
   return auto<Tasks>({
     // Import the ECPair library
     ecp: (cbk) => cbk(null, ECPairFactory(tinysecp)),

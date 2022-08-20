@@ -33,7 +33,6 @@ const signAuthChallenge = ({ ecp, hostname, k1, seed }) => {
 
   // Instantiate the key pair from this derived private key
   const linkingKey = ecp.fromPrivateKey(linkingPrivKey);
-  console.log(linkingKey);
 
   // Using the host-specific linking key, sign the challenge k1 value
   const signature = bufferAsHex(from(linkingKey.sign(hexAsBuffer(k1))));

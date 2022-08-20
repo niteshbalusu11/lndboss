@@ -1,5 +1,6 @@
-import { CreateInvoiceResult, createInvoice } from 'lightning';
+import { AuthenticatedLnd, CreateInvoiceResult, createInvoice } from 'lightning';
 
+import { Logger } from 'winston';
 import { auto } from 'async';
 import { bech32 } from 'bech32';
 
@@ -29,6 +30,14 @@ const wordsAsUtf8 = n => Buffer.from(bech32.fromWords(n)).toString('utf8');
   @returns via cbk or Promise
 */
 
+type Args = {
+  lnurl: string;
+  lnd: AuthenticatedLnd;
+  request: any;
+  logger: Logger;
+  amount: number;
+}
+
 type Tasks = {
   validate: undefined;
   getTerms: {
@@ -38,10 +47,11 @@ type Tasks = {
     url: string;
     k1: string;
   };
+  validateTerms: undefined;
   createInvoice: CreateInvoiceResult;
   withdraw: { withdrawal_request_sent: boolean };
 }
-const withdraw = async (args) => {
+const withdraw = async (args: Args): Promise<Tasks> => {
   return auto<Tasks>({
     // Check arguments
     validate: (cbk: any) => {
@@ -146,8 +156,21 @@ const withdraw = async (args) => {
       });
     }],
 
+    // Validate terms
+    validateTerms: ['getTerms', ({ getTerms }, cbk: any) => {
+      if (getTerms.min > args.amount) {
+        return cbk([400, 'AmountBelowMinimumAcceptedAmountToPayViaLnurl', getTerms.min]);
+      }
+
+      if (getTerms.max < args.amount) {
+        return cbk([400, 'AmountAboveMaximumAcceptedAmountToPayViaLnurl', getTerms.max]);
+      }
+
+      return cbk();
+    }],
+
     // Create a new payment request for withdrawl
-    createInvoice: ['getTerms', async ({}) => {
+    createInvoice: ['getTerms', 'validateTerms', async ({}) => {
       return await createInvoice({ lnd: args.lnd, mtokens: tokensAsMillitokens(args.amount).toString() });
     }],
 
@@ -186,7 +209,7 @@ const withdraw = async (args) => {
 
           args.logger.info({ withdrawal_request_sent: true });
 
-          return cbk({ withdrawal_request_sent: true });
+          return cbk(null, { withdrawal_request_sent: true });
         });
       }],
   });

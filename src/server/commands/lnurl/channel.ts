@@ -1,5 +1,6 @@
-import { GetIdentityResult, GetPeersResult, addPeer, getIdentity, getPeers } from 'lightning';
+import { AuthenticatedLnd, GetIdentityResult, GetPeersResult, addPeer, getIdentity, getPeers } from 'lightning';
 
+import { Logger } from 'winston';
 import { auto } from 'async';
 import { bech32 } from 'bech32';
 import { getNodeAlias } from 'ln-sync';
@@ -32,6 +33,14 @@ const wordsAsUtf8 = n => Buffer.from(bech32.fromWords(n)).toString('utf8');
   }
 */
 
+type Args = {
+  lnurl: string;
+  lnd: AuthenticatedLnd;
+  request: any;
+  logger: Logger;
+  is_private: string;
+}
+
 type Tasks = {
   validate: undefined;
   getIdentity: GetIdentityResult;
@@ -50,7 +59,7 @@ type Tasks = {
     requested_channel_open: boolean;
   };
 };
-const channel = async (args): Promise<any> => {
+const channel = async (args: Args): Promise<any> => {
   return auto<Tasks>({
     // Check arguments
     validate: (cbk: any) => {

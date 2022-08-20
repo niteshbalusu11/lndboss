@@ -31,8 +31,24 @@ const utf8AsBuffer = utf8 => Buffer.from(utf8, 'utf8');
     url: <Callback URL String>
   }
 */
-const getPayTerms = async ({ request, url }) => {
-  return auto({
+
+type Args = {
+  request: any;
+  url: string;
+}
+
+type Tasks = {
+  validate: undefined;
+  getTerms: {
+    description: string;
+    hash: string;
+    max: number;
+    min: number;
+    url: string;
+  }
+}
+const getPayTerms = async ({ request, url }: Args): Promise<Tasks> => {
+  return auto<Tasks>({
     // Check arguments
     validate: (cbk: any) => {
       if (!request) {

@@ -77,6 +77,7 @@ const lnurlCommand = async ({ args, lnd, logger }) => {
         lnd,
         logger,
         request,
+        is_private: args.is_private,
         lnurl: args.lnurl,
       })).sendConfirmation;
     }],
@@ -88,16 +89,17 @@ const lnurlCommand = async ({ args, lnd, logger }) => {
         return;
       }
 
-      return await pay({
+      return (await pay({
         lnd,
         logger,
         request,
+        amount: args.amount,
         avoid: args.avoid,
         lnurl: args.lnurl,
-        max_fee: args.max_fee,
-        max_paths: args.max_paths,
+        max_fee: args.max_fee || 1337,
+        max_paths: args.max_paths || 1,
         out: args.out,
-      });
+      })).pay;
     }],
 
     // Withdraw from lnurl
@@ -107,12 +109,13 @@ const lnurlCommand = async ({ args, lnd, logger }) => {
         return;
       }
 
-      return await withdraw({
+      return (await withdraw({
         lnd,
         logger,
         request,
+        amount: args.amount,
         lnurl: args.lnurl,
-      });
+      })).withdraw;
     }],
   },
   );

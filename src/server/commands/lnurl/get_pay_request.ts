@@ -18,8 +18,23 @@ const errorStatus = 'ERROR';
     request: <BOLT 11 Payment Request String>
   }
 */
-const getPayRequest = async ({ hash, mtokens, request, url }) => {
-  return auto({
+
+type Args = {
+  hash: string;
+  mtokens: string;
+  request: any;
+  url: string;
+}
+
+type Tasks = {
+  validate: undefined;
+  getRequest: {
+    destination: string;
+    request: string;
+  };
+}
+const getPayRequest = async ({ hash, mtokens, request, url }: Args) => {
+  return auto<Tasks>({
     // Check arguments
     validate: (cbk: any) => {
       if (!hash) {
