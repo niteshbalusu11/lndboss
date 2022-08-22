@@ -6,6 +6,7 @@ import getPayRequest from './get_pay_request';
 import getPayTerms from './get_pay_terms';
 import parseUrl from './parse_url';
 import { pay as payInvoice } from 'balanceofsatoshis/network';
+import { readFile } from 'fs';
 
 const tokensAsMtokens = (tokens: number): string => Math.floor(tokens * 1e3).toString();
 
@@ -138,6 +139,7 @@ const pay = async (args: Args): Promise<Tasks> => {
 
       return await payInvoice({
         avoid: avoidArray,
+        fs: { getFile: readFile },
         lnd: args.lnd,
         logger: args.logger,
         max_fee: args.max_fee,

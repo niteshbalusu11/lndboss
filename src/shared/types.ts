@@ -124,7 +124,7 @@ export type commandLnurl = {
   is_private: boolean;
   max_fee: number;
   max_paths: number;
-  message_id: string;
+  message_id?: string;
   node: string;
   out: string[];
   url: string;

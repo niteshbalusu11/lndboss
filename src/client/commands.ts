@@ -185,7 +185,10 @@ const commands: Commands = [
     value: 'Lnurl',
     description: 'Collection of lnurl features',
     args: {
-      function: 'Function',
+      auth: 'auth',
+      channel: 'channel',
+      pay: 'pay',
+      withdraw: 'withdraw',
     },
     flags: {
       amount: 'Amount',
