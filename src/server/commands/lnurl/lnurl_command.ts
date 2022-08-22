@@ -18,6 +18,7 @@ const supportedFunctions = ['auth', 'channel', 'pay', 'withdraw'];
 /** Manage Lnurl functions
 
   {
+    [amount]: <Amount to Pay or Withdraw Tokens Number>
     avoid: [<Avoid Forwarding Through String>]
     function: <Lnurl Function String>
     request: <Request Function>

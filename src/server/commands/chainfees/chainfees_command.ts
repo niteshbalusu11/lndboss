@@ -1,7 +1,6 @@
 import * as types from '~shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
-import { Logger } from '@nestjs/common';
 import { getChainFees } from 'balanceofsatoshis/chain';
 import { httpLogger } from '~server/utils/global_functions';
 
