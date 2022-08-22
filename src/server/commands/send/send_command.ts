@@ -2,7 +2,6 @@ import * as request from 'balanceofsatoshis/commands/simple_request';
 import * as types from '~shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
-import { Logger } from '@nestjs/common';
 import { Logger as LoggerType } from 'winston';
 import { httpLogger } from '~server/utils/global_functions';
 import { pushPayment } from 'balanceofsatoshis/network';
@@ -71,7 +70,6 @@ const sendCommand = async ({ args, lnd, logger }: Args): Promise<{ result: any }
 
     return { result };
   } catch (error) {
-    Logger.error(error);
     httpLogger({ error });
   }
 };

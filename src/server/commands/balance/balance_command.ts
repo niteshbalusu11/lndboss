@@ -3,7 +3,6 @@ import * as types from '~shared/types';
 import { getBalance, getDetailedBalance } from 'balanceofsatoshis/balances';
 
 import { AuthenticatedLnd } from 'lightning';
-import { Logger } from '@nestjs/common';
 import { httpLogger } from '~server/utils/global_functions';
 
 const parseAnsi = (n: string) =>
@@ -68,7 +67,6 @@ const balanceCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => 
 
     return { result };
   } catch (error) {
-    Logger.error(error);
     httpLogger({ error });
   }
 };

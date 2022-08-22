@@ -115,7 +115,23 @@ export type commandGraph = {
   sort: string;
 };
 
-// ========================Pay command================================
+// ========================Lnurl Command=====================================
+
+export type commandLnurl = {
+  amount: number;
+  avoid: string[];
+  function: string;
+  is_private: boolean;
+  max_fee: number;
+  max_paths: number;
+  message_id?: string;
+  node: string;
+  out: string[];
+  url: string;
+};
+
+
+// ========================Pay command=======================================
 
 export type commandPay = {
   avoid: string[];

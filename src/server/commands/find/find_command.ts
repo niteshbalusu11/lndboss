@@ -1,7 +1,6 @@
 import * as types from '~shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
-import { Logger } from '@nestjs/common';
 import { findRecord } from 'balanceofsatoshis/lnd';
 import { httpLogger } from '~server/utils/global_functions';
 
@@ -54,7 +53,6 @@ const findCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
 
     return { result };
   } catch (error) {
-    Logger.error(error);
     httpLogger({ error });
   }
 };

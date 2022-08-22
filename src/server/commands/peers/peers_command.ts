@@ -1,7 +1,6 @@
 import * as types from '~shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
-import { Logger } from '@nestjs/common';
 import { getPeers } from 'balanceofsatoshis/network';
 import { httpLogger } from '~server/utils/global_functions';
 import { readFile } from 'fs';
@@ -78,7 +77,6 @@ const peersCommand = async ({ args, lnd }: Args): Promise<{ result: Result }> =>
 
     return { result };
   } catch (error) {
-    Logger.error(error);
     httpLogger({ error });
   }
 };

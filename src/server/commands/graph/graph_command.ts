@@ -1,8 +1,7 @@
 import * as types from '~shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
-import { Logger } from '@nestjs/common';
-import { Logger as LoggerType } from 'winston';
+import { Logger } from 'winston';
 import { getGraphEntry } from 'balanceofsatoshis/network';
 import graphSummary from './graph_summary';
 import { httpLogger } from '~server/utils/global_functions';
@@ -40,7 +39,7 @@ const parseAnsi = (n: string) =>
 type Args = {
   args: types.commandGraph;
   lnd: AuthenticatedLnd;
-  logger: LoggerType;
+  logger: Logger;
 };
 const graphCommand = async ({ args, lnd, logger }: Args): Promise<{ result: any }> => {
   try {
@@ -78,7 +77,6 @@ const graphCommand = async ({ args, lnd, logger }: Args): Promise<{ result: any 
 
     return { result: { rows, summary: summary.nodeDetails } };
   } catch (error) {
-    Logger.error(error);
     httpLogger({ error });
   }
 };

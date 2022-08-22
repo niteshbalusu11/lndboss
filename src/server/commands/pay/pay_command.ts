@@ -1,7 +1,6 @@
 import * as types from '~shared/types';
 
 import { AuthenticatedLnd } from 'lightning';
-import { Logger } from '@nestjs/common';
 import { Logger as LoggerType } from 'winston';
 import { httpLogger } from '~server/utils/global_functions';
 import { pay } from 'balanceofsatoshis/network';
@@ -39,7 +38,6 @@ type Args = {
   lnd: AuthenticatedLnd;
 };
 const payCommand = async ({ args, lnd, logger }: Args): Promise<{ result: any }> => {
-  console.log(args);
   const avoidArray = !!args.avoid ? args.avoid.filter(n => !!n) : [];
   const outArray = !!args.out ? args.out.filter(n => !!n) : [];
 
@@ -60,7 +58,6 @@ const payCommand = async ({ args, lnd, logger }: Args): Promise<{ result: any }>
 
     return { result };
   } catch (error) {
-    Logger.error(error);
     httpLogger({ error });
   }
 };

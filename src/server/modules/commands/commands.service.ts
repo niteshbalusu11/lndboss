@@ -1,152 +1,140 @@
+import * as commands from '~server/commands';
+import * as dto from '~shared/commands.dto';
+
 import { Logger, createLogger, format, transports } from 'winston';
-import {
-  accountingCommand,
-  balanceCommand,
-  certValidityDaysCommand,
-  chainDepositCommand,
-  chainfeesCommand,
-  chartChainFeesCommand,
-  chartFeesEarnedCommand,
-  chartFeesPaidCommand,
-  chartPaymentsReceivedCommand,
-  closedCommand,
-  findCommand,
-  forwardsCommand,
-  graphCommand,
-  payCommand,
-  peersCommand,
-  priceCommand,
-  probeCommand,
-  reconnectCommand,
-  sendCommand,
-  tagsCommand,
-} from '~server/commands';
-import {
-  accountingDto,
-  balanceDto,
-  certValidityDaysDto,
-  chainDepositDto,
-  chainfeesDto,
-  chartChainFeesDto,
-  chartFeesEarnedDto,
-  chartFeesPaidDto,
-  chartPaymentsReceivedDto,
-  closedDto,
-  findDto,
-  forwardsDto,
-  graphDto,
-  payDto,
-  peersDto,
-  priceDto,
-  probeDto,
-  reconnectDto,
-  sendDto,
-  tagsDto,
-} from '~shared/commands.dto';
 
 import { Injectable } from '@nestjs/common';
 import { LndService } from '../lnd/lnd.service';
 import { SocketGateway } from '../socket/socket.gateway';
+import { httpLogger } from '~server/utils/global_functions';
 import { removeStyling } from '~server/utils/constants';
+
+/**
+ * CommandsService: Service for handling bos commands
+ * Takes in a request body, calls the appropriate command, and returns the result
+ */
 
 @Injectable()
 export class CommandsService {
   constructor(private socketService: SocketGateway) {}
 
-  async accountingCommand(args: accountingDto): Promise<{ result: any }> {
+  async logger({ messageId, service }) {
+    const emit = this.socketService.server.emit.bind(this.socketService.server);
+
+    const myFormat = format.printf(({ message }) => {
+      return emit(messageId, {
+        message: format.prettyPrint(removeStyling(message)),
+      });
+    });
+
+    const logger: Logger = createLogger({
+      level: 'info',
+      format: format.combine(myFormat),
+      defaultMeta: { service },
+      transports: [
+        new transports.Console({
+          format: format.combine(format.prettyPrint()),
+        }),
+      ],
+    });
+
+    return logger;
+  }
+
+  async accountingCommand(args: dto.accountingDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await accountingCommand({ args, lnd });
+    const { result } = await commands.accountingCommand({ args, lnd });
 
     return { result };
   }
 
-  async balanceCommand(args: balanceDto): Promise<{ result: any }> {
+  async balanceCommand(args: dto.balanceDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await balanceCommand({ args, lnd });
+    const { result } = await commands.balanceCommand({ args, lnd });
 
     return { result };
   }
 
-  async certValidityDaysCommand(args: certValidityDaysDto): Promise<{ result: any }> {
-    const { result } = await certValidityDaysCommand({ below: args.below, node: args.node });
+  async certValidityDaysCommand(args: dto.certValidityDaysDto): Promise<{ result: any }> {
+    const { result } = await commands.certValidityDaysCommand({ below: args.below, node: args.node });
 
     return { result: String(result) };
   }
 
-  async chainDepositCommand(args: chainDepositDto): Promise<{ result: any }> {
+  async chainDepositCommand(args: dto.chainDepositDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await chainDepositCommand({ args, lnd });
+    const { result } = await commands.chainDepositCommand({ args, lnd });
 
     return { result };
   }
 
-  async chainfeesCommand(args: chainfeesDto): Promise<{ result: any }> {
+  async chainfeesCommand(args: dto.chainfeesDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await chainfeesCommand({ args, lnd });
+    const { result } = await commands.chainfeesCommand({ args, lnd });
 
     return { result };
   }
 
-  async chartChainFeesCommand(args: chartChainFeesDto): Promise<{ result: any }> {
+  async chartChainFeesCommand(args: dto.chartChainFeesDto): Promise<{ result: any }> {
     const lnds = await LndService.getLnds({ nodes: args.nodes });
-    const { result } = await chartChainFeesCommand({ args, lnd: lnds });
+    const { result } = await commands.chartChainFeesCommand({ args, lnd: lnds });
 
     return { result };
   }
 
-  async chartFeesEarnedCommand(args: chartFeesEarnedDto): Promise<{ result: any }> {
-    const lnds = await LndService.getLnds({ nodes: args.nodes });
-
-    const { result } = await chartFeesEarnedCommand({ args, lnd: lnds });
-
-    return { result };
-  }
-
-  async chartFeesPaidCommand(args: chartFeesPaidDto): Promise<{ result: any }> {
+  async chartFeesEarnedCommand(args: dto.chartFeesEarnedDto): Promise<{ result: any }> {
     const lnds = await LndService.getLnds({ nodes: args.nodes });
 
-    const { result } = await chartFeesPaidCommand({ args, lnd: lnds });
+    const { result } = await commands.chartFeesEarnedCommand({ args, lnd: lnds });
 
     return { result };
   }
 
-  async chartPaymentsReceivedCommand(args: chartPaymentsReceivedDto): Promise<{ result: any }> {
+  async chartFeesPaidCommand(args: dto.chartFeesPaidDto): Promise<{ result: any }> {
     const lnds = await LndService.getLnds({ nodes: args.nodes });
 
-    const { result } = await chartPaymentsReceivedCommand({ args, lnd: lnds });
+    const { result } = await commands.chartFeesPaidCommand({ args, lnd: lnds });
 
     return { result };
   }
 
-  async closedCommand(args: closedDto): Promise<{ result: any }> {
+  async chartPaymentsReceivedCommand(args: dto.chartPaymentsReceivedDto): Promise<{ result: any }> {
+    const lnds = await LndService.getLnds({ nodes: args.nodes });
+
+    const { result } = await commands.chartPaymentsReceivedCommand({ args, lnd: lnds });
+
+    return { result };
+  }
+
+  async closedCommand(args: dto.closedDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await closedCommand({ args, lnd });
+    const { result } = await commands.closedCommand({ args, lnd });
 
     return { result };
   }
 
-  async findCommand(args: findDto): Promise<{ result: any }> {
+  async findCommand(args: dto.findDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await findCommand({ args, lnd });
+    const { result } = await commands.findCommand({ args, lnd });
 
     return { result };
   }
 
-  async forwardsCommand(args: forwardsDto): Promise<{ result: any }> {
+  async forwardsCommand(args: dto.forwardsDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await forwardsCommand({ args, lnd });
+    const { result } = await commands.forwardsCommand({ args, lnd });
 
     return { result };
   }
 
-  async graphCommand(args: graphDto): Promise<{ result: any }> {
+  async graphCommand(args: dto.graphDto): Promise<{ result: any }> {
     const logger: Logger = createLogger({
       level: 'info',
       format: format.json(),
@@ -160,34 +148,32 @@ export class CommandsService {
 
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await graphCommand({ args, lnd, logger });
+    const { result } = await commands.graphCommand({ args, lnd, logger });
 
     return { result };
   }
 
-  async payCommand(args: payDto): Promise<{ result: any }> {
-    const emit = this.socketService.server.emit.bind(this.socketService.server);
 
-    const myFormat = format.printf(({ message }) => {
-      return emit(args.message_id, {
-        message: format.prettyPrint(removeStyling(message)),
-      });
-    });
+  async lnurlCommand(args: dto.lnurlDto): Promise<{ result: any }> {
+    try {
+      const logger = await this.logger({ messageId: args.message_id, service: 'lnurl' });
 
-    const logger: Logger = createLogger({
-      level: 'info',
-      format: format.combine(myFormat),
-      defaultMeta: { service: 'pay' },
-      transports: [
-        new transports.Console({
-          format: format.combine(format.prettyPrint()),
-        }),
-      ],
-    });
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+      const result = await commands.lnurlCommand({ args, lnd, logger });
+
+      return { result };
+    } catch (error) {
+      httpLogger({ error });
+    }
+  }
+
+  async payCommand(args: dto.payDto): Promise<{ result: any }> {
+    const logger = await this.logger({ messageId: args.message_id, service: 'pay' });
 
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await payCommand({
+    const { result } = await commands.payCommand({
       args,
       lnd,
       logger,
@@ -196,78 +182,44 @@ export class CommandsService {
     return { result };
   }
 
-  async peersCommand(args: peersDto): Promise<{ result: any }> {
+  async peersCommand(args: dto.peersDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await peersCommand({ args, lnd });
+    const { result } = await commands.peersCommand({ args, lnd });
 
     return { result };
   }
 
-  async priceCommand(args: priceDto): Promise<{ result: any }> {
-    const { result } = await priceCommand(args);
+  async priceCommand(args: dto.priceDto): Promise<{ result: any }> {
+    const { result } = await commands.priceCommand({ args });
 
     return { result };
   }
 
-  async probeCommand(args: probeDto): Promise<{ result: any }> {
-    const emit = this.socketService.server.emit.bind(this.socketService.server);
-
-    const myFormat = format.printf(({ message }) => {
-      return emit(args.message_id, {
-        message: format.prettyPrint(removeStyling(message)),
-      });
-    });
-
-    const logger: Logger = createLogger({
-      level: 'info',
-      format: format.combine(myFormat),
-      defaultMeta: { service: 'probe' },
-      transports: [
-        new transports.Console({
-          format: format.combine(format.prettyPrint()),
-        }),
-      ],
-    });
+  async probeCommand(args: dto.probeDto): Promise<{ result: any }> {
+    const logger = await this.logger({ messageId: args.message_id, service: 'probe' });
 
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await probeCommand({ args, lnd, logger });
+    const { result } = await commands.probeCommand({ args, lnd, logger });
 
     return { result };
   }
 
-  async reconnectCommand(args: reconnectDto): Promise<{ result: any }> {
+  async reconnectCommand(args: dto.reconnectDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await reconnectCommand({ lnd });
+    const { result } = await commands.reconnectCommand({ lnd });
 
     return { result };
   }
 
-  async sendCommand(args: sendDto): Promise<{ result: any }> {
-    const emit = this.socketService.server.emit.bind(this.socketService.server);
-
-    const myFormat = format.printf(({ message }) => {
-      return emit(args.message_id, {
-        message: format.prettyPrint(removeStyling(message)),
-      });
-    });
-
-    const logger: Logger = createLogger({
-      level: 'info',
-      format: format.combine(myFormat),
-      defaultMeta: { service: 'send' },
-      transports: [
-        new transports.Console({
-          format: format.combine(format.prettyPrint()),
-        }),
-      ],
-    });
+  async sendCommand(args: dto.sendDto): Promise<{ result: any }> {
+    const logger = await this.logger({ messageId: args.message_id, service: 'send' });
 
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await sendCommand({
+    const { result } = await commands.sendCommand({
       args,
       lnd,
       logger,
@@ -276,8 +228,8 @@ export class CommandsService {
     return { result };
   }
 
-  async tagsCommand(args: tagsDto): Promise<{ result: any }> {
-    const { result } = await tagsCommand(args);
+  async tagsCommand(args: dto.tagsDto): Promise<{ result: any }> {
+    const { result } = await commands.tagsCommand({ args });
 
     return { result };
   }

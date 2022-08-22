@@ -67,7 +67,6 @@ const probeCommand = async ({ args, lnd, logger }: Args): Promise<{ result: Retu
 
     return { result };
   } catch (error) {
-    logger.error({ error });
     httpLogger({ error });
   }
 };
