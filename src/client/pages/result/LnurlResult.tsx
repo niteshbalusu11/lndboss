@@ -12,8 +12,8 @@ import { useRouter } from 'next/router';
 const socket = io();
 
 /*
-  Renders the output of the pay command
-  Listens to the websocket events for logging pay output to the browser
+  Renders the output of the lnurl command
+  Listens to the websocket events for logging lnurl output to the browser
 */
 
 const styles = {
@@ -96,7 +96,7 @@ const LnurlResult = () => {
   return (
     <CssBaseline>
       <Head>
-        <title>Pay Result</title>
+        <title>Lnurl Result</title>
       </Head>
       <StartFlexBoxBlack>
         <div style={styles.div}>

@@ -30,7 +30,7 @@ const styles = {
   form: {
     marginLeft: '50px',
     marginTop: '100px',
-    minWidth: '700px',
+    width: '700px',
   },
   textField: {
     width: '500px',
@@ -162,6 +162,8 @@ const Lnurl = () => {
       <StartFlexBox>
         <StandardHomeButtonLink />
         <Stack spacing={3} style={styles.form}>
+          <h2>{LnurlCommand.name}</h2>
+          <h4>{LnurlCommand.longDescription}</h4>
           <div>
             <InputLabel id="lnurl-function" style={styles.inputLabel}>
               Pick a value (Required)
@@ -201,6 +203,103 @@ const Lnurl = () => {
             style={styles.textField}
           />
 
+          {lnurlFunction === 'channel' && (
+            <FormControlLabel
+              control={
+                <StandardSwitch
+                  checked={isPrivate}
+                  onChange={handleIsPrivateChange}
+                  id={LnurlCommand.flags.is_private}
+                />
+              }
+              style={styles.switch}
+              label={LnurlCommand.flags.is_private}
+            />
+          )}
+
+          {lnurlFunction === 'pay' && (
+            <>
+              <>
+                <Button href="#text-buttons" onClick={() => addAvoidFields()} style={styles.button}>
+                  Add +
+                </Button>
+                {avoid.map((element, index) => (
+                  <div key={index}>
+                    <TextField
+                      type="text"
+                      label={LnurlCommand.flags.avoid}
+                      name={LnurlCommand.flags.avoid}
+                      placeholder={`${LnurlCommand.flags.avoid} (Avoid forwarding through)`}
+                      value={element.avoid}
+                      onChange={e => handleAvoidChange(index, e)}
+                      style={styles.textField}
+                      id={`avoid-${index}`}
+                    />
+                    {!!index ? (
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => removeAvoidFields(index)}
+                        style={styles.iconButton}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    ) : null}
+                  </div>
+                ))}
+              </>
+
+              <>
+                <Button href="#text-buttons" onClick={() => addOutFields()} style={styles.button}>
+                  Add +
+                </Button>
+                {out.map((element, index) => (
+                  <div key={index}>
+                    <TextField
+                      type="text"
+                      label={LnurlCommand.flags.out}
+                      name={LnurlCommand.flags.out}
+                      placeholder={`${LnurlCommand.flags.out} (Make first hop through peer)`}
+                      value={element.out}
+                      onChange={e => handleOutChange(index, e)}
+                      style={styles.textField}
+                      id={`out-${index}`}
+                    />
+                    {!!index ? (
+                      <IconButton aria-label="delete" onClick={() => removeOutFields(index)} style={styles.iconButton}>
+                        <DeleteIcon />
+                      </IconButton>
+                    ) : null}
+                  </div>
+                ))}
+              </>
+
+              <TextField
+                style={styles.textField}
+                id={LnurlCommand.flags.max_fee}
+                label={LnurlCommand.flags.max_fee}
+                value={maxFee}
+                onChange={handleMaxFeeChange}
+              />
+              <TextField
+                style={styles.textField}
+                id={LnurlCommand.flags.max_paths}
+                label={LnurlCommand.flags.max_paths}
+                value={maxPaths}
+                onChange={handleMaxPathsChange}
+              />
+            </>
+          )}
+
+          {(lnurlFunction === 'withdraw' || lnurlFunction === 'pay') && (
+            <TextField
+              style={styles.textField}
+              id={LnurlCommand.flags.amount}
+              label={LnurlCommand.flags.amount}
+              value={amount}
+              onChange={handleAmountChange}
+            />
+          )}
+
           <TextField
             type="text"
             placeholder={globalCommands.node.name}
@@ -209,87 +308,6 @@ const Lnurl = () => {
             onChange={handeNodeChange}
             style={styles.textField}
           />
-
-          <FormControlLabel
-            control={
-              <StandardSwitch checked={isPrivate} onChange={handleIsPrivateChange} id={LnurlCommand.flags.is_private} />
-            }
-            label={LnurlCommand.flags.is_private}
-          />
-
-          <>
-            <TextField
-              style={styles.textField}
-              id={LnurlCommand.flags.amount}
-              label={LnurlCommand.flags.amount}
-              value={amount}
-              onChange={handleAmountChange}
-            />
-            <>
-              <Button href="#text-buttons" onClick={() => addAvoidFields()} style={styles.button}>
-                Add +
-              </Button>
-              {avoid.map((element, index) => (
-                <div key={index}>
-                  <TextField
-                    type="text"
-                    label={LnurlCommand.flags.avoid}
-                    name={LnurlCommand.flags.avoid}
-                    placeholder={`${LnurlCommand.flags.avoid} (Avoid forwarding through)`}
-                    value={element.avoid}
-                    onChange={e => handleAvoidChange(index, e)}
-                    style={styles.textField}
-                    id={`avoid-${index}`}
-                  />
-                  {!!index ? (
-                    <IconButton aria-label="delete" onClick={() => removeAvoidFields(index)} style={styles.iconButton}>
-                      <DeleteIcon />
-                    </IconButton>
-                  ) : null}
-                </div>
-              ))}
-            </>
-
-            <>
-              <Button href="#text-buttons" onClick={() => addOutFields()} style={styles.button}>
-                Add +
-              </Button>
-              {out.map((element, index) => (
-                <div key={index}>
-                  <TextField
-                    type="text"
-                    label={LnurlCommand.flags.out}
-                    name={LnurlCommand.flags.out}
-                    placeholder={`${LnurlCommand.flags.out} (Make first hop through peer)`}
-                    value={element.out}
-                    onChange={e => handleOutChange(index, e)}
-                    style={styles.textField}
-                    id={`out-${index}`}
-                  />
-                  {!!index ? (
-                    <IconButton aria-label="delete" onClick={() => removeOutFields(index)} style={styles.iconButton}>
-                      <DeleteIcon />
-                    </IconButton>
-                  ) : null}
-                </div>
-              ))}
-            </>
-
-            <TextField
-              style={styles.textField}
-              id={LnurlCommand.flags.max_fee}
-              label={LnurlCommand.flags.max_fee}
-              value={maxFee}
-              onChange={handleMaxFeeChange}
-            />
-            <TextField
-              style={styles.textField}
-              id={LnurlCommand.flags.max_paths}
-              label={LnurlCommand.flags.max_paths}
-              value={maxPaths}
-              onChange={handleMaxPathsChange}
-            />
-          </>
 
           <SubmitButton>
             <Link href={{ pathname: `/result/LnurlResult`, query: flags }}>
