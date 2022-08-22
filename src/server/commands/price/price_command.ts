@@ -20,7 +20,10 @@ import { httpLogger } from '~server/utils/global_functions';
   }
 */
 
-const priceCommand = async (args: types.commandPrice): Promise<{ result: any }> => {
+type Args = {
+  args: types.commandPrice;
+}
+const priceCommand = async ({ args }: Args): Promise<{ result: any }> => {
   try {
     const symbols = !!args.symbols
       ? args.symbols

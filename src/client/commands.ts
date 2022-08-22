@@ -181,6 +181,23 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Lnurl',
+    value: 'Lnurl',
+    description: 'Collection of lnurl features',
+    args: {
+      function: 'Function',
+    },
+    flags: {
+      amount: 'Amount',
+      avoid: 'Avoid',
+      is_private: 'Private',
+      max_fee: 'MaxFee',
+      max_paths: 'MaxPaths',
+      out: 'Out',
+      url: 'Url',
+    }
+  },
+  {
     name: 'Pay',
     value: 'Pay',
     args: {

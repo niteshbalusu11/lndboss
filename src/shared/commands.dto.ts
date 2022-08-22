@@ -299,28 +299,6 @@ export class findDto {
   query: string;
 }
 
-export class graphDto {
-  @Transform(({ value }) => toStringArray(value))
-  @IsOptional()
-  @IsArray()
-  filters: string[];
-
-  @Transform(({ value }) => trim(value))
-  @IsOptional()
-  @IsString()
-  node: string;
-
-  @Transform(({ value }) => trim(value))
-  @IsOptional()
-  @IsString()
-  query: string;
-
-  @Transform(({ value }) => trim(value))
-  @IsOptional()
-  @IsString()
-  sort: string;
-}
-
 export class forwardsDto {
   @Transform(({ value }) => toNumber(value))
   @IsOptional()
@@ -348,6 +326,28 @@ export class forwardsDto {
   to: string;
 }
 
+export class graphDto {
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  filters: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  node: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  query: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  sort: string;
+}
+
 export class getRebalancesDto {
   @Transform(({ value }) => trim(value))
   @IsOptional()
@@ -360,6 +360,56 @@ export class grpcDto {
   @IsOptional()
   @IsString()
   node: string;
+}
+
+export class lnurlDto {
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  amount: number;
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  avoid: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  function: string;
+
+  @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
+  @IsBoolean()
+  is_private: boolean;
+
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  max_fee: number;
+
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  max_paths: number;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  message_id: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  node: string;
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  out: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  url: string;
 }
 
 export class payDto {

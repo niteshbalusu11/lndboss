@@ -27,7 +27,7 @@ test.describe('Test Tags command on the node.js side', async () => {
       icon: '❤️',
       is_avoided: true,
     };
-    const { result } = await tagsCommand(args);
+    const { result } = await tagsCommand({ args });
     console.log(result);
     expect(result).toBeTruthy();
   });
@@ -37,7 +37,7 @@ test.describe('Test Tags command on the node.js side', async () => {
       add: [],
       remove: [],
     };
-    const { result } = await tagsCommand(args);
+    const { result } = await tagsCommand({ args });
     console.log(result);
 
     expect(result).toBeTruthy();
@@ -52,7 +52,7 @@ test.describe('Test Tags command on the node.js side', async () => {
       ],
       tag: 'testtag',
     };
-    const { result } = await tagsCommand(args);
+    const { result } = await tagsCommand({ args });
     console.log(result);
 
     expect(result).toBeTruthy();

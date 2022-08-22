@@ -38,7 +38,7 @@ type Args = {
   lnd: AuthenticatedLnd;
   request: any;
   logger: Logger;
-  is_private: string;
+  is_private: boolean;
 }
 
 type Tasks = {
@@ -197,7 +197,7 @@ const channel = async (args: Args): Promise<any> => {
       'getIdentity',
       'getTerms',
       ({ getIdentity, getTerms }, cbk: any) => {
-        const type = !!args.is_private ? '1' : '0';
+        const type = args.is_private === true ? '1' : '0';
 
         return args.request({
           json: true,

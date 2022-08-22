@@ -1,5 +1,8 @@
 import * as request from 'balanceofsatoshis/commands/simple_request';
+import * as types from '~shared/types';
 
+import { AuthenticatedLnd } from 'lightning';
+import { Logger } from 'winston';
 import auth from './auth';
 import { auto } from 'async';
 import channel from './channel';
@@ -26,9 +29,14 @@ const supportedFunctions = ['auth', 'channel', 'pay', 'withdraw'];
     out: [<Out Through Peer With Public Key Hex String>]
   }
 
-  @returns via cbk or Promise
+  @returns via Promise
 */
-const lnurlCommand = async ({ args, lnd, logger }) => {
+type Args = {
+  args: types.commandLnurl;
+  lnd: AuthenticatedLnd;
+  logger: Logger;
+}
+const lnurlCommand = async ({ args, lnd, logger }: Args) => {
   return auto({
     // Check arguments
     validate: (cbk: any) => {
@@ -40,7 +48,7 @@ const lnurlCommand = async ({ args, lnd, logger }) => {
         return cbk([400, 'ExpectedLndToManageLnurl']);
       }
 
-      if (!args.lnurl) {
+      if (!args.url) {
         return cbk([400, 'ExpectedUrlStringToManageLnurl']);
       }
 
@@ -62,7 +70,7 @@ const lnurlCommand = async ({ args, lnd, logger }) => {
         lnd,
         logger,
         request,
-        lnurl: args.lnurl,
+        lnurl: args.url,
       })).send;
     }],
 
@@ -78,7 +86,7 @@ const lnurlCommand = async ({ args, lnd, logger }) => {
         logger,
         request,
         is_private: args.is_private,
-        lnurl: args.lnurl,
+        lnurl: args.url,
       })).sendConfirmation;
     }],
 
@@ -95,7 +103,7 @@ const lnurlCommand = async ({ args, lnd, logger }) => {
         request,
         amount: args.amount,
         avoid: args.avoid,
-        lnurl: args.lnurl,
+        lnurl: args.url,
         max_fee: args.max_fee || 1337,
         max_paths: args.max_paths || 1,
         out: args.out,
@@ -114,7 +122,7 @@ const lnurlCommand = async ({ args, lnd, logger }) => {
         logger,
         request,
         amount: args.amount,
-        lnurl: args.lnurl,
+        lnurl: args.url,
       })).withdraw;
     }],
   },

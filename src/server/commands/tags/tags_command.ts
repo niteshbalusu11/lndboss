@@ -1,3 +1,5 @@
+import * as types from '~shared/types';
+
 import { mkdir, readFile, writeFile } from 'fs';
 
 import { auto } from 'async';
@@ -45,12 +47,7 @@ const uniq = (arr: Iterable<unknown>) => Array.from(new Set(arr));
 */
 
 type Args = {
-  add: string[];
-  id?: string;
-  tag?: string;
-  remove: string[];
-  is_avoided?: boolean;
-  icon?: string;
+  args: types.commandTags;
 };
 
 type Tasks = {
@@ -63,7 +60,7 @@ type Tasks = {
   };
 };
 
-const tagsCommand = async (args: Args): Promise<{ result: any }> => {
+const tagsCommand = async ({ args }: Args): Promise<{ result: any }> => {
   try {
     const result = await auto<Tasks>({
       // Validate

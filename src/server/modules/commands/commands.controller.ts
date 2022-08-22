@@ -1,134 +1,119 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import {
-  accountingDto,
-  balanceDto,
-  certValidityDaysDto,
-  chainDepositDto,
-  chainfeesDto,
-  chartChainFeesDto,
-  chartFeesEarnedDto,
-  chartFeesPaidDto,
-  chartPaymentsReceivedDto,
-  closedDto,
-  findDto,
-  forwardsDto,
-  graphDto,
-  payDto,
-  peersDto,
-  priceDto,
-  probeDto,
-  reconnectDto,
-  sendDto,
-  tagsDto,
-} from '~shared/commands.dto';
+import * as dto from '~shared/commands.dto';
+
 import { CommandsService } from './commands.service';
+
+/**
+ * CommandsController: Controller for handling bos commands
+ * Takes in a request body, calls the appropriate commands service, and returns the result
+ */
 
 @Controller('api')
 export class CommandsController {
   constructor(private readonly commandsService: CommandsService) {}
 
   @Get('accounting')
-  async accountingCommand(@Query() args: accountingDto) {
+  async accountingCommand(@Query() args: dto.accountingDto) {
     return this.commandsService.accountingCommand(args);
   }
 
   @Get('balance')
-  async balanceCommand(@Query() args: balanceDto) {
+  async balanceCommand(@Query() args: dto.balanceDto) {
     return this.commandsService.balanceCommand(args);
   }
 
   @Get('cert-validity-days')
-  async certValidityDaysCommand(@Query() args: certValidityDaysDto) {
+  async certValidityDaysCommand(@Query() args: dto.certValidityDaysDto) {
     return this.commandsService.certValidityDaysCommand(args);
   }
 
   @Get('chain-deposit')
-  async chainDepositCommand(@Query() args: chainDepositDto) {
+  async chainDepositCommand(@Query() args: dto.chainDepositDto) {
     return this.commandsService.chainDepositCommand(args);
   }
 
   @Get('chainfees')
-  async chainfeesCommand(@Query() args: chainfeesDto) {
+  async chainfeesCommand(@Query() args: dto.chainfeesDto) {
     return this.commandsService.chainfeesCommand(args);
   }
 
   @Get('chart-chain-fees')
-  async chartChainFeesCommand(@Query() args: chartChainFeesDto) {
+  async chartChainFeesCommand(@Query() args: dto.chartChainFeesDto) {
     return this.commandsService.chartChainFeesCommand(args);
   }
 
   @Get('chart-fees-earned')
-  async chartFeesEarnedCommand(@Query() args: chartFeesEarnedDto) {
+  async chartFeesEarnedCommand(@Query() args: dto.chartFeesEarnedDto) {
     return this.commandsService.chartFeesEarnedCommand(args);
   }
 
   @Get('chart-fees-paid')
-  async chartFeesPaidCommand(@Query() args: chartFeesPaidDto) {
+  async chartFeesPaidCommand(@Query() args: dto.chartFeesPaidDto) {
     return this.commandsService.chartFeesPaidCommand(args);
   }
 
   @Get('chart-payments-received')
-  async chartPaymentsReceivedCommand(@Query() args: chartPaymentsReceivedDto) {
+  async chartPaymentsReceivedCommand(@Query() args: dto.chartPaymentsReceivedDto) {
     return this.commandsService.chartPaymentsReceivedCommand(args);
   }
 
   @Get('closed')
-  async closedCommand(@Query() args: closedDto) {
+  async closedCommand(@Query() args: dto.closedDto) {
     return this.commandsService.closedCommand(args);
   }
 
   @Get('find')
-  async findCommand(@Query() args: findDto) {
+  async findCommand(@Query() args: dto.findDto) {
     return this.commandsService.findCommand(args);
   }
 
   @Get('forwards')
-  async forwardsCommand(@Query() args: forwardsDto) {
+  async forwardsCommand(@Query() args: dto.forwardsDto) {
     return this.commandsService.forwardsCommand(args);
   }
 
   @Get('graph')
-  async graphCommand(@Query() args: graphDto) {
+  async graphCommand(@Query() args: dto.graphDto) {
     return this.commandsService.graphCommand(args);
   }
 
   @Get('lnurl')
-  async lnurlCommand(@Query() args) {
+  async lnurlCommand(@Query() args: dto.lnurlDto) {
     return this.commandsService.lnurlCommand(args);
   }
 
   @Get('pay')
-  async payCommand(@Query() args: payDto) {
+  async payCommand(@Query() args: dto.payDto) {
     return this.commandsService.payCommand(args);
   }
 
   @Get('peers')
-  async peersCommand(@Query() args: peersDto) {
+  async peersCommand(@Query() args: dto.peersDto) {
     return this.commandsService.peersCommand(args);
   }
 
   @Get('price')
-  async priceCommand(@Query() args: priceDto) {
+  async priceCommand(@Query() args: dto.priceDto) {
     return this.commandsService.priceCommand(args);
   }
 
   @Get('probe')
-  async probeCommand(@Query() args: probeDto) {
+  async probeCommand(@Query() args: dto.probeDto) {
     return this.commandsService.probeCommand(args);
   }
 
   @Get('reconnect')
-  async reconnectCommand(@Query() args: reconnectDto) {
+  async reconnectCommand(@Query() args: dto.reconnectDto) {
     return this.commandsService.reconnectCommand(args);
   }
 
   @Get('send')
-  async sendCommand(@Query() args: sendDto) {
+  async sendCommand(@Query() args: dto.sendDto) {
     return this.commandsService.sendCommand(args);
   }
 
   @Get('tags')
-  async tagsCommand(@Query() args: tagsDto) {
+  async tagsCommand(@Query() args: dto.tagsDto) {
     return this.commandsService.tagsCommand(args);
   }
 }
