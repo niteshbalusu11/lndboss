@@ -1,5 +1,7 @@
 <h1>Building a gui for balanceofsatoshis, work in progress</h1>
 
+[![npm version](https://badge.fury.io/js/lndboss.svg)](https://badge.fury.io/js/lndboss)
+
 #### For questions or support, please reach out on telegram.
 https://t.me/lndboss
 
