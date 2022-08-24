@@ -5,6 +5,7 @@ import { ThemeProvider, createTheme, styled } from '@mui/material/styles';
 
 import AccountingDashboard from './AccountingDashboard';
 import Box from '@mui/material/Box';
+import CheckConnection from './CheckConnection';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import CssBaseline from '@mui/material/CssBaseline';
 import DefaultDashboardContainer from './DefaultDashboardContainer';
@@ -73,8 +74,12 @@ const mdTheme = createTheme();
 const MainDashboard = () => {
   const [open, setOpen] = useState(true);
   const [accounting, setAccounting] = useState(0);
+  const [checkConnection, setCheckConnection] = useState(false);
 
   const DisplayContainer = () => {
+    if (!checkConnection) {
+      return <CheckConnection setCheckConnection={setCheckConnection} />;
+    }
     if (accounting === 1) {
       return <AccountingDashboard days={1} />;
     }
