@@ -30,19 +30,24 @@ const AccountingDashboard = ({ days }: { days: number }) => {
 
       const chartChainFeesQuery: types.commandChartChainFees = {
         days,
+        end_date: '',
         nodes,
+        start_date: '',
       };
 
       const chartFeesEarnedQuery: types.commandChartFeesEarned = {
         days,
+        end_date: '',
         nodes,
         is_count: false,
         is_forwarded: false,
+        start_date: '',
         via: '',
       };
 
       const chartFeesPaidQuery: types.commandChartFeesPaid = {
         days,
+        end_date: '',
         nodes,
         in: '',
         out: '',
@@ -51,11 +56,14 @@ const AccountingDashboard = ({ days }: { days: number }) => {
         is_network: false,
         is_peer: false,
         is_rebalances_only: false,
+        start_date: '',
       };
 
       const chartPaymentsReceivedQuery: types.commandChartPaymentsReceived = {
         days,
+        end_date: '',
         nodes,
+        start_date: '',
       };
 
       const [chartChainFeesResult, chartFeesEarnedResult, chartFeesPaidResult, chartPaymentsReceivedResult] =
@@ -133,7 +141,7 @@ const AccountingDashboard = ({ days }: { days: number }) => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 400,
+                height: 500,
               }}
             >
               {!!chartChainFeesData.data.length ? <ChartChainFeesOutput data={chartChainFeesData} /> : null}
@@ -147,7 +155,7 @@ const AccountingDashboard = ({ days }: { days: number }) => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 400,
+                height: 500,
               }}
             >
               {!!chartFeesEarnedData.data.length ? <ChartFeesEarnedOutput data={chartFeesEarnedData} /> : null}
@@ -161,7 +169,7 @@ const AccountingDashboard = ({ days }: { days: number }) => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 400,
+                height: 500,
               }}
             >
               {!!chartFeesPaidData.data.length ? <ChartFeesPaidOutput data={chartFeesPaidData} /> : null}
@@ -175,7 +183,7 @@ const AccountingDashboard = ({ days }: { days: number }) => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 400,
+                height: 500,
               }}
             >
               {!!chartPaymentsReceivedData.data.length ? (
