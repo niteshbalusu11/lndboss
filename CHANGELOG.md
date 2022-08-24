@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.21.1](https://github.com/niteshbalusu11/lndboss/compare/v1.21.0...v1.21.1) (2022-08-24)
 
+- Fix npmignore file
+
 ## [1.21.0](https://github.com/niteshbalusu11/lndboss/compare/v1.20.0...v1.21.0) (2022-08-24)
+
+- Added start and end flags to chart commands
+- Better connection check on dashboard
 
 ## [1.20.0](https://github.com/niteshbalusu11/lndboss/compare/v1.19.0...v1.20.0) (2022-08-22)
 
