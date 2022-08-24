@@ -27,7 +27,9 @@ const chartPaymentsReceivedCommand = async ({ args, lnd }: Args): Promise<{ resu
   try {
     const result = await getReceivedChart({
       lnds: lnd,
-      days: args.days || 60,
+      days: args.days,
+      end_date: args.end_date || undefined,
+      start_date: args.start_date || undefined,
     });
     return { result };
   } catch (error) {

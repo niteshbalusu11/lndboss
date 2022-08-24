@@ -33,7 +33,8 @@ type Args = {
 const chartFeesPaidCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
   try {
     const result = await getFeesPaid({
-      days: args.days || 60,
+      days: args.days,
+      end_date: args.end_date || undefined,
       fs: { getFile: readFile },
       in: args.in || undefined,
       is_most_fees_table: args.is_most_fees_table || undefined,
@@ -43,6 +44,7 @@ const chartFeesPaidCommand = async ({ args, lnd }: Args): Promise<{ result: any 
       is_rebalances_only: args.is_rebalances_only || undefined,
       lnds: lnd,
       out: args.out || undefined,
+      start_date: args.start_date || undefined,
     });
 
     return { result };

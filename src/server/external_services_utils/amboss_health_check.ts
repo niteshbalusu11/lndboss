@@ -105,9 +105,8 @@ const ambossHealthCheck = async ({ logger }): Promise<{ postToAmboss: any }> => 
                     },
                   };
 
-                  const axiosResult = await axios.post(ambossUrl, postBody, config);
+                  await axios.post(ambossUrl, postBody, config);
 
-                  logger.log({ message: axiosResult.data, type: 'json' });
                 } catch (error) {
                   logger.log({ message: JSON.stringify(error), type: 'error' });
                 }

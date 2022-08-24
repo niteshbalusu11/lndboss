@@ -29,11 +29,13 @@ type Args = {
 const chartFeesEarnedCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
   try {
     const result = await getFeesChart({
-      days: args.days || 60,
+      days: args.days,
+      end_date: args.end_date || undefined,
       fs: { getFile: readFile },
       is_count: args.is_count,
       is_forwarded: args.is_forwarded,
       lnds: lnd,
+      start_date: args.start_date || undefined,
       via: args.via || undefined,
     });
 

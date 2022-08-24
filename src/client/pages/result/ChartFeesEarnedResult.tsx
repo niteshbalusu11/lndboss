@@ -26,10 +26,12 @@ const ChartFeesEarnedResult = () => {
 
   const query = {
     days: router.query.days,
+    end_date: router.query.end_date,
     via: router.query.via,
     is_count: router.query.is_count,
     is_forwarded: router.query.is_forwarded,
     nodes: router.query.nodes,
+    start_date: router.query.start_date,
   };
 
   const [data, setData] = React.useState({ data: [], title: '', description: '' });

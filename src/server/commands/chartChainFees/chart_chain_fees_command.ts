@@ -30,8 +30,10 @@ const chartChainFeesCommand = async ({ args, lnd }: Args): Promise<{ result: any
   try {
     const result = await getChainFeesChart({
       request,
+      days: args.days,
+      end_date: args.end_date || undefined,
       lnds: lnd,
-      days: args.days || 60,
+      start_date: args.start_date || undefined,
     });
 
     return { result };

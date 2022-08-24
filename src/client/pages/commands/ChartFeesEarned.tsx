@@ -1,13 +1,14 @@
 import * as types from '~shared/types';
 
-import { Button, CssBaseline, FormControlLabel, IconButton, Stack, TextField } from '@mui/material';
-import React, { useState } from 'react';
 import {
+  BasicDatePicker,
   StandardHomeButtonLink,
   StandardSwitch,
   StartFlexBox,
   SubmitButton,
 } from '~client/standard_components/app-components';
+import { Button, CssBaseline, FormControlLabel, IconButton, Stack, TextField } from '@mui/material';
+import React, { useState } from 'react';
 import commands, { globalCommands } from '../../commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -54,8 +55,10 @@ const ChartFeesEarned = () => {
   const [count, setCount] = useState(false);
   const [forwarded, setForwarded] = useState(false);
   const [formValues, setFormValues] = useState([{ node: '' }]);
-  const [days, setDays] = useState('60');
+  const [days, setDays] = useState('');
   const [via, setVia] = useState('');
+  const [startDate, setStartDate] = useState<string | null>(null);
+  const [endDate, setEndDate] = useState<string | null>(null);
 
   const handleCountChange = () => {
     setCount((previousState: boolean) => !previousState);
@@ -91,10 +94,12 @@ const ChartFeesEarned = () => {
 
   const flags: types.commandChartFeesEarned = {
     via,
-    days: !!days ? Number(days) : 60,
+    days: Number(days) || 0,
+    end_date: endDate,
     is_count: count,
     is_forwarded: forwarded,
     nodes: formValues.map(n => n.node) || [''],
+    start_date: startDate,
   };
 
   return (
@@ -130,6 +135,20 @@ const ChartFeesEarned = () => {
             onChange={handleDaysChange}
             style={styles.textField}
           />
+
+          <BasicDatePicker
+            label={ChartFeesEarnedCommand.flags.start}
+            id={ChartFeesEarnedCommand.flags.start}
+            value={startDate}
+            setValue={setStartDate}
+          />
+          <BasicDatePicker
+            label={ChartFeesEarnedCommand.flags.end}
+            id={ChartFeesEarnedCommand.flags.end}
+            value={endDate}
+            setValue={setEndDate}
+          />
+
           <FormControlLabel
             style={styles.switch}
             control={

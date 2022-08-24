@@ -136,10 +136,21 @@ export class chartChainFeesDto {
   @IsNumber()
   days: number;
 
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  end_date: string;
+
   @Transform(({ value }) => toStringArray(value))
   @IsArray()
   @IsOptional()
   nodes: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  start_date: string;
+
 }
 
 export class chartFeesEarnedDto {
@@ -147,6 +158,11 @@ export class chartFeesEarnedDto {
   @IsOptional()
   @IsNumber()
   days: number;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  end_date: string;
 
   @Transform(({ value }) => toBoolean(value))
   @IsOptional()
@@ -166,6 +182,11 @@ export class chartFeesEarnedDto {
   @Transform(({ value }) => trim(value))
   @IsOptional()
   @IsString()
+  start_date: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
   via: string;
 }
 
@@ -174,6 +195,11 @@ export class chartFeesPaidDto {
   @IsOptional()
   @IsNumber()
   days: number;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  end_date: string;
 
   @Transform(({ value }) => trim(value))
   @IsOptional()
@@ -214,6 +240,11 @@ export class chartFeesPaidDto {
   @IsOptional()
   @IsString()
   out: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  start_date: string;
 }
 
 export class chartPaymentsReceivedDto {
@@ -222,10 +253,20 @@ export class chartPaymentsReceivedDto {
   @IsNumber()
   days: number;
 
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  end_date: string;
+
   @Transform(({ value }) => toStringArray(value))
   @IsArray()
   @IsOptional()
   nodes: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  start_date: string;
 }
 
 export class credentialsDto {
