@@ -8,7 +8,9 @@ import { httpLogger } from '~server/utils/global_functions';
 
   {
     [days]: <Received Over Days Count Number>
+    [end_date]: <End Date YYYY-MM-DD String>
     lnds: [<Authenticated LND API Object>]
+    [start_date]: <Start Date YYYY-MM-DD String>
   }
 
   @returns via Promise

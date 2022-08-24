@@ -9,6 +9,7 @@ import { readFile } from 'fs';
 
   {
     [days]: <Fees Earned Over Days Count Number>
+    [end_date]: <End Date YYYY-MM-DD String>
     [in]: <In Node Public Key or Alias String>
     [is_most_fees_table]: <Is Most Fees Table Bool>
     [is_most_forwarded_table]: <Is Most Forwarded Bool>
@@ -16,6 +17,7 @@ import { readFile } from 'fs';
     [is_peer]: <Show Only Peers In Table Bool>
     lnds: [<Authenticated LND API Object>]
     [out]: <Out Node Public Key or Alias String>
+    [start_date]: <Start Date YYYY-MM-DD String>
   }
 
   @returns via Promise

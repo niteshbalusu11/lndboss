@@ -9,8 +9,10 @@ import { readFile } from 'fs';
 
   {
     [days]: <Fees Earned Over Days Count Number>
+    [end_date]: <End Date YYYY-MM-DD String>
     [is_count]: <Return Only Count of Forwards Bool>
     lnds: [<Authenticated LND API Object>]
+    [start_date]: <Start Date YYYY-MM-DD String>
     [via]: <Via Public Key Hex or Tag Id or Alias String>
   }
 
