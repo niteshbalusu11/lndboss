@@ -1,13 +1,14 @@
 import * as types from '~shared/types';
 
-import { Button, CssBaseline, FormControlLabel, IconButton, Stack, TextField } from '@mui/material';
-import React, { useState } from 'react';
 import {
+  BasicDatePicker,
   StandardHomeButtonLink,
   StandardSwitch,
   StartFlexBox,
   SubmitButton,
 } from '~client/standard_components/app-components';
+import { Button, CssBaseline, FormControlLabel, IconButton, Stack, TextField } from '@mui/material';
+import React, { useState } from 'react';
 import commands, { globalCommands } from '../../commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -51,7 +52,7 @@ const styles = {
 };
 
 const ChartFeesPaid = () => {
-  const [days, setDays] = useState('60');
+  const [days, setDays] = useState('');
   const [formValues, setFormValues] = useState([{ node: '' }]);
   const [inNode, setInNode] = useState('');
   const [outNode, setOutNode] = useState('');
@@ -60,6 +61,8 @@ const ChartFeesPaid = () => {
   const [isNetwork, setIsNetwork] = useState(false);
   const [isPeer, setIsPeer] = useState(false);
   const [isRebalances, setIsRebalances] = useState(false);
+  const [startDate, setStartDate] = useState<string | null>(null);
+  const [endDate, setEndDate] = useState<string | null>(null);
 
   const addFormFields = () => {
     setFormValues([...formValues, { node: '' }]);
@@ -109,7 +112,8 @@ const ChartFeesPaid = () => {
   };
 
   const flags: types.commandChartFeesPaid = {
-    days: !!days ? Number(days) : 60,
+    days: Number(days) || 0,
+    end_date: endDate,
     in: inNode,
     is_most_fees_table: isMostFees,
     is_most_forwarded_table: isMostForwarded,
@@ -118,6 +122,7 @@ const ChartFeesPaid = () => {
     is_peer: isPeer,
     nodes: formValues.map(n => n.node),
     out: outNode,
+    start_date: startDate,
   };
 
   return (
@@ -138,6 +143,20 @@ const ChartFeesPaid = () => {
             onChange={handleDaysChange}
             style={styles.textField}
           />
+
+          <BasicDatePicker
+            label={ChartFeesPaidCommand.flags.start}
+            id={ChartFeesPaidCommand.flags.start}
+            value={startDate}
+            setValue={setStartDate}
+          />
+          <BasicDatePicker
+            label={ChartFeesPaidCommand.flags.end}
+            id={ChartFeesPaidCommand.flags.end}
+            value={endDate}
+            setValue={setEndDate}
+          />
+
           <TextField
             type="text"
             placeholder={`${ChartFeesPaidCommand.flags.in}`}

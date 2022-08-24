@@ -48,16 +48,20 @@ export type commandChainfees = {
 
 export type commandChartChainFees = {
   days: number;
+  end_date: string;
   nodes: string[];
+  start_date: string;
 };
 
 // ========================Chart Fees Earned Command=====================================
 
 export type commandChartFeesEarned = {
   days: number;
+  end_date: string;
   is_count: boolean;
   is_forwarded: boolean;
   nodes: string[];
+  start_date: string;
   via: string;
 };
 
@@ -65,6 +69,7 @@ export type commandChartFeesEarned = {
 
 export type commandChartFeesPaid = {
   days: number;
+  end_date: string;
   in: string;
   is_most_fees_table: boolean;
   is_most_forwarded_table: boolean;
@@ -73,13 +78,16 @@ export type commandChartFeesPaid = {
   is_rebalances_only: boolean;
   nodes: string[];
   out: string;
+  start_date: string;
 };
 
 // ========================Chart Payments Received Command=====================================
 
 export type commandChartPaymentsReceived = {
   days: number;
+  end_date: string;
   nodes: string[];
+  start_date: string;
 };
 
 // ========================Closed Command=====================================

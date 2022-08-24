@@ -9,6 +9,7 @@ import { readFile } from 'fs';
 
   {
     [days]: <Fees Earned Over Days Count Number>
+    [end_date]: <End Date YYYY-MM-DD String>
     [in]: <In Node Public Key or Alias String>
     [is_most_fees_table]: <Is Most Fees Table Bool>
     [is_most_forwarded_table]: <Is Most Forwarded Bool>
@@ -16,6 +17,7 @@ import { readFile } from 'fs';
     [is_peer]: <Show Only Peers In Table Bool>
     lnds: [<Authenticated LND API Object>]
     [out]: <Out Node Public Key or Alias String>
+    [start_date]: <Start Date YYYY-MM-DD String>
   }
 
   @returns via Promise
@@ -33,7 +35,8 @@ type Args = {
 const chartFeesPaidCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
   try {
     const result = await getFeesPaid({
-      days: args.days || 60,
+      days: args.days,
+      end_date: args.end_date || undefined,
       fs: { getFile: readFile },
       in: args.in || undefined,
       is_most_fees_table: args.is_most_fees_table || undefined,
@@ -43,6 +46,7 @@ const chartFeesPaidCommand = async ({ args, lnd }: Args): Promise<{ result: any 
       is_rebalances_only: args.is_rebalances_only || undefined,
       lnds: lnd,
       out: args.out || undefined,
+      start_date: args.start_date || undefined,
     });
 
     return { result };

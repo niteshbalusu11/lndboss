@@ -1,3 +1,4 @@
+import BasicDatePicker from './BasicDatePicker';
 import CenterFlexBox from './CenterFlexBox';
 import ContainerStyle from './ContainerStyle';
 import PositionedMenu from './PositionedMenu';
@@ -18,6 +19,7 @@ import SubmitButton from './SubmitButton';
 export {
   CenterFlexBox,
   ContainerStyle,
+  BasicDatePicker,
   PositionedMenu,
   ProgressBar,
   ReactCron,

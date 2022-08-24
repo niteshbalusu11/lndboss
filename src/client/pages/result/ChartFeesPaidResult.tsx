@@ -26,6 +26,7 @@ const ChartFeesPaidResult = () => {
 
   const query = {
     days: router.query.days,
+    end_date: router.query.end_date,
     in: router.query.in,
     is_most_fees_table: router.query.is_most_fees_table,
     is_most_forwarded_table: router.query.is_most_forwarded_table,
@@ -34,6 +35,7 @@ const ChartFeesPaidResult = () => {
     is_rebalances_only: router.query.is_rebalances_only,
     nodes: router.query.nodes,
     out: router.query.out,
+    start_date: router.query.start_date,
   };
 
   const [data, setData] = React.useState({ data: [], title: '', description: '', rows: [] });

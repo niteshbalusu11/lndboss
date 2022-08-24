@@ -95,6 +95,8 @@ const commands: Commands = [
       'Show chart of mining fee expenditure over time. Privacy note: this requests tx data from third parties',
     flags: {
       days: 'Days',
+      end: 'End',
+      start: 'Start',
     },
   },
   {
@@ -107,7 +109,9 @@ const commands: Commands = [
     flags: {
       count: 'Count',
       days: 'Days',
+      end: 'End',
       forwarded: 'Forwarded',
+      start: 'Start',
     },
   },
   {
@@ -118,6 +122,7 @@ const commands: Commands = [
       'Show the routing fees paid to forwarding nodes. Rebalances flag can return results much more quickly',
     flags: {
       days: 'Days',
+      end: 'End',
       in: 'In',
       is_most_fees_table: 'MostFees',
       is_most_forwarded_table: 'MostForwarded',
@@ -125,6 +130,7 @@ const commands: Commands = [
       is_peer: 'PeersOnly',
       is_rebalances_only: 'RebalancesOnly',
       out: 'Out',
+      start: 'Start',
     },
   },
   {
@@ -133,6 +139,8 @@ const commands: Commands = [
     description: 'Show chart for settled invoices from external parties',
     flags: {
       days: 'Days',
+      end: 'End',
+      start: 'Start',
     },
   },
   {

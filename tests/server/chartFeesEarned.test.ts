@@ -28,6 +28,25 @@ test.describe('Test ChartFeesEarned command on the node.js side', async () => {
     expect(result).toBeTruthy();
   });
 
+  test('run ChartFeesEarned command: dates', async () => {
+    const args = {
+      days: 0,
+      end_date: '2021-08-01',
+      nodes: [],
+      fs: { getFile: readFile },
+      is_count: false,
+      is_forwarded: false,
+      start_date: '2021-07-01',
+      via: 'outpeers',
+    };
+
+    const lnds = lightning.map(({ lnd }) => lnd);
+    const { result } = await chartFeesEarnedCommand({ args, lnd: lnds });
+
+    console.log('ChartFeesEarned----', result);
+    expect(result).toBeTruthy();
+  });
+
   test('run ChartFeesEarned command with is_count and is_forwarded', async () => {
     const args = {
       days: 10,

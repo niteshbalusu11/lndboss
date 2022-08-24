@@ -17,7 +17,7 @@ const styles = {
     marginLeft: '50px',
     marginRight: '50px',
     marginTop: '50px',
-    width: '700px',
+    width: '800px',
   },
 };
 
@@ -26,7 +26,9 @@ const ChartChainFeesResult = () => {
 
   const query = {
     days: router.query.days,
+    end_date: router.query.end_date,
     nodes: router.query.nodes,
+    start_date: router.query.start_date,
   };
 
   const [data, setData] = React.useState({ data: [], title: '', description: '' });

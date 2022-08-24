@@ -12,8 +12,24 @@ test.describe('Test ChartPaymentsReceived command on the node.js side', async ()
 
   test('run ChartPaymentsReceived command', async () => {
     const args = {
-      days: 10,
+      days: 0,
       nodes: [],
+    };
+
+    const lnds = lightning.map(({ lnd }) => lnd);
+    const { result } = await chartPaymentsReceivedCommand({ args, lnd: lnds });
+
+    console.log('ChartPaymentsReceived----', result);
+
+    expect(result).toBeTruthy();
+  });
+
+  test('run ChartPaymentsReceived command: dates', async () => {
+    const args = {
+      days: 0,
+      end_date: '2021-08-01',
+      nodes: [],
+      start_date: '2021-07-01',
     };
 
     const lnds = lightning.map(({ lnd }) => lnd);

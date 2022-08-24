@@ -1,8 +1,13 @@
 import * as types from '~shared/types';
 
+import {
+  BasicDatePicker,
+  StandardHomeButtonLink,
+  StartFlexBox,
+  SubmitButton,
+} from '~client/standard_components/app-components';
 import { Button, CssBaseline, IconButton, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components/app-components';
 import commands, { globalCommands } from '../../commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -44,7 +49,9 @@ const styles = {
 
 const ChartPaymentsReceived = () => {
   const [formValues, setFormValues] = useState([{ node: '' }]);
-  const [days, setDays] = useState('60');
+  const [days, setDays] = useState('');
+  const [startDate, setStartDate] = useState<string | null>(null);
+  const [endDate, setEndDate] = useState<string | null>(null);
 
   const handleDaysChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDays(event.target.value);
@@ -67,8 +74,10 @@ const ChartPaymentsReceived = () => {
   };
 
   const flags: types.commandChartPaymentsReceived = {
-    days: !!days ? Number(days) : 60,
+    days: Number(days) || 0,
+    end_date: endDate,
     nodes: formValues.map(n => n.node),
+    start_date: startDate,
   };
 
   return (
@@ -89,6 +98,20 @@ const ChartPaymentsReceived = () => {
             onChange={handleDaysChange}
             style={styles.textField}
           />
+
+          <BasicDatePicker
+            label={ChartPaymentsReceivedCommand.flags.start}
+            id={ChartPaymentsReceivedCommand.flags.start}
+            value={startDate}
+            setValue={setStartDate}
+          />
+          <BasicDatePicker
+            label={ChartPaymentsReceivedCommand.flags.end}
+            id={ChartPaymentsReceivedCommand.flags.end}
+            value={endDate}
+            setValue={setEndDate}
+          />
+
           <>
             <Button href="#text-buttons" onClick={() => addFormFields()} style={styles.button}>
               Add +

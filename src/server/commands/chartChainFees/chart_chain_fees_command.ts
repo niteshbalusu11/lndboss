@@ -9,9 +9,11 @@ import { httpLogger } from '~server/utils/global_functions';
 
   {
     days: <Chain Fees Paid Over Days Count Number>
+    [end_date]: <End Date YYYY-MM-DD String>
     is_monochrome: <Omit Colors Bool>
     lnds: [<Authenticated LND API Object>]
     request: <Request Function>
+    [start_date]: <Start Date YYYY-MM-DD String>
   }
 
   @returns via Promise
@@ -30,8 +32,10 @@ const chartChainFeesCommand = async ({ args, lnd }: Args): Promise<{ result: any
   try {
     const result = await getChainFeesChart({
       request,
+      days: args.days,
+      end_date: args.end_date || undefined,
       lnds: lnd,
-      days: args.days || 60,
+      start_date: args.start_date || undefined,
     });
 
     return { result };

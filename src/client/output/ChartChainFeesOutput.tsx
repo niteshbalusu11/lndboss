@@ -16,7 +16,7 @@ type Props = {
 
 const styles = {
   div: {
-    width: '700px',
+    width: '800px',
   },
 };
 
