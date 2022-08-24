@@ -1,4 +1,4 @@
-node-modules
+node_modules
 tests
 .env
 dev.Dockerfile
