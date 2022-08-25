@@ -1,15 +1,14 @@
+import { ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material';
+
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import ComputerIcon from '@mui/icons-material/Computer';
 import HomeIcon from '@mui/icons-material/Home';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
 import LogoutIcon from '@mui/icons-material/Logout';
 import React from 'react';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { clientConstants } from '~client/utils/constants';
 import { useNotify } from '~client/hooks/useNotify';
+
 // Displays the list of items in the sidebar
 
 const handleLogout = () => {
@@ -20,10 +19,7 @@ const handleLogout = () => {
 export const MainListItems = ({ setAccounting }: { setAccounting?: React.Dispatch<React.SetStateAction<number>> }) => {
   return (
     <React.Fragment>
-      <ListSubheader component="div" inset>
-        Menu
-      </ListSubheader>
-      <ListItemButton onClick={() => setAccounting(0)}>
+      <ListItemButton onClick={() => setAccounting(0)} sx={{ marginTop: '70px' }}>
         <ListItemIcon>
           <HomeIcon />
         </ListItemIcon>
