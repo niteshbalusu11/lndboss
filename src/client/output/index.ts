@@ -1,4 +1,5 @@
 import BalanceOutput from './BalanceOutput';
+import CallOutput from './CallOutput';
 import CertValidityDaysOutput from './CertValidityDaysOutput';
 import ChainDepositOutput from './ChainDepositOutput';
 import ChainfeesOutput from './ChainfeesOutput';
@@ -13,6 +14,7 @@ import TagsOutput from './TagsOutput';
 
 export {
   BalanceOutput,
+  CallOutput,
   CertValidityDaysOutput,
   ChainDepositOutput,
   ChainfeesOutput,
