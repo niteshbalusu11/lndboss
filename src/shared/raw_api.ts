@@ -58,37 +58,6 @@ export const rawApi = {
     {
       "arguments": [
         {
-          "description": "Request close out to address for cooperative close",
-          "named": "address",
-          "optional": true
-        },
-        {
-          "description": "Requested chain fee tokens per vbyte",
-          "named": "tokens_per_vbyte",
-          "optional": true,
-          "type": "number"
-        },
-        {
-          "description": "Force close the channel",
-          "named": "is_force_close",
-          "type": "boolean"
-        },
-        {
-          "description": "Hex encoded funding transaction id",
-          "named": "transaction_id",
-          "type": "hash"
-        },
-        {
-          "description": "Funding transaction output index",
-          "named": "transaction_vout",
-          "type": "number"
-        }
-      ],
-      "method": "closeChannel"
-    },
-    {
-      "arguments": [
-        {
           "description": "Chain address format: np2wpkh, p2wpkh or p2tr",
           "named": "format"
         }
@@ -587,50 +556,6 @@ export const rawApi = {
         }
       ],
       "method": "lockUtxo"
-    },
-    {
-      "arguments": [
-        {
-          "description": "Chain fee tokens per vbyte fee rate",
-          "named": "chain_fee_tokens_per_vbyte",
-          "optional": true,
-          "type": "number"
-        },
-        {
-          "description": "Gift tokens to peer on open",
-          "named": "give_tokens",
-          "optional": true,
-          "type": "number"
-        },
-        {
-          "description": "Local tokens to use to set channel total capacity",
-          "named": "local_tokens",
-          "type": "number"
-        },
-        {
-          "description": "Spend UTXOs with minimum of n confirmations",
-          "named": "min_confirmations",
-          "optional": true,
-          "type": "number"
-        },
-        {
-          "description": "Peer hex encoded public key",
-          "named": "partner_public_key",
-          "type": "public_key"
-        },
-        {
-          "description": "Peer's CSV delay value",
-          "named": "partner_csv_delay",
-          "optional": true,
-          "type": "number"
-        },
-        {
-          "description": "Node host:port to connect to",
-          "named": "partner_socket",
-          "optional": true
-        }
-      ],
-      "method": "openChannel"
     },
     {
       "arguments": [{

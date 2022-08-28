@@ -5,9 +5,21 @@ import { rawApi } from "~shared/raw_api";
 
 const lower = n => n.toLowerCase();
 
+/** Call the raw API
+
+  {
+    lnd: <Authenticated LND API Object>
+    [method]: <Method to Call String>
+    [params]: [<Querystring Encoded Parameter String>]
+  }
+
+  @returns via Promise
+  <Result Object>
+*/
+
 type Tasks = {
   validate: null;
-  buildArgs: any;
+  buildArgs: { [key: string]: string };
   call: any;
 }
 const callCommand = async ({ args, lnd }) => {

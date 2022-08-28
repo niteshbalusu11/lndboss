@@ -74,6 +74,8 @@ const axiosGetWebSocket = async ({ path, query }: ArgsGet) => {
 
 const axiosPost = async ({ path, postBody }: ArgsPost) => {
   try {
+    useLoading({ isLoading: true });
+
     const url = `${apiUrl}/${path}`;
     const accessToken = localStorage.getItem('accessToken');
 
@@ -85,9 +87,14 @@ const axiosPost = async ({ path, postBody }: ArgsPost) => {
 
     const data = await response.data;
 
+    useLoading({ isLoading: false });
     return data;
   } catch (error) {
-    window.alert(`Status: ${error.response.status}\nMessage: ${error.response.data.message}`);
+    useLoading({ isLoading: false });
+    useNotify({
+      type: 'error',
+      message: `Status: ${error.response.data.statusCode}\nMessage: ${error.response.data.message}`,
+    });
   }
 };
 
