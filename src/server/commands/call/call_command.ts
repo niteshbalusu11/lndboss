@@ -9,7 +9,7 @@ const lower = n => n.toLowerCase();
 
   {
     lnd: <Authenticated LND API Object>
-    [method]: <Method to Call String>
+    method: <Method to Call String>
     [params]: [<Querystring Encoded Parameter String>]
   }
 
