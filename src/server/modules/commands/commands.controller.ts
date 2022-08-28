@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import * as dto from '~shared/commands.dto';
 
 import { CommandsService } from './commands.service';
@@ -20,6 +20,11 @@ export class CommandsController {
   @Get('balance')
   async balanceCommand(@Query() args: dto.balanceDto) {
     return this.commandsService.balanceCommand(args);
+  }
+
+  @Post('call')
+  async callCommand(@Body() args) {
+    return this.commandsService.callCommand(args);
   }
 
   @Get('cert-validity-days')

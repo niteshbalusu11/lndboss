@@ -1,5 +1,6 @@
 import accountingCommand from './accounting/accounting_command';
 import balanceCommand from './balance/balance_command';
+import callCommand from './call/call_command';
 import certValidityDaysCommand from './certValidityDays/cert_validity_days_command';
 import chainDepositCommand from './chainDeposit/chain_deposit';
 import chainfeesCommand from './chainfees/chainfees_command';
@@ -24,6 +25,7 @@ import tagsCommand from './tags/tags_command';
 export {
   accountingCommand,
   balanceCommand,
+  callCommand,
   certValidityDaysCommand,
   chainDepositCommand,
   chainfeesCommand,

@@ -57,6 +57,19 @@ export class CommandsService {
     return { result };
   }
 
+  async callCommand(args): Promise<{ result: any }> {
+    try {
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+      const result = (await commands.callCommand({ args, lnd })).call;
+
+      return { result };
+    } catch (error) {
+      httpLogger({ error });
+    }
+
+  }
+
   async certValidityDaysCommand(args: dto.certValidityDaysDto): Promise<{ result: any }> {
     const { result } = await commands.certValidityDaysCommand({ below: args.below, node: args.node });
 

@@ -60,6 +60,11 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Call (Experimental)',
+    value: 'Call',
+    description: 'Make a raw API call and to get a raw API response (Experimental)',
+  },
+  {
     name: 'Cert Validity Days',
     value: 'CertValidityDays',
     description: 'Number of days until the cert is invalid',
