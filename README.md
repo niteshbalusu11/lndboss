@@ -14,6 +14,9 @@ bos accounting "category"
 # See total balance, including pending funds, excluding future commit fees
 bos balance
 
+# Call ln-service raw APIs
+bos call "method"
+
 # Get the number of days the node cert remains valid
 bos cert-validity-days
 
@@ -48,7 +51,7 @@ bos forwards
 bos graph "pubkey"
 
 # Collection of lnurl features
-bos lnurl --url "lnurl"
+bos lnurl "function"
 
 # Pay a payment request (invoice), probing first
 bos pay "payment_request"

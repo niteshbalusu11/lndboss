@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.22.0](https://github.com/niteshbalusu11/lndboss/compare/v1.21.1...v1.22.0) (2022-08-28)
 
+- Added support for bos call command
+
 ### [1.21.1](https://github.com/niteshbalusu11/lndboss/compare/v1.21.0...v1.21.1) (2022-08-24)
 
 - Fix npmignore file
