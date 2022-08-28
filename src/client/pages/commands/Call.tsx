@@ -6,7 +6,7 @@ import commands, { globalCommands } from '~client/commands';
 import { CallOutput } from '~client/output';
 import Head from 'next/head';
 import { RawApiList } from '~client/standard_components/lndboss';
-import { axiosPost } from '~client/utils/axios';
+import { axiosPostWithAlert } from '~client/utils/axios';
 import { rawApi } from '~shared/raw_api';
 import { useNotify } from '~client/hooks/useNotify';
 import validateCallCommandArgs from '~client/utils/validate_call_command_args';
@@ -105,7 +105,7 @@ const Call = () => {
       Object.assign(postArgs, n);
     });
 
-    const result = await axiosPost({ path: 'call', postBody: { method, node, postArgs } });
+    const result = await axiosPostWithAlert({ path: 'call', postBody: { method, node, postArgs } });
 
     if (!!result) {
       setData(result.result);

@@ -72,7 +72,7 @@ const axiosGetWebSocket = async ({ path, query }: ArgsGet) => {
   }
 };
 
-const axiosPost = async ({ path, postBody }: ArgsPost) => {
+const axiosPostWithAlert = async ({ path, postBody }: ArgsPost) => {
   try {
     useLoading({ isLoading: true });
 
@@ -98,4 +98,22 @@ const axiosPost = async ({ path, postBody }: ArgsPost) => {
   }
 };
 
-export { axiosGet, axiosGetWebSocket, axiosPost };
+const axiosPost = async ({ path, postBody }: ArgsPost) => {
+  try {
+    const url = `${apiUrl}/${path}`;
+    const accessToken = localStorage.getItem('accessToken');
+
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    };
+
+    const response = await axios.post(url, postBody, config);
+
+    const data = await response.data;
+
+    return data;
+  } catch (error) {
+    window.alert(`Status: ${error.response.status}\nMessage: ${error.response.data.message}`);
+  }
+}
+export { axiosGet, axiosGetWebSocket, axiosPost, axiosPostWithAlert };

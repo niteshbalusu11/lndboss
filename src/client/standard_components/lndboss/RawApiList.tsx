@@ -3,6 +3,8 @@ import { Autocomplete, TextField } from '@mui/material';
 import React from 'react';
 import { rawApi } from '~shared/raw_api';
 
+// Renders the raw api list for call command
+
 const styles = {
   textField: {
     width: '600px',
