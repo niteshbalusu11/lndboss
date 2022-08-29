@@ -665,30 +665,6 @@ export const rawApi = {
     {
       "arguments": [
         {
-          "description": "Destination chain address",
-          "named": "address"
-        },
-        {
-          "description": "Amount to send",
-          "named": "tokens",
-          "type": "number"
-        },
-        {
-          "description": "Per vbyte fee rate to use ",
-          "named": "fee_tokens_per_vbyte",
-          "type": "number"
-        },
-        {
-          "description": "Transaction description",
-          "named": "description",
-          "optional": true
-        }
-      ],
-      "method": "sendToChainAddress"
-    },
-    {
-      "arguments": [
-        {
           "description": "Hex encoded secret preimage",
           "named": "secret"
         }
