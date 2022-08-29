@@ -1,3 +1,4 @@
+import { CopyText } from '~client/standard_components/app-components';
 import QRCode from 'qrcode.react';
 import React from 'react';
 
@@ -33,6 +34,7 @@ const ChainDepositOutput = ({ data }: Data) => {
     <div style={styles.div}>
       <QRCode value={data.url} size={250} style={styles.qr} id="qrcode" bgColor="white" fgColor="black" />
       <p style={styles.text}>{data.address}</p>
+      <CopyText text={data.url} />
     </div>
   );
 };

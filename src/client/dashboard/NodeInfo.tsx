@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { CopyText } from '~client/standard_components/app-components';
 import Title from './Title';
 import Typography from '@mui/material/Typography';
 import { axiosGet } from '~client/utils/axios';
@@ -41,6 +42,7 @@ const NodeInfo = () => {
             variant="body1"
             style={styles.textMargin}
           >{`Pubkey: ${data.public_key}`}</Typography>
+          <CopyText text={data.public_key} />
           <Typography color="black" variant="body1" style={styles.textMargin}>
             {`Synced To Chain: ${!!data.is_synced_to_chain ? '✅' : '❌'}`}
           </Typography>

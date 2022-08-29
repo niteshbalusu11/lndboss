@@ -27,7 +27,7 @@ const DefaultDashboardContainer = () => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 240,
+                height: 260,
               }}
             >
               <BalanceInfo />
@@ -40,7 +40,7 @@ const DefaultDashboardContainer = () => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 240,
+                height: 260,
               }}
             >
               <NodeInfo />
