@@ -45,6 +45,12 @@ const styles = {
   h4: {
     marginTop: '0px',
   },
+  link: {
+    fontSize: '20px',
+    margin: '0px',
+    cursor: 'pointer',
+    color: 'white',
+  },
 };
 
 const ChartChainFees = () => {
@@ -134,14 +140,11 @@ const ChartChainFees = () => {
               </div>
             ))}
           </>
-          <SubmitButton>
-            <Link href={{ pathname: '/result/ChartChainFeesResult', query: flags }}>
-              <a target="_blank" style={{ color: 'white', textDecoration: 'none' }}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Run
-                Command&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </a>
-            </Link>
-          </SubmitButton>
+          <Link href={{ pathname: '/result/ChartChainFeesResult', query: flags }} passHref>
+            <a target="_blank" rel="noreferrer">
+              <SubmitButton>Run Command</SubmitButton>
+            </a>
+          </Link>
         </Stack>
       </StartFlexBox>
     </CssBaseline>

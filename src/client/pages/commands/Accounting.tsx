@@ -199,14 +199,11 @@ const Accounting = () => {
             onChange={handeNodeChange}
             style={styles.textField}
           />
-          <SubmitButton>
-            <Link href={{ pathname: '/result/AccountingResult', query: flags }}>
-              <a target="_blank" style={{ color: 'white', textDecoration: 'none' }}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Run
-                Command&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </a>
-            </Link>
-          </SubmitButton>
+          <Link href={{ pathname: '/result/AccountingResult', query: flags }} passHref>
+            <a target="_blank" rel="noreferrer">
+              <SubmitButton>Run Command</SubmitButton>
+            </a>
+          </Link>
         </Stack>
       </StartFlexBox>
     </CssBaseline>
