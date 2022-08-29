@@ -27,20 +27,20 @@ const DefaultDashboardContainer = () => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 260,
+                height: '100%',
               }}
             >
               <BalanceInfo />
             </Paper>
           </Grid>
           {/* Walletinfo */}
-          <Grid item xs={12} md={5} lg={7}>
+          <Grid item xs={12} md={5} lg={8}>
             <Paper
               sx={{
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 260,
+                height: '100%',
               }}
             >
               <NodeInfo />
@@ -53,7 +53,7 @@ const DefaultDashboardContainer = () => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 400,
+                height: '100%',
                 width: 800,
               }}
             >

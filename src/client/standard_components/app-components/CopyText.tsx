@@ -13,7 +13,7 @@ const CopyText = ({ text }: Args) => {
   return (
     <CopyToClipboard text={text} onCopy={() => useNotify({ type: 'success', message: 'Copied to clipboard' })}>
       <IconButton>
-        <ContentCopyIcon />
+        <ContentCopyIcon sx={{ fontSize: 'medium' }} />
       </IconButton>
     </CopyToClipboard>
   );

@@ -19,6 +19,7 @@ const styles = {
   text: {
     fontSize: '15px',
     fontWeight: 'bold',
+    display: 'inline-block',
   },
 };
 

@@ -69,15 +69,18 @@ const BalanceInfo = () => {
       <Typography component="p" variant="h5" style={{ marginBottom: '20px' }}>
         {`Balance: ${tokensAsBigTokens(totalBalance)}`}
       </Typography>
-      <Typography color="text.secondary" variant="body1">{`Offchain Balance: ${tokensAsBigTokens(
-        offchainBalance
-      )}`}</Typography>
-      <Typography color="text.secondary" variant="body1">
+
+      <Typography color="text.secondary" variant="body1" style={{ marginBottom: '20px' }}>
+        {`Offchain Balance: ${tokensAsBigTokens(offchainBalance)}`}
+      </Typography>
+
+      <Typography color="text.secondary" variant="body1" style={{ marginBottom: '20px' }}>
         {`Onchain Balance: ${tokensAsBigTokens(onchainBalance)}`}
       </Typography>
-      <Typography color="text.secondary" variant="body1">{`Inbound Liquidity: ${tokensAsBigTokens(
-        inboundLiquidity
-      )}`}</Typography>
+
+      <Typography color="text.secondary" variant="body1" style={{ marginBottom: '20px' }}>
+        {`Inbound Liquidity: ${tokensAsBigTokens(inboundLiquidity)}`}
+      </Typography>
     </React.Fragment>
   );
 };
