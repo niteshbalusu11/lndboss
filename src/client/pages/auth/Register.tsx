@@ -97,7 +97,7 @@ const Register = () => {
       <StartFlexBox>
         <StandardButtonLink destination={clientConstants.loginUrl} label="Login" />
         <Stack spacing="3" style={styles.form}>
-          <h2>Register</h2>
+          <h2>Setup Credentials</h2>
           <TextField
             type="text"
             placeholder="Account Name"
@@ -133,7 +133,7 @@ const Register = () => {
             </ul>
           </div>
           <SubmitButton variant="contained" disabled={isDisabled} onClick={fetchData}>
-            Register
+            Create Account
           </SubmitButton>
         </Stack>
       </StartFlexBox>

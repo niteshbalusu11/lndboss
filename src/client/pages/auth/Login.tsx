@@ -88,7 +88,7 @@ const Login = () => {
   return (
     <CssBaseline>
       <StartFlexBox>
-        <StandardButtonLink destination={clientConstants.registerUrl} label="Register" />
+        <StandardButtonLink destination={clientConstants.registerUrl} label="Setup Credentials" />
         <Stack spacing="3" style={styles.form}>
           <h2>Login</h2>
           <TextField
