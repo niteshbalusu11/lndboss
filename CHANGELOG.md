@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.23.0](https://github.com/niteshbalusu11/lndboss/compare/v1.22.0...v1.23.0) (2022-08-30)
 
+- Added month to date accounting on dashboard
+- Added copy to clipboard on dashboard and for chain-deposit command output
+- Fixed a bug which caused validation issues in call command
+- Fixed loading dialog timing issue on dashboard
+
 ## [1.22.0](https://github.com/niteshbalusu11/lndboss/compare/v1.21.1...v1.22.0) (2022-08-28)
 
 - Added support for bos call command
