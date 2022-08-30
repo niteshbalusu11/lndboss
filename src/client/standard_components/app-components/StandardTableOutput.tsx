@@ -17,7 +17,7 @@ import React, { useMemo } from 'react';
 
 type Props = {
   data: {
-    rows: any;
+    rows: string[][];
   };
   tableId: string;
 };

@@ -45,9 +45,16 @@ const fs = {
 type Tasks = {
   validate: undefined;
   dataDir: string;
-  checkDataDir: any;
+  checkDataDir: null;
   getDirs: string[];
-  getNodeCredentials: any[];
+  getNodeCredentials: {
+    node: string;
+    credentials: {
+      cert: string;
+      macaroon: string;
+      socket: string;
+    }
+  }[];
   getNodes: {
     lnd: AuthenticatedLnd;
     is_online: boolean;
@@ -68,7 +75,12 @@ type Tasks = {
       public_key: string;
     }[];
   };
-  removeDuplicates: any;
+  removeDuplicates: {
+    lnd: AuthenticatedLnd;
+    is_online: boolean;
+    node_name: string;
+    public_key: string;
+  }[];
 };
 
 type Args = {

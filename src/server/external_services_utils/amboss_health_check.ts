@@ -20,7 +20,7 @@ type Tasks = {
   getSavedNodes: {
     nodes: any[];
   };
-  postToAmboss: any;
+  postToAmboss: null;
 };
 
 const ambossHealthCheck = async ({ logger }): Promise<{ postToAmboss: any }> => {

@@ -36,7 +36,7 @@ type MapArgs = {
 
 type MapArray = {
   lnds: AuthenticatedLnd[];
-  map: (cbk: (n: MapArgs) => any) => any;
+  map: (cbk: (n: MapArgs) => any) => AuthenticatedLnd[];
 };
 
 const getLnds = async ({ nodes }) => {

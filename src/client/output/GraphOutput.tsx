@@ -6,7 +6,7 @@ import { StandardTableOutput } from '~client/standard_components/app-components'
 // Renders the output of the bos graph command
 
 type Props = {
-  data: string[];
+  data: string[][];
   summary: object;
 };
 
