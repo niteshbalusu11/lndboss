@@ -36,24 +36,23 @@ const validateCallCommandArgs = ({ args }): ReturnValue => {
       continue;
     }
 
-
-    if (args[i].type === 'channel' && !isChannel(args[i].value)) {
+    if (args[i].type === 'channel' && !!args[i].value && !isChannel(args[i].value)) {
       return { message: `${args[i].named} must be a standard format channel id` };
     }
 
-    if (args[i].type === 'hash' && !isHash(args[i].value)) {
+    if (args[i].type === 'hash' && !!args[i].value && !isHash(args[i].value)) {
       return { message: `${args[i].named} must be a hex encoded 32 byte hash` };
     }
 
-    if (args[i].type === 'number' && !isNumber(args[i].value)) {
+    if (args[i].type === 'number' && !!args[i].value && !isNumber(args[i].value)) {
       return { message: `${args[i].named} must be a number` };
     }
 
-    if (args[i].type === 'public_key' && !isPublicKey(args[i].value)) {
+    if (args[i].type === 'public_key' && !!args[i].value && !isPublicKey(args[i].value)) {
       return { message: `${args[i].named} must be a hex encoded public key` };
     }
 
-    if (args[i].type === 'boolean' && (args[i].value !== 'true' && args[i].value !== 'false')) {
+    if (args[i].type === 'boolean' && !!args[i].value && (args[i].value !== 'true' && args[i].value !== 'false')) {
       return { message: `${args[i].named} only takes true or false as a value` };
     }
   }

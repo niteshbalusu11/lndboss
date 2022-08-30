@@ -5,9 +5,15 @@ import { selectedSavedNode, tokensAsBigTokens } from '~client/utils/constants';
 
 import Title from './Title';
 import Typography from '@mui/material/Typography';
-import { axiosGet } from '~client/utils/axios';
+import { axiosGetNoLoading } from '~client/utils/axios';
 
 // Renders the balance info section of the dashboard.
+
+const styles = {
+  margin: {
+    marginBottom: '20px',
+  },
+};
 
 const BalanceInfo = () => {
   const [offchainBalance, setOffchainBalance] = useState(0);
@@ -42,9 +48,9 @@ const BalanceInfo = () => {
       };
 
       const [balance, onchain, inbound] = await Promise.all([
-        axiosGet({ path: 'balance', query: balanceQuery }),
-        axiosGet({ path: 'balance', query: onchainQuery }),
-        axiosGet({ path: 'grpc/get-channel-balance', query: inboundLiquidityQuery }),
+        axiosGetNoLoading({ path: 'balance', query: balanceQuery }),
+        axiosGetNoLoading({ path: 'balance', query: onchainQuery }),
+        axiosGetNoLoading({ path: 'grpc/get-channel-balance', query: inboundLiquidityQuery }),
       ]);
 
       if (!!balance) {
@@ -66,19 +72,19 @@ const BalanceInfo = () => {
   return (
     <React.Fragment>
       <Title>Balance Info</Title>
-      <Typography component="p" variant="h5" style={{ marginBottom: '20px' }}>
+      <Typography component="p" variant="h5" style={styles.margin}>
         {`Balance: ${tokensAsBigTokens(totalBalance)}`}
       </Typography>
 
-      <Typography color="text.secondary" variant="body1" style={{ marginBottom: '20px' }}>
+      <Typography color="text.secondary" variant="body1" style={styles.margin}>
         {`Offchain Balance: ${tokensAsBigTokens(offchainBalance)}`}
       </Typography>
 
-      <Typography color="text.secondary" variant="body1" style={{ marginBottom: '20px' }}>
+      <Typography color="text.secondary" variant="body1" style={styles.margin}>
         {`Onchain Balance: ${tokensAsBigTokens(onchainBalance)}`}
       </Typography>
 
-      <Typography color="text.secondary" variant="body1" style={{ marginBottom: '20px' }}>
+      <Typography color="text.secondary" variant="body1" style={styles.margin}>
         {`Inbound Liquidity: ${tokensAsBigTokens(inboundLiquidity)}`}
       </Typography>
     </React.Fragment>

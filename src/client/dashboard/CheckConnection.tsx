@@ -1,7 +1,7 @@
 import { Box, Container, Grid, Paper, Toolbar } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
-import { axiosGet } from '~client/utils/axios';
+import { axiosGetNoLoading } from '~client/utils/axios';
 import { selectedSavedNode } from '~client/utils/constants';
 
 // Checks connection and renders failure dialog on dashboard if connection fails and returns true if connection is successful.
@@ -18,7 +18,7 @@ const CheckConnection = ({ setCheckConnection }: Args) => {
         node: selectedSavedNode(),
       };
 
-      const result = await axiosGet({ path: 'grpc/get-wallet-info', query });
+      const result = await axiosGetNoLoading({ path: 'grpc/get-wallet-info', query });
 
       if (!!result) {
         setCheckConnection(previousValue => !previousValue);

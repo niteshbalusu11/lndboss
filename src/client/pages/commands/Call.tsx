@@ -109,6 +109,7 @@ const Call = () => {
 
     if (!!result) {
       setData(result.result);
+      useNotify({ type: 'success', message: 'Call command completed.' });
     }
   };
 

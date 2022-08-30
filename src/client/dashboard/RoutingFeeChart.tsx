@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { defaultChartQueryDays, selectedSavedNode } from '~client/utils/constants';
 
 import { ChartFeesEarnedOutput } from '~client/output';
-import { axiosGet } from '~client/utils/axios';
+import { axiosGetNoLoading } from '~client/utils/axios';
 import resgisterCharts from '../register_charts';
+import { useLoading } from '~client/hooks/useLoading';
 
 // Renders the routing fees earned chart section of the dashboard.
 
@@ -20,11 +21,14 @@ const RoutingFeeChart = () => {
         nodes: [selectedSavedNode()],
       };
 
-      const result = await axiosGet({ path: 'chart-fees-earned', query });
+      useLoading({ isLoading: true });
+      const result = await axiosGetNoLoading({ path: 'chart-fees-earned', query });
 
       if (!!result) {
         setData(result);
       }
+
+      useLoading({ isLoading: false });
     };
 
     fetchData();

@@ -4,7 +4,7 @@ import { Button, Menu, MenuItem } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import Router from 'next/router';
-import { axiosGet } from '~client/utils/axios';
+import { axiosGetNoLoading } from '~client/utils/axios';
 import { grey } from '@mui/material/colors';
 
 // Menu button on the commands page
@@ -44,7 +44,7 @@ const SavedNodes = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axiosGet({
+      const result = await axiosGetNoLoading({
         path: 'grpc/get-saved-nodes',
         query: {},
       });

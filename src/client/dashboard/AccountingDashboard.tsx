@@ -11,9 +11,10 @@ import React, { useEffect, useState } from 'react';
 
 import AccountingSummary from './AccountingSummary';
 import BalanceInfo from './BalanceInfo';
-import { axiosGet } from '~client/utils/axios';
+import { axiosGetNoLoading } from '~client/utils/axios';
 import resgisterCharts from '../register_charts';
 import { selectedSavedNode } from '~client/utils/constants';
+import { useLoading } from '~client/hooks/useLoading';
 
 // Renders the accounting section of the dashboard.
 
@@ -66,12 +67,13 @@ const AccountingDashboard = ({ days }: { days: number }) => {
         start_date: '',
       };
 
+      useLoading({ isLoading: true });
       const [chartChainFeesResult, chartFeesEarnedResult, chartFeesPaidResult, chartPaymentsReceivedResult] =
         await Promise.all([
-          axiosGet({ path: 'chart-chain-fees', query: chartChainFeesQuery }),
-          axiosGet({ path: 'chart-fees-earned', query: chartFeesEarnedQuery }),
-          axiosGet({ path: 'chart-fees-paid', query: chartFeesPaidQuery }),
-          axiosGet({ path: 'chart-payments-received', query: chartPaymentsReceivedQuery }),
+          axiosGetNoLoading({ path: 'chart-chain-fees', query: chartChainFeesQuery }),
+          axiosGetNoLoading({ path: 'chart-fees-earned', query: chartFeesEarnedQuery }),
+          axiosGetNoLoading({ path: 'chart-fees-paid', query: chartFeesPaidQuery }),
+          axiosGetNoLoading({ path: 'chart-payments-received', query: chartPaymentsReceivedQuery }),
         ]);
 
       if (!!chartChainFeesResult && !!chartFeesEarnedResult && !!chartFeesPaidResult && !!chartPaymentsReceivedResult) {
@@ -87,6 +89,7 @@ const AccountingDashboard = ({ days }: { days: number }) => {
         summary.push(chartPaymentsReceivedResult);
         setAccountingSummary(summary);
       }
+      useLoading({ isLoading: false });
     };
 
     fetchData();
@@ -114,7 +117,7 @@ const AccountingDashboard = ({ days }: { days: number }) => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 240,
+                height: '100%',
               }}
             >
               <BalanceInfo />
@@ -127,7 +130,7 @@ const AccountingDashboard = ({ days }: { days: number }) => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 240,
+                height: '100%',
               }}
             >
               <AccountingSummary data={accountingSummary} />
@@ -141,7 +144,7 @@ const AccountingDashboard = ({ days }: { days: number }) => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 500,
+                height: '100%',
               }}
             >
               {!!chartChainFeesData.data.length ? <ChartChainFeesOutput data={chartChainFeesData} /> : null}
@@ -155,7 +158,7 @@ const AccountingDashboard = ({ days }: { days: number }) => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 500,
+                height: '100%',
               }}
             >
               {!!chartFeesEarnedData.data.length ? <ChartFeesEarnedOutput data={chartFeesEarnedData} /> : null}
@@ -169,7 +172,7 @@ const AccountingDashboard = ({ days }: { days: number }) => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 500,
+                height: '100%',
               }}
             >
               {!!chartFeesPaidData.data.length ? <ChartFeesPaidOutput data={chartFeesPaidData} /> : null}
@@ -183,7 +186,7 @@ const AccountingDashboard = ({ days }: { days: number }) => {
                 p: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                height: 500,
+                height: '100%',
               }}
             >
               {!!chartPaymentsReceivedData.data.length ? (

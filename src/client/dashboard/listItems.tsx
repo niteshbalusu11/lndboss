@@ -7,7 +7,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import React from 'react';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { clientConstants } from '~client/utils/constants';
+import moment from 'moment';
 import { useNotify } from '~client/hooks/useNotify';
+
+const monthToDateDifference = () => moment().diff(moment().startOf('month'), 'days') || 1;
 
 // Displays the list of items in the sidebar
 
@@ -52,9 +55,15 @@ export const MainListItems = ({ setAccounting }: { setAccounting?: React.Dispatc
 
 export const SecondaryListItems = ({
   setAccounting,
+  setIsMonthToDate,
 }: {
   setAccounting: React.Dispatch<React.SetStateAction<number>>;
+  setIsMonthToDate: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const setMonthTodate = () => {
+    setIsMonthToDate(true);
+    setAccounting(monthToDateDifference());
+  };
   return (
     <React.Fragment>
       <ListSubheader component="div" inset>
@@ -80,6 +89,13 @@ export const SecondaryListItems = ({
           <AssignmentIcon />
         </ListItemIcon>
         <ListItemText primary="Last 30 days" />
+      </ListItemButton>
+
+      <ListItemButton onClick={setMonthTodate}>
+        <ListItemIcon>
+          <AssignmentIcon />
+        </ListItemIcon>
+        <ListItemText primary="Month To Date" />
       </ListItemButton>
     </React.Fragment>
   );

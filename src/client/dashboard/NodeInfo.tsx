@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { CopyText } from '~client/standard_components/app-components';
 import Title from './Title';
 import Typography from '@mui/material/Typography';
-import { axiosGet } from '~client/utils/axios';
+import { axiosGetNoLoading } from '~client/utils/axios';
 import { selectedSavedNode } from '~client/utils/constants';
 
 const substring = n => n.slice(0, 20) + '......' + n.slice(-20);
@@ -29,7 +29,7 @@ const NodeInfo = () => {
         node: selectedSavedNode(),
       };
 
-      const result = await axiosGet({ path: 'grpc/get-wallet-info', query });
+      const result = await axiosGetNoLoading({ path: 'grpc/get-wallet-info', query });
 
       if (!!result) {
         setData(result);

@@ -26,6 +26,7 @@ const mdTheme = createTheme();
 const MainDashboard = () => {
   const [accounting, setAccounting] = useState(0);
   const [checkConnection, setCheckConnection] = useState(false);
+  const [isMonthToDate, setIsMonthToDate] = useState(false);
 
   const DisplayContainer = () => {
     if (!checkConnection) {
@@ -45,6 +46,10 @@ const MainDashboard = () => {
 
     if (accounting === 0) {
       return <DefaultDashboardContainer />;
+    }
+
+    if (!!isMonthToDate) {
+      return <AccountingDashboard days={accounting} />;
     }
 
     return <DefaultDashboardContainer />;
@@ -76,7 +81,7 @@ const MainDashboard = () => {
           <List component="nav">
             <MainListItems setAccounting={setAccounting} />
             <Divider sx={{ my: 1 }} />
-            <SecondaryListItems setAccounting={setAccounting} />
+            <SecondaryListItems setAccounting={setAccounting} setIsMonthToDate={setIsMonthToDate} />
           </List>
         </Drawer>
         <DisplayContainer />
