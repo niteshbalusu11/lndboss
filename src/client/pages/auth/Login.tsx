@@ -106,6 +106,11 @@ const Login = () => {
             id="password"
             style={styles.input}
             onChange={handlePasswordChange}
+            onKeyDown={e => {
+              if (e.key === 'Enter') {
+                loginUser();
+              }
+            }}
           />
           <SubmitButton variant="contained" disabled={!username || !password} onClick={loginUser}>
             Login

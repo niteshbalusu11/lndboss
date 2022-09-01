@@ -121,6 +121,11 @@ const Register = () => {
             id="retypePassword"
             onChange={setSecond}
             style={styles.textField}
+            onKeyDown={e => {
+              if (e.key === 'Enter') {
+                fetchData();
+              }
+            }}
           />
           <div>
             <ul style={styles.ul}>
