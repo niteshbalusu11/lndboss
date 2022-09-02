@@ -6,6 +6,10 @@ on:
       - master
     paths-ignore:
       - '**/*.md'
+      - '**/*.yml'
+      - '**/*.yaml'
+      - 'README.md'
+      - 'CHANGELOG.md'
 
 jobs:
   build:

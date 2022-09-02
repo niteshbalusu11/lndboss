@@ -8,7 +8,11 @@ on:
     branches:
       - master
     paths-ignore:
-      - '**.md'
+      - '**/*.md'
+      - '**/*.yml'
+      - '**/*.yaml'
+      - 'README.md'
+      - 'CHANGELOG.md'
 
 jobs:
   build:
