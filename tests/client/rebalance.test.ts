@@ -22,7 +22,7 @@ test.describe('Test the Rebalance command client page', async () => {
     await page.type(`#${RebalanceCommand?.flags?.timeout_minutes}`, '1');
     await page.type('#node', 'alice');
 
-    await page.click('text=run command');
+    await page.click('text=Run Manual Rebalance');
     const popup = await page.waitForEvent('popup');
 
     await expect(popup).toHaveTitle('Rebalance Result');

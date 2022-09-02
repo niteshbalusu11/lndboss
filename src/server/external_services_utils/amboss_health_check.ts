@@ -3,6 +3,7 @@ import { auto, each, forever, retry } from 'async';
 
 import { ambossUrl } from '~server/utils/constants';
 import axios from 'axios';
+import { checkAmbossHealthSetting } from '~server/settings';
 import { getSavedNodes } from '~server/lnd';
 
 const postDelayMs = 1000 * 60 * 2;
@@ -89,6 +90,12 @@ const ambossHealthCheck = async ({ logger }): Promise<{ postToAmboss: any }> => 
               const date = new Date().toISOString();
               each(nodes, async node => {
                 try {
+                  const isHealthCheckEnabled = await checkAmbossHealthSetting() || process.env.AMBOSS_HEALTH_CHECK === 'true';
+
+                  if (!isHealthCheckEnabled) {
+                    return;
+                  }
+
                   const result: SignMessageResult = await signMessage({ lnd: node.lnd, message: date });
 
                   const config = {
@@ -114,7 +121,6 @@ const ambossHealthCheck = async ({ logger }): Promise<{ postToAmboss: any }> => 
             };
 
             setInterval(postToAmboss, postDelayMs);
-
             return cbk();
           },
           function (err) {

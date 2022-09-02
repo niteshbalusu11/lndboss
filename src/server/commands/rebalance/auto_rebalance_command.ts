@@ -1,5 +1,6 @@
 import { createLogger, format, transports } from 'winston';
 
+import { checkScheduledRebalanceSetting } from '~server/settings';
 import { manageRebalance } from 'balanceofsatoshis/swaps';
 import { readFile } from 'fs';
 
@@ -29,7 +30,12 @@ import { readFile } from 'fs';
   @returns via Promise
 */
 
-const autoRebalanceCommand = async ({ args, lnd }): Promise<{ result: any }> => {
+const autoRebalanceCommand = async ({ args, lnd }) => {
+  const isEnabled = await checkScheduledRebalanceSetting();
+  if (!isEnabled) {
+    return;
+  }
+
   const logger = createLogger({
     level: 'info',
     format: format.combine(format.prettyPrint()),
@@ -45,7 +51,7 @@ const autoRebalanceCommand = async ({ args, lnd }): Promise<{ result: any }> => 
   const inFiltersArray = args.in_filters.filter(n => !!n);
   const outFiltersArray = args.out_filters.filter(n => !!n);
 
-  const result = await manageRebalance({
+  await manageRebalance({
     lnd,
     logger,
     avoid: avoidArray,
@@ -61,8 +67,6 @@ const autoRebalanceCommand = async ({ args, lnd }): Promise<{ result: any }> => 
     out_through: args.out_through || undefined,
     timeout_minutes: args.timeout_minutes || 5,
   });
-
-  return { result };
 };
 
 export default autoRebalanceCommand;

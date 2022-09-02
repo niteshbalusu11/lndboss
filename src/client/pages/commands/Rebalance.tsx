@@ -213,22 +213,27 @@ const Rebalance = () => {
         <StandardHomeButtonLink />
         <Stack spacing={3} style={styles.form}>
           <h1>Auto Rebalance Scheduler</h1>
-          <h3>It is recommended that you manually test a rebalance before auto scheduling.</h3>
-          <ReactCron handleScheduleChange={handleScheduleChange} handleCronUrlChange={handleCronUrlChange} />
-          <a href={cronUrl} target="blank" id="cronguruUrl" style={styles.url}>
-            Click here to validate your schedule.
-          </a>
+          <h2>
+            To use Automated Rebalancing make sure to enable Scheduled Rebalances from User Preferences on the Dashboard
+            Page.
+          </h2>
+          <h3>Note: It is recommended that you manually test a rebalance before auto scheduling.</h3>
+          <h3>
+            Note: Select all rebalance parameters from the fields below, select a schedule and then click add schedule.
+          </h3>
+
           <Link href={{ pathname: clientConstants.rebalanceSchedulerUrl }}>
             <a target="blank" style={styles.url}>
               Click to view current scheduled jobs
             </a>
           </Link>
-          <SubmitButton variant="contained" onClick={fetchData}>
-            Add Schedule
-          </SubmitButton>
+
           <h1>Manual Rebalance</h1>
           <pre style={styles.pre}>{RebalanceCommand.longDescription}</pre>
-          <h3>NOTE: THERE IS NO WAY TO STOP AN IN-FLIGHT REBALANCE, DOUBLE CHECK BEFORE RUNNING.</h3>
+          <h3>
+            NOTE: THERE IS NO WAY TO STOP AN IN-FLIGHT REBALANCE OTHER THAN RESTARTING THE APP, DOUBLE CHECK BEFORE
+            RUNNING.
+          </h3>
 
           <PeersList
             setPeer={setOutPeer}
@@ -386,9 +391,22 @@ const Rebalance = () => {
           />
           <Link href={{ pathname: `/result/RebalanceResult`, query: flags }} passHref>
             <a target="_blank" rel="noreferrer">
-              <SubmitButton>Run Command</SubmitButton>
+              <SubmitButton>Run Manual Rebalance</SubmitButton>
             </a>
           </Link>
+
+          <ReactCron handleScheduleChange={handleScheduleChange} handleCronUrlChange={handleCronUrlChange} />
+          <a href={cronUrl} target="blank" id="cronguruUrl" style={styles.url}>
+            Click here to validate your schedule.
+          </a>
+          <Link href={{ pathname: clientConstants.rebalanceSchedulerUrl }}>
+            <a target="blank" style={styles.url}>
+              Click to view current scheduled jobs
+            </a>
+          </Link>
+          <SubmitButton variant="contained" onClick={fetchData}>
+            Add Schedule
+          </SubmitButton>
         </Stack>
       </StartFlexBox>
     </CssBaseline>

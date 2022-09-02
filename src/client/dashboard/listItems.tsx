@@ -4,6 +4,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import ComputerIcon from '@mui/icons-material/Computer';
 import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import React from 'react';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { clientConstants } from '~client/utils/constants';
@@ -41,6 +42,13 @@ export const MainListItems = ({ setAccounting }: { setAccounting?: React.Dispatc
           <ComputerIcon />
         </ListItemIcon>
         <ListItemText primary="Commands" />
+      </ListItemButton>
+
+      <ListItemButton href={clientConstants.userPreferencesUrl}>
+        <ListItemIcon>
+          <ManageAccountsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Preferences" />
       </ListItemButton>
 
       <ListItemButton href={clientConstants.loginUrl} onClick={handleLogout}>

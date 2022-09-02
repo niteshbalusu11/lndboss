@@ -1,0 +1,8 @@
+{
+  "ambossHealthCheck": {
+    "is_enabled": true
+  },
+  "scheduledRebalancing": {
+    "is_enabled": true
+  }
+}
