@@ -12,6 +12,9 @@ import { axiosGet } from '~client/utils/axios';
 import { globalCommands } from '~client/commands';
 import { useNotify } from '~client/hooks/useNotify';
 
+const substring = n => n.slice(0, 5) + '......' + n.slice(-5);
+const isPublicKey = (n: string) => !!n && /^0[2-3][0-9A-F]{64}$/i.test(n);
+
 /*
   Renders rebalance schedules
   GET call to Nest JS Process to get rebalance schedules
@@ -52,8 +55,8 @@ const columns = [
   'ID',
   'Node',
   'Schedule',
-  'InPeer',
-  'OutPeer',
+  'InPeerAlias',
+  'OutPeerAlias',
   'Avoid',
   'InFilters',
   'MaxFee',
@@ -61,6 +64,8 @@ const columns = [
   'MaxRebalance',
   'OutFilters',
   'TimeoutMinutes',
+  'InPeer',
+  'OutPeer',
 ];
 
 const RebalanceScheduler = () => {
@@ -141,8 +146,8 @@ const RebalanceScheduler = () => {
 
         row.push(rebalanceData.schedule);
 
-        row.push(rebalanceData.in_through);
-        row.push(rebalanceData.out_through);
+        row.push(rebalanceData.in_through_alias);
+        row.push(rebalanceData.out_through_alias);
 
         !!rebalanceData.avoid.length ? row.push(rebalanceData.avoid.join(', ')) : row.push('');
 
@@ -155,6 +160,13 @@ const RebalanceScheduler = () => {
         !!rebalanceData.out_filters.length ? row.push(rebalanceData.out_filters.join(', ')) : row.push('');
 
         row.push(rebalanceData.timeout_minutes);
+
+        row.push(
+          !!isPublicKey(rebalanceData.in_through) ? substring(rebalanceData.in_through) : rebalanceData.in_through
+        );
+        row.push(
+          !!isPublicKey(rebalanceData.out_through) ? substring(rebalanceData.out_through) : rebalanceData.out_through
+        );
 
         dataSet.push(row);
       });
