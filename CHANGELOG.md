@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.25.0](https://github.com/niteshbalusu11/lndboss/compare/v1.24.0...v1.25.0) (2022-09-02)
 
+- Support for peers and tags in rebalances
+
 ## [1.24.0](https://github.com/niteshbalusu11/lndboss/compare/v1.23.0...v1.24.0) (2022-09-02)
 
 - Added ability to turn amboss health check and automated rebalancing from UI.
