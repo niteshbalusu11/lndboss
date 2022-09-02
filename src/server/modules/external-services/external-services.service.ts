@@ -21,9 +21,7 @@ import { ambossHealthCheck } from '~server/external_services_utils';
 export class ExternalServicesService implements OnModuleInit {
   constructor(private logger: BosloggerService, private cronService: CronService) {}
   async onModuleInit(): Promise<void> {
-    if (process.env.AMBOSS_HEALTH_CHECK === 'true') {
-      this.pingAmbossHealthCheck({ logger: this.logger });
-    }
+    this.pingAmbossHealthCheck({ logger: this.logger });
   }
 
   async pingAmbossHealthCheck({ logger }) {

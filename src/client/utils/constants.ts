@@ -7,6 +7,7 @@ export const clientConstants = {
   publicPaths: ['/', '/auth/Login', '/auth/Register'],
   rebalanceSchedulerUrl: '/schedulers/RebalanceScheduler',
   registerUrl: '/auth/Register',
+  userPreferencesUrl: '/preferences/UserPreferences',
 };
 
 export const defaultChartQueryDays = 7;

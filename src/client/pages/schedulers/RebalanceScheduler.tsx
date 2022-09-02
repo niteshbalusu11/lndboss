@@ -170,7 +170,11 @@ const RebalanceScheduler = () => {
       <StartFlexBox>
         <StandardButtonLink destination="/Commands" label="Home" />
         <Stack spacing={3} style={styles.form}>
-          <h2>Rebalance Schedules</h2>
+          <h1>Rebalance Schedules</h1>
+          <h2>
+            To use Automated Rebalancing make sure to enable Scheduled Rebalances from User Preferences on the Dashboard
+            Page.
+          </h2>
           <a href={'/Rebalance'} target="blank" id="rebalance" style={styles.url}>
             Click here to schedule rebalances.
           </a>

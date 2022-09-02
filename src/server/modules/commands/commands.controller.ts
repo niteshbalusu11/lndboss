@@ -117,6 +117,11 @@ export class CommandsController {
     return this.commandsService.sendCommand(args);
   }
 
+  @Post('settings')
+  async settings(@Body() args) {
+    return this.commandsService.settings(args);
+  }
+
   @Get('tags')
   async tagsCommand(@Query() args: dto.tagsDto) {
     return this.commandsService.tagsCommand(args);

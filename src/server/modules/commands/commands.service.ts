@@ -2,6 +2,7 @@ import * as commands from '~server/commands';
 import * as dto from '~shared/commands.dto';
 
 import { Logger, createLogger, format, transports } from 'winston';
+import { getSettingsFile, writeSettingsFile } from '~server/settings';
 
 import { Injectable } from '@nestjs/common';
 import { LndService } from '../lnd/lnd.service';
@@ -239,6 +240,24 @@ export class CommandsService {
     });
 
     return { result };
+  }
+
+  async settings(args) {
+    try {
+      if (args.type === 'get') {
+        const result = await getSettingsFile();
+        return { result };
+      }
+
+      if (args.type === 'set') {
+        const result = await writeSettingsFile({ settings: args.settings });
+        return { result };
+      }
+
+      httpLogger({ error: [400, 'ExpectedValidSettingsType'] });
+    } catch (error) {
+      httpLogger({ error });
+    }
   }
 
   async tagsCommand(args: dto.tagsDto): Promise<{ result: any }> {
