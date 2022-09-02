@@ -1,5 +1,6 @@
+import PeersAndTagsList from './PeersAndTagsList';
 import PeersList from './PeersList';
 import RawApiList from './RawApiList';
 import TagsList from './TagsList';
 
-export { PeersList, RawApiList, TagsList };
+export { PeersAndTagsList, PeersList, RawApiList, TagsList };

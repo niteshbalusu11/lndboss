@@ -13,7 +13,7 @@ import commands, { globalCommands } from '../../commands';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
 import Link from 'next/link';
-import { PeersList } from '~client/standard_components/lndboss';
+import { PeersAndTagsList } from '~client/standard_components/lndboss';
 import { axiosPost } from '~client/utils/axios';
 import { clientConstants } from '~client/utils/constants';
 import { useNotify } from '~client/hooks/useNotify';
@@ -235,14 +235,14 @@ const Rebalance = () => {
             RUNNING.
           </h3>
 
-          <PeersList
+          <PeersAndTagsList
             setPeer={setOutPeer}
             label={RebalanceCommand.flags.out_through}
             placeholder={`${RebalanceCommand.flags.out_through} (Route out through a specific peer)`}
             id={RebalanceCommand.flags.out_through}
           />
 
-          <PeersList
+          <PeersAndTagsList
             setPeer={setInPeer}
             label={RebalanceCommand.flags.in_through}
             placeholder={`${RebalanceCommand.flags.in_through} (Route in through a specific peer)`}
