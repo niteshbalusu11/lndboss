@@ -58,7 +58,7 @@ const PeersAndTagsList = ({ id, label, placeholder, setPeer }: Args) => {
         responsePeers.forEach(peers => {
           peers.result.forEach(p => {
             newArray.push(
-              `${p.alias}\n${p.public_key}\n${tokensAsBigTokens(p.outbound)}/${tokensAsBigTokens(p.inbound)}\nNode: ${
+              `${p.alias}\n${p.public_key}\n${tokensAsBigTokens(p.inbound)}/${tokensAsBigTokens(p.outbound)}\nNode: ${
                 peers.node
               }`
             );

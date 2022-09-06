@@ -321,12 +321,7 @@ export class closedDto {
 export class deleteRebalanceDto {
   @Transform(({ value }) => trim(value))
   @IsString()
-  invoice_id: string;
-
-  @Transform(({ value }) => trim(value))
-  @IsOptional()
-  @IsString()
-  node: string;
+  id: string;
 }
 
 export class findDto {
@@ -387,13 +382,6 @@ export class graphDto {
   @IsOptional()
   @IsString()
   sort: string;
-}
-
-export class getRebalancesDto {
-  @Transform(({ value }) => trim(value))
-  @IsOptional()
-  @IsString()
-  node: string;
 }
 
 export class grpcDto {

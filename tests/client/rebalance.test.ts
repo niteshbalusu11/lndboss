@@ -58,9 +58,8 @@ test.describe('Test the Rebalance command client page', async () => {
     const popup = await page.waitForEvent('popup');
 
     await expect(popup).toHaveTitle('Rebalance Scheduler');
-    await popup.type('#node', 'alice');
 
-    await popup.click('text=fetch rebalances for saved node');
+    await popup.click('text=Refresh Rebalances');
 
     await expect(popup.locator('#scheduledRebalances')).toBeVisible();
   });

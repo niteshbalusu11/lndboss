@@ -1,12 +1,12 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { Logger, createLogger, format, transports } from 'winston';
-import { deleteRebalanceDto, getRebalancesDto, rebalanceDto, rebalanceScheduleDto } from '~shared/commands.dto';
+import { deleteRebalanceDto, rebalanceDto, rebalanceScheduleDto } from '~shared/commands.dto';
 
 import { BosloggerService } from '../boslogger/boslogger.service';
 import { CronService } from '../cron/cron.service';
 import { LndService } from '../lnd/lnd.service';
 import { SocketGateway } from '../socket/socket.gateway';
-import { getSavedNodes } from '~server/lnd';
+import { httpLogger } from '~server/utils/global_functions';
 import manageRebalanceTriggers from '~server/commands/rebalance/manage_rebalance_triggers';
 import { rebalanceCommand } from '~server/commands';
 import { removeStyling } from '~server/utils/constants';
@@ -38,20 +38,17 @@ Rebalance
   @returns via or Promise
 
   Get Scheduled Rebalances
-  {
-    [node]: <Node Name String>
-  }
 
   @returns via Promise
   {
-    invoice_id: <Invoice ID Array String>
+    id: <Rebalance ID Array String>
     rebalance_data: <Rebalance Data JSON Array String>
   }
 
   Delete Scheduled Rebalances
   {
     [node]: <Node Name String>
-    [invoice_id]: <Invoice ID String>
+    [id]: <Rebalance ID String>
   }
 
   @returns via Promise
@@ -105,29 +102,12 @@ export class RebalanceService implements OnModuleInit {
   // Run on module init
   async initRebalances() {
     try {
-      const { nodes } = await getSavedNodes({});
+      const { result } = await this.getRebalances();
 
-      if (!nodes.nodes || !nodes.nodes.length) {
-        return;
+      if (!!result && !!result.length) {
+        result.forEach(rebalance => this.cronService.createRebalanceCron({ args: rebalance.rebalance_data, id: rebalance.id }))
       }
 
-      const rebalances = await Promise.all(
-        nodes.nodes
-          .filter(node => !!node.lnd && !!node.is_online)
-          .map(async node => {
-            return await this.getRebalances({ node: node.node_name });
-          })
-      );
-
-      rebalances
-        .filter(n => !!n.result && !!n.result.getTriggers && !!n.result.getTriggers.length)
-        .forEach(rebalance => {
-          rebalance.result.getTriggers.forEach(trigger => {
-            const args = JSON.parse(trigger.rebalance_data);
-
-            this.cronService.createRebalanceCron({ args, id: trigger.id });
-          });
-        });
     } catch (error) {
       this.logger.log({ type: 'error', message: error.message });
     }
@@ -159,29 +139,31 @@ export class RebalanceService implements OnModuleInit {
 
   // Delete a rebalance cron job
   async deleteRebalance(args: deleteRebalanceDto): Promise<{ result: any }> {
-    const lnd = await LndService.authenticatedLnd({ node: args.node });
+    try {
+      await manageRebalanceTriggers({
+        action: actionDeleteRebalanceTrigger,
+        id: args.id,
+      });
 
-    await manageRebalanceTriggers({
-      lnd,
-      action: actionDeleteRebalanceTrigger,
-      id: args.invoice_id,
-    });
+      await this.cronService.deleteCron({ name: args.id });
 
-    await this.cronService.deleteCron({ name: args.invoice_id });
-
-    return { result: 'rebalanceScheduleDeleted' };
+      return { result: 'rebalanceScheduleDeleted' };
+    } catch (error) {
+      httpLogger({ error });
+    }
   }
 
   // Get a list of rebalance cron jobs
-  async getRebalances(args: getRebalancesDto): Promise<{ result: any }> {
-    const lnd = await LndService.authenticatedLnd({ node: args.node });
+  async getRebalances(): Promise<{ result: any }> {
+    try {
+      const result = await manageRebalanceTriggers({
+        action: actionListRebalancesTriggers,
+      });
 
-    const result = await manageRebalanceTriggers({
-      action: actionListRebalancesTriggers,
-      lnd,
-    });
-
-    return { result: result.getTriggers };
+      return { result: result.getTriggers };
+    } catch (error) {
+      httpLogger({ error });
+    }
   }
 
   // Manual rebalance
@@ -200,19 +182,23 @@ export class RebalanceService implements OnModuleInit {
 
   // Schedule a rebalance
   async scheduleRebalance(args: rebalanceScheduleDto): Promise<{ result: any }> {
-    const stringify = (obj: any) => JSON.stringify(obj);
-    const lnd = await LndService.authenticatedLnd({ node: args.node });
+    try {
+      const stringify = (obj: any) => JSON.stringify(obj);
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const result = await manageRebalanceTriggers({
-      lnd,
-      action: actionAddRebalanceTrigger,
-      data: stringify(args),
-    });
+      const result = await manageRebalanceTriggers({
+        lnd,
+        action: actionAddRebalanceTrigger,
+        data: stringify(args),
+      });
 
-    if (!!result.createRebalanceTrigger) {
-      this.cronService.createRebalanceCron({ args, id: result.createRebalanceTrigger.create.id });
+      if (!!result.createRebalanceTrigger) {
+        this.cronService.createRebalanceCron({ args, id: result.createRebalanceTrigger.id });
+      }
+
+      return { result: result.createRebalanceTrigger };
+    } catch (error) {
+      httpLogger({ error })
     }
-
-    return { result: result.createRebalanceTrigger };
   }
 }

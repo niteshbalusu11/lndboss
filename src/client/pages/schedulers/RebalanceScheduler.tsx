@@ -9,7 +9,6 @@ import {
 
 import Head from 'next/head';
 import { axiosGet } from '~client/utils/axios';
-import { globalCommands } from '~client/commands';
 import { useNotify } from '~client/hooks/useNotify';
 
 const substring = n => n.slice(0, 5) + '......' + n.slice(-5);
@@ -69,14 +68,9 @@ const columns = [
 ];
 
 const RebalanceScheduler = () => {
-  const [node, setNode] = useState('');
   const [rows, setRows] = useState([]);
   const [id, setId] = useState('');
   const dataSet = [];
-
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNode(event.target.value);
-  };
 
   const handleIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setId(event.target.value);
@@ -91,13 +85,9 @@ const RebalanceScheduler = () => {
   };
 
   const fetchDataOnClick = async () => {
-    const query = {
-      node,
-    };
-    const data = await axiosGet({ path: 'rebalance/getrebalances', query });
-    if (!!data && !!data.getTriggers && !!data.getTriggers.length) {
-      const { getTriggers } = data;
-      setTableData(getTriggers);
+    const data = await axiosGet({ path: 'rebalance/getrebalances', query: {} });
+    if (!!data && !!data.length) {
+      setTableData(data);
     } else {
       setRows([]);
     }
@@ -105,9 +95,9 @@ const RebalanceScheduler = () => {
 
   const fetchRebalanceDelete = async () => {
     const query = {
-      node,
-      invoice_id: id,
+      id,
     };
+
     const data = await axiosGet({ path: 'rebalance/deleterebalance', query });
 
     if (!!data) {
@@ -118,13 +108,10 @@ const RebalanceScheduler = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const query = {
-        node,
-      };
-      const data = await axiosGet({ path: 'rebalance/getrebalances', query });
-      if (!!data && !!data.getTriggers && !!data.getTriggers.length) {
-        const { getTriggers } = data;
-        setTableData(getTriggers);
+      const data = await axiosGet({ path: 'rebalance/getrebalances', query: {} });
+
+      if (!!data && !!data.length) {
+        setTableData(data);
       } else {
         setRows([]);
       }
@@ -187,18 +174,10 @@ const RebalanceScheduler = () => {
             To use Automated Rebalancing make sure to enable Scheduled Rebalances from User Preferences on the Dashboard
             Page.
           </h2>
-          <a href={'/Rebalance'} target="blank" id="rebalance" style={styles.url}>
+          <a href={'/commands/Rebalance'} target="blank" id="rebalance" style={styles.url}>
             Click here to schedule rebalances.
           </a>
-          <TextField
-            type="text"
-            placeholder={globalCommands.node.name}
-            label={globalCommands.node.name}
-            id={globalCommands.node.value}
-            onChange={handeNodeChange}
-            style={styles.textField}
-          />
-          <SubmitButton onClick={fetchDataOnClick}>Fetch Rebalances For Saved Node</SubmitButton>
+          <SubmitButton onClick={fetchDataOnClick}>Refresh Rebalances</SubmitButton>
           <DisplayTable />
           <h3>Enter a Rebalance ID to remove schedule</h3>
           <TextField

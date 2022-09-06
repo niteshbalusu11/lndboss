@@ -1,14 +1,15 @@
-import { AuthenticatedLnd, CreateInvoiceResult, createInvoice } from 'lightning';
-
+import { AuthenticatedLnd } from 'lightning';
 import { auto } from 'async';
 import encodeTrigger from './encode_trigger';
 import { getNodeAlias } from 'ln-sync';
+import { randomBytes } from 'crypto';
+import writeRebalanceFile from './write_rebalance_file';
 
-const daysAsMs = (days: number) => Number(days) * 1000 * 60 * 60 * 24;
-const defaultTriggerDays = 365;
-const futureDate = (ms: number) => new Date(Date.now() + ms).toISOString();
 const isPublicKey = (n: string) => !!n && /^0[2-3][0-9A-F]{64}$/i.test(n);
 const { parse } = JSON;
+const makeId = () => randomBytes(8).toString('hex');
+const createTriggerType = 'create';
+
 
 /** Create a new trigger for rebalance
 
@@ -29,7 +30,9 @@ type Tasks = {
     data: string;
   }
   description: string;
-  create: CreateInvoiceResult;
+  create: {
+    id: string;
+  };
 };
 
 type Args = {
@@ -123,11 +126,10 @@ const createRebalanceTrigger = async ({ data, lnd }: Args) => {
     create: [
       'description',
       async ({ description }) => {
-        return await createInvoice({
-          description,
-          lnd,
-          expires_at: futureDate(daysAsMs(defaultTriggerDays)),
-        });
+        const id = makeId();
+        await writeRebalanceFile({ id, rebalance: description, type: createTriggerType });
+
+        return { id };
       },
     ],
   });

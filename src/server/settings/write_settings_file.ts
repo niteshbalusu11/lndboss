@@ -58,7 +58,7 @@ const writeSettingsFile = async ({ settings }) => {
 
         writeFile(filePath, stringify(data), (err) => {
           if (!!err) {
-            return cbk([500, 'ExpectedToWriteSettingsFile', err]);
+            return cbk([500, 'UnexpectedErrorWritingSettingsFile', err]);
           }
 
           return cbk();
