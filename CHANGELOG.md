@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.0.0](https://github.com/niteshbalusu11/lndboss/compare/v1.25.0...v2.0.0) (2022-09-06)
 
+- Breaking change: Drop support for scheduled rebalances encoding in invoices and move to a JSON file in .bosgui directory.
+
 ## [1.25.0](https://github.com/niteshbalusu11/lndboss/compare/v1.24.0...v1.25.0) (2022-09-02)
 
 - Support for peers and tags in rebalances
