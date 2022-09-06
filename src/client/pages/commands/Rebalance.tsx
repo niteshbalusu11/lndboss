@@ -53,6 +53,9 @@ const styles = {
     fontWeight: 'bold',
     color: 'blue',
   },
+  link: {
+    width: '250px',
+  },
 };
 
 const Rebalance = () => {
@@ -390,7 +393,7 @@ const Rebalance = () => {
             style={styles.textField}
           />
           <Link href={{ pathname: `/result/RebalanceResult`, query: flags }} passHref>
-            <a target="_blank" rel="noreferrer">
+            <a target="_blank" rel="noreferrer" style={styles.link}>
               <SubmitButton>Run Manual Rebalance</SubmitButton>
             </a>
           </Link>

@@ -127,7 +127,7 @@ const RebalanceScheduler = () => {
 
         row.push(trigger.id);
 
-        const rebalanceData = JSON.parse(trigger.rebalance_data);
+        const rebalanceData = trigger.rebalance_data;
 
         !!rebalanceData.node ? row.push(rebalanceData.node) : row.push('Default');
 

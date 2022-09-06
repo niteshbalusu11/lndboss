@@ -46,7 +46,7 @@ const getTriggers = async ({}) => {
           const { result } = decodeTrigger({ encoded: n.rebalance });
           triggers.push({
             id: n.id,
-            rebalance_data: result.rebalance_data,
+            rebalance_data: parse(result.rebalance_data),
           })
         });
 
