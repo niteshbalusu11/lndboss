@@ -5,8 +5,7 @@ import { LndService } from '../lnd/lnd.service';
 import { SchedulerRegistry } from '@nestjs/schedule';
 import autoRebalanceCommand from '~server/commands/rebalance/auto_rebalance_command';
 import { rebalanceScheduleDto } from '~shared/commands.dto';
-
-const stringify = (n: object) => JSON.stringify(n, null, 2);
+const stringify = (obj: any) => JSON.stringify(obj, null, 2);
 
 /**
   @createRebalanceCron

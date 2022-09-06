@@ -1,15 +1,14 @@
-import async, { auto } from 'async';
-
+import { auto } from 'async';
 import decodeTrigger from './decode_trigger';
-import { getInvoices } from 'ln-service';
+import readRebalanceFile from './read_rebalance_file';
 
-const defaultInvoicesLimit = 100;
+const defaultRebalances = { rebalances: [] };
+const { parse } = JSON;
+
 
 /** Get registered triggers
 
-  {
-    lnd: <Authenticated LND API Object>
-  }
+  {}
 
   @returns via cbk or Promise
   {
@@ -24,67 +23,34 @@ const defaultInvoicesLimit = 100;
     }]
   }
 */
-const getTriggers = async ({ lnd }) => {
+const getTriggers = async ({}) => {
   return auto({
     // Check arguments
     validate: (cbk: any) => {
-      if (!lnd) {
-        return cbk([400, 'ExpectedAuthenticatedLndToGetTriggers']);
-      }
-
       return cbk();
     },
 
     // Get the past triggers
     getTriggers: [
       'validate',
-      ({}, cbk: any) => {
-        let token: any;
+      async () => {
         const triggers = [];
+        const data = await readRebalanceFile({});
+        if (!data) {
+          return defaultRebalances;
+        }
 
-        // Register past trigger invoices
-        return async.until(
-          cbk => cbk(null, token === false),
-          cbk => {
-            return getInvoices(
-              {
-                lnd,
-                token,
-                is_unconfirmed: true,
-                limit: !token ? defaultInvoicesLimit : undefined,
-              },
-              (err, res) => {
-                if (!!err) {
-                  return cbk(err);
-                }
+        const parsedData = parse(data);
 
-                token = res.next || false;
+        parsedData.rebalances.forEach(n => {
+          const { result } = decodeTrigger({ encoded: n.rebalance });
+          triggers.push({
+            id: n.id,
+            rebalance_data: result.rebalance_data,
+          })
+        });
 
-                res.invoices.forEach(({ description, id }) => {
-                  try {
-                    const trigger = decodeTrigger({ encoded: description });
-
-                    return triggers.push({
-                      id,
-                      rebalance_data: trigger.result.rebalance_data,
-                    });
-                  } catch (err) {
-                    // Ignore invoices that are not triggers
-                  }
-                });
-
-                return cbk();
-              }
-            );
-          },
-          err => {
-            if (!!err) {
-              return cbk(err);
-            }
-
-            return cbk(null, triggers);
-          }
-        );
+        return triggers;
       },
     ],
   });
