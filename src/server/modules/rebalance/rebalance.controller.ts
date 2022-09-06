@@ -18,7 +18,7 @@ export class RebalanceController {
   }
 
   @Get('api/rebalance/getrebalances')
-  async getRebalances(@Query() args) {
+  async getRebalances() {
     return this.rebalanceService.getRebalances();
   }
 
