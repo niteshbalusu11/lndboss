@@ -138,7 +138,6 @@ export type commandLnurl = {
   url: string;
 };
 
-
 // ========================Pay command=======================================
 
 export type commandPay = {

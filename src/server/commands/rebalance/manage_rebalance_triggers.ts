@@ -60,10 +60,12 @@ const manageRebalanceTriggers = async ({ action, data, id, lnd }: Args) => {
           return;
         }
 
-        const trigger = (await createRebalanceTrigger({
-          data,
-          lnd,
-        })).create;
+        const trigger = (
+          await createRebalanceTrigger({
+            data,
+            lnd,
+          })
+        ).create;
 
         return trigger;
       },
@@ -93,7 +95,7 @@ const manageRebalanceTriggers = async ({ action, data, id, lnd }: Args) => {
           return;
         }
 
-        const deleteTrigger = await writeRebalanceFile({ id, rebalance: '', type: editTriggerType })
+        const deleteTrigger = await writeRebalanceFile({ id, rebalance: '', type: editTriggerType });
 
         return deleteTrigger;
       },

@@ -53,7 +53,7 @@ type Tasks = {
       cert: string;
       macaroon: string;
       socket: string;
-    }
+    };
   }[];
   getNodes: {
     lnd: AuthenticatedLnd;

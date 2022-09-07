@@ -22,15 +22,15 @@ import { httpLogger } from '~server/utils/global_functions';
 
 type Args = {
   args: types.commandPrice;
-}
+};
 const priceCommand = async ({ args }: Args): Promise<{ result: any }> => {
   try {
     const symbols = !!args.symbols
       ? args.symbols
-        .toUpperCase()
-        .trim()
-        .split(',')
-        .map(n => n.trim())
+          .toUpperCase()
+          .trim()
+          .split(',')
+          .map(n => n.trim())
       : ['USD'];
 
     const result = await getPrices({

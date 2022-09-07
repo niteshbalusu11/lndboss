@@ -18,7 +18,7 @@ test.describe('Test Call command on the node.js side', async () => {
         description: 'testdescription',
         is_including_private_channels: true,
         mtokens: '1000',
-      }
+      },
     };
     const result = await callCommand({ args, lnd: lightning.lnd });
 

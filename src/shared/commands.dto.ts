@@ -150,7 +150,6 @@ export class chartChainFeesDto {
   @IsOptional()
   @IsString()
   start_date: string;
-
 }
 
 export class chartFeesEarnedDto {

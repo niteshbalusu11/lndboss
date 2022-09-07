@@ -90,7 +90,8 @@ const ambossHealthCheck = async ({ logger }): Promise<{ postToAmboss: any }> => 
               const date = new Date().toISOString();
               each(nodes, async node => {
                 try {
-                  const isHealthCheckEnabled = await checkAmbossHealthSetting() || process.env.AMBOSS_HEALTH_CHECK === 'true';
+                  const isHealthCheckEnabled =
+                    (await checkAmbossHealthSetting()) || process.env.AMBOSS_HEALTH_CHECK === 'true';
 
                   if (!isHealthCheckEnabled) {
                     return;
@@ -113,7 +114,6 @@ const ambossHealthCheck = async ({ logger }): Promise<{ postToAmboss: any }> => 
                   };
 
                   await axios.post(ambossUrl, postBody, config);
-
                 } catch (error) {
                   logger.log({ message: JSON.stringify(error), type: 'error' });
                 }

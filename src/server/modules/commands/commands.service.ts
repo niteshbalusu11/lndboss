@@ -68,7 +68,6 @@ export class CommandsService {
     } catch (error) {
       httpLogger({ error });
     }
-
   }
 
   async certValidityDaysCommand(args: dto.certValidityDaysDto): Promise<{ result: any }> {
@@ -166,7 +165,6 @@ export class CommandsService {
 
     return { result };
   }
-
 
   async lnurlCommand(args: dto.lnurlDto): Promise<{ result: any }> {
     try {

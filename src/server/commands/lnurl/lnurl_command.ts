@@ -36,7 +36,7 @@ type Args = {
   args: types.commandLnurl;
   lnd: AuthenticatedLnd;
   logger: Logger;
-}
+};
 const lnurlCommand = async ({ args, lnd, logger }: Args) => {
   return auto({
     // Check arguments
@@ -61,73 +61,92 @@ const lnurlCommand = async ({ args, lnd, logger }: Args) => {
     },
 
     // Authenticate using lnurl
-    auth: ['validate', async ({}) => {
-      // Exit early if not lnurl auth
-      if (args.function !== functionAuth) {
-        return;
-      }
+    auth: [
+      'validate',
+      async ({}) => {
+        // Exit early if not lnurl auth
+        if (args.function !== functionAuth) {
+          return;
+        }
 
-      return (await auth({
-        lnd,
-        logger,
-        request,
-        lnurl: args.url,
-      })).send;
-    }],
+        return (
+          await auth({
+            lnd,
+            logger,
+            request,
+            lnurl: args.url,
+          })
+        ).send;
+      },
+    ],
 
     // Request inbound channel
-    channel: ['validate', async ({}) => {
-      // Exit early if not lnurl channel
-      if (args.function !== functionChannel) {
-        return;
-      }
+    channel: [
+      'validate',
+      async ({}) => {
+        // Exit early if not lnurl channel
+        if (args.function !== functionChannel) {
+          return;
+        }
 
-      return (await channel({
-        lnd,
-        logger,
-        request,
-        is_private: args.is_private,
-        lnurl: args.url,
-      })).sendConfirmation;
-    }],
+        return (
+          await channel({
+            lnd,
+            logger,
+            request,
+            is_private: args.is_private,
+            lnurl: args.url,
+          })
+        ).sendConfirmation;
+      },
+    ],
 
     // Pay to lnurl
-    pay: ['validate', async ({}) => {
-      // Exit early if not lnurl pay
-      if (args.function !== functionPay) {
-        return;
-      }
+    pay: [
+      'validate',
+      async ({}) => {
+        // Exit early if not lnurl pay
+        if (args.function !== functionPay) {
+          return;
+        }
 
-      return (await pay({
-        lnd,
-        logger,
-        request,
-        amount: args.amount,
-        avoid: args.avoid,
-        lnurl: args.url,
-        max_fee: args.max_fee || 1337,
-        max_paths: args.max_paths || 1,
-        out: args.out,
-      })).pay;
-    }],
+        return (
+          await pay({
+            lnd,
+            logger,
+            request,
+            amount: args.amount,
+            avoid: args.avoid,
+            lnurl: args.url,
+            max_fee: args.max_fee || 1337,
+            max_paths: args.max_paths || 1,
+            out: args.out,
+          })
+        ).pay;
+      },
+    ],
 
     // Withdraw from lnurl
-    withdraw: ['validate', async ({}) => {
-      // Exit early if not lnurl withdraw
-      if (args.function !== functionWithdraw) {
-        return;
-      }
+    withdraw: [
+      'validate',
+      async ({}) => {
+        // Exit early if not lnurl withdraw
+        if (args.function !== functionWithdraw) {
+          return;
+        }
 
-      return (await withdraw({
-        lnd,
-        logger,
-        request,
-        amount: args.amount,
-        lnurl: args.url,
-      })).withdraw;
-    }],
-  },
-  );
+        return (
+          await withdraw({
+            lnd,
+            logger,
+            request,
+            amount: args.amount,
+            lnurl: args.url,
+          })
+        ).withdraw;
+      },
+    ],
+  });
 };
 
 export default lnurlCommand;

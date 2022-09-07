@@ -1,7 +1,7 @@
 import * as lightning from 'lightning';
 
-import { auto } from "async";
-import { rawApi } from "~shared/raw_api";
+import { auto } from 'async';
+import { rawApi } from '~shared/raw_api';
 
 const lower = n => n.toLowerCase();
 
@@ -21,7 +21,7 @@ type Tasks = {
   validate: null;
   buildArgs: { [key: string]: string };
   call: any;
-}
+};
 const callCommand = async ({ args, lnd }) => {
   return auto<Tasks>({
     validate: (cbk: any) => {
@@ -36,24 +36,30 @@ const callCommand = async ({ args, lnd }) => {
       return cbk();
     },
 
-    buildArgs: ['validate', async () => {
-      const { postArgs } = args;
-      const obj = { lnd };
+    buildArgs: [
+      'validate',
+      async () => {
+        const { postArgs } = args;
+        const obj = { lnd };
 
-      for (const key in postArgs) {
-        if (Object.prototype.hasOwnProperty.call(postArgs, key)) {
-          const element = postArgs[key];
-          obj[key] = element;
+        for (const key in postArgs) {
+          if (Object.prototype.hasOwnProperty.call(postArgs, key)) {
+            const element = postArgs[key];
+            obj[key] = element;
+          }
         }
-      }
 
-      return obj;
-    }],
+        return obj;
+      },
+    ],
 
-    call: ['buildArgs', async ({ buildArgs }) => {
-      return await lightning[args.method](buildArgs);
-    }],
-  })
+    call: [
+      'buildArgs',
+      async ({ buildArgs }) => {
+        return await lightning[args.method](buildArgs);
+      },
+    ],
+  });
 };
 
 export default callCommand;

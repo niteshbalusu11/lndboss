@@ -24,7 +24,7 @@ type Args = {
   mtokens: string;
   request: any;
   url: string;
-}
+};
 
 type Tasks = {
   validate: undefined;
@@ -32,7 +32,7 @@ type Tasks = {
     destination: string;
     request: string;
   };
-}
+};
 const getPayRequest = async ({ hash, mtokens, request, url }: Args) => {
   return auto<Tasks>({
     // Check arguments
@@ -57,52 +57,55 @@ const getPayRequest = async ({ hash, mtokens, request, url }: Args) => {
     },
 
     // Get the payment request
-    getRequest: ['validate', ({}, cbk: any) => {
-      const qs = { amount: mtokens };
+    getRequest: [
+      'validate',
+      ({}, cbk: any) => {
+        const qs = { amount: mtokens };
 
-      return request({ qs, url, json: true }, (err, r, json) => {
-        if (!!err) {
-          return cbk([503, 'FailedToGetPaymentRequestFromService', { err }]);
-        }
+        return request({ qs, url, json: true }, (err, r, json) => {
+          if (!!err) {
+            return cbk([503, 'FailedToGetPaymentRequestFromService', { err }]);
+          }
 
-        if (!json) {
-          return cbk([503, 'ServiceFailedToReturnPayReqJson']);
-        }
+          if (!json) {
+            return cbk([503, 'ServiceFailedToReturnPayReqJson']);
+          }
 
-        if (json.status === errorStatus) {
-          return cbk([503, 'ServiceReturnedError', { err: json.reason }]);
-        }
+          if (json.status === errorStatus) {
+            return cbk([503, 'ServiceReturnedError', { err: json.reason }]);
+          }
 
-        if (!json.pr) {
-          return cbk([503, 'ExpectedPaymentRequestFromService']);
-        }
+          if (!json.pr) {
+            return cbk([503, 'ExpectedPaymentRequestFromService']);
+          }
 
-        try {
-          parsePaymentRequest({ request: json.pr });
-        } catch (err) {
-          return cbk([503, 'FailedToParseReturnedPaymentRequest', { err }]);
-        }
+          try {
+            parsePaymentRequest({ request: json.pr });
+          } catch (err) {
+            return cbk([503, 'FailedToParseReturnedPaymentRequest', { err }]);
+          }
 
-        const request = parsePaymentRequest({ request: json.pr });
+          const request = parsePaymentRequest({ request: json.pr });
 
-        if (request.description_hash !== hash) {
-          return cbk([503, 'ServiceReturnedInvalidPaymentDescriptionHash']);
-        }
+          if (request.description_hash !== hash) {
+            return cbk([503, 'ServiceReturnedInvalidPaymentDescriptionHash']);
+          }
 
-        if (request.is_expired) {
-          return cbk([503, 'ServiceReturnedExpiredPaymentRequest']);
-        }
+          if (request.is_expired) {
+            return cbk([503, 'ServiceReturnedExpiredPaymentRequest']);
+          }
 
-        if (request.mtokens !== mtokens) {
-          return cbk([503, 'ServiceReturnedIncorrectInvoiceAmount']);
-        }
+          if (request.mtokens !== mtokens) {
+            return cbk([503, 'ServiceReturnedIncorrectInvoiceAmount']);
+          }
 
-        return cbk(null, {
-          destination: request.destination,
-          request: json.pr,
+          return cbk(null, {
+            destination: request.destination,
+            request: json.pr,
+          });
         });
-      });
-    }],
+      },
+    ],
   });
 };
 

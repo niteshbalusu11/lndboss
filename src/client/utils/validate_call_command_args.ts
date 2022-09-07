@@ -20,7 +20,7 @@ const isPublicKey = (n: string) => !!n && /^0[2-3][0-9A-F]{64}$/i.test(n);
 
 type ReturnValue = {
   message: string | null;
-}
+};
 
 const validateCallCommandArgs = ({ args }): ReturnValue => {
   if (!isArray(args)) {
@@ -52,12 +52,12 @@ const validateCallCommandArgs = ({ args }): ReturnValue => {
       return { message: `${args[i].named} must be a hex encoded public key` };
     }
 
-    if (args[i].type === 'boolean' && !!args[i].value && (args[i].value !== 'true' && args[i].value !== 'false')) {
+    if (args[i].type === 'boolean' && !!args[i].value && args[i].value !== 'true' && args[i].value !== 'false') {
       return { message: `${args[i].named} only takes true or false as a value` };
     }
   }
 
   return { message: null };
-}
+};
 
 export default validateCallCommandArgs;

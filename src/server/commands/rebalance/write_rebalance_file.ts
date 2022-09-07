@@ -32,128 +32,128 @@ type Tasks = {
     data: string;
   };
   writeFile: undefined;
-}
+};
 const writeRebalanceFile = async ({ id, rebalance, type }) => {
-  return (await auto<Tasks>({
-    // Check arguments
-    validate: (cbk: any) => {
-      if (!id) {
-        return cbk([400, 'ExpectedRebalanceIdToWriteRebalanceFile']);
-      }
+  return (
+    await auto<Tasks>({
+      // Check arguments
+      validate: (cbk: any) => {
+        if (!id) {
+          return cbk([400, 'ExpectedRebalanceIdToWriteRebalanceFile']);
+        }
 
-      if (!type) {
-        return cbk([400, 'ExpectedRebalanceWriteTypeToWriteRebalanceFile']);
-      }
+        if (!type) {
+          return cbk([400, 'ExpectedRebalanceWriteTypeToWriteRebalanceFile']);
+        }
 
-      return cbk();
-    },
-
-
-    // Make sure the node directory is there
-    registerDirectory: [
-      'validate',
-      ({}, cbk: any) => {
-        const homeDirPath = join(...[homedir(), home]);
-
-        return mkdir(homeDirPath, () => {
-          // Ignore errors, the directory may already be there
-          return cbk();
-        });
+        return cbk();
       },
-    ],
 
-    // Read the rebalance file
-    readFile: [
-      'registerDirectory',
-      async () => {
-        const data = await readRebalanceFile({});
+      // Make sure the node directory is there
+      registerDirectory: [
+        'validate',
+        ({}, cbk: any) => {
+          const homeDirPath = join(...[homedir(), home]);
 
-        return data;
-      }
-    ],
+          return mkdir(homeDirPath, () => {
+            // Ignore errors, the directory may already be there
+            return cbk();
+          });
+        },
+      ],
 
-    // Append data to existing rebalances
-    addData: [
-      'readFile',
-      ({ readFile }, cbk: any) => {
-        if (type !== createTriggerType) {
-          return cbk(null, { data: undefined });
-        }
+      // Read the rebalance file
+      readFile: [
+        'registerDirectory',
+        async () => {
+          const data = await readRebalanceFile({});
 
-        const obj = {
-          id,
-          rebalance,
-        };
+          return data;
+        },
+      ],
 
-        // Exit early if there is no data or file
-        if (!readFile) {
-          defaultRebalances.rebalances.push(obj)
-
-          return cbk(null, { data: Buffer.from(stringify(defaultRebalances)) });
-        }
-
-        const parsedData = parse(readFile);
-
-        parsedData.rebalances.push(obj);
-
-        return cbk(null, { data: Buffer.from(stringify(parsedData)) });
-      }
-    ],
-
-    // Modify existing rebalance data
-    modifyData: [
-      'readFile',
-      ({ readFile }, cbk: any) => {
-        if (type !== editTriggerType) {
-          return cbk(null, { data: undefined });
-        }
-
-        if (!readFile) {
-          return cbk([400, 'ExpectedRebalanceDataToDeleteRebalanceTrigger']);
-        }
-
-        const parsedData = parse(readFile);
-
-        if (!parsedData.rebalances.length) {
-          return cbk([400, 'ExpectedRebalanceDataToDeleteRebalanceTrigger']);
-        }
-
-        const findRebalance = parsedData.rebalances.find(n => n.id === id);
-
-        if (!findRebalance) {
-          return cbk([400, 'ExpectedValidRebalanceIdToDeleteRebalanceJob'])
-        }
-
-        const filterdData = parsedData.rebalances.filter(n => n.id !== id);
-
-        const modifiedData = { rebalances: filterdData }
-
-        return cbk(null, { data: Buffer.from(stringify(modifiedData)) });
-      }
-
-    ],
-
-    // write the rebalances to file
-    writeFile: [
-      'addData',
-      'modifyData',
-      'readFile',
-      'registerDirectory',
-      ({ addData, modifyData }, cbk: any) => {
-        const filePath = join(...[homedir(), home, rebalancesFile]);
-
-        const data = addData.data || modifyData.data;
-
-        writeFile(filePath, data, (err) => {
-          if (!!err) {
-            return cbk([500, 'UnexpectedErrorWritingSettingsFile', err]);
+      // Append data to existing rebalances
+      addData: [
+        'readFile',
+        ({ readFile }, cbk: any) => {
+          if (type !== createTriggerType) {
+            return cbk(null, { data: undefined });
           }
 
-          return cbk();
-        });
-      }
-    ],
-  })).writeFile;
+          const obj = {
+            id,
+            rebalance,
+          };
+
+          // Exit early if there is no data or file
+          if (!readFile) {
+            defaultRebalances.rebalances.push(obj);
+
+            return cbk(null, { data: Buffer.from(stringify(defaultRebalances)) });
+          }
+
+          const parsedData = parse(readFile);
+
+          parsedData.rebalances.push(obj);
+
+          return cbk(null, { data: Buffer.from(stringify(parsedData)) });
+        },
+      ],
+
+      // Modify existing rebalance data
+      modifyData: [
+        'readFile',
+        ({ readFile }, cbk: any) => {
+          if (type !== editTriggerType) {
+            return cbk(null, { data: undefined });
+          }
+
+          if (!readFile) {
+            return cbk([400, 'ExpectedRebalanceDataToDeleteRebalanceTrigger']);
+          }
+
+          const parsedData = parse(readFile);
+
+          if (!parsedData.rebalances.length) {
+            return cbk([400, 'ExpectedRebalanceDataToDeleteRebalanceTrigger']);
+          }
+
+          const findRebalance = parsedData.rebalances.find(n => n.id === id);
+
+          if (!findRebalance) {
+            return cbk([400, 'ExpectedValidRebalanceIdToDeleteRebalanceJob']);
+          }
+
+          const filterdData = parsedData.rebalances.filter(n => n.id !== id);
+
+          const modifiedData = { rebalances: filterdData };
+
+          return cbk(null, { data: Buffer.from(stringify(modifiedData)) });
+        },
+      ],
+
+      // write the rebalances to file
+      writeFile: [
+        'addData',
+        'modifyData',
+        'readFile',
+        'registerDirectory',
+        ({ addData, modifyData }, cbk: any) => {
+          const filePath = join(...[homedir(), home, rebalancesFile]);
+
+          const data = addData.data || modifyData.data;
+
+          writeFile(filePath, data, err => {
+            if (!!err) {
+              return cbk([500, 'UnexpectedErrorWritingSettingsFile', err]);
+            }
+
+            return cbk();
+          });
+        },
+      ],
+    })
+  ).writeFile;
 };
 
 export default writeRebalanceFile;

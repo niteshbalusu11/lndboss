@@ -10,7 +10,6 @@ const { parse } = JSON;
 const makeId = () => randomBytes(8).toString('hex');
 const createTriggerType = 'create';
 
-
 /** Create a new trigger for rebalance
 
   {
@@ -28,7 +27,7 @@ type Tasks = {
   outPeerAlias: string;
   pushAliases: {
     data: string;
-  }
+  };
   description: string;
   create: {
     id: string;
@@ -70,7 +69,7 @@ const createRebalanceTrigger = async ({ data, lnd }: Args) => {
           // Ingore errors
           return '';
         }
-      }
+      },
     ],
 
     // Get out peer alias
@@ -88,7 +87,8 @@ const createRebalanceTrigger = async ({ data, lnd }: Args) => {
           // Ingore errors
           return '';
         }
-      }],
+      },
+    ],
 
     // Push alias data into data object
     pushAliases: [
@@ -104,7 +104,7 @@ const createRebalanceTrigger = async ({ data, lnd }: Args) => {
         } catch (err) {
           return { data };
         }
-      }
+      },
     ],
 
     // Encode the trigger

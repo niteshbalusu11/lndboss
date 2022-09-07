@@ -18,54 +18,55 @@ const stringify = (obj: any) => JSON.stringify(obj, null, 2);
   @returns via Promise
 */
 const writeSettingsFile = async ({ settings }) => {
-  return (await auto({
-    // Check arguments
-    validate: (cbk: any) => {
-      if (!settings) {
-        return cbk([400, 'ExpectedSettingsObjectToWriteSettingsFile']);
-      }
-
-      if (!!settings) {
-        if (typeof settings !== 'object') {
-          return cbk([400, 'ExpectedValidSettingsObjectToWriteSettingsFile']);
+  return (
+    await auto({
+      // Check arguments
+      validate: (cbk: any) => {
+        if (!settings) {
+          return cbk([400, 'ExpectedSettingsObjectToWriteSettingsFile']);
         }
-      }
 
-      return cbk();
-    },
-
-
-    // Make sure the node directory is there
-    registerDirectory: [
-      'validate',
-      ({}, cbk: any) => {
-        const homeDirPath = join(...[homedir(), home]);
-
-        return mkdir(homeDirPath, () => {
-          // Ignore errors, the directory may already be there
-          return cbk();
-        });
-      },
-    ],
-
-    // write the settings file
-    writeFile: [
-      'registerDirectory',
-      ({}, cbk: any) => {
-        const filePath = join(...[homedir(), home, settingsFile]);
-
-        const data = settings || defaultSettings;
-
-        writeFile(filePath, stringify(data), (err) => {
-          if (!!err) {
-            return cbk([500, 'UnexpectedErrorWritingSettingsFile', err]);
+        if (!!settings) {
+          if (typeof settings !== 'object') {
+            return cbk([400, 'ExpectedValidSettingsObjectToWriteSettingsFile']);
           }
+        }
 
-          return cbk();
-        });
-      }
-    ],
-  })).writeFile;
+        return cbk();
+      },
+
+      // Make sure the node directory is there
+      registerDirectory: [
+        'validate',
+        ({}, cbk: any) => {
+          const homeDirPath = join(...[homedir(), home]);
+
+          return mkdir(homeDirPath, () => {
+            // Ignore errors, the directory may already be there
+            return cbk();
+          });
+        },
+      ],
+
+      // write the settings file
+      writeFile: [
+        'registerDirectory',
+        ({}, cbk: any) => {
+          const filePath = join(...[homedir(), home, settingsFile]);
+
+          const data = settings || defaultSettings;
+
+          writeFile(filePath, stringify(data), err => {
+            if (!!err) {
+              return cbk([500, 'UnexpectedErrorWritingSettingsFile', err]);
+            }
+
+            return cbk();
+          });
+        },
+      ],
+    })
+  ).writeFile;
 };
 
 export default writeSettingsFile;
