@@ -105,9 +105,10 @@ export class RebalanceService implements OnModuleInit {
       const { result } = await this.getRebalances();
 
       if (!!result && !!result.length) {
-        result.forEach(rebalance => this.cronService.createRebalanceCron({ args: rebalance.rebalance_data, id: rebalance.id }))
+        result.forEach(rebalance =>
+          this.cronService.createRebalanceCron({ args: rebalance.rebalance_data, id: rebalance.id })
+        );
       }
-
     } catch (error) {
       this.logger.log({ type: 'error', message: error.message });
     }
@@ -198,7 +199,7 @@ export class RebalanceService implements OnModuleInit {
 
       return { result: result.createRebalanceTrigger };
     } catch (error) {
-      httpLogger({ error })
+      httpLogger({ error });
     }
   }
 }

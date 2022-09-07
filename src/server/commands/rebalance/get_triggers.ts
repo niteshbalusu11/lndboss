@@ -5,7 +5,6 @@ import readRebalanceFile from './read_rebalance_file';
 const defaultRebalances = { rebalances: [] };
 const { parse } = JSON;
 
-
 /** Get registered triggers
 
   {}
@@ -47,7 +46,7 @@ const getTriggers = async ({}) => {
           triggers.push({
             id: n.id,
             rebalance_data: parse(result.rebalance_data),
-          })
+          });
         });
 
         return triggers;

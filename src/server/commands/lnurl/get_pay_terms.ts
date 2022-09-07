@@ -35,7 +35,7 @@ const utf8AsBuffer = utf8 => Buffer.from(utf8, 'utf8');
 type Args = {
   request: any;
   url: string;
-}
+};
 
 type Tasks = {
   validate: undefined;
@@ -45,8 +45,8 @@ type Tasks = {
     max: number;
     min: number;
     url: string;
-  }
-}
+  };
+};
 const getPayTerms = async ({ request, url }: Args): Promise<Tasks> => {
   return auto<Tasks>({
     // Check arguments
@@ -63,90 +63,93 @@ const getPayTerms = async ({ request, url }: Args): Promise<Tasks> => {
     },
 
     // Get payment terms
-    getTerms: ['validate', ({}, cbk: any) => {
-      return request({ url, json: true }, (err, r, json) => {
-        if (!!err) {
-          return cbk([503, 'FailureGettingLnUrlDataFromUrl', { err }]);
-        }
+    getTerms: [
+      'validate',
+      ({}, cbk: any) => {
+        return request({ url, json: true }, (err, r, json) => {
+          if (!!err) {
+            return cbk([503, 'FailureGettingLnUrlDataFromUrl', { err }]);
+          }
 
-        if (!json) {
-          return cbk([503, 'ExpectedJsonObjectReturnedInLnurlResponse']);
-        }
+          if (!json) {
+            return cbk([503, 'ExpectedJsonObjectReturnedInLnurlResponse']);
+          }
 
-        if (!json.callback) {
-          return cbk([503, 'ExpectedCallbackInLnurlResponseJson']);
-        }
+          if (!json.callback) {
+            return cbk([503, 'ExpectedCallbackInLnurlResponseJson']);
+          }
 
-        try {
-          // eslint-disable-next-line no-new
-          new URL(json.callback);
-        } catch (err) {
-          return cbk([503, 'ExpectedValidCallbackUrlInLnurlResponseJson']);
-        }
+          try {
+            // eslint-disable-next-line no-new
+            new URL(json.callback);
+          } catch (err) {
+            return cbk([503, 'ExpectedValidCallbackUrlInLnurlResponseJson']);
+          }
 
-        if ((new URL(json.callback)).protocol !== sslProtocol) {
-          return cbk([400, 'LnurlsThatSpecifyNonSslUrlsAreUnsupported']);
-        }
+          if (new URL(json.callback).protocol !== sslProtocol) {
+            return cbk([400, 'LnurlsThatSpecifyNonSslUrlsAreUnsupported']);
+          }
 
-        if (!isNumber(json.maxSendable)) {
-          return cbk([503, 'ExpectedNumericValueForMaxSendable']);
-        }
+          if (!isNumber(json.maxSendable)) {
+            return cbk([503, 'ExpectedNumericValueForMaxSendable']);
+          }
 
-        if (!json.maxSendable) {
-          return cbk([503, 'ExpectedNonZeroMaxSendableInLnurlResponse']);
-        }
+          if (!json.maxSendable) {
+            return cbk([503, 'ExpectedNonZeroMaxSendableInLnurlResponse']);
+          }
 
-        if (json.maxSendable < minMaxSendable) {
-          return cbk([400, 'MaxSendableValueIsLowerThanSupportedValue']);
-        }
+          if (json.maxSendable < minMaxSendable) {
+            return cbk([400, 'MaxSendableValueIsLowerThanSupportedValue']);
+          }
 
-        if (!json.metadata) {
-          return cbk([503, 'ExpectedLnUrlMetadataInLnurlResponse']);
-        }
+          if (!json.metadata) {
+            return cbk([503, 'ExpectedLnUrlMetadataInLnurlResponse']);
+          }
 
-        try {
-          parse(json.metadata);
-        } catch (err) {
-          return cbk([503, 'ExpectedValidMetadataInLnurlResponse']);
-        }
+          try {
+            parse(json.metadata);
+          } catch (err) {
+            return cbk([503, 'ExpectedValidMetadataInLnurlResponse']);
+          }
 
-        if (!isArray(parse(json.metadata))) {
-          return cbk([503, 'ExpectedMetadataArrayInLnurlResponse', json]);
-        }
+          if (!isArray(parse(json.metadata))) {
+            return cbk([503, 'ExpectedMetadataArrayInLnurlResponse', json]);
+          }
 
-        const [, description] = parse(json.metadata)
-          .filter(isArray)
-          .find(([entry, text]) => entry === textPlain && !!text);
+          const [, description] = parse(json.metadata)
+            .filter(isArray)
+            .find(([entry, text]) => entry === textPlain && !!text);
 
-        if (!description) {
-          return cbk([503, 'ExpectedTextPlainEntryInLnurlResponse']);
-        }
+          if (!description) {
+            return cbk([503, 'ExpectedTextPlainEntryInLnurlResponse']);
+          }
 
-        if (!isNumber(json.minSendable)) {
-          return cbk([503, 'ExpectedNumericValueForMinSendable']);
-        }
+          if (!isNumber(json.minSendable)) {
+            return cbk([503, 'ExpectedNumericValueForMinSendable']);
+          }
 
-        if (json.minSendable < minMinSendable) {
-          return cbk([503, 'ExpectedHigherMinSendableValueInLnurlResponse']);
-        }
+          if (json.minSendable < minMinSendable) {
+            return cbk([503, 'ExpectedHigherMinSendableValueInLnurlResponse']);
+          }
 
-        if (json.minSendable > json.maxSendable) {
-          return cbk([503, 'ExpectedMaxSendableMoreThanMinSendable']);
-        }
+          if (json.minSendable > json.maxSendable) {
+            return cbk([503, 'ExpectedMaxSendableMoreThanMinSendable']);
+          }
 
-        if (json.tag !== payRequestTag) {
-          return cbk([503, 'ExpectedPaymentRequestTagInLnurlResponse']);
-        }
+          if (json.tag !== payRequestTag) {
+            return cbk([503, 'ExpectedPaymentRequestTagInLnurlResponse']);
+          }
 
-        return cbk(null, {
-          description,
-          hash: sha256(utf8AsBuffer(json.metadata)),
-          max: mtokensAsTokens(json.maxSendable),
-          min: mtokensAsTokens(max(lowestSendableValue, json.minSendable)),
-          url: json.callback,
+          return cbk(null, {
+            description,
+            hash: sha256(utf8AsBuffer(json.metadata)),
+            max: mtokensAsTokens(json.maxSendable),
+            min: mtokensAsTokens(max(lowestSendableValue, json.minSendable)),
+            url: json.callback,
+          });
         });
-      });
-    }],
+      },
+    ],
   });
 };
 

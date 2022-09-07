@@ -197,7 +197,8 @@ const commands: Commands = [
     name: 'Lnurl',
     value: 'Lnurl',
     description: 'Collection of lnurl features',
-    longDescription: 'Functions: auth, channel, pay, withdraw. lnurl auth will request authorization. lnurl channel will request an incoming payment channel. lnurl pay will request a payment request from a service. lnurl withdraw will create an invoice and send it to a service',
+    longDescription:
+      'Functions: auth, channel, pay, withdraw. lnurl auth will request authorization. lnurl channel will request an incoming payment channel. lnurl pay will request a payment request from a service. lnurl withdraw will create an invoice and send it to a service',
     args: {
       auth: 'auth',
       channel: 'channel',
@@ -212,7 +213,7 @@ const commands: Commands = [
       max_paths: 'MaxPaths',
       out: 'Out',
       url: 'Url',
-    }
+    },
   },
   {
     name: 'Pay',

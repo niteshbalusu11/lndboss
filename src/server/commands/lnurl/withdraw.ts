@@ -36,7 +36,7 @@ type Args = {
   request: any;
   logger: Logger;
   amount: number;
-}
+};
 
 type Tasks = {
   validate: undefined;
@@ -50,7 +50,7 @@ type Tasks = {
   validateTerms: undefined;
   createInvoice: CreateInvoiceResult;
   withdraw: { withdrawal_request_sent: boolean };
-}
+};
 const withdraw = async (args: Args): Promise<Tasks> => {
   return auto<Tasks>({
     // Check arguments
@@ -85,94 +85,104 @@ const withdraw = async (args: Args): Promise<Tasks> => {
     },
 
     // Get accepted terms from the encoded url
-    getTerms: ['validate', ({}, cbk: any) => {
-      const { words } = decode(asLnurl(args.lnurl), bech32CharLimit);
+    getTerms: [
+      'validate',
+      ({}, cbk: any) => {
+        const { words } = decode(asLnurl(args.lnurl), bech32CharLimit);
 
-      const url = wordsAsUtf8(words);
+        const url = wordsAsUtf8(words);
 
-      return args.request({ url, json: true }, (err, r, json) => {
-        if (!!err) {
-          return cbk([503, 'FailureGettingLnUrlDataFromUrl', { err }]);
-        }
+        return args.request({ url, json: true }, (err, r, json) => {
+          if (!!err) {
+            return cbk([503, 'FailureGettingLnUrlDataFromUrl', { err }]);
+          }
 
-        if (!json) {
-          return cbk([503, 'ExpectedJsonObjectReturnedInLnurlResponse']);
-        }
+          if (!json) {
+            return cbk([503, 'ExpectedJsonObjectReturnedInLnurlResponse']);
+          }
 
-        if (json.status === errorStatus) {
-          return cbk([503, 'LnurlWithdrawReturnedErr', { err: json.reason }]);
-        }
+          if (json.status === errorStatus) {
+            return cbk([503, 'LnurlWithdrawReturnedErr', { err: json.reason }]);
+          }
 
-        if (!json.callback) {
-          return cbk([503, 'ExpectedCallbackInLnurlResponseJson']);
-        }
+          if (!json.callback) {
+            return cbk([503, 'ExpectedCallbackInLnurlResponseJson']);
+          }
 
-        try {
-          // eslint-disable-next-line no-new
-          new URL(json.callback);
-        } catch (err) {
-          return cbk([503, 'ExpectedValidCallbackUrlInLnurlResponseJson']);
-        }
+          try {
+            // eslint-disable-next-line no-new
+            new URL(json.callback);
+          } catch (err) {
+            return cbk([503, 'ExpectedValidCallbackUrlInLnurlResponseJson']);
+          }
 
-        if ((new URL(json.callback)).protocol !== sslProtocol) {
-          return cbk([400, 'LnurlsThatSpecifyNonSslUrlsAreUnsupported']);
-        }
+          if (new URL(json.callback).protocol !== sslProtocol) {
+            return cbk([400, 'LnurlsThatSpecifyNonSslUrlsAreUnsupported']);
+          }
 
-        if (!json.k1) {
-          return cbk([503, 'ExpectedK1InLnurlResponseJson']);
-        }
+          if (!json.k1) {
+            return cbk([503, 'ExpectedK1InLnurlResponseJson']);
+          }
 
-        if (!json.tag) {
-          return cbk([503, 'ExpectedTagInLnurlResponseJson']);
-        }
+          if (!json.tag) {
+            return cbk([503, 'ExpectedTagInLnurlResponseJson']);
+          }
 
-        if (json.tag !== tag) {
-          return cbk([503, 'ExpectedTagToBeWithdrawRequestInLnurlResponse']);
-        }
+          if (json.tag !== tag) {
+            return cbk([503, 'ExpectedTagToBeWithdrawRequestInLnurlResponse']);
+          }
 
-        if (!isNumber(json.minWithdrawable)) {
-          return cbk([503, 'ExpectedNumericValueForMinWithdrawable']);
-        }
+          if (!isNumber(json.minWithdrawable)) {
+            return cbk([503, 'ExpectedNumericValueForMinWithdrawable']);
+          }
 
-        if (!isNumber(json.maxWithdrawable)) {
-          return cbk([503, 'ExpectedNumericValueForMaxWithdrawable']);
-        }
+          if (!isNumber(json.maxWithdrawable)) {
+            return cbk([503, 'ExpectedNumericValueForMaxWithdrawable']);
+          }
 
-        if (json.minWithdrawable < minWithdrawable) {
-          return cbk([400, 'MinWithdrawableIsLowerThanSupportedValue']);
-        }
+          if (json.minWithdrawable < minWithdrawable) {
+            return cbk([400, 'MinWithdrawableIsLowerThanSupportedValue']);
+          }
 
-        if (json.minWithdrawable > json.maxWithdrawable) {
-          return cbk([400, 'MinWithdrawableIsHigherThanMaxWithdrawable']);
-        }
+          if (json.minWithdrawable > json.maxWithdrawable) {
+            return cbk([400, 'MinWithdrawableIsHigherThanMaxWithdrawable']);
+          }
 
-        return cbk(null, {
-          description: json.defaultDescription,
-          k1: json.k1,
-          max: mtokensAsTokens(json.maxWithdrawable),
-          min: mtokensAsTokens(json.minWithdrawable),
-          url: json.callback,
+          return cbk(null, {
+            description: json.defaultDescription,
+            k1: json.k1,
+            max: mtokensAsTokens(json.maxWithdrawable),
+            min: mtokensAsTokens(json.minWithdrawable),
+            url: json.callback,
+          });
         });
-      });
-    }],
+      },
+    ],
 
     // Validate terms
-    validateTerms: ['getTerms', ({ getTerms }, cbk: any) => {
-      if (getTerms.min > args.amount) {
-        return cbk([400, 'AmountBelowMinimumAcceptedAmountToPayViaLnurl', getTerms.min]);
-      }
+    validateTerms: [
+      'getTerms',
+      ({ getTerms }, cbk: any) => {
+        if (getTerms.min > args.amount) {
+          return cbk([400, 'AmountBelowMinimumAcceptedAmountToPayViaLnurl', getTerms.min]);
+        }
 
-      if (getTerms.max < args.amount) {
-        return cbk([400, 'AmountAboveMaximumAcceptedAmountToPayViaLnurl', getTerms.max]);
-      }
+        if (getTerms.max < args.amount) {
+          return cbk([400, 'AmountAboveMaximumAcceptedAmountToPayViaLnurl', getTerms.max]);
+        }
 
-      return cbk();
-    }],
+        return cbk();
+      },
+    ],
 
     // Create a new payment request for withdrawl
-    createInvoice: ['getTerms', 'validateTerms', async ({}) => {
-      return await createInvoice({ lnd: args.lnd, mtokens: tokensAsMillitokens(args.amount).toString() });
-    }],
+    createInvoice: [
+      'getTerms',
+      'validateTerms',
+      async ({}) => {
+        return await createInvoice({ lnd: args.lnd, mtokens: tokensAsMillitokens(args.amount).toString() });
+      },
+    ],
 
     // Send the withdraw request
     withdraw: [
@@ -211,7 +221,8 @@ const withdraw = async (args: Args): Promise<Tasks> => {
 
           return cbk(null, { withdrawal_request_sent: true });
         });
-      }],
+      },
+    ],
   });
 };
 

@@ -141,5 +141,5 @@ const axiosPost = async ({ path, postBody }: ArgsPost) => {
   } catch (error) {
     window.alert(`Status: ${error.response.status}\nMessage: ${error.response.data.message}`);
   }
-}
+};
 export { axiosGet, axiosGetNoLoading, axiosGetWebSocket, axiosPost, axiosPostWithAlert };

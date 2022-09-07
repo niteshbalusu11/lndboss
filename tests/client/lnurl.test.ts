@@ -84,7 +84,6 @@ test.describe('Test the Lnurl command client page', async () => {
     await page.click('text=home');
   });
 
-
   test('test the Lnurl command page: withdraw', async ({ page }) => {
     await page.goto(testConstants.commandsPage);
     await page.click('#Lnurl');

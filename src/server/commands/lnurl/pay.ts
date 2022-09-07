@@ -37,7 +37,7 @@ type Args = {
   max_paths: number;
   out: string[];
   request: any;
-}
+};
 
 type Tasks = {
   validate: undefined;
@@ -52,7 +52,7 @@ type Tasks = {
   getRequest: { destination: string; request: string };
   getAlias: { alias: string };
   pay: any;
-}
+};
 const pay = async (args: Args): Promise<Tasks> => {
   return auto<Tasks>({
     // Check arguments
@@ -95,59 +95,80 @@ const pay = async (args: Args): Promise<Tasks> => {
     },
 
     // Get accepted terms from the encoded url
-    getTerms: ['validate', async ({}) => {
-      return (await getPayTerms({
-        request: args.request,
-        url: parseUrl({ url: args.lnurl }).url,
-      })).getTerms;
-    }],
+    getTerms: [
+      'validate',
+      async ({}) => {
+        return (
+          await getPayTerms({
+            request: args.request,
+            url: parseUrl({ url: args.lnurl }).url,
+          })
+        ).getTerms;
+      },
+    ],
 
     // Validate terms
-    validateTerms: ['getTerms', ({ getTerms }, cbk: any) => {
-      if (getTerms.min > args.amount) {
-        return cbk([400, 'AmountBelowMinimumAcceptedAmountToPayViaLnurl', getTerms.min]);
-      }
+    validateTerms: [
+      'getTerms',
+      ({ getTerms }, cbk: any) => {
+        if (getTerms.min > args.amount) {
+          return cbk([400, 'AmountBelowMinimumAcceptedAmountToPayViaLnurl', getTerms.min]);
+        }
 
-      if (getTerms.max < args.amount) {
-        return cbk([400, 'AmountAboveMaximumAcceptedAmountToPayViaLnurl', getTerms.max]);
-      }
+        if (getTerms.max < args.amount) {
+          return cbk([400, 'AmountAboveMaximumAcceptedAmountToPayViaLnurl', getTerms.max]);
+        }
 
-      return cbk();
-    }],
+        return cbk();
+      },
+    ],
 
     // Get payment request
-    getRequest: ['getTerms', 'validateTerms', async ({ getTerms }) => {
-      return (await getPayRequest({
-        hash: getTerms.hash,
-        mtokens: tokensAsMtokens(args.amount),
-        request: args.request,
-        url: getTerms.url,
-      })).getRequest;
-    }],
+    getRequest: [
+      'getTerms',
+      'validateTerms',
+      async ({ getTerms }) => {
+        return (
+          await getPayRequest({
+            hash: getTerms.hash,
+            mtokens: tokensAsMtokens(args.amount),
+            request: args.request,
+            url: getTerms.url,
+          })
+        ).getRequest;
+      },
+    ],
 
     // Get the destination node alias
-    getAlias: ['getRequest', async ({ getRequest }) => {
-      return await getNodeAlias({ id: getRequest.destination, lnd: args.lnd });
-    }],
+    getAlias: [
+      'getRequest',
+      async ({ getRequest }) => {
+        return await getNodeAlias({ id: getRequest.destination, lnd: args.lnd });
+      },
+    ],
 
     // Pay the payment request
-    pay: ['getAlias', 'getRequest', async ({ getAlias, getRequest }) => {
-      args.logger.info({ paying: getAlias.alias });
+    pay: [
+      'getAlias',
+      'getRequest',
+      async ({ getAlias, getRequest }) => {
+        args.logger.info({ paying: getAlias.alias });
 
-      const avoidArray = !!args.avoid ? args.avoid.filter(n => !!n) : [];
-      const outArray = !!args.out ? args.out.filter(n => !!n) : [];
+        const avoidArray = !!args.avoid ? args.avoid.filter(n => !!n) : [];
+        const outArray = !!args.out ? args.out.filter(n => !!n) : [];
 
-      return await payInvoice({
-        avoid: avoidArray,
-        fs: { getFile: readFile },
-        lnd: args.lnd,
-        logger: args.logger,
-        max_fee: args.max_fee,
-        max_paths: args.max_paths,
-        out: outArray,
-        request: getRequest.request,
-      });
-    }],
+        return await payInvoice({
+          avoid: avoidArray,
+          fs: { getFile: readFile },
+          lnd: args.lnd,
+          logger: args.logger,
+          max_fee: args.max_fee,
+          max_paths: args.max_paths,
+          out: outArray,
+          request: getRequest.request,
+        });
+      },
+    ],
   });
 };
 
