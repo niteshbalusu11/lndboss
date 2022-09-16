@@ -1441,6 +1441,68 @@ try {
 
 <br></br>
 
+### Open
+
+```javascript
+/**
+@GetRequest
+
+@Url
+http://localhost:8055/api/open
+
+@Body
+  {
+    capacities: [<New Channel Capacity Tokens String>]
+    cooperative_close_addresses: [<Cooperative Close Address>]
+    gives: [<New Channel Give Tokens Number>]
+    internal_fund_fee_rate: <Funding Fee Rate Number>,
+    [is_avoiding_broadcast]: <Avoid Funding Transaction Broadcast Bool>
+    [is_external]: <Use External Funds to Open Channels Bool>
+    lnd: <Authenticated LND API Object>
+    logger: <Winston Logger Object>
+    opening_nodes: [<Open New Channel With Saved Node Name String>]
+    public_keys: [<Public Key Hex String>]
+    request: <Request Function>
+    types: [<Channel Type String>]
+  }
+
+@Response
+  {
+    transaction_id: <Open Channels Transaction Id Hex String>
+    transaction: <Open Channels Raw Transaction Id String>
+  }
+*/
+
+try {
+  const url = 'http://localhost:8055/api/open';
+
+    const postBody = {
+      ask: [],
+      capacities: ['100000', '2000000'],
+      cooperative_close_addresses: [],
+      gives: [20000, 30000],
+      internal_fund_fee_rate: 1,
+      is_avoiding_broadcast: false,
+      is_external: false,
+      logger,
+      opening_nodes: [],
+      public_keys: ['pubkey1', 'pubkey2'],
+      set_fee_rates: [],
+      types: ['public', 'private'],
+    };
+
+
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    };
+
+    const response = await axios.post(url, postBody, config);
+} catch (error) {
+  console.error(error);
+}
+```
+<br></br>
+
 ### Pay
 
 ```javascript

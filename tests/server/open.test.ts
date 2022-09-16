@@ -46,11 +46,8 @@ test.describe('Test Open command on the node.js side', async () => {
       gives: [20000, 30000],
       internal_fund_fee_rate: 1,
       is_avoiding_broadcast: false,
-      is_external: false,
       logger,
-      opening_nodes: [],
       public_keys: [bobWallet.public_key, carolWallet.public_key],
-      set_fee_rates: [],
       types: ['public', 'private'],
     };
 
