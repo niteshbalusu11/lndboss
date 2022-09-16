@@ -9,6 +9,7 @@ import { LndService } from '../lnd/lnd.service';
 import { SocketGateway } from '../socket/socket.gateway';
 import { httpLogger } from '~server/utils/global_functions';
 import { removeStyling } from '~server/utils/constants';
+import validateOpen from '~server/commands/open/validate_open';
 
 /**
  * CommandsService: Service for handling bos commands
@@ -175,6 +176,48 @@ export class CommandsService {
       const result = await commands.lnurlCommand({ args, lnd, logger });
 
       return { result };
+    } catch (error) {
+      httpLogger({ error });
+    }
+  }
+
+  async openCommand(args: dto.openDto): Promise<{ result: any }> {
+    try {
+      const logger = await this.logger({ messageId: args.message_id, service: 'open' });
+
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+      const { result } = await commands.openCommand({ args, lnd, logger });
+
+      return { result };
+    } catch (error) {
+      httpLogger({ error });
+    }
+  }
+
+  async openCommandValidation(args: dto.openDto): Promise<{ result: any }> {
+    try {
+      const logger = await this.logger({ messageId: args.message_id, service: 'open' });
+
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+      await validateOpen({
+        lnd,
+        logger,
+        ask: [],
+        capacities: args.capacities,
+        cooperative_close_addresses: args.cooperative_close_addresses,
+        gives: args.gives,
+        internal_fund_fee_rate: args.internal_fund_fee_rate,
+        is_avoiding_broadcast: args.is_avoiding_broadcast,
+        is_external: undefined,
+        opening_nodes: [],
+        public_keys: args.public_keys,
+        set_fee_rates: [],
+        types: args.types,
+      });
+
+      return { result: true };
     } catch (error) {
       httpLogger({ error });
     }

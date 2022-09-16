@@ -10,6 +10,7 @@ import ChartPaymentsReceivedOutput from './ChartPaymentsReceivedOutput';
 import ClosedOutput from './ClosedOutput';
 import FindOutput from './FindOutput';
 import ForwardsOutput from './ForwardsOutput';
+import OpenOutput from './OpenOutput';
 import TagsOutput from './TagsOutput';
 
 export {
@@ -25,5 +26,6 @@ export {
   ClosedOutput,
   FindOutput,
   ForwardsOutput,
+  OpenOutput,
   TagsOutput,
 };

@@ -87,6 +87,16 @@ export class CommandsController {
     return this.commandsService.lnurlCommand(args);
   }
 
+  @Post('open')
+  async openCommand(@Body() args: dto.openDto) {
+    return this.commandsService.openCommand(args);
+  }
+
+  @Post('validate-open')
+  async openCommandValidation(@Body() args: dto.openDto) {
+    return this.commandsService.openCommandValidation(args);
+  }
+
   @Get('pay')
   async payCommand(@Query() args: dto.payDto) {
     return this.commandsService.payCommand(args);
