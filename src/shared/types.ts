@@ -152,6 +152,20 @@ export type commandPay = {
   request: string;
 };
 
+// ========================Open Command======================================
+
+export type commandOpen = {
+  capacities: string[];
+  cooperative_close_addresses: string[];
+  gives: number[];
+  internal_fund_fee_rate: number;
+  is_avoiding_broadcast: boolean;
+  message_id: string;
+  node: string;
+  public_keys: string[];
+  types: string[];
+};
+
 // ========================Peers Command=====================================
 export type commandPeers = {
   earnings_days: string;

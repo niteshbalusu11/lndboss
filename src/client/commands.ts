@@ -232,6 +232,24 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Open (Experimental)',
+    value: 'Open',
+    args: {
+      peerPublicKeys: 'PublicKey',
+    },
+    description: 'Open channels, optionally using an external wallet',
+    longDescription:
+      'When creating channels from an external wallet do not self-broadcast.\n For trusted funding specify --type as private-trusted/public-trusted.\n Trusted channel funding is not supported in LND 0.15.0 and below.\n',
+    flags: {
+      amount: 'Amount',
+      avoidBroadcast: 'AvoidBroadcast',
+      coopCloseAddress: 'CoopCloseAddress',
+      give: 'Give',
+      internalFundAtFeeRate: 'InternalFundFeeRate',
+      type: 'Type',
+    },
+  },
+  {
     name: 'Peers',
     value: 'Peers',
     description: 'Get a list of channel-connected peers',

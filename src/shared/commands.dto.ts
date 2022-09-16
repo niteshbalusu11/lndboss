@@ -440,6 +440,48 @@ export class lnurlDto {
   url: string;
 }
 
+export class openDto {
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  capacities: string[];
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  cooperative_close_addresses: string[];
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  gives: number[];
+
+  @Transform(({ value }) => toNumber(value))
+  @IsNumber()
+  internal_fund_fee_rate: number;
+
+  @IsOptional()
+  @IsBoolean()
+  is_avoiding_broadcast: boolean;
+
+  @Transform(({ value }) => trim(value))
+  @IsString()
+  message_id: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  node: string;
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsArray()
+  public_keys: string[];
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsArray()
+  types: string[];
+}
+
 export class payDto {
   @Transform(({ value }) => toStringArray(value))
   @IsOptional()

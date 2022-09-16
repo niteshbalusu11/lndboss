@@ -16,6 +16,10 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN yarn build:prod
 
+# ---------------
+# Install Production Dependencies
+# ---------------
+
 FROM node:16-alpine as deps
 
 WORKDIR /lndboss
