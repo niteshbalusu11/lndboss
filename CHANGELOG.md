@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.1.0](https://github.com/niteshbalusu11/lndboss/compare/v2.0.1...v2.1.0) (2022-09-16)
 
+- Support for bos open command for batch open and zero conf channels
+
 ### [2.0.1](https://github.com/niteshbalusu11/lndboss/compare/v2.0.0...v2.0.1) (2022-09-06)
 
 - Fixed a bug where cronjob schedule is not getting parsed
