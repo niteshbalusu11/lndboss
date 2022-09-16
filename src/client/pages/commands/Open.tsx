@@ -206,6 +206,7 @@ const Open = () => {
                   placeholder={OpenCommand.flags.amount}
                   onChange={event => handleFormChange(index, event)}
                   style={styles.textField}
+                  id={`amount-${index}`}
                 />
 
                 <TextField
@@ -215,6 +216,7 @@ const Open = () => {
                   placeholder={OpenCommand.flags.coopCloseAddress}
                   onChange={event => handleFormChange(index, event)}
                   style={styles.textField}
+                  id={`address-${index}`}
                 />
 
                 <TextField
@@ -224,6 +226,7 @@ const Open = () => {
                   placeholder={`${OpenCommand.flags.give} (Gift amount to peer)`}
                   onChange={event => handleFormChange(index, event)}
                   style={styles.textField}
+                  id={`give-${index}`}
                 />
 
                 <FormControl sx={{ minWidth: 120, marginLeft: '10px' }}>

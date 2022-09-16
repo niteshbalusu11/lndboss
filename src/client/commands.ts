@@ -232,7 +232,7 @@ const commands: Commands = [
     },
   },
   {
-    name: 'Open',
+    name: 'Open (Experimental)',
     value: 'Open',
     args: {
       peerPublicKeys: 'PublicKey',
