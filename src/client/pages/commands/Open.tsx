@@ -32,6 +32,11 @@ import validateOpenCommandArgs from '~client/utils/validate_open_command_args';
 const knownTypes = ['public', 'private', 'public-trusted', 'private-trusted'];
 const OpenCommand = commands.find(n => n.value === 'Open');
 
+/*
+  Renders the bos open command
+  POST call to the NestJs process to open channels
+*/
+
 const styles = {
   form: {
     marginLeft: '50px',
