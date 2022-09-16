@@ -21,11 +21,11 @@ import {
 } from '~client/standard_components/app-components';
 import commands, { globalCommands } from '~client/commands';
 
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
 import { OpenOutput } from '~client/output';
-import { axiosPost } from '~client/utils/axios';
-import { useLoading } from '~client/hooks/useLoading';
+import { axiosPostWithAlert } from '~client/utils/axios';
 import { useNotify } from '~client/hooks/useNotify';
 import validateOpenCommandArgs from '~client/utils/validate_open_command_args';
 
@@ -75,6 +75,7 @@ const styles = {
 const Open = () => {
   const [avoidBroadcast, setAvoidBroadcast] = useState(false);
   const [data, setData] = useState(undefined);
+  const [disabled, setDisabled] = useState(false);
   const [formFields, setFormFields] = useState([{ amount: '', coopCloseAddress: '', give: '', pubkey: '', type: '' }]);
   const [internalFundFeeRate, setInternalFundFeeRate] = useState(undefined);
   const [node, setNode] = useState('');
@@ -133,18 +134,27 @@ const Open = () => {
       is_avoiding_broadcast: avoidBroadcast,
     };
 
-    try {
-      useLoading({ isLoading: true });
+    const result = await axiosPostWithAlert({ path: 'validate-open', postBody });
 
-      const result = await axiosPost({ path: 'validate-open', postBody });
-
-      if (!!result) {
-        const result = await axiosPost({ path: 'open', postBody });
-        setData(result);
-        useLoading({ isLoading: false });
-      }
-    } catch (err) {
-      useLoading({ isLoading: false });
+    if (!!result) {
+      Confirm.show(
+        'Confirm Channel Open',
+        'Open Channels?',
+        'Yes',
+        'No',
+        async () => {
+          const result = await axiosPostWithAlert({ path: 'open', postBody });
+          if (!!result) {
+            setData(result);
+            useNotify({ type: 'success', message: 'Channels opened' });
+            setDisabled(previousValue => !previousValue);
+          }
+        },
+        () => {
+          useNotify({ type: 'info', message: 'Open Cancelled' });
+        },
+        {}
+      );
     }
   };
 
@@ -257,7 +267,7 @@ const Open = () => {
             label={OpenCommand.flags.internalFundAtFeeRate}
             name={OpenCommand.flags.internalFundAtFeeRate}
             id={OpenCommand.flags.internalFundAtFeeRate}
-            placeholder={`${OpenCommand.flags.internalFundAtFeeRate} (OnChain Fee Rate)`}
+            placeholder={'OnChain Fee Rate'}
             onChange={handeInternalFundFeeRateChange}
             style={styles.textField}
           />
@@ -281,7 +291,9 @@ const Open = () => {
             style={styles.textField}
           />
           <br />
-          <SubmitButton onClick={fetchData}>Run Command</SubmitButton>
+          <SubmitButton onClick={fetchData} disabled={disabled}>
+            Validate and Open Channels
+          </SubmitButton>
           {!!data ? <OpenOutput data={data.result} /> : null}
         </Stack>
       </StartFlexBox>

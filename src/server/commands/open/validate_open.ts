@@ -17,6 +17,30 @@ const times = 10;
 const tokAsBigUnit = tokens => (tokens / 1e8).toFixed(8);
 const uniq = arr => Array.from(new Set(arr));
 
+/** Test open channel with peers
+
+  {
+    ask: <Ask For Input Function>
+    capacities: [<New Channel Capacity Tokens String>]
+    cooperative_close_addresses: [<Cooperative Close Address>]
+    gives: [<New Channel Give Tokens Number>]
+    [is_avoiding_broadcast]: <Avoid Funding Transaction Broadcast Bool>
+    [is_external]: <Use External Funds to Open Channels Bool>
+    lnd: <Authenticated LND API Object>
+    logger: <Winston Logger Object>
+    opening_nodes: [<Open New Channel With Saved Node Name String>]
+    public_keys: [<Public Key Hex String>]
+    request: <Request Function>
+    set_fee_rates: [<Fee Rate Number>]
+    types: [<Channel Type String>]
+  }
+
+  @returns via Promise
+  {
+
+  }
+*/
+
 type Args = {
   ask: string[];
   capacities: string[];
