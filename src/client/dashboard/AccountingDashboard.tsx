@@ -62,8 +62,10 @@ const AccountingDashboard = ({ days }: { days: number }) => {
 
       const chartPaymentsReceivedQuery: types.commandChartPaymentsReceived = {
         days,
-        end_date: '',
         nodes,
+        end_date: '',
+        is_count: false,
+        query: '',
         start_date: '',
       };
 
