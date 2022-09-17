@@ -257,10 +257,20 @@ export class chartPaymentsReceivedDto {
   @IsString()
   end_date: string;
 
+  @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
+  @IsBoolean()
+  is_count: boolean;
+
   @Transform(({ value }) => toStringArray(value))
   @IsArray()
   @IsOptional()
   nodes: string[];
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  query: string;
 
   @Transform(({ value }) => trim(value))
   @IsOptional()

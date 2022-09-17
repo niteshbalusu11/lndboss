@@ -143,8 +143,10 @@ const commands: Commands = [
     value: 'ChartPaymentsReceived',
     description: 'Show chart for settled invoices from external parties',
     flags: {
+      count: 'Count',
       days: 'Days',
       end: 'End',
+      for: 'For',
       start: 'Start',
     },
   },

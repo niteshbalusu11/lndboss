@@ -3,10 +3,11 @@ import * as types from '~shared/types';
 import {
   BasicDatePicker,
   StandardHomeButtonLink,
+  StandardSwitch,
   StartFlexBox,
   SubmitButton,
 } from '~client/standard_components/app-components';
-import { Button, CssBaseline, IconButton, Stack, TextField } from '@mui/material';
+import { Button, CssBaseline, FormControlLabel, IconButton, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import commands, { globalCommands } from '../../commands';
 
@@ -45,16 +46,29 @@ const styles = {
   h4: {
     marginTop: '0px',
   },
+  switch: {
+    width: '100px',
+  },
 };
 
 const ChartPaymentsReceived = () => {
-  const [formValues, setFormValues] = useState([{ node: '' }]);
+  const [count, setCount] = useState<boolean>(false);
   const [days, setDays] = useState('');
-  const [startDate, setStartDate] = useState<string | null>(null);
   const [endDate, setEndDate] = useState<string | null>(null);
+  const [forQuery, setForQuery] = useState<string | null>(null);
+  const [formValues, setFormValues] = useState([{ node: '' }]);
+  const [startDate, setStartDate] = useState<string | null>(null);
+
+  const handleCountChange = () => {
+    setCount(previousValue => !previousValue);
+  };
 
   const handleDaysChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDays(event.target.value);
+  };
+
+  const handleForQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setForQuery(event.target.value);
   };
 
   const addFormFields = () => {
@@ -76,7 +90,9 @@ const ChartPaymentsReceived = () => {
   const flags: types.commandChartPaymentsReceived = {
     days: Number(days) || 0,
     end_date: endDate,
+    is_count: count,
     nodes: formValues.map(n => n.node),
+    query: forQuery,
     start_date: startDate,
   };
 
@@ -105,11 +121,33 @@ const ChartPaymentsReceived = () => {
             value={startDate}
             setValue={setStartDate}
           />
+
           <BasicDatePicker
             label={ChartPaymentsReceivedCommand.flags.end}
             id={ChartPaymentsReceivedCommand.flags.end}
             value={endDate}
             setValue={setEndDate}
+          />
+
+          <TextField
+            type="text"
+            placeholder={`${ChartPaymentsReceivedCommand.flags.for} (Show results for a query)`}
+            label={`${ChartPaymentsReceivedCommand.flags.for}`}
+            id={ChartPaymentsReceivedCommand.flags.for}
+            onChange={handleForQueryChange}
+            style={styles.textField}
+          />
+
+          <FormControlLabel
+            style={styles.switch}
+            control={
+              <StandardSwitch
+                checked={count}
+                onChange={handleCountChange}
+                id={ChartPaymentsReceivedCommand.flags.count}
+              />
+            }
+            label={ChartPaymentsReceivedCommand.flags.count}
           />
 
           <>
