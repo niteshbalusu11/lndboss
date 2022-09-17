@@ -53,6 +53,9 @@ bos graph "pubkey"
 # Collection of lnurl features
 bos lnurl "function"
 
+# Batch open channels, zero conf supported
+bos open "pubkeys"
+
 # Pay a payment request (invoice), probing first
 bos pay "payment_request"
 
@@ -1011,7 +1014,9 @@ http://localhost:8055/api/chart-payments-received
   {
     [days]: <Fees Earned Over Days Count Number>
     [end_date]: <End Date YYYY-MM-DD String>
+    [is_count]: <Show Count Boolean>
     [nodes]: <Saved Nodes String Array>
+    [query]: <Query String>
     [start_date]: <Start Date YYYY-MM-DD String>
   }
 
