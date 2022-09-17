@@ -86,7 +86,9 @@ export type commandChartFeesPaid = {
 export type commandChartPaymentsReceived = {
   days: number;
   end_date: string;
+  is_count: boolean;
   nodes: string[];
+  query: string;
   start_date: string;
 };
 

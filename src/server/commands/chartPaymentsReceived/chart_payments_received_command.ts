@@ -9,7 +9,9 @@ import { httpLogger } from '~server/utils/global_functions';
   {
     [days]: <Received Over Days Count Number>
     [end_date]: <End Date YYYY-MM-DD String>
+    [is_count]: <Show Count Boolean>
     lnds: [<Authenticated LND API Object>]
+    [query]: <Query String>
     [start_date]: <Start Date YYYY-MM-DD String>
   }
 
@@ -31,6 +33,8 @@ const chartPaymentsReceivedCommand = async ({ args, lnd }: Args): Promise<{ resu
       lnds: lnd,
       days: args.days,
       end_date: args.end_date || undefined,
+      is_count: args.is_count || undefined,
+      query: args.query,
       start_date: args.start_date || undefined,
     });
     return { result };

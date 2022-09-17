@@ -26,8 +26,10 @@ test.describe('Test ChartPaymentsReceived command on the node.js side', async ()
 
   test('run ChartPaymentsReceived command: dates', async () => {
     const args = {
+      is_count: true,
       days: 0,
       end_date: '2021-08-01',
+      for: '',
       nodes: [],
       start_date: '2021-07-01',
     };

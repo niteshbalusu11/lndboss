@@ -27,7 +27,9 @@ const ChartPaymentsReceivedResult = () => {
   const query = {
     days: router.query.days,
     end_date: router.query.end_date,
+    is_count: router.query.is_count,
     nodes: router.query.nodes,
+    query: router.query.query,
     start_date: router.query.start_date,
   };
 
