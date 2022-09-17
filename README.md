@@ -1457,12 +1457,8 @@ http://localhost:8055/api/open
     gives: [<New Channel Give Tokens Number>]
     internal_fund_fee_rate: <Funding Fee Rate Number>,
     [is_avoiding_broadcast]: <Avoid Funding Transaction Broadcast Bool>
-    [is_external]: <Use External Funds to Open Channels Bool>
-    lnd: <Authenticated LND API Object>
-    logger: <Winston Logger Object>
     opening_nodes: [<Open New Channel With Saved Node Name String>]
     public_keys: [<Public Key Hex String>]
-    request: <Request Function>
     types: [<Channel Type String>]
   }
 
@@ -1483,8 +1479,6 @@ try {
       gives: [20000, 30000],
       internal_fund_fee_rate: 1,
       is_avoiding_broadcast: false,
-      is_external: false,
-      logger,
       opening_nodes: [],
       public_keys: ['pubkey1', 'pubkey2'],
       set_fee_rates: [],
