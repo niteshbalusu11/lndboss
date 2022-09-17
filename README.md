@@ -1445,7 +1445,7 @@ try {
 
 ```javascript
 /**
-@GetRequest
+@PostRequest
 
 @Url
 http://localhost:8055/api/open
