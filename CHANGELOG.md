@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/niteshbalusu11/lndboss/compare/v2.1.0...v2.2.0) (2022-09-19)
+
 ## [2.1.0](https://github.com/niteshbalusu11/lndboss/compare/v2.0.1...v2.1.0) (2022-09-16)
 
 - Support for bos open command for batch open and zero conf channels
