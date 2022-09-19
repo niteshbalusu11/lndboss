@@ -32,6 +32,7 @@ const styles = {
     marginTop: '0px',
   },
   ul: {
+    marginTop: '20px',
     fontWeight: 'bold',
   },
 };
@@ -48,10 +49,10 @@ const Register = () => {
     setUserName(event.target.value);
   };
 
-  const [validLength, hasNumber, upperCase, lowerCase, match, specialChar]: boolean[] = usePasswordValidation({
+  const [validLength, match]: boolean[] = usePasswordValidation({
     firstPassword: password.firstPassword,
     secondPassword: password.secondPassword,
-    requiredLength: 8,
+    requiredLength: 10,
   });
 
   const setFirst = (event: { target: { value: string } }) => {
@@ -61,7 +62,7 @@ const Register = () => {
     setPassword({ ...password, secondPassword: event.target.value });
   };
 
-  const isDisabled = !validLength || !hasNumber || !upperCase || !lowerCase || !match || !specialChar || !username;
+  const isDisabled = !validLength || !match || !username;
 
   const fetchData = async () => {
     const url = `${apiUrl}/auth/register`;
@@ -129,11 +130,7 @@ const Register = () => {
           />
           <div>
             <ul style={styles.ul}>
-              <li>8 Characters: {!!validLength ? <span>✅</span> : <span>👎</span>}</li>
-              <li>Has a Number: {!!hasNumber ? <span>✅</span> : <span>👎</span>}</li>
-              <li>UpperCase: {!!upperCase ? <span>✅</span> : <span>👎</span>}</li>
-              <li>LowerCase: {!!lowerCase ? <span>✅</span> : <span>👎</span>}</li>
-              <li>Special Character: {!!specialChar ? <span>✅</span> : <span>👎</span>}</li>
+              <li>10 Characters: {!!validLength ? <span>✅</span> : <span>👎</span>}</li>
               <li>Match: {!!match ? <span>✅</span> : <span>👎</span>}</li>
             </ul>
           </div>
