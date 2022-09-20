@@ -32,7 +32,7 @@
     "release:patch": "standard-version --release-as patch && yarn build:prod && yarn publish",
     "release:test": "standard-version --dry-run --release-as minor",
     "test": "playwright test",
-    "test:client": "playwright test tests/client --headed",
+    "test:client": "playwright test tests/client",
     "test:server": "playwright test tests/server"
   },
   "dependencies": {
