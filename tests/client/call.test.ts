@@ -8,7 +8,7 @@ test.describe('Test the Call command client page', async () => {
     await setAccessToken({ page });
   });
 
-  test('test the Call command page: chain-fees', async ({ page }) => {
+  test('test the Call command page', async ({ page }) => {
     await page.goto(testConstants.commandsPage);
     await page.click('text=Call (Experimental)');
     await expect(page).toHaveTitle('Call');

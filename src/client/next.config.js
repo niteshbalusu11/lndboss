@@ -7,6 +7,8 @@ dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 dotenv.config({ path: path.join(homedir(), '.bosgui', '.env') });
 
 module.exports = {
+  swcMinify: true,
+  reactStrictMode: true,
   publicRuntimeConfig: {
     apiUrl: `${process.env.BASE_PATH || ''}/api`,
     basePath: process.env.BASE_PATH || '',
