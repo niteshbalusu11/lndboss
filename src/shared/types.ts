@@ -99,7 +99,7 @@ export type commandClosed = {
   node: string;
 };
 
-export type feesCommand = {
+export type commandFees = {
   cltv_delta: number;
   fee_rate: string;
   node: string;

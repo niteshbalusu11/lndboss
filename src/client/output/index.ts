@@ -8,6 +8,7 @@ import ChartFeesEarnedOutput from './ChartFeesEarnedOutput';
 import ChartFeesPaidOutput from './ChartFeesPaidOutput';
 import ChartPaymentsReceivedOutput from './ChartPaymentsReceivedOutput';
 import ClosedOutput from './ClosedOutput';
+import FeesOutput from './FeesOutput';
 import FindOutput from './FindOutput';
 import ForwardsOutput from './ForwardsOutput';
 import OpenOutput from './OpenOutput';
@@ -24,6 +25,7 @@ export {
   ChartFeesPaidOutput,
   ChartPaymentsReceivedOutput,
   ClosedOutput,
+  FeesOutput,
   FindOutput,
   ForwardsOutput,
   OpenOutput,

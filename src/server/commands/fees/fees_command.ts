@@ -21,18 +21,20 @@ import { readFile } from 'fs';
   }
 */
 type Args = {
-  args: types.feesCommand;
+  args: types.commandFees;
   lnd: AuthenticatedLnd;
   logger: Logger;
 };
 const feesCommand = async ({ args, lnd, logger }: Args) => {
+  const toArray = !!args.to ? args.to.filter((n: string) => !!n) : [];
+
   const result = await adjustFees({
     lnd,
     logger,
-    cltv_delta: args.cltv_delta,
+    cltv_delta: args.cltv_delta || undefined,
     fee_rate: args.fee_rate,
     fs: { getFile: readFile },
-    to: args.to || [],
+    to: toArray,
   });
 
   return { result };
