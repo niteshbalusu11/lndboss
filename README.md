@@ -41,6 +41,9 @@ bos chart-payments-received
 # See details on how closed channels resolved on-chain
 bos closed
 
+# View outbound fee rates and update outbound fee rates to peers
+bos fees
+
 # Query the node to find something like a payment, channel or node
 bos find "query"
 
@@ -1107,6 +1110,49 @@ try {
 ```
 
 <br></br>
+
+### Fees
+
+```javascript
+/**
+@PostRequest
+
+@Url
+http://localhost:8055/api/fees
+
+@Body
+  {
+    [cltv_delta]: <Set CLTV Delta Number>
+    [fee_rate]: <Fee Rate String>
+    to: [<Adjust Routing Fee To Peer Alias or Public Key or Tag String>]
+  }
+
+@Response
+  {
+    rows: [[<Table Cell String>]]
+  }
+*/
+
+try {
+  const url = 'http://localhost:8055/api/open';
+
+    const postBody = {
+      fee_rate: ['100'],
+      to: ['bob', 'carol']
+    };
+
+
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    };
+
+    const response = await axios.post(url, postBody, config);
+} catch (error) {
+  console.error(error);
+}
+```
+<br></br>
+
 
 ### Find
 
