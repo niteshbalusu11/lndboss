@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.3.0](https://github.com/niteshbalusu11/lndboss/compare/v2.2.0...v2.3.0) (2022-09-23)
 
+- Added support for bos fees command
+- Bump dependencies
+
 ## [2.2.0](https://github.com/niteshbalusu11/lndboss/compare/v2.1.0...v2.2.0) (2022-09-19)
 
 - Added for and query flags for chart-payments-received command
