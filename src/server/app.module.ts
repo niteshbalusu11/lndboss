@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CredentialsModule } from './modules/credentials/credentials.module';
 import { CronModule } from './modules/cron/cron.module';
 import { ExternalServicesModule } from './modules/external-services/external-services.module';
+import { FeesModule } from './modules/fees/fees.module';
 import { GrpcModule } from './modules/grpc/grpc.module';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
 import { LndModule } from './modules/lnd/lnd.module';
@@ -29,6 +30,7 @@ import { join } from 'path';
     CommandsModule,
     CronModule,
     ExternalServicesModule,
+    FeesModule,
     GrpcModule,
     ConfigModule.forRoot({
       isGlobal: true,

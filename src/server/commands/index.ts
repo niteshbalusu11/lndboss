@@ -9,6 +9,7 @@ import chartFeesEarnedCommand from './chartFeesEarned/chart_fees_earned_command'
 import chartFeesPaidCommand from './chartFeesPaid/chart_fees_paid_command';
 import chartPaymentsReceivedCommand from './chartPaymentsReceived/chart_payments_received_command';
 import closedCommand from './closed/closed_command';
+import feesCommand from './fees/fees_command';
 import findCommand from './find/find_command';
 import forwardsCommand from './forwards/forwards_command';
 import graphCommand from './graph/graph_command';
@@ -35,6 +36,7 @@ export {
   chartFeesPaidCommand,
   chartPaymentsReceivedCommand,
   closedCommand,
+  feesCommand,
   findCommand,
   forwardsCommand,
   graphCommand,

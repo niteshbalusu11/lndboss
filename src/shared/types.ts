@@ -99,6 +99,13 @@ export type commandClosed = {
   node: string;
 };
 
+export type feesCommand = {
+  cltv_delta: number;
+  fee_rate: string;
+  node: string;
+  to: string[];
+};
+
 // ========================Find Command=====================================
 
 export type commandFind = {
