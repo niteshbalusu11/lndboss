@@ -161,6 +161,31 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Fees',
+    value: 'Fees',
+    description: 'Show and adjust outbound fee rates',
+    longDescription: `List out fee rates, fix problems with routing policies, set out fees.
+
+    When setting fee, if channels pending, will wait for confirm to set.
+
+    Set-fee-rate can use formulas: https://formulajs.info/functions/.
+
+    Specify PERCENT(0.00) to set the fee as a fraction of routed amount.
+
+    Specify BIPS() to set the fee as parts per thousand.
+
+    You can use INBOUND and OUTBOUND in formulas for IF formulas.
+
+    You can use INBOUND_FEE_RATE to mirror an inbound fee.
+
+    You can use FEE_RATE_OF_<PUBKEY> to reference other node rates.`,
+    flags: {
+      set_cltv_delta: 'SetCltvDelta',
+      set_fee_rate: 'SetFeeRate',
+      to: 'To',
+    },
+  },
+  {
     name: 'Find',
     value: 'Find',
     description: 'Look for something in the node db that matches a query',

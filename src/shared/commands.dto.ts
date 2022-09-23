@@ -333,6 +333,27 @@ export class deleteRebalanceDto {
   id: string;
 }
 
+export class feesDto {
+  @IsOptional()
+  @IsNumber()
+  cltv_delta: number;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  fee_rate: string;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  node: string;
+
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  to: string[];
+}
+
 export class findDto {
   @Transform(({ value }) => trim(value))
   @IsOptional()
