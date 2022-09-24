@@ -11,4 +11,5 @@ module.exports = {
     apiUrl: `${process.env.BASE_PATH || ''}/api`,
     basePath: process.env.BASE_PATH || '',
   },
+  reactStrictMode: true,
 };

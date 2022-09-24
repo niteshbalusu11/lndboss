@@ -55,7 +55,7 @@ const SavedNodes = () => {
     };
 
     fetchData();
-  }, []);
+  }, [nodes]);
 
   return (
     <>

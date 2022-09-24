@@ -21,7 +21,7 @@ const CheckConnection = ({ setCheckConnection }: Args) => {
       const result = await axiosGetNoLoading({ path: 'grpc/get-wallet-info', query });
 
       if (!!result) {
-        setCheckConnection(previousValue => !previousValue);
+        setCheckConnection(true);
         isSuccess(true);
       } else {
         isSuccess(false);
