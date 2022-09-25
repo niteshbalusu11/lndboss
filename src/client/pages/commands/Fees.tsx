@@ -8,7 +8,9 @@ import commands, { globalCommands } from '../../commands';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { FeesOutput } from '~client/output';
 import Head from 'next/head';
+import Link from 'next/link';
 import { axiosPostWithAlert } from '~client/utils/axios';
+import { clientConstants } from '~client/utils/constants';
 
 const FeesCommand = commands.find(n => n.value === 'Fees');
 
@@ -41,6 +43,10 @@ const styles = {
   iconButton: {
     width: '50px',
     marginTop: '0px',
+  },
+  url: {
+    fontWeight: 'bold',
+    color: 'blue',
   },
 };
 
@@ -108,6 +114,12 @@ const Fees = () => {
         <Stack style={styles.form}>
           <h2>{FeesCommand.name}</h2>
           <h4 style={styles.h4}>{FeesCommand.longDescription}</h4>
+
+          <Link href={{ pathname: clientConstants.feeStrategyPath }}>
+            <a target="blank" style={styles.url}>
+              Click to view current scheduled jobs
+            </a>
+          </Link>
 
           <TextField
             type="text"
