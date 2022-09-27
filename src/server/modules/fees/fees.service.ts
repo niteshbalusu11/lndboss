@@ -1,11 +1,13 @@
 import { Logger, createLogger, format, transports } from 'winston';
+import { feesDto, feesStrategiesDto } from '~shared/commands.dto';
 
 import { Injectable } from '@nestjs/common';
 import { LndService } from '../lnd/lnd.service';
 import { feesCommand } from '~server/commands';
-import { feesDto } from '~shared/commands.dto';
 import { httpLogger } from '~server/utils/global_functions';
 import { removeStyling } from '~server/utils/constants';
+import saveStrategies from '~server/commands/fees/save_strategies';
+import validateStrategies from '~server/commands/fees/validate_strategies';
 
 // Fees service: service for bos fees command
 
@@ -39,6 +41,17 @@ export class FeesService {
       });
 
       return { result: removeStyling(result) };
+    } catch (error) {
+      httpLogger({ error });
+    }
+  }
+
+  async save(args: feesStrategiesDto) {
+    try {
+      await validateStrategies({ configs: args.strategies.configs });
+      const result = await saveStrategies({ data: args.strategies });
+
+      return { result };
     } catch (error) {
       httpLogger({ error });
     }

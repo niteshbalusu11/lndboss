@@ -1,24 +1,23 @@
 import { CssBaseline, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
+import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components/app-components';
 
+import Head from 'next/head';
 import { Stack } from '@mui/system';
-import { StartFlexBox } from '~client/standard_components/app-components';
 import YamlEditor from '@focus-reactive/react-yaml';
+import { axiosPostWithAlert } from '~client/utils/axios';
 import { configs } from '~client/utils/fee_strategies';
+import { useNotify } from '~client/hooks/useNotify';
 
 const sampleConfigs = Object.keys(configs);
 
 const FeeStrategies = () => {
+  const [data, setData] = useState(undefined);
+  const [error, setError] = useState(undefined);
   const [strategy, setStrategy] = useState(undefined);
   const actions = useRef(null);
 
-  const Search = React.forwardRef<any>(function x(props, ref) {
-    return <YamlEditor json={configs} onChange={handleChange} onError={handleError} ref={ref} />;
-  });
-
   useEffect(() => {
-    // Here we have access to imperative actions
-
     if (!strategy) {
       actions.current.replaceValue({ json: configs.defaultConfig });
     } else {
@@ -27,16 +26,38 @@ const FeeStrategies = () => {
   }, [strategy]);
 
   const handleChange = ({ json }) => {
-    console.log(json);
+    setData(json);
   };
 
   const handleError = errorObject => {
-    console.log(errorObject.message);
+    setError(errorObject);
   };
+
+  const fetchData = async () => {
+    if (!!error) {
+      useNotify({ type: 'error', message: 'Cannot save, errors need to be fixed.' });
+      return;
+    }
+    const postBody = {
+      strategies: data,
+    };
+
+    const result = await axiosPostWithAlert({ path: 'save-strategies', postBody });
+
+    if (!!result) {
+      useNotify({ type: 'success', message: 'Fee strategies have been saved' });
+    }
+  };
+
   return (
     <CssBaseline>
+      <Head>
+        <title>Fee Scheduler</title>
+      </Head>
       <StartFlexBox>
+        <StandardHomeButtonLink />
         <Stack style={styles.form}>
+          <h2>Automated Fees</h2>
           <FormControl sx={{ minWidth: 120, marginLeft: '10px' }}>
             <InputLabel id="strategies" style={styles.inputLabel}>
               Sample Strategies
@@ -57,8 +78,11 @@ const FeeStrategies = () => {
             </Select>
           </FormControl>
           <div style={{ background: 'white', maxWidth: '100vh', marginTop: '30px' }}>
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-ignore */}
             <YamlEditor json={configs} onChange={handleChange} onError={handleError} ref={actions} />
           </div>
+          <SubmitButton onClick={fetchData}>Save Strategies</SubmitButton>
         </Stack>
       </StartFlexBox>
     </CssBaseline>
