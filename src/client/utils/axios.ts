@@ -139,7 +139,7 @@ const axiosPost = async ({ path, postBody }: ArgsPost) => {
 
     return data;
   } catch (error) {
-    window.alert(`Status: ${error.response.status}\nMessage: ${error.response.data.message}`);
+    console.log(error);
   }
 };
 export { axiosGet, axiosGetNoLoading, axiosGetWebSocket, axiosPost, axiosPostWithAlert };

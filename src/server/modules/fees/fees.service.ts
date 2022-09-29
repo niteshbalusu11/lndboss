@@ -5,6 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { LndService } from '../lnd/lnd.service';
 import { feesCommand } from '~server/commands';
 import { httpLogger } from '~server/utils/global_functions';
+import readFeesFile from '~server/commands/fees/read_fees_file';
 import { removeStyling } from '~server/utils/constants';
 import saveStrategies from '~server/commands/fees/save_strategies';
 import validateStrategies from '~server/commands/fees/validate_strategies';
@@ -48,10 +49,24 @@ export class FeesService {
 
   async save(args: feesStrategiesDto) {
     try {
-      await validateStrategies({ configs: args.strategies.configs });
-      const result = await saveStrategies({ data: args.strategies });
+      await validateStrategies({ configs: args.configs });
 
-      return { result };
+      const result = await saveStrategies({ data: args });
+
+      return result;
+    } catch (error) {
+      httpLogger({ error });
+    }
+  }
+
+  async readFeesFile() {
+    try {
+      const { data } = await readFeesFile({});
+      if (!data) {
+        return false;
+      }
+
+      return data;
     } catch (error) {
       httpLogger({ error });
     }

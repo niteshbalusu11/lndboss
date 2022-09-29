@@ -2,53 +2,34 @@ import { auto, each } from 'async';
 
 import tagsCommand from '../tags/tags_command';
 
-const allowedKeys = [
-  'activity_period',
-  'base_fee_msat',
-  'config',
-  'fee_ppm',
-  'id',
-  'max_ratio',
-  'min_ratio',
-  'name',
-  'strategy',
-];
-
-const allowedKeyTypes = {
-  activity_period: 'string',
-  base_fee_msat: 'number',
-  config: 'null',
-  fee_ppm: 'number',
-  id: 'array',
-  name: 'string',
-  max_ratio: 'number',
-  min_ratio: 'number',
-  strategy: 'string',
-};
-
-const { isArray } = Array;
 const isNumber = n => !isNaN(n);
-const isObject = n => typeof n === 'object';
 const isPublicKey = n => !!n && /^0[2-3][0-9A-F]{64}$/i.test(n);
-const isString = n => typeof n === 'string';
 
 type Args = {
-  configs: Array<object>;
+  configs: {
+    config: {
+      basefees: string;
+      feerate: string;
+      id: Array<string>;
+      maxhtlcratio: string;
+      messageid: string;
+      parsed_id: Array<string>;
+      ratio: string;
+    }[];
+    node: string;
+  }[];
 };
 type Tasks = {
   validate: undefined;
   getTags: any;
-  getDestructuredArray: {
-    data: { key: string; value: string | string[] }[];
-  };
-  validateConfigs: undefined;
+  validateConfig: undefined;
 };
 const validateKeysAndValues = async ({ configs }: Args) => {
   return (
     await auto<Tasks>({
       // validate
       validate: (cbk: any) => {
-        if (!configs || !isArray(configs)) {
+        if (!configs) {
           return cbk([400, 'ExpectedConfigsToValidateKeysAndValues']);
         }
 
@@ -73,83 +54,64 @@ const validateKeysAndValues = async ({ configs }: Args) => {
         },
       ],
 
-      getDestructuredArray: [
-        'validate',
-        ({}, cbk: any) => {
-          const destructuredArray = [];
-          const keys = [];
-
-          configs.forEach(data => {
-            const validate = ({ data, keys }) => {
-              if (!!data && !isArray(data) && !!isObject(data)) {
-                Object.keys(data).forEach(key => {
-                  keys.push(key);
-                  const value = data[key];
-
-                  const obj = {
-                    key,
-                    value: !isObject(value) || !!isArray(value) ? data[key] : '',
-                  };
-
-                  destructuredArray.push(obj);
-                  if (!!isObject(value) && !isArray(value)) {
-                    validate({ data: value, keys });
-                  }
-                });
-              }
-            };
-
-            validate({ data, keys });
-          });
-
-          return cbk(null, { data: destructuredArray });
-        },
-      ],
-
-      validateConfigs: [
-        'getDestructuredArray',
+      validateConfig: [
         'getTags',
-        async ({ getDestructuredArray, getTags }) => {
-          const { data } = getDestructuredArray;
+        async ({ getTags }) => {
           const { tags } = getTags;
 
-          await each(data, async n => {
-            if (!allowedKeys.includes(n.key)) {
-              throw new Error(`InvalidKey ${n.key}`);
-            }
+          return await each(configs, async eachConfig => {
+            return await each(eachConfig.config, async config => {
+              if (!isNumber(Number(config.basefees))) {
+                throw new Error('ExpectedNumericBaseFeesValues');
+              }
 
-            if (!allowedKeyTypes[n.key]) {
-              throw new Error(`MissingKeyTypeFor ${n.key}`);
-            }
+              if (!isNumber(Number(config.feerate))) {
+                throw new Error('ExpectedNumericFeeRateValues');
+              }
 
-            if (allowedKeyTypes[n.key] === 'string' && !isString(n.value)) {
-              throw new Error(`ExpectedStringType ${n.value} for ${n.key}`);
-            }
+              if (!isNumber(Number(config.maxhtlcratio))) {
+                throw new Error('ExpectedNumericMaxHtlcRatioValues');
+              }
 
-            if (allowedKeyTypes[n.key] === 'number' && !isNumber(n.value)) {
-              throw new Error(`ExpectedNumberType ${n.value} for ${n.key}`);
-            }
+              if (!isNumber(Number(config.ratio))) {
+                throw new Error('ExpectedNumericOutboundCapacityValues');
+              }
 
-            if (allowedKeyTypes[n.key] === 'null' && n.value !== '') {
-              throw new Error(`ExpectedNullValue ${n.value} for ${n.key}`);
-            }
+              if (Number(config.basefees) < 0) {
+                throw new Error('ExpectedBaseFeesGreaterThanZero');
+              }
 
-            if (allowedKeyTypes[n.key] === 'array' && !isArray(n.value)) {
-              throw new Error(`ExpectedArrayType ${n.value} for ${n.key}`);
-            }
+              if (Number(config.feerate) < 0) {
+                throw new Error('ExpectedFeeRateGreaterThanZero');
+              }
 
-            if (n.key === 'id' && !!isArray(n.value)) {
-              n.value.forEach(id => {
-                if (!isPublicKey(id) && !tags.includes(id)) {
-                  throw new Error(`ExpectedValidTagNameOrPubkey ${id} for ${n.key}`);
+              if (Number(config.ratio) < 0 || Number(config.ratio) > 1) {
+                throw new Error('ExpectedOutboundCapacityRatioLessThanOneAndGreaterThanZero');
+              }
+
+              if (Number(config.maxhtlcratio) < 0 || Number(config.maxhtlcratio) > 1) {
+                throw new Error('ExpectedMaxHtlcRatioLessThanOneAndGreaterThanZero');
+              }
+
+              const ids = config.parsed_id.filter(n => !!n);
+
+              ids.forEach(n => {
+                if (!n || n === '') {
+                  return;
+                }
+
+                if (!isPublicKey(n) && !tags.includes(n)) {
+                  throw new Error(`ExpectedValidTagNameOrPubkey ${n}`);
                 }
               });
-            }
+
+              return true;
+            });
           });
         },
       ],
     })
-  ).validateConfigs;
+  ).validateConfig;
 };
 
 export default validateKeysAndValues;

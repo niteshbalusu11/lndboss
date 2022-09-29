@@ -13,8 +13,13 @@ export class FeesController {
     return this.feeService.feesCommand(args);
   }
 
-  @Post('api/save-strategies')
+  @Post('api/fees/save-strategies')
   async save(@Body() args: feesStrategiesDto) {
     return this.feeService.save(args);
+  }
+
+  @Post('api/fees/getfile')
+  async getFile() {
+    return this.feeService.readFeesFile();
   }
 }
