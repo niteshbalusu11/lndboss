@@ -8,17 +8,18 @@ const isPublicKey = n => !!n && /^0[2-3][0-9A-F]{64}$/i.test(n);
 type Args = {
   configs: {
     config: {
-      basefees: string;
-      feerate: string;
-      id: Array<string>;
-      maxhtlcratio: string;
-      messageid: string;
-      parsed_id: Array<string>;
-      ratio: string;
+      basefees: string[];
+      feerates: string[];
+      ids: string[];
+      maxhtlcratios: string[];
+      parsed_ids: string[];
+      ratios: string[];
     }[];
+    message_id: string;
     node: string;
   }[];
 };
+
 type Tasks = {
   validate: undefined;
   getTags: any;
@@ -61,39 +62,39 @@ const validateKeysAndValues = async ({ configs }: Args) => {
 
           return await each(configs, async eachConfig => {
             return await each(eachConfig.config, async config => {
-              if (!isNumber(Number(config.basefees))) {
+              if (!!config.basefees.filter(n => !isNumber(Number(n))).length) {
                 throw new Error('ExpectedNumericBaseFeesValues');
               }
 
-              if (!isNumber(Number(config.feerate))) {
+              if (!!config.feerates.filter(n => !isNumber(Number(n))).length) {
                 throw new Error('ExpectedNumericFeeRateValues');
               }
 
-              if (!isNumber(Number(config.maxhtlcratio))) {
+              if (!!config.maxhtlcratios.filter(n => !isNumber(Number(n))).length) {
                 throw new Error('ExpectedNumericMaxHtlcRatioValues');
               }
 
-              if (!isNumber(Number(config.ratio))) {
+              if (!!config.ratios.filter(n => !isNumber(Number(n))).length) {
                 throw new Error('ExpectedNumericOutboundCapacityValues');
               }
 
-              if (Number(config.basefees) < 0) {
+              if (!!config.basefees.filter(n => Number(n) < 0).length) {
                 throw new Error('ExpectedBaseFeesGreaterThanZero');
               }
 
-              if (Number(config.feerate) < 0) {
+              if (!!config.feerates.filter(n => Number(n) < 0).length) {
                 throw new Error('ExpectedFeeRateGreaterThanZero');
               }
 
-              if (Number(config.ratio) < 0 || Number(config.ratio) > 1) {
+              if (!!config.ratios.filter(n => Number(n) < 0 || Number(n) > 1).length) {
                 throw new Error('ExpectedOutboundCapacityRatioLessThanOneAndGreaterThanZero');
               }
 
-              if (Number(config.maxhtlcratio) < 0 || Number(config.maxhtlcratio) > 1) {
+              if (!!config.maxhtlcratios.filter(n => Number(n) < 0 || Number(n) > 1).length) {
                 throw new Error('ExpectedMaxHtlcRatioLessThanOneAndGreaterThanZero');
               }
 
-              const ids = config.parsed_id.filter(n => !!n);
+              const ids = config.parsed_ids.filter(n => !!n);
 
               ids.forEach(n => {
                 if (!n || n === '') {

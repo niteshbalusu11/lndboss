@@ -11,6 +11,8 @@ import { useLoading } from '~client/hooks/useLoading';
 import { useNotify } from '~client/hooks/useNotify';
 import validateAutoFees from '~client/utils/validate_auto_fees';
 
+const splitValue = n => n.split('\n')[1].trim();
+
 /*
   Renders the fee scheduler page
   POST call to the NestJs process to schedule auto fees
@@ -46,8 +48,17 @@ const styles = {
     width: '100px',
   },
 };
+type FormFieldState = Array<{
+  ratios: string[];
+  basefees: string[];
+  feerates: string[];
+  maxhtlcratios: string[];
+  ids: string[];
+}>;
 const FeeScheduler = () => {
-  const [formFields, setFormFields] = useState([{ ratio: '', basefees: '', feerate: '', maxhtlcratio: '', id: [] }]);
+  const [formFields, setFormFields] = useState<FormFieldState>([
+    { ratios: [], basefees: [], feerates: [], maxhtlcratios: [], ids: [] },
+  ]);
   const [node, setNode] = useState('');
   const [peersAndTags, setPeersAndTags] = useState([]);
 
@@ -66,6 +77,7 @@ const FeeScheduler = () => {
 
         if (!!result) {
           const [{ config }] = result.configs.filter(n => n.node === '');
+
           setFormFields(config);
         }
 
@@ -86,20 +98,25 @@ const FeeScheduler = () => {
       return;
     }
     const [{ config }] = result.configs.filter(n => n.node === node);
+
     setFormFields(config);
   };
 
   const fetchData = async () => {
-    const baseFees = formFields.map(n => n.basefees) || [];
-    const feeRate = formFields.map(n => n.feerate) || [];
-    const maxHtlcRatio = formFields.map(n => n.maxhtlcratio) || [];
     const messageId = node === '' ? 'lndboss_fee_scheduling-default' : `lndboss_fee_scheduling-${node}`;
-    const ratio = formFields.map(n => n.ratio) || [];
 
-    const isValid = validateAutoFees({ baseFees, feeRate, maxHtlcRatio, ratio });
-
-    if (!isValid.is_valid) {
-      useNotify({ type: 'error', message: isValid.message });
+    try {
+      formFields.forEach((n, index) => {
+        validateAutoFees({
+          index: index + 1,
+          baseFees: n.basefees,
+          feeRates: n.feerates,
+          maxHtlcRatios: n.maxhtlcratios,
+          ratios: n.ratios,
+        });
+      });
+    } catch (error) {
+      useNotify({ type: 'error', message: error.message });
       return;
     }
 
@@ -107,33 +124,19 @@ const FeeScheduler = () => {
 
     const configs = {
       node,
+      message_id: messageId,
       config: [],
     };
 
     formFields.forEach(n => {
       const obj = {
-        basefees: '',
-        feerate: '',
-        maxhtlcratio: '',
-        messageid: messageId,
-        id: [],
-        parsed_id: [],
-        ratio: '',
+        basefees: n.basefees,
+        feerates: n.feerates,
+        maxhtlcratios: n.maxhtlcratios,
+        ids: n.ids,
+        ratios: n.ratios,
+        parsed_ids: n.ids.map(a => splitValue(a)),
       };
-
-      obj.basefees = n.basefees;
-      obj.feerate = n.feerate;
-      obj.maxhtlcratio = n.maxhtlcratio;
-      obj.id = n.id;
-      obj.parsed_id = n.id.map(a => {
-        if (!a || a === '') {
-          return a;
-        }
-        const splitValue = a.split('\n')[1].trim();
-
-        return splitValue;
-      });
-      obj.ratio = n.ratio;
 
       configs.config.push(obj);
     });
@@ -147,26 +150,53 @@ const FeeScheduler = () => {
     }
   };
 
-  const handleFormChange = (i: number, e: any, newValue?: any) => {
+  const handleBaseFeesChange = (i: number, e: any, newValue?: any) => {
     if (!!newValue) {
       const newFormValues = [...formFields];
-      newFormValues[i].id = newValue;
+      newFormValues[i].basefees = newValue;
       setFormFields(newFormValues);
-      return;
     }
+  };
 
-    const newFormValues = [...formFields];
-    newFormValues[i][e.target.name] = e.target.value;
-    setFormFields(newFormValues);
+  const handleFeeRateChange = (i: number, e: any, newValue?: any) => {
+    if (!!newValue) {
+      const newFormValues = [...formFields];
+      newFormValues[i].feerates = newValue;
+      setFormFields(newFormValues);
+    }
+  };
+
+  const handleIdChange = (i: number, e: any, newValue?: any) => {
+    if (!!newValue) {
+      const newFormValues = [...formFields];
+      newFormValues[i].ids = newValue;
+      setFormFields(newFormValues);
+    }
+  };
+
+  const handleMaxHtlcRatioChange = (i: number, e: any, newValue?: any) => {
+    if (!!newValue) {
+      const newFormValues = [...formFields];
+      newFormValues[i].maxhtlcratios = newValue;
+      setFormFields(newFormValues);
+    }
+  };
+
+  const handleRatioChange = (i: number, e: any, newValue?: any) => {
+    if (!!newValue) {
+      const newFormValues = [...formFields];
+      newFormValues[i].ratios = newValue;
+      setFormFields(newFormValues);
+    }
   };
 
   const addFields = () => {
     const object = {
-      ratio: '',
-      basefees: '',
-      feerate: '',
-      maxhtlcratio: '',
-      id: [],
+      ratios: [],
+      basefees: [],
+      feerates: [],
+      maxhtlcratios: [],
+      ids: [],
     };
 
     setFormFields([...formFields, object]);
@@ -198,7 +228,7 @@ const FeeScheduler = () => {
                   freeSolo
                   multiple={true}
                   options={peersAndTags}
-                  value={form.id || []}
+                  value={form.ids || []}
                   renderInput={params => (
                     <TextField
                       {...params}
@@ -208,51 +238,87 @@ const FeeScheduler = () => {
                       style={styles.textField}
                     />
                   )}
-                  onChange={(event, newValue) => handleFormChange(index, event, newValue)}
+                  onChange={(event, newValue) => handleIdChange(index, event, newValue)}
                 />
 
-                <TextField
-                  type="text"
-                  label="Outbound/Capacity Ratio"
-                  name={'ratio'}
-                  placeholder="Outbound/Capacity Ratio"
-                  onChange={event => handleFormChange(index, event)}
-                  style={styles.textField}
+                <Autocomplete
                   id={`ratio-${index}`}
-                  value={form.ratio || ''}
+                  sx={{ display: 'inline-block' }}
+                  freeSolo
+                  multiple={true}
+                  options={form.ratios || []}
+                  value={form.ratios || []}
+                  renderInput={params => (
+                    <TextField
+                      {...params}
+                      label="Outbound/Capacity Ratio"
+                      placeholder="Outbound/Capacity Ratio"
+                      value={form.ratios}
+                      style={styles.textField}
+                      id={`ratio-${index}`}
+                    />
+                  )}
+                  onChange={(event, newValue) => handleRatioChange(index, event, newValue)}
                 />
 
-                <TextField
-                  type="text"
-                  label="Base Fees (msat, optional)"
-                  name={'basefees'}
-                  placeholder="Base Fees (msat)"
-                  onChange={event => handleFormChange(index, event)}
-                  style={styles.textField}
+                <Autocomplete
                   id={`basefees-${index}`}
-                  value={form.basefees || ''}
+                  sx={{ display: 'inline-block' }}
+                  freeSolo
+                  multiple={true}
+                  options={form.basefees || []}
+                  value={form.basefees || []}
+                  renderInput={params => (
+                    <TextField
+                      {...params}
+                      label="Base Fees (msat, optional)"
+                      placeholder="Base Fees (msat)"
+                      value={form.basefees}
+                      style={styles.textField}
+                      id={`basefees-${index}`}
+                    />
+                  )}
+                  onChange={(event, newValue) => handleBaseFeesChange(index, event, newValue)}
                 />
 
-                <TextField
-                  type="text"
-                  label="Fee Rate (ppm)"
-                  name={'feerate'}
-                  placeholder="Fee Rate (ppm)"
-                  onChange={event => handleFormChange(index, event)}
-                  style={styles.textField}
+                <Autocomplete
                   id={`feerate-${index}`}
-                  value={form.feerate || ''}
+                  sx={{ display: 'inline-block' }}
+                  freeSolo
+                  multiple={true}
+                  options={form.feerates || []}
+                  value={form.feerates || []}
+                  renderInput={params => (
+                    <TextField
+                      {...params}
+                      label="Fee Rate (ppm)"
+                      placeholder="Fee Rate (ppm)"
+                      value={form.feerates}
+                      style={styles.textField}
+                      id={`feerate-${index}`}
+                    />
+                  )}
+                  onChange={(event, newValue) => handleFeeRateChange(index, event, newValue)}
                 />
 
-                <TextField
-                  type="text"
-                  label="MaxHtlc/Capacity Ratio (Optional)"
-                  name={'maxhtlcratio'}
-                  placeholder="MaxHtlc/Capacity Ratio"
-                  onChange={event => handleFormChange(index, event)}
-                  style={styles.textField}
+                <Autocomplete
                   id={`maxhtlcratio-${index}`}
-                  value={form.maxhtlcratio || ''}
+                  sx={{ display: 'inline-block' }}
+                  freeSolo
+                  multiple={true}
+                  options={form.maxhtlcratios || []}
+                  value={form.maxhtlcratios || []}
+                  renderInput={params => (
+                    <TextField
+                      {...params}
+                      label="MaxHtlc/Capacity Ratio (Optional)"
+                      placeholder="MaxHtlc/Capacity Ratio"
+                      value={form.maxhtlcratios}
+                      style={styles.textField}
+                      id={`maxhtlcratio-${index}`}
+                    />
+                  )}
+                  onChange={(event, newValue) => handleMaxHtlcRatioChange(index, event, newValue)}
                 />
 
                 <IconButton aria-label="delete" onClick={() => removeFields(index)} style={styles.iconButton}>

@@ -358,14 +358,14 @@ export class feesStrategiesDto {
   @IsArray()
   configs: {
     config: {
-      basefees: string;
-      feerate: string;
-      id: Array<string>;
-      maxhtlcratio: string;
-      messageid: string;
-      parsed_id: Array<string>;
-      ratio: string;
+      basefees: string[];
+      feerates: string[];
+      ids: string[];
+      maxhtlcratios: string[];
+      parsed_ids: string[];
+      ratios: string[];
     }[];
+    message_id: string;
     node: string;
   }[];
 }
