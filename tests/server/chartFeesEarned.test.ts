@@ -18,7 +18,6 @@ test.describe('Test ChartFeesEarned command on the node.js side', async () => {
       fs: { getFile: readFile },
       is_count: false,
       is_forwarded: false,
-      via: 'outpeers',
     };
 
     const lnds = lightning.map(({ lnd }) => lnd);
@@ -37,7 +36,6 @@ test.describe('Test ChartFeesEarned command on the node.js side', async () => {
       is_count: false,
       is_forwarded: false,
       start_date: '2021-07-01',
-      via: 'outpeers',
     };
 
     const lnds = lightning.map(({ lnd }) => lnd);
@@ -54,7 +52,6 @@ test.describe('Test ChartFeesEarned command on the node.js side', async () => {
       fs: { getFile: readFile },
       is_count: true,
       is_forwarded: true,
-      via: 'outpeers',
     };
 
     const lnds = lightning.map(({ lnd }) => lnd);
