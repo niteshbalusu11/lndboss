@@ -1,5 +1,6 @@
 const isNumber = (n: number) => !isNaN(n);
-const allEqual = arr => arr.every(v => v === arr[0] || v === 0);
+const allEqual = (n: number[]) => n.every(v => v === n[0] || v === 0);
+const checkRatio = (n: string[]) => Number(n[0]) < Number(n[1]);
 
 type Args = {
   baseFees: string[];
@@ -20,6 +21,28 @@ const validateAutoFees = (args: Args) => {
     throw new Error(`ExpectedEqualNumberOfValuesFor Ratio, BaseFees, FeeRate, MaxHtlc In Row ${args.index}`);
   }
 
+  ratios.forEach(n => {
+    const split = n.split('-');
+
+    if (split.length !== 2) {
+      throw new Error('Expected Valid Range Of Ratios');
+    }
+
+    split.forEach(n => {
+      if (!isNumber(Number(n))) {
+        throw new Error(`Expected Numeric Values In Ratios In Row ${args.index}`);
+      }
+
+      if (Number(n) > 1 || Number(n) < 0) {
+        throw new Error(`Expected Outbound Capacity Ratio Less Than One And Greater Than Zero In Row ${args.index}`);
+      }
+    });
+
+    if (!checkRatio(split)) {
+      throw new Error(`Expected First Number In Ratio Lower Than Second Number In Row ${args.index}`);
+    }
+  });
+
   if (!!baseFees.filter(n => !isNumber(Number(n))).length) {
     throw new Error(`Expected Numeric BaseFees Values In Row ${args.index}`);
   }
@@ -32,20 +55,12 @@ const validateAutoFees = (args: Args) => {
     throw new Error(`Expected Numeric MaxHtlc Ratio Values In Row ${args.index}`);
   }
 
-  if (!!ratios.filter(n => !isNumber(Number(n))).length) {
-    throw new Error(`Expected Numeric Outbound Capacity Values In Row ${args.index}`);
-  }
-
   if (!!baseFees.filter(n => Number(n) < 0).length) {
     throw new Error(`Expected BaseFees Greater Than Zero In Row ${args.index}`);
   }
 
   if (!!feeRates.filter(n => Number(n) < 0).length) {
     throw new Error(`Expected FeeRate Greater Than Zero In Row ${args.index}`);
-  }
-
-  if (!!ratios.filter(n => Number(n) > 1 || Number(n) < 0).length) {
-    throw new Error(`Expected Outbound Capacity Ratio Less Than One And Greater Than Zero In Row ${args.index}`);
   }
 
   if (!!maxHtlcRatios.filter(n => Number(n) > 1 || Number(n) < 0).length) {

@@ -5,6 +5,7 @@ import { LndService } from '../lnd/lnd.service';
 import { SchedulerRegistry } from '@nestjs/schedule';
 import autoRebalanceCommand from '~server/commands/rebalance/auto_rebalance_command';
 import { rebalanceScheduleDto } from '~shared/commands.dto';
+import scheduledFeesCommand from '~server/commands/fees/scheduled_fees_command';
 
 const stringify = (obj: any) => JSON.stringify(obj, null, 2);
 
@@ -39,6 +40,23 @@ export class CronService {
       const lnd = await LndService.authenticatedLnd({ node: args.node });
 
       await autoRebalanceCommand({
+        lnd,
+        args,
+      });
+    });
+
+    this.schedulerRegistry.addCronJob(id, job);
+    job.start();
+  }
+
+  // Create cron service for fees
+  async createAutoFeesCron({ args, id }) {
+    this.logger.log({ message: `adding fee cron schedule ${stringify(args)}`, type: 'info' });
+
+    const job = new CronJob(args.schedule, async () => {
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+      await scheduledFeesCommand({
         lnd,
         args,
       });

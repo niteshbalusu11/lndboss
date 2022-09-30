@@ -2,6 +2,8 @@ import { auto, each } from 'async';
 
 import tagsCommand from '../tags/tags_command';
 
+const { isArray } = Array;
+const checkRatio = (n: string[]) => Number(n[0]) < Number(n[1]);
 const isNumber = n => !isNaN(n);
 const isPublicKey = n => !!n && /^0[2-3][0-9A-F]{64}$/i.test(n);
 
@@ -17,7 +19,7 @@ type Args = {
     }[];
     message_id: string;
     node: string;
-  }[];
+  };
 };
 
 type Tasks = {
@@ -31,7 +33,19 @@ const validateKeysAndValues = async ({ configs }: Args) => {
       // validate
       validate: (cbk: any) => {
         if (!configs) {
-          return cbk([400, 'ExpectedConfigsToValidateKeysAndValues']);
+          return cbk([400, 'ExpectedConfigsToValidateStrategies']);
+        }
+
+        if (!configs.message_id) {
+          return cbk([400, 'ExpectedMessageIdToValidateStrategies']);
+        }
+
+        if (configs.node === undefined) {
+          return cbk([400, 'ExpectedNodeNameStringToValidateStrategies']);
+        }
+
+        if (!isArray(configs.config)) {
+          return cbk([400, 'ExpectedArrayOfConfigToValidateStrategies']);
         }
 
         return cbk();
@@ -60,54 +74,66 @@ const validateKeysAndValues = async ({ configs }: Args) => {
         async ({ getTags }) => {
           const { tags } = getTags;
 
-          return await each(configs, async eachConfig => {
-            return await each(eachConfig.config, async config => {
-              if (!!config.basefees.filter(n => !isNumber(Number(n))).length) {
-                throw new Error('ExpectedNumericBaseFeesValues');
+          return await each(configs.config, async config => {
+            if (!!config.basefees.filter(n => !isNumber(Number(n))).length) {
+              throw new Error('ExpectedNumericBaseFeesValues');
+            }
+
+            if (!!config.feerates.filter(n => !isNumber(Number(n))).length) {
+              throw new Error('ExpectedNumericFeeRateValues');
+            }
+
+            if (!!config.maxhtlcratios.filter(n => !isNumber(Number(n))).length) {
+              throw new Error('ExpectedNumericMaxHtlcRatioValues');
+            }
+
+            if (!!config.basefees.filter(n => Number(n) < 0).length) {
+              throw new Error('ExpectedBaseFeesGreaterThanZero');
+            }
+
+            if (!!config.feerates.filter(n => Number(n) < 0).length) {
+              throw new Error('ExpectedFeeRateGreaterThanZero');
+            }
+
+            if (!!config.maxhtlcratios.filter(n => Number(n) < 0 || Number(n) > 1).length) {
+              throw new Error('ExpectedMaxHtlcRatioLessThanOneAndGreaterThanZero');
+            }
+
+            config.ratios.forEach(n => {
+              const split = n.split('-');
+
+              if (split.length !== 2) {
+                throw new Error('Expected Valid Range Of Ratios');
               }
 
-              if (!!config.feerates.filter(n => !isNumber(Number(n))).length) {
-                throw new Error('ExpectedNumericFeeRateValues');
-              }
-
-              if (!!config.maxhtlcratios.filter(n => !isNumber(Number(n))).length) {
-                throw new Error('ExpectedNumericMaxHtlcRatioValues');
-              }
-
-              if (!!config.ratios.filter(n => !isNumber(Number(n))).length) {
-                throw new Error('ExpectedNumericOutboundCapacityValues');
-              }
-
-              if (!!config.basefees.filter(n => Number(n) < 0).length) {
-                throw new Error('ExpectedBaseFeesGreaterThanZero');
-              }
-
-              if (!!config.feerates.filter(n => Number(n) < 0).length) {
-                throw new Error('ExpectedFeeRateGreaterThanZero');
-              }
-
-              if (!!config.ratios.filter(n => Number(n) < 0 || Number(n) > 1).length) {
-                throw new Error('ExpectedOutboundCapacityRatioLessThanOneAndGreaterThanZero');
-              }
-
-              if (!!config.maxhtlcratios.filter(n => Number(n) < 0 || Number(n) > 1).length) {
-                throw new Error('ExpectedMaxHtlcRatioLessThanOneAndGreaterThanZero');
-              }
-
-              const ids = config.parsed_ids.filter(n => !!n);
-
-              ids.forEach(n => {
-                if (!n || n === '') {
-                  return;
+              split.forEach(n => {
+                if (!isNumber(Number(n))) {
+                  throw new Error('Expected Numeric Values In Ratios In Row');
                 }
 
-                if (!isPublicKey(n) && !tags.includes(n)) {
-                  throw new Error(`ExpectedValidTagNameOrPubkey ${n}`);
+                if (Number(n) > 1 || Number(n) < 0) {
+                  throw new Error('Expected Outbound Capacity Ratio Less Than One And Greater Than Zero In Row');
                 }
               });
 
-              return true;
+              if (!checkRatio(split)) {
+                throw new Error('Expected First Number In Ratio Lower Than Second Number In Row');
+              }
             });
+
+            const ids = config.parsed_ids.filter(n => !!n);
+
+            ids.forEach(n => {
+              if (!n || n === '') {
+                return;
+              }
+
+              if (!isPublicKey(n) && !tags.includes(n)) {
+                throw new Error(`ExpectedValidTagNameOrPubkey ${n}`);
+              }
+            });
+
+            return true;
           });
         },
       ],

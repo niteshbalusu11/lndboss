@@ -120,8 +120,6 @@ const FeeScheduler = () => {
       return;
     }
 
-    const postBody = { configs: [] };
-
     const configs = {
       node,
       message_id: messageId,
@@ -141,7 +139,7 @@ const FeeScheduler = () => {
       configs.config.push(obj);
     });
 
-    postBody.configs.push(configs);
+    const postBody = { configs };
 
     const result = await axiosPostWithAlert({ path: 'fees/save-strategies', postBody });
 

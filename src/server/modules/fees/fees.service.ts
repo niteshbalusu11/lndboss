@@ -1,6 +1,7 @@
 import { Logger, createLogger, format, transports } from 'winston';
 import { feesDto, feesStrategiesDto } from '~shared/commands.dto';
 
+import { CronService } from '../cron/cron.service';
 import { Injectable } from '@nestjs/common';
 import { LndService } from '../lnd/lnd.service';
 import { feesCommand } from '~server/commands';
@@ -8,12 +9,15 @@ import { httpLogger } from '~server/utils/global_functions';
 import readFeesFile from '~server/commands/fees/read_fees_file';
 import { removeStyling } from '~server/utils/constants';
 import saveStrategies from '~server/commands/fees/save_strategies';
+import scheduledFeesCommand from '~server/commands/fees/scheduled_fees_command';
 import validateStrategies from '~server/commands/fees/validate_strategies';
 
 // Fees service: service for bos fees command
 
 @Injectable()
 export class FeesService {
+  constructor(private cronService: CronService) {}
+
   // Create logger
   createLogger({}): Logger {
     const logger: Logger = createLogger({
@@ -51,7 +55,11 @@ export class FeesService {
     try {
       await validateStrategies({ configs: args.configs });
 
-      const result = await saveStrategies({ data: args });
+      const result = await saveStrategies({ configs: args.configs });
+
+      const lnd = await LndService.authenticatedLnd({ node: args.configs.node });
+
+      await scheduledFeesCommand({ lnd, args: args.configs });
 
       return result;
     } catch (error) {
