@@ -7,6 +7,14 @@ const checkRatio = (n: string[]) => Number(n[0]) < Number(n[1]);
 const isNumber = n => !isNaN(n);
 const isPublicKey = n => !!n && /^0[2-3][0-9A-F]{64}$/i.test(n);
 
+/** Validate config server side
+  {
+    config: <Fee Strategy Config Object>
+  }
+
+  @retruns via promise
+  boolean
+ */
 type Args = {
   configs: {
     config: {
@@ -30,7 +38,7 @@ type Tasks = {
 const validateKeysAndValues = async ({ configs }: Args) => {
   return (
     await auto<Tasks>({
-      // validate
+      // Check arguments
       validate: (cbk: any) => {
         if (!configs) {
           return cbk([400, 'ExpectedConfigsToValidateStrategies']);
@@ -51,6 +59,7 @@ const validateKeysAndValues = async ({ configs }: Args) => {
         return cbk();
       },
 
+      // Get tags from file
       getTags: [
         'validate',
         async () => {
@@ -69,6 +78,7 @@ const validateKeysAndValues = async ({ configs }: Args) => {
         },
       ],
 
+      // Validate config before saving
       validateConfig: [
         'getTags',
         async ({ getTags }) => {

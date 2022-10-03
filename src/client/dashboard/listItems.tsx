@@ -1,10 +1,12 @@
 import { ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material';
 
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import BalanceIcon from '@mui/icons-material/Balance';
 import ComputerIcon from '@mui/icons-material/Computer';
 import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import MoneyIcon from '@mui/icons-material/Money';
 import React from 'react';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { clientConstants } from '~client/utils/constants';
@@ -104,6 +106,30 @@ export const SecondaryListItems = ({
           <AssignmentIcon />
         </ListItemIcon>
         <ListItemText primary="Month To Date" />
+      </ListItemButton>
+    </React.Fragment>
+  );
+};
+
+export const QuickTools = () => {
+  return (
+    <React.Fragment>
+      <ListSubheader component="div" inset>
+        Automation Tools
+      </ListSubheader>
+
+      <ListItemButton href={clientConstants.rebalanceUrl}>
+        <ListItemIcon>
+          <BalanceIcon />
+        </ListItemIcon>
+        <ListItemText primary="Auto Rebalancing" />
+      </ListItemButton>
+
+      <ListItemButton href={clientConstants.feeStrategyPath}>
+        <ListItemIcon>
+          <MoneyIcon />
+        </ListItemIcon>
+        <ListItemText primary="Auto Fees" />
       </ListItemButton>
     </React.Fragment>
   );

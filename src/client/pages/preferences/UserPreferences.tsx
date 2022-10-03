@@ -38,6 +38,7 @@ const styles = {
 const UserPreferences = () => {
   const [scheduledRebalancing, setScheduledRebalancing] = useState(false);
   const [ambossHealthCheck, setAmbossHealthCheck] = useState(false);
+  const [automatedFees, setAutomatedFees] = useState(false);
 
   const handleScheduleRebalancingChange = () => {
     setScheduledRebalancing(previousValue => !previousValue);
@@ -45,6 +46,10 @@ const UserPreferences = () => {
 
   const handleAmbossHealthCheckChange = () => {
     setAmbossHealthCheck(previousValue => !previousValue);
+  };
+
+  const handleAutomatedFeesChange = () => {
+    setAutomatedFees(previousValue => !previousValue);
   };
 
   useEffect(() => {
@@ -57,6 +62,7 @@ const UserPreferences = () => {
           JSON.parse(result.result);
           setScheduledRebalancing(parse(result.result).scheduledRebalancing.is_enabled);
           setAmbossHealthCheck(parse(result.result).ambossHealthCheck.is_enabled);
+          setAutomatedFees(parse(result.result).automatedFees.is_enabled);
         } catch (error) {
           // Ignore errors
         }
@@ -72,6 +78,9 @@ const UserPreferences = () => {
       },
       scheduledRebalancing: {
         is_enabled: scheduledRebalancing,
+      },
+      automatedFees: {
+        is_enabled: automatedFees,
       },
     };
 
@@ -124,6 +133,12 @@ const UserPreferences = () => {
               />
             }
             label="Amboss Health Check"
+          />
+
+          <FormControlLabel
+            style={styles.switch}
+            control={<StandardSwitch checked={automatedFees} onChange={handleAutomatedFeesChange} id="automatedFees" />}
+            label="Automated Fees"
           />
           <SubmitButton onClick={postData}>Update</SubmitButton>
         </Stack>

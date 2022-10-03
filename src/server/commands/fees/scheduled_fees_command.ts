@@ -2,16 +2,15 @@ import {
   AuthenticatedLnd,
   GetChannelResult,
   GetChannelsResult,
-  GetFeeRatesResult,
   GetIdentityResult,
   getChannel,
   getChannels,
-  getFeeRates,
   getIdentity,
 } from 'lightning';
-import { auto, each, map } from 'async';
+import { auto, map } from 'async';
 
 import getIcons from '../tags/get_icons';
+import { getSettingsFile } from '~server/settings';
 import { homedir } from 'os';
 import { join } from 'path';
 import { readFile } from 'fs';
@@ -21,6 +20,15 @@ const feesFile = 'fees.json';
 const home = '.bosgui';
 const { parse } = JSON;
 const { isArray } = Array;
+
+/** Execute scheduled fees configs
+  {
+    configs: [<Fee Strategies Config Object>]
+    lnd: <Authenticated Lnd Object>
+  }
+
+  @returns via Promise
+ */
 
 type Args = {
   args: {
@@ -39,6 +47,7 @@ type Args = {
 
 type Tasks = {
   validate: undefined;
+  readSettingsFile: boolean | undefined;
   readFeesFile: {
     data: object;
   };
@@ -51,7 +60,6 @@ type Tasks = {
     }[];
   };
   getPublicKey: GetIdentityResult;
-  getFeeRates: GetFeeRatesResult;
   getPolicies: GetChannelResult[];
   updatePolicies: any;
 };
@@ -61,11 +69,46 @@ const scheduledFeesCommand = async ({ args, lnd }: Args) => {
     await auto<Tasks>({
       // Check arguments
       validate: (cbk: any) => {
+        if (!args.config) {
+          return cbk([400, 'ExpectedConfigToRunScheduledFees']);
+        }
+
+        if (!lnd) {
+          return cbk([400, 'ExpectedAuthenticatedLndToRunScheduledFees']);
+        }
+
         return cbk();
       },
 
+      readSettingsFile: [
+        'validate',
+        async () => {
+          const result = await getSettingsFile();
+
+          if (!result) {
+            throw new Error('AutomatedFees IsNotActive-TurnOn From UserPreferences On Dashboard');
+          }
+
+          try {
+            const res = parse(result);
+            if (!res.automatedFees) {
+              throw new Error('AutomatedFees IsNotActive-TurnOn From UserPreferences On Dashboard');
+            }
+
+            if (!res.automatedFees.is_enabled) {
+              throw new Error('AutomatedFees IsNotActive-TurnOn From UserPreferences On Dashboard');
+            }
+          } catch (err) {
+            throw new Error('AutomatedFeesIsNotActive-TurnOnFromUserPreferencesOnDashboard');
+          }
+
+          return true;
+        },
+      ],
+
       // Read fees file
       readFeesFile: [
+        'readSettingsFile',
         'validate',
         ({}, cbk: any) => {
           const filePath = join(...[homedir(), home, feesFile]);
@@ -87,6 +130,7 @@ const scheduledFeesCommand = async ({ args, lnd }: Args) => {
 
       // Get the channels
       getChannels: [
+        'readSettingsFile',
         'validate',
         async () => {
           return await getChannels({ lnd });
@@ -103,16 +147,9 @@ const scheduledFeesCommand = async ({ args, lnd }: Args) => {
         },
       ],
 
-      // Get the current fee rates
-      getFeeRates: [
-        'validate',
-        async () => {
-          return await getFeeRates({ lnd });
-        },
-      ],
-
       // Get the policies of all channels
       getPolicies: [
+        'readSettingsFile',
         'getChannels',
         ({ getChannels }, cbk: any) => {
           return map(
@@ -140,13 +177,14 @@ const scheduledFeesCommand = async ({ args, lnd }: Args) => {
         },
       ],
 
+      // Execute policy updates
       updatePolicies: [
         'getChannels',
-        'getFeeRates',
         'getIcons',
         'getPolicies',
         'getPublicKey',
-        async ({ getChannels, getFeeRates, getIcons, getPolicies, getPublicKey }) => {
+        'readSettingsFile',
+        async ({ getChannels, getIcons, getPolicies, getPublicKey }) => {
           type Config = {
             basefees: string[];
             feerates: string[];
@@ -160,7 +198,6 @@ const scheduledFeesCommand = async ({ args, lnd }: Args) => {
             const result = await updatePolicies({
               config,
               getChannels,
-              getFeeRates,
               getIcons,
               getPolicies,
               getPublicKey,

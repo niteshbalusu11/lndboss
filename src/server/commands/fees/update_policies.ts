@@ -1,16 +1,34 @@
-import { AuthenticatedLnd, GetChannelResult, GetChannelsResult, GetFeeRatesResult, GetIdentityResult } from 'lightning';
+import { AuthenticatedLnd, GetChannelResult, GetChannelsResult, GetIdentityResult, updateRoutingFees } from 'lightning';
 import { auto, each, map, retry } from 'async';
-import { findKey, updateChannelFee } from 'ln-sync';
 
+import { findKey } from 'ln-sync';
 import moment from 'moment';
 
-const asTxOut = n => `${n.transaction_id}:${n.transaction_vout}`;
-const { ceil } = Math;
+const { ceil, max, round } = Math;
+const defaultBaseFees = '1000';
+const defaultCltvDelta = 40;
+const defaultRate = 1;
+const diff = (a: number, b: number, c: number) => a - (b + c);
+const div = (a: number, b: number) => (a / b).toFixed(2);
 const flatten = arr => [].concat(...arr);
-const { max } = Math;
+const isBetween = (num1: number, num2: number, value: number) => value >= num1 && value < num2;
+const maxhtlc = (a: number, b: number) => String(round(a * b * 1000));
 const uniq = (arr: string[]) => Array.from(new Set(arr));
 const interval = 1000 * 60 * 2;
 const times = 360;
+
+/** Update fee policies
+  {
+    config: <Saved Fee Config Object>
+    getChannels: [<Get Channels Rpc Result Object>]
+    getIcons: [<Get Tags and Icons Object>]
+    getPolicies: [<Get Channel Policies Rpc Result Object]
+    getPublicKey: <Public Key Object>
+    lnd: <Authenticated Lnd Object>
+  }
+
+  @returns via Promise
+ */
 
 type Args = {
   config: {
@@ -21,7 +39,6 @@ type Args = {
     ratios: string[];
   };
   getChannels: GetChannelsResult;
-  getFeeRates: GetFeeRatesResult;
   getIcons: {
     nodes: {
       aliases: string[];
@@ -39,181 +56,165 @@ type Tasks = {
   getPeers: {
     public_key: string;
   }[];
-  staticFeesData: any;
-  feeUpdate: any;
-  updateStaticFees: any;
+  updateFees: any;
+  getUpdateInfo: {
+    base_fee_mtokens: string;
+    cltv_delta: number;
+    fee_rate: number;
+    max_htlc_mtokens: string | undefined;
+    ratio: string;
+    transaction_id: string;
+    transaction_vout: number;
+  }[];
 };
 const updatePolicies = async (args: Args) => {
   return await auto<Tasks>({
     // Check arguments
     validate: (cbk: any) => {
+      if (!args.config) {
+        return cbk([400, 'ExpectedConfigToUpdatePolicies']);
+      }
+
+      if (!args.getChannels) {
+        return cbk([400, 'ExpectedChannelsToUpdatePolicies']);
+      }
+
+      if (!args.getIcons) {
+        return cbk([400, 'ExpectedTagNamesAndIconsToUpdatePolicies']);
+      }
+
+      if (!args.getPublicKey) {
+        return cbk([400, 'ExpectedPublicKeyToUpdatePolicies']);
+      }
+
+      if (!args.lnd) {
+        return cbk([400, 'ExpectedAuthenticatedLndToUpdatePolicies']);
+      }
+
       return cbk();
     },
 
     // Get peers
     getPeers: [
       'validate',
-      async () => {
+      ({}, cbk: any) => {
         const { channels } = args.getChannels;
 
         if (!args.config.parsed_ids.length) {
           const peerKeys = uniq(channels.map(n => n.partner_public_key));
-          return peerKeys.map(n => ({ public_key: n }));
+          return cbk(
+            null,
+            peerKeys.map(n => ({ public_key: n }))
+          );
         }
 
-        const res = await map(args.config.parsed_ids, async query => {
-          const nodes = args.getIcons.nodes.filter(n => n.aliases.includes(query));
+        return map(
+          args.config.parsed_ids,
+          (query, cbk) => {
+            const nodes = args.getIcons.nodes.filter(n => n.aliases.includes(query));
 
-          if (!!nodes.length) {
-            return nodes.map(n => ({ public_key: n.public_key }));
-          }
-
-          return await findKey({ channels, query, lnd: args.lnd });
-        });
-
-        return flatten(res);
-      },
-    ],
-
-    staticFeesData: [
-      'getPeers',
-      async ({ getPeers }) => {
-        if (!!args.config.parsed_ids.length) {
-          return;
-        }
-
-        const ownKey = args.getPublicKey.public_key;
-        const peerKeys = getPeers.map(n => n.public_key).filter(n => !!n);
-
-        return await map(peerKeys, async (key: string) => {
-          const channels = [].concat(args.getChannels.channels).filter(channel => channel.partner_public_key === key);
-
-          const feeRates = args.getFeeRates.channels.filter(rate => {
-            return channels.find(n => asTxOut(n) === asTxOut(rate));
-          });
-
-          const currentPolicies = args.getPolicies
-            .filter(n => !!n)
-            .filter(n => channels.find(chan => asTxOut(chan) === asTxOut(n)))
-            .map(n => n.policies.find(p => p.public_key === ownKey))
-            .filter(n => !!n);
-
-          const baseFeeMillitokens = feeRates
-            .map(n => BigInt(n.base_fee_mtokens))
-            .reduce((sum, fee) => (fee > sum ? fee : sum), BigInt(Number()));
-
-          return channels.map(channel => {
-            // Exit early when there is no known policy
-            if (!currentPolicies.length) {
-              return {
-                cltv_delta: undefined,
-                fee_rate: undefined,
-                transaction_id: channel.transaction_id,
-                transaction_vout: channel.transaction_vout,
-              };
+            // Exit early when there is a tag match
+            if (!!nodes.length) {
+              return cbk(
+                null,
+                nodes.map(n => ({ public_key: n.public_key }))
+              );
             }
 
-            // Only the highest CLTV delta across all peer channels applies
-            const cltvDelta = max(...currentPolicies.map(n => n.cltv_delta));
+            return findKey({ channels, query, lnd: args.lnd }, cbk);
+          },
+          (err, res) => {
+            if (!!err) {
+              return cbk(err);
+            }
 
-            // Only the highest fee rate across all peer channels applies
-            const maxFeeRate = max(...currentPolicies.map(n => n.fee_rate));
-
-            return {
-              base_fee_mtokens: baseFeeMillitokens.toString(),
-              cltv_delta: cltvDelta,
-              fee_rate: maxFeeRate,
-              transaction_id: channel.transaction_id,
-              transaction_vout: channel.transaction_vout,
-            };
-          });
-        });
+            return cbk(null, flatten(res));
+          }
+        );
       },
     ],
 
-    feeUpdate: [
+    // Get info needed to update fee policies
+    getUpdateInfo: [
       'getPeers',
       async ({ getPeers }) => {
-        if (!args.config.parsed_ids.length) {
-          return;
-        }
+        const peerKeys = getPeers.map(n => n.public_key).filter(n => !!n);
+        const ownKey = args.getPublicKey.public_key;
 
-        return;
-        // const ownKey = args.getPublicKey.public_key;
-        // const peerKeys = getPeers.map(n => n.public_key).filter(n => !!n);
+        const combinedArray = args.config.ratios.map((ratio, i) => {
+          return {
+            ratio,
+            basefees: !!args.config.basefees.length ? args.config.basefees[i] : undefined,
+            feerate: !!args.config.feerates.length ? Number(args.config.feerates[i]) : undefined,
+            maxhtlcratio: !!args.config.maxhtlcratios.length ? Number(args.config.maxhtlcratios[i]) : undefined,
+          };
+        });
 
-        // return await map(peerKeys, async (key: string) => {
-        //   const channels = [].concat(args.getChannels.channels).filter(channel => channel.partner_public_key === key);
+        const currentPolicies = args.getPolicies
+          .filter(n => !!n)
+          .map(n => n.policies.find(p => p.public_key === ownKey))
+          .filter(n => !!n);
 
-        //   const feeRates = args.getFeeRates.channels.filter(rate => {
-        //     return channels.find(n => asTxOut(n) === asTxOut(rate));
-        //   });
+        const cltvDelta = max(...currentPolicies.map(n => n.cltv_delta));
 
-        //   const currentPolicies = args.getPolicies
-        //     .filter(n => !!n)
-        //     .filter(n => channels.find(chan => asTxOut(chan) === asTxOut(n)))
-        //     .map(n => n.policies.find(p => p.public_key === ownKey))
-        //     .filter(n => !!n);
+        const res = await map(combinedArray, async ({ ratio, basefees, feerate, maxhtlcratio }) => {
+          const getBetweenChannels = await map(peerKeys, async (key: string) => {
+            const channels = args.getChannels.channels
+              .filter(channel => channel.partner_public_key === key)
+              .filter(channel => {
+                const [a, b] = ratio.split('-');
+                const capacity = diff(channel.capacity, channel.local_reserve, channel.remote_reserve);
 
-        //   const baseFeeMillitokens = feeRates
-        //     .map(n => BigInt(n.base_fee_mtokens))
-        //     .reduce((sum, fee) => (fee > sum ? fee : sum), BigInt(Number()));
+                const outboundCapacityRatio = div(channel.local_balance, capacity);
 
-        //   return channels.map(channel => {
-        //     // Exit early when there is no known policy
-        //     if (!currentPolicies.length) {
-        //       return {
-        //         cltv_delta: args.cltv_delta,
-        //         fee_rate: rate,
-        //         transaction_id: channel.transaction_id,
-        //         transaction_vout: channel.transaction_vout,
-        //       };
-        //     }
+                return isBetween(Number(a), Number(b), Number(outboundCapacityRatio));
+              })
+              .filter(n => !!n)
+              .map(n => ({
+                ratio,
+                base_fee_mtokens: basefees || defaultBaseFees,
+                cltv_delta: cltvDelta || defaultCltvDelta,
+                fee_rate: feerate === undefined ? defaultRate : feerate,
+                max_htlc_mtokens: !!maxhtlcratio ? maxhtlc(n.capacity, maxhtlcratio) : undefined,
+                transaction_id: n.transaction_id,
+                transaction_vout: n.transaction_vout,
+              }));
 
-        //     // Only the highest CLTV delta across all peer channels applies
-        //     const cltvDelta = max(...currentPolicies.map(n => n.cltv_delta));
+            return channels;
+          });
 
-        //     // Only the highest fee rate across all peer channels applies
-        //     const maxFeeRate = max(...currentPolicies.map(n => n.fee_rate));
+          return flatten(getBetweenChannels);
+        });
 
-        //     return {
-        //       base_fee_mtokens: baseFeeMillitokens.toString(),
-        //       cltv_delta: cltvDelta,
-        //       fee_rate: rate !== undefined ? rate : maxFeeRate,
-        //       transaction_id: channel.transaction_id,
-        //       transaction_vout: channel.transaction_vout,
-        //     };
-        //   });
-        // });
+        return flatten(res.filter(n => !!n.length));
       },
     ],
 
     // Execute fee updates
-    updateStaticFees: [
-      'staticFeesData',
-      ({ staticFeesData }, cbk) => {
-        console.log(flatten(staticFeesData));
-        if (!staticFeesData) {
+    updateFees: [
+      'getUpdateInfo',
+      ({ getUpdateInfo }, cbk: any) => {
+        if (!getUpdateInfo || !getUpdateInfo.length) {
           return cbk();
         }
 
         return each(
-          flatten(staticFeesData),
-          (update, cbk) => {
+          getUpdateInfo,
+          (update, cbk: any) => {
             return retry(
               { interval, times },
               cbk => {
-                return updateChannelFee(
+                return updateRoutingFees(
                   {
                     base_fee_mtokens: update.base_fee_mtokens,
                     cltv_delta: update.cltv_delta,
                     fee_rate: ceil(update.fee_rate),
-                    from: args.getPublicKey.public_key,
                     lnd: args.lnd,
+                    max_htlc_mtokens: update.max_htlc_mtokens,
                     transaction_id: update.transaction_id,
                     transaction_vout: update.transaction_vout,
                   },
-                  err => {
+                  (err: any) => {
                     if (!!err) {
                       console.log(err);
 

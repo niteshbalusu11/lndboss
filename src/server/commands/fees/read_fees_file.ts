@@ -7,6 +7,13 @@ const feesFile = 'fees.json';
 const home = '.bosgui';
 const { parse } = JSON;
 
+/** Read the fees.json file
+
+  @returns via Promise
+  {
+    data: <Fee JSON File String>
+  }
+ */
 type Tasks = {
   readFile: {
     data: object;

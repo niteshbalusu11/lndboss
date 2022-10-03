@@ -77,7 +77,6 @@ const FeeScheduler = () => {
 
         if (!!result) {
           const [{ config }] = result.configs.filter(n => n.node === '');
-
           setFormFields(config);
         }
 
@@ -92,6 +91,7 @@ const FeeScheduler = () => {
 
   const fetchDataForSavedNode = async () => {
     const result = await axiosPostWithAlert({ path: 'fees/getfile', postBody: {} });
+
     const findFeeData = result.configs.find(n => n.node === node);
     if (!findFeeData) {
       useNotify({ type: 'error', message: 'NoConfigFoundForSavedNode' });
@@ -120,6 +120,8 @@ const FeeScheduler = () => {
       return;
     }
 
+    const postBody = { configs: [] };
+
     const configs = {
       node,
       message_id: messageId,
@@ -139,7 +141,7 @@ const FeeScheduler = () => {
       configs.config.push(obj);
     });
 
-    const postBody = { configs };
+    postBody.configs.push(configs);
 
     const result = await axiosPostWithAlert({ path: 'fees/save-strategies', postBody });
 
@@ -215,6 +217,7 @@ const FeeScheduler = () => {
         <StandardHomeButtonLink />
         <Stack spacing={3} style={styles.form}>
           <h2>Automated Fees</h2>
+          <Instructions />
           {formFields.map((form, index) => {
             return (
               <div key={index}>
@@ -352,3 +355,65 @@ export async function getServerSideProps() {
     props: {},
   };
 }
+
+const Instructions = () => {
+  return (
+    <ul>
+      <h3>Important Notes:</h3>
+      <li>
+        Saved Node field is only required if you control multiple nodes with lndboss, leave it blank if you only run one
+        node.
+      </li>
+      <li>Atleast one Outbound/Capacity Ratio is required.</li>
+      <li>Peers-Tags are optional, not selecting will make the policy apply to all peers.</li>
+      <li>
+        Every field can take multiple values, type a value and hit enter and it will turn into a bubble (IMPORTANT).
+      </li>
+      <li>Policies execute in order, row by row. Policies set in row 1 will apply to peers/tags selected in row 1.</li>
+      <li>If you want to set different policies to different peers/tags then click the add button to add a new row.</li>
+      <li>You could also add a new row for the same set of peers if you just want it to look cleaner.</li>
+      <li>
+        If you set two 2 ratios in row 1, you can only set 0 or 2 base fees, feerates and maxhtlc ratios. Length must
+        match or be null
+      </li>
+
+      <br />
+      <h3>Peers-Tags list (optional)</h3>
+      <li>Pick peers and tags to apply the policies to.</li>
+      <li>Not picking a peer or tag will make the policy apply to all your peers.</li>
+
+      <br />
+      <h3>Outbound/Capacity Ratio Range (required):</h3>
+      <li>Ratio range between current outbound liquidity to the total capacity of the channel.</li>
+      <li>
+        Example outbound/capacity ratio range: 0.5-0.7 This implies the policy applies when outbound liquidity is 50-70%
+        of the total capacity.
+      </li>
+      <li>
+        Multiple ratio ranges can be added in the same field, just type a range and hit enter and it turns into a
+        bubble.
+      </li>
+
+      <br />
+      <h3>Base Fees (msat, optional):</h3>
+      <li>Base fees in milli sats to apply, multiple values can be set in the same field.</li>
+      <li>Default base fees is 1000msat or 1sat if left blank.</li>
+
+      <br />
+      <h3>Fee Rate (ppm, optional):</h3>
+      <li>Fee Rate in ppm to apply, multple values can be set in the same field.</li>
+      <li>Default fee rate is 1ppm if left blank.</li>
+
+      <br />
+      <h3>MaxHtlc/Capacity Ratio (optional):</h3>
+      <li>Ratio between MaxHtlc Size and Capacity of the channel.</li>
+      <li>
+        Example: 0.3 would imply set the maxhtlc to 30% of the total capacity for a given outbound/capacity ratio.
+      </li>
+      <li>
+        If left blank, it will default to the current maxhtlc value of the channel. Multiple values can be set, just
+        type a value and hit enter.
+      </li>
+    </ul>
+  );
+};

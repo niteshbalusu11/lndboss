@@ -6,10 +6,21 @@ import { join } from 'path';
 import readFeesFile from './read_fees_file';
 
 const feesFile = 'fees.json';
+const flatten = arr => [].concat(...arr);
 const home = '.bosgui';
 const { isArray } = Array;
 const stringify = (obj: any) => JSON.stringify(obj, null, 2);
 
+/** Save fee strategies to file
+  {
+    configs: [<Fee Strategies Config Object>]
+    message_id: <Unique Message Id String>
+    [node]: <Saved Node String>
+  }
+
+  @returns via Promise
+  <is_saved Boolean>
+ */
 type Args = {
   configs: {
     config: {
@@ -22,7 +33,7 @@ type Args = {
     }[];
     message_id: string;
     node: string;
-  };
+  }[];
 };
 
 type Tasks = {
@@ -38,19 +49,19 @@ const saveStrategies = async ({ configs }: Args) => {
     await auto<Tasks>({
       // check arguments
       validate: (cbk: any) => {
-        if (!configs) {
+        if (!configs || !isArray(configs)) {
           return cbk([400, 'ExpectedFeeStrategyObjectToSaveStrategies']);
         }
 
-        if (!configs.message_id) {
+        if (!configs[0].message_id) {
           return cbk([400, 'ExpectedMessageIdToSaveStrategies']);
         }
 
-        if (configs.node === undefined) {
+        if (configs[0].node === undefined) {
           return cbk([400, 'ExpectedNodeNameStringToSaveStrategies']);
         }
 
-        if (!isArray(configs.config)) {
+        if (!isArray(configs[0].config)) {
           return cbk([400, 'ExpectedArrayOfConfigToSaveStrategies']);
         }
 
@@ -116,11 +127,11 @@ const saveStrategies = async ({ configs }: Args) => {
           const filePath = join(...[homedir(), home, feesFile]);
           const { data } = readFile;
 
-          const findData = data.configs.find(n => n.node === configs.node && n.message_id === configs.message_id);
+          const findData = data.configs.find(n => n.node === configs[0].node && n.message_id === configs[0].message_id);
 
           if (!findData) {
             const newData = {
-              configs: [...data.configs, configs],
+              configs: flatten([...data.configs, configs]),
             };
 
             writeFile(filePath, stringify(newData), err => {
@@ -133,9 +144,11 @@ const saveStrategies = async ({ configs }: Args) => {
           }
 
           if (!!findData) {
-            const index = data.configs.findIndex(n => n.node === configs.node && n.message_id === configs.message_id);
+            const index = data.configs.findIndex(
+              n => n.node === configs[0].node && n.message_id === configs[0].message_id
+            );
 
-            data.configs[index] = configs;
+            data.configs[index] = configs[0];
 
             writeFile(filePath, stringify(data), err => {
               if (!!err) {

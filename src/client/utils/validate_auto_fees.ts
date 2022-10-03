@@ -2,6 +2,18 @@ const isNumber = (n: number) => !isNaN(n);
 const allEqual = (n: number[]) => n.every(v => v === n[0] || v === 0);
 const checkRatio = (n: string[]) => Number(n[0]) < Number(n[1]);
 
+/** Validate automated fees parameters client side
+  {
+    [baseFees]: [<Base Fees To Set String>]
+    [feeRates]: [<Fee Rate To Set String>]
+    [maxhtlcratio]: [<Max Htlc Ratio To Set to Set String>]
+    index: <Array Index Number>
+    ratios: [<Outbound to Capacity Ratio String>]
+  }
+
+  @returns boolean
+*/
+
 type Args = {
   baseFees: string[];
   feeRates: string[];
@@ -16,6 +28,10 @@ const validateAutoFees = (args: Args) => {
   const maxHtlcRatios = args.maxHtlcRatios.filter(n => !!n);
 
   const lengths = [ratios.length, baseFees.length, feeRates.length, maxHtlcRatios.length];
+
+  if (!ratios.length) {
+    throw new Error(`Ratios cannot be empty in row ${args.index}`);
+  }
 
   if (!allEqual(lengths)) {
     throw new Error(`ExpectedEqualNumberOfValuesFor Ratio, BaseFees, FeeRate, MaxHtlc In Row ${args.index}`);
