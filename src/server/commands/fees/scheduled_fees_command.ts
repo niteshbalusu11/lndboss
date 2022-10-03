@@ -91,6 +91,7 @@ const scheduledFeesCommand = async ({ args, lnd }: Args) => {
 
           try {
             const res = parse(result);
+
             if (!res.automatedFees) {
               throw new Error('AutomatedFees IsNotActive-TurnOn From UserPreferences On Dashboard');
             }
@@ -129,23 +130,12 @@ const scheduledFeesCommand = async ({ args, lnd }: Args) => {
       ],
 
       // Get the channels
-      getChannels: [
-        'readSettingsFile',
-        'validate',
-        async () => {
-          return await getChannels({ lnd });
-        },
-      ],
+      getChannels: ['readSettingsFile', 'validate', async () => await getChannels({ lnd })],
 
       getIcons: ['validate', async () => await getIcons({})],
 
       // Get the wallet public key
-      getPublicKey: [
-        'validate',
-        async () => {
-          return await getIdentity({ lnd });
-        },
-      ],
+      getPublicKey: ['readSettingsFile', 'validate', async () => await getIdentity({ lnd })],
 
       // Get the policies of all channels
       getPolicies: [
@@ -195,7 +185,7 @@ const scheduledFeesCommand = async ({ args, lnd }: Args) => {
           };
 
           return await map(args.config, async (config: Config) => {
-            const result = await updatePolicies({
+            return await updatePolicies({
               config,
               getChannels,
               getIcons,
@@ -203,8 +193,6 @@ const scheduledFeesCommand = async ({ args, lnd }: Args) => {
               getPublicKey,
               lnd,
             });
-
-            return result;
           });
         },
       ],

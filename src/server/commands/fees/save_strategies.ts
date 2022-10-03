@@ -33,7 +33,7 @@ type Args = {
     }[];
     message_id: string;
     node: string;
-  }[];
+  };
 };
 
 type Tasks = {
@@ -49,19 +49,19 @@ const saveStrategies = async ({ configs }: Args) => {
     await auto<Tasks>({
       // check arguments
       validate: (cbk: any) => {
-        if (!configs || !isArray(configs)) {
+        if (!configs) {
           return cbk([400, 'ExpectedFeeStrategyObjectToSaveStrategies']);
         }
 
-        if (!configs[0].message_id) {
+        if (!configs.message_id) {
           return cbk([400, 'ExpectedMessageIdToSaveStrategies']);
         }
 
-        if (configs[0].node === undefined) {
+        if (configs.node === undefined) {
           return cbk([400, 'ExpectedNodeNameStringToSaveStrategies']);
         }
 
-        if (!isArray(configs[0].config)) {
+        if (!isArray(configs.config)) {
           return cbk([400, 'ExpectedArrayOfConfigToSaveStrategies']);
         }
 
@@ -103,7 +103,7 @@ const saveStrategies = async ({ configs }: Args) => {
           const filePath = join(...[homedir(), home, feesFile]);
 
           const obj = {
-            configs,
+            configs: [configs],
           };
 
           writeFile(filePath, stringify(obj), err => {
@@ -127,7 +127,7 @@ const saveStrategies = async ({ configs }: Args) => {
           const filePath = join(...[homedir(), home, feesFile]);
           const { data } = readFile;
 
-          const findData = data.configs.find(n => n.node === configs[0].node && n.message_id === configs[0].message_id);
+          const findData = data.configs.find(n => n.node === configs.node && n.message_id === configs.message_id);
 
           if (!findData) {
             const newData = {
@@ -144,11 +144,9 @@ const saveStrategies = async ({ configs }: Args) => {
           }
 
           if (!!findData) {
-            const index = data.configs.findIndex(
-              n => n.node === configs[0].node && n.message_id === configs[0].message_id
-            );
+            const index = data.configs.findIndex(n => n.node === configs.node && n.message_id === configs.message_id);
 
-            data.configs[index] = configs[0];
+            data.configs[index] = configs;
 
             writeFile(filePath, stringify(data), err => {
               if (!!err) {

@@ -12,8 +12,6 @@ import saveStrategies from '~server/commands/fees/save_strategies';
 import scheduledFeesCommand from '~server/commands/fees/scheduled_fees_command';
 import validateStrategies from '~server/commands/fees/validate_strategies';
 
-const { isArray } = Array;
-
 // Fees service: service for bos fees command
 
 @Injectable()
@@ -55,17 +53,13 @@ export class FeesService {
 
   async save(args: feesStrategiesDto) {
     try {
-      if (!args.configs || !isArray(args.configs) || !args.configs.length) {
-        throw new Error('ExpectedArrayOfConfigsToSaveConfigs');
-      }
-
-      await validateStrategies({ configs: args.configs[0] });
+      await validateStrategies({ configs: args.configs });
 
       const result = await saveStrategies({ configs: args.configs });
 
-      const lnd = await LndService.authenticatedLnd({ node: args.configs[0].node });
+      const lnd = await LndService.authenticatedLnd({ node: args.configs.node });
 
-      await scheduledFeesCommand({ lnd, args: args.configs[0] });
+      await scheduledFeesCommand({ lnd, args: args.configs });
 
       return result;
     } catch (error) {

@@ -54,10 +54,11 @@ type FormFieldState = Array<{
   feerates: string[];
   maxhtlcratios: string[];
   ids: string[];
+  inactivity: string[];
 }>;
 const FeeScheduler = () => {
   const [formFields, setFormFields] = useState<FormFieldState>([
-    { ratios: [], basefees: [], feerates: [], maxhtlcratios: [], ids: [] },
+    { ratios: [], basefees: [], feerates: [], maxhtlcratios: [], ids: [], inactivity: [] },
   ]);
   const [node, setNode] = useState('');
   const [peersAndTags, setPeersAndTags] = useState([]);
@@ -92,6 +93,11 @@ const FeeScheduler = () => {
   const fetchDataForSavedNode = async () => {
     const result = await axiosPostWithAlert({ path: 'fees/getfile', postBody: {} });
 
+    if (!result) {
+      useNotify({ type: 'error', message: 'NoConfigFoundForSavedNode' });
+      return;
+    }
+
     const findFeeData = result.configs.find(n => n.node === node);
     if (!findFeeData) {
       useNotify({ type: 'error', message: 'NoConfigFoundForSavedNode' });
@@ -120,8 +126,6 @@ const FeeScheduler = () => {
       return;
     }
 
-    const postBody = { configs: [] };
-
     const configs = {
       node,
       message_id: messageId,
@@ -134,6 +138,7 @@ const FeeScheduler = () => {
         feerates: n.feerates,
         maxhtlcratios: n.maxhtlcratios,
         ids: n.ids,
+        inactivity: [],
         ratios: n.ratios,
         parsed_ids: n.ids.map(a => splitValue(a)),
       };
@@ -141,7 +146,7 @@ const FeeScheduler = () => {
       configs.config.push(obj);
     });
 
-    postBody.configs.push(configs);
+    const postBody = { configs };
 
     const result = await axiosPostWithAlert({ path: 'fees/save-strategies', postBody });
 
@@ -197,6 +202,7 @@ const FeeScheduler = () => {
       feerates: [],
       maxhtlcratios: [],
       ids: [],
+      inactivity: [],
     };
 
     setFormFields([...formFields, object]);
@@ -340,8 +346,12 @@ const FeeScheduler = () => {
             style={styles.textField}
           />
           <br />
-          <SubmitButton onClick={fetchData}>Schedule Fees</SubmitButton>
-          <SubmitButton onClick={fetchDataForSavedNode}>Fetch data for saved node</SubmitButton>
+          <div style={{ display: 'inline-block', margin: '0px' }}>
+            <SubmitButton onClick={fetchData} style={{ marginRight: '50px' }}>
+              Schedule Fees
+            </SubmitButton>
+            <SubmitButton onClick={fetchDataForSavedNode}>Fetch data for saved node</SubmitButton>
+          </div>
         </Stack>
       </StartFlexBox>
     </CssBaseline>
