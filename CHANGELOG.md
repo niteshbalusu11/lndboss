@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.4.0](https://github.com/niteshbalusu11/lndboss/compare/v2.3.0...v2.4.0) (2022-10-04)
 
+- Added support for scheduling automated fee/channel policies based on conditions.
+- Fixed tags command client page.
+- Fixed error messages on dashboard page.
+
 ## [2.3.0](https://github.com/niteshbalusu11/lndboss/compare/v2.2.0...v2.3.0) (2022-09-23)
 
 - Added support for bos fees command
