@@ -1,4 +1,4 @@
-import { IsArray, IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
 import { toBoolean, toNumber, toStringArray, trim } from './cast.helper';
 
 import { Transform } from 'class-transformer';
@@ -352,6 +352,23 @@ export class feesDto {
   @IsOptional()
   @IsArray()
   to: string[];
+}
+
+export class feesStrategiesDto {
+  @IsObject()
+  configs: {
+    config: {
+      basefees: string[];
+      feerates: string[];
+      ids: string[];
+      inactivity: string[];
+      maxhtlcratios: string[];
+      parsed_ids: string[];
+      ratios: string[];
+    }[];
+    message_id: string;
+    node: string;
+  };
 }
 
 export class findDto {

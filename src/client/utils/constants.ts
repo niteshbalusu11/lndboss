@@ -2,10 +2,12 @@ export const clientConstants = {
   authenticatePage: '/Authenticate',
   commandsPage: '/Commands',
   dashboardPage: '/Dashboard',
+  feeStrategyPath: '/schedulers/FeeScheduler',
   homeButtonLabel: 'Home',
   loginUrl: '/auth/Login',
   publicPaths: ['/', '/auth/Login', '/auth/Register'],
   rebalanceSchedulerUrl: '/schedulers/RebalanceScheduler',
+  rebalanceUrl: '/commands/Rebalance',
   registerUrl: '/auth/Register',
   userPreferencesUrl: '/preferences/UserPreferences',
 };

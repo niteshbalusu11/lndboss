@@ -36,7 +36,7 @@ export const algorithm = 'aes-256-cbc';
 export const ambossUrl = 'https://api.amboss.space/graphql';
 
 // Amboss Health Check Cron Schedule
-export const ambossHealthCheckCronSchedule = CronExpression.EVERY_10_MINUTES;
+export const autoFeesCronSchedule = process.env.AUTO_FEES_SCHEDULE || CronExpression.EVERY_12_HOURS;
 
 // Parse Ansi escape sequences
 export const removeStyling = o =>

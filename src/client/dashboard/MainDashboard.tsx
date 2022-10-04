@@ -1,5 +1,5 @@
 import { Divider, List, Toolbar, Typography } from '@mui/material';
-import { MainListItems, SecondaryListItems } from '../dashboard/listItems';
+import { MainListItems, QuickTools, SecondaryListItems } from '../dashboard/listItems';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import React, { useState } from 'react';
 import { ThemeProvider, createTheme, styled } from '@mui/material/styles';
@@ -80,6 +80,8 @@ const MainDashboard = () => {
           <Divider />
           <List component="nav">
             <MainListItems setAccounting={setAccounting} />
+            <Divider sx={{ my: 1 }} />
+            <QuickTools />
             <Divider sx={{ my: 1 }} />
             <SecondaryListItems setAccounting={setAccounting} setIsMonthToDate={setIsMonthToDate} />
           </List>
