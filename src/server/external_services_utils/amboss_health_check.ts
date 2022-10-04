@@ -43,14 +43,12 @@ const ambossHealthCheck = async ({ logger }): Promise<{ postToAmboss: any }> => 
           const { nodes } = await getSavedNodes({ network: 'btc' });
 
           if (!nodes.nodes || !nodes.nodes.length) {
-            logger.log({ type: 'warn', message: 'ExpectedAuthenticatedLndToPostAmbossHealthCheck---Retrying...' });
             throw new Error('ExpectedAuthenticatedLndToPostAmbossHealthCheck');
           }
 
           const filteredNodes = nodes.nodes.filter(node => !!node.lnd && !!node.is_online);
 
           if (!filteredNodes.length) {
-            logger.log({ type: 'warn', message: 'ExpectedOnlineNodesToPostAmbossHealthCheck---Retrying...' });
             throw new Error('ExpectedOnlineNodesToPostAmbossHealthCheck');
           }
 

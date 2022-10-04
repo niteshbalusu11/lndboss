@@ -5,6 +5,8 @@ import { useNotify } from '~client/hooks/useNotify';
 const { publicRuntimeConfig } = getConfig();
 const { apiUrl } = publicRuntimeConfig;
 
+const abortedErrorCode = 'ECONNABORTED';
+
 type ArgsGet = {
   path: string;
   query: object;
@@ -65,10 +67,37 @@ const axiosGetNoLoading = async ({ path, query }: ArgsGet) => {
       return result;
     }
   } catch (error) {
+    if (error.code === abortedErrorCode) {
+      return;
+    }
+
     useNotify({
       type: 'error',
       message: `Status: ${error.response.data.statusCode}\nMessage: ${error.response.data.message}`,
     });
+  }
+};
+
+const axiosGetNoAlert = async ({ path, query }: ArgsGet) => {
+  try {
+    const url = `${apiUrl}/${path}`;
+    const accessToken = localStorage.getItem('accessToken');
+
+    const response = await axios.get(url, {
+      params: query,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const { result } = await response.data;
+
+    if (!!result) {
+      return result;
+    }
+  } catch (error) {
+    // Ignore errors
   }
 };
 
@@ -142,4 +171,4 @@ const axiosPost = async ({ path, postBody }: ArgsPost) => {
     console.log(error);
   }
 };
-export { axiosGet, axiosGetNoLoading, axiosGetWebSocket, axiosPost, axiosPostWithAlert };
+export { axiosGet, axiosGetNoAlert, axiosGetNoLoading, axiosGetWebSocket, axiosPost, axiosPostWithAlert };

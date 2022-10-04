@@ -118,18 +118,18 @@ export const QuickTools = () => {
         Automation Tools
       </ListSubheader>
 
-      <ListItemButton href={clientConstants.rebalanceUrl}>
-        <ListItemIcon>
-          <BalanceIcon />
-        </ListItemIcon>
-        <ListItemText primary="Auto Rebalancing" />
-      </ListItemButton>
-
       <ListItemButton href={clientConstants.feeStrategyPath}>
         <ListItemIcon>
           <MoneyIcon />
         </ListItemIcon>
         <ListItemText primary="Auto Fees" />
+      </ListItemButton>
+
+      <ListItemButton href={clientConstants.rebalanceUrl}>
+        <ListItemIcon>
+          <BalanceIcon />
+        </ListItemIcon>
+        <ListItemText primary="Auto Rebalancing" />
       </ListItemButton>
     </React.Fragment>
   );

@@ -222,7 +222,11 @@ const FeeScheduler = () => {
       <StartFlexBox>
         <StandardHomeButtonLink />
         <Stack spacing={3} style={styles.form}>
-          <h2>Automated Fees</h2>
+          <h1>Automated Fees Scheduler</h1>
+          <h2>
+            To use Automated Fees Scheduler make sure to enable Automated Fees from User Preferences on the Dashboard
+            Page.
+          </h2>
           <Instructions />
           {formFields.map((form, index) => {
             return (

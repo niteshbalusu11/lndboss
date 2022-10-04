@@ -1,7 +1,6 @@
 import * as types from '~shared/types';
 
 import {
-  Box,
   Button,
   CssBaseline,
   FormControlLabel,
@@ -11,6 +10,7 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  Stack,
   TextField,
 } from '@mui/material';
 import React, { useState } from 'react';
@@ -34,11 +34,15 @@ const TagsCommand = commands.find(n => n.value === 'Tags');
   GET call to the NestJs process to get the tags
 */
 
-const styles: any = {
+const styles = {
   form: {
     marginLeft: '50px',
     marginTop: '100px',
-    width: '300px',
+    width: '700px',
+  },
+  textField: {
+    width: '380px',
+    marginTop: '20px',
   },
   button: {
     color: 'white',
@@ -46,13 +50,17 @@ const styles: any = {
     borderRadius: '10px',
     border: '1px solid black',
     marginTop: '20px',
+    width: '50px',
   },
-  box: {
-    marginTop: '100px',
-    minWidth: '600px',
+  iconButton: {
+    width: '50px',
+    marginTop: '0px',
   },
   h4: {
     marginTop: '0px',
+  },
+  switch: {
+    width: '100px',
   },
   inputLabel: {
     fontWeight: 'bold',
@@ -60,13 +68,6 @@ const styles: any = {
   },
   select: {
     width: '300px',
-  },
-  textField: {
-    width: '500px',
-    marginTop: '12px',
-  },
-  switch: {
-    width: '100px',
   },
 };
 
@@ -138,64 +139,63 @@ const Tags = () => {
       </Head>
       <StartFlexBox>
         <StandardHomeButtonLink />
-        <Box style={styles.box}>
+        <Stack style={styles.form}>
           <h2>{TagsCommand.name}</h2>
           <h4 style={styles.h4}>{TagsCommand.description}</h4>
-          <div>
-            <InputLabel id="demo-simple-select-standard-label" style={styles.inputLabel}>
-              Pick a value
-            </InputLabel>
-            <Select
-              labelId="tag-type"
-              id="tag-type"
-              value={tagType}
-              onChange={handleChoiceChange}
-              label="TagType"
-              style={styles.select}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value="display" id="display">
-                Display Tags
-              </MenuItem>
-              <MenuItem value="add" id="add">
-                Add Tag
-              </MenuItem>
-              <MenuItem value="remove" id="remove">
-                Remove Tag
-              </MenuItem>
-            </Select>
-          </div>
+
+          <InputLabel id="demo-simple-select-standard-label" style={styles.inputLabel}>
+            Pick a value
+          </InputLabel>
+          <Select
+            labelId="tag-type"
+            id="tag-type"
+            value={tagType}
+            onChange={handleChoiceChange}
+            label="TagType"
+            style={styles.select}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value="display" id="display">
+              Display Tags
+            </MenuItem>
+            <MenuItem value="add" id="add">
+              Add Tag
+            </MenuItem>
+            <MenuItem value="remove" id="remove">
+              Remove Tag
+            </MenuItem>
+          </Select>
+
           {tagType === 'add' || tagType === 'remove' ? (
             <>
-              <div>
-                <TextField
-                  type="text"
-                  name={TagsCommand.args.tag}
-                  id={TagsCommand.args.tag}
-                  placeholder={TagsCommand.args.tag}
-                  label={TagsCommand.args.tag}
-                  onChange={handleTagNameChange}
-                  style={styles.textField}
-                  value={tagName}
-                />
-                <FormControlLabel
-                  control={<StandardSwitch checked={avoid} onChange={handleAvoidChange} id={TagsCommand.flags.avoid} />}
-                  label="Mark to globally avoid all tagged nodes"
-                  style={styles.textField}
-                />
-                <TextField
-                  type="text"
-                  name={TagsCommand.flags.icon}
-                  id={TagsCommand.flags.icon}
-                  placeholder={`${TagsCommand.flags.icon} (Emoji optional)`}
-                  label={TagsCommand.flags.icon}
-                  onChange={handleIconChange}
-                  style={styles.textField}
-                  value={icon}
-                />
-              </div>
+              <TextField
+                type="text"
+                name={TagsCommand.args.tag}
+                id={TagsCommand.args.tag}
+                placeholder={TagsCommand.args.tag}
+                label={TagsCommand.args.tag}
+                onChange={handleTagNameChange}
+                style={styles.textField}
+                value={tagName}
+              />
+              <FormControlLabel
+                control={<StandardSwitch checked={avoid} onChange={handleAvoidChange} id={TagsCommand.flags.avoid} />}
+                label="Mark to globally avoid all tagged nodes"
+                style={styles.textField}
+              />
+              <TextField
+                type="text"
+                name={TagsCommand.flags.icon}
+                id={TagsCommand.flags.icon}
+                placeholder={`${TagsCommand.flags.icon} (Emoji optional)`}
+                label={TagsCommand.flags.icon}
+                onChange={handleIconChange}
+                style={styles.textField}
+                value={icon}
+              />
+
               <Button href="#text-buttons" onClick={() => addFormFields()} style={styles.button}>
                 Add +
               </Button>
@@ -227,7 +227,7 @@ const Tags = () => {
             Run Command
           </SubmitButton>
           {!!data ? <TagsOutput result={data} /> : null}
-        </Box>
+        </Stack>
       </StartFlexBox>
     </CssBaseline>
   );

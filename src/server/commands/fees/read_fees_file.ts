@@ -16,7 +16,7 @@ const { parse } = JSON;
  */
 type Tasks = {
   readFile: {
-    data: object;
+    data: any;
   };
 };
 const readFeesFile = async ({}) => {

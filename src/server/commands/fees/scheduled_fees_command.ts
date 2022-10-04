@@ -11,13 +11,8 @@ import { auto, map } from 'async';
 
 import getIcons from '../tags/get_icons';
 import { getSettingsFile } from '~server/settings';
-import { homedir } from 'os';
-import { join } from 'path';
-import { readFile } from 'fs';
 import updatePolicies from './update_policies';
 
-const feesFile = 'fees.json';
-const home = '.bosgui';
 const { parse } = JSON;
 const { isArray } = Array;
 
@@ -48,9 +43,6 @@ type Args = {
 type Tasks = {
   validate: undefined;
   readSettingsFile: boolean | undefined;
-  readFeesFile: {
-    data: object;
-  };
   getChannels: GetChannelsResult;
   getIcons: {
     nodes: {
@@ -86,62 +78,74 @@ const scheduledFeesCommand = async ({ args, lnd }: Args) => {
           const result = await getSettingsFile();
 
           if (!result) {
-            throw new Error('AutomatedFees IsNotActive-TurnOn From UserPreferences On Dashboard');
+            return false;
           }
 
           try {
             const res = parse(result);
 
             if (!res.automatedFees) {
-              throw new Error('AutomatedFees IsNotActive-TurnOn From UserPreferences On Dashboard');
+              return false;
             }
 
             if (!res.automatedFees.is_enabled) {
-              throw new Error('AutomatedFees IsNotActive-TurnOn From UserPreferences On Dashboard');
+              return false;
             }
           } catch (err) {
-            throw new Error('AutomatedFeesIsNotActive-TurnOnFromUserPreferencesOnDashboard');
+            return false;
           }
 
           return true;
         },
       ],
 
-      // Read fees file
-      readFeesFile: [
+      // Get the channels
+      getChannels: [
         'readSettingsFile',
         'validate',
-        ({}, cbk: any) => {
-          const filePath = join(...[homedir(), home, feesFile]);
-          readFile(filePath, (err, res) => {
-            if (!!err || !res) {
-              return cbk([400, 'ExpectedFeesJsonFileToScheduleFeesCommand']);
-            }
+        async ({ readSettingsFile }) => {
+          if (!readSettingsFile) {
+            return;
+          }
 
-            try {
-              parse(res.toString());
-            } catch (err) {
-              return cbk([400, 'ExpectedValidFeesJsonFileToScheduleFeesCommand']);
-            }
-
-            return cbk(null, { data: parse(res.toString()) });
-          });
+          return await getChannels({ lnd });
         },
       ],
 
-      // Get the channels
-      getChannels: ['readSettingsFile', 'validate', async () => await getChannels({ lnd })],
+      getIcons: [
+        'readSettingsFile',
+        'validate',
+        async ({ readSettingsFile }) => {
+          if (!readSettingsFile) {
+            return;
+          }
 
-      getIcons: ['validate', async () => await getIcons({})],
+          return await getIcons({});
+        },
+      ],
 
       // Get the wallet public key
-      getPublicKey: ['readSettingsFile', 'validate', async () => await getIdentity({ lnd })],
+      getPublicKey: [
+        'readSettingsFile',
+        'validate',
+        async ({ readSettingsFile }) => {
+          if (!readSettingsFile) {
+            return;
+          }
+
+          return await getIdentity({ lnd });
+        },
+      ],
 
       // Get the policies of all channels
       getPolicies: [
         'readSettingsFile',
         'getChannels',
-        ({ getChannels }, cbk: any) => {
+        ({ getChannels, readSettingsFile }, cbk: any) => {
+          if (!readSettingsFile) {
+            return cbk();
+          }
+
           return map(
             getChannels.channels,
             (channel, cbk: any) => {
@@ -174,7 +178,11 @@ const scheduledFeesCommand = async ({ args, lnd }: Args) => {
         'getPolicies',
         'getPublicKey',
         'readSettingsFile',
-        async ({ getChannels, getIcons, getPolicies, getPublicKey }) => {
+        async ({ getChannels, getIcons, getPolicies, getPublicKey, readSettingsFile }) => {
+          if (!readSettingsFile) {
+            return;
+          }
+
           type Config = {
             basefees: string[];
             feerates: string[];
