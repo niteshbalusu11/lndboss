@@ -84,6 +84,13 @@ bos send
 bos tags
 ```
 
+### LndBoss is now available for one click install in AppStores of:
+
+- Citadel
+- Embassy
+- Umbrel
+
+<br />
 ## Yarn global install instructions (Requires NodeJs and Yarn)
 
 ### For Linux:
