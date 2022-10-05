@@ -1,10 +1,11 @@
 import * as types from '~shared/types';
 
-import { CssBaseline, Stack, TextField } from '@mui/material';
+import { Button, CssBaseline, IconButton, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components/app-components';
 import commands, { globalCommands } from '~client/commands';
 
+import DeleteIcon from '@mui/icons-material/Delete';
 import { ForwardsOutput } from '~client/output';
 import Head from 'next/head';
 import { axiosGet } from '~client/utils/axios';
@@ -22,6 +23,18 @@ const styles = {
     marginTop: '100px',
     minWidth: '700px',
   },
+  button: {
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    width: '50px',
+  },
+  iconButton: {
+    width: '50px',
+    marginTop: '0px',
+  },
   textField: {
     width: '300px',
   },
@@ -37,6 +50,7 @@ const Forwards = () => {
   const [to, setTo] = useState('');
   const [sort, setSort] = useState('');
   const [node, setNode] = useState('');
+  const [formValues, setFormValues] = useState([{ tag: '' }]);
 
   const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
@@ -58,6 +72,24 @@ const Forwards = () => {
     setSort(event.target.value);
   };
 
+  // ====================================================================
+  const addFormFields = () => {
+    setFormValues([...formValues, { tag: '' }]);
+  };
+
+  const removeFormFields = (i: number) => {
+    const newFormValues = [...formValues];
+    newFormValues.splice(i, 1);
+    setFormValues(newFormValues);
+  };
+
+  const handleChange = (i: number, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const newFormValues = [...formValues];
+    newFormValues[i][e.target.name] = e.target.value;
+    setFormValues(newFormValues);
+  };
+  // ====================================================================
+
   const fetchData = async () => {
     const query: types.commandForwards = {
       from,
@@ -65,6 +97,7 @@ const Forwards = () => {
       sort,
       to,
       days: Number(days),
+      tags: formValues.map(n => n.tag),
     };
 
     const result = await axiosGet({ path: 'forwards', query });
@@ -116,6 +149,32 @@ const Forwards = () => {
             onChange={handleToChange}
             style={styles.textField}
           />
+
+          <>
+            <Button href="#text-buttons" onClick={() => addFormFields()} style={styles.button}>
+              Add +
+            </Button>
+            {formValues.map((element, index) => (
+              <div key={index}>
+                <TextField
+                  type="text"
+                  label={ForwardsCommand.flags.tag}
+                  name="tag"
+                  placeholder={ForwardsCommand.flags.tag}
+                  value={element.tag || ''}
+                  onChange={e => handleChange(index, e)}
+                  style={styles.textField}
+                  id={`tag-${index}`}
+                />
+                {!!index ? (
+                  <IconButton aria-label="delete" onClick={() => removeFormFields(index)} style={styles.iconButton}>
+                    <DeleteIcon />
+                  </IconButton>
+                ) : null}
+              </div>
+            ))}
+          </>
+
           <TextField
             type="text"
             placeholder={globalCommands.node.name}

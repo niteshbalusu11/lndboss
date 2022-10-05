@@ -16,6 +16,7 @@ import { readFile } from 'fs';
     [is_table]: <Return Results As Table Bool>
     lnd: <Authenticated LND API Object>
     [sort]: <Sort By Field String>
+    [tags]: [<Tag Name String>]
   }
 
   @returns via Promise
@@ -39,8 +40,11 @@ type Args = {
 };
 const forwardsCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
   try {
+    const tags = !!args.tags ? args.tags.filter(n => !!n) : [];
+
     const result = await getForwards({
       lnd,
+      tags,
       days: args.days,
       from: args.from,
       fs: { getFile: readFile },
