@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.5.0](https://github.com/niteshbalusu11/lndboss/compare/v2.4.0...v2.5.0) (2022-10-05)
 
+- Added filter variable BLOCKS_SINCE_LAST_CHANNEL in peers command.
+- Added support for tags in bos forwards command.
+- Bumps several dependencies.
+
 ## [2.4.0](https://github.com/niteshbalusu11/lndboss/compare/v2.3.0...v2.4.0) (2022-10-04)
 
 - Added support for scheduling automated fee/channel policies based on conditions.
