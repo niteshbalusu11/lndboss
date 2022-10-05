@@ -15,6 +15,7 @@ test.describe('Test Forwards command on the node.js side', async () => {
       days: 4,
       from: 'alice',
       sort: 'earned_in',
+      tags: [],
       to: 'bob',
     };
     const { result } = await forwardsCommand({ args, lnd: lightning.lnd });

@@ -403,6 +403,11 @@ export class forwardsDto {
   @IsString()
   sort: string;
 
+  @Transform(({ value }) => toStringArray(value))
+  @IsOptional()
+  @IsArray()
+  tags: string[];
+
   @Transform(({ value }) => trim(value))
   @IsOptional()
   @IsString()

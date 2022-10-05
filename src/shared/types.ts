@@ -120,6 +120,7 @@ export type commandForwards = {
   from: string;
   node: string;
   sort: string;
+  tags: string[];
   to: string;
 };
 

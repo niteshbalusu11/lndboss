@@ -204,6 +204,7 @@ const commands: Commands = [
       from: 'From',
       sort: 'Sort',
       to: 'To',
+      tag: 'Tag',
     },
   },
   {
