@@ -737,6 +737,7 @@ http://localhost:8055/api/forwards
     [from]: <Query Alias/Pubkey String>
     [node]: <Saved Node String>
     [sort]: <Sort By Field String>
+    [tags]: [<Tag Name String>]
     [to]: <Query Alias/Pubkey String>
   }
 

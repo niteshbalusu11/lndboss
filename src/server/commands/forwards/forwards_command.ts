@@ -16,7 +16,7 @@ import { readFile } from 'fs';
     [is_table]: <Return Results As Table Bool>
     lnd: <Authenticated LND API Object>
     [sort]: <Sort By Field String>
-    [tags]: [<Tags String>]
+    [tags]: [<Tag Name String>]
   }
 
   @returns via Promise
