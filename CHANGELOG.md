@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.6.0](https://github.com/niteshbalusu11/lndboss/compare/v2.5.0...v2.6.0) (2022-10-06)
 
+- Add openChannel, closeChannel and sendToChainAddress to call command.
+- Fixed a bug where numbers and boolean types were not getting converted.
+
 ## [2.5.0](https://github.com/niteshbalusu11/lndboss/compare/v2.4.0...v2.5.0) (2022-10-05)
 
 - Added filter variable BLOCKS_SINCE_LAST_CHANNEL in peers command.
