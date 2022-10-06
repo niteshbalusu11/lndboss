@@ -217,8 +217,6 @@ const updatePolicies = async (args: Args) => {
                     },
                     (err: any) => {
                       if (!!err) {
-                        console.log(err);
-
                         console.log({
                           next_retry: moment().add(interval, 'ms').calendar(),
                         });

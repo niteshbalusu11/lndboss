@@ -38,7 +38,6 @@ const styles = {
 
 const Call = () => {
   const [node, setNode] = useState('');
-  const [argumentsArray, setArgumentsArray] = useState(null);
   const [validationArray, setValidationArray] = useState([{ named: '', value: '', type: '', required: false }]);
   const [method, setMethod] = useState('');
   const [data, setData] = useState(null);
@@ -46,16 +45,6 @@ const Call = () => {
 
   useEffect(() => {
     if (!!method) {
-      setArgumentsArray(
-        !!argument(method).arguments
-          ? argument(method).arguments.map((n: { named: string }) => {
-              const obj = {};
-              obj[n.named] = '';
-              return obj;
-            })
-          : []
-      );
-
       setValidationArray(
         !!getArguments && !!getArguments.length
           ? getArguments.map(n => {
@@ -78,11 +67,6 @@ const Call = () => {
     type: string,
     optional: boolean
   ) => {
-    const newFormValues = argumentsArray;
-    newFormValues[index][named] = e.target.value;
-
-    setArgumentsArray(newFormValues);
-
     const newValidationArray = validationArray;
     newValidationArray[index] = { named, value: e.target.value, type, required: !optional };
     setValidationArray(newValidationArray);
@@ -101,8 +85,25 @@ const Call = () => {
     }
 
     const postArgs = {};
-    argumentsArray.forEach(n => {
-      Object.assign(postArgs, n);
+
+    validationArray.forEach(n => {
+      if (n.type === 'number') {
+        Object.assign(postArgs, { [n.named]: Number(n.value) });
+        return;
+      }
+
+      if (n.type === 'boolean') {
+        if (n.value === 'false') {
+          Object.assign(postArgs, { [n.named]: false });
+        }
+
+        if (n.value === 'true') {
+          Object.assign(postArgs, { [n.named]: true });
+        }
+        return;
+      }
+
+      Object.assign(postArgs, { [n.named]: n.value });
     });
 
     const result = await axiosPostWithAlert({ path: 'call', postBody: { method, node, postArgs } });
