@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 import { chartChainFeesCommand } from '../../src/server/commands/';
-import spawnCluster from '../utils/spawn_lightning_cluster.js';
+import spawnCluster from '../utils/spawn_lightning_cluster';
 
 test.describe('Test ChartChainFees command on the node.js side', async () => {
   let lightning: any[];

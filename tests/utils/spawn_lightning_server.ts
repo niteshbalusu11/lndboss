@@ -24,4 +24,4 @@ const spawnLightningServer = async (): Promise<SpawnLightningServerType> => {
   return { lnd, kill };
 };
 
-export default spawnLightningServer;
+export { spawnLightningServer };

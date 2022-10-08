@@ -1,10 +1,10 @@
 import { Logger, createLogger, format, transports } from 'winston';
+import { SpawnLightningServerType, spawnLightningServer } from '../utils/spawn_lightning_server';
 import { expect, test } from '@playwright/test';
-import spawnLightningServer, { SpawnLightningServerType } from '../utils/spawn_lightning_server.js';
 
 import auth from '../../src/server/commands/lnurl/auth';
 import request from 'balanceofsatoshis/commands/simple_request';
-import { testConstants } from '../utils/constants.js';
+import { testConstants } from '../utils/constants';
 
 test.describe('Test Lnurl command on the node.js side', async () => {
   let lightning: SpawnLightningServerType;
