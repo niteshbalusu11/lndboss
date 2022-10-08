@@ -1,6 +1,6 @@
-import { SpawnLightningType } from './spawn_lightning';
+import { SpawnLightningType, spawnLightning } from './spawn_lightning';
+
 import { putSavedCredentials } from '../../src/server/lnd';
-import spawnLightning from './spawn_lightning.js';
 
 let lightning: SpawnLightningType;
 

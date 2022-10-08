@@ -1,5 +1,5 @@
+import { SpawnLightningServerType, spawnLightningServer } from '../utils/spawn_lightning_server';
 import { expect, test } from '@playwright/test';
-import spawnLightningServer, { SpawnLightningServerType } from '../utils/spawn_lightning_server.js';
 
 import { reconnectCommand } from '../../src/server/commands/';
 

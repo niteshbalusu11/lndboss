@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 import { chartFeesEarnedCommand } from '../../src/server/commands/';
 import { readFile } from 'fs';
-import spawnCluster from '../utils/spawn_lightning_cluster.js';
+import spawnCluster from '../utils/spawn_lightning_cluster';
 
 test.describe('Test ChartFeesEarned command on the node.js side', async () => {
   let lightning: any[];

@@ -30,4 +30,4 @@ const spawnLightning = async (): Promise<SpawnLightningType> => {
   return { cert, kill, macaroon, socket };
 };
 
-export default spawnLightning;
+export { spawnLightning };
