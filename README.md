@@ -10,79 +10,85 @@ https://t.me/lndboss
 
 ```shell
 # See an accounting formatted list of various types of transactions
-bos accounting "category"
+accounting "category"
 
 # See total balance, including pending funds, excluding future commit fees
-bos balance
+balance
 
 # Call ln-service raw APIs
-bos call "method"
+call "method"
 
 # Get the number of days the node cert remains valid
-bos cert-validity-days
+cert-validity-days
 
 # Receive on-chain funds via a regular address
-bos chain-deposit
+chain-deposit
 
 # See the current fee estimates confirmation targets
-bos chainfees
+chainfees
 
 # Show chain fees paid
-bos chart-chain-fees
+chart-chain-fees
 
 # Show routing fees earned
-bos chart-fees-earned
+chart-fees-earned
 
 # Show routing fees paid
-bos chart-fees-paid
+chart-fees-paid
 
 # Show a chart of payments received
-bos chart-payments-received
+chart-payments-received
 
 # See details on how closed channels resolved on-chain
-bos closed
+closed
+
+# Create a group channel request
+create-group-channel
 
 # View outbound fee rates and update outbound fee rates to peers
-bos fees
+fees
 
 # Query the node to find something like a payment, channel or node
-bos find "query"
+find "query"
 
 # Output a summarized version of peers forwarded towards
-bos forwards
+forwards
 
 # Look up the channels and fee rates of a node by its public key
-bos graph "pubkey"
+graph "pubkey"
+
+# Joins a group channel request
+create-group-channel "invite_code"
 
 # Collection of lnurl features
-bos lnurl "function"
+lnurl "function"
 
 # Batch open channels, zero conf supported
-bos open "pubkeys"
+open "pubkeys"
 
 # Pay a payment request (invoice), probing first
-bos pay "payment_request"
+pay "payment_request"
 
 # Show channel-connected peers
-bos peers
+peers
 
 # Output the price of BTC
-bos price
+price
 
 # Test if funds can be sent to a destination
-bos probe "payment_request/public_key"
+probe "payment_request/public_key"
 
 # Rebalance funds between peers
-bos rebalance
+rebalance
 
 # Reconnect to offline peers
-bos reconnect
+reconnect
 
 # Send funds using keysend or lnurl/lightning address and an optional message to a node
-bos send
+send
 
 # Tags can be used in other commands via tag and avoid options
-bos tags
+tags
 ```
 
 ### LndBoss is now available for one click install in AppStores of:
