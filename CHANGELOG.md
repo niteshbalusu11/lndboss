@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://github.com/niteshbalusu11/lndboss/compare/v2.6.0...v2.7.0) (2022-10-11)
+
 ## [2.6.0](https://github.com/niteshbalusu11/lndboss/compare/v2.5.0...v2.6.0) (2022-10-06)
 
 - Add openChannel, closeChannel and sendToChainAddress to call command.
