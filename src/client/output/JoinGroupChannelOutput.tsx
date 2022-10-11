@@ -8,7 +8,11 @@ type Args = {
   data: string | undefined;
 };
 const JoinGroupChannelOutput = ({ data }: Args) => {
-  return <div style={styles.div}>{!!data && <pre>{data}</pre>}</div>;
+  return (
+    <div style={styles.div} id="creategroupchanneloutput">
+      {!!data && <pre>{data}</pre>}
+    </div>
+  );
 };
 
 export default JoinGroupChannelOutput;
