@@ -15,26 +15,12 @@ const CertValidityDaysCommand = commands.find(n => n.value === 'CertValidityDays
   GET call to NestJs process to get cert validity days related information
 */
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    width: '700px',
-  },
-  textField: {
-    width: '300px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-};
-
 const CertValidityDays = () => {
   const [node, setNode] = useState('');
   const [below, setBelow] = useState('');
   const [data, setData] = useState('');
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -76,7 +62,7 @@ const CertValidityDays = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <SubmitButton variant="contained" onClick={fetchData}>
@@ -90,3 +76,17 @@ const CertValidityDays = () => {
 };
 
 export default CertValidityDays;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '700px',
+  },
+  textField: {
+    width: '300px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+};

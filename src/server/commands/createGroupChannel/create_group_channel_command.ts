@@ -19,7 +19,7 @@ import { createGroupChannel } from 'paid-services';
 */
 
 type Args = {
-  args: types.createGroupChannelCommand;
+  args: types.commandCreateGroupChannel;
   lnd: AuthenticatedLnd;
   logger: Logger;
 };
@@ -31,7 +31,6 @@ const createGroupChannelCommand = async ({ args, lnd, logger }: Args) => {
     count: args.count,
     rate: args.rate,
   });
-
   return { result };
 };
 

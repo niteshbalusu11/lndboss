@@ -20,42 +20,6 @@ const AccountingCommand = commands.find(n => n.value === 'Accounting');
   Passes query parameters to the accounting results page
 */
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    width: '700px',
-  },
-  textField: {
-    width: '350px',
-  },
-  button: {
-    color: 'white',
-    fontWeight: 'bold',
-    borderRadius: '10px',
-    border: '1px solid black',
-    marginTop: '20px',
-    width: '50px',
-  },
-  iconButton: {
-    width: '50px',
-    marginTop: '0px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-  inputLabel: {
-    fontWeight: 'bold',
-    color: 'black',
-  },
-  select: {
-    width: '300px',
-  },
-  switch: {
-    width: '100px',
-  },
-};
-
 const Accounting = () => {
   const [node, setNode] = useState('');
   const [isCsv, setIsCsv] = useState(false);
@@ -89,7 +53,7 @@ const Accounting = () => {
     setRateProvider(event.target.value);
   };
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -196,7 +160,7 @@ const Accounting = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <Link href={{ pathname: '/result/AccountingResult', query: flags }} passHref>
@@ -211,3 +175,39 @@ const Accounting = () => {
 };
 
 export default Accounting;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '700px',
+  },
+  textField: {
+    width: '350px',
+  },
+  button: {
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    width: '50px',
+  },
+  iconButton: {
+    width: '50px',
+    marginTop: '0px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+  inputLabel: {
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  select: {
+    width: '300px',
+  },
+  switch: {
+    width: '100px',
+  },
+};

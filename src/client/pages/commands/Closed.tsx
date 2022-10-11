@@ -16,26 +16,12 @@ const ClosedCommand = commands.find(n => n.value === 'Closed');
   GET call to the NestJs process to get closed transactions
 */
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    minWidth: '700px',
-  },
-  textField: {
-    width: '300px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-};
-
 const Closed = () => {
   const [node, setNode] = useState('');
   const [limit, setLimit] = useState('');
   const [data, setData] = useState(undefined);
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -81,7 +67,7 @@ const Closed = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <SubmitButton variant="contained" onClick={fetchData}>
@@ -95,3 +81,17 @@ const Closed = () => {
 };
 
 export default Closed;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    minWidth: '700px',
+  },
+  textField: {
+    width: '300px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+};

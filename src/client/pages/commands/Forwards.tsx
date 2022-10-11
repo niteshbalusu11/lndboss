@@ -17,32 +17,6 @@ const ForwardsCommand = commands.find(n => n.value === 'Forwards');
   GET call to the NestJs process to forwards information
 */
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    minWidth: '700px',
-  },
-  button: {
-    color: 'white',
-    fontWeight: 'bold',
-    borderRadius: '10px',
-    border: '1px solid black',
-    marginTop: '20px',
-    width: '50px',
-  },
-  iconButton: {
-    width: '50px',
-    marginTop: '0px',
-  },
-  textField: {
-    width: '300px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-};
-
 const Forwards = () => {
   const [days, setDays] = useState('');
   const [data, setData] = useState(undefined);
@@ -52,7 +26,7 @@ const Forwards = () => {
   const [node, setNode] = useState('');
   const [formValues, setFormValues] = useState([{ tag: '' }]);
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -180,7 +154,7 @@ const Forwards = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <SubmitButton variant="contained" onClick={fetchData}>
@@ -194,3 +168,29 @@ const Forwards = () => {
 };
 
 export default Forwards;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    minWidth: '700px',
+  },
+  button: {
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    width: '50px',
+  },
+  iconButton: {
+    width: '50px',
+    marginTop: '0px',
+  },
+  textField: {
+    width: '300px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+};

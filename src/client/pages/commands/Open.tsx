@@ -27,7 +27,7 @@ import Head from 'next/head';
 import { OpenOutput } from '~client/output';
 import { axiosPostWithAlert } from '~client/utils/axios';
 import { useNotify } from '~client/hooks/useNotify';
-import validateOpenCommandArgs from '~client/utils/validate_open_command_args';
+import validateOpenCommandArgs from '~client/utils/validations/validate_open_command_args';
 
 const knownTypes = ['public', 'private', 'public-trusted', 'private-trusted'];
 const OpenCommand = commands.find(n => n.value === 'Open');
@@ -37,46 +37,6 @@ const OpenCommand = commands.find(n => n.value === 'Open');
   POST call to the NestJs process to open channels
 */
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    width: '1500px',
-  },
-  textField: {
-    width: '220px',
-    marginLeft: '10px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-  button: {
-    color: 'white',
-    fontWeight: 'bold',
-    borderRadius: '10px',
-    border: '1px solid black',
-    marginTop: '20px',
-    width: '50px',
-  },
-  iconButton: {
-    width: '50px',
-    marginTop: '0px',
-  },
-  switch: {
-    width: '100px',
-  },
-  select: {
-    width: '200px',
-  },
-  inputLabel: {
-    color: 'black',
-  },
-  formControl: {
-    marginLeft: '10px',
-    width: '100px',
-  },
-};
-
 const Open = () => {
   const [avoidBroadcast, setAvoidBroadcast] = useState(false);
   const [data, setData] = useState(undefined);
@@ -85,11 +45,11 @@ const Open = () => {
   const [internalFundFeeRate, setInternalFundFeeRate] = useState(undefined);
   const [node, setNode] = useState('');
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
-  const handeInternalFundFeeRateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInternalFundFeeRateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInternalFundFeeRate(event.target.value);
   };
 
@@ -276,7 +236,7 @@ const Open = () => {
             name={OpenCommand.flags.internalFundAtFeeRate}
             id={OpenCommand.flags.internalFundAtFeeRate}
             placeholder={'OnChain Fee Rate'}
-            onChange={handeInternalFundFeeRateChange}
+            onChange={handleInternalFundFeeRateChange}
             style={styles.textField}
           />
           <FormControlLabel
@@ -295,7 +255,7 @@ const Open = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <br />
@@ -310,3 +270,43 @@ const Open = () => {
 };
 
 export default Open;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '1500px',
+  },
+  textField: {
+    width: '220px',
+    marginLeft: '10px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+  button: {
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    width: '50px',
+  },
+  iconButton: {
+    width: '50px',
+    marginTop: '0px',
+  },
+  switch: {
+    width: '100px',
+  },
+  select: {
+    width: '200px',
+  },
+  inputLabel: {
+    color: 'black',
+  },
+  formControl: {
+    marginLeft: '10px',
+    width: '100px',
+  },
+};

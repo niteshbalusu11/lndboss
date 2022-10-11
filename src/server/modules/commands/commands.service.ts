@@ -134,8 +134,9 @@ export class CommandsService {
 
   async createGroupChannelCommand(args: dto.createGroupChannelDto): Promise<{ result: any }> {
     try {
-      const lnd = await LndService.authenticatedLnd({ node: args.node });
       const logger = await this.logger({ messageId: args.message_id, service: 'create-group-channel' });
+
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
 
       const { result } = await commands.createGroupChannelCommand({ args, lnd, logger });
 
@@ -182,8 +183,9 @@ export class CommandsService {
 
   async joinGroupChannelCommand(args: dto.joinGroupChannelDto): Promise<{ result: any }> {
     try {
-      const lnd = await LndService.authenticatedLnd({ node: args.node });
       const logger = await this.logger({ messageId: args.message_id, service: 'join-group-channel' });
+
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
 
       const { result } = await commands.joinGroupChannelCommand({ args, lnd, logger });
 

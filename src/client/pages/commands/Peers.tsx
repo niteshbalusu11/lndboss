@@ -12,7 +12,7 @@ import commands, { globalCommands } from '~client/commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import Head from 'next/head';
-import PeersOutput from '~client/output/PeersOutput';
+import { PeersOutput } from '~client/output';
 import { axiosGet } from '~client/utils/axios';
 
 /*
@@ -21,39 +21,6 @@ import { axiosGet } from '~client/utils/axios';
 */
 
 const PeersCommand = commands.find(n => n.value === 'Peers');
-
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    minWidth: '700px',
-  },
-  textField: {
-    width: '500px',
-  },
-  pre: {
-    fontWeight: 'bold',
-  },
-  button: {
-    color: 'white',
-    fontWeight: 'bold',
-    borderRadius: '10px',
-    border: '1px solid black',
-    marginTop: '20px',
-    width: '50px',
-  },
-  iconButton: {
-    width: '50px',
-    marginTop: '0px',
-  },
-  switch: {
-    width: '100px',
-  },
-  url: {
-    fontWeight: 'bold',
-    color: 'blue',
-  },
-};
 
 const Peers = () => {
   const [node, setNode] = useState('');
@@ -70,7 +37,7 @@ const Peers = () => {
   const [tags, setTags] = useState([{ tags: '' }]);
   const [data, setData] = useState(undefined);
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -327,7 +294,7 @@ const Peers = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <SubmitButton variant="contained" onClick={fetchData}>
@@ -341,3 +308,36 @@ const Peers = () => {
 };
 
 export default Peers;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    minWidth: '700px',
+  },
+  textField: {
+    width: '500px',
+  },
+  pre: {
+    fontWeight: 'bold',
+  },
+  button: {
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    width: '50px',
+  },
+  iconButton: {
+    width: '50px',
+    marginTop: '0px',
+  },
+  switch: {
+    width: '100px',
+  },
+  url: {
+    fontWeight: 'bold',
+    color: 'blue',
+  },
+};

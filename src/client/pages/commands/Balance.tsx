@@ -21,23 +21,6 @@ import { axiosGet } from '~client/utils/axios';
 
 const BalanceCommand = commands.find(n => n.value === 'Balance');
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    width: '700px',
-  },
-  textField: {
-    width: '300px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-  switch: {
-    width: '100px',
-  },
-};
-
 const Balance = () => {
   const [above, setAbove] = useState('');
   const [below, setBelow] = useState('');
@@ -48,7 +31,7 @@ const Balance = () => {
   const [data, setData] = useState(undefined);
   const [node, setNode] = useState('');
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -152,7 +135,7 @@ const Balance = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <SubmitButton variant="contained" onClick={fetchData}>
@@ -166,3 +149,20 @@ const Balance = () => {
 };
 
 export default Balance;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '700px',
+  },
+  textField: {
+    width: '300px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+  switch: {
+    width: '100px',
+  },
+};

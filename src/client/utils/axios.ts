@@ -1,7 +1,11 @@
+import * as YAML from 'json-to-pretty-yaml';
+
 import axios from 'axios';
 import getConfig from 'next/config';
+import { io } from 'socket.io-client';
 import { useLoading } from '~client/hooks/useLoading';
 import { useNotify } from '~client/hooks/useNotify';
+
 const { publicRuntimeConfig } = getConfig();
 const { apiUrl } = publicRuntimeConfig;
 
@@ -171,4 +175,62 @@ const axiosPost = async ({ path, postBody }: ArgsPost) => {
     console.log(error);
   }
 };
-export { axiosGet, axiosGetNoAlert, axiosGetNoLoading, axiosGetWebSocket, axiosPost, axiosPostWithAlert };
+
+const axiosPostWithWebSocket = async ({ id, path, postBody, setData }) => {
+  try {
+    const socket = io();
+    const output = [];
+
+    socket.on('connect', () => {
+      console.log('connected');
+    });
+
+    socket.on('disconnect', () => {
+      console.log('disconnected');
+    });
+
+    socket.on(`${id}`, data => {
+      const message = data.message.options;
+
+      output.push(YAML.stringify(message));
+
+      setData(output.join('\n'));
+    });
+
+    socket.on('error', err => {
+      throw err;
+    });
+
+    const url = `${apiUrl}/${path}`;
+    const accessToken = localStorage.getItem('accessToken');
+
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    };
+
+    const response = await axios.post(url, postBody, config);
+
+    const data = await response.data;
+
+    output.push(YAML.stringify(data));
+
+    setData(output.join('\n'));
+
+    return data;
+  } catch (error) {
+    useNotify({
+      type: 'error',
+      message: `Status: ${error.response.data.statusCode}\nMessage: ${error.response.data.message}`,
+    });
+  }
+};
+
+export {
+  axiosGet,
+  axiosGetNoAlert,
+  axiosGetNoLoading,
+  axiosGetWebSocket,
+  axiosPost,
+  axiosPostWithAlert,
+  axiosPostWithWebSocket,
+};

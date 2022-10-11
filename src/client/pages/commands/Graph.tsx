@@ -17,33 +17,6 @@ import { axiosGet } from '~client/utils/axios';
 
 const GraphCommand = commands.find(n => n.value === 'Graph');
 
-const styles = {
-  button: {
-    color: 'white',
-    fontWeight: 'bold',
-    borderRadius: '10px',
-    border: '1px solid black',
-    marginTop: '20px',
-    width: '50px',
-  },
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    width: '1000px',
-  },
-  iconButton: {
-    width: '50px',
-    marginTop: '0px',
-  },
-  textField: {
-    width: '500px',
-  },
-  h4: {
-    marginTop: '0px',
-    fontWeight: 'bold',
-  },
-};
-
 const Graph = () => {
   const [aliasOrPubkey, setAliasOrPubkey] = useState('');
   const [node, setNode] = useState('');
@@ -51,7 +24,7 @@ const Graph = () => {
   const [filter, setFilter] = useState([{ filter: '' }]);
   const [data, setData] = useState(undefined);
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -154,7 +127,7 @@ const Graph = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <SubmitButton variant="contained" onClick={fetchData}>
@@ -168,3 +141,30 @@ const Graph = () => {
 };
 
 export default Graph;
+
+const styles = {
+  button: {
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    width: '50px',
+  },
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '1000px',
+  },
+  iconButton: {
+    width: '50px',
+    marginTop: '0px',
+  },
+  textField: {
+    width: '500px',
+  },
+  h4: {
+    marginTop: '0px',
+    fontWeight: 'bold',
+  },
+};

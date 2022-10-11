@@ -9,7 +9,7 @@ import fetchPeersAndTags from '~client/utils/fetch_peers_and_tags';
 import { globalCommands } from '~client/commands';
 import { useLoading } from '~client/hooks/useLoading';
 import { useNotify } from '~client/hooks/useNotify';
-import validateAutoFees from '~client/utils/validate_auto_fees';
+import validateAutoFees from '~client/utils/validations/validate_auto_fees';
 
 const splitValue = n => n.split('\n')[1].trim();
 
@@ -63,7 +63,7 @@ const FeeScheduler = () => {
   const [node, setNode] = useState('');
   const [peersAndTags, setPeersAndTags] = useState([]);
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -346,7 +346,7 @@ const FeeScheduler = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <br />

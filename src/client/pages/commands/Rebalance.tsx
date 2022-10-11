@@ -25,39 +25,6 @@ const RebalanceCommand = commands.find(n => n.value === 'Rebalance');
   GET call to the NestJs process to execute a rebalance
 */
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    minWidth: '700px',
-  },
-  textField: {
-    width: '500px',
-  },
-  pre: {
-    fontWeight: 'bold',
-  },
-  button: {
-    color: 'white',
-    fontWeight: 'bold',
-    borderRadius: '10px',
-    border: '1px solid black',
-    marginTop: '20px',
-    width: '50px',
-  },
-  iconButton: {
-    width: '50px',
-    marginTop: '0px',
-  },
-  url: {
-    fontWeight: 'bold',
-    color: 'blue',
-  },
-  link: {
-    width: '250px',
-  },
-};
-
 const Rebalance = () => {
   const [node, setNode] = useState('');
   const [amount, setAmount] = useState('');
@@ -82,7 +49,7 @@ const Rebalance = () => {
     setCronUrl(newCronUrl);
   };
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -389,7 +356,7 @@ const Rebalance = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <Link href={{ pathname: `/result/RebalanceResult`, query: flags }} passHref>
@@ -417,3 +384,36 @@ const Rebalance = () => {
 };
 
 export default Rebalance;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    minWidth: '700px',
+  },
+  textField: {
+    width: '500px',
+  },
+  pre: {
+    fontWeight: 'bold',
+  },
+  button: {
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    width: '50px',
+  },
+  iconButton: {
+    width: '50px',
+    marginTop: '0px',
+  },
+  url: {
+    fontWeight: 'bold',
+    color: 'blue',
+  },
+  link: {
+    width: '250px',
+  },
+};

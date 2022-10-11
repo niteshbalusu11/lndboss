@@ -18,7 +18,7 @@ import { joinGroupChannel } from 'paid-services';
 */
 
 type Args = {
-  args: types.joinGroupChannelCommand;
+  args: types.commandJoinGroupChannel;
   lnd: AuthenticatedLnd;
   logger: Logger;
 };

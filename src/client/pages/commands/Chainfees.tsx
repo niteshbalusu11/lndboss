@@ -21,30 +21,13 @@ const ChainfeesCommand = commands.find(n => n.value === 'Chainfees');
   GET call to the NestJs process to get chainfees information
 */
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    minWidth: '700px',
-  },
-  textField: {
-    width: '300px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-  switch: {
-    width: '100px',
-  },
-};
-
 const Chainfees = () => {
   const [blocks, setBlocks] = useState('');
   const [file, setFile] = useState(false);
   const [node, setNode] = useState('');
   const [data, setData] = useState(undefined);
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -98,7 +81,7 @@ const Chainfees = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <SubmitButton variant="contained" onClick={fetchData}>
@@ -112,3 +95,20 @@ const Chainfees = () => {
 };
 
 export default Chainfees;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    minWidth: '700px',
+  },
+  textField: {
+    width: '300px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+  switch: {
+    width: '100px',
+  },
+};

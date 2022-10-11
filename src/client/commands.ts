@@ -161,6 +161,17 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Create Group Channel (Experimental)',
+    value: 'CreateGroupChannel',
+    description: 'Coordinate balanced channels group',
+    longDescription: 'Create a group channel invite code, other nodes can join the group using join-group-channel',
+    flags: {
+      capacity: 'Capacity',
+      fee_rate: 'FeeRate',
+      size: 'Size',
+    },
+  },
+  {
     name: 'Fees',
     value: 'Fees',
     description: 'Show and adjust outbound fee rates',
@@ -219,6 +230,18 @@ const commands: Commands = [
     flags: {
       filter: 'Filter',
       sort: 'Sort',
+    },
+  },
+  {
+    name: 'Join Group Channel (Experimental)',
+    value: 'JoinGroupChannel',
+    description: 'Join a balanced channels group',
+    longDescription: 'Another node should have run create-group-channel to create group',
+    args: {
+      code: 'Code',
+    },
+    flags: {
+      max_fee_rate: 'MaxFeeRate',
     },
   },
   {
