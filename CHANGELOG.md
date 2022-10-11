@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.7.0](https://github.com/niteshbalusu11/lndboss/compare/v2.6.0...v2.7.0) (2022-10-11)
 
+- Added support for bos create-group-channel
+- Added support for bos join-group-channel
+- Bump dependencies
+
 ## [2.6.0](https://github.com/niteshbalusu11/lndboss/compare/v2.5.0...v2.6.0) (2022-10-06)
 
 - Add openChannel, closeChannel and sendToChainAddress to call command.
