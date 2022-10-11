@@ -22,35 +22,6 @@ const ChartFeesEarnedCommand = commands.find(n => n.value === 'ChartFeesEarned')
   Passes query parameters to the chart-fees-earned results page
 */
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    width: '700px',
-  },
-  textField: {
-    width: '380px',
-  },
-  button: {
-    color: 'white',
-    fontWeight: 'bold',
-    borderRadius: '10px',
-    border: '1px solid black',
-    marginTop: '20px',
-    width: '50px',
-  },
-  iconButton: {
-    width: '50px',
-    marginTop: '0px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-  switch: {
-    width: '100px',
-  },
-};
-
 const ChartFeesEarned = () => {
   const [count, setCount] = useState(false);
   const [forwarded, setForwarded] = useState(false);
@@ -196,3 +167,32 @@ const ChartFeesEarned = () => {
 };
 
 export default ChartFeesEarned;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '700px',
+  },
+  textField: {
+    width: '380px',
+  },
+  button: {
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    width: '50px',
+  },
+  iconButton: {
+    width: '50px',
+    marginTop: '0px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+  switch: {
+    width: '100px',
+  },
+};

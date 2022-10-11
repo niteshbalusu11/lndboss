@@ -6,7 +6,7 @@ import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '~client/stan
 import commands, { globalCommands } from '~client/commands';
 
 import Head from 'next/head';
-import ReconnectOutput from '~client/output/ReconnectOutput';
+import { ReconnectOutput } from '~client/output';
 import { axiosGet } from '~client/utils/axios';
 
 /*
@@ -16,24 +16,10 @@ import { axiosGet } from '~client/utils/axios';
 
 const ReconnectCommand = commands.find(n => n.value === 'Reconnect');
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    width: '800px',
-  },
-  textField: {
-    width: '500px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-};
-
 const Reconnect = () => {
   const [node, setNode] = useState('');
   const [data, setData] = useState(undefined);
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -63,7 +49,7 @@ const Reconnect = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <SubmitButton variant="contained" onClick={fetchData}>
@@ -77,3 +63,17 @@ const Reconnect = () => {
 };
 
 export default Reconnect;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '800px',
+  },
+  textField: {
+    width: '500px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+};

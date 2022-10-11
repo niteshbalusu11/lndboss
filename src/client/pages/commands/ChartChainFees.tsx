@@ -21,38 +21,6 @@ const ChartChainFeesCommand = commands.find(n => n.value === 'ChartChainFees');
   Passes query parameters to the chart-chain-fees results page
 */
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    width: '700px',
-  },
-  textField: {
-    width: '350px',
-  },
-  button: {
-    color: 'white',
-    fontWeight: 'bold',
-    borderRadius: '10px',
-    border: '1px solid black',
-    marginTop: '20px',
-    width: '50px',
-  },
-  iconButton: {
-    width: '50px',
-    marginTop: '0px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-  link: {
-    fontSize: '20px',
-    margin: '0px',
-    cursor: 'pointer',
-    color: 'white',
-  },
-};
-
 const ChartChainFees = () => {
   const [formValues, setFormValues] = useState([{ node: '' }]);
   const [days, setDays] = useState('');
@@ -152,3 +120,35 @@ const ChartChainFees = () => {
 };
 
 export default ChartChainFees;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '700px',
+  },
+  textField: {
+    width: '350px',
+  },
+  button: {
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    width: '50px',
+  },
+  iconButton: {
+    width: '50px',
+    marginTop: '0px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+  link: {
+    fontSize: '20px',
+    margin: '0px',
+    cursor: 'pointer',
+    color: 'white',
+  },
+};

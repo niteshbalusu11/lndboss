@@ -10,7 +10,7 @@ import {
 } from '~client/standard_components/app-components';
 
 import Head from 'next/head';
-import PriceOutput from '~client/output/PriceOutput';
+import { PriceOutput } from '~client/output';
 import { axiosGet } from '~client/utils/axios';
 import commands from '../../commands';
 
@@ -20,23 +20,6 @@ const PriceCommand = commands.find(n => n.value === 'Price');
   Renders the bos price command
   GET call to the NestJs process to get fiat pricing information
 */
-
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    minWidth: '700px',
-  },
-  textField: {
-    width: '500px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-  switch: {
-    width: '100px',
-  },
-};
 
 const Price = () => {
   const [symbols, setSymbols] = useState('');
@@ -112,3 +95,20 @@ const Price = () => {
 };
 
 export default Price;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    minWidth: '700px',
+  },
+  textField: {
+    width: '500px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+  switch: {
+    width: '100px',
+  },
+};

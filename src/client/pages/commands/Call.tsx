@@ -9,7 +9,7 @@ import { RawApiList } from '~client/standard_components/lndboss';
 import { axiosPostWithAlert } from '~client/utils/axios';
 import { rawApi } from '~shared/raw_api';
 import { useNotify } from '~client/hooks/useNotify';
-import validateCallCommandArgs from '~client/utils/validate_call_command_args';
+import validateCallCommandArgs from '~client/utils/validations/validate_call_command_args';
 
 const CallCommand = commands.find(n => n.value === 'Call');
 const argument = (n: string) => rawApi.calls.find(s => s.method === n);
@@ -18,23 +18,6 @@ const argument = (n: string) => rawApi.calls.find(s => s.method === n);
   Renders the bos call command
   Passes query parameters to the chart-chain-fees results page
 */
-
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    width: '700px',
-  },
-  textField: {
-    width: '500px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-  switch: {
-    width: '100px',
-  },
-};
 
 const Call = () => {
   const [node, setNode] = useState('');
@@ -72,7 +55,7 @@ const Call = () => {
     setValidationArray(newValidationArray);
   };
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -150,7 +133,7 @@ const Call = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <SubmitButton variant="contained" onClick={fetchData}>
@@ -164,3 +147,20 @@ const Call = () => {
 };
 
 export default Call;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '700px',
+  },
+  textField: {
+    width: '500px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+  switch: {
+    width: '100px',
+  },
+};

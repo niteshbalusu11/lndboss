@@ -99,6 +99,17 @@ export type commandClosed = {
   node: string;
 };
 
+// ========================Create Group Channel Command=========================
+
+export type commandCreateGroupChannel = {
+  capacity: number;
+  count: number;
+  node: string;
+  message_id: string;
+  rate: number;
+};
+
+// ========================Fees Command========================================
 export type commandFees = {
   cltv_delta: number;
   fee_rate: string;
@@ -131,6 +142,15 @@ export type commandGraph = {
   node: string;
   query: string;
   sort: string;
+};
+
+// ========================Join Group Channel Command=========================
+
+export type commandJoinGroupChannel = {
+  code: string;
+  node: string;
+  message_id: string;
+  max_rate: number;
 };
 
 // ========================Lnurl Command=====================================

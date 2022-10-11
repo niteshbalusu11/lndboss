@@ -8,10 +8,15 @@ import ChartFeesEarnedOutput from './ChartFeesEarnedOutput';
 import ChartFeesPaidOutput from './ChartFeesPaidOutput';
 import ChartPaymentsReceivedOutput from './ChartPaymentsReceivedOutput';
 import ClosedOutput from './ClosedOutput';
+import CreateGroupChannelOutput from './CreateGroupChannelOutput';
 import FeesOutput from './FeesOutput';
 import FindOutput from './FindOutput';
 import ForwardsOutput from './ForwardsOutput';
+import JoinGroupChannelOutput from './JoinGroupChannelOutput';
 import OpenOutput from './OpenOutput';
+import PeersOutput from './PeersOutput';
+import PriceOutput from './PriceOutput';
+import ReconnectOutput from './ReconnectOutput';
 import TagsOutput from './TagsOutput';
 
 export {
@@ -25,9 +30,14 @@ export {
   ChartFeesPaidOutput,
   ChartPaymentsReceivedOutput,
   ClosedOutput,
+  CreateGroupChannelOutput,
   FeesOutput,
   FindOutput,
   ForwardsOutput,
+  JoinGroupChannelOutput,
   OpenOutput,
+  PeersOutput,
+  PriceOutput,
+  ReconnectOutput,
   TagsOutput,
 };

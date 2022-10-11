@@ -617,6 +617,80 @@ try {
 
 <br></br>
 
+### CreateGroupChannel
+
+```javascript
+/**
+@PostRequest
+
+@Url
+http://localhost:8055/api/create-group-channel
+
+@Body
+/**
+  {
+    capacity: <Channel Capacity Tokens Number>
+    count: <Group Member Count Number>
+    rate: <Opening Chain Fee Tokens Per VByte Rate Number>
+  }
+
+@Response
+  {
+    transaction_id: <Transaction Id Hex String>
+  }
+*/
+*/
+
+import { io } from 'socket.io-client';
+
+try {
+  const url = 'http://localhost:8055/api/create-group-channel';
+
+  // Unique connection name for websocket connection.
+  const dateString = Date.now().toString();
+
+  const postBody = {
+    capacity: 1000000,
+    count: 3,
+    rate: 2,
+  };
+
+  // You will need live logs for create-group-channel, you can start a websocket connection with the server and add an event listener.
+  // Websocket url is the same as the server url http://localhost:8055
+  // Messages from the server are passed to client using the dateString passed from above.
+  const socket = io();
+
+  socket.on('connect', () => {
+    console.log('connected');
+  });
+
+  socket.on('disconnect', () => {
+    console.log('disconnected');
+  });
+
+  // Make sure to pass the same dateString from above
+  socket.on(`${dateString}`, data => {
+    console.log(data);
+  });
+
+  socket.on('error', err => {
+    throw err;
+  });
+
+  // End websocket code.
+
+  const config = {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  };
+
+  const response = await axios.post(url, postBody, config);
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
+
 ### Fees
 
 ```javascript
@@ -640,7 +714,7 @@ http://localhost:8055/api/fees
 */
 
 try {
-  const url = 'http://localhost:8055/api/open';
+  const url = 'http://localhost:8055/api/fees';
 
   const postBody = {
     fee_rate: ['100'],
@@ -826,6 +900,76 @@ try {
       Authorization: `Bearer ${accessToken}`,
     },
   });
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
+
+### JoinGroupChannel
+
+```javascript
+/**
+@PostRequest
+
+@Url
+http://localhost:8055/api/join-group-channel
+
+@Body
+/**
+  {
+    code: <Group Invite Code String>
+    max_rate: <Max Opening Chain Fee Tokens Per VByte Fee Rate Number>
+  }
+@Response
+  {
+    transaction_id: <Channel Funding Transaction Id Hex String>
+  }
+*/
+
+import { io } from 'socket.io-client';
+
+try {
+  const url = 'http://localhost:8055/api/join-group-channel';
+
+  // Unique connection name for websocket connection.
+  const dateString = Date.now().toString();
+
+  const postBody = {
+    code: 'invite_code',
+    max_rate: 3,
+  };
+
+  // You will need live logs for join-group-channel, you can start a websocket connection with the server and add an event listener.
+  // Websocket url is the same as the server url http://localhost:8055
+  // Messages from the server are passed to client using the dateString passed from above.
+  const socket = io();
+
+  socket.on('connect', () => {
+    console.log('connected');
+  });
+
+  socket.on('disconnect', () => {
+    console.log('disconnected');
+  });
+
+  // Make sure to pass the same dateString from above
+  socket.on(`${dateString}`, data => {
+    console.log(data);
+  });
+
+  socket.on('error', err => {
+    throw err;
+  });
+
+  // End websocket code.
+
+  const config = {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  };
+
+  const response = await axios.post(url, postBody, config);
 } catch (error) {
   console.error(error);
 }

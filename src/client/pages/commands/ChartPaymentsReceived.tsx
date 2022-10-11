@@ -22,35 +22,6 @@ const ChartPaymentsReceivedCommand = commands.find(n => n.value === 'ChartPaymen
   Passes query parameters to the chart-payments-received results page
 */
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    width: '700px',
-  },
-  textField: {
-    width: '350px',
-  },
-  button: {
-    color: 'white',
-    fontWeight: 'bold',
-    borderRadius: '10px',
-    border: '1px solid black',
-    marginTop: '20px',
-    width: '50px',
-  },
-  iconButton: {
-    width: '50px',
-    marginTop: '0px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-  switch: {
-    width: '100px',
-  },
-};
-
 const ChartPaymentsReceived = () => {
   const [count, setCount] = useState<boolean>(false);
   const [days, setDays] = useState('');
@@ -186,3 +157,32 @@ const ChartPaymentsReceived = () => {
 };
 
 export default ChartPaymentsReceived;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '700px',
+  },
+  textField: {
+    width: '350px',
+  },
+  button: {
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    width: '50px',
+  },
+  iconButton: {
+    width: '50px',
+    marginTop: '0px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+  switch: {
+    width: '100px',
+  },
+};

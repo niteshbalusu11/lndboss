@@ -19,37 +19,6 @@ const FeesCommand = commands.find(n => n.value === 'Fees');
   POST call to the NestJs process to get fees information
 */
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    width: '800px',
-  },
-  textField: {
-    width: '500px',
-    marginTop: '10px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-  button: {
-    color: 'white',
-    fontWeight: 'bold',
-    borderRadius: '10px',
-    border: '1px solid black',
-    marginTop: '20px',
-    width: '50px',
-  },
-  iconButton: {
-    width: '50px',
-    marginTop: '0px',
-  },
-  url: {
-    fontWeight: 'bold',
-    color: 'blue',
-  },
-};
-
 const Fees = () => {
   const [cltvDelta, setCltvDelta] = useState(undefined);
   const [data, setData] = useState(undefined);
@@ -57,7 +26,7 @@ const Fees = () => {
   const [formValues, setFormValues] = useState([{ node: '' }]);
   const [node, setNode] = useState(undefined);
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -169,7 +138,7 @@ const Fees = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
 
@@ -182,3 +151,34 @@ const Fees = () => {
 };
 
 export default Fees;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '800px',
+  },
+  textField: {
+    width: '500px',
+    marginTop: '10px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+  button: {
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    width: '50px',
+  },
+  iconButton: {
+    width: '50px',
+    marginTop: '0px',
+  },
+  url: {
+    fontWeight: 'bold',
+    color: 'blue',
+  },
+};

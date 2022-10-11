@@ -327,6 +327,24 @@ export class closedDto {
   node: string;
 }
 
+export class createGroupChannelDto {
+  @IsNumber()
+  capacity: number;
+
+  @IsNumber()
+  count: number;
+
+  @IsOptional()
+  @IsString()
+  node: string;
+
+  @IsString()
+  message_id: string;
+
+  @IsNumber()
+  rate: number;
+}
+
 export class deleteRebalanceDto {
   @Transform(({ value }) => trim(value))
   @IsString()
@@ -441,6 +459,20 @@ export class grpcDto {
   @IsOptional()
   @IsString()
   node: string;
+}
+export class joinGroupChannelDto {
+  @IsString()
+  code: string;
+
+  @IsOptional()
+  @IsString()
+  node: string;
+
+  @IsString()
+  message_id: string;
+
+  @IsNumber()
+  max_rate: number;
 }
 
 export class lnurlDto {

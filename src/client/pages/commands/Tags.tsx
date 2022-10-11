@@ -34,43 +34,6 @@ const TagsCommand = commands.find(n => n.value === 'Tags');
   GET call to the NestJs process to get the tags
 */
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    width: '700px',
-  },
-  textField: {
-    width: '380px',
-    marginTop: '20px',
-  },
-  button: {
-    color: 'white',
-    fontWeight: 'bold',
-    borderRadius: '10px',
-    border: '1px solid black',
-    marginTop: '20px',
-    width: '50px',
-  },
-  iconButton: {
-    width: '50px',
-    marginTop: '0px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-  switch: {
-    width: '100px',
-  },
-  inputLabel: {
-    fontWeight: 'bold',
-    color: 'black',
-  },
-  select: {
-    width: '300px',
-  },
-};
-
 const Tags = () => {
   const [avoid, setAvoid] = useState(false);
   const [formValues, setFormValues] = useState([{ pubkey: '' }]);
@@ -232,4 +195,42 @@ const Tags = () => {
     </CssBaseline>
   );
 };
+
 export default Tags;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '700px',
+  },
+  textField: {
+    width: '380px',
+    marginTop: '20px',
+  },
+  button: {
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    width: '50px',
+  },
+  iconButton: {
+    width: '50px',
+    marginTop: '0px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+  switch: {
+    width: '100px',
+  },
+  inputLabel: {
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  select: {
+    width: '300px',
+  },
+};

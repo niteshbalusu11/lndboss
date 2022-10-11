@@ -16,27 +16,13 @@ import { axiosGet } from '~client/utils/axios';
 
 const ChainDepositCommand = commands.find(n => n.value === 'ChainDeposit');
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    width: '700px',
-  },
-  textField: {
-    width: '500px',
-  },
-  h4: {
-    marginTop: '0px',
-  },
-};
-
 const ChainDeposit = () => {
   const [amount, setAmount] = useState('');
   const [data, setData] = useState({ address: '', url: '' });
   const [node, setNode] = useState('');
   const [format, setFormat] = useState('');
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -93,7 +79,7 @@ const ChainDeposit = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <SubmitButton variant="contained" onClick={fetchData}>
@@ -107,3 +93,17 @@ const ChainDeposit = () => {
 };
 
 export default ChainDeposit;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '700px',
+  },
+  textField: {
+    width: '500px',
+  },
+  h4: {
+    marginTop: '0px',
+  },
+};

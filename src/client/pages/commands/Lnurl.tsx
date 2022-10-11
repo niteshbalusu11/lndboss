@@ -26,46 +26,6 @@ import Link from 'next/link';
 
 const LnurlCommand = commands.find(n => n.value === 'Lnurl');
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    width: '700px',
-  },
-  textField: {
-    width: '500px',
-  },
-  pre: {
-    fontWeight: 'bold',
-  },
-  button: {
-    color: 'white',
-    fontWeight: 'bold',
-    borderRadius: '10px',
-    border: '1px solid black',
-    marginTop: '20px',
-    width: '50px',
-  },
-  iconButton: {
-    width: '50px',
-    marginTop: '0px',
-  },
-  switch: {
-    width: '100px',
-  },
-  url: {
-    fontWeight: 'bold',
-    color: 'blue',
-  },
-  inputLabel: {
-    fontWeight: 'bold',
-    color: 'black',
-  },
-  select: {
-    width: '300px',
-  },
-};
-
 const Lnurl = () => {
   const [node, setNode] = useState('');
   const [amount, setAmount] = useState('');
@@ -81,7 +41,7 @@ const Lnurl = () => {
     setLnurlFunction(event.target.value);
   };
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -305,7 +265,7 @@ const Lnurl = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <Link href={{ pathname: `/result/LnurlResult`, query: flags }} passHref>
@@ -320,3 +280,43 @@ const Lnurl = () => {
 };
 
 export default Lnurl;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '700px',
+  },
+  textField: {
+    width: '500px',
+  },
+  pre: {
+    fontWeight: 'bold',
+  },
+  button: {
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    width: '50px',
+  },
+  iconButton: {
+    width: '50px',
+    marginTop: '0px',
+  },
+  switch: {
+    width: '100px',
+  },
+  url: {
+    fontWeight: 'bold',
+    color: 'blue',
+  },
+  inputLabel: {
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  select: {
+    width: '300px',
+  },
+};

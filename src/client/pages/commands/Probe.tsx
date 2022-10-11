@@ -21,39 +21,6 @@ const ProbeCommand = commands.find(n => n.value === 'Probe');
   GET call to the NestJs process to execute to probe a node on the network.
 */
 
-const styles = {
-  form: {
-    marginLeft: '50px',
-    marginTop: '100px',
-    minWidth: '700px',
-  },
-  textField: {
-    width: '500px',
-  },
-  pre: {
-    fontWeight: 'bold',
-  },
-  button: {
-    color: 'white',
-    fontWeight: 'bold',
-    borderRadius: '10px',
-    border: '1px solid black',
-    marginTop: '20px',
-    width: '50px',
-  },
-  iconButton: {
-    width: '50px',
-    marginTop: '0px',
-  },
-  switch: {
-    width: '100px',
-  },
-  url: {
-    fontWeight: 'bold',
-    color: 'blue',
-  },
-};
-
 const Probe = () => {
   const [node, setNode] = useState('');
   const [amount, setAmount] = useState('');
@@ -64,7 +31,7 @@ const Probe = () => {
   const [maxPaths, setMaxPaths] = useState('');
   const [outPeer, setOutPeer] = useState([{ outPeer: '' }]);
 
-  const handeNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNode(event.target.value);
   };
 
@@ -233,7 +200,7 @@ const Probe = () => {
             placeholder={globalCommands.node.name}
             label={globalCommands.node.name}
             id={globalCommands.node.value}
-            onChange={handeNodeChange}
+            onChange={handleNodeChange}
             style={styles.textField}
           />
           <Link href={{ pathname: `/result/ProbeResult`, query: flags }} passHref>
@@ -248,3 +215,36 @@ const Probe = () => {
 };
 
 export default Probe;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    minWidth: '700px',
+  },
+  textField: {
+    width: '500px',
+  },
+  pre: {
+    fontWeight: 'bold',
+  },
+  button: {
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '10px',
+    border: '1px solid black',
+    marginTop: '20px',
+    width: '50px',
+  },
+  iconButton: {
+    width: '50px',
+    marginTop: '0px',
+  },
+  switch: {
+    width: '100px',
+  },
+  url: {
+    fontWeight: 'bold',
+    color: 'blue',
+  },
+};

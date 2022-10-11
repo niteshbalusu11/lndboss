@@ -132,6 +132,20 @@ export class CommandsService {
     return { result };
   }
 
+  async createGroupChannelCommand(args: dto.createGroupChannelDto): Promise<{ result: any }> {
+    try {
+      const logger = await this.logger({ messageId: args.message_id, service: 'create-group-channel' });
+
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+      const { result } = await commands.createGroupChannelCommand({ args, lnd, logger });
+
+      return { result };
+    } catch (error) {
+      httpLogger({ error });
+    }
+  }
+
   async findCommand(args: dto.findDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
@@ -165,6 +179,20 @@ export class CommandsService {
     const { result } = await commands.graphCommand({ args, lnd, logger });
 
     return { result };
+  }
+
+  async joinGroupChannelCommand(args: dto.joinGroupChannelDto): Promise<{ result: any }> {
+    try {
+      const logger = await this.logger({ messageId: args.message_id, service: 'join-group-channel' });
+
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+      const { result } = await commands.joinGroupChannelCommand({ args, lnd, logger });
+
+      return { result };
+    } catch (error) {
+      httpLogger({ error });
+    }
   }
 
   async lnurlCommand(args: dto.lnurlDto): Promise<{ result: any }> {
