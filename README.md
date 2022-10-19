@@ -1,7 +1,7 @@
 <h1>A GUI For BalanceOfSatoshis</h1>
 
 [![npm version](https://badge.fury.io/js/lndboss.svg)](https://badge.fury.io/js/lndboss)
-[![docker pulls](https://img.shields.io/docker/pulls/niteshbalusu/lndboss?style=flat-round)](https://hub.docker.com/repository/docker/niteshbalusu/lndboss)
+[![docker pulls](https://img.shields.io/docker/pulls/niteshbalusu/lndboss?style=flat-round)](https://hub.docker.com/r/niteshbalusu/lndboss)
 
 #### For questions or support, please reach out on telegram.
 https://t.me/lndboss
