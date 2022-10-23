@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [2.7.1](https://github.com/niteshbalusu11/lndboss/compare/v2.7.0...v2.7.1) (2022-10-23)
 
+- Fixed a bug where fee policy updates don't work for new channels.
+
 ## [2.7.0](https://github.com/niteshbalusu11/lndboss/compare/v2.6.0...v2.7.0) (2022-10-11)
 
 - Added support for bos create-group-channel
