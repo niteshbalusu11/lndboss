@@ -8,11 +8,10 @@ const { ceil, max, round } = Math;
 const defaultBaseFees = '1000';
 const defaultCltvDelta = 40;
 const defaultRate = 1;
-const diff = (a: number, b: number, c: number) => a - (b + c);
 const div = (a: number, b: number) => (a / b).toFixed(2);
 const flatten = arr => [].concat(...arr);
 const interval = 1000 * 60 * 2;
-const isBetween = (num1: number, num2: number, value: number) => value >= num1 && value < num2;
+const isBetween = (num1: number, num2: number, value: number) => value > num1 && value <= num2;
 const maxhtlc = (a: number, b: number) => String(round(a * b * 1000));
 const times = 10;
 const uniq = (arr: string[]) => Array.from(new Set(arr));
@@ -164,9 +163,8 @@ const updatePolicies = async (args: Args) => {
                 .filter(channel => channel.partner_public_key === key)
                 .filter(channel => {
                   const [a, b] = ratio.split('-');
-                  const capacity = diff(channel.capacity, channel.local_reserve, channel.remote_reserve);
 
-                  const outboundCapacityRatio = div(channel.local_balance, capacity);
+                  const outboundCapacityRatio = div(channel.local_balance, channel.capacity);
 
                   return isBetween(Number(a), Number(b), Number(outboundCapacityRatio));
                 })
@@ -195,6 +193,7 @@ const updatePolicies = async (args: Args) => {
       updateFees: [
         'getUpdateInfo',
         ({ getUpdateInfo }, cbk: any) => {
+          console.log(getUpdateInfo);
           if (!getUpdateInfo || !getUpdateInfo.length) {
             return cbk();
           }
