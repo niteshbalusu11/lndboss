@@ -193,7 +193,6 @@ const updatePolicies = async (args: Args) => {
       updateFees: [
         'getUpdateInfo',
         ({ getUpdateInfo }, cbk: any) => {
-          console.log(getUpdateInfo);
           if (!getUpdateInfo || !getUpdateInfo.length) {
             return cbk();
           }
