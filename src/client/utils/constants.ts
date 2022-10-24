@@ -2,7 +2,7 @@ export const clientConstants = {
   authenticatePage: '/Authenticate',
   commandsPage: '/Commands',
   dashboardPage: '/Dashboard',
-  feeStrategyPath: '/schedulers/FeeScheduler',
+  feeStrategyPath: '/schedulers/FeesScheduler',
   homeButtonLabel: 'Home',
   loginUrl: '/auth/Login',
   publicPaths: ['/', '/auth/Login', '/auth/Register'],

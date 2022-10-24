@@ -2,8 +2,9 @@ import { auto, each } from 'async';
 
 import tagsCommand from '../tags/tags_command';
 
-const { isArray } = Array;
 const checkRatio = (n: string[]) => Number(n[0]) < Number(n[1]);
+const { isArray } = Array;
+const { isInteger } = Number;
 const isNumber = n => !isNaN(n);
 const isPublicKey = n => !!n && /^0[2-3][0-9A-F]{64}$/i.test(n);
 
@@ -21,6 +22,7 @@ type Args = {
       basefees: string[];
       feerates: string[];
       ids: string[];
+      inactivity: string[];
       maxhtlcratios: string[];
       parsed_ids: string[];
       ratios: string[];
@@ -93,6 +95,10 @@ const validateKeysAndValues = async ({ configs }: Args) => {
               throw new Error('ExpectedNumericFeeRateValues');
             }
 
+            if (!!config.inactivity.filter(n => !isNumber(Number(n))).length) {
+              throw new Error('ExpectedNumericFeeRateValues');
+            }
+
             if (!!config.maxhtlcratios.filter(n => !isNumber(Number(n))).length) {
               throw new Error('ExpectedNumericMaxHtlcRatioValues');
             }
@@ -103,6 +109,14 @@ const validateKeysAndValues = async ({ configs }: Args) => {
 
             if (!!config.feerates.filter(n => Number(n) < 0).length) {
               throw new Error('ExpectedFeeRateGreaterThanZero');
+            }
+
+            if (!!config.inactivity.filter(n => Number(n) <= 0).length) {
+              throw new Error('ExpectedInactivityPeriodsGreaterThanZero');
+            }
+
+            if (!!config.inactivity.filter(n => !isInteger(Number(n))).length) {
+              throw new Error('ExpectedInactivityPeriodsGreaterThanZero');
             }
 
             if (!!config.maxhtlcratios.filter(n => Number(n) < 0 || Number(n) > 1).length) {

@@ -36,6 +36,7 @@ type AutoFeeCronArgs = {
     config: {
       basefees: string[];
       feerates: string[];
+      inactivity: string[];
       maxhtlcratios: string[];
       parsed_ids: string[];
       ratios: string[];

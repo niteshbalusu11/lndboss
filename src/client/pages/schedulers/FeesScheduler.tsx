@@ -56,7 +56,7 @@ type FormFieldState = Array<{
   ids: string[];
   inactivity: string[];
 }>;
-const FeeScheduler = () => {
+const FeesScheduler = () => {
   const [formFields, setFormFields] = useState<FormFieldState>([
     { ratios: [], basefees: [], feerates: [], maxhtlcratios: [], ids: [], inactivity: [] },
   ]);
@@ -114,6 +114,7 @@ const FeeScheduler = () => {
     try {
       formFields.forEach((n, index) => {
         validateAutoFees({
+          inactivityPeriods: n.inactivity,
           index: index + 1,
           baseFees: n.basefees,
           feeRates: n.feerates,
@@ -138,7 +139,7 @@ const FeeScheduler = () => {
         feerates: n.feerates,
         maxhtlcratios: n.maxhtlcratios,
         ids: n.ids,
-        inactivity: [],
+        inactivity: n.inactivity,
         ratios: n.ratios,
         parsed_ids: n.ids.map(a => splitValue(a)),
       };
@@ -183,6 +184,14 @@ const FeeScheduler = () => {
     if (!!newValue) {
       const newFormValues = [...formFields];
       newFormValues[i].maxhtlcratios = newValue;
+      setFormFields(newFormValues);
+    }
+  };
+
+  const handleInactivityPeriodChange = (i: number, e: any, newValue?: any) => {
+    if (!!newValue) {
+      const newFormValues = [...formFields];
+      newFormValues[i].inactivity = newValue;
       setFormFields(newFormValues);
     }
   };
@@ -332,6 +341,26 @@ const FeeScheduler = () => {
                   onChange={(event, newValue) => handleMaxHtlcRatioChange(index, event, newValue)}
                 />
 
+                <Autocomplete
+                  id={`inactivity-${index}`}
+                  sx={{ display: 'inline-block' }}
+                  freeSolo
+                  multiple={true}
+                  options={form.inactivity || []}
+                  value={form.inactivity || []}
+                  renderInput={params => (
+                    <TextField
+                      {...params}
+                      label="Inactivity Period (Optional)"
+                      placeholder="Inactivity Period (days)"
+                      value={form.inactivity}
+                      style={styles.textField}
+                      id={`inactivity-${index}`}
+                    />
+                  )}
+                  onChange={(event, newValue) => handleInactivityPeriodChange(index, event, newValue)}
+                />
+
                 <IconButton aria-label="delete" onClick={() => removeFields(index)} style={styles.iconButton}>
                   <DeleteIcon />
                 </IconButton>
@@ -362,7 +391,7 @@ const FeeScheduler = () => {
   );
 };
 
-export default FeeScheduler;
+export default FeesScheduler;
 
 export async function getServerSideProps() {
   return {

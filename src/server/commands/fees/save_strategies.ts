@@ -27,6 +27,7 @@ type Args = {
       basefees: string[];
       feerates: string[];
       ids: string[];
+      inactivity: string[];
       maxhtlcratios: string[];
       parsed_ids: string[];
       ratios: string[];

@@ -30,6 +30,7 @@ type Args = {
     config: {
       basefees: string[];
       feerates: string[];
+      inactivity: string[];
       maxhtlcratios: string[];
       parsed_ids: string[];
       ratios: string[];
@@ -187,6 +188,7 @@ const scheduledFeesCommand = async ({ args, lnd }: Args) => {
             basefees: string[];
             feerates: string[];
             ids: string[];
+            inactivity: string[];
             maxhtlcratios: string[];
             parsed_ids: string[];
             ratios: string[];

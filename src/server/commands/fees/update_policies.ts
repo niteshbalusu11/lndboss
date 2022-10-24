@@ -1,8 +1,10 @@
+import * as moment from 'moment';
+
 import { AuthenticatedLnd, GetChannelResult, GetChannelsResult, GetIdentityResult, updateRoutingFees } from 'lightning';
 import { auto, each, map, retry } from 'async';
 
+import fetchForwards from './fetch_forwards';
 import { findKey } from 'ln-sync';
-import moment from 'moment';
 
 const { ceil, max, round } = Math;
 const defaultBaseFees = '1000';
@@ -33,6 +35,7 @@ type Args = {
   config: {
     basefees: string[];
     feerates: string[];
+    inactivity: string[];
     maxhtlcratios: string[];
     parsed_ids: string[];
     ratios: string[];
@@ -56,10 +59,32 @@ type Tasks = {
     public_key: string;
   }[];
   updateFees: any;
-  getUpdateInfo: {
+  getForwards: {
+    created_at: string;
+    fee: number;
+    fee_mtokens: string;
+    incoming_channel: string;
+    mtokens: string;
+    outgoing_channel: string;
+    tokens: number;
+  }[];
+  filterInfo: {
     base_fee_mtokens: string;
+    channel_id: string;
     cltv_delta: number;
     fee_rate: number;
+    inactivity: string;
+    max_htlc_mtokens: string | undefined;
+    ratio: string;
+    transaction_id: string;
+    transaction_vout: number;
+  }[];
+  getUpdateInfo: {
+    base_fee_mtokens: string;
+    channel_id: string;
+    cltv_delta: number;
+    fee_rate: number;
+    inactivity: string;
     max_htlc_mtokens: string | undefined;
     ratio: string;
     transaction_id: string;
@@ -93,6 +118,22 @@ const updatePolicies = async (args: Args) => {
 
         return cbk();
       },
+
+      // Get forwards
+      getForwards: [
+        'validate',
+        async () => {
+          // Exit early if there are no idle peers
+          if (!args.config.inactivity.length) {
+            return [];
+          }
+
+          const numericInactivity = args.config.inactivity.map(n => Number(n));
+          const maxInactivity = Math.max.apply(null, numericInactivity);
+
+          return await fetchForwards({ idle_days: maxInactivity, lnd: args.lnd });
+        },
+      ],
 
       // Get peers
       getPeers: [
@@ -146,6 +187,7 @@ const updatePolicies = async (args: Args) => {
               ratio,
               basefees: !!args.config.basefees.length ? args.config.basefees[i] : undefined,
               feerate: !!args.config.feerates.length ? Number(args.config.feerates[i]) : undefined,
+              inactivity: !!args.config.inactivity.length ? Number(args.config.inactivity[i]) : undefined,
               maxhtlcratio: !!args.config.maxhtlcratios.length ? Number(args.config.maxhtlcratios[i]) : undefined,
             };
           });
@@ -157,7 +199,7 @@ const updatePolicies = async (args: Args) => {
 
           const cltvDelta = max(...currentPolicies.map(n => n.cltv_delta));
 
-          const res = await map(combinedArray, async ({ ratio, basefees, feerate, maxhtlcratio }) => {
+          const res = await map(combinedArray, async ({ ratio, basefees, feerate, inactivity, maxhtlcratio }) => {
             const getBetweenChannels = await map(peerKeys, async (key: string) => {
               const channels = args.getChannels.channels
                 .filter(channel => channel.partner_public_key === key)
@@ -173,8 +215,11 @@ const updatePolicies = async (args: Args) => {
                   ratio,
                   base_fee_mtokens: basefees || defaultBaseFees,
                   cltv_delta: cltvDelta || defaultCltvDelta,
+                  channel_id: n.id,
                   fee_rate: feerate === undefined ? defaultRate : feerate,
+                  inactivity: moment().subtract(inactivity, 'days').toISOString(),
                   max_htlc_mtokens: !!maxhtlcratio ? maxhtlc(n.capacity, maxhtlcratio) : undefined,
+                  partner_public_key: n.partner_public_key,
                   transaction_id: n.transaction_id,
                   transaction_vout: n.transaction_vout,
                 }));
@@ -189,16 +234,46 @@ const updatePolicies = async (args: Args) => {
         },
       ],
 
+      filterInfo: [
+        'getUpdateInfo',
+        'getForwards',
+        async ({ getUpdateInfo, getForwards }) => {
+          // Exit early when inactivity periods or forwards are not present
+          if (!args.config.inactivity.length || !getForwards || !getForwards.length) {
+            return getUpdateInfo;
+          }
+
+          // Filter out updates if there is a forward after inactivity days.
+          const filterInfo = getUpdateInfo.filter(info => {
+            const forward = getForwards.find(
+              n =>
+                (n.incoming_channel === info.channel_id || n.outgoing_channel === info.channel_id) &&
+                n.created_at > info.inactivity
+            );
+
+            if (!forward) {
+              return info;
+            }
+
+            return null;
+          });
+
+          return filterInfo;
+        },
+      ],
+
       // Execute fee updates
       updateFees: [
+        'filterInfo',
+        'getForwards',
         'getUpdateInfo',
-        ({ getUpdateInfo }, cbk: any) => {
-          if (!getUpdateInfo || !getUpdateInfo.length) {
+        ({ filterInfo }, cbk: any) => {
+          if (!filterInfo || !filterInfo.length) {
             return cbk();
           }
 
           return each(
-            getUpdateInfo,
+            filterInfo,
             (update, cbk: any) => {
               return retry(
                 { interval, times },
