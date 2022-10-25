@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [2.8.1](https://github.com/niteshbalusu11/lndboss/compare/v2.8.0...v2.8.1) (2022-10-25)
 
+- Fixed positioning of inactivity period of fees scheduler page.
+
 ## [2.8.0](https://github.com/niteshbalusu11/lndboss/compare/v2.7.1...v2.8.0) (2022-10-25)
 
 - Added support for auto fee policy based on channel inactivity periods.
