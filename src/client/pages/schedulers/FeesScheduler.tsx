@@ -282,6 +282,26 @@ const FeesScheduler = () => {
                 />
 
                 <Autocomplete
+                  id={`inactivity-${index}`}
+                  sx={{ display: 'inline-block' }}
+                  freeSolo
+                  multiple={true}
+                  options={form.inactivity || []}
+                  value={form.inactivity || []}
+                  renderInput={params => (
+                    <TextField
+                      {...params}
+                      label="Inactivity Period (Optional)"
+                      placeholder="Inactivity Period (days)"
+                      value={form.inactivity}
+                      style={styles.textField}
+                      id={`inactivity-${index}`}
+                    />
+                  )}
+                  onChange={(event, newValue) => handleInactivityPeriodChange(index, event, newValue)}
+                />
+
+                <Autocomplete
                   id={`basefees-${index}`}
                   sx={{ display: 'inline-block' }}
                   freeSolo
@@ -339,26 +359,6 @@ const FeesScheduler = () => {
                     />
                   )}
                   onChange={(event, newValue) => handleMaxHtlcRatioChange(index, event, newValue)}
-                />
-
-                <Autocomplete
-                  id={`inactivity-${index}`}
-                  sx={{ display: 'inline-block' }}
-                  freeSolo
-                  multiple={true}
-                  options={form.inactivity || []}
-                  value={form.inactivity || []}
-                  renderInput={params => (
-                    <TextField
-                      {...params}
-                      label="Inactivity Period (Optional)"
-                      placeholder="Inactivity Period (days)"
-                      value={form.inactivity}
-                      style={styles.textField}
-                      id={`inactivity-${index}`}
-                    />
-                  )}
-                  onChange={(event, newValue) => handleInactivityPeriodChange(index, event, newValue)}
                 />
 
                 <IconButton aria-label="delete" onClick={() => removeFields(index)} style={styles.iconButton}>
@@ -435,6 +435,15 @@ const Instructions = () => {
       <li>
         Multiple ratio ranges can be added in the same field, just type a range and hit enter and it turns into a
         bubble.
+      </li>
+
+      <br />
+      <h3>Inactivity Period (optional):</h3>
+      <li>Set fee policies based on how many days a channel was inactive.</li>
+      <li>Example: 30 means peers/tags selected had no route for 30 days.</li>
+      <li>
+        Works along with ratio ranges, the condition will always be outbound/capacity ratio && inactivity period when
+        executing.
       </li>
 
       <br />
