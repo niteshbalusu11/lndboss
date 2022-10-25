@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.8.0](https://github.com/niteshbalusu11/lndboss/compare/v2.7.1...v2.8.0) (2022-10-25)
+
 ### [2.7.1](https://github.com/niteshbalusu11/lndboss/compare/v2.7.0...v2.7.1) (2022-10-23)
 
 - Fixed a bug where fee policy updates don't work for new channels.
