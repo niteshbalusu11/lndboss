@@ -65,7 +65,7 @@ const Open = () => {
 
   const fetchData = async () => {
     const messageId = Date.now().toString();
-    const capacities = formFields.map(n => n.amount).filter(n => !!n) || [];
+    const capacities = formFields.map(n => n.amount.trim()).filter(n => !!n) || [];
     const coopCloseAddresses = formFields.map(n => n.coopCloseAddress).filter(n => !!n) || [];
     const gives = formFields.map(n => Number(n.give)).filter(n => !!n) || [];
     const publicKeys = formFields.map(n => n.pubkey).filter(n => !!n) || [];
@@ -135,10 +135,11 @@ const Open = () => {
     setFormFields([...formFields, object]);
   };
 
-  const removeFields = index => {
-    const data = [...formFields];
-    data.splice(index, 1);
-    setFormFields(data);
+  const removeFields = (index: number) => {
+    const list = [...formFields];
+    list.splice(index, 1);
+
+    setFormFields(list);
   };
 
   return (
@@ -162,6 +163,7 @@ const Open = () => {
                   onChange={event => handleFormChange(index, event)}
                   style={styles.textField}
                   id={`pubkey-${index}`}
+                  value={form.pubkey}
                 />
 
                 <TextField
@@ -172,6 +174,7 @@ const Open = () => {
                   onChange={event => handleFormChange(index, event)}
                   style={styles.textField}
                   id={`amount-${index}`}
+                  value={form.amount}
                 />
 
                 <TextField
@@ -182,6 +185,7 @@ const Open = () => {
                   onChange={event => handleFormChange(index, event)}
                   style={styles.textField}
                   id={`address-${index}`}
+                  value={form.coopCloseAddress}
                 />
 
                 <TextField
@@ -192,6 +196,7 @@ const Open = () => {
                   onChange={event => handleFormChange(index, event)}
                   style={styles.textField}
                   id={`give-${index}`}
+                  value={form.give}
                 />
 
                 <FormControl sx={{ minWidth: 120, marginLeft: '10px' }}>
@@ -221,7 +226,12 @@ const Open = () => {
                   </Select>
                 </FormControl>
 
-                <IconButton aria-label="delete" onClick={() => removeFields(index)} style={styles.iconButton}>
+                <IconButton
+                  aria-label="delete"
+                  onClick={() => removeFields(index)}
+                  id={`delete-${index}`}
+                  style={styles.iconButton}
+                >
                   <DeleteIcon />
                 </IconButton>
               </div>
