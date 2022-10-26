@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [2.9.2](https://github.com/niteshbalusu11/lndboss/compare/v2.9.1...v2.9.2) (2022-10-26)
 
-- Bump bos dependency which fixes create-group-channel and join-group-channel commands.
+- Bump bos dependency which fixes create-group-channel and join-group-channel commands for taproot inputs.
 
 ## [2.9.0](https://github.com/niteshbalusu11/lndboss/compare/v2.8.1...v2.9.0) (2022-10-26)
 
