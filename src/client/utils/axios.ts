@@ -1,6 +1,7 @@
 import * as YAML from 'json-to-pretty-yaml';
 
 import axios from 'axios';
+import { getAuthenticatedCookie } from './cookie';
 import getConfig from 'next/config';
 import { io } from 'socket.io-client';
 import { useLoading } from '~client/hooks/useLoading';
@@ -26,7 +27,7 @@ const axiosGet = async ({ path, query }: ArgsGet) => {
     useLoading({ isLoading: true });
 
     const url = `${apiUrl}/${path}`;
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getAuthenticatedCookie();
 
     const response = await axios.get(url, {
       params: query,
@@ -55,7 +56,7 @@ const axiosGet = async ({ path, query }: ArgsGet) => {
 const axiosGetNoLoading = async ({ path, query }: ArgsGet) => {
   try {
     const url = `${apiUrl}/${path}`;
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getAuthenticatedCookie();
 
     const response = await axios.get(url, {
       params: query,
@@ -85,7 +86,7 @@ const axiosGetNoLoading = async ({ path, query }: ArgsGet) => {
 const axiosGetNoAlert = async ({ path, query }: ArgsGet) => {
   try {
     const url = `${apiUrl}/${path}`;
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getAuthenticatedCookie();
 
     const response = await axios.get(url, {
       params: query,
@@ -108,7 +109,7 @@ const axiosGetNoAlert = async ({ path, query }: ArgsGet) => {
 const axiosGetWebSocket = async ({ path, query }: ArgsGet) => {
   try {
     const url = `${apiUrl}/${path}`;
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getAuthenticatedCookie();
 
     const response = await axios.get(url, {
       params: query,
@@ -136,7 +137,7 @@ const axiosPostWithAlert = async ({ path, postBody }: ArgsPost) => {
     useLoading({ isLoading: true });
 
     const url = `${apiUrl}/${path}`;
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getAuthenticatedCookie();
 
     const config = {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -160,7 +161,7 @@ const axiosPostWithAlert = async ({ path, postBody }: ArgsPost) => {
 const axiosPost = async ({ path, postBody }: ArgsPost) => {
   try {
     const url = `${apiUrl}/${path}`;
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getAuthenticatedCookie();
 
     const config = {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -202,7 +203,7 @@ const axiosPostWithWebSocket = async ({ id, path, postBody, setData }) => {
     });
 
     const url = `${apiUrl}/${path}`;
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getAuthenticatedCookie();
 
     const config = {
       headers: { Authorization: `Bearer ${accessToken}` },

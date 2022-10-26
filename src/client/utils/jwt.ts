@@ -33,3 +33,25 @@ export const isJwtValid = ({ token }: { token: string }) => {
     return false;
   }
 };
+
+/** Decode the JWT token
+  {
+    token: <JWT Auth token String>,
+  }
+  @returns
+    decoded: <Decoded JWT Object>
+*/
+
+export const jwtDecode = ({ token }: { token: string }) => {
+  try {
+    const decoded: Decoded = jwt_decode(token);
+
+    if (!decoded || !decoded.exp) {
+      return false;
+    }
+
+    return decoded.exp;
+  } catch (error) {
+    return false;
+  }
+};

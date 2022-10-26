@@ -6,6 +6,7 @@ import Router from 'next/router';
 import axios from 'axios';
 import { clientConstants } from '~client/utils/constants';
 import getConfig from 'next/config';
+import { setAuthenticatedCookie } from '~client/utils/cookie';
 import { useNotify } from '~client/hooks/useNotify';
 
 const { publicRuntimeConfig } = getConfig();
@@ -73,7 +74,7 @@ const Login = () => {
         window.alert('ErrorRetrievingAccessToken');
       }
 
-      localStorage.setItem('accessToken', data.accessToken);
+      setAuthenticatedCookie({ token: data.accessToken });
 
       Router.push(clientConstants.dashboardPage);
       useNotify({ type: 'success', message: 'Successfully logged in' });

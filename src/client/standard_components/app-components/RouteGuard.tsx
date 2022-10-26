@@ -1,4 +1,5 @@
 import { clientConstants } from '~client/utils/constants';
+import { getAuthenticatedCookie } from '~client/utils/cookie';
 import { isJwtValid } from '~client/utils/jwt';
 import { useEffect } from 'react';
 import { useNotify } from '~client/hooks/useNotify';
@@ -9,7 +10,7 @@ const RouteGuard = ({ router, children }: any) => {
   const path = router.pathname;
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getAuthenticatedCookie();
 
     authCheck(accessToken);
   }, [path]);

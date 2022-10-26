@@ -11,6 +11,7 @@ import React from 'react';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { clientConstants } from '~client/utils/constants';
 import moment from 'moment';
+import { removeAuthenticatedCookie } from '~client/utils/cookie';
 import { useNotify } from '~client/hooks/useNotify';
 
 const monthToDateDifference = () => moment().diff(moment().startOf('month'), 'days') || 1;
@@ -18,7 +19,7 @@ const monthToDateDifference = () => moment().diff(moment().startOf('month'), 'da
 // Displays the list of items in the sidebar
 
 const handleLogout = () => {
-  localStorage.removeItem('accessToken');
+  removeAuthenticatedCookie();
   useNotify({ type: 'info', message: 'Logged out successfully' });
 };
 

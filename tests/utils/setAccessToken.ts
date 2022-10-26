@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const setAccessToken = async ({ page }) => {
+const lndbossCookie = 'lndboss-cookie';
+
+const setAccessToken = async ({ context }) => {
   const url = process.env.TESTING_URL!;
 
   const config = {
@@ -18,7 +20,10 @@ const setAccessToken = async ({ page }) => {
 
   const { accessToken } = data;
 
-  await page.addInitScript(`localStorage.setItem('accessToken', '${accessToken}')`);
+  // await page.addInitScript(`localStorage.setItem('accessToken', '${accessToken}')`);
+  // await page.addInitScript(setCookie(lndbossCookie, accessToken));
+
+  // const browserContext = await browser.newContext();
 
   return accessToken;
 };
@@ -34,7 +39,6 @@ const getAccessToken = async () => {
     password: process.env.TESTING_PASSWORD,
     username: process.env.TESTING_USERNAME,
   };
-  console.log(url, postBody);
 
   const response = await axios.post(url, postBody, config);
 
@@ -45,8 +49,11 @@ const getAccessToken = async () => {
   return accessToken;
 };
 
-const removeAccessToken = async ({ page }) => {
-  await page.addInitScript(`localStorage.removeItem('accessToken')`);
+const removeAccessToken = async ({ browser, page }) => {
+  // await page.addInitScript(`localStorage.removeItem('accessToken')`);
+  const browserContext = await browser.newContext();
+  await browserContext.clearCookies();
+  // await page.addInitScript(deleteCookie(lndbossCookie));
 };
 
 export { getAccessToken, setAccessToken, removeAccessToken };

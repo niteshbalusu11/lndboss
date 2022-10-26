@@ -7,12 +7,28 @@ import { testConstants } from '../utils/constants';
 const BalanceCommand = commands.find(n => n.value === 'Balance');
 
 test.describe('Test the Balance command client page', async () => {
-  test.beforeEach(async ({ page }) => {
-    await setAccessToken({ page });
-  });
+  test.beforeEach(async ({ context }) => {});
 
-  test('Test the Balance command page and input values', async ({ page }) => {
+  test('Test the Balance command page and input values', async ({ context }) => {
+    const token = await setAccessToken({ context });
+    await context.addCookies([
+      {
+        url: 'http://[::1]:8055',
+        name: 'lndboss-cookie',
+        sameSite: 'Strict',
+        value: token,
+      },
+    ]);
+
+    // console.log((await context.storageState()).cookies);
+    console.log(await context.cookies());
+    const page = await context.newPage();
     await page.goto(testConstants.commandsPage);
+
+    page.on('console', msg => {
+      console.log(msg);
+    });
+
     await page.click('text=Balance');
     await expect(page).toHaveTitle('Balance');
 
@@ -36,7 +52,7 @@ test.describe('Test the Balance command client page', async () => {
     await page.click('text=home');
   });
 
-  test.afterEach(async ({ page }) => {
-    await removeAccessToken({ page });
+  test.afterEach(async ({ browser, page }) => {
+    await removeAccessToken({ browser, page });
   });
 });

@@ -5,6 +5,7 @@ import { Button, Menu, MenuItem } from '@mui/material';
 import Link from 'next/link';
 import { clientConstants } from '~client/utils/constants';
 import { purple } from '@mui/material/colors';
+import { removeAuthenticatedCookie } from '~client/utils/cookie';
 import { useNotify } from '~client/hooks/useNotify';
 
 // Menu button on the commands page
@@ -36,7 +37,7 @@ const PositionedMenu = () => {
 
   const handleLogout = () => {
     setAnchorEl(null);
-    localStorage.removeItem('accessToken');
+    removeAuthenticatedCookie();
     useNotify({ type: 'info', message: 'Logged out successfully' });
   };
 

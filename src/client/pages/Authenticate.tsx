@@ -10,6 +10,7 @@ import {
 import Head from 'next/head';
 import Router from 'next/router';
 import axios from 'axios';
+import { getAuthenticatedCookie } from '~client/utils/cookie';
 import getConfig from 'next/config';
 import { useLoading } from '~client/hooks/useLoading';
 import { useNotify } from '~client/hooks/useNotify';
@@ -118,7 +119,7 @@ const Authenticate = () => {
     };
 
     try {
-      const accessToken = localStorage.getItem('accessToken');
+      const accessToken = getAuthenticatedCookie();
 
       const url = `${apiUrl}/credentials`;
 
