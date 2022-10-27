@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test';
 
 import commands from '../../src/client/commands';
-import { loginForTests } from '../utils/setAccessToken';
+import { setCookie } from '../utils/setAccessToken';
 import { testConstants } from '../utils/constants';
 
 const JoinGroupChannelCommand = commands.find(n => n.value === 'JoinGroupChannel');
 
 test.describe('Test the Join Group Channel command client page', async () => {
   test.beforeEach(async ({ page }) => {
-    await loginForTests({ page });
+    await setCookie({ page });
   });
 
   test('test the Join Group Channel command page and input values', async ({ page }) => {
@@ -33,6 +33,7 @@ test.describe('Test the Join Group Channel command client page', async () => {
   });
 
   test.afterEach(async ({ page }) => {
+    await page.context().clearCookies();
     await page.close();
   });
 });

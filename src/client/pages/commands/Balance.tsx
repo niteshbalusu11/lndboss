@@ -13,7 +13,6 @@ import commands, { globalCommands } from '../../commands';
 import { BalanceOutput } from '../../output';
 import Head from 'next/head';
 import { axiosGet } from '~client/utils/axios';
-import { getAuthenticatedCookie } from '~client/utils/cookie';
 
 /*
   Renders the bos balance command
@@ -23,7 +22,6 @@ import { getAuthenticatedCookie } from '~client/utils/cookie';
 const BalanceCommand = commands.find(n => n.value === 'Balance');
 
 const Balance = () => {
-  console.log('cookie is: -- ', getAuthenticatedCookie());
   const [above, setAbove] = useState('');
   const [below, setBelow] = useState('');
   const [isEnabled1, setIsEnabled1] = useState(false);

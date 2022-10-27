@@ -46,18 +46,21 @@ const getAccessToken = async () => {
   return accessToken;
 };
 
-const loginForTests = async ({ page }: { page: Page }) => {
-  const password = process.env.TESTING_PASSWORD!;
-  const username = process.env.TESTING_USERNAME!;
-  console.log(password, username);
-  await page.goto(testConstants.loginUrl);
-  await page.type(`#accountName`, username!);
-  await page.type(`#password`, password!);
-  await page.click('#login');
+const setCookie = async ({ page }: { page: Page }) => {
+  const token = await getAccessToken();
+
+  // Set cookie expiry to 30 seconds
+  const expiry = Math.floor(Date.now() / 1000) + 30;
+
+  await page
+    .context()
+    .addCookies([
+      { expires: expiry, name: testConstants.cookieName, secure: true, value: token, url: testConstants.cookieUrl },
+    ]);
 };
 
 const removeAccessToken = async ({ page }) => {
   await page.addInitScript(`localStorage.removeItem('accessToken')`);
 };
 
-export { getAccessToken, loginForTests, setAccessToken, removeAccessToken };
+export { getAccessToken, setAccessToken, setCookie, removeAccessToken };

@@ -1,6 +1,8 @@
 export const testConstants = {
   homeButtonLabel: 'Home',
   commandsPage: '/Commands',
+  cookieName: 'lndboss-cookie',
+  cookieUrl: 'http://localhost:8055',
   loginUrl: '/auth/Login',
   rebalanceSchedulerUrl: '/schedulers/RebalanceScheduler',
   registerUrl: '/auth/Register',

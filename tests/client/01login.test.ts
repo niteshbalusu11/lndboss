@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test';
 
-import { loginForTests } from '../utils/setAccessToken';
+import { setCookie } from '../utils/setAccessToken';
 import { testConstants } from '../utils/constants';
 
 test.describe('Test the login page and check authentication', async () => {
   test.beforeEach(async ({ page }) => {
-    await loginForTests({ page });
+    await setCookie({ page });
   });
 
   test('Test the login page and input values: type credentials', async ({ page }) => {
@@ -44,6 +44,7 @@ test.describe('Test the login page and check authentication', async () => {
   });
 
   test.afterEach(async ({ page }) => {
+    await page.context().clearCookies();
     await page.close();
   });
 });

@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test';
 
 import commands from '../../src/client/commands';
-import { loginForTests } from '../utils/setAccessToken';
+import { setCookie } from '../utils/setAccessToken';
 import { testConstants } from '../utils/constants';
 
 const PriceCommand = commands.find(n => n.value === 'Price');
 
 test.describe('Test the Price command client page', async () => {
   test.beforeEach(async ({ page }) => {
-    await loginForTests({ page });
+    await setCookie({ page });
   });
 
   test('test the Price command page and input values', async ({ page }) => {
@@ -41,6 +41,7 @@ test.describe('Test the Price command client page', async () => {
   });
 
   test.afterEach(async ({ page }) => {
+    await page.context().clearCookies();
     await page.close();
   });
 });
