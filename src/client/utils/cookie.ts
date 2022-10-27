@@ -20,7 +20,7 @@ export const setAuthenticatedCookie = async ({ token }) => {
     maxAge: diff(maxAge, currentTimeStamp),
     path: '/',
     sameSite: true,
-    secure: true,
+    secure: false,
   };
 
   setCookie(lndbossCookie, token, cookieOptions);
