@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test';
-import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
+import { loginForTests } from '../utils/setAccessToken';
 import { testConstants } from '../utils/constants';
 
 test.describe('Test the Open command client page', async () => {
   test.beforeEach(async ({ page }) => {
-    await setAccessToken({ page });
+    await loginForTests({ page });
   });
 
   test('test the Open page and input values', async ({ page }) => {
@@ -26,6 +26,6 @@ test.describe('Test the Open command client page', async () => {
   });
 
   test.afterEach(async ({ page }) => {
-    await removeAccessToken({ page });
+    await page.close();
   });
 });

@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test';
-import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
+import { loginForTests } from '../utils/setAccessToken';
 import { testConstants } from '../utils/constants';
 
 const CreateGroupChannelCommand = commands.find(n => n.value === 'CreateGroupChannel');
 
 test.describe('Test the Create Group Channel command client page', async () => {
   test.beforeEach(async ({ page }) => {
-    await setAccessToken({ page });
+    await loginForTests({ page });
   });
 
   test('test the Create Group Channel command page and input values', async ({ page }) => {
@@ -31,6 +31,6 @@ test.describe('Test the Create Group Channel command client page', async () => {
   });
 
   test.afterEach(async ({ page }) => {
-    await removeAccessToken({ page });
+    await page.close();
   });
 });

@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test';
-import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
+import { loginForTests } from '../utils/setAccessToken';
 import { testConstants } from '../utils/constants';
 
 const GraphCommand = commands.find(n => n.value === 'Graph');
 
 test.describe('Test the Graph command client page', async () => {
   test.beforeEach(async ({ page }) => {
-    await setAccessToken({ page });
+    await loginForTests({ page });
   });
 
   test('test the Graph command page and input values', async ({ page }) => {
@@ -26,6 +26,6 @@ test.describe('Test the Graph command client page', async () => {
   });
 
   test.afterEach(async ({ page }) => {
-    await removeAccessToken({ page });
+    await page.close();
   });
 });

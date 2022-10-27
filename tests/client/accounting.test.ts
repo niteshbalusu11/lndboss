@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test';
-import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
+import { loginForTests } from '../utils/setAccessToken';
 import { testConstants } from '../utils/constants';
 
 const AccountingCommand = commands.find(n => n.value === 'Accounting');
 
 test.describe('Test the Accounting command client page', async () => {
   test.beforeEach(async ({ page }) => {
-    await setAccessToken({ page });
+    await loginForTests({ page });
   });
 
   test('test the Accounting command page: chain-fees', async ({ page }) => {
@@ -201,6 +201,6 @@ test.describe('Test the Accounting command client page', async () => {
   });
 
   test.afterEach(async ({ page }) => {
-    await removeAccessToken({ page });
+    await page.close();
   });
 });

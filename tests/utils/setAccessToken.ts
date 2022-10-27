@@ -1,8 +1,8 @@
+import { Page } from '@playwright/test';
 import axios from 'axios';
+import { testConstants } from './constants';
 
-const lndbossCookie = 'lndboss-cookie';
-
-const setAccessToken = async ({ context }) => {
+const setAccessToken = async ({ page }) => {
   const url = process.env.TESTING_URL!;
 
   const config = {
@@ -20,10 +20,7 @@ const setAccessToken = async ({ context }) => {
 
   const { accessToken } = data;
 
-  // await page.addInitScript(`localStorage.setItem('accessToken', '${accessToken}')`);
-  // await page.addInitScript(setCookie(lndbossCookie, accessToken));
-
-  // const browserContext = await browser.newContext();
+  await page.addInitScript(`localStorage.setItem('accessToken', '${accessToken}')`);
 
   return accessToken;
 };
@@ -49,11 +46,18 @@ const getAccessToken = async () => {
   return accessToken;
 };
 
-const removeAccessToken = async ({ browser, page }) => {
-  // await page.addInitScript(`localStorage.removeItem('accessToken')`);
-  const browserContext = await browser.newContext();
-  await browserContext.clearCookies();
-  // await page.addInitScript(deleteCookie(lndbossCookie));
+const loginForTests = async ({ page }: { page: Page }) => {
+  const password = process.env.TESTING_PASSWORD!;
+  const username = process.env.TESTING_USERNAME!;
+  console.log(password, username);
+  await page.goto(testConstants.loginUrl);
+  await page.type(`#accountName`, username!);
+  await page.type(`#password`, password!);
+  await page.click('#login');
 };
 
-export { getAccessToken, setAccessToken, removeAccessToken };
+const removeAccessToken = async ({ page }) => {
+  await page.addInitScript(`localStorage.removeItem('accessToken')`);
+};
+
+export { getAccessToken, loginForTests, setAccessToken, removeAccessToken };
