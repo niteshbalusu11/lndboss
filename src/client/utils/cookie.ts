@@ -19,7 +19,7 @@ export const setAuthenticatedCookie = async ({ token }) => {
   const cookieOptions = {
     maxAge: diff(maxAge, currentTimeStamp),
     path: '/',
-    sameSite: false,
+    sameSite: true,
     secure: false,
   };
 
