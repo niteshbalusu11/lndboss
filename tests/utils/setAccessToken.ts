@@ -34,7 +34,6 @@ const getAccessToken = async () => {
     password: process.env.TESTING_PASSWORD,
     username: process.env.TESTING_USERNAME,
   };
-  console.log(url, postBody);
 
   const response = await axios.post(url, postBody, config);
 
