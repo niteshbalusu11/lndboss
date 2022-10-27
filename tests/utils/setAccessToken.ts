@@ -1,4 +1,6 @@
+import { Page } from '@playwright/test';
 import axios from 'axios';
+import { testConstants } from './constants';
 
 const setAccessToken = async ({ page }) => {
   const url = process.env.TESTING_URL!;
@@ -44,8 +46,21 @@ const getAccessToken = async () => {
   return accessToken;
 };
 
+const setCookie = async ({ page }: { page: Page }) => {
+  const token = await getAccessToken();
+
+  // Set cookie expiry to 30 seconds
+  const expiry = Math.floor(Date.now() / 1000) + 30;
+
+  await page
+    .context()
+    .addCookies([
+      { expires: expiry, name: testConstants.cookieName, secure: true, value: token, url: testConstants.cookieUrl },
+    ]);
+};
+
 const removeAccessToken = async ({ page }) => {
   await page.addInitScript(`localStorage.removeItem('accessToken')`);
 };
 
-export { getAccessToken, setAccessToken, removeAccessToken };
+export { getAccessToken, setAccessToken, setCookie, removeAccessToken };

@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test';
-import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
+import { setCookie } from '../utils/setAccessToken';
 import { testConstants } from '../utils/constants';
 
 const ChainfeesCommand = commands.find(n => n.value === 'Chainfees');
 
 test.describe('Test the Chainfees command client page', async () => {
   test.beforeEach(async ({ page }) => {
-    await setAccessToken({ page });
+    await setCookie({ page });
   });
 
   test('test the Chainfees command page and input values', async ({ page }) => {
@@ -45,6 +45,7 @@ test.describe('Test the Chainfees command client page', async () => {
   });
 
   test.afterEach(async ({ page }) => {
-    await removeAccessToken({ page });
+    await page.context().clearCookies();
+    await page.close();
   });
 });

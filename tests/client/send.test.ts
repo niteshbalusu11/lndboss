@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test';
-import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
+import { setCookie } from '../utils/setAccessToken';
 import { testConstants } from '../utils/constants';
 
 const SendCommand = commands.find(n => n.value === 'Send');
 
 test.describe('Test the Send command client page', async () => {
   test.beforeEach(async ({ page }) => {
-    await setAccessToken({ page });
+    await setCookie({ page });
   });
 
   test('test the Send command page and input values', async ({ page }) => {
@@ -40,6 +40,7 @@ test.describe('Test the Send command client page', async () => {
   });
 
   test.afterEach(async ({ page }) => {
-    await removeAccessToken({ page });
+    await page.context().clearCookies();
+    await page.close();
   });
 });

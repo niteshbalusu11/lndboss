@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test';
-import { removeAccessToken, setAccessToken } from '../utils/setAccessToken';
 
 import commands from '../../src/client/commands';
+import { setCookie } from '../utils/setAccessToken';
 import { testConstants } from '../utils/constants';
 
 const RebalanceCommand = commands.find(n => n.value === 'Rebalance');
 
 test.describe('Test the Rebalance command client page', async () => {
   test.beforeEach(async ({ page }) => {
-    await setAccessToken({ page });
+    await setCookie({ page });
   });
 
   test('test the Rebalance command page and input values', async ({ page }) => {
@@ -65,6 +65,7 @@ test.describe('Test the Rebalance command client page', async () => {
   });
 
   test.afterEach(async ({ page }) => {
-    await removeAccessToken({ page });
+    await page.context().clearCookies();
+    await page.close();
   });
 });
