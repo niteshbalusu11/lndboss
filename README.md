@@ -458,7 +458,7 @@ If not, you have 2 options to authenticate to LND:
 
 ### Option 1: (Using path to LND directory)
 
-- From the home page, click on Menu on the top left corner, select Authenticate, and select the option `Path to LND directory`
+- From the dashboard page, click on Connect To Lnd on the left app drawer, select Authenticate, and select the option `Path to LND directory`
 -  Enter the full LND directory, example: `/home/ubuntu/nitesh/.lnd`. 
 - Socket would be `localhost:10009`, if you're running lndboss on a different machine from your node, then you'll have to set it to `hostname:10009`, example: `raspberrypi.local:10009`
 - Click `Authenticate`, your credentials will be verified and presented with a success/failure message.
@@ -468,7 +468,7 @@ If not, you have 2 options to authenticate to LND:
 
 ### Option 2: (Using base64 credentials)
 
-- From the home page, click on Menu on the top left corner, select Authenticate, and select the option `credentials`.
+- From the dashboard page, click on Connect To Lnd on the left app drawer, select Authenticate, and select the option `credentials`.
 - You will need base64 encoded Macaroon, TLS Cert and Socket to authenticate to LND.
 - Easiest way to obtain them is by running `bos credentials --cleartext --nospend` command on your node if you have [BalanceOfSatoshis](https://github.com/alexbosworth/balanceofsatoshis) installed.
 - Socket would be `localhost:10009`, if you're running lndboss on a different machine from your node, then you'll have to set it to `hostname:10009`, example: `raspberrypi.local:10009`
