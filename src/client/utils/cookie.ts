@@ -1,10 +1,32 @@
-import { deleteCookie, getCookie, setCookie } from 'cookies-next';
+import nookies, { destroyCookie, parseCookies, setCookie } from 'nookies';
 
 import { jwtDecode } from './jwt';
 
 const lndbossCookie = 'lndboss-cookie';
 
 const diff = (m: number, n: number) => Math.round(m - n);
+
+// Get cookie from browser
+export const getAuthenticatedCookie = () => {
+  const cookie = parseCookies();
+
+  return cookie[lndbossCookie];
+};
+
+export const getAuthenticatedServerCookie = ctx => {
+  const cookies = nookies.get(ctx);
+
+  if (!cookies || !cookies[lndbossCookie]) {
+    return false;
+  }
+
+  return cookies[lndbossCookie];
+};
+
+// Remove cookie from browser
+export const removeAuthenticatedCookie = () => {
+  destroyCookie(null, lndbossCookie);
+};
 
 // Set cookie to browser
 export const setAuthenticatedCookie = async ({ token }) => {
@@ -23,17 +45,5 @@ export const setAuthenticatedCookie = async ({ token }) => {
     secure: false,
   };
 
-  setCookie(lndbossCookie, token, cookieOptions);
-};
-
-// Get cookie from browser
-export const getAuthenticatedCookie = () => {
-  const cookie = getCookie(lndbossCookie);
-
-  return String(cookie);
-};
-
-// Remove cookie from browser
-export const removeAuthenticatedCookie = () => {
-  deleteCookie(lndbossCookie);
+  setCookie(null, lndbossCookie, token, cookieOptions);
 };
