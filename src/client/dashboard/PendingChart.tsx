@@ -31,7 +31,7 @@ const PendingChart = () => {
   }, []);
 
   resgisterCharts();
-  return !!data && !!data.length ? <BasicTable rows={data} /> : null;
+  return !!data && !!data.length ? <BasicTable rows={data} title={'Pending Things'} /> : null;
 };
 
 export default PendingChart;

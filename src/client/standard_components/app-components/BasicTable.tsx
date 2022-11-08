@@ -8,14 +8,17 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
+// Creates a basic table with rows and title.
+
 function createData(data: string) {
   return { data };
 }
 
 type Args = {
   rows: string[];
+  title: string;
 };
-const BasicTable = ({ rows }: Args) => {
+const BasicTable = ({ rows, title }: Args) => {
   const data = rows.map(n => createData(n));
 
   return (
@@ -23,7 +26,7 @@ const BasicTable = ({ rows }: Args) => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="left">Pending Things</TableCell>
+            <TableCell align="left">{title}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
