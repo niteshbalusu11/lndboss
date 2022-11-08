@@ -1,11 +1,12 @@
 import { AuthenticatedLnd, GetChannelBalanceResult, GetWalletInfoResult } from 'lightning';
 import { channelBalance, walletInfo } from '~server/commands/grpc_utils/grpc_utils';
+import { getPendingDto, grpcDto } from '~shared/commands.dto';
 
 import { Injectable } from '@nestjs/common';
 import { LndService } from '../lnd/lnd.service';
 import getPeers from '~server/commands/grpc_utils/get_peers';
+import { getPending } from '~server/commands/grpc_utils';
 import { getSavedNodes } from '~server/lnd';
-import { grpcDto } from '~shared/commands.dto';
 import { map } from 'async';
 
 type GetPeersArgs = {
@@ -14,6 +15,13 @@ type GetPeersArgs = {
 
 @Injectable()
 export class GrpcService {
+  async getChannelBalance(args: grpcDto): Promise<{ result: GetChannelBalanceResult }> {
+    const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+    const { result } = await channelBalance({ lnd });
+    return { result };
+  }
+
   async getPeers(args: GetPeersArgs): Promise<any> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
@@ -37,22 +45,23 @@ export class GrpcService {
     return { result };
   }
 
-  async getWalletInfo(args: grpcDto): Promise<{ result: GetWalletInfoResult }> {
+  async getPending(args: getPendingDto): Promise<any> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
-    const { result } = await walletInfo({ lnd });
-    return { result };
-  }
+    const result = await getPending({ lnd });
 
-  async getChannelBalance(args: grpcDto): Promise<{ result: GetChannelBalanceResult }> {
-    const lnd = await LndService.authenticatedLnd({ node: args.node });
-
-    const { result } = await channelBalance({ lnd });
-    return { result };
+    return result;
   }
 
   async getSavedNodes(): Promise<{ result: any }> {
     const nodes = await getSavedNodes({});
     return { result: nodes.nodes };
+  }
+
+  async getWalletInfo(args: grpcDto): Promise<{ result: GetWalletInfoResult }> {
+    const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+    const { result } = await walletInfo({ lnd });
+    return { result };
   }
 }

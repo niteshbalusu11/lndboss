@@ -432,6 +432,12 @@ export class forwardsDto {
   to: string;
 }
 
+export class getPendingDto {
+  @IsOptional()
+  @IsString()
+  node: string;
+}
+
 export class graphDto {
   @Transform(({ value }) => toStringArray(value))
   @IsOptional()
