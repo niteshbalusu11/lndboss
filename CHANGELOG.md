@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.10.0](https://github.com/niteshbalusu11/lndboss/compare/v2.9.2...v2.10.0) (2022-11-08)
 
+- Added a simple table on dashboard page that shows pending payments and channels.
+
 ### [2.9.2](https://github.com/niteshbalusu11/lndboss/compare/v2.9.1...v2.9.2) (2022-10-26)
 
 - Bump bos dependency which fixes create-group-channel and join-group-channel commands for taproot inputs.
