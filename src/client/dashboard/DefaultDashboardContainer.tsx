@@ -2,6 +2,7 @@ import { Box, Container, Grid, Paper, Toolbar } from '@mui/material';
 
 import BalanceInfo from './BalanceInfo';
 import NodeInfo from '~client/dashboard/NodeInfo';
+import PendingChart from './PendingChart';
 import RoutingFeeChart from './RoutingFeeChart';
 
 // Renders the default dashboard on page load.
@@ -33,6 +34,7 @@ const DefaultDashboardContainer = () => {
               <BalanceInfo />
             </Paper>
           </Grid>
+
           {/* Walletinfo */}
           <Grid item xs={12} md={5} lg={8}>
             <Paper
@@ -46,6 +48,22 @@ const DefaultDashboardContainer = () => {
               <NodeInfo />
             </Paper>
           </Grid>
+
+          {/* Pending Chart */}
+          <Grid item xs={12} md={5} lg={11}>
+            <Paper
+              sx={{
+                p: 2,
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
+                width: 800,
+              }}
+            >
+              <PendingChart />
+            </Paper>
+          </Grid>
+
           {/* Chart */}
           <Grid item xs={12} md={5} lg={11}>
             <Paper

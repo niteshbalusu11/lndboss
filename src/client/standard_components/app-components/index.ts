@@ -1,4 +1,5 @@
 import BasicDatePicker from './BasicDatePicker';
+import BasicTable from './BasicTable';
 import CenterFlexBox from './CenterFlexBox';
 import ContainerStyle from './ContainerStyle';
 import CopyText from './CopyText';
@@ -18,10 +19,11 @@ import StartFlexBoxBlack from './StartFlexBoxBlack';
 import Startup from './Startup';
 import SubmitButton from './SubmitButton';
 export {
+  BasicDatePicker,
+  BasicTable,
   CenterFlexBox,
   ContainerStyle,
   CopyText,
-  BasicDatePicker,
   PositionedMenu,
   ProgressBar,
   ReactCron,
