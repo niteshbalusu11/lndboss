@@ -61,6 +61,10 @@ const getPending = async ({ lnd }: Args) => {
     await auto({
       // Check arguments
       validate: (cbk: any) => {
+        if (!lnd) {
+          return cbk([400, 'ExpectedAuthenticatedLndToGetPendingInfo']);
+        }
+
         return cbk();
       },
 
