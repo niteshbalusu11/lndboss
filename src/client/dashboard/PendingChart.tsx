@@ -19,7 +19,7 @@ const PendingChart = () => {
 
       useLoading({ isLoading: true });
       const result = await axiosPost({ path: 'grpc/get-pending', postBody });
-      console.log(result);
+
       if (!!result) {
         setData(result);
       }

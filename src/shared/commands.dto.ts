@@ -762,6 +762,11 @@ export class rebalanceDto {
   @IsString()
   in_through: string;
 
+  @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
+  @IsBoolean()
+  is_strict_max_fee_rate: boolean;
+
   @Transform(({ value }) => toNumber(value))
   @IsOptional()
   @IsNumber()
@@ -832,6 +837,10 @@ export class rebalanceScheduleDto {
   @IsOptional()
   @IsString()
   in_through: string;
+
+  @IsOptional()
+  @IsBoolean()
+  is_strict_max_fee_rate: boolean;
 
   @Transform(({ value }) => toNumber(value))
   @IsOptional()
