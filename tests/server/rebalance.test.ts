@@ -46,6 +46,7 @@ test.describe('Test Rebalance command on the node.js side', async () => {
       in_filters: [],
       in_outbound: 0,
       in_through: carolWallet.public_key,
+      is_strict_max_fee_rate: true,
       max_fee: 100,
       max_fee_rate: 100,
       max_rebalance: '50000',
