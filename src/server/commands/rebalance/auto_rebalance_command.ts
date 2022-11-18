@@ -59,6 +59,7 @@ const autoRebalanceCommand = async ({ args, lnd }) => {
     in_filters: inFiltersArray,
     in_outbound: args.in_outbound || undefined,
     in_through: args.in_through || undefined,
+    is_strict_max_fee_rate: args.is_strict_max_fee_rate || undefined,
     max_fee: args.max_fee || 1337,
     max_fee_rate: args.max_fee_rate || 250,
     max_rebalance: args.max_rebalance,

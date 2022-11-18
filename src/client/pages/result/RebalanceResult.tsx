@@ -53,6 +53,7 @@ const RebalanceResult = () => {
       in_filters: router.query.in_filters,
       in_outbound: router.query.in_outbound,
       in_through: router.query.in_through,
+      is_strict_max_fee_rate: router.query.is_strict_max_fee_rate,
       max_fee: router.query.max_fee,
       max_fee_rate: router.query.max_fee_rate,
       max_rebalance: router.query.max_rebalance,

@@ -362,6 +362,7 @@ const commands: Commands = [
       in_filters: 'InFilters',
       in_outbound: 'InTargetOutbound',
       in_through: 'In',
+      is_strict_max_fee_rate: 'AvoidHighFeeRoutes',
       max_fee: 'MaxFee',
       max_fee_rate: 'MaxFeeRate',
       max_rebalance: 'Amount',

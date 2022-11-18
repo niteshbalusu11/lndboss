@@ -240,6 +240,7 @@ export type commandRebalance = {
   in_filters: string[];
   in_outbound: string;
   in_through: string;
+  is_strict_max_fee_rate: boolean;
   max_fee: number;
   max_fee_rate: number;
   max_rebalance: string;

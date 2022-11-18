@@ -1494,6 +1494,7 @@ http://localhost:8055/api/rebalance
     [in_filters]: [<Inbound Filter Formula String>]
     [in_outbound]: <Inbound Target Outbound Liquidity Tokens Number>
     [in_through]: <Pay In Through Peer String>
+    [is_strict_max_fee_rate]: <Avoid Routes Above Fee Rate>
     [max_fee]: <Maximum Fee Tokens Number>
     [max_fee_rate]: <Max Fee Rate Tokens Per Million Number>
     [max_rebalance]: <Maximum Amount to Rebalance Tokens String>

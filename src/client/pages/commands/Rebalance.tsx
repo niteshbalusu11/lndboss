@@ -1,10 +1,11 @@
 import * as types from '~shared/types';
 
-import { Button, CssBaseline, IconButton, Stack, TextField } from '@mui/material';
+import { Button, CssBaseline, FormControlLabel, IconButton, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import {
   ReactCron,
   StandardHomeButtonLink,
+  StandardSwitch,
   StartFlexBox,
   SubmitButton,
 } from '~client/standard_components/app-components';
@@ -34,6 +35,7 @@ const Rebalance = () => {
   const [inTargetOutbound, setInTargetOutbound] = useState(undefined);
   const [outTargetInbound, setOutTargetInbound] = useState(undefined);
   const [inPeer, setInPeer] = useState(undefined);
+  const [isStrictMaxFeeRate, setIsStrictMaxFeeRate] = useState(false);
   const [outPeer, setOutPeer] = useState(undefined);
   const [maxFee, setMaxFee] = useState('1337');
   const [maxFeeRate, setMaxFeeRate] = useState('250');
@@ -128,6 +130,10 @@ const Rebalance = () => {
     setMaxFeeRate(e.target.value);
   };
 
+  const handleAvoidHighFeeRoutes = () => {
+    setIsStrictMaxFeeRate((previousState: boolean) => !previousState);
+  };
+
   const handleTimeoutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTimeout(e.target.value);
   };
@@ -139,6 +145,7 @@ const Rebalance = () => {
     in_filters: inFilter.map(n => n.inFilter),
     in_outbound: inTargetOutbound,
     in_through: inPeer,
+    is_strict_max_fee_rate: isStrictMaxFeeRate,
     max_fee: Number(maxFee),
     max_fee_rate: Number(maxFeeRate),
     max_rebalance: amount,
@@ -156,6 +163,7 @@ const Rebalance = () => {
       in_filters: inFilter.map(n => n.inFilter),
       in_outbound: inTargetOutbound,
       in_through: inPeer,
+      is_strict_max_fee_rate: isStrictMaxFeeRate,
       max_fee: Number(maxFee),
       max_fee_rate: Number(maxFeeRate),
       max_rebalance: amount,
@@ -182,28 +190,7 @@ const Rebalance = () => {
       <StartFlexBox>
         <StandardHomeButtonLink />
         <Stack spacing={3} style={styles.form}>
-          <h1>Auto Rebalance Scheduler</h1>
-          <h2>
-            To use Automated Rebalancing make sure to enable Scheduled Rebalances from User Preferences on the Dashboard
-            Page.
-          </h2>
-          <h3>Note: It is recommended that you manually test a rebalance before auto scheduling.</h3>
-          <h3>
-            Note: Select all rebalance parameters from the fields below, select a schedule and then click add schedule.
-          </h3>
-
-          <Link href={{ pathname: clientConstants.rebalanceSchedulerUrl }}>
-            <a target="blank" style={styles.url}>
-              Click to view current scheduled jobs
-            </a>
-          </Link>
-
-          <h1>Manual Rebalance</h1>
-          <pre style={styles.pre}>{RebalanceCommand.longDescription}</pre>
-          <h3>
-            NOTE: THERE IS NO WAY TO STOP AN IN-FLIGHT REBALANCE OTHER THAN RESTARTING THE APP, DOUBLE CHECK BEFORE
-            RUNNING.
-          </h3>
+          <Instructions />
 
           <PeersAndTagsList
             setPeer={setOutPeer}
@@ -245,6 +232,19 @@ const Rebalance = () => {
             onChange={handleMaxFeeRateChange}
             style={styles.textField}
           />
+
+          <FormControlLabel
+            style={styles.switch}
+            control={
+              <StandardSwitch
+                checked={isStrictMaxFeeRate}
+                onChange={handleAvoidHighFeeRoutes}
+                id={RebalanceCommand.flags.is_strict_max_fee_rate}
+              />
+            }
+            label={RebalanceCommand.flags.is_strict_max_fee_rate}
+          />
+
           <>
             <Button href="#text-buttons" onClick={() => addAvoidFields()} style={styles.button}>
               Add +
@@ -416,4 +416,50 @@ const styles = {
   link: {
     width: '250px',
   },
+  switch: {
+    width: '100px',
+  },
+};
+
+const Instructions = () => {
+  return (
+    <>
+      <h1>Auto Rebalance Scheduler</h1>
+      <h3>
+        To use Automated Rebalancing make sure to enable Scheduled Rebalances from User Preferences on the Dashboard
+        Page.
+      </h3>
+      <ul>
+        <li>It is recommended that you manually test a rebalance before auto scheduling.</li>
+        <li>Select all rebalance parameters from the fields below, select a schedule and then click add schedule.</li>
+      </ul>
+
+      <Link href={{ pathname: clientConstants.rebalanceSchedulerUrl }}>
+        <a target="blank" style={styles.url}>
+          Click to view current scheduled jobs
+        </a>
+      </Link>
+
+      <h1>Manual Rebalance</h1>
+      <h4>Change the liquidity of two peers.</h4>
+      <ul>
+        <li>Specifying target liquidity you can use CAPACITY/2, other formulas.</li>
+        <li>You can specify tags for --avoid, --in, --out (see help tags)</li>
+        <li>--amount can take m/k variables: 5*m for 5 million, 250*k = 0.0025.</li>
+        <li>--avoid can take a channel id or a public key to avoid.</li>
+        <li>--avoid can take a public_key/public_key to avoid a directed pair.</li>
+        <li>--avoid can take a FORMULA/public_key to avoid inbound peers.</li>
+        <li>--avoid can take a public_key/FORMULA to avoid outbound peers.</li>
+        <li>--avoid FORMULA variables: FEE_RATE, BASE_FEE, HEIGHT, AGE.</li>
+        <li>--in decreases the inbound liquidity with a specific peer/tag.</li>
+        <li>--in-filter/--out-filter vars: CAPACITY/HEIGHTS/INBOUND_LIQUIDITY.</li>
+        <li>--in-filter/--out-filter vars: OUTBOUND_LIQUIDITY/PENDING_PAYMENTS</li>
+      </ul>
+
+      <h4>
+        NOTE: THERE IS NO WAY TO STOP AN IN-FLIGHT REBALANCE OTHER THAN RESTARTING THE APP, DOUBLE CHECK BEFORE RUNNING.
+        REBALANCE AUTO TIMEOUT IS 5MINS IF NOT SPECIFIED.
+      </h4>
+    </>
+  );
 };
