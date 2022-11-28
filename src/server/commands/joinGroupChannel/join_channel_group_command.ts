@@ -18,11 +18,11 @@ import { joinGroupChannel } from 'paid-services';
 */
 
 type Args = {
-  args: types.commandJoinGroupChannel;
+  args: types.commandJoinChannelGroup;
   lnd: AuthenticatedLnd;
   logger: Logger;
 };
-const joinGroupChannelCommand = async ({ args, lnd, logger }: Args) => {
+const joinChannelGroupCommand = async ({ args, lnd, logger }: Args) => {
   const result = await joinGroupChannel({
     lnd,
     logger,
@@ -33,4 +33,4 @@ const joinGroupChannelCommand = async ({ args, lnd, logger }: Args) => {
   return { result };
 };
 
-export default joinGroupChannelCommand;
+export default joinChannelGroupCommand;

@@ -1,5 +1,7 @@
 const isNumber = (n: number) => !isNaN(n);
+const { isArray } = Array;
 const isOdd = n => !!(n % 2);
+const isPublicKey = n => !!n && /^0[2-3][0-9A-F]{64}$/i.test(n);
 const maxGroupSize = 420;
 const minChannelSize = 2e4;
 const minGroupSize = 2;
@@ -18,6 +20,7 @@ type Args = {
   capacity: number;
   count: number;
   rate: number;
+  members: string[];
 };
 const validateCreateGroupChannelCommand = (args: Args) => {
   if (!args.capacity || !isNumber(args.capacity)) {
@@ -46,6 +49,14 @@ const validateCreateGroupChannelCommand = (args: Args) => {
 
   if (!args.rate || !isNumber(args.rate)) {
     throw new Error('Expected Numeric Fee Rate To Open Group Channel');
+  }
+
+  if (!isArray(args.members)) {
+    throw new Error('Expected Array Of Members To Open Group Channel');
+  }
+
+  if (!!args.members.length && !!args.members.filter(n => !isPublicKey(n)).length) {
+    throw new Error('Expected Valid Pubkey For Allow Flag');
   }
 
   return true;

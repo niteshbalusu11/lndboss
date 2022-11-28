@@ -67,9 +67,9 @@ export class CommandsController {
     return this.commandsService.closedCommand(args);
   }
 
-  @Post('create-group-channel')
-  async createGroupChannelCommand(@Body() args: dto.createGroupChannelDto) {
-    return this.commandsService.createGroupChannelCommand(args);
+  @Post('create-channel-group')
+  async createChannelGroupCommand(@Body() args: dto.createGroupChannelDto) {
+    return this.commandsService.createChannelGroupCommand(args);
   }
 
   @Get('find')
@@ -87,9 +87,9 @@ export class CommandsController {
     return this.commandsService.graphCommand(args);
   }
 
-  @Post('join-group-channel')
-  async joinGroupChannelCommand(@Body() args: dto.joinGroupChannelDto) {
-    return this.commandsService.joinGroupChannelCommand(args);
+  @Post('join-channel-group')
+  async joinChannelGroupCommand(@Body() args: dto.joinGroupChannelDto) {
+    return this.commandsService.joinChannelGroupCommand(args);
   }
 
   @Get('lnurl')

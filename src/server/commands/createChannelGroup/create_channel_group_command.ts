@@ -19,19 +19,20 @@ import { createGroupChannel } from 'paid-services';
 */
 
 type Args = {
-  args: types.commandCreateGroupChannel;
+  args: types.commandCreateChannelGroup;
   lnd: AuthenticatedLnd;
   logger: Logger;
 };
-const createGroupChannelCommand = async ({ args, lnd, logger }: Args) => {
+const createChannelGroupCommand = async ({ args, lnd, logger }: Args) => {
   const result = await createGroupChannel({
     lnd,
     logger,
     capacity: args.capacity,
     count: args.count,
+    members: args.members || [],
     rate: args.rate,
   });
   return { result };
 };
 
-export default createGroupChannelCommand;
+export default createChannelGroupCommand;

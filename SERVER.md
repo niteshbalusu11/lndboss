@@ -624,13 +624,14 @@ try {
 @PostRequest
 
 @Url
-http://localhost:8055/api/create-group-channel
+http://localhost:8055/api/create-channel-group
 
 @Body
 /**
   {
     capacity: <Channel Capacity Tokens Number>
     count: <Group Member Count Number>
+    [members]: [<Allowed Group Members String>]
     rate: <Opening Chain Fee Tokens Per VByte Rate Number>
   }
 
@@ -644,7 +645,7 @@ http://localhost:8055/api/create-group-channel
 import { io } from 'socket.io-client';
 
 try {
-  const url = 'http://localhost:8055/api/create-group-channel';
+  const url = 'http://localhost:8055/api/create-channel-group';
 
   // Unique connection name for websocket connection.
   const dateString = Date.now().toString();
@@ -655,7 +656,7 @@ try {
     rate: 2,
   };
 
-  // You will need live logs for create-group-channel, you can start a websocket connection with the server and add an event listener.
+  // You will need live logs for create-channel-group, you can start a websocket connection with the server and add an event listener.
   // Websocket url is the same as the server url http://localhost:8055
   // Messages from the server are passed to client using the dateString passed from above.
   const socket = io();
@@ -914,7 +915,7 @@ try {
 @PostRequest
 
 @Url
-http://localhost:8055/api/join-group-channel
+http://localhost:8055/api/join-channel-group
 
 @Body
 /**
@@ -931,7 +932,7 @@ http://localhost:8055/api/join-group-channel
 import { io } from 'socket.io-client';
 
 try {
-  const url = 'http://localhost:8055/api/join-group-channel';
+  const url = 'http://localhost:8055/api/join-channel-group';
 
   // Unique connection name for websocket connection.
   const dateString = Date.now().toString();
@@ -941,7 +942,7 @@ try {
     max_rate: 3,
   };
 
-  // You will need live logs for join-group-channel, you can start a websocket connection with the server and add an event listener.
+  // You will need live logs for join-channel-group, you can start a websocket connection with the server and add an event listener.
   // Websocket url is the same as the server url http://localhost:8055
   // Messages from the server are passed to client using the dateString passed from above.
   const socket = io();

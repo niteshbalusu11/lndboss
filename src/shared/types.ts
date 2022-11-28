@@ -99,12 +99,13 @@ export type commandClosed = {
   node: string;
 };
 
-// ========================Create Group Channel Command=========================
+// ========================Create Channel Group Command=========================
 
-export type commandCreateGroupChannel = {
+export type commandCreateChannelGroup = {
   capacity: number;
   count: number;
   node: string;
+  members: string[];
   message_id: string;
   rate: number;
 };
@@ -146,7 +147,7 @@ export type commandGraph = {
 
 // ========================Join Group Channel Command=========================
 
-export type commandJoinGroupChannel = {
+export type commandJoinChannelGroup = {
   code: string;
   node: string;
   message_id: string;

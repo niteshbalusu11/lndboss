@@ -4,22 +4,21 @@ import commands from '../../src/client/commands';
 import { setCookie } from '../utils/setAccessToken';
 import { testConstants } from '../utils/constants';
 
-const CreateGroupChannelCommand = commands.find(n => n.value === 'CreateGroupChannel');
+const CreateChannelGroupCommand = commands.find(n => n.value === 'CreateChannelGroup');
 
 test.describe('Test the Create Group Channel command client page', async () => {
   test.beforeEach(async ({ page }) => {
     await setCookie({ page });
   });
 
-  test('test the Create Group Channel command page and input values', async ({ page }) => {
-    test.slow();
+  test('test the Create Channel Group command page and input values', async ({ page }) => {
     await page.goto(testConstants.commandsPage);
-    await page.click('text=Create Group Channel');
-    await expect(page).toHaveTitle('Create Group Channel');
+    await page.click('text=Create Channel Group');
+    await expect(page).toHaveTitle('Create Channel Group');
 
-    await page.type(`#${CreateGroupChannelCommand?.flags?.capacity}`, '100000');
-    await page.type(`#${CreateGroupChannelCommand?.flags?.fee_rate}`, '2');
-    await page.type(`#${CreateGroupChannelCommand?.flags?.size}`, '2');
+    await page.type(`#${CreateChannelGroupCommand?.flags?.capacity}`, '100000');
+    await page.type(`#${CreateChannelGroupCommand?.flags?.fee_rate}`, '2');
+    await page.type(`#${CreateChannelGroupCommand?.flags?.size}`, '2');
 
     await page.type('#node', 'testnode1');
 
