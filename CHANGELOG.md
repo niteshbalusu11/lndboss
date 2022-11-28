@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.12.0](https://github.com/niteshbalusu11/lndboss/compare/v2.11.0...v2.12.0) (2022-11-28)
+
 ## [2.11.0](https://github.com/niteshbalusu11/lndboss/compare/v2.10.0...v2.11.0) (2022-11-18)
 
 - Added avoid-high-fee-routes to rebalance to ignore route above max-fee-rate.
