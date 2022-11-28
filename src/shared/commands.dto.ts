@@ -338,6 +338,10 @@ export class createGroupChannelDto {
   @IsString()
   node: string;
 
+  @IsArray()
+  @IsOptional()
+  members: string[];
+
   @IsString()
   message_id: string;
 

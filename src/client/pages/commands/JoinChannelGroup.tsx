@@ -9,16 +9,16 @@ import Head from 'next/head';
 import { JoinGroupChannelOutput } from '~client/output';
 import { axiosPostWithWebSocket } from '~client/utils/axios';
 import { useNotify } from '~client/hooks/useNotify';
-import validateJoinGroupChannelCommand from '~client/utils/validations/validate_join_group_channel_command';
+import validateJoinGroupChannelCommand from '~client/utils/validations/validate_join_channel_group_command';
 
 /*
   Renders the bos join-group-channel command
   GET call to the NestJs process to get chain deposit address
 */
 
-const JoinGroupChannelCommand = commands.find(n => n.value === 'JoinGroupChannel');
+const JoinChannelGroupCommand = commands.find(n => n.value === 'JoinChannelGroup');
 
-const JoinGroupChannel = () => {
+const JoinChannelGroup = () => {
   const [code, setCode] = useState('');
   const [data, setData] = useState(undefined);
   const [maxFeeRate, setMaxFeeRate] = useState('');
@@ -47,7 +47,7 @@ const JoinGroupChannel = () => {
         return;
       }
 
-      const postBody: types.commandJoinGroupChannel = {
+      const postBody: types.commandJoinChannelGroup = {
         code,
         node,
         max_rate: Number(maxFeeRate),
@@ -56,7 +56,7 @@ const JoinGroupChannel = () => {
 
       await axiosPostWithWebSocket({
         id: postBody.message_id,
-        path: 'join-group-channel',
+        path: 'join-channel-group',
         postBody,
         setData,
       });
@@ -68,29 +68,29 @@ const JoinGroupChannel = () => {
   return (
     <CssBaseline>
       <Head>
-        <title>Join Group Channel</title>
+        <title>Join Channel Group</title>
       </Head>
       <StartFlexBox>
         <StandardHomeButtonLink />
         <Stack spacing={3} style={styles.form}>
-          <h2>{JoinGroupChannelCommand.name}</h2>
-          <h4 style={styles.h4}>{JoinGroupChannelCommand.description}</h4>
-          <h4 style={styles.h4}>{JoinGroupChannelCommand.longDescription}</h4>
+          <h2>{JoinChannelGroupCommand.name}</h2>
+          <h4 style={styles.h4}>{JoinChannelGroupCommand.description}</h4>
+          <h4 style={styles.h4}>{JoinChannelGroupCommand.longDescription}</h4>
           <Instructions />
 
           <TextField
             type="text"
             placeholder="Invite Code"
-            label={JoinGroupChannelCommand.args.code}
-            id={JoinGroupChannelCommand.args.code}
+            label={JoinChannelGroupCommand.args.code}
+            id={JoinChannelGroupCommand.args.code}
             onChange={handleCodeChange}
             style={styles.textField}
           />
           <TextField
             type="text"
             placeholder="Chain fee rate for open"
-            label={JoinGroupChannelCommand.flags.max_fee_rate}
-            id={JoinGroupChannelCommand.flags.max_fee_rate}
+            label={JoinChannelGroupCommand.flags.max_fee_rate}
+            id={JoinChannelGroupCommand.flags.max_fee_rate}
             onChange={handleMaxFeeRateChange}
             style={styles.textField}
           />
@@ -113,7 +113,7 @@ const JoinGroupChannel = () => {
   );
 };
 
-export default JoinGroupChannel;
+export default JoinChannelGroup;
 
 const styles = {
   form: {

@@ -9,12 +9,12 @@ import chartFeesEarnedCommand from './chartFeesEarned/chart_fees_earned_command'
 import chartFeesPaidCommand from './chartFeesPaid/chart_fees_paid_command';
 import chartPaymentsReceivedCommand from './chartPaymentsReceived/chart_payments_received_command';
 import closedCommand from './closed/closed_command';
-import createGroupChannelCommand from './createGroupChannel/create_group_channel_command';
+import createChannelGroupCommand from './createChannelGroup/create_channel_group_command';
 import feesCommand from './fees/fees_command';
 import findCommand from './find/find_command';
 import forwardsCommand from './forwards/forwards_command';
 import graphCommand from './graph/graph_command';
-import joinGroupChannelCommand from './joinGroupChannel/join_group_channel_command';
+import joinChannelGroupCommand from './joinGroupChannel/join_channel_group_command';
 import lnurlCommand from './lnurl/lnurl_command';
 import openCommand from './open/open_command';
 import payCommand from './pay/pay_command';
@@ -38,12 +38,12 @@ export {
   chartFeesPaidCommand,
   chartPaymentsReceivedCommand,
   closedCommand,
-  createGroupChannelCommand,
+  createChannelGroupCommand,
   feesCommand,
   findCommand,
   forwardsCommand,
   graphCommand,
-  joinGroupChannelCommand,
+  joinChannelGroupCommand,
   lnurlCommand,
   openCommand,
   payCommand,

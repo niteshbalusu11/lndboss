@@ -161,11 +161,12 @@ const commands: Commands = [
     },
   },
   {
-    name: 'Create Group Channel (Experimental)',
-    value: 'CreateGroupChannel',
+    name: 'Create Channel Group (Experimental)',
+    value: 'CreateChannelGroup',
     description: 'Coordinate balanced channels group',
     longDescription: 'Create a group channel invite code, other nodes can join the group using join-group-channel',
     flags: {
+      allow: 'Allow (Pubkeys-Optional)',
       capacity: 'Capacity',
       fee_rate: 'FeeRate',
       size: 'Size',
@@ -233,8 +234,8 @@ const commands: Commands = [
     },
   },
   {
-    name: 'Join Group Channel (Experimental)',
-    value: 'JoinGroupChannel',
+    name: 'Join Channel Group (Experimental)',
+    value: 'JoinChannelGroup',
     description: 'Join a balanced channels group',
     longDescription: 'Another node should have run create-group-channel to create group',
     args: {
