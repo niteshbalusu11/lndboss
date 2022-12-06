@@ -39,6 +39,7 @@ const commands: Commands = [
       payments: 'payments',
     },
     flags: {
+      date: 'Date',
       is_csv: 'CSV',
       is_fiat_disabled: 'DisableFiat',
       month: 'Month',

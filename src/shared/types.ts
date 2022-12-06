@@ -1,6 +1,7 @@
 // ========================Command Accouting==============================
 export type commandAccounting = {
   category: string;
+  date: string;
   is_csv: boolean;
   is_fiat_disabled: boolean;
   month: string;

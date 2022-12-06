@@ -21,16 +21,21 @@ const AccountingCommand = commands.find(n => n.value === 'Accounting');
 */
 
 const Accounting = () => {
-  const [node, setNode] = useState('');
+  const [category, setCategory] = useState('');
+  const [date, setDate] = useState('');
   const [isCsv, setIsCsv] = useState(false);
   const [isFiatDisabled, setIsFiatDisabled] = useState(true);
   const [month, setMonth] = useState(null);
-  const [year, setYear] = useState(null);
-  const [category, setCategory] = useState('');
+  const [node, setNode] = useState('');
   const [rateProvider, setRateProvider] = useState('');
+  const [year, setYear] = useState(null);
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCategory(event.target.value);
+  };
+
+  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDate(event.target.value);
   };
 
   const handleIsCsvChange = () => {
@@ -59,6 +64,7 @@ const Accounting = () => {
 
   const flags: types.commandAccounting = {
     category,
+    date,
     month,
     node,
     year,
@@ -138,6 +144,14 @@ const Accounting = () => {
             id={AccountingCommand.flags.month}
             style={styles.textField}
             onChange={handleMonthChange}
+          />
+          <TextField
+            type="text"
+            placeholder={`${AccountingCommand.flags.date} (Records for specified date of month)`}
+            label={AccountingCommand.flags.date}
+            id={AccountingCommand.flags.date}
+            style={styles.textField}
+            onChange={handleDateChange}
           />
           <TextField
             type="text"

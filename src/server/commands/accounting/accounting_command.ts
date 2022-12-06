@@ -39,6 +39,7 @@ const accountingCommand = async ({ args, lnd }: Args): Promise<{ result: any }> 
       lnd,
       request,
       category: args.category,
+      date: args.date,
       is_csv: args.is_csv,
       is_fiat_disabled: args.is_fiat_disabled,
       month: args.month,

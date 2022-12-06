@@ -25,6 +25,7 @@ const AccountingResult = () => {
 
   const query = {
     category: router.query.category,
+    date: router.query.date,
     is_csv: router.query.is_csv,
     is_fiat_disabled: router.query.is_fiat_disabled,
     month: router.query.month,

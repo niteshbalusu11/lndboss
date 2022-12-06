@@ -8,6 +8,11 @@ export class accountingDto {
   @IsString()
   category: string;
 
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  date: string;
+
   @Transform(({ value }) => toBoolean(value))
   @IsBoolean()
   is_csv: boolean;

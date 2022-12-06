@@ -19,6 +19,7 @@ test.describe('Test the Accounting command client page', async () => {
     await page.locator(`#${AccountingCommand?.args?.chainFees}`).click();
     await page.check(`#${AccountingCommand?.flags?.is_fiat_disabled}`);
     await page.type(`#${AccountingCommand?.flags?.month}`, '6');
+    await page.type(`#${AccountingCommand?.flags?.date}`, '6');
     await page.type(`#${AccountingCommand?.flags?.year}`, '2022');
     await page.type(`#${AccountingCommand?.flags?.rate_provider}`, 'coindesk');
     await page.type('#node', 'testnode1');
@@ -46,6 +47,7 @@ test.describe('Test the Accounting command client page', async () => {
     await page.locator(`#${AccountingCommand?.args?.chainReceives}`).click();
     await page.check(`#${AccountingCommand?.flags?.is_fiat_disabled}`);
     await page.type(`#${AccountingCommand?.flags?.month}`, '6');
+    await page.type(`#${AccountingCommand?.flags?.date}`, '6');
     await page.type(`#${AccountingCommand?.flags?.year}`, '2022');
     await page.type(`#${AccountingCommand?.flags?.rate_provider}`, 'coindesk');
     await page.type('#node', 'testnode1');
@@ -73,6 +75,7 @@ test.describe('Test the Accounting command client page', async () => {
     await page.locator(`#${AccountingCommand?.args?.chainSends}`).click();
     await page.check(`#${AccountingCommand?.flags?.is_fiat_disabled}`);
     await page.type(`#${AccountingCommand?.flags?.month}`, '6');
+    await page.type(`#${AccountingCommand?.flags?.date}`, '6');
     await page.type(`#${AccountingCommand?.flags?.year}`, '2022');
     await page.type(`#${AccountingCommand?.flags?.rate_provider}`, 'coindesk');
     await page.type('#node', 'testnode1');
@@ -100,6 +103,7 @@ test.describe('Test the Accounting command client page', async () => {
     await page.locator(`#${AccountingCommand?.args?.forwards}`).click();
     await page.check(`#${AccountingCommand?.flags?.is_fiat_disabled}`);
     await page.type(`#${AccountingCommand?.flags?.month}`, '6');
+    await page.type(`#${AccountingCommand?.flags?.date}`, '6');
     await page.type(`#${AccountingCommand?.flags?.year}`, '2022');
     await page.type(`#${AccountingCommand?.flags?.rate_provider}`, 'coindesk');
     await page.type('#node', 'testnode1');
@@ -127,6 +131,7 @@ test.describe('Test the Accounting command client page', async () => {
     await page.locator(`#${AccountingCommand?.args?.invoices}`).click();
     await page.check(`#${AccountingCommand?.flags?.is_fiat_disabled}`);
     await page.type(`#${AccountingCommand?.flags?.month}`, '6');
+    await page.type(`#${AccountingCommand?.flags?.date}`, '6');
     await page.type(`#${AccountingCommand?.flags?.year}`, '2022');
     await page.type(`#${AccountingCommand?.flags?.rate_provider}`, 'coindesk');
     await page.type('#node', 'testnode1');
@@ -154,6 +159,7 @@ test.describe('Test the Accounting command client page', async () => {
     await page.locator(`#${AccountingCommand?.args?.invoices}`).click();
     await page.check(`#${AccountingCommand?.flags?.is_fiat_disabled}`);
     await page.type(`#${AccountingCommand?.flags?.month}`, '6');
+    await page.type(`#${AccountingCommand?.flags?.date}`, '6');
     await page.type(`#${AccountingCommand?.flags?.year}`, '2022');
     await page.type(`#${AccountingCommand?.flags?.rate_provider}`, 'coindesk');
     await page.type('#node', 'testnode1');
@@ -182,6 +188,7 @@ test.describe('Test the Accounting command client page', async () => {
     await page.check(`#${AccountingCommand?.flags?.is_fiat_disabled}`);
     await page.check(`#${AccountingCommand?.flags?.is_csv}`);
     await page.type(`#${AccountingCommand?.flags?.month}`, '6');
+    await page.type(`#${AccountingCommand?.flags?.date}`, '6');
     await page.type(`#${AccountingCommand?.flags?.year}`, '2022');
     await page.type(`#${AccountingCommand?.flags?.rate_provider}`, 'coindesk');
     await page.type('#node', 'testnode1');

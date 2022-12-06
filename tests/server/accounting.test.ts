@@ -13,6 +13,7 @@ test.describe('Test Accounting command on the node.js side', async () => {
   test('run accounting command for chain-fees', async () => {
     const args = {
       category: 'chain-fees',
+      date: '10',
       month: '6',
       node: '',
       year: '2022',
@@ -31,6 +32,7 @@ test.describe('Test Accounting command on the node.js side', async () => {
     const args = {
       category: 'chain-receives',
       month: '6',
+      date: '10',
       node: '',
       year: '2022',
       is_csv: false,
@@ -48,6 +50,7 @@ test.describe('Test Accounting command on the node.js side', async () => {
     const args = {
       category: 'chain-sends',
       month: '6',
+      date: '10',
       node: '',
       year: '2022',
       is_csv: false,
@@ -65,6 +68,7 @@ test.describe('Test Accounting command on the node.js side', async () => {
     const args = {
       category: 'forwards',
       month: '6',
+      date: '10',
       node: '',
       year: '2022',
       is_csv: false,
@@ -82,6 +86,7 @@ test.describe('Test Accounting command on the node.js side', async () => {
     const args = {
       category: 'invoices',
       month: '6',
+      date: '10',
       node: '',
       year: '2022',
       is_csv: false,
@@ -99,6 +104,7 @@ test.describe('Test Accounting command on the node.js side', async () => {
     const args = {
       category: 'payments',
       month: '6',
+      date: '10',
       node: '',
       year: '2022',
       is_csv: false,
@@ -116,6 +122,7 @@ test.describe('Test Accounting command on the node.js side', async () => {
     const args = {
       category: 'payments',
       month: '6',
+      date: '10',
       node: '',
       year: '2022',
       is_csv: true,
