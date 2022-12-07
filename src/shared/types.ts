@@ -287,3 +287,12 @@ export type commandTags = {
   remove: string[] | string;
   tag: string;
 };
+
+// ========================Utxos Command=====================================
+export type commandUtxos = {
+  count_below: number;
+  is_confirmed: boolean;
+  is_count: boolean;
+  min_tokens: number;
+  node: string;
+};

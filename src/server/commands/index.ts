@@ -25,6 +25,7 @@ import rebalanceCommand from './rebalance/rebalance_command';
 import reconnectCommand from './reconnect/reconnect_command';
 import sendCommand from './send/send_command';
 import tagsCommand from './tags/tags_command';
+import utxosCommand from './utxos/utxos_command';
 
 export {
   accountingCommand,
@@ -54,4 +55,5 @@ export {
   reconnectCommand,
   sendCommand,
   tagsCommand,
+  utxosCommand,
 };

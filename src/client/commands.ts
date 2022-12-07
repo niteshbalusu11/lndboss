@@ -417,6 +417,17 @@ const commands: Commands = [
       remove: 'Remove',
     },
   },
+  {
+    name: 'Utxos',
+    value: 'Utxos',
+    description: 'Get list of utxos',
+    flags: {
+      confirmed: 'Confirmed',
+      count: 'Count',
+      count_below: 'CountBelow',
+      size: 'Size',
+    },
+  },
 ];
 
 export default commands;

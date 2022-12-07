@@ -1731,3 +1731,59 @@ try {
 ```
 
 <br></br>
+
+### Utxos
+
+```javascript
+/**
+@PostRequest
+
+@Url
+http://localhost:8055/api/utxos
+
+@Body
+  {
+    [count_below]: <Return Only Count, And Below Number>
+    [is_count]: <Return Only Count Bool>
+    [is_confirmed]: <Return Only Confirmed Utxos Bool>
+    [min_tokens]: <Return Utxos of Value Above Tokens Size Number>
+  }
+
+@Response
+  // Non-count response
+  {
+    utxos: [{
+      address: <Chain Address String>
+      amount: <Coins Amount String>
+      [confirmations]: <Confirmation Count Number>
+      outpoint: <Coin Outpoint String>
+      [is_unconfirmed]: <UTXO is Confirmed Bool>
+      [locked]: <UTXO Lock Id Hex String>
+      [lock_expires_at]: <UTXO Lock Expiration ISO 8601 Date String>
+      [related_description]: <Transaction Description String>
+      [related_channels]: [<Related Channel Description String>]
+    }]
+  }
+
+  // Count response
+  <Count Number>
+*/
+
+try {
+  const url = 'http://localhost:8055/api/utxos';
+
+  const postBody = {
+    is_confirmed: true,
+  };
+
+  const config = {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  };
+
+  const response = await axios.post(url, postBody, config);
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
