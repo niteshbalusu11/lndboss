@@ -89,6 +89,9 @@ send
 
 # Tags can be used in other commands via tag and avoid options
 tags
+
+# Show list of utxos
+utxos
 ```
 
 ### LndBoss is now available for one click install in AppStores of:
