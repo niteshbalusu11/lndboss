@@ -992,3 +992,25 @@ export class tagsDto {
   @IsString()
   tag: string;
 }
+
+export class utxosDto {
+  @IsOptional()
+  @IsNumber()
+  count_below: number;
+
+  @IsOptional()
+  @IsBoolean()
+  is_confirmed: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  is_count: boolean;
+
+  @IsOptional()
+  @IsNumber()
+  min_tokens: number;
+
+  @IsOptional()
+  @IsString()
+  node: string;
+}

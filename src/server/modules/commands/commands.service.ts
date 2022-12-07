@@ -334,4 +334,15 @@ export class CommandsService {
 
     return { result };
   }
+
+  async utxosCommand(args: dto.utxosDto): Promise<{ result: any }> {
+    try {
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
+      const { result } = await commands.utxosCommand({ args, lnd });
+
+      return { result };
+    } catch (error) {
+      httpLogger({ error });
+    }
+  }
 }

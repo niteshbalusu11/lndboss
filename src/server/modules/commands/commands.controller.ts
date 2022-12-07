@@ -146,4 +146,9 @@ export class CommandsController {
   async tagsCommand(@Query() args: dto.tagsDto) {
     return this.commandsService.tagsCommand(args);
   }
+
+  @Post('utxos')
+  async utxosCommand(@Body() args: dto.utxosDto) {
+    return this.commandsService.utxosCommand(args);
+  }
 }
