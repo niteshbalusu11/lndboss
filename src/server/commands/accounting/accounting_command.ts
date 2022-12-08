@@ -10,6 +10,7 @@ import { httpLogger } from '~server/utils/global_functions';
   {
     category: <Accounting Category Type String>
     [currency]: <Currency Label String>
+    [date]: <Date String>
     [fiat]: <Fiat Type String>
     [is_csv]: <Return CSV Output Bool>
     [is_fiat_disabled]: <Omit Fiat Conversion Bool>
