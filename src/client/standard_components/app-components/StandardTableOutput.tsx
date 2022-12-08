@@ -8,7 +8,7 @@ import {
   TablePagination,
   TableRow,
 } from '@mui/material';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
 /*
   Renders the a standard table output.
@@ -56,8 +56,8 @@ const StandardTableOutput = ({ data, tableId }: Props) => {
       .filter((_row: Data, i) => i > 0);
   }, [data]);
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -104,7 +104,7 @@ const StandardTableOutput = ({ data, tableId }: Props) => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={[10, 25, 50, 100]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
