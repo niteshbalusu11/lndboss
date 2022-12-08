@@ -12,7 +12,6 @@ import React, { useMemo, useState } from 'react';
 
 /*
   Renders the a standard table output.
-
 */
 
 type Props = {
