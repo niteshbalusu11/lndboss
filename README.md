@@ -135,6 +135,7 @@ y
 
 # Update shell
 . ~/.profile
+
 ```
 
 ### After installing Node.js, you can install yarn.
