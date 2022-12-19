@@ -283,6 +283,27 @@ export class chartPaymentsReceivedDto {
   start_date: string;
 }
 
+export class cleanFailedPaymentsDto {
+  @IsBoolean()
+  is_dry_run: boolean;
+
+  @IsOptional()
+  @IsString()
+  node: string;
+}
+
+export class closedDto {
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  limit: number;
+
+  @Transform(({ value }) => trim(value))
+  @IsOptional()
+  @IsString()
+  node: string;
+}
+
 export class credentialsDto {
   @Transform(({ value }) => trim(value))
   @IsString()
@@ -318,18 +339,6 @@ export class credentialsDto {
   @Transform(({ value }) => trim(value))
   @IsString()
   socket: string;
-}
-
-export class closedDto {
-  @Transform(({ value }) => toNumber(value))
-  @IsOptional()
-  @IsNumber()
-  limit: number;
-
-  @Transform(({ value }) => trim(value))
-  @IsOptional()
-  @IsString()
-  node: string;
 }
 
 export class createGroupChannelDto {
@@ -459,7 +468,6 @@ export class graphDto {
   node: string;
 
   @Transform(({ value }) => trim(value))
-  @IsOptional()
   @IsString()
   query: string;
 

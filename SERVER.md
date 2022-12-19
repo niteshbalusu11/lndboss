@@ -558,6 +558,49 @@ try {
 
 <br></br>
 
+### CleanFailedPayments
+
+```javascript
+/**
+@PostRequest
+
+@Url
+http://localhost:8055/api/clean-failed-payments
+
+@Body
+  {
+    is_dry_run: <Avoid Actually Deleting Payments>
+    lnd: <Authenticated LND API Object>
+    logger: <Winston Logger Object>
+  }
+
+  @Returns
+  {
+    [total_failed_payments_found]: <Failed Payments Found Number>
+    [total_failed_payments_deleted]: <Failed Payments Deleted Number>
+  }
+*/
+*/
+
+try {
+  const url = 'http://localhost:8055/api/clean-failed-payments';
+
+  const postBody = {
+    is_dry_run: false,
+  };
+
+  const config = {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  };
+
+  const response = await axios.post(url, postBody, config);
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
+
 ### Closed
 
 ```javascript

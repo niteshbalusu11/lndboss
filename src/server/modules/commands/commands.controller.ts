@@ -62,6 +62,11 @@ export class CommandsController {
     return this.commandsService.chartPaymentsReceivedCommand(args);
   }
 
+  @Post('clean-failed-payments')
+  async cleanFailedPaymentsCommand(@Body() args: dto.cleanFailedPaymentsDto) {
+    return this.commandsService.cleanFailedPaymentsCommand(args);
+  }
+
   @Get('closed')
   async closedCommand(@Query() args: dto.closedDto) {
     return this.commandsService.closedCommand(args);

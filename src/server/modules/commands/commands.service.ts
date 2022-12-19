@@ -43,6 +43,21 @@ export class CommandsService {
     return logger;
   }
 
+  async defaultLogger({ service }: { service: string }) {
+    const logger: Logger = createLogger({
+      level: 'info',
+      format: format.json(),
+      defaultMeta: { service },
+      transports: [
+        new transports.Console({
+          format: format.combine(format.prettyPrint()),
+        }),
+      ],
+    });
+
+    return logger;
+  }
+
   async accountingCommand(args: dto.accountingDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
@@ -124,6 +139,20 @@ export class CommandsService {
     return { result };
   }
 
+  async cleanFailedPaymentsCommand(args: dto.cleanFailedPaymentsDto): Promise<{ result: any }> {
+    try {
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+      const logger: Logger = await this.defaultLogger({ service: 'cleanfailedpayments' });
+
+      const { result } = await commands.cleanFailedPaymentsCommand({ args, lnd, logger });
+
+      return { result };
+    } catch (error) {
+      httpLogger({ error });
+    }
+  }
+
   async closedCommand(args: dto.closedDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
@@ -163,16 +192,7 @@ export class CommandsService {
   }
 
   async graphCommand(args: dto.graphDto): Promise<{ result: any }> {
-    const logger: Logger = createLogger({
-      level: 'info',
-      format: format.json(),
-      defaultMeta: { service: 'graph' },
-      transports: [
-        new transports.Console({
-          format: format.combine(format.prettyPrint()),
-        }),
-      ],
-    });
+    const logger: Logger = await this.defaultLogger({ service: 'graph' });
 
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 
