@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.14.0](https://github.com/niteshbalusu11/lndboss/compare/v2.13.0...v2.14.0) (2022-12-19)
 
+- Added bos clean-failed-payments command.
+
 ## [2.13.0](https://github.com/niteshbalusu11/lndboss/compare/v2.12.0...v2.13.0) (2022-12-07)
 
 - Added bos utxos command.
