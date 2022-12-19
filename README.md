@@ -39,6 +39,9 @@ chart-fees-paid
 # Show a chart of payments received
 chart-payments-received
 
+# Remove old failed payment data for probes and other failed payments
+clean-failed-payments
+
 # See details on how closed channels resolved on-chain
 closed
 

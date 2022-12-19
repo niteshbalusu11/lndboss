@@ -8,6 +8,7 @@ import chartChainFeesCommand from './chartChainFees/chart_chain_fees_command';
 import chartFeesEarnedCommand from './chartFeesEarned/chart_fees_earned_command';
 import chartFeesPaidCommand from './chartFeesPaid/chart_fees_paid_command';
 import chartPaymentsReceivedCommand from './chartPaymentsReceived/chart_payments_received_command';
+import cleanFailedPaymentsCommand from './cleanFailedPayments/clean_failed_payments_command';
 import closedCommand from './closed/closed_command';
 import createChannelGroupCommand from './createChannelGroup/create_channel_group_command';
 import feesCommand from './fees/fees_command';
@@ -38,6 +39,7 @@ export {
   chartFeesEarnedCommand,
   chartFeesPaidCommand,
   chartPaymentsReceivedCommand,
+  cleanFailedPaymentsCommand,
   closedCommand,
   createChannelGroupCommand,
   feesCommand,

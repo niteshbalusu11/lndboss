@@ -7,6 +7,7 @@ import ChartChainFeesOutput from './ChartChainFeesOutput';
 import ChartFeesEarnedOutput from './ChartFeesEarnedOutput';
 import ChartFeesPaidOutput from './ChartFeesPaidOutput';
 import ChartPaymentsReceivedOutput from './ChartPaymentsReceivedOutput';
+import CleanFailedPaymentsOutput from './CleanFailedPaymentsOutput';
 import ClosedOutput from './ClosedOutput';
 import CreateGroupChannelOutput from './CreateGroupChannelOutput';
 import FeesOutput from './FeesOutput';
@@ -29,6 +30,7 @@ export {
   ChartFeesEarnedOutput,
   ChartFeesPaidOutput,
   ChartPaymentsReceivedOutput,
+  CleanFailedPaymentsOutput,
   ClosedOutput,
   CreateGroupChannelOutput,
   FeesOutput,

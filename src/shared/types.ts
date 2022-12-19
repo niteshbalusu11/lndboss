@@ -93,6 +93,13 @@ export type commandChartPaymentsReceived = {
   start_date: string;
 };
 
+// ========================Clean Failed Payments Command=====================================
+
+export type commandCleanFailedPayments = {
+  is_dry_run: boolean;
+  node: string;
+};
+
 // ========================Closed Command=====================================
 
 export type commandClosed = {

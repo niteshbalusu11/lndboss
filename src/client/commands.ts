@@ -152,6 +152,16 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Clean Failed Payments',
+    value: 'CleanFailedPayments',
+    description: 'Clean out past failed payment data.',
+    longDescription:
+      'Clean out past failed payment data. Remove old failed payment data for probes and other failed payments. (This command might take a long time to run).',
+    flags: {
+      dryrun: 'Dryrun',
+    },
+  },
+  {
     name: 'Closed',
     value: 'Closed',
     description: 'Channel closes with chain-transaction derived resolution details',
