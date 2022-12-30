@@ -68,8 +68,9 @@ export class CommandsService {
 
   async balanceCommand(args: dto.balanceDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
+    const lnds = await LndService.getLnds({ nodes: [args.node] });
 
-    const { result } = await commands.balanceCommand({ args, lnd });
+    const { result } = await commands.balanceCommand({ args, lnd, lnds });
 
     return { result };
   }
@@ -199,6 +200,20 @@ export class CommandsService {
     const { result } = await commands.graphCommand({ args, lnd, logger });
 
     return { result };
+  }
+
+  async invoiceCommand(args: dto.invoiceDto): Promise<{ result: any }> {
+    try {
+      const logger: Logger = await this.defaultLogger({ service: 'invoice' });
+
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+      const { result } = await commands.invoiceCommand({ args, lnd, logger });
+
+      return { result };
+    } catch (error) {
+      httpLogger({ error });
+    }
   }
 
   async joinChannelGroupCommand(args: dto.joinGroupChannelDto): Promise<{ result: any }> {

@@ -15,6 +15,7 @@ import feesCommand from './fees/fees_command';
 import findCommand from './find/find_command';
 import forwardsCommand from './forwards/forwards_command';
 import graphCommand from './graph/graph_command';
+import invoiceCommand from './invoice/invoice_command';
 import joinChannelGroupCommand from './joinGroupChannel/join_channel_group_command';
 import lnurlCommand from './lnurl/lnurl_command';
 import openCommand from './open/open_command';
@@ -46,6 +47,7 @@ export {
   findCommand,
   forwardsCommand,
   graphCommand,
+  invoiceCommand,
   joinChannelGroupCommand,
   lnurlCommand,
   openCommand,

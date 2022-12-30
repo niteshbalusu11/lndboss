@@ -153,6 +153,20 @@ export type commandGraph = {
   sort: string;
 };
 
+// ========================Invoice Command===================================
+
+export type commandInvoice = {
+  amount: string;
+  description: string;
+  expires_in: number;
+  is_hinting: boolean;
+  is_selecting_hops: boolean;
+  is_virtual: boolean;
+  node: string;
+  rate_provider: string;
+  virtual_fee_rate: number;
+};
+
 // ========================Join Group Channel Command=========================
 
 export type commandJoinChannelGroup = {

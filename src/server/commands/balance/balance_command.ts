@@ -27,12 +27,13 @@ const parseAnsi = (n: string) =>
 type Args = {
   args: types.commandBalance;
   lnd: AuthenticatedLnd;
+  lnds: AuthenticatedLnd[];
 };
-const balanceCommand = async ({ args, lnd }: Args): Promise<{ result: any }> => {
+const balanceCommand = async ({ args, lnd, lnds }: Args): Promise<{ result: any }> => {
   try {
     if (!!args.is_detailed) {
       const detailed = await getDetailedBalance({
-        lnd,
+        lnds,
         is_confirmed: args.is_confirmed,
       });
 
