@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.15.0](https://github.com/niteshbalusu11/lndboss/compare/v2.14.0...v2.15.0) (2022-12-30)
 
+- Added quick tools page to create invoice, pay invoice, create onchain address and send onchain.
+- Fixed a bug where detailed balance is broken for balance command.
+
 ## [2.14.0](https://github.com/niteshbalusu11/lndboss/compare/v2.13.0...v2.14.0) (2022-12-19)
 
 - Added bos clean-failed-payments command.
