@@ -5,6 +5,7 @@ export const clientConstants = {
   feeStrategyPath: '/schedulers/FeesScheduler',
   homeButtonLabel: 'Home',
   loginUrl: '/auth/Login',
+  quickTools: '/preferences/QuickTools',
   publicPaths: ['/', '/auth/Login', '/auth/Register'],
   rebalanceSchedulerUrl: '/schedulers/RebalanceScheduler',
   rebalanceUrl: '/commands/Rebalance',

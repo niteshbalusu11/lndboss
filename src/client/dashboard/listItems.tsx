@@ -7,6 +7,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import MoneyIcon from '@mui/icons-material/Money';
+import OfflineBoltIcon from '@mui/icons-material/OfflineBolt';
 import React from 'react';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { clientConstants } from '~client/utils/constants';
@@ -52,6 +53,13 @@ export const MainListItems = ({ setAccounting }: { setAccounting?: React.Dispatc
           <ManageAccountsIcon />
         </ListItemIcon>
         <ListItemText primary="Preferences" />
+      </ListItemButton>
+
+      <ListItemButton href={clientConstants.quickTools}>
+        <ListItemIcon>
+          <OfflineBoltIcon />
+        </ListItemIcon>
+        <ListItemText primary="Quick Actions" />
       </ListItemButton>
 
       <ListItemButton href={clientConstants.loginUrl} onClick={handleLogout}>

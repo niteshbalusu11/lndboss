@@ -483,6 +483,44 @@ export class grpcDto {
   @IsString()
   node: string;
 }
+
+export class invoiceDto {
+  @IsString()
+  amount: string;
+
+  @IsString()
+  @IsOptional()
+  description: string;
+
+  @IsNumber()
+  @IsOptional()
+  expires_in: number;
+
+  @IsBoolean()
+  @IsOptional()
+  is_hinting: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  is_selecting_hops: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  is_virtual: boolean;
+
+  @IsString()
+  @IsOptional()
+  node: string;
+
+  @IsString()
+  @IsOptional()
+  rate_provider: string;
+
+  @IsNumber()
+  @IsOptional()
+  virtual_fee_rate: number;
+}
+
 export class joinGroupChannelDto {
   @IsString()
   code: string;

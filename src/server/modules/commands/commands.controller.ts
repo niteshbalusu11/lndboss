@@ -92,6 +92,11 @@ export class CommandsController {
     return this.commandsService.graphCommand(args);
   }
 
+  @Post('invoice')
+  async invoiceCommand(@Body() args: dto.invoiceDto) {
+    return this.commandsService.invoiceCommand(args);
+  }
+
   @Post('join-channel-group')
   async joinChannelGroupCommand(@Body() args: dto.joinGroupChannelDto) {
     return this.commandsService.joinChannelGroupCommand(args);

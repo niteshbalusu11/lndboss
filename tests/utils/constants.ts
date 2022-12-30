@@ -4,6 +4,7 @@ export const testConstants = {
   cookieName: 'lndboss-cookie',
   cookieUrl: 'http://localhost:8055',
   loginUrl: '/auth/Login',
+  quickToolsPage: '/preferences/QuickTools',
   rebalanceSchedulerUrl: '/schedulers/RebalanceScheduler',
   registerUrl: '/auth/Register',
   publicPaths: ['/', '/auth/Login', '/auth/Register'],
