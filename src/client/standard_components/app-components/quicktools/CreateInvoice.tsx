@@ -46,10 +46,10 @@ const CreateInvoice = () => {
       virtual_fee_rate: 0,
     };
 
-    const { result } = await axiosPostWithAlert({ path: 'invoice', postBody });
+    const result = await axiosPostWithAlert({ path: 'invoice', postBody });
 
     if (!!result) {
-      setData(result);
+      setData(result.result);
     }
   };
 

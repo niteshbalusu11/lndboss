@@ -10,9 +10,8 @@ test.describe('Test Price command on the node.js side', async () => {
 
   test('run Price command', async () => {
     const args = {
-      symbols: 'USD,AUD',
       file: false,
-      from: 'coindesk',
+      from: 'coinbase',
     };
     const result = await getPrices({
       request,

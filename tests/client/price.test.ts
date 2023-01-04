@@ -17,6 +17,7 @@ test.describe('Test the Price command client page', async () => {
     await expect(page).toHaveTitle('Price');
 
     await page.type(`#${PriceCommand?.args?.symbols}`, 'USD,AUD');
+    await page.type(`#${PriceCommand?.flags?.from}`, 'coingecko');
 
     await page.click('text=run command');
     await page.waitForTimeout(1000);
@@ -31,6 +32,7 @@ test.describe('Test the Price command client page', async () => {
     await expect(page).toHaveTitle('Price');
 
     await page.type(`#${PriceCommand?.args?.symbols}`, 'USD,AUD');
+    await page.type(`#${PriceCommand?.flags?.from}`, 'coingecko');
     await page.check(`#${PriceCommand?.flags?.file}`);
 
     await page.click('text=run command');

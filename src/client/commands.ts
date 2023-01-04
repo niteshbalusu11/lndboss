@@ -245,6 +245,22 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Invoice',
+    value: 'Invoice',
+    description: 'Create an invoice and get a BOLT 11 payment request',
+    longDescription:
+      'Create an invoice and get a BOLT 11 payment request. Amount can take m/k variables: 5*m for 5 million, 250*k = 0.0025. Fiat conversion is supported in amount, N*USD or N*EUR. Fiat rate providers: coinbase, coindesk, coingecko.',
+    args: {
+      amount: 'Amount',
+    },
+    flags: {
+      description: 'For',
+      expires_in: 'Hours',
+      is_hinting: 'Include Hints',
+      rate_provider: 'RateProvider',
+    },
+  },
+  {
     name: 'Join Channel Group (Experimental)',
     value: 'JoinChannelGroup',
     description: 'Join a balanced channels group',
