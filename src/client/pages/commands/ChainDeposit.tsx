@@ -19,12 +19,8 @@ const ChainDepositCommand = commands.find(n => n.value === 'ChainDeposit');
 const ChainDeposit = () => {
   const [amount, setAmount] = useState('');
   const [data, setData] = useState({ address: '', url: '' });
-  const [node, setNode] = useState('');
   const [format, setFormat] = useState('');
-
-  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNode(event.target.value);
-  };
+  const [node, setNode] = useState('');
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(event.target.value);
@@ -32,6 +28,10 @@ const ChainDeposit = () => {
 
   const handleFormatChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormat(event.target.value);
+  };
+
+  const handleNodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNode(event.target.value);
   };
 
   const fetchData = async () => {

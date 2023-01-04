@@ -6,7 +6,7 @@ import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '~client/stan
 import commands, { globalCommands } from '../../commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';
-import GraphOutput from '~client/output/GraphOutput';
+import { GraphOutput } from '~client/output';
 import Head from 'next/head';
 import { axiosGet } from '~client/utils/axios';
 

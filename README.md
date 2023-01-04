@@ -60,8 +60,11 @@ forwards
 # Look up the channels and fee rates of a node by its public key
 graph "pubkey"
 
+# Create an invoice and get a BOLT 11 payment request
+invoice "amount"
+
 # Joins a group channel request
-create-group-channel "invite_code"
+join-group-channel "invite_code"
 
 # Collection of lnurl features
 lnurl "function"

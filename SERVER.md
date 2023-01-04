@@ -951,6 +951,54 @@ try {
 
 <br></br>
 
+### Invoice
+
+```javascript
+/**
+@PostRequest
+
+@Url
+http://localhost:8055/api/invoice
+
+@Body
+  {
+    amount: <Invoice Amount String>
+    [description]: <Invoice Description String>
+    [expires_in]: <Invoice Expires In Hours Number>
+    [is_hinting]: <Include Private Channels Bool>
+    [rate_provider]: <Fiat Rate Provider String>
+  }
+
+@Response
+  {
+    [is_settled]: <Invoice Was Paid Bool>
+    [request]: <BOLT 11 Payment Request String>
+    [tokens]: <Invoice Amount Number>
+  }
+*/
+
+try {
+  const url = 'http://localhost:8055/api/invoice';
+
+  const postBody = {
+    amount: '10*USD',
+    description: 'some description',
+    expires_in: 4,
+    is_hinting: false,
+  };
+
+  const config = {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  };
+
+  const response = await axios.post(url, postBody, config);
+} catch (error) {
+  console.error(error);
+}
+```
+
+<br></br>
+
 ### JoinGroupChannel
 
 ```javascript

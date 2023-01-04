@@ -39,7 +39,6 @@ const PayInvoice = () => {
     const result = await axiosGet({ path: 'pay', query });
 
     if (!!result) {
-      console.log(result);
       setData(result);
     }
   };

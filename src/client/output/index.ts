@@ -13,6 +13,8 @@ import CreateGroupChannelOutput from './CreateGroupChannelOutput';
 import FeesOutput from './FeesOutput';
 import FindOutput from './FindOutput';
 import ForwardsOutput from './ForwardsOutput';
+import GraphOutput from './GraphOutput';
+import InvoiceOutput from './InvoiceOutput';
 import JoinGroupChannelOutput from './JoinGroupChannelOutput';
 import OpenOutput from './OpenOutput';
 import PeersOutput from './PeersOutput';
@@ -36,6 +38,8 @@ export {
   FeesOutput,
   FindOutput,
   ForwardsOutput,
+  GraphOutput,
+  InvoiceOutput,
   JoinGroupChannelOutput,
   OpenOutput,
   PeersOutput,
