@@ -118,6 +118,21 @@ export type commandCreateChannelGroup = {
   rate: number;
 };
 
+// ========================Decrypt Command ===================================
+
+export type commandDecrypt = {
+  encrypted: string;
+  node: string;
+};
+
+// ========================Encrypt Command ===================================
+
+export type commandEncrypt = {
+  message: string;
+  node: string;
+  to: string;
+};
+
 // ========================Fees Command========================================
 export type commandFees = {
   cltv_delta: number;

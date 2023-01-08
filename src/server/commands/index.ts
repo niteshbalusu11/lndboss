@@ -11,6 +11,8 @@ import chartPaymentsReceivedCommand from './chartPaymentsReceived/chart_payments
 import cleanFailedPaymentsCommand from './cleanFailedPayments/clean_failed_payments_command';
 import closedCommand from './closed/closed_command';
 import createChannelGroupCommand from './createChannelGroup/create_channel_group_command';
+import decryptCommand from './decrypt/decrypt_command';
+import encryptCommand from './encrypt/encrypt_command';
 import feesCommand from './fees/fees_command';
 import findCommand from './find/find_command';
 import forwardsCommand from './forwards/forwards_command';
@@ -43,6 +45,8 @@ export {
   cleanFailedPaymentsCommand,
   closedCommand,
   createChannelGroupCommand,
+  decryptCommand,
+  encryptCommand,
   feesCommand,
   findCommand,
   forwardsCommand,

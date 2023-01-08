@@ -77,6 +77,16 @@ export class CommandsController {
     return this.commandsService.createChannelGroupCommand(args);
   }
 
+  @Post('decrypt')
+  async decryptCommand(@Body() args: dto.decryptDto) {
+    return this.commandsService.decryptCommand(args);
+  }
+
+  @Post('encrypt')
+  async encryptCommand(@Body() args: dto.encryptDto) {
+    return this.commandsService.encryptCommand(args);
+  }
+
   @Get('find')
   async findCommand(@Query() args: dto.findDto) {
     return this.commandsService.findCommand(args);

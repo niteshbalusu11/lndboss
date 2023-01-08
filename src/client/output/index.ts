@@ -10,6 +10,8 @@ import ChartPaymentsReceivedOutput from './ChartPaymentsReceivedOutput';
 import CleanFailedPaymentsOutput from './CleanFailedPaymentsOutput';
 import ClosedOutput from './ClosedOutput';
 import CreateGroupChannelOutput from './CreateGroupChannelOutput';
+import DecryptOutput from './DecryptOutput';
+import EncryptOutput from './EncryptOutput';
 import FeesOutput from './FeesOutput';
 import FindOutput from './FindOutput';
 import ForwardsOutput from './ForwardsOutput';
@@ -35,6 +37,8 @@ export {
   CleanFailedPaymentsOutput,
   ClosedOutput,
   CreateGroupChannelOutput,
+  DecryptOutput,
+  EncryptOutput,
   FeesOutput,
   FindOutput,
   ForwardsOutput,
