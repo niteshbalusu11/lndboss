@@ -176,6 +176,30 @@ export class CommandsService {
     }
   }
 
+  async decryptCommand(args: dto.decryptDto): Promise<{ result: any }> {
+    try {
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+      const { result } = await commands.decryptCommand({ args, lnd });
+
+      return { result };
+    } catch (error) {
+      httpLogger({ error });
+    }
+  }
+
+  async encryptCommand(args: dto.encryptDto): Promise<{ result: any }> {
+    try {
+      const lnd = await LndService.authenticatedLnd({ node: args.node });
+
+      const { result } = await commands.encryptCommand({ args, lnd });
+
+      return { result };
+    } catch (error) {
+      httpLogger({ error });
+    }
+  }
+
   async findCommand(args: dto.findDto): Promise<{ result: any }> {
     const lnd = await LndService.authenticatedLnd({ node: args.node });
 

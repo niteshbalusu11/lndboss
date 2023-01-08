@@ -363,6 +363,28 @@ export class createGroupChannelDto {
   rate: number;
 }
 
+export class decryptDto {
+  @IsString()
+  encrypted: string;
+
+  @IsOptional()
+  @IsString()
+  node: string;
+}
+
+export class encryptDto {
+  @IsString()
+  message: string;
+
+  @IsOptional()
+  @IsString()
+  node: string;
+
+  @IsOptional()
+  @IsString()
+  to: string;
+}
+
 export class deleteRebalanceDto {
   @Transform(({ value }) => trim(value))
   @IsString()

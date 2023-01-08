@@ -184,6 +184,23 @@ const commands: Commands = [
     },
   },
   {
+    name: 'Decrypt',
+    value: 'Decrypt',
+    description: 'Decrypt a message encrypted to the node key or to another node key.',
+    args: {
+      encrypted: 'Encrypted',
+    },
+  },
+  {
+    name: 'Encrypt',
+    value: 'Encrypt',
+    description: 'Encrypt a message to the node key or to another node key',
+    flags: {
+      message: 'Message',
+      to: 'To',
+    },
+  },
+  {
     name: 'Fees',
     value: 'Fees',
     description: 'Show and adjust outbound fee rates',
