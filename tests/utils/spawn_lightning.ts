@@ -7,6 +7,7 @@ const ports = {
   chain_zmq_tx_port: 4445,
   lightning_p2p_port: 5445,
   lightning_rpc_port: 6445,
+  lightning_tower_port: 8011,
 };
 
 export type SpawnLightningType = {
@@ -25,6 +26,7 @@ const spawnLightning = async (): Promise<SpawnLightningType> => {
     generate_address: address,
     lightning_p2p_port: ports.lightning_p2p_port,
     lightning_rpc_port: ports.lightning_rpc_port,
+    lightning_tower_port: ports.lightning_tower_port,
   });
 
   return { cert, kill, macaroon, socket };
