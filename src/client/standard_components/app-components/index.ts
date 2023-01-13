@@ -15,7 +15,6 @@ import StandardRouterLink from './StandardRouterLink';
 import StandardSwitch from './StandardSwitch';
 import StandardTableOutput from './StandardTableOutput';
 import StartFlexBox from './StartFlexBox';
-import StartFlexBoxBlack from './StartFlexBoxBlack';
 import Startup from './Startup';
 import SubmitButton from './SubmitButton';
 export {
@@ -36,7 +35,6 @@ export {
   StandardSwitch,
   StandardTableOutput,
   StartFlexBox,
-  StartFlexBoxBlack,
   Startup,
   SubmitButton,
 };

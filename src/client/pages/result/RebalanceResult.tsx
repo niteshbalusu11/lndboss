@@ -1,10 +1,10 @@
 import * as YAML from 'json-to-pretty-yaml';
 
+import { CssBaseline, Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
-import { CssBaseline } from '@mui/material';
 import Head from 'next/head';
-import { StartFlexBoxBlack } from '~client/standard_components/app-components';
+import { StartFlexBox } from '~client/standard_components/app-components';
 import { axiosGetWebSocket } from '~client/utils/axios';
 import { io } from 'socket.io-client';
 import { useRouter } from 'next/router';
@@ -15,19 +15,6 @@ const socket = io();
   Renders the output of the rebalance command
   Listens to the websocket events for logging rebalance output to the browser
 */
-
-const styles = {
-  pre: {
-    fontweight: 'bold',
-    color: 'white',
-  },
-  div: {
-    marginLeft: '20px',
-  },
-  h1: {
-    color: 'white',
-  },
-};
 
 const RebalanceResult = () => {
   const router = useRouter();
@@ -76,9 +63,8 @@ const RebalanceResult = () => {
     socket.on(`${dateString}`, data => {
       const message = data.message;
 
-      output.push(YAML.stringify(message));
-
-      setData(output.toString());
+      output.push(message.options || message);
+      setData(YAML.stringify(output));
     });
 
     socket.on('error', err => {
@@ -89,9 +75,11 @@ const RebalanceResult = () => {
       const result = await axiosGetWebSocket({ path: 'rebalance', query });
 
       if (!!result) {
-        output.push(YAML.stringify(result));
-        setData(output.toString());
+        output.push(result);
+        setData(YAML.stringify(output));
       }
+
+      socket.disconnect();
     };
 
     fetchData();
@@ -102,18 +90,21 @@ const RebalanceResult = () => {
       <Head>
         <title>Rebalance Result</title>
       </Head>
-      <StartFlexBoxBlack>
-        <div style={styles.div}>
-          <h1 id={'rebalanceResultTitle'} style={styles.h1}>
-            Rebalancing...
-          </h1>
-          {!!data && (
-            <div id={'rebalanceResult'}>
-              <pre style={styles.pre}>{data}</pre>
+      <StartFlexBox>
+        <Stack spacing={3} style={styles.form}>
+          <div style={styles.style}>
+            <div style={styles.headerStyle} id={'rebalanceResultTitle'}>
+              <strong>Paying Offchain...</strong>
             </div>
-          )}
-        </div>
-      </StartFlexBoxBlack>
+
+            {!!data && (
+              <div id={'rebalanceResult'}>
+                <pre style={styles.preStyle}>{data}</pre>
+              </div>
+            )}
+          </div>
+        </Stack>
+      </StartFlexBox>
     </CssBaseline>
   );
 };
@@ -125,3 +116,38 @@ export async function getServerSideProps() {
 }
 
 export default RebalanceResult;
+
+const styles = {
+  form: {
+    marginLeft: '50px',
+    marginTop: '100px',
+    width: '900px',
+  },
+  pre: {
+    fontweight: 'bold',
+    color: 'white',
+  },
+  div: {
+    marginLeft: '20px',
+  },
+  h1: {
+    color: 'white',
+  },
+  headerStyle: {
+    backgroundColor: '#193549',
+    padding: '5px 10px',
+    fontFamily: 'monospace',
+    color: '#ffc600',
+  },
+  preStyle: {
+    display: 'block',
+    padding: '10px 30px',
+    margin: '0',
+    overflow: 'scroll',
+  },
+  style: {
+    backgroundColor: '#1f4662',
+    color: '#fff',
+    fontSize: '12px',
+  },
+};

@@ -238,7 +238,7 @@ const styles = {
   form: {
     marginLeft: '50px',
     marginTop: '100px',
-    minWidth: '700px',
+    width: '700px',
   },
   textField: {
     width: '500px',

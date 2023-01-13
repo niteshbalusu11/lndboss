@@ -1,3 +1,4 @@
+import * as YAML from 'json-to-pretty-yaml';
 import * as types from '~shared/types';
 
 import React, { useState } from 'react';
@@ -82,7 +83,7 @@ const PayInvoiceOutput = ({ data }: Args) => {
         <strong>Result</strong>
       </div>
 
-      <pre style={styles.preStyle}>{JSON.stringify(data, null, 2)}</pre>
+      <pre style={styles.preStyle}>{YAML.stringify(data)}</pre>
     </div>
   );
 };
