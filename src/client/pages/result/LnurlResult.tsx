@@ -59,7 +59,7 @@ const LnurlResult = () => {
     socket.on(`${dateString}`, data => {
       const message = data.message;
 
-      output.push(message.options || message);
+      output.push(YAML.stringify(message.options || message));
       setData(YAML.stringify(output));
     });
 
@@ -74,6 +74,8 @@ const LnurlResult = () => {
         output.push(YAML.stringify(result));
         setData(output.toString());
       }
+
+      socket.disconnect();
     };
 
     fetchData();
