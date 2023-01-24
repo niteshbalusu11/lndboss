@@ -15,7 +15,7 @@ accounting "category"
 # See total balance, including pending funds, excluding future commit fees
 balance
 
-# Call ln-service raw APIs
+# Call ln-service and ln-sync raw APIs
 call "method"
 
 # Get the number of days the node cert remains valid
