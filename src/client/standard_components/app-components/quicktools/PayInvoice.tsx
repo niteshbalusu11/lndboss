@@ -29,6 +29,7 @@ const PayInvoice = () => {
       node,
       avoid: [],
       in_through: '',
+      is_strict_max_fee: false,
       max_fee: 1337,
       max_paths: 1,
       message: '',

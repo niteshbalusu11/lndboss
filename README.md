@@ -48,6 +48,12 @@ closed
 # Create a group channel request
 create-group-channel
 
+# Decrypt a message
+decrypt
+
+# Encrypt a message to a pubkey
+encrypt
+
 # View outbound fee rates and update outbound fee rates to peers
 fees
 

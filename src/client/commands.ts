@@ -321,6 +321,7 @@ const commands: Commands = [
     flags: {
       avoid: 'Avoid',
       in: 'In',
+      is_strict_max_fee: 'AvoidHighFeeRoutes',
       max_fee: 'MaxFee',
       max_paths: 'MaxPaths',
       message: 'Message',

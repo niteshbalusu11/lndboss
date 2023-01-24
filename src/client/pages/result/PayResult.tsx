@@ -38,6 +38,7 @@ const PayResult = () => {
     const query = {
       avoid: router.query.avoid,
       in_through: router.query.in_through,
+      is_strict_max_fee: router.query.is_strict_max_fee,
       max_fee: router.query.max_fee,
       max_paths: router.query.max_paths,
       message: router.query.message,

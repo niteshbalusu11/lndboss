@@ -1,8 +1,13 @@
 import * as types from '~shared/types';
 
-import { Button, CssBaseline, IconButton, Stack, TextField } from '@mui/material';
+import { Button, CssBaseline, FormControlLabel, IconButton, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
-import { StandardHomeButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components/app-components';
+import {
+  StandardHomeButtonLink,
+  StandardSwitch,
+  StartFlexBox,
+  SubmitButton,
+} from '~client/standard_components/app-components';
 import commands, { globalCommands } from '~client/commands';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -16,10 +21,11 @@ const PayCommand = commands.find(n => n.value === 'Pay');
   GET call to the NestJs process to execute a keysend or lnurl pay
 */
 
-const Send = () => {
+const Pay = () => {
   const [node, setNode] = useState('');
   const [avoid, setAvoid] = useState([{ avoid: '' }]);
   const [inPeer, setInPeer] = useState(undefined);
+  const [isStrictMaxFee, setIsStrictMaxFee] = useState(false);
   const [out, setOut] = useState([{ out: '' }]);
   const [maxFee, setMaxFee] = useState('1337');
   const [maxPaths, setMaxPaths] = useState('');
@@ -63,6 +69,10 @@ const Send = () => {
   };
 
   // =====================================================================================
+  const handleAvoidHighFeeRoutes = () => {
+    setIsStrictMaxFee((previousState: boolean) => !previousState);
+  };
+
   const handleInPeerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInPeer(e.target.value);
   };
@@ -88,6 +98,7 @@ const Send = () => {
     node,
     avoid: avoid.map(n => n.avoid),
     in_through: inPeer,
+    is_strict_max_fee: isStrictMaxFee,
     max_fee: Number(maxFee),
     max_paths: Number(maxPaths),
     out: out.map(n => n.out),
@@ -143,6 +154,18 @@ const Send = () => {
             id={PayCommand.flags.max_fee}
             onChange={handleMaxFeeChange}
             style={styles.textField}
+          />
+
+          <FormControlLabel
+            style={styles.switch}
+            control={
+              <StandardSwitch
+                checked={isStrictMaxFee}
+                onChange={handleAvoidHighFeeRoutes}
+                id={PayCommand.flags.is_strict_max_fee}
+              />
+            }
+            label={PayCommand.flags.is_strict_max_fee}
           />
 
           <TextField
@@ -214,7 +237,7 @@ const Send = () => {
   );
 };
 
-export default Send;
+export default Pay;
 
 const styles = {
   form: {

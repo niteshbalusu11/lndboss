@@ -36,9 +36,10 @@ test.describe('Test Pay command on the node.js side', async () => {
     bobInvoice = await createInvoice({ lnd: bob.lnd, tokens: 100 });
   });
 
-  test('run send command', async () => {
+  test('run pay command', async () => {
     const args = {
       avoid: [],
+      is_strict_max_fee: true,
       request: bobInvoice.request,
       out: [],
       max_fee: 100,

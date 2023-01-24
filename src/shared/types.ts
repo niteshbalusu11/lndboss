@@ -206,20 +206,6 @@ export type commandLnurl = {
   url: string;
 };
 
-// ========================Pay command=======================================
-
-export type commandPay = {
-  avoid: string[];
-  in_through: string;
-  max_fee: number;
-  max_paths: number;
-  message: string;
-  message_id?: string;
-  node: string;
-  out: string[];
-  request: string;
-};
-
 // ========================Open Command======================================
 
 export type commandOpen = {
@@ -232,6 +218,21 @@ export type commandOpen = {
   node: string;
   public_keys: string[];
   types: string[];
+};
+
+// ========================Pay command=======================================
+
+export type commandPay = {
+  avoid: string[];
+  in_through: string;
+  is_strict_max_fee: boolean;
+  max_fee: number;
+  max_paths: number;
+  message: string;
+  message_id?: string;
+  node: string;
+  out: string[];
+  request: string;
 };
 
 // ========================Peers Command=====================================

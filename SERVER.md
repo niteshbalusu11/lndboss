@@ -1303,6 +1303,7 @@ http://localhost:8055/api/pay
     amount: <Amount to Push Tokens String>
     avoid: [<Avoid Forwarding Through String>]
     [in_through]: <Pay In Through Peer String>
+    [is_strict_max_fee_rate]: <Avoid High Fee Routes Boolean>
     [max_fee]: <Maximum Fee Tokens Number>
     [max_paths]: <Max Paths to take Number>
     [message]: <Message to Include With Payment String>
