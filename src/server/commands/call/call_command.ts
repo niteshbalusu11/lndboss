@@ -1,8 +1,10 @@
 import * as lightning from 'lightning';
+import * as lnSync from 'ln-sync';
 
 import { auto } from 'async';
 import { rawApi } from '~shared/raw_api';
 
+const fromLnSync = 'ln-sync';
 const lower = n => n.toLowerCase();
 
 /** Call the raw API
@@ -56,6 +58,10 @@ const callCommand = async ({ args, lnd }) => {
     call: [
       'buildArgs',
       async ({ buildArgs }) => {
+        if (args.from === fromLnSync) {
+          return await lnSync[args.method](buildArgs);
+        }
+
         return await lightning[args.method](buildArgs);
       },
     ],

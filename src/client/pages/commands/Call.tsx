@@ -13,6 +13,7 @@ import validateCallCommandArgs from '~client/utils/validations/validate_call_com
 
 const CallCommand = commands.find(n => n.value === 'Call');
 const argument = (n: string) => rawApi.calls.find(s => s.method === n);
+const fromLnSync = 'ln-sync';
 
 /*
   Renders the bos call command
@@ -60,6 +61,7 @@ const Call = () => {
   };
 
   const fetchData = async () => {
+    console.log(argument(method));
     const { message } = validateCallCommandArgs({ args: validationArray });
 
     if (!!message) {
@@ -68,6 +70,8 @@ const Call = () => {
     }
 
     const postArgs = {};
+
+    const from = !!argument(method).from && argument(method).from === fromLnSync ? fromLnSync : undefined;
 
     validationArray.forEach(n => {
       if (n.type === 'number') {
@@ -89,7 +93,7 @@ const Call = () => {
       Object.assign(postArgs, { [n.named]: n.value });
     });
 
-    const result = await axiosPostWithAlert({ path: 'call', postBody: { method, node, postArgs } });
+    const result = await axiosPostWithAlert({ path: 'call', postBody: { from, method, node, postArgs } });
 
     if (!!result) {
       setData(result.result);

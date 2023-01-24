@@ -11,6 +11,7 @@ import { readFile } from 'fs';
   {
     avoid: [<Avoid Forwarding Through String>]
     [in_through]: <Pay In Through Node With Public Key Hex String>
+    [is_strict_max_fee]: <Avoid High Fee Routes Boolean>
     lnd: <Authenticated LND API Object>
     logger: <Winston Logger Object>
     max_fee: <Max Fee Tokens Number>

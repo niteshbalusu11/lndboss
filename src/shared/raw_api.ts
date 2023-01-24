@@ -3,6 +3,51 @@ export const rawApi = {
     {
       arguments: [
         {
+          description: 'Channel capacity tokens',
+          named: 'capacity',
+          type: 'number',
+        },
+        {
+          description: 'Request close out to address for cooperative close',
+          named: 'cooperative_close_address',
+          optional: true,
+        },
+        {
+          description: 'Gift tokens to peer on open',
+          named: 'give_tokens',
+          optional: true,
+          type: 'boolean',
+        },
+        {
+          description: 'Is private channel?',
+          named: 'is_private',
+          optional: true,
+          type: 'boolean',
+        },
+        {
+          description: 'Minimum htlc millitokens',
+          named: 'min_htlc_mtokens',
+          optional: true,
+          type: 'number',
+        },
+        {
+          description: 'Partner output csv delay',
+          named: 'partner_csv_delay',
+          optional: true,
+          type: 'number',
+        },
+        {
+          description: 'Partner hex encoded public key',
+          named: 'partner_public_key',
+          type: 'public_key',
+        },
+      ],
+      from: 'ln-sync',
+      method: 'acceptsChannelOpen',
+    },
+    {
+      arguments: [
+        {
           description: 'Node identity hex encoded public key',
           named: 'public_key',
           type: 'public_key',
@@ -87,6 +132,17 @@ export const rawApi = {
         },
       ],
       method: 'closeChannel',
+    },
+    {
+      arguments: [
+        {
+          description: 'Node public key to connect with',
+          named: 'id',
+          type: 'public_key',
+        },
+      ],
+      from: 'ln-sync',
+      method: 'connectPeer',
     },
     {
       arguments: [
@@ -264,6 +320,16 @@ export const rawApi = {
         },
       ],
       method: 'enableChannel',
+    },
+    {
+      arguments: [
+        {
+          description: 'Alias of peer you are looking for',
+          named: 'query',
+        },
+      ],
+      from: 'ln-sync',
+      method: 'findKey',
     },
     {
       arguments: [
@@ -461,6 +527,10 @@ export const rawApi = {
     },
     {
       method: 'getMethods',
+    },
+    {
+      from: 'ln-sync',
+      method: 'getNetwork',
     },
     {
       method: 'getNetworkCentrality',
