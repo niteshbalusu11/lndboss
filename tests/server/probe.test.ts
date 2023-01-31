@@ -41,6 +41,7 @@ test.describe('Test Send command on the node.js side', async () => {
       avoid: [],
       destination: bobWallet.public_key,
       tokens: '10',
+      max_fee: 100,
     };
 
     try {

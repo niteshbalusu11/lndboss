@@ -799,6 +799,16 @@ export class probeDto {
   @IsString()
   in_through: string;
 
+  @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
+  @IsBoolean()
+  is_strict_max_fee: boolean;
+
+  @Transform(({ value }) => toNumber(value))
+  @IsOptional()
+  @IsNumber()
+  max_fee: number;
+
   @Transform(({ value }) => toNumber(value))
   @IsOptional()
   @IsNumber()

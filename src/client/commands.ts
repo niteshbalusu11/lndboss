@@ -393,6 +393,8 @@ const commands: Commands = [
       avoid: 'Avoid',
       find_max: 'FindMax',
       in: 'In',
+      is_strict_max_fee: 'AvoidHighFeeRoutes',
+      max_fee: 'MaxFee',
       max_paths: 'MaxPaths',
       out: 'Out',
     },

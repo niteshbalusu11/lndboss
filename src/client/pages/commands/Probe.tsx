@@ -28,6 +28,8 @@ const Probe = () => {
   const [destination, setDestination] = useState('');
   const [findMax, setFindMax] = useState(false);
   const [inPeer, setInPeer] = useState(undefined);
+  const [isStrictMaxFee, setIsStrictMaxFee] = useState(false);
+  const [maxFee, setMaxFee] = useState('1337');
   const [maxPaths, setMaxPaths] = useState('');
   const [outPeer, setOutPeer] = useState([{ outPeer: '' }]);
 
@@ -59,12 +61,20 @@ const Probe = () => {
     setAvoid(newFormValues);
   };
 
+  const handleAvoidHighFeeRoutes = () => {
+    setIsStrictMaxFee((previousState: boolean) => !previousState);
+  };
+
   const handleFindMaxChange = () => {
     setFindMax((previousState: boolean) => !previousState);
   };
 
   const handleInPeerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInPeer(event.target.value);
+  };
+
+  const handleMaxFeeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMaxFee(e.target.value);
   };
 
   const handleMaxPathsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,6 +103,8 @@ const Probe = () => {
     avoid: avoid.map(n => n.avoid),
     find_max: findMax,
     in_through: inPeer,
+    is_strict_max_fee: isStrictMaxFee,
+    max_fee: Number(maxFee),
     max_paths: Number(maxPaths),
     out: outPeer.map(n => n.outPeer),
     tokens: amount,
@@ -155,6 +167,28 @@ const Probe = () => {
             }
             label={ProbeCommand.flags.find_max}
           />
+
+          <TextField
+            type="text"
+            placeholder={`${ProbeCommand.flags.max_fee} (Maximum fee to pay)`}
+            label={ProbeCommand.flags.max_fee}
+            id={ProbeCommand.flags.max_fee}
+            onChange={handleMaxFeeChange}
+            style={styles.textField}
+          />
+
+          <FormControlLabel
+            style={styles.switch}
+            control={
+              <StandardSwitch
+                checked={isStrictMaxFee}
+                onChange={handleAvoidHighFeeRoutes}
+                id={ProbeCommand.flags.is_strict_max_fee}
+              />
+            }
+            label={ProbeCommand.flags.is_strict_max_fee}
+          />
+
           <TextField
             type="text"
             placeholder={`${ProbeCommand.flags.in} (Route through specific peer of destination)`}

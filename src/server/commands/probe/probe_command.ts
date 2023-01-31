@@ -17,6 +17,7 @@ import { readFile } from 'fs';
       getFile: <Read File Contents Function> (path, cbk) => {}
     }
     [in_through]: <Pay In Through Public Key Hex String>
+    [is_strict_max_fee]: <Avoid High Fee Routes Boolean>
     lnd: <Authenticated LND API Object>
     logger: <Winston Logger Object>
     [max_paths]: <Maximum Probe Paths Number>
@@ -59,6 +60,8 @@ const probeCommand = async ({ args, lnd, logger }: Args): Promise<{ result: Retu
       find_max: !!args.find_max ? 16777215 : undefined,
       fs: { getFile: readFile },
       in_through: inThrough.public_key,
+      is_strict_max_fee: !!args.is_strict_max_fee,
+      max_fee: args.max_fee === undefined ? 1337 : args.max_fee,
       max_paths: args.max_paths || 1,
       out: !!args.out ? args.out.filter(n => !!n) : [],
       request: args.destination.length !== 66 ? args.destination : undefined,

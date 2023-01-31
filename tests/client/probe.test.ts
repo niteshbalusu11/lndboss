@@ -19,6 +19,7 @@ test.describe('Test the Probe command client page', async () => {
     await page.type(`#${ProbeCommand?.args?.to}`, 'pubkey');
     await page.type(`#${ProbeCommand?.flags?.in}`, 'carol');
     await page.type(`#${ProbeCommand?.args?.amount}`, '50000');
+    await page.type(`#${ProbeCommand?.flags?.max_fee}`, '100');
 
     await page.type('#node', 'alice');
 

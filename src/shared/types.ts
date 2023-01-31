@@ -266,6 +266,8 @@ export type commandProbe = {
   destination: string;
   find_max: boolean;
   in_through: string;
+  is_strict_max_fee: boolean;
+  max_fee: number;
   max_paths: number;
   node: string;
   out: string[];
