@@ -28,6 +28,7 @@ const Send = () => {
   const [destination, setDestination] = useState('');
   const [inPeer, setInPeer] = useState(undefined);
   const [isDryrun, setIsDryRun] = useState(false);
+  const [isStrictMaxFee, setIsStrictMaxFee] = useState(false);
   const [outPeer, setOutPeer] = useState(undefined);
   const [maxFee, setMaxFee] = useState('1337');
   const [maxFeeRate, setMaxFeeRate] = useState('');
@@ -60,6 +61,10 @@ const Send = () => {
     const newFormValues = [...avoid];
     newFormValues[i].avoid = e.target.value;
     setAvoid(newFormValues);
+  };
+
+  const handleAvoidHighFeeRoutes = () => {
+    setIsStrictMaxFee((previousState: boolean) => !previousState);
   };
 
   const handleDryrunChange = () => {
@@ -99,6 +104,7 @@ const Send = () => {
     in_through: inPeer,
     is_dry_run: isDryrun,
     is_omitting_message_from: isOmittingMessageFrom,
+    is_strict_max_fee: isStrictMaxFee,
     max_fee: Number(maxFee),
     max_fee_rate: Number(maxFeeRate),
     out_through: outPeer,
@@ -189,6 +195,19 @@ const Send = () => {
             onChange={handleMaxFeeRateChange}
             style={styles.textField}
           />
+
+          <FormControlLabel
+            style={styles.switch}
+            control={
+              <StandardSwitch
+                checked={isStrictMaxFee}
+                onChange={handleAvoidHighFeeRoutes}
+                id={SendCommand.flags.is_strict_max_fee}
+              />
+            }
+            label={SendCommand.flags.is_strict_max_fee}
+          />
+
           <TextField
             type="text"
             placeholder={`${SendCommand.flags.message} (Message to include with payment)`}

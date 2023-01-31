@@ -19,6 +19,7 @@ import { readFile } from 'fs';
     [in_through]: <Pay In Through Peer String>
     [is_dry_run]: <Do Not Push Payment Bool>
     [is_omitting_message_from]: <Do Not Include From Key In Message Bool>
+    [is_strict_max_fee]: <Avoid High Fee Routes Boolean>
     lnd: <Authenticated LND API Object>
     logger: <Winston Logger Object>
     max_fee: <Maximum Fee Tokens Number>
@@ -61,6 +62,7 @@ const sendCommand = async ({ args, lnd, logger }: Args): Promise<{ result: any }
       in_through: args.in_through,
       is_dry_run: args.is_dry_run,
       is_omitting_message_from: args.is_omitting_message_from,
+      is_strict_max_fee: !!args.is_strict_max_fee,
       max_fee: args.max_fee || 1337,
       max_fee_rate: args.max_fee_rate || undefined,
       message: args.message,

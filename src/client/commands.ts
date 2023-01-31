@@ -442,6 +442,7 @@ const commands: Commands = [
       in_through: 'In',
       is_dry_run: 'Dryrun',
       is_omitting_message_from: 'messageOmitFromKey',
+      is_strict_max_fee: 'AvoidHighFeeRoutes',
       max_fee: 'MaxFee',
       max_fee_rate: 'MaxFeeRate',
       message: 'Message',

@@ -42,6 +42,7 @@ const SendResult = () => {
       in_through: router.query.in_through,
       is_dry_run: router.query.is_dry_run,
       is_omitting_message_from: router.query.is_omitting_message_from,
+      is_strict_max_fee: router.query.is_strict_max_fee,
       max_fee: router.query.max_fee,
       max_fee_rate: router.query.max_fee_rate,
       message: router.query.message,

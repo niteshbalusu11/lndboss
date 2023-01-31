@@ -1020,6 +1020,11 @@ export class sendDto {
   @IsBoolean()
   is_omitting_message_from: boolean;
 
+  @Transform(({ value }) => toBoolean(value))
+  @IsOptional()
+  @IsBoolean()
+  is_strict_max_fee: boolean;
+
   @Transform(({ value }) => toNumber(value))
   @IsOptional()
   @IsNumber()

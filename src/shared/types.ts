@@ -308,6 +308,7 @@ export type commandSend = {
   in_through: string;
   is_dry_run: boolean;
   is_omitting_message_from: boolean;
+  is_strict_max_fee: boolean;
   max_fee: number;
   max_fee_rate: number;
   message: string;

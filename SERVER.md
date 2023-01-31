@@ -1751,6 +1751,7 @@ http://localhost:8055/api/send
     [in_through]: <Pay In Through Peer String>
     [is_dry_run]: <Do Not Push Payment Bool>
     [is_omitting_message_from]: <Do Not Include From Key In Message Bool>
+    [is_strict_max_fee]: <Avoid High Fee Routes Boolean>
     [max_fee]: <Maximum Fee Tokens Number>
     [max_fee_rate]: <Max Fee Rate Tokens Per Million Number>
     [message]: <Message to Include With Payment String>
