@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file. See [standa
 ## [2.17.0](https://github.com/niteshbalusu11/lndboss/compare/v2.16.0...v2.17.0) (2023-01-31)
 
 - Add avoid-high-fee-routes to probe command.
-- Add avoid high-fee-routes to send command.
+- Add avoid high-fee-routes to pay command.
 - Add avoid high-fee-routes to send command.
 - Add support for calling acceptsChannelOpen, connectPeer, findKey and getNetwork to call command.
 
