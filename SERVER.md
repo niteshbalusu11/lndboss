@@ -1501,6 +1501,8 @@ http://localhost:8055/api/probe
     [destination]: <Destination pubkey/Payment Request string>
     [find_max]: <Boolean>
     [in_through]: <Pay In Through Public Key Hex String>
+    [is_strict_max_fee_rate]: <Avoid High Fee Routes Boolean>
+    [max_fee]: <Maximum Fee Tokens Number>
     [max_paths]: <Maximum Probe Paths Number>
     message_id: <DateTime stamp string>
     [node]: <Saved Node String>
@@ -1530,6 +1532,7 @@ try {
     destination: '02dc8800af7b6f18b7eefbfb3112b99f2c0f0196475f99b8210b73ecd0c638f0e3',
     in_through: '02ce4aea072f54422d35eb8d82aebe966b033d4e98b470907f601a025c5c29a7dc',
     max_paths: 1,
+    max_fee: 100,
     message_id: dateString,
     tokens: '100',
   };
