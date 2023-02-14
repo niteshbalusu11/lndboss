@@ -13,7 +13,7 @@ const defaultRate = 1;
 const div = (a: number, b: number) => (a / b).toFixed(2);
 const flatten = arr => [].concat(...arr);
 const interval = 1000 * 60 * 2;
-const isBetween = (num1: number, num2: number, value: number) => value > num1 && value <= num2;
+const isBetween = (num1: number, num2: number, value: number) => (value > num1 || num1 === 0) && value <= num2;
 const maxhtlc = (a: number, b: number) => String(round(a * b * 1000));
 const times = 10;
 const uniq = (arr: string[]) => Array.from(new Set(arr));
