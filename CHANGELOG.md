@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.17.1](https://github.com/niteshbalusu11/lndboss/compare/v2.17.0...v2.17.1) (2023-02-14)
+
 ## [2.17.0](https://github.com/niteshbalusu11/lndboss/compare/v2.16.0...v2.17.0) (2023-01-31)
 
 - Added avoid-high-fee-routes to probe command.
