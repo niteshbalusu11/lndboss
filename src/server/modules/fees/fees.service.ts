@@ -92,6 +92,9 @@ export class FeesService implements OnModuleInit {
       this.runAutoFees(args);
 
       if (!!getJob) {
+        this.cronService.deleteCron({ name: args.configs.message_id });
+        this.cronService.createAutoFeesCron({ args: args.configs, schedule: autoFeesCronSchedule });
+
         return result;
       }
 
