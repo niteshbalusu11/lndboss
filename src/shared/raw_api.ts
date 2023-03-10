@@ -370,6 +370,26 @@ export const rawApi = {
       method: 'getBackups',
     },
     {
+      arguments: [
+        {
+          description: 'Get block at a specific height',
+          named: 'height',
+          optional: true,
+          type: 'number',
+        },
+        {
+          description: 'Get block with a specific hash',
+          named: 'id',
+          optional: true,
+          type: 'hash',
+        },
+      ],
+      method: 'getBlock',
+    },
+    {
+      method: 'getChainAddresses',
+    },
+    {
       method: 'getChainBalance',
     },
     {
@@ -856,6 +876,19 @@ export const rawApi = {
     {
       arguments: [
         {
+          description: 'Address to use for signing',
+          named: 'address',
+        },
+        {
+          description: 'Message to sign',
+          named: 'message',
+        },
+      ],
+      method: 'signChainAddressMessage',
+    },
+    {
+      arguments: [
+        {
           description: 'Hex encoded secret preimage',
           named: 'secret',
         },
@@ -1027,6 +1060,23 @@ export const rawApi = {
         },
       ],
       method: 'updateRoutingFees',
+    },
+    {
+      arguments: [
+        {
+          description: 'Address to verify against',
+          named: 'address',
+        },
+        {
+          description: 'Message that was signed',
+          named: 'message',
+        },
+        {
+          description: 'Hex encoded message signature',
+          named: 'signature',
+        },
+      ],
+      method: 'verifyChainAddressMessage',
     },
     {
       arguments: [
