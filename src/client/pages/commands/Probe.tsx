@@ -237,10 +237,8 @@ const Probe = () => {
             onChange={handleNodeChange}
             style={styles.textField}
           />
-          <Link href={{ pathname: `/result/ProbeResult`, query: flags }} passHref>
-            <a target="_blank" rel="noreferrer">
-              <SubmitButton>Run Command</SubmitButton>
-            </a>
+          <Link href={{ pathname: `/result/ProbeResult`, query: flags }} target={'_blank'}>
+            <SubmitButton>Run Command</SubmitButton>
           </Link>
         </Stack>
       </StartFlexBox>

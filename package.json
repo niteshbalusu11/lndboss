@@ -64,7 +64,7 @@
     "jwt-decode": "^3.1.2",
     "lightning": "^7.1.4",
     "nest-winston": "^1.9.1",
-    "next": "^12.3.1",
+    "next": "^13.2.4",
     "nookies": "^2.5.2",
     "notiflix": "^3.2.6",
     "passport": "^0.6.0",

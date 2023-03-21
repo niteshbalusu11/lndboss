@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Link as MULink } from '@mui/material';
 import React from 'react';
 
 /*
@@ -26,10 +25,8 @@ type Props = {
 
 const StandardRouterLink = ({ label, destination }: Props) => {
   return (
-    <Link href={destination} id={label}>
-      <MULink style={styles.link} underline="hover" id={label}>
-        {label}
-      </MULink>
+    <Link href={destination} id={label} style={styles.link}>
+      {label}
     </Link>
   );
 };

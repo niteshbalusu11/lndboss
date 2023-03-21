@@ -177,10 +177,8 @@ const Accounting = () => {
             onChange={handleNodeChange}
             style={styles.textField}
           />
-          <Link href={{ pathname: '/result/AccountingResult', query: flags }} passHref>
-            <a target="_blank" rel="noreferrer">
-              <SubmitButton>Run Command</SubmitButton>
-            </a>
+          <Link href={{ pathname: '/result/AccountingResult', query: flags }} target={'_blank'}>
+            <SubmitButton>Run Command</SubmitButton>
           </Link>
         </Stack>
       </StartFlexBox>

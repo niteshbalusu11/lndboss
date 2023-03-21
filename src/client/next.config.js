@@ -12,4 +12,5 @@ module.exports = {
     basePath: process.env.BASE_PATH || '',
   },
   reactStrictMode: true,
+  swcMinify: true,
 };
