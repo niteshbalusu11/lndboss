@@ -9,7 +9,7 @@ import { useLoading } from '~client/hooks/useLoading';
 // Calls NestJs Server and returns pending payments and channels
 
 const PendingChart = () => {
-  const [data, setData] = useState(undefined);
+  const [data, setData] = useState<any>(undefined);
 
   useEffect(() => {
     const fetchData = async () => {

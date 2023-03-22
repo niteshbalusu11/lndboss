@@ -25,10 +25,10 @@ const Accounting = () => {
   const [date, setDate] = useState('');
   const [isCsv, setIsCsv] = useState(false);
   const [isFiatDisabled, setIsFiatDisabled] = useState(true);
-  const [month, setMonth] = useState(null);
+  const [month, setMonth] = useState('');
   const [node, setNode] = useState('');
   const [rateProvider, setRateProvider] = useState('');
-  const [year, setYear] = useState(null);
+  const [year, setYear] = useState('');
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCategory(event.target.value);

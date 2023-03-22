@@ -31,9 +31,9 @@ type Args = {
 const PeersOutput = ({ data, isComplete }: Args) => {
   const RenderOutput = () => {
     if (!isComplete && !!data.rows) {
-      const dataSet = [];
+      const dataSet: any = [];
       data.rows.forEach((row: string[]) => {
-        const newRow = [];
+        const newRow: any = [];
         row.forEach((n: string) => {
           newRow.push(removeStyling(String(n)));
         });
@@ -59,6 +59,8 @@ const PeersOutput = ({ data, isComplete }: Args) => {
         </div>
       );
     }
+
+    return <h2>NoPeersDataToDisplay</h2>;
   };
 
   return <RenderOutput />;

@@ -41,11 +41,11 @@ const columns = [
 
 const ClosedOutput = ({ data }: Args) => {
   const closes = data.closes;
-  const dataSet = [];
+  const dataSet: any = [];
 
   const rows = useMemo(() => {
     closes.forEach(close => {
-      const row = [];
+      const row: any = [];
       row.push(close.peer_public_key);
 
       if (!!close.peer_alias) {

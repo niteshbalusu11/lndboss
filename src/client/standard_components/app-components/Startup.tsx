@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { CssBaseline } from '@mui/material';
 import Router from 'next/router';
-import { clientConstants } from '~client/utils/constants';
+import { clientConstants } from '../../utils/constants';
 
 /*
   Render bos startup video for 3 seconds and redirect to the commands page.

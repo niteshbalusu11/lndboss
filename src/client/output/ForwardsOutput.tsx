@@ -34,11 +34,11 @@ const columns = [
 
 const ForwardsOutput = ({ data }: Args) => {
   const peers = data.peers;
-  const dataSet = [];
+  const dataSet: any = [];
 
   const rows = useMemo(() => {
     peers.forEach(peer => {
-      const row = [];
+      const row: any = [];
 
       if (!!peer.icons && !!peer.icons.length) {
         row.push(peer.icons.toString());

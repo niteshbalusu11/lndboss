@@ -1,4 +1,6 @@
-import { ContainerStyle } from '../standard_components/app-components';
+'use client';
+
+import { ContainerStyle } from '../../standard_components/app-components';
 import React from 'react';
 
 /*

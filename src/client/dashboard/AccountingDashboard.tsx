@@ -84,7 +84,7 @@ const AccountingDashboard = ({ days }: { days: number }) => {
         setChartFeesPaidData(chartFeesPaidResult);
         setChartPaymentsReceivedData(chartPaymentsReceivedResult);
 
-        const summary = [];
+        const summary: any = [];
         summary.push(chartChainFeesResult);
         summary.push(chartFeesEarnedResult);
         summary.push(chartFeesPaidResult);

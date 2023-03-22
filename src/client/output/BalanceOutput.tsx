@@ -41,8 +41,8 @@ type CreateData = {
 };
 
 const BalanceOutput = ({ data }: Data) => {
-  const rows = [];
-  const keys = [];
+  const rows: any = [];
+  const keys: any = [];
 
   const createData = (key: CreateData, value: CreateData) => {
     return { key: key.key, value: value.value };

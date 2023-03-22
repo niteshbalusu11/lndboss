@@ -24,7 +24,7 @@ const handleLogout = () => {
   useNotify({ type: 'info', message: 'Logged out successfully' });
 };
 
-export const MainListItems = ({ setAccounting }: { setAccounting?: React.Dispatch<React.SetStateAction<number>> }) => {
+export const MainListItems = ({ setAccounting }: { setAccounting: React.Dispatch<React.SetStateAction<number>> }) => {
   return (
     <React.Fragment>
       <ListItemButton onClick={() => setAccounting(0)} sx={{ marginTop: '70px' }}>

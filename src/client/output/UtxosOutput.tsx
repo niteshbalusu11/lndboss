@@ -48,12 +48,12 @@ const UtxosOutput = ({ data }: Props) => {
     );
   }
 
-  const utxos = typeof data.result === 'object' ? data.result.utxos : [];
-  const dataSet = [];
+  const utxos = typeof data.result === 'object' ? data.result.utxos : ([] as any);
+  const dataSet: any = [];
 
   const rows = useMemo(() => {
     utxos.forEach(utxo => {
-      const row = [];
+      const row: any = [];
 
       row.push(utxo.address);
 
