@@ -1,5 +1,6 @@
 {
   "extends": "../../tsconfig.paths.json",
+  "plugins": [{ "name": "next" }],
   "compilerOptions": {
     "plugins": [{ "name": "next" }],
     "target": "es5",

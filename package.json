@@ -27,7 +27,7 @@
     "start": "NODE_ENV=production nest start ",
     "start:debug": "nest start --debug --watch",
     "start:prod": "NODE_ENV=production node dist/server/main",
-    "lint": "eslint \"{src,tests}/**/*.ts\" --fix",
+    "lint": "eslint \"{src/server,src/shared}/**/*.ts\"",
     "next:lint": "next lint src/client",
     "release": "standard-version --release-as minor && yarn build:prod && yarn publish",
     "release:major": "standard-version --release-as major && yarn build:prod && yarn publish",
@@ -93,8 +93,14 @@
     "@types/passport-local": "^1.0.35",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
-    "eslint": "8.36.0",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "eslint": "^8.0.1",
     "eslint-config-next": "13.2.4",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard-with-typescript": "^34.0.1",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
     "ln-docker-daemons": "^4.1.2",
     "prettier": "^2.8.5",
     "rimraf": "^4.4.0",
@@ -103,6 +109,6 @@
     "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.2",
-    "typescript": "^5.0.2"
+    "typescript": "*"
   }
 }
