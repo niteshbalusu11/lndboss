@@ -84,10 +84,8 @@ const Fees = () => {
           <h2>{FeesCommand.name}</h2>
           <h4 style={styles.h4}>{FeesCommand.longDescription}</h4>
 
-          <Link href={{ pathname: clientConstants.feeStrategyPath }}>
-            <a target="blank" style={styles.url}>
-              Click to view current scheduled jobs
-            </a>
+          <Link href={{ pathname: clientConstants.feeStrategyPath }} style={styles.url} target={'_blank'}>
+            Click to view current scheduled jobs
           </Link>
 
           <TextField

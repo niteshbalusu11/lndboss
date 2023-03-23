@@ -1,6 +1,8 @@
 {
   "extends": "../../tsconfig.paths.json",
+  "plugins": [{ "name": "next" }],
   "compilerOptions": {
+    "plugins": [{ "name": "next" }],
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -14,8 +16,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "strictNullChecks": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js", "shared/**/*.*"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js", "shared/**/*.*", ".next/types/**/*.ts"],
   "exclude": ["node_modules", ".next", "server/**/*.*"]
 }

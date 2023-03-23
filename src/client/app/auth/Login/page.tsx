@@ -1,16 +1,17 @@
+'use client';
+
 import { CssBaseline, Stack, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { StandardButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components/app-components';
 
-import Router from 'next/router';
 import axios from 'axios';
 import { clientConstants } from '~client/utils/constants';
-import getConfig from 'next/config';
 import { setAuthenticatedCookie } from '~client/utils/cookie';
 import { useNotify } from '~client/hooks/useNotify';
+import { useRouter } from 'next/navigation';
 
-const { publicRuntimeConfig } = getConfig();
-const { apiUrl } = publicRuntimeConfig;
+const apiUrl = `${process.env.BASE_PATH || ''}/api`;
+
 /*
   Renders the login page
   POST call to the NestJs process to verify credentials and get back JWT token.
@@ -46,6 +47,7 @@ const styles = {
 };
 
 const Login = () => {
+  const router = useRouter();
   const [username, setUsername] = useState('');
 
   const [password, setPassword] = useState('');
@@ -76,9 +78,10 @@ const Login = () => {
 
       setAuthenticatedCookie({ token: data.accessToken });
 
-      Router.push(clientConstants.dashboardPage);
       useNotify({ type: 'success', message: 'Successfully logged in' });
+      router.push(clientConstants.dashboardPage);
     } catch (error) {
+      console.error(error);
       useNotify({
         type: 'error',
         message: `Status: ${error.response.status}\nMessage: ${error.response.data.message}`,

@@ -21,7 +21,7 @@ const styles = {
 };
 
 const NodeInfo = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<any>(null);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -25,10 +25,10 @@ const Accounting = () => {
   const [date, setDate] = useState('');
   const [isCsv, setIsCsv] = useState(false);
   const [isFiatDisabled, setIsFiatDisabled] = useState(true);
-  const [month, setMonth] = useState(null);
+  const [month, setMonth] = useState('');
   const [node, setNode] = useState('');
   const [rateProvider, setRateProvider] = useState('');
-  const [year, setYear] = useState(null);
+  const [year, setYear] = useState('');
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCategory(event.target.value);
@@ -177,10 +177,8 @@ const Accounting = () => {
             onChange={handleNodeChange}
             style={styles.textField}
           />
-          <Link href={{ pathname: '/result/AccountingResult', query: flags }} passHref>
-            <a target="_blank" rel="noreferrer">
-              <SubmitButton>Run Command</SubmitButton>
-            </a>
+          <Link href={{ pathname: '/result/AccountingResult', query: flags }} target={'_blank'}>
+            <SubmitButton>Run Command</SubmitButton>
           </Link>
         </Stack>
       </StartFlexBox>

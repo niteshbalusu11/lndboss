@@ -10,7 +10,7 @@ type Args = {
   setCheckConnection: (previousValue: any) => void;
 };
 const CheckConnection = ({ setCheckConnection }: Args) => {
-  const [success, isSuccess] = useState(null);
+  const [success, isSuccess] = useState<null | boolean>(null);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -145,10 +145,8 @@ const ChartPaymentsReceived = () => {
               </div>
             ))}
           </>
-          <Link href={{ pathname: '/result/ChartPaymentsReceivedResult', query: flags }} passHref>
-            <a target="_blank" rel="noreferrer">
-              <SubmitButton>Run Command</SubmitButton>
-            </a>
+          <Link href={{ pathname: '/result/ChartPaymentsReceivedResult', query: flags }} target={'_blank'}>
+            <SubmitButton>Run Command</SubmitButton>
           </Link>
         </Stack>
       </StartFlexBox>

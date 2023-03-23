@@ -17,7 +17,7 @@ export const defaultChartQueryDays = 7;
 
 export const selectedSavedNode = () => {
   if (!!localStorage.getItem('SELECTED_SAVED_NODE') && localStorage.getItem('SELECTED_SAVED_NODE') !== 'undefined') {
-    return localStorage.getItem('SELECTED_SAVED_NODE');
+    return localStorage.getItem('SELECTED_SAVED_NODE') as string;
   }
 
   return '';

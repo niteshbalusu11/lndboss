@@ -359,20 +359,16 @@ const Rebalance = () => {
             onChange={handleNodeChange}
             style={styles.textField}
           />
-          <Link href={{ pathname: `/result/RebalanceResult`, query: flags }} passHref>
-            <a target="_blank" rel="noreferrer" style={styles.link}>
-              <SubmitButton>Run Manual Rebalance</SubmitButton>
-            </a>
+          <Link href={{ pathname: `/result/RebalanceResult`, query: flags }} style={styles.link} target={'_blank'}>
+            <SubmitButton>Run Manual Rebalance</SubmitButton>
           </Link>
 
           <ReactCron handleScheduleChange={handleScheduleChange} handleCronUrlChange={handleCronUrlChange} />
-          <a href={cronUrl} target="blank" id="cronguruUrl" style={styles.url}>
+          <Link href={cronUrl} target={'_blank'} id="cronguruUrl" style={styles.url}>
             Click here to validate your schedule.
-          </a>
-          <Link href={{ pathname: clientConstants.rebalanceSchedulerUrl }}>
-            <a target="blank" style={styles.url}>
-              Click to view current scheduled jobs
-            </a>
+          </Link>
+          <Link href={{ pathname: clientConstants.rebalanceSchedulerUrl }} target={'_blank'} style={styles.url}>
+            Click to view current scheduled jobs
           </Link>
           <SubmitButton variant="contained" onClick={fetchData}>
             Add Schedule
@@ -434,10 +430,8 @@ const Instructions = () => {
         <li>Select all rebalance parameters from the fields below, select a schedule and then click add schedule.</li>
       </ul>
 
-      <Link href={{ pathname: clientConstants.rebalanceSchedulerUrl }}>
-        <a target="blank" style={styles.url}>
-          Click to view current scheduled jobs
-        </a>
+      <Link href={{ pathname: clientConstants.rebalanceSchedulerUrl }} target={'_blank'} style={styles.url}>
+        Click to view current scheduled jobs
       </Link>
 
       <h1>Manual Rebalance</h1>

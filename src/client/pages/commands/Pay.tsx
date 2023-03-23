@@ -226,10 +226,8 @@ const Pay = () => {
             onChange={handleNodeChange}
             style={styles.textField}
           />
-          <Link href={{ pathname: `/result/PayResult`, query: flags }} passHref>
-            <a target="_blank" rel="noreferrer">
-              <SubmitButton>Run Command</SubmitButton>
-            </a>
+          <Link href={{ pathname: `/result/PayResult`, query: flags }} target={'_blank'}>
+            <SubmitButton>Run Command</SubmitButton>
           </Link>
         </Stack>
       </StartFlexBox>

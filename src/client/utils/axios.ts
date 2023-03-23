@@ -2,13 +2,11 @@ import * as YAML from 'json-to-pretty-yaml';
 
 import axios from 'axios';
 import { getAuthenticatedCookie } from './cookie';
-import getConfig from 'next/config';
 import { io } from 'socket.io-client';
 import { useLoading } from '~client/hooks/useLoading';
 import { useNotify } from '~client/hooks/useNotify';
 
-const { publicRuntimeConfig } = getConfig();
-const { apiUrl } = publicRuntimeConfig;
+const apiUrl = `${process.env.BASE_PATH || ''}/api`;
 
 const abortedErrorCode = 'ECONNABORTED';
 
