@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [2.18.1](https://github.com/niteshbalusu11/lndboss/compare/v2.18.0...v2.18.1) (2023-04-10)
 
+- Bump bos dependency that fixes a bug in send command when keysending to unannounced nodes.
+
 ## [2.18.0](https://github.com/niteshbalusu11/lndboss/compare/v2.17.3...v2.18.0) (2023-03-10)
 
 - Added getChainAddresses, getBlock, verifyChainAddressMessage, signChainAddressMessage to Call Command.
