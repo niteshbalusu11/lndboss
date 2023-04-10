@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.18.1](https://github.com/niteshbalusu11/lndboss/compare/v2.18.0...v2.18.1) (2023-04-10)
+
 ## [2.18.0](https://github.com/niteshbalusu11/lndboss/compare/v2.17.3...v2.18.0) (2023-03-10)
 
 - Added getChainAddresses, getBlock, verifyChainAddressMessage, signChainAddressMessage to Call Command.
