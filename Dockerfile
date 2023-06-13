@@ -1,7 +1,7 @@
 # ---------------
 # Install Dependencies
 # ---------------
-FROM amd64/node:16-alpine as build
+FROM node:16-alpine as build
 
 WORKDIR /lndboss
 
