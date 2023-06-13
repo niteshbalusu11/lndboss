@@ -4,7 +4,7 @@ import { AuthenticatedLnd, GetWalletVersionResult, addPeer, getNode, getPeers, g
 import { acceptsChannelOpen, getNetwork } from 'ln-sync';
 import { auto, detectSeries, each, eachSeries, map, retry } from 'async';
 
-import { parseAmount } from 'balanceofsatoshis/display';
+import { parseAmount } from 'ln-accounting';
 
 const flatten = arr => [].concat(...arr);
 const { isArray } = Array;

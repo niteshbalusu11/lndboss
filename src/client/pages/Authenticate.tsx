@@ -10,9 +10,11 @@ import {
 import Head from 'next/head';
 import Router from 'next/router';
 import axios from 'axios';
+import { clientConstants } from '~client/utils/constants';
 import { getAuthenticatedCookie } from '~client/utils/cookie';
 import { useLoading } from '~client/hooks/useLoading';
 import { useNotify } from '~client/hooks/useNotify';
+import { useRouter } from 'next/navigation';
 
 const apiUrl = `${process.env.BASE_PATH || ''}/api`;
 
@@ -59,6 +61,7 @@ const styles = {
 };
 
 const Authenticate = () => {
+  const router = useRouter();
   const [cert, setCert] = useState('');
   const [macaroon, setMacaroon] = useState('');
   const [nodeName, setNodeName] = useState('');
@@ -140,7 +143,7 @@ const Authenticate = () => {
       }
 
       if (!!result && !!connection.hasAccess) {
-        Router.push('/Commands');
+        router.push(clientConstants.dashboardPage);
         useNotify({ type: 'success', message: 'Credentials saved and Authenticated to LND! 🚀' });
       }
     } catch (error) {

@@ -14,6 +14,7 @@ test.describe('Test the Rebalance command client page', async () => {
   test('test the Rebalance command page and input values', async ({ page }) => {
     await page.goto(testConstants.commandsPage);
     await page.click('text=Rebalance');
+
     await expect(page).toHaveTitle('Rebalance');
     await page.type(`#avoid-0`, 'ban');
     await page.type(`#${RebalanceCommand?.flags?.in_through}`, 'carol');

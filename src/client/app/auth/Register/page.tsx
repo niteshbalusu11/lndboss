@@ -5,11 +5,11 @@ import React, { useState } from 'react';
 import { StandardButtonLink, StartFlexBox, SubmitButton } from '~client/standard_components/app-components';
 
 import Head from 'next/head';
-import Router from 'next/router';
 import axios from 'axios';
 import { clientConstants } from '~client/utils/constants';
 import { useNotify } from '~client/hooks/useNotify';
 import { usePasswordValidation } from '~client/hooks/usePasswordValidation';
+import { useRouter } from 'next/navigation';
 
 const apiUrl = `${process.env.BASE_PATH || ''}/api`;
 
@@ -38,6 +38,8 @@ const styles = {
 };
 
 const Register = () => {
+  const router = useRouter();
+
   const [username, setUserName] = useState('');
 
   const [password, setPassword] = useState({
@@ -77,7 +79,7 @@ const Register = () => {
       const result: boolean = await response.data;
 
       if (!!result) {
-        Router.push('/auth/Login');
+        router.push(clientConstants.loginUrl);
         useNotify({ type: 'success', message: 'Account created successfully' });
       } else {
         useNotify({ type: 'error', message: 'Failed to create account' });
