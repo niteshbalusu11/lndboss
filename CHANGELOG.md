@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.19.0](https://github.com/niteshbalusu11/lndboss/compare/v2.18.1...v2.19.0) (2023-06-13)
+
 ### [2.18.1](https://github.com/niteshbalusu11/lndboss/compare/v2.18.0...v2.18.1) (2023-04-10)
 
 - Bump bos dependency that fixes a bug in send command when keysending to unannounced nodes.
